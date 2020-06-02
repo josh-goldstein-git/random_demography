@@ -1,0 +1,565 @@
+
+%% to do
+%% get a nice pdf of slides
+%% do a branch_geo.R -- showing distribution of surviving line sizs
+%% mississippi.R -- showing pk, and disn of Zn
+
+
+
+\documentclass{beamer}
+\usepackage{amsmath}
+\setbeamertemplate{footline}[frame number]{}
+%% plan
+%% hour 1: Viral example, a simulation
+%% hour 2: , generating functions and Extinctions
+%% Next time: means, variances, and analytic case with geometric
+%% offspring.
+\title{Branching Processes \\ Dem260 Math Demog
+  \\ Spring 2020 \\ Lecture 8}
+\author{Joshua R. Goldstein}
+
+\begin{document}
+% remove spaces before and after printed stuff in R chunk output
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}  
+\maketitle
+
+\section{Intro}
+
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item A viral example, simulating a branching process, our questions
+  \item Generating functions and extinction
+  \item Next time, finish up BP and get started on Fisher-Wright
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Stochastic modeling}
+
+  \begin{itemize}
+  \item Until now, we've focused on the hidden structures of
+    heterogeneity.
+  \item Now, we're switching gears:
+    \begin{itemize}
+    \item Stochastic not deterministic
+    \item In small populations, randomness matters. (Even when risks are homogeneous.)
+    \item Todayn: branching processes (``parents producing children''), next
+      Fisher-Wright (``children choosing parents''), and then historical
+      reconstruction from contemporary diversity (``coalescent'').
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Very brief history of Branching Processes}
+  \begin{itemize}
+  \item Bienayme's lost notes
+  \item Galton  and Watson's (extinction of families)
+  \item Genetics (survival of a mutant)
+  \item The bomb (chain reactions)
+  \item Anywhere ``incipient dynamics'' matter.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Applicability to the Coronavirus? Yes and no.}
+
+  \begin{itemize}
+  \item Perhaps the beginning, with first few cases.
+  \item But once scale gets large, we'll see that deterministic
+    dynamics take over.
+  \item One lesson: beyond $R_0$.
+  \end{itemize}
+\end{frame}  
+
+\section{Simulated examples and the questions they raise}
+
+\begin{frame}{Our viral example}
+  Here are the chances that the first carrier passes on the virus to $k$
+  people?
+  \begin{table}
+    \begin{tabular}{|l|l|l|}
+      \hline
+      $k$ & $p_k$ & digits \\
+      \hline
+      0 & .3  & 0-2 \\
+      1 & .4  & 3-5 \\
+      2 & .3  & 6-9 \\
+      \hline
+    \end{tabular}
+  \end{table}
+  \begin{itemize}
+  \item What is $R_0$, (aka $m$)? Calculate.
+  \item Let's diagram one chance outcome, using my number ``(xxx) xxx-9056''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{9, 0, 5, 6}
+  \begin{table}
+    \begin{tabular}{|l|l|l|}
+      \hline
+      $k$ & $p_k$ & digits \\
+      \hline
+      0 & .3  & 0-2 \\
+      1 & .4  & 3-5 \\
+      2 & .3  & 6-9 \\
+      \hline
+    \end{tabular}
+  \end{table}
+\end{frame}  
+
+
+\begin{frame}[fragile]{Let's repeat}
+  \begin{table}
+    \begin{tabular}{|l|l|l|}
+      \hline
+      $k$ & $p_k$ & digits \\
+      \hline
+      0 & .3  & 0-2 \\
+      1 & .4  & 3-5 \\
+      2 & .3  & 6-9 \\
+      \hline
+    \end{tabular}
+  \end{table}
+  \begin{enumerate}
+  \item Let's try another diagram as a group. First name
+    alphabetically (last cell digit)
+  \item Everyone do their last 4 digits
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{What is a (Bienaym\'e-)Galton-Watson branching process?}
+  \begin{description}
+  \item[$p_k$] Each individual in each generation reproduces
+    independently, following same offspring distribution, with $p_k$
+    as the probability of having $k$ offspring.
+  \item[$Z_n$] The si$Z$e of the $n$'th generation $Z_n$. ($Z_1 \equiv 1$)
+  \item[$p_0 > 0$] Some non-zero probability of no children.
+  \item[Variance] None of the $p_k$ are 1
+  \end{description}
+\end{frame}
+
+
+\begin{frame}{Some questions}
+  \begin{itemize}
+  \item What is the chance $d$ of eventual extinction (no ``outbreak'')?
+  \item  Or, what is the distribution of surviving family
+    sizes?
+  \item What are the aggregate properties of many branching
+    processes? (Mean growth, variance, time-paths, eventual size)?
+  \end{itemize}
+\end{frame}  
+
+\begin{frame}{Galton's original question}
+  \begin{figure}[h]
+    % \caption{A simulation of heterogeneous growth}
+    \centering
+    \includegraphics[width = 1.0\textwidth]{./galton_title}\\
+    \includegraphics[width = 1.0\textwidth]{./galton_quote}\\
+    \includegraphics[width = 1.0\textwidth]{./galton_quote_more}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{A simulation}
+  
+  <<echo = T, size = "tiny">>=
+  k = 0:2
+  p0 = .3; p1 = .3; p2 = .4;
+  p_k = c(p0, p1, p2)
+  Z1 = 1
+  set.seed(9)
+  (kids.of.Z1 = sample(x = k, size = Z1, replace = T, prob = p_k))
+  (Z2 = sum(kids.of.Z1))
+  (kids.of.Z2 = sample(x = k, size = Z2, replace = T, prob = p_k))
+  (Z3 = sum(kids.of.Z2))
+  (kids.of.Z3 = sample(x = k, size = Z3, replace = T, prob = p_k))
+  (Z4 = sum(kids.of.Z3))
+  @ 
+  Let's draw the tree.
+\end{frame}  
+
+\begin{frame}[fragile]{A simulation (2)}
+
+  A function   
+  <<echo = T, size = "small">>=
+  branch <- function(n_max = 30, pk = c(p0, p1, p2), Z1 = 1)
+  {
+      Z.vec <- rep(NA, n_max)
+      Z.vec[1] <- Z1
+      for (i in 1:(n_max-1))
+      {
+          Z.vec[i+1] <- sum(sample(x = k,
+                                   size = Z.vec[i],
+                                   replace = T,
+                                   prob = p_k))
+      }
+      return(Z.vec)
+  }
+  set.seed(19); branch()
+  set.seed(99);   branch()
+  @ 
+\end{frame}  
+
+
+\begin{frame}[fragile]{A simulation (3)}
+  Let's see what happens with 20 trials (up to 30 generations)
+  <<echo = T, eval = F>>=
+  n_trials = 20; n_gen = 30
+  Z.mat <- matrix(NA, n_trials, n_gen)
+  set.seed(131)
+  for (i in 1:n_trials)
+      Z.mat[i,] <- branch(n_max = n_gen)
+  matplot(t(Z.mat),
+          type = "l", lty = 1, ylab = "Zn", xlab = "n")
+  @ 
+\end{frame}
+
+
+\begin{frame}
+  <<echo = F, eval = T, fig.height = 5>>=
+  n_trials = 20; n_gen = 30
+  Z.mat <- matrix(NA, n_trials, n_gen)
+  set.seed(131) 
+  for (i in 1:n_trials)
+      Z.mat[i,] <- branch(n_max = n_gen)
+  matplot(t(Z.mat),
+          type = "l", lty = 1, ylab = "Zn", xlab = "n")
+  @ 
+  How many survive (out of 20)?
+\end{frame}
+
+\begin{frame}[fragile]{log-scale}
+  <<echo = F, eval = T, fig.height = 4>>=
+  suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
+  surviving = ifelse(Z.mat[,n_gen] == 0, "extinct", "survive")
+  foo <- prop.table(table(surviving))
+
+  print( prop.table(table(surviving)) )
+  @   
+  \begin{itemize}
+  \item How would you discribe the time path of the surviving lines?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Long term}
+  <<echo = F, fig.height = 4>>=
+  n_trials = 20; n_gen = 100
+  Z.mat <- matrix(NA, n_trials, n_gen)
+  set.seed(131) 
+  for (i in 1:n_trials)
+      Z.mat[i,] <- branch(n_max = n_gen)
+  suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
+  @
+  What does this remind you of? (Hint: ``Leslie''). (See Harris figure)
+\end{frame}
+
+\begin{frame}{``Extinction'' vs ``breakout''}
+  \begin{itemize}
+  \item We see that in a super-critical ($m > 1$) branching process,
+    if a line can survive a few generations and reach a large enough
+    size, it will grow exponentially.
+  \item What happens if $m < 1$, if $m = 1$? Discuss.
+  \end{itemize}
+\end{frame}
+
+\section{Mathematical Analysis}
+
+\begin{frame}{Mathematical analysis}
+\end{frame}
+
+\begin{frame}{The Probability Generating Function: Our mathematical tool}
+
+  $$
+  h(z) = p_0 + p_1 z + p_2 z^2 + \ldots
+  $$
+
+  The PGF ``keeps book'' on the probabilities. The
+  chance of $k$ is the coefficient on $z^k$.
+
+  Some interesting properties 
+  \begin{description}
+  \item[$h(0) = $ ]
+  \item[$h(1) = $  ]
+  \item[$h'(1) = $]
+  \end{description}
+
+  But the magic is next.
+\end{frame}
+
+\begin{frame}{The story of two brothers}
+  A father has two sons. The probability generating function of their
+  children combined is:
+
+  $$
+  [h(z)]^2 = (p_0  + p_1 z + p_2 z^2) \times (p_0  + p_1 z + p_2 z^2)
+  $$
+
+  Multiply out, and tell me the coefficients on $z^0, z^1, \ldots $.
+
+\end{frame}  
+
+\begin{frame}{Even more amazing}
+
+  What is the probability generating function for the distribution of grandsons?
+  \begin{itemize}
+  \item A man has two sons, with probability $p_2$, so PGF in that case
+    is $  p_2 [h(z)]^2 $.
+  \item But let's sum over all possible numbers of
+    sons.
+
+    $$
+    p_0 + p_1 h(z) + p_2 [h(z)]^2 + p_3 [h(z)]^3 + \ldots
+    $$
+
+  \item Which is? (Hint: write a new argument for PGF) \pause 
+    $$
+    h(h(z))
+    $$
+    \pause
+  \item Can show PGF for the n'th generation is
+    $$
+    h(h(h ... \mbox{$n$ times}  h(z)))  = h_n(z)
+    $$
+  \end{itemize}
+\end{frame}  
+
+\begin{frame}{In-class exercise: write out $h_2(z) = h(h(z))$ for 
+  $$
+  h(z) =     p_0 + p_1 z + p_2 z^2.
+  $$}
+
+\end{frame}  
+
+
+\begin{frame}{Extinction}
+\end{frame}
+
+
+\begin{frame}{Extinction: some generalities}
+
+
+  \begin{description}
+  \item[``Extinction is forever.''] So, the probability $d_n$ of extinction
+    {\em by } generation $n$ can never decline over time. (Must it
+    always rise?)\\
+
+    \pause
+  \item[Is non-extinction ``forever''?] If $\lim_{n \rightarrow \infty} = d(\infty) <
+    1$, then this says there's a chance $1 - d(\infty)$ of eternal
+    persistence. We'll try to figure out more about what this means.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Extinction: a recursive trick}
+
+  If the probability of a female line going extinct in $n$ generations
+  is $d_n$, then this is equivalent to her daughter(s) line(s) going
+  extinct in $n-1$ generations. With $p_k$ chance of having
+  $k$ daughters, we have
+  $$
+  d_n = p_0 + p_1 d_{n-1} + \mbox{What is next term in series?}
+  $$
+\end{frame}
+
+
+\begin{frame}{Recursive extinction, continued}
+
+  What can we do with 
+  $$
+  d_n = h(d_{n-1})?
+  $$ 
+  
+  Well, remember that $d_n$ is non-decreasing, and that it's maximum
+  can be no greater than $1.0$. When $d_n$ reaches it's limit, say
+  $d$,  we won't need generational subscripts, $d$ will be constant,
+  and will obey
+  $$
+  d = h(d)
+  $$
+
+  Thus, an amazing result: the probability of ultimate extinction
+  is when the argument equals the PGF of the argument.
+
+\end{frame}  
+
+\begin{frame}{Can $d = 1$, can $d < 1$}
+  \begin{enumerate}
+  \item Try $d = 1$. What happens?
+  \item If we were to find a solution less than 1.0, how would we
+    interpret that?
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Three cases}
+
+  <<echo = F, fig.height = 5>>=
+  par(mfrow = c(1,3), pty = "s")
+  z = seq(0, 1.6, .01)
+  pk = c(.3, .0, .7); names(pk) <- 0:2
+  d <- pk["0"]
+  for (i in 1:10)
+  {
+      d <- pk["0"]  + pk["1"]*d + pk["2"]*d^2
+  }
+  ##  super-critical 
+  hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
+  plot.fun <- function(z, hz)
+  {
+      plot(z, hz, type = "l", ylim = c(0,1.6),
+           ylab = "h(z)",
+           yaxs = "i", xaxs = "i", axes = F)
+      axis(1, at = seq(0, 1.5, .5))
+      axis(2, at = seq(0, 1.5, .5))
+      abline(0,1, col = "grey")
+      lines(z, hz)
+      axis(2, at = pk["0"], labels = "p0",
+           col.axis = "red", col = "red",
+           lwd = 1, las = 2)
+  }
+  plot.fun(z,hz)
+  points(c(d, 1),c(d, 1))
+  title("Super-critical (m > 1) \n 2 roots")
+  ## sub-critical
+  pk = c(.3, .55, .15); names(pk) <- 0:2
+  hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
+  plot.fun(z,hz)
+  title("Sub-critical (m < 1) \n 1 root")
+  points(1,1)
+  ## critical
+  pk = c(.3, .4, .3); names(pk) <- 0:2
+  hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
+  plot.fun(z, hz)
+  title("Critical (m = 1), \n 1 root")
+  points(1,1)
+  @   
+  We can prove by answering: 
+  What is $h'(1)$? What is $h(0)$? Is $h''(z) > 0$? 
+\end{frame}  
+
+\begin{frame}[fragile]{A cobweb diagram (here a ``staircase'')}
+  <<echo = F, fig.height = 4>>=
+  pk = c(.3, .0, .7); names(pk) <- 0:2
+  z = seq(0, 1.6, .01)
+  hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
+  plot.fun(z,hz)
+  @ 
+  
+  Where is $h(p_0)$, $h(h(p_0))$, $h(h(h(p_0)))$, $\ldots$?
+
+\end{frame}
+
+\begin{frame}{So how do we actually get $d$?}
+
+  Take the case where $p_0 = .3$, $p_1 = 0$, and $p_3 = .7$ (the one I
+  just plotted).
+  \pause
+  \begin{itemize}
+  \item Can do some algebra \pause
+  \item Or we can recursively iterate on the computer.
+  \end{itemize}
+  \end{frame}
+
+\begin{frame}[fragile]{Numerical recursion}
+  <<echo = T>>=
+
+  pk = c(.3, .0, .7); names(pk) <- 0:2 ## our example
+  d <- pk["0"] # initial value
+  for (i in 1:20)
+  {
+      d <- pk["0"]  + pk["1"]*d + pk["2"]*d^2
+      if (i %in% c(1,2,19,20))
+          print(paste(i, d))
+  }
+
+  @ 
+\end{frame}
+
+
+\begin{frame}[fragile]{Did we get the right value?}
+  \pause
+  <<echo = F, fig.height = 4>>=
+  pk = c(.3, .0, .7); names(pk) <- 0:2
+  z = seq(0, 1.6, .01)
+  hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
+  plot.fun(z,hz)
+  abline(h = d, col = "green")
+  abline(v = d, col = "green")
+  @ 
+\end{frame}  
+
+  \begin{frame}{Extinction and non-extinction revisited}
+    \begin{itemize}
+    \item If $m > 1$, there exists $d$ bigger than 0 and less than unity.
+    \item This means there's some positive chance of extinction.
+    \item But also some chance of never-extinction. (What form does
+      never-extinction take?)
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Return to our simulation}
+
+    <<echo = F, fig.height = 5>>=
+    suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
+    @ 
+    Relevance to Corona virus?
+    
+  \end{frame}
+
+
+  
+  % \begin{frame}{Means and variances of $Z_n$}
+
+  %   We'll skip for now, maybe come back to with Fisher-Wright.
+
+  % \end{frame}
+
+  % \begin{frame}{Convergence of $Z_n / m^n$ to random variable $W$}
+  %   We'll also skip.
+  % \end{frame}
+
+  \begin{frame}{Good and bad set-ups for branching process}
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        Bad
+        \begin{itemize}
+        \item When offspring of 1 depends on offspring of other (e.g.,
+          brothers inheriting a farm)
+        \item When resource constraints slow growth rates (e.g.,
+          Malthus: fertility of  next gen depends on fertility of last;
+          SIR model in disease spread)
+        \item Analysis. PGF is powerful but still we often have to deal
+          with listing all possibilities.
+        \item Big populations -- law of large numbers means randomness
+          doesn't matter.
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        Good
+        \begin{itemize}
+        \item Unrestricted growth (frontier, new disease, start of a
+          reaction)
+        \item A ``null'' model for understanding how apparent structure
+          is just random outcomes. Families that die out didn't have to
+          have low $NRR$. Just because most new viruses don't break out,
+          doesn't mean they aren't potentially dangerous ($R_0 >> 1.0$).
+        \item A model that corresponds our mental model of running a
+          generative process forward. (cf. Fisher-Wright)
+        \end{itemize}
+      \end{column}
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}{Next time}
+    \begin{itemize}
+    \item Do the PS exercises. 
+    \item We'll have BP part 2, next week. (means  and variances of
+      $Z_n$,   the one tractable offspring distribution, time to
+      extinction, etc.)
+      \item I hope to have a mini-project with Missippi last names.
+    \item We may start Fisher-Wright. (Kennedy and I recommend
+      Gillespie.)
+    \end{itemize}
+  \end{frame}
+  \begin{frame}{Questions?}
+  \end{frame}  
+\end{document}
+

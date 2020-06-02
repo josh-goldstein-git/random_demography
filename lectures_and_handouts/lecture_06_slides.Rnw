@@ -1,0 +1,409 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+
+\setbeamertemplate{footline}[frame number]{}
+
+\title{Fertility Heterogeneity:\\ Tempo Distortions and Distorted Tempo \\
+  Dem260 Math Demog \\
+  Spring 2020 \\
+  Lecture 6}
+
+\author{Joshua R. Goldstein}
+
+\begin{document}
+
+\maketitle
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item A tempo simulation
+  \item Bongaarts and Feeney's formula
+  \item An application to the United States
+  \item[*] Cookie Break
+  \item Two Americas?
+  \item EM algorithm for unmixing mixtures
+  \item An application to two Americas.
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{A common theme for 1st half of semester}
+  What we see is superficial. Heterogeneous models reveal what's
+  ``really'' going on. (Or do they?)
+  
+  \begin{itemize}
+  \item Until today, population hazards mislead
+  \item Today, homogeneous fertility misleads
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{2nd half of the semester will reverse perspectives}
+
+  \begin{itemize}
+  \item We see differences we see in genotypes, in lineages, in
+    names.
+  \item These could be due to ``real'' differences
+    (heterogeneity).
+  \item But they could also be due to luck. Everyone is the same
+    but stochastic outcomes differ.
+  \item Our models of individual-level randomness will have
+    predicted dynamics, which are themselves interesting but can
+    also be used as a ``null'' to compare to observations.
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame} {Fertility postponement, a very simple example}
+
+  Baseline
+  \begin{itemize}
+  \item A population has a history of 1 birth per day
+  \item When women turn age 25, they have a daughter.
+  \item This gives us a constant stream of births, 365 per year.
+  \end{itemize}
+
+  Postponement
+  \begin{itemize}
+  \item Starting on Jan. 1, 020, everyone postponements childbearing
+    an additional month, until they are aged 25 1/12.
+
+  \item  How many births will there be in 2020?
+
+  \item  How many births in 2021?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Continuous postponement, a shiny simulation}
+  
+  \url{https://shiny.demog.berkeley.edu/josh/tempo/}
+  
+  \begin{description}
+  \item [$R(t)$] Cumulative postponment
+  \item[$r(t)$] Incremental postponement $r(t) = R'(t)$
+  \end{description}
+
+  What is a formula for recovering original birth stream?
+  $$
+  \hat{B}_{orig} = B_{obs} \times (1 + R'(t))
+  $$
+  or
+  $$
+  \hat{B}_{orig} = B_{obs} \times 1/  \left[1 - R'(t)\right]?
+  $$
+
+  Note: this idea of ``recovering original'' is one way to think
+  about tempo adjustment.
+  
+\end{frame}
+
+\begin{frame}{A bigger microsimulation}
+  \begin{itemize}
+  \item Each period will have births across a range of ages
+  \item We'll randomly generate the original planned birthdays
+  \item Then we'll shift by a continuous function $R(t)$.
+  \end{itemize}
+\end{frame}
+
+
+\section{Period Shifts}
+
+\begin{frame}{Bongaarts and Feeney's model}
+
+  
+  $$
+  f(a,t) = f_0(a - R(t)) (1- R'(t)) q(t)
+  $$
+  \pause
+  \begin{description}
+  \item[$f(a,t)$] birth rate of women aged $a$ in period $t$
+  \item[$f_0$] A constant baseline schedule (can be norm'd to sum to 1).
+  \item[$q(t)$] A period intensity parameter: ``quantum''
+  \item[$R(t)$] Cumulative shift.
+  \end{description}
+
+  
+\end{frame}      
+\begin{frame}{An example}
+
+  $$
+  f(a,t) = f_0(a - R(t)) (1- R'(t)) q(t)
+  $$
+  
+  \begin{itemize}
+  \item $R_{2019} = 3$
+  \item $R'_{2019} = .1$
+  \item $q(2019) = 1$
+  \end{itemize}
+
+  Give an expression for $f(28,2019)$.
+\end{frame}
+
+\begin{frame}{A derivation (due to Rodriguez)}
+
+  Assume no quantum effects.
+
+  Take a cohort with cumulative fertility
+  $$
+  F_0(a) = \int_0^a f(x) \,dx
+  $$
+
+  Now put in shifts so that observed fertility is from an
+  age $R(t)$ years \alert{earlier}. (``28'' is the new ``25''!)
+  $$
+  F(a,t) = F_0(a - R(t)) \pause = F_0(a - R(c + a))
+  $$
+  \pause
+  Differentiate with respect to age (which for a cohort is also
+  time $t$), using chain rule
+  \pause
+  $$
+  f(a,t) = f_0(a - R(t)) \left[1 - R'(t)\right]
+  $$
+  Bingo!
+\end{frame}
+\begin{frame}{Quantum comes at the end}
+  Let's re-notate our constant quantum result
+  $$
+  f_0(a,t | R(t) ) = f_0(a - R(t)) \left[1 - R'(t)\right]
+  $$
+  Then we can incorporate period quantum on the shifted surface:
+  $$
+  f(a,t) = f_0(a,t | R(t) ) \alert{q(t)} = f_0(a - R(t)) \left[1 - R'(t)\right]\alert{q(t)}
+  $$
+
+  Note: If we vary quantum \alert{before} shifts, then $q(t)$ will
+  bleed into neighboring years. (a small effect, but makes model
+  messier).
+\end{frame}
+
+\begin{frame}{Tempo-adjusted TFR: counter-factual, TFR in absence of timing changes}
+
+  $$
+  TFR(t) = \int_0^\infty f(a,t) \, da
+  $$
+
+  Substituting our shifted birth rates with quantum
+  $$
+  TFR(t) = \int_0^\infty f_0(a - R(t)) \left[1 - R'(t)\right]q(t) 
+  $$
+  gives?
+  \pause
+
+  
+  $$
+  TFR(t) = TFR_0 \left[1 - R'(t)\right] q(t)
+  $$
+  \pause
+  WLG, define $TFR_0 = 1$, then
+  $$
+  q(t) =   \alert{ {TFR(t) \over 1 - R'(t)} \equiv TFR^*(t) }
+  $$
+  Voila, the BF formula
+\end{frame}
+
+
+\begin{frame}{How do period schedules change?}
+  For homework
+  $$
+  f(a,t) = f_0(a - R(t)) \left[1 - R'(t)\right]
+  $$
+
+
+  What does
+  $$
+  {\partial \over \partial t} \log f(a,t) = ?
+  $$
+  Let's sketch
+\end{frame}
+
+\begin{frame}{A diagnostic}
+  for homework
+\end{frame}  
+
+\begin{frame}{``Uniform'' shifts}
+
+  \begin{itemize}
+  \item BF model assumes all ages shift by $R(t)$.
+  \item BF model assumes all ages rise or fall by same quantum $q(t)$
+  \item Violating these assumptions means change in mean age will not
+    just reflect ``tempo''.
+  \item Example: What happens if people have fewer higher order births?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{BF recommendation for achieving uniformity}
+
+  Separate estimates for each birth order, and then combine:
+  $$
+  TFR^*(t) = \sum_i TFR_i^*(t) = \sum_i {TFR_i(t) \over 1 - r_i(t)}
+  $$
+
+  This will protect against order-specific quantum effects.
+  
+\end{frame}
+\section{An Application to the United States}
+
+\begin{frame}[fragile]{An Application to the United States}
+  \begin{itemize}
+  \item We'll use HFD data
+  \item We'll do tempo adjustment for all births
+  \item We'll redo by birth order
+  \end{itemize}
+
+\begin{verbatim}
+
+ usa_tempo.R
+\end{verbatim}
+  
+\end{frame}
+
+\begin{frame}
+  \begin{figure}[h]
+    \caption{BF tempo adjustment of US total fertility}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{./usa_tempo_fig.pdf}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Conclusions}
+  \begin{itemize}
+  \item Baby boom smaller if we account for ``pre-ponement''.
+  \item Fertility lull in 1970s and 80s disappears if we account for
+    ``postponement''
+  \item Birth order disaggregation improves estimates of shifts from
+    changes in mean age
+  \item What happened with the recession?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Cookie Break}
+\end{frame}
+
+
+\section{Two Americas}
+
+\begin{frame}[fragile]{Animation}
+
+  Let's look at births (all orders).
+
+\begin{verbatim}
+fat_movie.pdf
+\end{verbatim}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Mixing}
+  Let's look at 1st births, again as if their are two latent groups:
+  $A$ and $B$.  (These could be ``early moms'' / ``late moms'',
+  non-college / college,
+  pre-marital / marital, lower-class / upper class, $\ldots$)
+
+\begin{verbatim}
+fat_mix_movie.pdf
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Youtube}
+\end{frame}
+
+\begin{frame}[fragile]{In R}
+  <<>>=
+  library(mixtools)
+@
+\end{frame}
+
+\begin{frame}[fragile]{In R}
+
+  <<size = "tiny">>=
+  ## simulate 2 normals 
+  N <- 1000
+  x1 <- rnorm(N, mean = 22, sd = 3) ##
+  x2 <- rnorm(2*N, mean = 30, sd = 4)
+  ## combine them
+  x <- c(x1,x2)
+  ## use EM to infer mixture
+  out <- normalmixEM(x,
+                     lambda = c(.5, .5),
+                     mu = c(15, 35),
+                     sigma = c(5,5))
+
+  print(out$mu)
+  print(out$sigma)
+  print(out$lambda)
+  @
+  Seems to work great.
+\end{frame}  
+
+\begin{frame}[fragile]{Visualization}
+
+  <<echo = F, fig.height = 4>>=
+  ages <- 10:49
+  dens1 <- dnorm(x = ages, mean = out$mu[1], sd = out$sigma[1]) * out$lambda[1]
+  dens2 <- dnorm(x = ages, mean = out$mu[2], sd = out$sigma[2]) * out$lambda[2]
+  par(mfrow = c(1,1))
+  hist(x, probability = T, col = "grey")
+  lines(ages, dens1, col = "red", lwd = 2)
+  lines(ages, dens2, col = "blue", lwd = 2)
+  lines(ages, dens1 + dens2, col = "black", lwd = 2)
+  @ 
+\end{frame}  
+
+
+\begin{frame}{An algorithm for tempo adjustment of mixtures}
+  \begin{enumerate}
+  \item Fit normal mixture to each year.
+  \item Refit using constant variance (average). This assures shape
+    invariance of each component, fulfilling BF assumption.
+  \item Estimate BF separately for $A$ and $B$, and combine.
+  \end{enumerate}  
+\end{frame}
+
+\begin{frame}
+  \begin{figure}[h]
+    \caption{Results (preliminary)}
+    \centering
+    \includegraphics[width = 1\textwidth]{./tempo_mixed_results_figure.pdf}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}{Identifiability?}
+\end{frame}    
+% could do with 3 sub-populations?
+
+\begin{frame}{Main points}
+  \begin{itemize}
+  \item Postponement dilutes period births, lowers TFR
+  \item Tempo-adjustment tries to ``put births back in''
+  \item Changes in mean work fine if ``shape'' doesn't change
+  \item Shape can change through heterogeneity
+  \item With strong assumptions, we can identify heterogeneity
+  \item Declining quantum for young and postponement for old appears
+    to be the story
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Caveats}
+  \begin{itemize}
+  \item Who are these latent groups? Do you start out in one and end
+    up in the other? Do you stay in one your whole life?
+  \item How do we project forward?
+  \item Can we use other indicators (e.g., social class, education,
+    marriage) to get same results?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Next time, Branching Processes}
+
+  Either Dartmouth textbook reading, or Harris classic.
+\end{frame}
+
+
+\end{document}
+
+
+
+
