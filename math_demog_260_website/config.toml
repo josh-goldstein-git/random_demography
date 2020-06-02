@@ -1,0 +1,28 @@
+baseURL = ""
+languageCode = "en-us"
+title = "Mathematical Demography with Applications"
+theme = "ananke"
+relativeURLs = true
+
+# Menu links
+[[menu.main]]
+	name = "Home"	
+	weight = 1
+	url = "."
+[[menu.main]]
+	name = "Blog"	
+	weight = 2
+	url = "/posts/"
+[[menu.main]]
+	name = "Materials"
+	weight = 3
+	url = "/materials/"
+[[menu.main]]
+	name = "Shiny Apps"
+	weight = 4
+	url = "/shiny_apps/"
+ [[menu.main]]
+ 	name = "About"
+ 	weight = 5
+ 	url = "/about/"
+	

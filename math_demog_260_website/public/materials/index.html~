@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Mathematical Demography with Applications  | Materials</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.59.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Materials" />
+<meta property="og:description" content=" Course Calendar with Readings
+1. Introduction to Heterogeneity  Lecture 1 pdf Problem Set 1 pdf Heterogeneity&rsquo;s Ruses Shiny App  2. Mortality Heterogeneity  Lecture 2 pdf Problem Set 2 pdf Frailty Simulator (R program) Gompertz Functions(R program)  3. Gamma Frailty with Applications  Black-White Mortality Crossover shiny app  4. Student Presentations 5. Guest Lecture 6. Fertility Heterogeneity " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/materials/" />
+<meta property="article:published_time" content="2020-01-30T21:11:02-08:00" />
+<meta property="article:modified_time" content="2020-01-30T21:11:02-08:00" />
+<meta itemprop="name" content="Materials">
+<meta itemprop="description" content=" Course Calendar with Readings
+1. Introduction to Heterogeneity  Lecture 1 pdf Problem Set 1 pdf Heterogeneity&rsquo;s Ruses Shiny App  2. Mortality Heterogeneity  Lecture 2 pdf Problem Set 2 pdf Frailty Simulator (R program) Gompertz Functions(R program)  3. Gamma Frailty with Applications  Black-White Mortality Crossover shiny app  4. Student Presentations 5. Guest Lecture 6. Fertility Heterogeneity ">
+
+
+<meta itemprop="datePublished" content="2020-01-30T21:11:02-08:00" />
+<meta itemprop="dateModified" content="2020-01-30T21:11:02-08:00" />
+<meta itemprop="wordCount" content="55">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Materials"/>
+<meta name="twitter:description" content=" Course Calendar with Readings
+1. Introduction to Heterogeneity  Lecture 1 pdf Problem Set 1 pdf Heterogeneity&rsquo;s Ruses Shiny App  2. Mortality Heterogeneity  Lecture 2 pdf Problem Set 2 pdf Frailty Simulator (R program) Gompertz Functions(R program)  3. Gamma Frailty with Applications  Black-White Mortality Crossover shiny app  4. Student Presentations 5. Guest Lecture 6. Fertility Heterogeneity "/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://example.org/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Mathematical Demography with Applications
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/posts/" title="Blog page">
+              Blog
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/materials/" title="Materials page">
+              Materials
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/shiny_apps/" title="Shiny Apps page">
+              Shiny Apps
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <div class="flex-l mt2 mw8 center">
+    <article class="center cf pv5 ph3 ph4-ns mw7">
+      <header>
+        <p class="f6 b helvetica tracked">
+          
+        </p>
+        <h1 class="f1">
+          Materials
+        </h1>
+      </header>
+      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
+        
+
+<p><a href="/materials_content/math_demog_reading_list.pdf">Course Calendar with Readings</a></p>
+
+<h3 id="1-introduction-to-heterogeneity">1. Introduction to Heterogeneity</h3>
+
+<ul>
+<li>Lecture 1 <a href="/materials_content/lecture_1_slides-woven.pdf">pdf</a></li>
+<li>Problem Set 1 <a href="/materials_content/problem_set_1.pdf">pdf</a></li>
+<li>Heterogeneity&rsquo;s Ruses <a href="../shiny_apps/">Shiny App</a></li>
+</ul>
+
+<h3 id="2-mortality-heterogeneity">2. Mortality Heterogeneity</h3>
+
+<ul>
+<li>Lecture 2 <a href="/materials_content/lecture_2_slides-woven.pdf">pdf</a></li>
+<li>Problem Set 2 <a href="/materials_content/problem_set_2.pdf">pdf</a></li>
+<li>Frailty Simulator <a href="/materials_content/frailty_simulator.R">(R program)</a></li>
+<li>Gompertz Functions<a href="/materials_content/gomp_funs.R">(R program)</a></li>
+</ul>
+
+<h3 id="3-gamma-frailty-with-applications">3. Gamma Frailty with Applications</h3>
+
+<!-- * [Lecture 3](/materials_content/lecture_3_slides-woven.pdf)
+* [Problem Set 3](/materials_content/problem_set_3.pdf)
+* [censoc_selective_survival_income.R](/materials_content/foo.R) 
+-->
+
+<ul>
+<li>Black-White Mortality Crossover <a href="../shiny_apps/">shiny app</a></li>
+</ul>
+
+<h3 id="4-student-presentations">4. Student Presentations</h3>
+
+<h3 id="5-guest-lecture">5. Guest Lecture</h3>
+
+<h3 id="6-fertility-heterogeneity">6. Fertility Heterogeneity</h3>
+
+      </div>
+    </article>
+  </div>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  Mathematical Demography with Applications 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

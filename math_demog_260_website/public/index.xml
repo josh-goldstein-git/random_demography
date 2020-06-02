@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mathematical Demography with Applications</title>
+    <link>/</link>
+    <description>Recent content on Mathematical Demography with Applications</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Feb 2020 14:50:42 -0800</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tempo and updates</title>
+      <link>/posts/tempo/</link>
+      <pubDate>Mon, 24 Feb 2020 14:50:42 -0800</pubDate>
+      
+      <guid>/posts/tempo/</guid>
+      <description>Reading list for Fertility Heterogeneity week is available under materials tab. Most of this material is optional, for after-class reading. If you are familiar with Bongaarts-Feeney tempo adjustment, would recommend looking at the Burkimsher paper. If you&amp;rsquo;re not familiar with B-F, the review paper by me and Tom provides a moderately technical overview. We&amp;rsquo;ll be doing section 2.5 in class.
+Ken also sent an updated version of his slides, which I&amp;rsquo;ve posted.</description>
+    </item>
+    
+    <item>
+      <title>Ken&#39;s Guest Lecture and in-class R exercise available</title>
+      <link>/posts/ken_post/</link>
+      <pubDate>Tue, 18 Feb 2020 14:26:35 -0800</pubDate>
+      
+      <guid>/posts/ken_post/</guid>
+      <description>Slide are available for Ken Wachter&amp;rsquo;s guest lecture. There is also an in-class R exercise.</description>
+    </item>
+    
+    <item>
+      <title>Increasing inequality?</title>
+      <link>/posts/third_post/</link>
+      <pubDate>Thu, 13 Feb 2020 20:15:51 -0800</pubDate>
+      
+      <guid>/posts/third_post/</guid>
+      <description>The Waldron analysis presents the following table.
+  If we simulate two heterogeneous groups, one which always has twice the baseline mortality level as the other, then we will see the observed hazard ratio converge with age as mortality selectively removes the most frail individuals. If we let the baseline levels of both groups decline steadily, simulating the process of mortality improvement, then this will make it appar that the hazard ratio is rising over time.</description>
+    </item>
+    
+    <item>
+      <title>Update (Feb 7)</title>
+      <link>/posts/second_post/</link>
+      <pubDate>Fri, 07 Feb 2020 11:49:23 -0800</pubDate>
+      
+      <guid>/posts/second_post/</guid>
+      <description>I&amp;rsquo;ve just posted a corrected version of Lecture 3. This includes a reconciliation with the result on mortality progress over time. (The problem turned out to be in part that the Vaupel and Missov derivation has a mistaken minus sign in one of the definitions.)
+I&amp;rsquo;ve also posted a pdf of the Manton and Stollard reading on Black/White crossover.</description>
+    </item>
+    
+    <item>
+      <title>Materials</title>
+      <link>/materials/</link>
+      <pubDate>Thu, 30 Jan 2020 21:11:02 -0800</pubDate>
+      
+      <guid>/materials/</guid>
+      <description>Course Calendar with Readings
+1. Introduction to Heterogeneity  Lecture 1 pdf Problem Set 1 pdf Problem Set 1 solutions (updated) pdf Heterogeneity&amp;rsquo;s Ruses Shiny App  2. Mortality Heterogeneity  Lecture 2 pdf Problem Set 2 pdf Problem Set 2 solutions (updated) pdf Frailty Simulator (R program) Gompertz Functions(R program)  3. Gamma Frailty with Applications  Lecture 3 CenSoc_mortality_selection.Rmd rho_simu.Rmd Problem Set 3 pdf Black-White Mortality Crossover shiny app  4.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Thu, 30 Jan 2020 21:02:39 -0800</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This website is for &amp;ldquo;Mathematical Demography (Demog 260)&amp;rdquo; taught by Joshua R. Goldstein at UC, Berkeley.
+Contact: (My attempt at a human-only readable email address) josh dot goldstein at berkeley (with usual educational suffix)</description>
+    </item>
+    
+    <item>
+      <title>Shiny_apps</title>
+      <link>/shiny_apps/</link>
+      <pubDate>Thu, 30 Jan 2020 19:46:40 -0800</pubDate>
+      
+      <guid>/shiny_apps/</guid>
+      <description>Heterogeneity&amp;rsquo;s Ruses A shiny app inspired by Vaupel and Yashin&amp;rsquo;s paper.
+Mortality Crossover Uses inversion formula from Gamma-distributed frailty to estimate baseline hazard that would be consistent with the observed aggregate hazard for different frailty variances. (by German Rodriguez)</description>
+    </item>
+    
+    <item>
+      <title>Welcome</title>
+      <link>/posts/my-first-post/</link>
+      <pubDate>Thu, 30 Jan 2020 19:31:17 -0800</pubDate>
+      
+      <guid>/posts/my-first-post/</guid>
+      <description>Welcome to the Demog260 website. The upper right menu navigates to content. See &amp;ldquo;Materials&amp;rdquo; for lecture slides, problem sets and other documents.</description>
+    </item>
+    
+  </channel>
+</rss>

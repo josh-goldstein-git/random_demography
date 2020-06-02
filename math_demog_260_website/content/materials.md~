@@ -1,0 +1,102 @@
+---
+title: "Materials"
+date: 2020-01-30T21:11:02-08:00
+draft: true
+---
+
+[Course Calendar with Readings](/materials_content/math_demog_reading_list.pdf)
+
+### 1. Introduction to Heterogeneity
+* Lecture 1 [pdf](/materials_content/lecture_1_slides-woven.pdf)
+* Problem Set 1 [pdf](/materials_content/problem_set_1.pdf)
+* Problem Set 1 solutions (updated) [pdf](/materials_content/ps1.pdf)
+* Heterogeneity's Ruses [Shiny App](../shiny_apps/)
+
+### 2. Mortality Heterogeneity 
+* Lecture 2 [pdf](/materials_content/lecture_2_slides-woven.pdf)
+* Problem Set 2 [pdf](/materials_content/problem_set_2.pdf)
+* Problem Set 2 solutions (updated) [pdf](/materials_content/ps2.pdf)
++ Frailty Simulator [(R program)](/materials_content/frailty_simulator.R)
++ Gompertz Functions[(R program)](/materials_content/gomp_funs.R)
+
+### 3. Gamma Frailty with Applications
+* [Lecture 3](/materials_content/lecture_3_slides-woven.pdf)
+* [CenSoc_mortality_selection.Rmd](/materials_content/CenSoc_mortality_selection.Rmd)
+* [rho_simu.Rmd](/materials_content/rho_simu.Rmd)
+* Problem Set 3 [pdf](/materials_content/problem_set_3.pdf)
+* Black-White Mortality Crossover [shiny app](../shiny_apps/)
+
+
+
+### 4. Student Presentations
+
+
+* Cross-overs [pdf](/materials_content/mortality_crossover_math_demog.pdf)
+  *  Manton and Stollard reading on Black/White Mortality Crossover [pdf](/materials_content/manton_stollard_1981.pdf)
+* Plateaus [R program](/materials_content/plateaus.R)
+* Progress [pdf](/materials_content/progress.pdf)
+  * Josh's attempt at simulating Waldron's pattern purely through
+    heterogeneity, with a constant risk ratio of baseline
+    mortality. [R program](/materials_content/waldron_simu.R)
+
+### 5. Guest Lecture by Prof. Kenneth W. Wachter
+
+* Guest Lecture: "Hazards and Plateaus" [ updated pdf](/materials_content/kww_250_2020b.pdf)
+* In-class R exercise [R program](/materials_content/ucode01.r)
+
+
+### 6 (and 7). Fertility Heterogeneity
+
+* Joshua R. Goldstein and Thomas Cassidy (2016) "Amplified Changes: An
+  Analysis of Four Dynamic Fertility Models", Chapter 2, R. Schoen (ed.)
+  _Dynamic Demographic Analysis_, Springer. [pdf](/materials_content/goldstein_cassidy_amplified_changes.pdf)
+
+	[We'll only be covering the Bongaarts-Feeney model in class, but
+    this paper provides an overview of a menagerie of tempo
+    models. We'll do the derivation on p. 18 in class.]
+
+* (optional) Rachel Sullivan (2005) ``The age pattern of first-birth rates among
+  US women: the bimodal 1990s,'' {\em Demography}, 42(2),
+  259-273. [pdf](https://www.jstor.org/stable/4147346)
+
+    [An early paper, by a Berkeley Demography student, focusing on
+    first birth hazards.]
+  
+* Marion Burkimsher (2017) ``Evolution of the shape of the
+  fertility curve: Why might some countries develop a bimodal curve?''
+  {\em Demographic Research},
+  37(11):295-324. [link to paper](https://www.demographic-research.org/volumes/vol37/11/default.htm)
+
+    [A descriptive paper. You can skim but do see especially section 7,
+  where she argues that her findings contradict Sullivan for the
+  United States.]
+
+*  Victor Lavrenko. Youtube video :''EM algorithm: how it works''
+  [youtube](https://www.youtube.com/watch?v=REypj2sy\_5U)
+
+    [Fitting mixture models with EM algorithm -- with great yellow and
+  blue graphics. Try this first before reading Hastie and Tiberashi]
+
+* Hastie and Tiberashi (2017) ``The EM Algorithm'' section 8.5 of {\em The Elements of Statistical Learning: Data Mining,
+    Inference, and Prediction}. Pages 272-276 of ESLII\_print12.pdf
+  available at [pdf](https://web.stanford.edu/~hastie/ElemStatLearn/)
+
+    [A textbook example of expectation-maximization algorithm applied to
+     mixture of two normals].
+
+* Lecture 6 [pdf](/materials_content/lecture_6_slides-woven.pdf)
+* Problem Set 6 [pdf](/materials_content/problem_set_6.pdf)
+* Tempo Simulator [(R program)](/materials_content/tempo_simu.R)
+* USA tempo adjustment [(R program)](/materials_content/usa_tempo.R),
+  plus additional functions:
+  [tempo_functions.R](/materials_content/tempo_functions.R) and 
+	 [utility_functions.R](/materials_content/utility_functions.R) 
+* US fertility movie [pdf](/materials_content/fat_movie.pdf)
+* US fertility movie with fitted normal mixtures [pdf](/materials_content/fat_mix_movie.pdf)
+
+
+
+### 8. Branching Processes (Part 1)
+
+* Lecture 8 [pdf] (/materials_content/lecture_8_slides-woven.pdf)
+* Problem Set 8 [pdf](/materials_content/problem_set_8.pdf)

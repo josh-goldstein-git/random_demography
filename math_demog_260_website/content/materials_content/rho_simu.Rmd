@@ -1,0 +1,191 @@
+---
+title: "Simulation of rates of mortality improvement by age in hetogeneous cohorts"
+author: Joshua R. Goldstein
+output: html_notebook
+---
+
+# Overview
+
+We want to see what it means for frailty to "slow mortality
+progress". To do this we simulate two life tables, one with 10% lower
+mortality at all ages and show that at older ages the gap is much
+smaller.
+
+(A more general example could have different decreases at different
+ages.)
+
+We show that the simulation produces what should be expected from the
+gamma-gompertz.
+
+The result has a kind of "duality"
+
+* On the one hand it is repeating what we did with cross-overs,
+  showing that differences between observed hazards of groups is
+  biased downward, when compared to differences in base-line hazards.
+  
+* On the other hand, if we can conceive of these groups as different
+  cohorts on the Lexis diagram, giving us the interpretation that
+  slower progress at older ages may also be driven by mortality
+  seleciton.
+  
+
+## Preliminaries
+
+```{r}
+source("../gomp_funs.R")
+get.Dx <- function(y)
+{
+    ## counts number of x in single year age groups
+    ## including zeros when there's no one
+    ## (note: built-in "table()" won't do this :(
+    x <- 0:max(floor(y))
+    y.fac <- factor(floor(y), levels = x)
+    Dx <- tabulate(y.fac)
+    names(Dx) <- x
+    return(Dx)
+}
+get.lt <- function(y)
+{
+    Dx <- get.Dx(y)
+    x <- as.numeric(names(Dx))
+    ## get lx by reverse-survival
+    lx <- rev(cumsum(rev(Dx)))
+    ## get person-years as average of adjacent lx
+    lxpn <- c(lx[-1], 0)
+    Lx <- (lx + lxpn)/2
+    ## get hazards
+    mx <- Dx/Lx
+    Sx <- lx/lx[1]
+    lt <- data.frame(x=x, Sx=Sx, mx=mx)
+    return(lt)
+    }
+```
+
+
+## Simulate our frailty (z's)
+
+We do one set of z's, which we are going to use twice. (It would also
+be fine to do two sets of z's, but one set runs faster with big sample.)
+
+```{r}
+million = 10^6
+N <-  4*million
+my.sd <- sqrt(.2) ## .44
+sigma.sq <- my.sd^2
+z <- rgamma(N, shape = 1/sigma.sq, scale = sigma.sq)
+```
+
+## Simulate our deaths for our two cohorts (y1 and y2)
+
+Here we use Gamma-Gompertz with a common $\rho$ for all ages, but one
+could use any baseline and any $\rho(x)$ and the mathematical result
+stillholds. An advantage of Gamma-Gompertz is that we can compare our
+simulation to the exact analytical result.
+
+```{r}
+
+
+base.b <- 1/9 # for both cohorts
+
+## for cohort 1
+
+base.a.1 <- 10^-4 
+
+## for cohort 2
+## educe base by exp(-rho) of about 10%
+rho = .1 # baseline decline 
+base.a.2 <- base.a.1 * exp(-rho)
+
+## ages at death
+y1 <- rgomp(N,
+           b = base.b, ## doesn't vary
+           a = base.a.1 * z) ## multiplicative fixed frailty
+
+y2 <- rgomp(N,
+           b = base.b, ## doesn't vary
+           a = base.a.2 * z) ## multiplicative fixed frailty
+```
+
+Now we get the observed life tables for these cohorts using our handy
+functions, defined above -- and we calculate the change in hazards we
+see in our simulation ("rho.obs.simu").
+
+```{r}
+lt.1 <- get.lt(y1)
+lt.2 <- get.lt(y2)
+
+## truncate so they have same length
+## (they can differ at older ages, depending on chance draws)
+n.ages <- max(nrow(lt.1), nrow(lt.2))
+lt.1 <- lt.1[1:n.ages,]
+lt.2 <- lt.2[1:n.ages,]
+x <- 0:(n.ages-1)
+
+## compute observed rho
+mx1 <- lt.1$mx
+mx2 <- lt.2$mx
+rho.obs.simu <- log(mx1/mx2)
+
+plot(x, rho.obs.simu, ylim = c(-.1, .2), type = "o")
+abline(h = rho, col = "red")
+title("Rates of mortality improvement by age")
+```
+
+We see that there is a lot of noise when there are few deaths (early
+and late in life). But the main message is that mortality improvement
+in our simulation slows at older ages. At age "70" the progress is
+only about half of the change in baseline hazards.
+
+
+## now get predicted rho
+
+Finally we compare to the exact result VM's eq (39*).
+
+```{r}
+
+a1 = base.a.1
+a2 = base.a.2
+b = base.b
+## Gamma-gompertz survival curves
+S.bar.1 <- (1 + sigma.sq * (a1/b) * (exp(b*x) - 1))^(1/sigma.sq)
+S.bar.2 <- (1 + sigma.sq * (a2/b) * (exp(b*x) - 1))^(1/sigma.sq)
+
+## compute change in S.bar
+d.log.S.bar <- log(S.bar.2/S.bar.1) # proportional change in log.S.bar
+accent.S.bar <- -d.log.S.bar # minus sign by definition
+
+## compute 
+## VM (39*)
+## rho.obs = rho.true - sigma.sq * d.log.S.bar
+rho.true <- rho
+rho.obs.exact =  rho - sigma.sq * accent.S.bar
+
+
+plot(x, rho.obs.simu, ylim = c(-.1, .2), type = "o")
+lines(x, rho.obs.exact, col = "blue")
+abline(h = rho, col = "red")
+legend("bottom", legend = c("pop rho simulated",
+                            "pop rho exact",
+                            "baseline rho"),
+       pch = c(1, -1,-1),
+       lty = c(1,1,1),
+       col = c("black", "blue", "red"),
+       bty = "n")
+abline(h = 0, col = "grey")
+```
+
+## Discussion
+
+> Why is simulation noisy at early and late ages?
+
+> Is this like Lee-Carter pattern?
+
+> What is implication for forecasting?
+
+> What is implication for inequality over time?
+
+
+
+
+
+
