@@ -1,0 +1,373 @@
+--- 
+title: "A Minimal Book Example"
+author: "Yihui Xie"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+fig_caption: true
+---
+
+# Prerequisites
+
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+
+The **bookdown** package can be installed from CRAN or Github:
+
+```{r eval=FALSE}
+install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+```
+
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+# Problem set 1
+
+## Questions
+
+1. True or False? “If every part grows exponentially at its own rate, then the whole will also grow exponentially.” Explain your answer briefly.
+
+2. List what you think are two of the best arguments in favor of doing a disaggregated projection? What are two of the best arguments in favor of doing an aggregated projection?
+3.  $r_u = .0075$, $r_m = 0.035$, $K_u(1970) = 200$, $K_m(1970) = 50$
+    (@) Use the first few years of the projection to verify that rate of change in the aggregate growth rate equals the variance of the growth rate. Does it matter what time points and period you consider?  
+    (@) The growth rate changes over the course of the 50 years, but there is a constant growth rate that will produce the exact same population after 50 years. A reasonable choice of the constant growth rate to apply is the value of the changing growth rate at year 25 (half-way through the period). We can estimate this using a Taylor series approximation: $$ \bar{r}(25) \approx \bar{r}(0) + 25\bar{r}'(0) + (25)^2 \bar{r}''(0) $$  
+        i. Show that $\bar{r}''(t) = \bar{r}_3(t) - \bar{r}_2(t) \bar{r}(t) - 2 \bar{r}(t) \sigma^2_r(t)$ \\
+        ii. Calculate the combined US-Mexico population after 50 years according to the following five (5) methods, plot the total population after 50 years according to these 5 methods on a graph.
+            a. Dissaggregated (“true”) forecast, with each country growing at its own rate
+            b. Aggregated forecast, pretending it’s one country, growing at $\bar{r}(0)$) for 50 years
+            c. Aggregated forecast, growing at the “true” value of $\bar{r}(25)$ for the whole period. (Use the value of $\bar{r}(25)$) that you calculate from the disaggregated forecast):
+            d. Aggregated forecast, growing at the first-order Taylor series estimate of $\bar{r}(25)$ for the whole period:
+            e. Aggregated forecast, growing at the second-order Taylor series estimate of $\bar{r}(25)$ for the whole period:
+            For this exercise we need to calculate the extra second-order term from the Taylor series, $25^2\bar{r}''(0)$:
+
+   4. For Ken’s Poisson-Exponential model,
+      a. What is the closed-form expression for $\hat{r}(t)$  
+      b. What is the variance of the growth rate?  
+      c. Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn’t depend on? (difference of $\bar{r}(t)$ and $\bar{r}(0)$)  
+
+## Solutions
+1. True or False? “If every part grows exponentially at its own rate, then the whole will also grow exponentially.” Explain your answer briefly.
+
+   False. 
+
+   From Keyfitz we know that the average growth rate of a heterogeneous population is: $$\bar{r}(t)=\frac{\sum_i{Q_i}{r_i}e^{r_i{t}}}{\sum_i{Q_i}e^{r_i{t}}}$$ Here, $\bar{r}(t)$ is not constant for all t as  there is a compositional effect. This should be read as “If every part grows at a constant exponential rate, then the whole will also grow exponentially.”.
+We could argue that only in the long term it is true. 
+
+
+2. List what you think are two of the best arguments in favor of doing a disaggregated projection? What are two of the best arguments in favor of doing an aggregated projection?
+    a. Disaggregated projections:
+        i. Revealing the "true" path, patterns of individuals different from that of the aggregate.
+        ii. Take into account size of each sub-population, in particular the smaller ones.
+        iii. It may be more precise. Growth rates for sub-populations reflect their intrinsic characteristics, such that projections that do not use appropriate rates can lead to adverse social/policy implications. 
+    b. Aggregated projections:
+        i. If population is homogeneous, we can estimate a simpler model than projecting many models for sub-populations.
+        ii. We might care more about the overall rates rather than the group-specific rates.
+        iii. More data available.
+        iv. Easier.
+
+3.  $r_u = .0075$, $r_m = 0.035$, $K_u(1970) = 200$, $K_m(1970) = 50$
+    (@) Use the first few years of the projection to verify that rate of change in the aggregate growth rate equals the variance of the growth rate. Does it matter what time points and period you consider?  
+    From the information given, we can obtain $\bar{r}(t)$ and $\sigma_r^2(t)$ by projecting each country's population using individual rates and then obtaining the total population ($\bar{K}(t)$). We use the formula for aggregate growth rate: $$ \bar{r}(t)= \frac{K_u(0) r_u(t) e^{r_u(t) t} + K_m(0) r_m(t) e^{r_m(t) t}}{K_u(0) e^{r_u(t) t} + K_m(0) e^{r_m (t) t}}$$
+    Then, we can calculate the variance of the growth rates as: 
+    $$\begin{aligned}
+    \sigma_r^2(t) &= \frac{{K_u(0) e^{r_u(t) t}(r_u(t) - \bar{r}(t))^2 + K_m(0) e^{r_m(t) t}(r_m(t) - \bar{r}(t))^2}} { {K_u(0) e^{r_u(t) t} + K_m(0) e^{r_m(t) t}}} \\ 
+    &= \frac{K_u(t) r_u(t)^2 + K_m(t) r_u(t)^2}{K_u(t)+K_m(t)}-\bar{r}(t)^2 
+    \end{aligned}$$
+    The table below show these results for projections at the beginning and ending of a 50 year period. 
+    ```
+    | $t$ | $\sigma^2_r(t)$ | $K_u(t)$ | $K_m(t)$ | $\bar{K}(t)$ | $\bar{K}(t)-\bar{K}(t-1)$ | $\bar{r}(t)$ | $\bar{r}'(t)$ |
+    |---|---------------|--------|--------|------------|-------------------------|------------|-------------|
+    |0  | 0.00021     | 200     | 50      | 250     |        |        |       |
+    |l  | 0.000123 | 201.506 | 51.781  | 253.287 | 3.2866 | 0.0131 |       |
+    |2  | 0.000125 | 203.023 | 53.625  | 256.648 | 3.3614 | 0.0132 | 0.0001|         
+    |3  | 0.000127 | 204.551 | 55.536  | 260.087 | 3.4385 | 0.0133 | 0.0001|
+    | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+    |49 | 0.000189 | 288.824 | 277.833 | 566.658 |        |        |       |
+    |50 | 0.000189 | 290.998 | 287.730 | 578.728 | 12.071 | 0.0211 |       |
+    |51 | 0.000189 | 293.189 | 297.979 | 591.168 | 12.440 | 0.0213 | 0.0002|
+    ```
+    Overall, the time points do not matter and we can verify that $\frac{d\bar{r}(t)}{d(t)}=\sigma_r^2(t)$  
+    (@) The growth rate changes over the course of the 50 years, but there is a constant growth rate that will produce the exact same population after 50 years. A reasonable choice of the constant growth rate to apply is the value of the changing growth rate at year 25 (half-way through the period). We can estimate this using a Taylor series approximation: $$ \bar{r}(25) \approx \bar{r}(0) + 25\bar{r}'(0) + (25)^2 \bar{r}''(0) $$  
+        i. Show that $\bar{r}''(t) = \bar{r}_3(t) - \bar{r}_2(t) \bar{r}(t) - 2 \bar{r}(t) \sigma^2_r(t)$ \\
+        From before, we know that:
+        $$\begin{aligned}
+        \sigma_r^2(t) &= \bar{r}'(t) \\
+        & = \frac{\sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}} - \left(\frac{ \sum K_i(0)r_ie^{r_it}} {\sum K_i(0)e^{r_it}}\right)^2 \\
+        &= \frac{\sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}} - \bar{r}^2(t) 
+        \end{aligned}$$
+        Using the quotient rule $\left(\frac{u}{v}\right)'= \frac{u'v-vu'}{v^2}$ we can take the second derivative of the average growth rate
+        $$\begin{aligned}
+        \bar{r}''(t) &= { \frac{\left(\sum K_i(0)e^{r_it}\right)(\sum K_i(0)r_i^3e^{r_it}) -(\sum K_i(0)r_i^2e^{r_it})(\sum K_i(0)r_i e^{r_it})}  {(\sum K_i(0)e^{r_it})^2 }} - 2\bar{r}(t)\times\bar{r}'(t)\\ 
+        &= \frac{ \sum K_i(0)r_i^3e^{r_it}} {\sum K_i(0)e^{r_it} } - \frac{ \sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}}\times \frac{\sum K_i(0)r_i e^{r_it}}{\sum K_i(0)e^{r_it} } - 2\bar{r}(t)\sigma^2_r(t) \\
+        &= \bar{r}_3 (t) - \bar{r}_2(t)\bar{r}(t) - 2\bar{r}(t)\sigma^2_r(t)
+        \end{aligned}$$
+        where $\bar{r}_n$ is the $n$th moment of $\bar{r}(t)$, and it is known that $\bar{r}'(t) = \sigma^2_r(t)$.
+        ii. Calculate the combined US-Mexico population after 50 years according to the following five (5) methods, plot the total population after 50 years according to these 5 methods on a graph.
+            a. Dissaggregated (“true”) forecast, with each country growing at its own rate
+            $$\begin{aligned}
+            \bar{K}(2020) &= K_u(2020) + K_m(2020)\\ 
+            &=K_u(1970) e^{50r_u} + K_m(1970) e^{50r_m}\\
+            &=200e^{.0075\times 50} + 50e^{.035\times 50}\\
+            &= 578.728 
+            \end{aligned}$$
+            b. Aggregated forecast, pretending it’s one country, growing at $\bar{r}(0)$) for 50 years
+            $$\begin{aligned}
+            \overline{r}(0) &= \frac{\sum K_i(0)r_i e^{r_i t}} {\sum K_i(0)e^{r_i t }}\\
+            &=\frac{K_u(1970)r_u + K_m(1970)r_m }{K_u(1970) + K_m(1970) }\\
+            & =  \frac{ 200\times .0075 + 50\times.035} {200+50 } = 0.013
+            \end{aligned}$$
+            $$\begin{aligned}
+            \bar{K}(2020) &= \bar{K}(1970)e^{\bar{r}(0) 50}\\
+            &= 250e^{.013\times 50} \approx 478.8852
+            \end{aligned}$$ 
+            c. Aggregated forecast, growing at the “true” value of $\bar{r}(25)$ for the whole period. (Use the value of $\bar{r}(25)$) that you calculate from the disaggregated forecast):
+            $$\begin{aligned}
+            \bar{r}(25) &= {\sum K_i(0)r_i e^{r_i t} \over \sum K_i(0)e^{r_i t }}\\
+            & = \frac{K_u(1970)r_u e^{25r_u} + K_m(1970)r_m e^{25r_m} }{K_u(1970)e^{25r_u} + K_m(1970)e^{25r_m} }\\ 
+            & =\frac{200\times.0075 e^{.0075\left(25\right)}+50\times.035 e^{.035\left(25\right)}}{200 e^{.0075\left(25\right)}+50 e^{.035\left(25\right)}} \approx 0.0176632\\
+            \bar{K}(2020) &= 250e^{0.016632(50)} \approx 574.25316
+            \end{aligned}$$
+            d. Aggregated forecast, growing at the first-order Taylor series estimate of $\bar{r}(25)$ for the whole period:
+            $$\begin{aligned}
+            \sigma^2_r(0) &= \frac{K_u(1970)r_u^2 + K_m(1970)r_m^2} {K_u(1970) + K_m(1970)} - \bar{r}^2(0) \\
+            & =  \frac{(200)(0.0075)^2 + (50)(0.035)^2}{250}-(0.013)^2 \\
+            & = 0.000121 \\
+            \hat{\bar{r}}(25) & \approx \bar{r}(0) + 25\sigma^2_r(0) =  0.016025 \\ 
+            \bar{K}(2020) &= 250 e^{0.016025(50)} \approx 557.0811485
+            \end{aligned}$$
+            e. Aggregated forecast, growing at the second-order Taylor series estimate of $\bar{r}(25)$ for the whole period:
+            For this exercise we need to calculate the extra second-order term from the Taylor series, $25^2\bar{r}''(0)$:
+            $$\begin{aligned}
+            \bar{r}''(0) &= \frac{200(0.0075)^3+50(0.035)^3}{250} - \frac{200(0.0075)^2+50(0.035)^2}{250} \times (0.013) - 2(0.013)(0.000121)\\
+            \hat{\bar{r}}(25) & \approx \bar{r}(0) + 25\sigma^2_r(0) +(25)^2\bar{r}''(0) \\
+            & =  0.01664891\\
+            \bar{K}(2020) &= 250 e^{0.01664891(50)} \\
+            & \approx 574.73337 \\
+            \end{aligned}$$
+        iii. Graphs  
+        There are many methods to project populations.
+        
+        ```{r pressure, echo=FALSE, out.width = '100%'}
+        knitr::include_graphics(figures/pp1.png)
+        knitr::include_graphics(figures/pp2.png)
+        ```
+   4. For Ken’s Poisson-Exponential model,
+      a. What is the closed-form expression for $\hat{r}(t)$  
+      $$\begin{aligned}
+      \hat{r}(t) &= \frac{d}{dt}log(\hat{k})\\
+      &= r_0 - \alpha \lambda e^{-\alpha t}
+      \end{aligned}$$
+      b. What is the variance of the growth rate?  
+      The variance of the growth rate is $\sigma_r^2(t)$:
+      $$\bar{r}'(t)= \sigma^2_r(t) = \alpha^2\lambda e^{-\alpha t}$$
+      c. Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn’t depend on? (difference of $\bar{r}(t)$ and $\bar{r}(0)$)  
+      Distortion index: 
+      $$\bar{r}(t) - \bar{r}(0) = r_0 - \lambda \alpha e^{-\alpha t} - (r_0 - \lambda \alpha e^{0}) = \lambda \alpha - \lambda \alpha e^{-\alpha t} $$
+      $$ \text{or, } \hspace{0.5 cm} \lambda \alpha(1-e^{-\alpha t})$$
+      Depends on $\lambda$, $\alpha$, $t$, but not $r_0$ or $s$. That is, it depends on the the gap between growth rates, the relative population sizes, fastest growth rate, the poisson distribution parameter, but not the poisson distributed integer s.
+        
+        
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Problem Set 2
+
+## Questions
+
+## Solution
+1. True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.  
+    True. If each individual has their own hazard schedule proportional to baseline $z$, there will be more variation in the distribution of deaths than if each person had the baseline case. The variation for homogeneous populations comes from to chance only, while the variation for heterogeneous populations comes from chance and group variation in risk. Therefore, the variance of the population distribution of deaths will always be larger than that of the baseline (unless the variance is 0).   
+2. Use simulation in R to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages. (See frailty simulator.R" for sample code).  
+```{r pressure, echo=FALSE, fig.cap="Gamma Distribution", out.width = '100%'}
+knitr::include_graphics(figures/gamma_hazard.png)
+```
+```{r pressure, echo=FALSE, fig.cap="Beta Distribution", out.width = '100%'}
+knitr::include_graphics(figures/beta_hazard.png)
+```
+```{r pressure, echo=FALSE, fig.cap="Uniform Distribution", out.width = '100%'}
+knitr::include_graphics(figures/uniform_hazard.png)
+```
+    - Gamma-distributed frailty begins to increase more slowly after age 60 compared to baseline.
+    - Beta-distributed frailty begins to increase more slowly after age 60 compared to baseline and eventually stops increasing at age 100.     
+    - Uniform-distributed frailty begins to increase more slowly after age 60 compared to baseline. Similar to gamma-distributed frailty. 
+3. Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this? (This is an open-ended question. You should feel free to use mathematics, intuition, or any other approach to answer.)  
+    It doesn't look like two proportional subgroups. It looks like the frailty is drawn from a single distribution (but very up to interpretation — answers were split). 
+4. Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this? (Also open ended)
+    The behavior is somewhat similar, as the hazards are increasing more slowly at older ages. However, the beta hazards stops increasing at a certain point. The uniform and the gamma are more similar. For the parameters we used, beta-distributed frailty generates many very-frail or very-robust individuals and fewer medium-frail individuals. Gamma-distributed frailty generates many medium-frail individuals but fewer very-frail or very-robust individuals. 
+5. At what age do population hazards start to diverge from the baseline
+    in the the three models? Is it fair to say that half the cohort has to
+    have died before unobserved heterogeneity plays a role?
+    Generally around age 65, but if frailty is beta distributed (with our set of parameters) then we observe a divergence earlier. For the gamma and uniform frailty models roughly half the cohort has to die before unobserved heterogeneity plays a role, but for the beta model we observe divergence in the survival curve much earlier.   
+6. Extend the simulation code to include life expectancy at age x (Shown above.)
+    See above.
+7. Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)
+```{r, eval = F, echo = F}
+## Uniform
+  w <- .9 ## try smaller if you want
+  z <- runif(N, min = 1 - w , max = 1 + w)
+
+# gamma
+# my.sd <- .5
+#  sigma.sq <- my.sd^2
+#z <- rgamma(N, shape = 1/sigma.sq, scale = sigma.sq)
+
+## beta (U-shaped)
+ z <- rbeta(N, shape1 = .5, shape2 = .5)
+ hist(z)
+ # ## other choices?
+
+base.b <- 1/9
+base.a <- 10^-4
+y <- rgomp(N,
+           b = base.b, ## doesn't vary
+           a = base.a * z) ## multiplicative fixed frailty
+hist(y)
+
+
+avg_hazard <- tibble(
+  age = floor(y),
+  z = z
+)
+
+avg_hazard_plot <- avg_hazard %>% 
+  group_by(age) %>% 
+  summarize(z_mean = mean(z), n = n()) %>% 
+  mutate(z_bar_num = cumsum(rev(z_mean*n)), z_bar_denom = cumsum(rev(n))) %>% 
+  mutate(z_bar = rev(z_bar_num/z_bar_denom) )
+
+avg_hazard_plot %>% 
+  ggplot(aes(x = age, y = z_bar)) +
+  geom_point() + 
+  theme_minimal() + 
+  ggtitle("Uniform Hazards Average Frailty")
+```
+
+```{r pressure, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(figures/uniform_avg_hazard.png)
+knitr::include_graphics(figures/gamma_avg_hazard.png)
+knitr::include_graphics(figures/beta_avg_hazard.png)
+
+```
+8. Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?
+```{r, eval = F, echo = F}
+library(gridExtra)
+
+avg_hazard1 <- avg_hazard %>% 
+  filter(age > 0) %>% 
+  ggplot() +
+  geom_histogram(aes(x = z)) + 
+  theme_minimal() + 
+  ggtitle("Beta Hazards Frailty")
+
+avg_hazard2 <- avg_hazard %>% 
+  filter(age > 25) %>% 
+  ggplot() +
+  geom_histogram(aes(x = z)) + 
+  theme_minimal() + 
+  ggtitle("Beta Hazards Frailty (survivors 25+)")
+
+avg_hazard3 <- avg_hazard %>% 
+  filter(age > 50) %>% 
+  ggplot() +
+  geom_histogram(aes(x = z)) + 
+  theme_minimal() + 
+  ggtitle("Beta Hazards Frailty (survivors 50+)")
+  
+avg_hazard4 <- avg_hazard%>% 
+  filter(age > 75) %>% 
+  ggplot() +
+  geom_histogram(aes(x = z)) + 
+  theme_minimal() + 
+  ggtitle("Beta Hazards Frailty (survivors 75+)")
+
+grid.arrange(avg_hazard1, avg_hazard2, avg_hazard3, avg_hazard4, ncol=2)
+  
+  
+  mutate(age_group = case_when(
+    age < 25 ~ "(0-25]",
+    age < 50 ~"(25, 50]",
+    age < 75 ~ "(50, 75]",
+    age >= 75 ~"75+"
+  )) 
+
+avg_hazard %>% 
+  ggplot() +
+  geom_histogram(aes(x = z)) + 
+  theme_minimal() + 
+  ggtitle("Uniform Hazards Average Frailty") + 
+  facet_wrap(~age_group, scales = "free")
+
+
+```
+```{r pressure, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(figures/uniform_hazards_histogram.png)
+knitr::include_graphics(figures/gamma_hazards_histogram.png)
+knitr::include_graphics(figures/beta_histogram_hazard.png)
+
+```
+    The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+. 
+    9. Use the method of completing the gamma to get the mean of the gamma distribution. (Hint: I believe there are youtube examples of this).
+$$\begin{aligned}
+\mu 
+& = \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+& = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k+1) \lambda^{k+1}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+& = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k) \lambda^{k}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k+1) \lambda^{k+1}} z^{k - 1} e^{-\frac{z}{\lambda}} \\ 
+& = k \lambda \cdot 1 \\
+& = k \lambda
+\end{aligned}$$
+10. Derive V&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?  
+11. Derive V&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?  
+12. Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.
+
+
+
+
+
+
+<!--chapter:end:02-literature.Rmd-->
+
+# Methods
+
+We describe our methods in this chapter.
+
+<!--chapter:end:03-method.Rmd-->
+
+# Applications
+
+Some _significant_ applications are demonstrated in this chapter.
+
+## Example one
+
+## Example two
+
+<!--chapter:end:04-application.Rmd-->
+
+# Final Words
+
+We have finished a nice book.
+
+<!--chapter:end:05-summary.Rmd-->
+
+`r if (knitr:::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:06-references.Rmd-->
+
