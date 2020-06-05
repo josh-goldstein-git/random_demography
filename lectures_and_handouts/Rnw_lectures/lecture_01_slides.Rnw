@@ -1,11 +1,3 @@
-\documentclass{beamer}
-\usepackage{amsmath}
-\def \rmax {r_0}
-\setbeamertemplate{footline}[frame number]{}
-
-\begin{document}
-\SweaveOpts{concordance=TRUE}
-
 
 \title{Introduction to Demographic Heterogeneity \\ Dem260 Math Demog
   \\ Spring 2020 \\ Lecture 1}
