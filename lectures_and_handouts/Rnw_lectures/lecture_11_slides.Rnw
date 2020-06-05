@@ -1,0 +1,229 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setbeamertemplate{footline}[frame number]{}
+\title{The Coalescent: Expectations of the Past \\ Dem260 Math Demog
+  \\ Spring 2020 \\ Lecture 11}
+\author{Joshua R. Goldstein}
+
+\begin{document}
+% remove spaces before and after printed stuff in R chunk output
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}  
+\maketitle
+
+\section{Intro}
+
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item Big picture: What is ``coalescent theory''?
+  \item Time to TMRCA
+  \item Inferring population size
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Big picture}
+
+  Nomenclature:
+  \begin{itemize}
+  \item Coalescent theory is not a theory.
+  \item It's a model for the probability of different histories
+  \item ``the'' coalescent is a bit confusing. We're not inferring the
+    actual history of common ancestry, just the probabilities
+  \end{itemize}
+\end{frame}
+
+ \begin{frame}{An actual``picture''}
+   \begin{columns}
+     \begin{column}{0.5\textwidth}
+       \includegraphics[width=1.1\textwidth]{../coalescent/cutter_diagram.png}
+     \end{column}
+     \begin{column}{0.5\textwidth}
+       \small
+       \begin{itemize}
+       \item Top panel is a Fisher-Wright instance, ordered so that lines
+         don't cross.
+       \item Haplotype is a sequence (we are diploids, each 
+         contributing 2 haplotypes). But let's just think of each line as
+         an individual, for now.
+       \item We can find The Most Recent Common Ancestor (TMRCA) of
+         \alert{sample} (dark purple). Who and when would the MRCA of the top two
+         individuals be?
+       \end{itemize}
+     \end{column}
+   \end{columns}
+ \end{frame}
+
+
+\begin{frame}{More on the ``picture''}
+
+   \begin{columns}
+     \begin{column}{0.5\textwidth}
+       \includegraphics[width=1.1\textwidth]{../coalescent/cutter_diagram.png}
+     \end{column}
+     \begin{column}{0.5\textwidth}
+       \small
+  \begin{itemize}
+  \item Our sample $\neq$ even all {\em extant } descendants of the MRCA. What
+    does this mean?
+  \item Our sample $\neq$ all of the descendants of the MRCA. What
+    does this mean?
+  \item If we chose two descendants at random, would we always get
+    same MRCA? 
+  \end{itemize}
+
+     \end{column}
+   \end{columns}
+
+ % insert cutter figure
+  \alert{When we model coalescence we are thinking backwards in time.}
+  
+\end{frame}
+
+\begin{frame}{Our first question: When was MRCA?}
+
+  If we sample two individuals (today), how long ago was their MRCA?\\
+  (Note: question is not ``who'')
+  \begin{itemize}
+  \item Our answer will in terms of the probability of MRCA being 1
+    generation ago, 2 generations ago, etc.
+  \item We'll assume Fisher-Wright (constant N, each gen randomly
+    picks parents)
+  \item The answer is surprisingly simple :)
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Our answer (1)}
+  Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
+  \begin{itemize}
+  \item The chance that two sampled people have same parent is $1/N$, right?
+  \item Thus $P(T_{MRCA} = 1) = 1/N$.
+  \item What is $P(T_{MRCA} = 2) = $?
+  \item What is $P(T_{MRCA} = n) = $?
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Our answer (2)}
+
+  Let's go to continuous time (reasonable if pop is big and time scale
+  is long).
+  
+  Hazard of coalescence = $c = 1/N$.
+  Probability of coalescence at time $t$ = $\ell(t) h(t) = e^{-ct} c$
+
+  What is expected time of coalescence? Think life expectancy.
+  \pause
+  $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
+\end{frame}
+
+\begin{frame}{TMRCA}
+  Let's simulate
+  \begin{itemize}
+  \item 1 time, without random seed, letting N = 40, ngen = 200, mu = 0
+  \item Average over 100 FW simulations
+  \item What is variance of outcome? Is it what we would expect from
+    exponential?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Break}
+\end{frame}
+
+\begin{frame}{Mutation and inference of TMRCA and $N$}
+  \begin{itemize}
+  \item Say mutations occur at a constant rate $\mu$ ($10^{-8}$?)
+  \item Each year we would expect $\mu$ mutations, and over $T$ years we
+    would expect $T\mu$ mutations.
+  \item Say we observe that two people differ at $k$ sites of the
+    genome.
+    \begin{itemize}
+    \item When was TMRCA?
+    \item How big is the population?
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mutation, continued}
+  \begin{itemize}
+  \item When was TMRCA?
+  \item How big is the population?
+  \end{itemize}
+  
+  Picture ($\Lambda$)
+  Tree length = $2T$
+  Expected number of mutations:
+  $$
+  E(k) = E(2T\mu) = \bar{T} 2 \mu
+  $$
+  Since,
+  $$
+  \bar{T} = E(TMRCA) = N
+  $$
+  If we observe on average $\bar{k}$ mutations, then
+  $$
+  E(k) = N 2 \mu \rightarrow \hat{N} = {\bar{k} \over 2 \mu}
+  $$ 
+\end{frame}  
+
+
+\begin{frame}{Inference of population size, simulation}
+  \begin{itemize}
+  \item We do FW with mutations
+  \item Average pairwise differences
+  \item Divide by $2\mu$ to get our estimate
+  \item We can repeat a bunch of times and see average estimate
+    converges to the truth
+  \end{itemize}
+  Break-out.
+\end{frame}
+
+\begin{frame}{Break number 2}
+\end{frame}  
+
+\begin{frame}{Coalescence of a sample of $n$ individuals}
+  \begin{itemize}
+  \item This is covered on pages 42 and 43 of Gillespie
+  \item We'll just do one quick example, accepting the result
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{A sample of 3: Note we're using $N$ (instead of
+    $2N$)}
+
+\begin{verbatim}
+
+        *            _______
+       / \
+      /   \          
+     /     \         T(2) : E(T(2)) = N
+    /       \
+   /         *       _______
+  /         / \
+ /         /   \     T(3) : E(T(3)) = N * 2/[3*2]
+*         *     *    _______
+
+                      ...
+                     _______
+                     T(n) : E(T(n)) = N * 2/[n * (n-1)]
+\end{verbatim}
+  Question: If we sample 4, how much of time to TMRCA
+  is do we have 4 branches, 3 branches, and 2 branches?
+\end{frame}
+
+
+
+\begin{frame}{For next time}
+  \begin{itemize}
+  \item Varying population sizes 
+  \item A real life example inferring population history from real
+    mitochondrial DNA sequences. 
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
+
+

@@ -1,0 +1,571 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\setbeamertemplate{footline}[frame number]{}
+\title{Fisher-Wright: Children Choosing Parents \\ Dem260 Math Demog
+  \\ Spring 2020 \\ Lecture 10}
+\author{Joshua R. Goldstein}
+
+\begin{document}
+% remove spaces before and after printed stuff in R chunk output
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}  
+\maketitle
+
+\section{Intro}
+
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item Formal demography of epidemic mortality (about an hour)
+  \item Fisher-Wright introduction
+  \item Baby naming as an example of neutral evolution
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{My questions}
+  \begin{enumerate}
+  \item How does age-structure of population affect epidemic
+    mortality?
+  \item How does mortality change affect life expectancy in normal
+    times? 
+  \item How much remaining life is lost from an epidemic?
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{(1) Population aging}
+\centering
+  \includegraphics[width=1.1\textwidth]{/Users/josh/Documents/sandbox/hugo/demogblog/content/posts/worldwide_figures/old_2020_map.png}
+
+  \small
+  Source: Tuljapurkar and Zuo \url{https://u.demog.berkeley.edu/~josh/demogblog/}
+\end{frame}
+
+\begin{frame}{Stable theory}
+  The crude death rate is deaths / population
+  $$
+  \mbox{Crude Death Rate} = D/N
+  $$
+  \pause
+  In a stable population with growth rate $r$
+  $$
+  CDR(r) = {\int e^{-ra} \ell(a) m(a) \, da \over
+    \int e^{-ra} \ell(a)  \, da}
+  $$
+  \pause
+  Classic result (from Lotka)
+  $$
+  {d \log CDR(r) \over dr}|_{r = 0} = A - e(0) \approx -40
+  $$
+\pause
+  A ``proportional hazards'' epidemic hitting a population with $r = -.01$
+  (e.g., Italy) will cause \alert{40 percent more deaths per capita}
+  than $r = 0$ (e.g., US)
+  
+\end{frame}
+
+% \begin{frame}{Application: Italy and the United States}
+
+%   [picture of the two with r = -.01 and r = 0 curves]
+
+%   Estimated of increase in crude death rate from same change in mortality.
+% \end{frame}
+
+\begin{frame}{(2) Loss of person years remaining}
+
+  % Consider age-profiles of the epidemic
+  % \begin{itemize}
+  % \item uniform increase in mortality
+  % \item proportional increase in mortality
+  % \item covid profile?
+  % \end{itemize}
+\end{frame}
+
+\begin{frame}{Loss of person years remaining}
+
+  Before epidemic:
+  $$
+  PYR = \int N(x) e(x) \, dx
+  $$
+\pause
+  After (``instant'') epidemic 
+  $$
+  PYR = \int \left[ N(x) - D^*(x) \right] e(x) \, dx
+  $$
+\pause
+  Proportion of person years lost
+  $$
+  \int D^*(x) e(x) \,dx \over \int N(x) e(x)\, dx
+  $$
+\end{frame}
+
+% \begin{frame}{Stationary case, Uniform mortality}
+
+%   A stationary pop, has zero growth rate and an age structure
+%   proportional to survival, $\ell(x)$.
+
+%   Consider constant hazards from epidemic mortality, then 
+%   $$
+%   D(x) \propto \ell(x)
+%   $$
+
+%   Average person who dies loses about 40 person years.
+
+% \end{frame}
+
+\begin{frame}{Stationary theory}
+
+\begin{block}{If}
+  \begin{enumerate}
+  \item \alert{Stationarity} $N(x) \propto \ell(x)$
+  \item \alert{Proportional hazards} $M^*(x) = \Delta M(x)$
+  \end{enumerate}
+\end{block}
+\pause
+\begin{block}{Then}
+Proportional loss of person
+  years:
+  $$
+\alert{  {-d \log PYR \over d \Delta} = {H \over  A} = {\mbox{Life
+    table entropy} \over \mbox{Mean age of stationary pop}}} \approx {0.15
+  \over 40} = 0.0038
+$$
+\end{block}
+\pause
+  A doubling of mortality in epidemic year ($\Delta = 1)$ 
+  causes ``only'' a 0.38\% loss of remaining life expectancy.
+  % Average person who dies loses $e^\dagger \approx 12$ years.
+\end{frame}
+
+\begin{frame}{These numbers seem small}
+
+  \begin{itemize}
+    \item Even an epidemic {\em doubling} mortality has small effect on
+      remaining life expectancy ($\approx$ \alert{2 months} per person)
+    \item But all-cause mortality also small 
+      ($\approx$ \alert{2 months} per person)
+    \item Covid-19: 1 million deaths $= 30$\% more mortality, but older \\
+      ($\approx$ \alert{2 weeks} per person)
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{(3) A normalization}
+
+  PYLost in an epidemic year, relative to normal year:
+$$
+{\mbox{PY lost from epidemic} \over
+  \mbox{PY lost without epidemic}} = 
+  {\int D^*(x) e(x)\,dx \over
+    \int D(x) e(x)\,dx}
+  \approx
+  % { e(A^*_{D}) \int D^*(x)\,dx  \over 
+  %   e(A_{D}) \int D(x)\,dx  } = 
+     { e(A^*_{D})  D^*  \over 
+    e(A_{D})  D  } 
+  $$
+  
+  Takes into account number of deaths, average-age of deaths, and remaining
+  life expectancy.
+
+\end{frame}
+
+
+\begin{frame}{How does Covid-19 compare?}
+\centering
+  \includegraphics[width=0.8\textwidth]{../figures/hiv_plus.pdf}
+\end{frame}
+
+\begin{frame}{(4) How much GDP would we be willing to forgo?}
+
+\begin{itemize}
+
+\item  At \$130,000 per person-year:  averting 1 million
+  deaths $\approx$ \$1.5 trillion.
+
+\item  A 5 percent decline in GDP (Goldman Sachs): $\approx$ \$1 trillion.
+\end{itemize}
+Staying at home appears to be right decision for social planner.
+\end{frame}
+
+
+\begin{frame}{Conclusions}
+  \begin{itemize}
+  \item Numbers -- big and small --  need context \\
+    (1 million deaths $=$  2 weeks of remaining life)
+  \item Covid-19 mortality is serious \\ (same magnitude as 20 years
+    of HIV or 10 years of opioid deaths, but smaller than Spanish flu)
+  \item The economic price does not seem inappropriate
+  \end{itemize}
+\end{frame}
+\end{document}
+
+  
+
+
+
+
+\begin{frame}{Review}
+  \begin{itemize}
+  \item What a branching process is and potential applications
+  \item How probability generating functions can be used to analyze
+  \item Sub-critical, critical, and super-critical extinction probs.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Means and variances}
+  What happened in your simulation?
+\end{frame}
+
+\begin{frame}{Means of offspring in generation $n$}
+
+  \begin{itemize}
+  \item Is it ``meaningful''? (If we have a lot of zeros)
+  \item We'll show that unconditional mean
+    $$
+    \mathbb{E} Z_n = m^n
+    $$
+  \item What if $m = 1$?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mean size of surviving lines?}
+
+  Total probability is sum of conditional probabilities, times the chance of
+  each condition:
+  $$
+  \mathbb{E} Z_n = \mathbb{E}( Z_n | Z_n > 0) P(Z_n > 0) +
+  \mathbb{E}( Z_n | Z_n = 0) P(Z_n = 0)
+  $$
+  
+  What is mean size of surviving lines?
+  \begin{itemize}
+  \item Hint 1: $P(Z_n = 0) = d_n$
+  \item Hint 2:     $\mathbb{E} Z_n = m^n$
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Let's check our result using simulation}
+\end{frame}
+
+\begin{frame}[fragile]{Our set-up (note: code is revised slightly)}
+
+  <<echo = T, size = "small">>=
+  branch <- function(n_max = 30, p_k = c(p0, p1, p2), Z1 = 1)
+  {
+      ## note: this returns 0s when extinct
+      k <- 0:(length(p_k)-1)
+      Z.vec <- rep(NA, n_max)
+      Z.vec[1] <- Z1
+      for (i in 1:(n_max-1))
+      {
+          Z.vec[i+1] <- sum(sample(x = k,
+                                   size = Z.vec[i],
+                                   replace = T,
+                                   prob = p_k))
+      }
+      return(Z.vec)
+  }
+  p0 = .3; p1 = .4; p2 = .3 ## what is m?
+  @ 
+\end{frame}  
+
+
+\begin{frame}[fragile]{1000 trials, code}
+  <<echo = T, eval = F>>=
+  n_trials = 1000; n_gen = 100
+  Z.mat <- matrix(NA, n_trials, n_gen)
+  set.seed(131)
+  for (i in 1:n_trials)
+      Z.mat[i,] <- branch(n_max = n_gen)
+  matplot(t(Z.mat),
+          type = "l", lty = 1, ylab = "Zn", xlab = "n")
+  @ 
+\end{frame}
+
+\begin{frame}[fragile]{1000 trials, picture}
+  <<echo = F, eval = T, fig.height = 5>>=
+  n_trials = 1000; n_gen = 100
+  Z.mat <- matrix(NA, n_trials, n_gen)
+  set.seed(131)
+  for (i in 1:n_trials)
+      Z.mat[i,] <- branch(n_max = n_gen)
+  matplot(t(Z.mat),
+          type = "l", lty = 1, ylab = "Zn", xlab = "n")
+  @ 
+\end{frame}
+
+\begin{frame}[fragile]{1000 trials, means}
+
+<<echo = T, eval = F>>=
+Zn_bar = apply(Z.mat, 2, mean)
+n <- 1:ncol(Z.mat)
+proportion.zero <- function(x){prop.table(table(x == 0))["TRUE"]}
+d_n = apply(Z.mat, 2, proportion.zero)
+Z.mat.na <- Z.mat; Z.mat.na[Z.mat == 0] <- NA
+Zn_surv_bar = apply(Z.mat.na, 2, mean, na.rm = T)
+par(mfrow = c(1,3))
+plot(n, Zn_bar, main = "Mean Zn")
+plot(n, d_n, main = "Fraction extinct")
+plot(n, Zn_surv_bar)
+## insert code here for Zn_surv_bar.hat and add a line
+@ 
+\end{frame}
+
+\begin{frame}[fragile]{1000 trials, means, picture}
+
+<<echo = F, eval = T, fig.height = 5>>=
+Zn_bar = apply(Z.mat, 2, mean)
+n <- 1:ncol(Z.mat)
+proportion.zero <- function(x){prop.table(table(x == 0))["TRUE"]}
+d_n = apply(Z.mat, 2, proportion.zero)
+Z.mat.na <- Z.mat; Z.mat.na[Z.mat == 0] <- NA
+Zn_surv_bar = apply(Z.mat.na, 2, mean, na.rm = T)
+par(mfrow = c(1,3))
+plot(n, Zn_bar, main = "Mean Zn")
+plot(n, d_n, main = "Fraction extinct")
+plot(n, Zn_surv_bar)
+## insert code here for Zn_surv_bar.hat and add a line
+@ 
+\end{frame}
+
+
+\begin{frame}{Proving     $\mathbb{E} Z_n = m^n$}
+
+        Ingredients
+        \begin{itemize}
+        \item $h'(1) = m = \bar{Z}$
+        \item $h_n'(1) = \bar{Z}_n$
+        \item $h_{n+1}(z) = h(h_n(z))$
+        \end{itemize}
+
+      Derivation
+
+\end{frame}
+
+
+\begin{frame}{Variance}
+
+  Variance result.  (Too much algebra to do here). \\
+  
+  For $m = 1$,
+  $$
+  \sigma_n^2 = n \sigma^2 
+  $$
+  \begin{itemize}
+  \item Also a result for $m\neq 1$
+  \item What does increasing variance mean for critical case? (Does
+    this make sense?)
+  \item What happens to variance of lines that survive? Is it bigger
+    or smaller than unconditional variance?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Variance in our simulation}
+<<fig.height = 5>>=
+var_Zn = apply(Z.mat, 2, var)
+n <- 1:ncol(Z.mat)
+plot(n, var_Zn)
+@ 
+\end{frame}
+
+% \begin{frame}[fragile]{Distribution of $Z_n$}
+%   <<fig.height = 5>>=
+%   Z20 <- table(table(Z.mat[,20]))
+%   Z5 <- table(table(Z.mat[,5]))
+%   par(mfrow = c(2,2))
+%   plot(Z20[Z20 < 100])
+%   plot(log(Z20[Z20 < 100]))
+%   plot(Z5[Z5 < 100])
+%   plot(log(Z5[Z5 < 100]))
+%   @
+
+% \end{frame}
+
+
+
+
+\section{Geometric distribution}
+\begin{frame}{Geometric offspring distribution}
+
+  For $k = 1, 2, \ldots$,
+  $$
+  p_k = b c^{k-1}
+  $$
+
+  For $k = 0$,
+  $$
+  p_0 = 1 - p_1 - p_2 - \ldots .
+  $$
+
+  Let's solve for $p_0$, using the geometric series sum, for $a <
+  1$,  $$
+  1 + a + a^2 + \ldots =
+  1 / (1-a)
+  $$
+\end{frame}
+
+\begin{frame}[fragile]{A picture, Lotka's parameters for 1920}
+
+  <<fig.height = 4>>=
+  b = 0.2126 ;   c = 0.5893
+  kk = 1:10  ;   p_kk = b * c^(kk-1)
+  p0 = b/(1-c)
+  k = c(0, kk) ;   p_k = c(p0, p_kk)
+  plot(k, p_k)
+@ 
+\end{frame}
+
+
+\begin{frame}{Realism?}
+
+  See Table 10.3, p 386, Grinstead and Snell.
+
+\end{frame}
+
+\begin{frame}{The Geometric Distribution's simple PGF}
+
+  $$
+  h(z) = p_0 + p_1 z + p_2 z^2 + \ldots
+  $$
+  With geometric $p_k$
+  $$
+  h(z) = p_0 + \sum_{k= 1}^\infty b c^{k-1} z^k.
+  $$
+  Substituting for $p_0$ and rewriting
+  $$
+  h(z) = \left( 1 - {b / (1-c)}\right) + bz \sum_{k= 1}^\infty 
+  (cz)^{k-1}.
+  $$
+  Substituting $j = k-1$,
+  $$
+  h(z) = \left( 1 - {b / (1-c)}\right) + bz \sum_{j= 0}^\infty 
+  (cz)^{j} = \left( 1 - {b / (1-c)}\right) + {bz \over (1 - cz)}
+  $$
+
+  The PGF is now ``tractable''
+
+\end{frame}
+
+\begin{frame}{$m$ and extinction}
+
+  $$
+  h(z) =  \left( 1 - {b / 1-c}\right) + {bz \over 1 - cz}
+  $$
+
+  Please solve for $m$. (Hint: $h'(1)$). What is $m$ with Lotka's $b$
+  and $c$?
+  
+  We solve $z = h(z)$ with a bunch of algebra to get
+  $$
+  d = {1 - b - c \over c(1-c)}
+  $$
+
+  How does $d$ depend on $b$ and $c$?
+\end{frame}
+
+\begin{frame}{Big payoff: the full distribution of $Z_n$}
+  See Grinstead and Snell p. 385
+\end{frame}
+
+\begin{frame}[fragile]{A plot of Keyfitz's numbers for generations 1, 2,
+    and 3. Is it exponential for $k > 0$?}
+<<eval = F, echo = T, size = "tiny">>=
+## b = 0.2126 ;   c = 0.5893 ## lotka
+b = 0.3666; c = .5533 ## Keyfitz (from GS)
+m = b / (1-c)^2 ## [1] 1.260416
+d = (1 - b - c) / (c * (1-c))           #[1] 0.8185088
+par(mfrow = c(1,1))
+for (i in 1:3)
+{
+    n = i
+    p0_n = d * (m^n - 1)/ (m^n -d)
+    j = kk
+    pj_n = m^n *
+        ((1-d) / (m^n - d))^2 *
+        ((m^n - 1)/(m^n - d))^(j-1)
+    pk_n <- c(p0_n, pj_n)
+    if (i == 1)
+        plot(k, pk_n, type = "l", log = "")
+    if (i > 1)
+        lines(k, pk_n, col = i)
+}
+@
+
+\end{frame}  
+
+\begin{frame}[fragile]{log scale}
+<<eval = T, echo = F, fig.height = 5>>=
+## b = 0.2126 ;   c = 0.5893 ## lotka
+b = 0.3666; c = .5533 ## Keyfitz (from G&S)
+m = b / (1-c)^2 ## [1] 1.260416
+d = (1 - b - c) / (c * (1-c))           #[1] 0.8185088
+par(mfrow = c(1,1))
+for (i in 1:3)
+{
+    n = i
+    print(n)
+    p0_n = d * (m^n - 1)/ (m^n -d)
+    j = kk
+    pj_n = m^n * ((1-d) / (m^n - d))^2 * ((m^n - 1)/(m^n - d))^(j-1)
+    pk_n <- c(p0_n, pj_n)
+    if (i == 1)
+        plot(k, pk_n, type = "l", log = "y")
+    if (i > 1)
+        lines(k, pk_n, col = i)
+}
+@
+\end{frame}
+
+\begin{frame}{Applications}
+
+  We have exponential distribution with a few  very large lines, and a
+  lot of small lines.
+  \begin{itemize}
+  \item Distribution of neutral alleles
+  \item Distribution of family lines (Y-chromosome, mtDNA, last names)
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}{Our result}
+  With geometric $p_k$, we get geometric $Z_n$, for all $n$.
+
+  Conjecture: geometric is to BP as gamma is to frailty? 
+
+\end{frame}
+
+% \section{Mississippi}
+
+% \begin{frame}{Let's switch to R}
+
+%   Our goal will be to see if distributions look geometric, or not.
+  
+% \end{frame}
+
+
+\section{Branching Processes and Covid-19}
+
+\begin{frame}{Branching Processes and Covid-19}
+  Discussion questions:
+  \begin{itemize}
+  \item What is the BP that they are studying? Is it contagion, social
+    contacts, or ?
+  \item What do they assume about the BP?
+  \item Do they use any analytical results or just simulation? Why?
+  \item Best feature of paper?
+  \item Worst feature of paper?
+  \item Inspire any other approaches?
+  \end{itemize}
+\end{frame}  
+
+\begin{frame}
+  Spring Break! \\
+  DemogBlog \\
+  Possible ends to the semester?
+\end{frame}
+
+
+\end{document}
+

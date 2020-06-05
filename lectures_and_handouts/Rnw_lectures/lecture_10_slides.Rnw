@@ -1,0 +1,480 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setbeamertemplate{footline}[frame number]{}
+\title{Fisher-Wright: Children Choosing Parents \\ Dem260 Math Demog
+  \\ Spring 2020 \\ Lecture 10}
+\author{Joshua R. Goldstein}
+
+\begin{document}
+% remove spaces before and after printed stuff in R chunk output
+\renewenvironment{knitrout}{\setlength{\topsep}{0mm}}{}  
+\maketitle
+
+\section{Intro}
+
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item Formal demography of epidemic mortality (about an hour)
+  \item Fisher-Wright introduction
+  \item Baby naming as an example of neutral evolution
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Some questions}
+  \begin{enumerate}
+  \item How does age-structure of population affect epidemic
+    mortality?
+  \item How does mortality change affect life expectancy in normal
+    times? 
+  \item How much remaining life is lost from an epidemic?
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{(1) Population aging}
+  \centering
+  \includegraphics[width=1.1\textwidth]{/Users/josh/Documents/sandbox/hugo/demogblog/content/posts/worldwide_figures/old_2020_map.png}
+
+  \small
+  Source: Tuljapurkar and Zuo \url{https://u.demog.berkeley.edu/~josh/demogblog/}
+\end{frame}
+
+\begin{frame}{Stable theory}
+  The crude death rate is deaths / population
+  $$
+  \mbox{Crude Death Rate} = D/N
+  $$
+  \pause
+  In a stable population with growth rate $r$
+  $$
+  CDR(r) = {\int e^{-ra} \ell(a) m(a) \, da \over
+    \int e^{-ra} \ell(a)  \, da}
+  $$
+  \pause
+  Classic result (from Lotka)
+  $$
+  {d \log CDR(r) \over dr}|_{r = 0} = A - e(0) \approx -40
+  $$
+  \pause
+\end{frame}
+
+\begin{frame}{Stable theory, example}
+
+  If US and India had same age-specific mortality,
+  but India grew 1 percent faster, what would
+  the ratio of their crude death rates be?
+
+  \pause
+
+  Now, if Covid-19 increases hazards at all ages by the same amount
+  proportion in both countries, what will the ratio of their crude death rates be?
+
+  \pause
+  A homework problem? Indirect standardization of U.S. state CDRs using
+  observed age structure and national mortality. How much of observed
+  CDR variation does age-structure explain?
+\end{frame}
+
+
+\begin{frame}{(2) Keyfitz's entropy}
+
+  \begin{itemize}
+  \item Let $\mu^*(x) = (1 + \Delta) \mu_0(x)$
+  \item So, $H^*(x) = (1 + \Delta) H(x)$.
+  \item And, $\ell^*(x) = \ell(x)^{1+ \Delta}$.
+  \item What is $d e(0) \over d \Delta$?
+    \pause
+  \end{itemize}
+  $$
+  {\cal H} = {d \log e(0) \over d \Delta} = {-\int \ell(x) \log \ell(x) \, dx \over e(0)}
+  $$
+\end{frame}
+
+\begin{frame}{A demographic translation}
+
+  Reverse order of integration to get
+
+  $$
+  {\cal H} = {\int d(x) e(x) \, dx \over e(0)}
+  $$
+
+  Another optional HW problem: Pick any life table, plot $\log e(0,
+  \Delta)$ against $\Delta$. See if slope at 0 is $\cal H$. See how
+  much slope changes away from $\Delta = 0$. Calculate curvature,
+  check against an analytical calculation.
+  
+\end{frame}
+
+
+\begin{frame}{(3) Loss of person years remaining}
+
+  % Consider age-profiles of the epidemic
+  % \begin{itemize}
+  % \item uniform increase in mortality
+  % \item proportional increase in mortality
+  % \item covid profile?
+  % \end{itemize}
+\end{frame}
+
+\begin{frame}{Loss of person years remaining}
+
+  Before epidemic:
+  $$
+  PYR = \int N(x) e(x) \, dx
+  $$
+  \pause
+  After (``instant'') epidemic 
+  $$
+  PYR = \int \left[ N(x) - D^*(x) \right] e(x) \, dx
+  $$
+  \pause
+  Proportion of person years lost
+  $$
+  \int D^*(x) e(x) \,dx \over \int N(x) e(x)\, dx
+  $$
+\end{frame}
+
+\begin{frame}{Stationary theory}
+
+  \begin{block}{If}
+    \begin{enumerate}
+    \item \alert{Stationarity} $N(x) \propto \ell(x)$
+    \item \alert{Proportional hazards} $M^*(x) = (1 + \Delta) M(x)$
+    \end{enumerate}
+  \end{block}
+  \pause
+  \begin{block}{Then}
+    Proportional loss of person
+    years:
+    $$
+    \alert{  {-d \log PYR \over d \Delta} = {H \over  A} = {\mbox{Life
+          table entropy} \over \mbox{Mean age of stationary pop}}} \approx {0.15
+      \over 40} = 0.0038
+    $$
+  \end{block}
+  \pause
+  A doubling of mortality in epidemic year ($\Delta = 1)$ 
+  causes ``only'' a 0.38\% loss of remaining life expectancy.
+  % Average person who dies loses $e^\dagger \approx 12$ years.
+\end{frame}
+\begin{frame}{Workspace}
+\end{frame}
+
+\begin{frame}{These numbers seem small}
+  \begin{itemize}
+  \item Even an epidemic {\em doubling} mortality has small effect on
+    remaining life expectancy ($\approx$ \alert{2 months} per person)
+  \item But all-cause mortality also small 
+    ($\approx$ \alert{2 months} per person)
+  \item Covid-19: 1 million deaths $= 30$\% more mortality, but older \\
+    ($\approx$ \alert{2 weeks} per person)
+  \end{itemize}
+\end{frame}
+
+% \begin{frame}{homework}
+%   \begin{itemize}
+%   \item plot d log e(0) against d\Delta for Delta ranging from -.5, to +
+%     1. What is slope at Delta = 0? Is it H? How accurate is linear
+%     approx using H(\Delta = 0) for Delta = .1, .2, .5, 1?
+
+%   \item What share of person years are lost during a year of normal
+%     mortality? Prove that it is A/H ...
+%   \end{itemize}  
+% \end{frame}  
+
+%%%%%%%%%%%%%%%%%%% Fisher-Wright
+\begin{frame}{Cookie Break}
+\end{frame}
+
+\begin{frame}{Fisher-Wright: Big picture}
+  Galton-Watson-Bienaym\'e Branching Processe
+  \begin{itemize}
+  \item Branching process models independent parents randomly
+    producing offspring. ``Generative''
+  \item Total population size can vary, and has a random component and
+    deterministic one $m$
+  \item Qualitative result when $m = 1$ is that there is one longest
+    surviving line. This is ``fixation'', when one {\em type} becomes
+    universal.
+  \end{itemize}
+  \pause
+  Fisher-Wright
+  \begin{itemize}
+  \item Children picking their parents (not ``generative'')
+  \item Total population size is constant
+  \item Qualitatively similar to BP. Extinction and fixation.
+  \item Flexible: mutation, selection, even changes in pop size.
+  \item With apologies, biologists take FW ``seriously'' even if they
+    don't take it ``literally.''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{Another cell phone example}
+  \begin{centering}
+  Let's simulate and draw lines
+\begin{verbatim}
+Gen 1   0    1    2    3    4    5    6    7    8    9
+Gen 2
+Gen 3
+\end{verbatim}
+\end{centering}
+\begin{itemize}
+\item What will happen?
+\end{itemize}
+
+\end{frame}    
+
+\begin{frame}[fragile]{Simulation code}
+  <<>>=
+  fwm <- function(N, n_gen, mu = 0) ## mu != 4/N
+  {
+      ## simulate fisher-wright (with mutations)
+      x <- paste(1:N) ## starting types
+      A <- matrix(NA, nrow = n_gen, ncol = N)
+      for (i in 1:n_gen)
+      {
+          A[i,] <- x
+          x <- sample(x, size = N, replace = T)
+          x <- mut(x, mu)
+          x
+      }
+      return(A) ## matrix of types, each line a generation.
+  }
+  @ 
+\end{frame}
+
+\begin{frame}[fragile]{Simulation code}
+  <<>>=
+  mut <- function(x, mu)
+  {
+      ## m, the individuals that mutate
+      m <- which(rbinom(length(x), 1, mu) == 1)
+      if (length(m) == 0) ## if no-one mutates
+          return(x)
+      ## add a suffix to their ID, so it will be unique (infinite alleles)
+      suffix <- 10000*round(runif(length(m)),4)
+      x[m] <- paste0(x[m], ".", suffix)
+      x
+  }
+
+  @ 
+\end{frame}
+
+\begin{frame}[fragile]{Trying it out}
+  <<>>=
+  set.seed(1)
+  fwm(N = 10, n_gen = 2, mu = 0)
+  fwm(N = 10, n_gen = 2, mu = 0)
+  @ 
+\end{frame}
+
+\begin{frame}[fragile]{Trying it out some more}
+  <<size="tiny", fig.height = 3.5>>=
+  set.seed(1)
+  A <- fwm(N = 10, n_gen = 20, mu = 0)
+  tt <- table(A, row(A)) ## count types by row
+  ptt <- prop.table(tt, 2) ## proportions
+  matplot(t(ptt), type = 'l', lty = 1, main = "FW simu")
+  text(x = 4, y = jitter(ptt[,4]), rownames(ptt), col = 1:6)
+  @
+  Qs: What happens at time 15?  Why does line 5 rise and fall? What happens at time 2?
+  What is $E(p_i(t) | p_i(t-1))$?
+\end{frame}
+
+\begin{frame}[fragile]{Bigger pop and more time}
+  <<size = "tiny", fig.height = 4>>=
+  set.seed(1)
+  A <- fwm(N = 100, n_gen = 200, mu = 0)
+  tt <- table(A, row(A)) ## count types by row
+  ptt <- prop.table(tt, 2) ## proportions
+  matplot(t(ptt), type = 'l', lty = 1)
+  @
+  \begin{itemize}
+  \item What does this remind you of? What will happen in long run?
+  \item What other questions could we ask?
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Questions we can ask}
+  \begin{itemize}
+  \item What is probability that line $i$ will ``fix''? (Hint: easy)
+  \item What is expected time until some line fixes? (We'll demo the result)
+  \item How can we describe the path to fixation? (We'll derive the result)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Probability that a particular line will
+    ``fix''}
+  <<echo=F, fig.height = 5>>=
+  set.seed(1)
+  A <- fwm(N = 10, n_gen = 20, mu = 0)
+  tt <- table(A, row(A)) ## count types by row
+  ptt <- prop.table(tt, 2) ## proportions
+  matplot(t(ptt), type = 'l', lty = 1, main = "FW simu")
+  text(x = 4, y = jitter(ptt[,4]), rownames(ptt), col = 1:6)
+  @ 
+\end{frame}
+
+\begin{frame}{Expected time until fixation?}
+  Answer for us is
+  $$
+  \bar{T}_{fixed} = 2 \cdot N
+  $$
+  Note: Biologists say $4 N_e$ \\
+  See Wikipedia "Genetic drift"
+\end{frame}
+
+\begin{frame}[fragile]{Simulation of time to fixation}
+  <<>>=
+  T.vec <- NULL
+  all.the.same <- function(x){length(unique(x)) == 1}
+  set.seed(10)
+  for (i in 1:100)
+  {
+      A <- fwm(N = 100, n_gen = 1000,mu = 0)
+      extinction_time = min(row(A)[apply(A, 1, all.the.same)])
+      T.vec[i] <- extinction_time
+  }
+  mean(T.vec)
+  @ 
+\end{frame}
+
+\begin{frame}{Path to fixation: a measure of
+    homogeneity/heterogeneity}
+
+  Chance that two randomly drawn individuals are of same type.
+  $$
+  G = \sum_i p_i^2
+  $$
+
+  If we have two types, $p_1 = \pi$ , $p_2 = 1-\pi$?
+  What is G if $\pi = 0, .5, 1$?
+\end{frame}  
+
+\begin{frame}{Let's derive time path of G}
+
+  Let's assume just two types, $\pi(t)$
+
+  Chance two indiv are of same type
+  $$
+  G_{t+1} = P(\mbox{same parent})\cdot 1 +
+  P(\mbox{different parent})\cdot G_{t}
+  $$
+
+  Notation: I'm going use $K$ for pop size. Bio uses $2N$.
+  $$
+  G_{t+1} = {1 \over K} \cdot 1 + (1 - {1\over K}) \cdot G_{t}
+  $$
+\end{frame}
+\begin{frame}{Let's derive time path of G, continued}
+  $$
+  G_{t+1} = {1 \over K} \cdot 1 + (1 - {1\over K}) \cdot G_{t}
+  $$
+  Easier to solve letting $H = 1 - G$. Some algebra gives
+  $$
+  H_{t+1} = H_{t} (1 - 1/K)
+  $$
+
+  Or,
+  $$
+  H_{t} = H_0 (1 - 1/K)^t % \rightarrow H_0 e^{-t/K}
+  $$
+  So, H goes to 0 exponentially, just as G goes to 1.
+\end{frame}  
+
+\begin{frame}{Cookie Break number 2}
+  Coming up, Baby Names.
+\end{frame}
+
+
+%%%%%%%%% baby names
+
+\begin{frame}{Baby Names}
+
+  ``Drift as a mechanism for cultural change: an example from baby names''
+  by Matthew W. Hahn and R. Alexander Bentley
+  {\em Proc. R. Soc. Lond. B} 2003 270, S120-S123
+\end{frame}
+
+\begin{frame}{What's the basic idea?}
+  \begin{itemize}
+  \item How is naming a baby like Fisher-Wright?
+  \item How is it not?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Basic idea}
+  \begin{itemize}
+  \item Like Fisher-Wright 
+    \begin{itemize}
+    \item people choose from existing set (?)
+    \item names are ``neutral'' (?)
+    \item draw proportionally (?)
+    \end{itemize}
+  \item They test to see if they can reject FW
+    \begin{itemize}
+    \item compare observed histograms to FW simulation
+    \end{itemize}
+  \item They include mutation to get a stationary disn
+  \end{itemize}
+  Note: failing to reject FW doesn't mean it's correct
+\end{frame}
+
+
+\begin{frame}{Their picture}
+  \includegraphics[width=0.4\textwidth]{./hahn_pic_1.png}
+  \includegraphics[width=0.6\textwidth]{./hahn_pic_2.png}
+\end{frame}
+
+\begin{frame}{Drawing their picture with the data}
+  babynames.R
+\end{frame}  
+
+
+\begin{frame}{Drawing their picture with simulation}
+  Note: babynames.R needs some tinkering in order to work.
+  Good optional homework problem.
+  Also a good term project to look at other characteristics of name
+  dynamics to see if we can reject neutral change via FW.
+\end{frame}  
+
+\begin{frame}{Some potential criticism}
+  \begin{itemize}
+  \item While we can't reject that there's some parameterization of
+    FW that gives us similar disn, this doesn't mean that we've
+    found the right mechanism. (Just that we can't reject it).
+    \pause
+  \item What are some other tests of this mechanism?
+    \pause
+  \item Markov assumption. We could see if each frequency really
+    followed random walk.
+  \item Perhaps we could see if variances were scaled to
+    frequencies correctly.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusions}
+  \begin{enumerate}
+  \item Fisher-Wright an alternative to branching processes
+  \item It reverses logic of reproduction, but gives similar
+    quantitative and qualitative results
+  \item A neutral model for other processes?
+  \item Starting point for coalescent
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Future path}
+  \begin{enumerate}
+  \item Coalescent 
+  \item Population History 
+  \item Mini-project presentations
+  \end{enumerate}
+\end{frame}
+
+
+\end{document}
+

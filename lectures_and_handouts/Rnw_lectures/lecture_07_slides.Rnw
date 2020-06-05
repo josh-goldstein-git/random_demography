@@ -1,0 +1,77 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+
+\setbeamertemplate{footline}[frame number]{}
+
+\title{Branching Processes \\
+  Dem260 Math Demog \\
+  Spring 2020 \\
+  Lecture 7}
+
+\author{Joshua R. Goldstein}
+
+
+\begin{document}
+
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item The Galton-Watson-Bienaym\'e Process
+  \item The distribution of the 2nd generation
+  \item Moment generating functions
+  \item Extinction probabilities
+  \item The distribution of offspring of all generations
+  \item A tractable offspring distribution
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{What is a Branching Process?}
+
+  Pic from txtbook
+  A quote
+  Assumptions
+\end{frame}
+
+\begin{frame}{Why are we interested?}
+
+  -- old motivation: to see if elites were dying out because of
+  ``degeneration''
+  -- war-time motivation: to see how to build the bomb
+  -- contemporary motivation: evolution and neutral genetic
+  change. what is the chance that a mutant will survive?
+  -- sociological: will all of S. Korea be ``Kim''?
+  -- can we get variance of repro success from name disn?
+  -- it will give us a headstart on other (less realistic but easier) ``drift'' models.
+\end{frame}
+
+
+\begin{frame}{Let's simulate on the board}
+
+  Let's put in the wiki example
+  0 or 1 --> 0 sons
+  2:6  --> 1 son
+  7:9 --> 2 sons
+
+  We'll go out a few gens with peoples phone numbers
+
+  What Qs could we try to answer: what is probability of extinction,
+  what is mean pop size, what is variance, what is distribution?
+
+  
+\end{frame}
+
+
+\begin{frame}{Let's simulate in R}
+
+  What is 
+
+  Let's put in the wiki example
+  0 or 1 --> 0 sons
+  2:6  --> 1 son
+  7:9 --> 2 sons
+
+  We'll go out a few gens with peoples phone numbers
+  
+\end{frame}
+
+
+    

@@ -1,0 +1,431 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\def \rmax {r_0}
+\def\vm{V\&M }
+\def\mu2{\mu^{(2)}}
+\def\mu1{\mu^{(1)}}
+\def\z1{z^{(1)}}
+\def\z2{z^{(2)}}
+\def\H1{H_1}
+
+\setbeamertemplate{footline}[frame number]{}
+
+
+
+\title{Mortality Heterogeneity: Gamma Frailty with Applications \\
+  Dem260 Math Demog \\
+  Spring 2020 \\
+  Lecture 3}
+\author{Joshua R. Goldstein}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Agenda for today}
+  \begin{enumerate}
+  \item Conclusions from last time
+  \item Hazards and Average Frailty for Gamma
+  \item CenSoc Application
+  \item[*] Cookie Break
+  \item Cross-overs and (Inversion Formula)
+  \item Plateaus
+  \item Distorted progress? (for next time)
+  \item Gamma-Gompertz (for next time?)
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Conclusions from class 2}
+  \begin{itemize}
+  \item Heterogeneity as variation in risk (not just outcome)
+    \pause
+  \item Constantly growing parts $\neq$ constantly growth whole
+    \pause
+  \item Keyfitz result: Change in growth rate $=$ variance of growth
+    rates
+    \pause
+  \item Poisson growth gives us a closed-form solution.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusions from class 3}
+  \begin{itemize}
+  \item Multiplicative Fixed Frailty is one option for modeling
+    \pause
+  \item Gave us analytical expressions for population survival and
+    hazards including $\bar{\mu}(x) = \mu_0(x) \bar{z}(x)$
+    \pause
+  \item Extended Keyfitz result to age-changing hazards
+    \pause
+  \item Survival curve for Gamma
+  \end{itemize}    
+\end{frame}
+
+% from pop survival to pop hazards
+
+\begin{frame}{From pop survival to pop hazards}
+
+  We have
+  $$
+  \bar S(x) = {1 \over  \left(1 + \sigma^2 H_0(x)\right)^{1/ \sigma^2}}
+  $$
+
+  Let's compute $\bar\mu(x)$.
+
+  \pause
+  $$
+  \bar\mu(x) = {\mu_0 \over 1 + \sigma^2 H_0(x)}
+  $$
+\end{frame}
+
+\begin{frame}{What happens to frailty of survivors?}
+
+  Recall that pop hazards = baseline $\times  \bar{z}(x)$.
+
+  \pause
+  So,
+  $$
+  \bar\mu(x) = \mu_0(x) { 1  \over 1 + \sigma^2 H_0(x)}
+  $$
+  Sketch $\bar{z}(x)$. Hint: what form does $H_0(x)$ have?
+\end{frame}
+
+\begin{frame}{Example: Gamma-Gompertz}
+  \begin{itemize}
+  \item If $H_0(x)$ be Gompertz, we have closed-form
+    expression. What is it?
+  \item Does $\bar{z}$ have the form
+    $$
+    {1 \over 1 + v*e^{w x}}
+    $$
+  \item This is a backwards S, going down.
+  \end{itemize}
+\end{frame}    
+
+\begin{frame}[fragile]{A picture}
+  <<>>=
+  sigma.sq = .2
+  x = 0:100
+  a = 5 * 10^-4
+  b = 1/8
+  H0.x = (a/b) * (exp(b*x) - 1)
+  bar.z = 1 / (1 + sigma.sq * H0.x)
+  plot(x, bar.z)
+  @
+  Look at the apparent exponential decline in tail
+  (Homework: what is proportional rate of change in $\bar{z}$ as $x$
+  gets big? Is it close to Gompertz $b$?)
+\end{frame}
+
+\begin{frame}{Average frailty in terms of survival}
+
+  $$ 
+  \bar{z}(x) = [\bar{S}(x)]^{\sigma^2}!
+  $$
+
+  In real life, we observe $\bar{S}(x)$. So this allows us to say
+  something about implied $\bar{z}$ from hazards.
+
+  \vspace{.5}
+
+  Reversing the logic: if we see a characteristic changing with age,
+  then we can estimate ``${\sigma^2}$'' (I put in quotes because its
+  the variance of the proportional effect of the observed
+  characteristic.)
+\end{frame}
+
+% frailty example from CenSoc
+\begin{frame}
+  Shift to CenSoc_mortality_selection.Rmd
+\end{frame}
+
+\begin{frame}
+  Cookie Break
+\end{frame}
+
+% Convergence and crossoves
+
+\begin{frame}{Convergence and cross-overs}
+
+  What happens to mortality disparities at older ages?
+  \begin{itemize}
+  \item ``Cumulative disadvantage''?
+  \item ``Age as a leveler''?
+
+    (Individual adaptation/plasticity, gov support, separation from
+    unequal structures like labor market)
+  \item Bad data / measurement
+
+    (Unreliable ages, institutionalization changes sample, etc.)
+
+  \item \alert{Nothing}.
+
+    (It's all selection (``frailty''), pop hazards but
+    individual hazards would have remained ``parallel''.)
+
+  \end{itemize}
+
+  Our goal is to examine this last ``null hypothesis.'' What can  
+  frailty explain, and what can't it?
+  
+\end{frame}
+
+\begin{frame}{A possible null-model}
+
+  \begin{itemize}
+  \item 2 groups, each with internal gamma-frailty
+  \item proportional \alert{baseline} hazards
+  \end{itemize}
+
+  $$
+  \mu2_0(x) =  R \mu1_0(x)
+  $$
+  (see \vr (38))
+
+  $$
+  \mu1(x |\z1) = \mu1_0 \z1 ;   \mu2(x |\z2) = \mu2_0 \z2 ; 
+  $$
+
+  And, frailty terms are each gamma, with mean 1 and own variances.
+
+\end{frame}
+
+
+\begin{frame}{A result: \vr (5E)}
+
+  $$
+  \bar{R}(x) \equiv {\bar\mu_2(x) \over \bar\mu_1(x)} =
+  {R + R\sigma_1^2 \H1(x) \over 1 + R \sigma_2^2 \H1(x)}
+  $$
+  Questions:
+  \begin{itemize}
+  \item If variances are equal. What happens at age 0? What happens
+    at very old ages.
+  \item If the higher mortality group has bigger frailty variance, what
+    happens at older ages?
+  \item Same if  higher mortality group has smaller frailty
+    variance?
+  \end{itemize}
+
+  (Homework: prove this, simulate this. see if cross of is when
+  cumulative hazards satisfy the condition at the end of 5E). (*
+  problem. can you solve for x0 in temrs of variances 1 and 2 and R
+  with gamma gompertz?)
+
+\end{frame}
+
+\begin{frame}{Inversion}
+
+\end{frame}
+
+\begin{frame}{Our challenge}
+
+Our pop hazards formula is not so easy to invert 
+$$
+\bar{\mu}(x) = {\mu_0(x) \over 1 + \sigma^2 H_0(x)}
+$$
+because we have both hazards and cumulative hazards on right.
+\end{frame}
+
+\begin{frame}{A solution}
+
+Hazards are slope of log survival
+
+Recall for Gamma,
+$$
+\bar{S}(x) = { 1 \over (1 + \sigma^2 H_0(x))^{1/\sigma^2}}
+$$
+
+We write down the hazard as the derivative of log survival
+$$
+\bar{\mu}(x)  = {1 \over \sigma^2} {d \over dx} \log(1 + \sigma^2 H_0(x)).
+$$
+\pause
+The anti-derivative of both sides, gives
+$$
+\bar{H}(x) = {1 \over \sigma^2} \log(1 + \sigma^2 H_0(x)).
+$$
+
+And now we have only 1 expression involving the baseline hazards on
+the right. 
+\end{frame}
+
+\begin{frame}{Our inversion formula}
+
+Solving 
+$$
+\bar{H}(x) = {1 \over \sigma^2} \log(1 + \sigma^2 H_0(x)).
+$$
+gives us the cumulative hazard
+$$
+H_0(x) = {1 \over \sigma^2} \left(e^{\sigma^2 \bar{H}(x)} - 1 \right).
+$$
+\pause
+And differencing, gives us a remarkably simple expression for the
+baseline hazard in terms of the observed popualtion hazard
+$$
+\mu_0(x) = \bar\mu(x) e^{\sigma_2 \bar{H}(x)}
+$$
+
+\begin{frame}{Something for nothing?}
+
+$$
+\mu_0(x) = \bar\mu(x) e^{\sigma_2 \bar{H}(x)}
+$$
+
+\begin{itemize}
+\item We don't observe underlying baseline hazard $\mu_0$ on left
+\item What is observed (and unobserved) on right?
+\end{itemize}
+
+\end{frame}
+\begin{frame}{An example}
+
+ 
+  <<echo = F, warning = F>>=
+library(data.table)
+dt <- fread("~/Documents/hmd/hmd_statistics/c_death_rates/cMx_1x1/ITA.cMx_1x1.txt",
+            na.string = ".")
+my.dt <- dt[Year == 1915]
+my.dt[, H.f := cumsum(Female)]
+my.dt[, H.m := cumsum(Male)]
+my.dt[, h.f := Female]
+my.dt[, h.m := Male]
+sigma.sq <- .5^2
+my.dt[, h0.f.5 := h.f * exp(sigma.sq *H.f)]
+my.dt[, h0.m.5 := h.m * exp(sigma.sq *H.m)]
+sigma.sq <- .2^2
+my.dt[, h0.f.2 := h.f * exp(sigma.sq *H.f)]
+my.dt[, h0.m.2 := h.m * exp(sigma.sq *H.m)]
+sigma.sq <- 1^2
+my.dt[, h0.f1 := h.f * exp(sigma.sq *H.f)]
+my.dt[, h0.m1 := h.m * exp(sigma.sq *H.m)]
+@
+
+Italian Females, born 1915 ($\sigma^2 = .2^2, .5^2, 1^2$)
+<<echo = F, warning = F, fig.height = 3>>= 
+par(mfrow = c(1,2))
+foo <- my.dt[, plot(Age, H.f, col = "red")]
+title("Cumulative Hazards\n Swedish Females born 1915")
+foo <- my.dt[, plot(Age, log(h.f), type = "l", ylim = c(-7, 2), col = "red",
+                    main = "Observed vs. implied baseline")]
+foo <- my.dt[, lines(Age, log(h0.f.2), lty = 2, col = "red")]
+foo <- my.dt[, lines(Age, log(h0.f.5), lty = 3, col = "red")]
+foo <- my.dt[, lines(Age, log(h0.f1), lty = 4, col = "red")]
+legend("topleft", legend = c("baseline", "obs if s2 = .2^2", "obs if s2 = .5^2", "obs if s2 = 1^2"),
+       col = "red", lty = 1:4)
+@
+\end{frame}
+\begin{frame}{Less convergence in baseline?}
+
+Italian Females vs Males born 1915 ($\sigma^2 = .5^2$)
+
+<<echo = F, warning = F, fig.height = 3>>=
+
+par(mfrow = c(1,2))
+## title("Cumulative Hazards\n Swedish Females born 1915")
+foo <- my.dt[, plot(Age, log(h.f), type = "l", ylim = c(-7, 2), col = "red",
+                    main = "Observed vs. implied baseline")]
+foo <- my.dt[, lines(Age, log(h0.f.5), lty = 2, col = "red")]
+ugh <- my.dt[, lines(Age, log(h.m), type = "l", col = "blue")]
+ugh <- my.dt[, lines(Age, log(h0.m.5), lty = 2, col = "blue")]
+legend("topleft", legend = c("female observed",
+                             "female baseline",
+                             "male observed",
+                             "male baseline"),
+       col = c("red","red", "blue", "blue"), lty = c(1,2, 1,2))
+## now do difference
+foo <- my.dt[, plot(Age, h.m/h.f, type = "l", col = "black",
+                    ylab = c("h.m/h.f"),
+                    main = "Male-female hazard ratio")]
+foo <- my.dt[, lines(Age, h0.m.5/h0.f.5, lty = 2)]
+legend("topright", legend = c("observed",
+                              "implied baseline"),
+##       col = c("red","blue"),
+       lty = 1:2)
+@
+
+Much bigger convergence in ``observed'' than in baseline
+
+\end{frame}
+
+\begin{frame}{German's App for Black-White Crossover}
+\end{frame}
+
+
+% plateau
+
+\begin{frame}{Old-age mortality plateaus}
+  \begin{itemize}
+    \item The student group presentation
+      will introduce
+      \item  Ken will spend a whole class on it.
+
+      \item I note that the main interest is not in the plateau itself, but
+  rather what clues it gives to evolutionary theories of senescence.
+\end{itemize}
+\end{frame}
+
+
+
+% time approach
+
+\begin{frame}{Heterogeneity slows mortality improvement (1) }
+
+  Define $\rho(x,t)$ be the rate of mortality \alert{improvement}
+  $$
+  \rho(x,t) = - {d \over dt} \log \bar\mu(x,t)
+  $$
+  \pause
+  
+  Extending our gamma result for 1 cohort to the surface, 
+  $$
+  \bar\mu(x,t) = \mu_0(x,t) \bar{S}_c(x,t)^{\sigma^2}
+  $$ 
+\end{frame}
+
+\begin{frame}{Heterogeneity slows mortality improvement (2)}
+
+
+  We take the log and the time-derivative of hazards  give \vm (39^*)
+  $$ 
+  \rho(x,t) = \rho_0(x,t) - \sigma^2 {d \over dt} \log
+  \bar{S}_c(x,t)^{\sigma^2}
+  $$ 
+
+  So individual risks from one cohort to the next are going down
+  faster it seems. Intuition?
+  
+\end{frame}
+
+\begin{frame}{An example}
+
+  Assume  $\sigma^2 = .2$.
+
+  <<>>=
+  sigma.sq = .2
+  dt <- fread("~/Documents/hmd/hmd_statistics/c_lt_both/bltcoh_1x1/ITA.bltcoh_1x1.txt", na.string = ".")
+  mx.80.c1880 <- dt[Year == 1880 & Age == "80"]$mx
+  mx.80.c1900 <- dt[Year == 1900 & Age == "80"]$mx
+  (rho.bar.80 <- -log(mx.80.c1900/mx.80.c1880)/20) ## about 0.8%
+  Sx.80.c1880 <- dt[Year == 1880 & Age == "80"]$lx
+  Sx.80.c1900 <- dt[Year == 1900 & Age == "80"]$lx
+  (d.log.Sx <- log(Sx.80.c1900/Sx.80.c1880)/20)
+  (rho.0.80 = rho.bar.80 + sigma.sq * d.log.Sx) ##  about 1.3%
+@ 
+So mortality progress is more than 50\% faster than it appears!
+
+Issues?
+
+  
+\end{frame}  
+
+  
+  Giving the result
+  
+
+  
+
+\end{document}  
+
