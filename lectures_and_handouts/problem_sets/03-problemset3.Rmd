@@ -178,7 +178,7 @@ legend(x = 5, y = -1, title = "Variance", legend = c("0.25", "0.02"), col = c("b
 ```
 5. Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.  
     If we alter any of the parameters here, it would change the age of crossover in accordance with that observed in Problem 6. We can simulate this by writing the previous code as a function and running it with different parameters.  
-```{r}
+    ```{r}
 N <- 1000000
 
 get.crossover.plot <- function(sigmasq.1.fun, sigmasq.2.fun, beta.fun, alpha.fun, R.fun) {
@@ -225,26 +225,26 @@ legend(x = 5, y = -1, title = "Variance", legend = c(sigmasq.1.fun, sigmasq.2.fu
        lwd = 2,lty = 1)
 }
 ```
-Now let's run this for different values of alpha, beta, R, and the two variances. In the first set of graphs, changing the two variances to compare when they are very different and when they are very similar. Age of crossover does not seem to change very much.  
-```{r, echo=FALSE}
+    Now let's run this for different values of alpha, beta, R, and the two variances. In the first set of graphs, changing the two variances to compare when they are very different and when they are very similar. Age of crossover does not seem to change very much.    
+    ```{r, echo=FALSE}
 par(mfrow = c(1,2))
 get.crossover.plot(sigmasq.1.fun = 0.001, sigmasq.2.fun = 0.7, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 1.6 )
 get.crossover.plot(sigmasq.1.fun = 0.3, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 1.6 )
 ```
-Then, when changing alpha so that we can compare a very small alpha with a large one, no crossover occurs.  
-```{r, echo=FALSE}
+    Then, when changing alpha so that we can compare a very small alpha with a large one, no crossover occurs.  
+    ```{r, echo=FALSE}
 par(mfrow = c(1,2))
 get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-6, beta.fun = 1/9 , R.fun = 1.6 )
 get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-3, beta.fun = 1/9 , R.fun = 1.6 )
 ``` 
-By changing beta to compare a very small beta and a large one, we get a crossover very early with a large beta.  
-```{r, echo=FALSE}
+    By changing beta to compare a very small beta and a large one, we get a crossover very early with a large beta.  
+    ```{r, echo=FALSE}
 par(mfrow = c(1,2))
 get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/20 , R.fun = 1.6 )
 get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/4 , R.fun = 1.6 )
 ```
-Finally, if we compare a large and small r, there does not seem to be a crossover.   
-```{r, echo=FALSE}
+    Finally, if we compare a large and small r, there does not seem to be a crossover.   
+    ```{r, echo=FALSE}
 par(mfrow = c(1,2))
 get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 0.7)
 get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 2.0)
@@ -262,25 +262,23 @@ get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4
     \end{aligned}$$
 7. Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age $\rho(x)$ that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with $\sigma^2 = 1/5$.  
     Let's use the same data as in Problem 2.  
-    ```{r, echo=FALSE, warning= FALSE}
-require(tidyverse)
-italy <- read_table2("data/italy_fltcoh_1x1.txt", skip=1) %>% #HMD Italy cohort data, female lifetable (1x1)
-  filter(Year == 1880|Year == 1900)
-
-italy$Age[italy$Age == "110+"] <- 110
-italy$Age <- as.numeric(italy$Age)
-italy$mx <- as.numeric(italy$mx)
-italy$lx <- italy$lx/100000
-
-italy <- italy %>%
-  select(Year, Age, mx, lx)
-
-italy1880 <- italy %>% filter(Year == 1880)
-italy1900 <- italy %>% filter(Year == 1900)
-
-```
+    ```{r, echo=FALSE, warning= FALSE, message =FALSE}
+    require(tidyverse)
+    italy <- read_table2("data/italy_fltcoh_1x1.txt", skip=1) %>% #HMD Italy cohort data, female lifetable (1x1)
+    filter(Year == 1880|Year == 1900)
+    italy$Age[italy$Age == "110+"] <- 110
+    italy$Age <- as.numeric(italy$Age)
+    italy$mx <- as.numeric(italy$mx)
+    italy$lx <- italy$lx/100000
+  
+    italy <- italy %>%
+    select(Year, Age, mx, lx)
+  
+    italy1880 <- italy %>% filter(Year == 1880)
+    italy1900 <- italy %>% filter(Year == 1900)
+    ```
     The observed rate of mortality improvement can be calculated using $$ \bar{\rho}(x,t) = - {1 \over t} \log {m_{t2}(x) \over m_{t1}(x) }$$ and the version with frailty can be calculated using this equation $$ \rho(x,t) = \bar{\rho}(x,t) + \sigma^2\ {d \over dt}\bar{S}_c (x,t) $$ Now we can calculate the rates of improvement in mortality and compare them.   
-```{r, echo=FALSE}
+    ```{r echo=FALSE}
 sigma.sq.ct <- 1/5
 ages <- 0:110
 rho_bar <- (-1/20)*log(italy1900$mx/italy1880$mx)
@@ -292,53 +290,17 @@ lines(ages, rho, lty = 2, col = "red")
 legend("topright", legend = c("Observed", "With Frailty"), lty = c(1,2), col = c("black", "red"))
 title("Mortality Improvement for the Cohorts of 1880 and 1900")
 ```  
-When we assume frailty, we get a higher rate of improvement at the older ages than in the observed case.  
+    When we assume frailty, we get a higher rate of improvement at the older ages than in the observed case.  
 8. Extend the CenSoc demonstration of changing characteristics with age in at least one of the following ways (a) Use years of education instead of wage income. (b) Use both years of education and wage income. (c) Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” ($\hat{z}_{obs}$) larger for one group. Discuss briefly.  
-```{r, echo=FALSE, warning= FALSE, message=FALSE}
-require(data.table)
-dt <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
-```
-    Now let's add in the wage cleaning code from Josh's simulation.  
-```{r, echo = T, results = 'hide'}
-
-## Clean wage data
-dt[incwage == 999998, incwage := NA]
-dt[incwage == 0, incwage := NA]
-
-#dt[, hist(incwage)]
-#dt[, hist(log(incwage))]
-
-## Do age at death for 1895-1900 cohorts
-dt[, age.at.death := dyear + dmonth/12 - (byear + bmonth/12)]
-my.dt <- dt[byear %in% 1895:1900 & dyear %in% 1975:2004]
-## now limits to deaths younger than 105
-my.dt[, max(age.at.death), by = byear]
-my.dt[age.at.death >= 105] ## 177 people
-my.dt[floor(age.at.death) == 104] ## 253 people
-## now we have same age range for every cohort
-my.dt <- my.dt[age.at.death < 105]
-my.dt <- my.dt[!is.na(incwage)] ## keep only non-missing 
-
-#now let's center income at 0
-
-## standardized log income
-## log_inc_stan = log(y_orig) - mean(log(y_orig))
-## note: control for byear, since different ages in 1940
-my.dt[, y_orig_inc := incwage]
-my.dt[, log_inc := log(incwage)]
-my.dt[, log_inc_mean := mean(log_inc), by = byear]
-my.dt[, y_inc := log_inc - log_inc_mean]
-#my.dt[, hist(y_inc)]
-#my.dt[, summary(y_inc)]
-```
-    Let's clean the education data in a similar way.  
-```{r, echo = FALSE, results='hide'}
-my.dt <- my.dt[!is.na(educyrs)]
-my.dt[, y_orig_educ := educyrs]
-my.dt[, educyrs_mean := mean(educyrs), by = byear]
-my.dt[, y_educ := educyrs - educyrs_mean]
-#my.dt[, hist(y_educ)]
-#my.dt[, summary(y_educ)] #This is not exactly centered at 0
+    ```{r, echo=FALSE, warning= FALSE, message=FALSE}
+    require(data.table)
+    dt <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
+    my.dt <- my.dt[!is.na(educyrs)]
+    my.dt[, y_orig_educ := educyrs]
+    my.dt[, educyrs_mean := mean(educyrs), by = byear]
+    my.dt[, y_educ := educyrs - educyrs_mean]
+    #my.dt[, hist(y_educ)]
+    #my.dt[, summary(y_educ)] #This is not exactly centered at 0
 ```
     a. Let's see how this changes for education.  
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}

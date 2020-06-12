@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.6.24)  4 JUN 2020 16:42
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.6.24)  8 JUN 2020 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1272,88 +1272,88 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 ]
 Chapter 1.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 139.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 137.
 [5] [6
 
 ]
 Chapter 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--170
+Underfull \hbox (badness 10000) in paragraph at lines 162--164
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 204--206
+Underfull \hbox (badness 10000) in paragraph at lines 198--200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--208
+Underfull \hbox (badness 10000) in paragraph at lines 200--202
 
  []
 
 [8]
-Overfull \hbox (315.25pt too wide) in paragraph at lines 288--288
+Overfull \hbox (315.25pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 | $t$ | $\sigma^2_r(t)$ | $K_u(t)$ | $K_m(t)$ | $\bar{K}(t)$
  | $\bar{K}(t)-\bar{K}(t-1)$ | $\bar{r}(t)$ | $\bar{r}[](t)$ |[] 
  []
 
 
-Overfull \hbox (231.25pt too wide) in paragraph at lines 288--288
+Overfull \hbox (231.25pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |---|---------------|--------|--------|------------|--------
 -----------------|------------|-------------|[] 
  []
 
 
-Overfull \hbox (73.75pt too wide) in paragraph at lines 288--288
+Overfull \hbox (73.75pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |0  | 0.00021     | 200     | 50      | 250     |        |  
       |       |[] 
  []
 
 
-Overfull \hbox (58.0pt too wide) in paragraph at lines 288--288
+Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |l  | 0.000123 | 201.506 | 51.781  | 253.287 | 3.2866 | 0.01
 31 |       |[] 
  []
 
 
-Overfull \hbox (58.0pt too wide) in paragraph at lines 288--288
+Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |2  | 0.000125 | 203.023 | 53.625  | 256.648 | 3.3614 | 0.01
 32 | 0.0001|[] 
  []
 
 
-Overfull \hbox (58.0pt too wide) in paragraph at lines 288--288
+Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |3  | 0.000127 | 204.551 | 55.536  | 260.087 | 3.4385 | 0.01
 33 | 0.0001|[] 
  []
 
 
-Overfull \hbox (147.25pt too wide) in paragraph at lines 288--288
+Overfull \hbox (147.25pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\v
 dots$ | $\vdots$ | $\vdots$ |[] 
  []
 
 
-Overfull \hbox (58.0pt too wide) in paragraph at lines 288--288
+Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |49 | 0.000189 | 288.824 | 277.833 | 566.658 |        |     
    |       |[] 
  []
 
 
-Overfull \hbox (58.0pt too wide) in paragraph at lines 288--288
+Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |50 | 0.000189 | 290.998 | 287.730 | 578.728 | 12.071 | 0.02
 11 |       |[] 
  []
 
 
-Overfull \hbox (58.0pt too wide) in paragraph at lines 288--288
+Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
  []\TU/lmtt/m/n/10 |51 | 0.000189 | 293.189 | 297.979 | 591.168 | 12.440 | 0.02
 13 | 0.0002|[] 
  []
 
 [9]
-Overfull \hbox (101.06073pt too wide) detected at line 315
+Overfull \hbox (101.06073pt too wide) detected at line 309
 [][]
  []
 
@@ -1364,29 +1364,25 @@ Underfull \vbox (badness 2894) has occurred while \output is active []
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 345.
+(amsmath)                 on input line 339.
 
 
-Overfull \hbox (18.8485pt too wide) detected at line 349
+Overfull \hbox (18.8485pt too wide) detected at line 343
 [][]
  []
 
 
-Overfull \hbox (166.04787pt too wide) detected at line 368
+Overfull \hbox (166.04787pt too wide) detected at line 362
 [][]
  []
 
+[11]
 File: figures/pp1.png Graphic file (type bmp)
 <figures/pp1.png>
 File: figures/pp2.png Graphic file (type bmp)
 <figures/pp2.png>
 
-Overfull \hbox (210.03311pt too wide) in paragraph at lines 371--375
-\TU/lmr/m/n/10 There are many methods to project populations. []
- []
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 384--385
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 
  []
 
@@ -1395,7 +1391,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 384--385
 ]
 Chapter 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--418
+Underfull \hbox (badness 10000) in paragraph at lines 407--409
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 409--411
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--413
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 425--427
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 427--429
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 442--443
 
  []
 
@@ -1406,35 +1427,15 @@ File: figures/beta_hazard.png Graphic file (type bmp)
 File: figures/uniform_hazard.png Graphic file (type bmp)
 <figures/uniform_hazard.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 418--422
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 418--422
-[]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[15]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 428--430
+Underfull \hbox (badness 10000) in paragraph at lines 459--461
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 439--444
+[16] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 470--473
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[17]
 File: figures/uniform_avg_hazard.png Graphic file (type bmp)
 <figures/uniform_avg_hazard.png>
 File: figures/gamma_avg_hazard.png Graphic file (type bmp)
@@ -1442,17 +1443,17 @@ File: figures/gamma_avg_hazard.png Graphic file (type bmp)
 File: figures/beta_avg_hazard.png Graphic file (type bmp)
 <figures/beta_avg_hazard.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--454
+Underfull \hbox (badness 10000) in paragraph at lines 479--483
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--454
+Underfull \hbox (badness 10000) in paragraph at lines 479--483
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--454
+Underfull \hbox (badness 10000) in paragraph at lines 479--483
 []
  []
 
@@ -1460,50 +1461,204 @@ Underfull \hbox (badness 10000) in paragraph at lines 450--454
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [18]
-Overfull \hbox (1728.75pt too wide) in paragraph at lines 461--461
-[]\TU/lmtt/m/n/10 The uniform does not remain uniform. This matches our intuiti
-on that people with higher frailty will die off first. This leaves an exponenti
-ally decreasing distribution of frailty for survivors age 75+. The gamma remain
-s a gamma but the parameters change. The beta, similar to the uniform, does not
- remain beta. There is an exponentially decreasing distribution of frailty for 
-survivors age 75+.[] 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[19]
+File: figures/uniform_hazards_histogram.png Graphic file (type bmp)
+<figures/uniform_hazards_histogram.png>
+File: figures/gamma_hazards_histogram.png Graphic file (type bmp)
+<figures/gamma_hazards_histogram.png>
+File: figures/beta_histogram_hazard.png Graphic file (type bmp)
+<figures/beta_histogram_hazard.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 484--489
+[][]
  []
 
 
-Overfull \hbox (379.5pt too wide) in paragraph at lines 461--461
-[]\TU/lmtt/m/n/10 9. Use the method of completing the gamma to get the mean of 
-the gamma distribution. (Hint: I believe there are youtube examples of this).[]
- 
+Underfull \hbox (badness 10000) in paragraph at lines 484--489
+[]
  []
 
-[19] [20
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 484--489
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[20]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[21] [22]
 Chapter 4.
-[21] [22
+File: bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[23
 
 ]
+Underfull \vbox (badness 7576) has occurred while \output is active []
+
+[24]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 523--529
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 530--531
+
+ []
+
+File: bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf>
+[26]
+Underfull \vbox (badness 2460) detected at line 598
+ []
+
+
+Underfull \vbox (badness 2460) has occurred while \output is active []
+
+[27]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-18-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-19-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-20-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-21-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[29] [30]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-23-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 624--628
+
+ []
+
+[31]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-27-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[32]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 697--697
+[]\TU/lmtt/m/n/10 ![](bookdown-demo_files/figure-latex/unnamed-chunk-28-1.pdf)<
+!-- -->[] 
+ []
+
+
+Overfull \hbox (600.0pt too wide) in paragraph at lines 697--697
+[]\TU/lmtt/m/n/10 c. We[]ll run the wage income comparison for Blacks and White
+s separately. To this we need the other file that Josh uses, so we[]ll run the 
+previous data cleaning code again as well.[] 
+ []
+
+
+Overfull \hbox (972.75pt too wide) in paragraph at lines 697--697
+[]\TU/lmtt/m/n/10 Now let[]s graph these two. We can see a decline in log wages
+ with age for Blacks that we do not observe for Whites, for whom this tends to 
+increase by age. This suggests that we may observe greater variance in heteroge
+neity for blacks than for Whites.[] 
+ []
+
+File: bookdown-demo_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-30-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[33]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-30-2.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-30-2.pdf>
+[34]
 Chapter 5.
-[23] [24
+[35
+
+] [36
 
 ]
 Chapter 6.
+
+Overfull \hbox (35.31628pt too wide) detected at line 758
+[][]
+ []
+
+[37]
+Overfull \hbox (258.75pt too wide) in paragraph at lines 880--880
+[]\TU/lmtt/m/n/10 The extinction probability is converging to 0.75 (going out t
+o 50 or 60 generations is helpful for observing this).[] 
+ []
+
+[38]
+File: figures/branch_simulation.png Graphic file (type bmp)
+<figures/branch_simulation.png>
+File: figures/extinctionplot.png Graphic file (type bmp)
+<figures/extinctionplot.png>
+File: figures/generation_dist.png Graphic file (type bmp)
+<figures/generation_dist.png>
+[39] [40] [41]
+Overfull \hbox (290.25pt too wide) in paragraph at lines 965--965
+[]    \TU/lmtt/m/n/10 \includegraphics[width=1\linewidth]{figures/meanvar} \cap
+tion{Survival mean and variance}\label{fig:unnamed-chunk-35}[] 
+ []
+
+
+Overfull \hbox (883.5pt too wide) in paragraph at lines 965--965
+[]    \TU/lmtt/m/n/10 The mean and variance calculated above account for all li
+nes, not just surviving ones. In this simulation, the mean tends to hover aroun
+d 1 and the variance tends to increase with generation number, at least up to a
+ certain point.[] 
+ []
+
 No file bookdown-demo.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 498.
-[25]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 498.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 971.
+[42]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 971.
 (./bookdown-demo.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 498.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 498.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 498.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 971.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 971.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 971.
  ) 
 Here is how much of TeX's memory you used:
- 25424 strings out of 493007
- 466273 string characters out of 6136719
- 683670 words of memory out of 5000000
- 29145 multiletter control sequences out of 15000+600000
+ 25517 strings out of 493007
+ 470091 string characters out of 6136719
+ 686211 words of memory out of 5000000
+ 29215 multiletter control sequences out of 15000+600000
  536625 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,10n,117p,10422b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,11n,117p,10422b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (25 pages).
+Output written on bookdown-demo.pdf (42 pages).
