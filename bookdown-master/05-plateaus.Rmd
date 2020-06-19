@@ -1,0 +1,65 @@
+# Mortality plateaus
+
+## Outline
+- Math
+- Ken's class
+- Presentation
+
+
+## Heterogeneity slows mortality improvement 
+
+  Define $\rho(x,t)$ be the rate of mortality \alert{improvement}
+  $$
+  \rho(x,t) = - {d \over dt} \log \bar\mu(x,t)
+  $$
+  
+  
+  Extending our gamma result for 1 cohort to the surface, 
+  $$
+  \bar\mu(x,t) = \mu_0(x,t) \bar{S}_c(x,t)^{\sigma^2}
+  $$ 
+
+  We take the log and the time-derivative of hazards  give \vm (39^*)
+  $$ 
+  \rho(x,t) = \rho_0(x,t) - \sigma^2 {d \over dt} \log
+  \bar{S}_c(x,t)^{\sigma^2}
+  $$ 
+
+  So individual risks from one cohort to the next are going down
+  faster it seems. Intuition?
+  
+### An example
+
+  Assume  $\sigma^2 = .2$.
+
+```{r}
+library(data.table)
+  sigma.sq = .2
+  dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/ITA.bltcoh_1x1.txt", na.string = ".")
+  mx.80.c1880 <- dt[Year == 1880 & Age == "80"]$mx
+  mx.80.c1900 <- dt[Year == 1900 & Age == "80"]$mx
+  (rho.bar.80 <- -log(mx.80.c1900/mx.80.c1880)/20) ## about 0.8%
+  Sx.80.c1880 <- dt[Year == 1880 & Age == "80"]$lx
+  Sx.80.c1900 <- dt[Year == 1900 & Age == "80"]$lx
+  (d.log.Sx <- log(Sx.80.c1900/Sx.80.c1880)/20)
+  (rho.0.80 = rho.bar.80 + sigma.sq * d.log.Sx) ##  about 1.3%
+```
+So mortality progress is more than 50\% faster than it appears!
+
+Issues?
+
+## Conclusions 
+- Gamma frailty gives simple expressions for population survival,
+hazard, and average frailty.
+- Gamma frailty gives a plateau
+- Gamma frailty gives us a predicted rate of convergence and
+cross-over with age
+- All of this means it is a useful null model.
+- Takes us away from “it could be selection” to “what if it were
+selection”
+
+
+## Ken's class
+  
+  Giving the result
+  
