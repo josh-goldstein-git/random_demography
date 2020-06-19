@@ -1,19 +1,31 @@
 # Problem Set 2
 
 ## Questions
+1. True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.  
+2. Use simulation in R to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages. (See frailty simulator.R" for sample code).  
+3. Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this? (This is an open-ended question. You should feel free to use mathematics, intuition, or any other approach to answer.)  
+4. Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this? (Also open ended)
+5. At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?
+6. Extend the simulation code to include life expectancy at age x (Shown above.)
+7. Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)
+8. Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?
+9. Use the method of completing the gamma to get the mean of the gamma distribution. (Hint: I believe there are youtube examples of this).
+10. Derive V&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?  
+11. Derive V&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?  
+12. Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.
 
 ## Solution
 1. True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.  
-    True. If each individual has their own hazard schedule proportional to baseline $z$, there will be more variation in the distribution of deaths than if each person had the baseline case. The variation for homogeneous populations comes from to chance only, while the variation for heterogeneous populations comes from chance and group variation in risk. Therefore, the variance of the population distribution of deaths will always be larger than that of the baseline (unless the variance is 0).   
+    True. If each individual has their own hazard schedule proportional to baseline $z$, there will be more variation in the distribution of deaths than if each person had the baseline case. The variation for homogeneous populations comes from to chance only, while the variation for heterogeneous populations comes from chance and group variation in risk. Therefore, the variance of the population distribution of deaths will always be larger than that of the baseline (unless the variance is 0). 
 2. Use simulation in R to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages. (See frailty simulator.R" for sample code).  
-```{r pressure, echo=FALSE, fig.cap="Gamma Distribution", out.width = '100%'}
-knitr::include_graphics(figures/gamma_hazard.png)
+```{r, echo=FALSE, fig.cap="Gamma Distribution", out.width = '100%'}
+knitr::include_graphics('figures/gamma_hazard.png')
 ```
-```{r pressure, echo=FALSE, fig.cap="Beta Distribution", out.width = '100%'}
-knitr::include_graphics(figures/beta_hazard.png)
+```{r, echo=FALSE, fig.cap="Beta Distribution", out.width = '100%'}
+knitr::include_graphics('figures/beta_hazard.png')
 ```
-```{r pressure, echo=FALSE, fig.cap="Uniform Distribution", out.width = '100%'}
-knitr::include_graphics(figures/uniform_hazard.png)
+```{r, echo=FALSE, fig.cap="Uniform Distribution", out.width = '100%'}
+knitr::include_graphics('figures/uniform_hazard.png')
 ```
     - Gamma-distributed frailty begins to increase more slowly after age 60 compared to baseline.
     - Beta-distributed frailty begins to increase more slowly after age 60 compared to baseline and eventually stops increasing at age 100.     
@@ -22,9 +34,7 @@ knitr::include_graphics(figures/uniform_hazard.png)
     It doesn't look like two proportional subgroups. It looks like the frailty is drawn from a single distribution (but very up to interpretation — answers were split). 
 4. Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this? (Also open ended)
     The behavior is somewhat similar, as the hazards are increasing more slowly at older ages. However, the beta hazards stops increasing at a certain point. The uniform and the gamma are more similar. For the parameters we used, beta-distributed frailty generates many very-frail or very-robust individuals and fewer medium-frail individuals. Gamma-distributed frailty generates many medium-frail individuals but fewer very-frail or very-robust individuals. 
-5. At what age do population hazards start to diverge from the baseline
-    in the the three models? Is it fair to say that half the cohort has to
-    have died before unobserved heterogeneity plays a role?
+5. At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?
     Generally around age 65, but if frailty is beta distributed (with our set of parameters) then we observe a divergence earlier. For the gamma and uniform frailty models roughly half the cohort has to die before unobserved heterogeneity plays a role, but for the beta model we observe divergence in the survival curve much earlier.   
 6. Extend the simulation code to include life expectancy at age x (Shown above.)
     See above.
@@ -69,11 +79,10 @@ avg_hazard_plot %>%
   theme_minimal() + 
   ggtitle("Uniform Hazards Average Frailty")
 ```
-
-```{r pressure, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(figures/uniform_avg_hazard.png)
-knitr::include_graphics(figures/gamma_avg_hazard.png)
-knitr::include_graphics(figures/beta_avg_hazard.png)
+```{r, echo=FALSE, out.width = '100%'}
+knitr::include_graphics('figures/uniform_avg_hazard.png')
+knitr::include_graphics('figures/gamma_avg_hazard.png')
+knitr::include_graphics('figures/beta_avg_hazard.png')
 
 ```
 8. Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?
@@ -127,10 +136,10 @@ avg_hazard %>%
 
 
 ```
-```{r pressure, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(figures/uniform_hazards_histogram.png)
-knitr::include_graphics(figures/gamma_hazards_histogram.png)
-knitr::include_graphics(figures/beta_histogram_hazard.png)
+```{r, echo=FALSE, out.width = '100%'}
+knitr::include_graphics('figures/uniform_hazards_histogram.png')
+knitr::include_graphics('figures/gamma_hazards_histogram.png')
+knitr::include_graphics('figures/beta_histogram_hazard.png')
 
 ```
     The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+. 
@@ -146,8 +155,3 @@ $$\begin{aligned}
 10. Derive V&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?  
 11. Derive V&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?  
 12. Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.
-
-
-
-
-

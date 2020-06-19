@@ -1,0 +1,457 @@
+# Problem set 3
+
+## Questions
+
+## Solutions
+1. Under gamma frailty, we obtained an explicit expression for average frailty by age for any baseline hazard schedule. $$ \bar{z}=\frac{1}{1+\sigma^2 H_0(x)}$$ Assume baseline mortality is Gompertz (say with a = $10^{-4}$ and b = 1/12). Try a couple of different values of $\sigma^2$ (but make sure one of these values is 1/7 for comparability with the next problem). Describe what happens to average frailty at older ages. Does it decrease exponentially? If so, is there an age at which the rate of decrease equals (or at least comes very close to) the exponential rate of increase in baseline hazards b? Does this age depend on $\sigma^2$?  
+    The average frailty over age  depends on the level of $\sigma^2$ as follows:  
+    ```{r, echo=FALSE}
+    set.seed(20200317)
+sigma.sq1 <- c(0.01, 1/7, 0.5, 0.75)
+
+a <- 10^-4
+b <- 1/12
+x <- 0:100
+H0x <- (a/b)*(exp(b*x) -1)
+
+z.bar.fun <- function(variance) {
+  z.bar <- 1 / (1 +  H0x*variance)
+  return(z.bar)
+}
+
+z1 <- z.bar.fun(0.01)
+z2 <- z.bar.fun(1/7)
+z3 <- z.bar.fun(0.5)
+z4 <- z.bar.fun(0.75)
+
+plot(x, z1 ,type = "l", lty=3, ylim=c(0, 1), xlab="Age", ylab="Average frailty (z)")
+lines(x, z2, lty =2)
+lines(x, z3, lty = 5)
+lines(x, z4, lty =4)
+legend ("bottomleft", legend = round(sigma.sq1, 3),
+         lty = c(3,2,5,4))
+```  
+    The average answer suggests that while there is some exponential decline in average frailty at older ages, this is not apparent throughout. In order to evaluate whether there is some age at which the exponential rate of increase in baseline hazards equals the rate of decrease, most answers graphed the two quantities and by visual inspection established that this happens at very old ages (around 150), and that the age required decreases with higher variance. One answer used a derivatives-based approach, equating the derivative of $\bar{z}$ to $b$. Here, I compare log mean frailty to the negative log baseline hazards, and find that at older ages, these two rates approach each other. At lower variances, this occurs only at very old ages.  
+    ```{r, echo=FALSE}
+sigma.sq2 <- c(0.01, "1/7", 0.5, 0.75, "b")
+a <- 10^-4
+b <- 1/12
+x <- 0:150
+H0x <- (a/b)*(exp(b*x) -1)
+
+z.bar.fun <- function(variance) {
+  z.bar <- 1 / (1 +  H0x*variance)
+  return(z.bar)
+}
+
+z1 <- z.bar.fun(0.01)
+z2 <- z.bar.fun(1/7)
+z3 <- z.bar.fun(0.5)
+z4 <- z.bar.fun(0.75)
+
+plot(x, log(z1) ,type = "l", lty=3, xlab="Age", ylab="Log average frailty")
+lines(x, log(z2), lty =2)
+lines(x, log(z3), lty = 5)
+lines(x, log(z4), lty =4)
+lines(x, -log(H0x), lty = 1)
+
+legend ("bottomleft", legend = c(sigma.sq2),
+         lty = c(3,2,5,4, 1))
+```
+2. Obtain from the Human Mortality Database a schedule of single-year-of-age, cohort mortality rates for females born in 1880 in Italy. Use the “inversion formula” for the gamma distribution to obtain the baseline hazards implied by  $\sigma^2= 1/7$. Plot the observed and implied baseline schedule. Plot the average frailty by age. Do your results resemble or differ from the Gompertz case above  
+    Reading in this data,  
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+require(tidyverse)
+italy2 <- read_table2("data/italycMx_1x1.txt") %>%
+  filter(Year == 1880) %>%
+  select(Year, Age, Female)
+
+italy2$Age[italy2$Age == "110+"] <- 110
+italy2$mux <- as.numeric(italy2$Female)
+```
+    In order to get the baseline hazards implied by $\sigma^2$ = 1/7, we can use the inversion formula $$\mu_0 (x) = \bar{\mu}(x)e^{\sigma^2\bar{H}(x)}$$  
+    Taking logs, this gives us $$log(\mu_0 (x)) = log(\bar{\mu}(x))+{\sigma^2log(\bar{H}(x))}$$  
+    $H(x)$ is equal to the summation of $\mu(x)$ in continuous time, so we can take the cumulative sum of these mortality rates to get the cumulative hazards. We can then use this to calculate the baseline hazards schedule.    
+    ```{r, echo=FALSE}
+sigma.sq.it <- 1/7
+
+italy2$H0 <- cumsum(italy2$mux)
+italy2$Hbar <- (1/sigma.sq.it)*log(1+sigma.sq.it*italy2$H0)
+italy2$mu0 <- log(italy2$mux)+sigma.sq.it*italy2$Hbar
+
+plot(italy2$Age, log(italy2$mux), type = "l", xlab = "Age", ylab = "Hazards")
+lines(italy2$Age, italy2$mu0, col = "red", lty = 2)
+legend("topleft",legend = c("Observed", "Implied"), lty = c(1,2))
+
+```
+    Now let's plot average frailty by age. While the shape of the mean frailty graph is the same in both cases, average frailty seems to decline more rapidly here than in the Gompertz case (this is driven by early ages.)  
+```{r, echo=FALSE}
+italy2$zbar <- (1/(1+sigma.sq.it*italy2$H0))
+plot(italy2$Age, italy2$zbar, type = "l", xlab = "Age", ylab = "Average frailty")
+
+```
+3. Derive V&M ’s result (5E)  
+    Since $\mu_2(x) = R\mu_1(x)$ and frailty is distributed gamma with variances $\sigma_1^2$ and $\sigma_2^2$, respectively, we can rewrite $$\bar{R}(x) = \frac{\bar{\mu_2}(x)}{\bar{\mu_1(x)}}$$ as  
+$$\begin{aligned}
+\bar{R}(x) & = {\mu_2(x) \over 1+\sigma^2_2H_2(x)} \times{1+H_1(x)\sigma^2_1 \over \mu_1(x)} \\
+ & = { \bar{\mu}_2(x) \over \bar{\mu}_1(x) }\times { 1+H_1(x)\sigma^2_1 \over 1+H_2(x)\sigma^2_2 }
+\end{aligned}$$
+Since $H_2 = R*H_1$,
+$$\begin{aligned}
+ & = {R} \times { 1+\sigma^2_1 H_1(x) \over 1+R\sigma^2_2 H_1(x) }\\
+ & = { R+R\sigma^2_1 H_1(x) \over 1+R\sigma^2_2 H_1(x) }
+ \end{aligned}$$
+4. Simulate this cross over with two proportional Gompertz schedules, with different frailty variances. Can you get a cross-over? If so, does it occur when cumulative hazard satisfy the condition (in small font) at the end of 5E?  
+    All answers used code from Josh's frailty simulator.  
+```{r,echo=FALSE}
+source("functions/gomp_funs.R")
+
+#Let's choose different variances for the two Gompertz schedules.
+
+sigmasq.1 <- 0.02
+sigmasq.2 <- 0.25
+N <- 1000000
+
+#Now let's generate the zs for this using the rgamma function.
+
+z1 <- rgamma(N, shape = 1/sigmasq.1, scale = sigmasq.1)
+z2 <- rgamma(N, shape = 1/sigmasq.2, scale = sigmasq.2)
+
+#Since these are proportional Gompertzian schedules, they will have the same b but different alphas, scaled by R
+
+beta1 <- 1/9
+alpha1 <- 10^-4
+R <- 1.5
+
+y1 <- rgomp(N, b = beta1, a = alpha1*z1) 
+y2 <- rgomp(N, b = beta1, a = R*alpha1*z2)
+
+#Now we can calculate hazards using the Dx function from the frailty simulator.
+
+get.Dx <- function(y)
+{
+    ## counts number of x in single year age groups
+    ## including zeros when there's no one
+    ## (note: built-in "table()" won't do this :(
+    x <- 0:max(floor(y))
+    y.fac <- factor(floor(y), levels = x)
+    Dx <- tabulate(y.fac)
+    names(Dx) <- x
+    return(Dx)
+}
+
+##Let's do this for the first schedule.
+Dx.1 <- get.Dx(y1)
+x.1 <- as.numeric(names(Dx.1))
+
+## get lx by reverse-survival
+lx.1 <- rev(cumsum(rev(Dx.1)))
+## get person-years as average of adjacent lx
+lxpn.1 <- c(lx.1[-1], NA)
+Lx.1 <- (lx.1 + lxpn.1)/2
+## get hazards
+mx.1 <- Dx.1/Lx.1
+
+#Now let's do this for the second schedule.
+
+Dx.2 <- get.Dx(y2)
+x.2 <- as.numeric(names(Dx.2))
+
+## get lx by reverse-survival
+lx.2 <- rev(cumsum(rev(Dx.2)))
+## get person-years as average of adjacent lx
+lxpn.2 <- c(lx.2[-1], NA)
+Lx.2 <- (lx.2 + lxpn.2)/2
+## get hazards
+mx.2 <- Dx.2/Lx.2
+
+```
+    Now we can graph this to observe the crossover. In Problem 6, we calculate an age where this crossover would occur based on 5E, and here, graphing that line in grey, we see that the crossover occurs at exactly that point.  
+```{r, echo=FALSE}
+x.crossover <- (1/beta1)*log( (((beta1/alpha1)*(R-1)) / (R*(sigmasq.2-sigmasq.1))) - 1 )
+  
+plot(x.1, log(mx.1), main = "Crossover in Log Hazards", type = "l", lty = 1, lwd = 2, col = "black", xlab = "Age", ylab = "log hx")
+lines(x.2, log(mx.2), type = "l", col = "red", lty = 1, lwd = 2)
+abline(v = x.crossover, col ="gray", lty = 2)
+legend(x = 5, y = -1, title = "Variance", legend = c("0.25", "0.02"), col = c("black", "red"),
+       lwd = 2,lty = 1)
+```
+5. Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.  
+    If we alter any of the parameters here, it would change the age of crossover in accordance with that observed in Problem 6. We can simulate this by writing the previous code as a function and running it with different parameters.  
+```{r}
+N <- 1000000
+
+get.crossover.plot <- function(sigmasq.1.fun, sigmasq.2.fun, beta.fun, alpha.fun, R.fun) {
+
+#Now let's generate the zs for this using the rgamma function.
+
+z1.fun <- rgamma(N, shape = 1/sigmasq.1, scale = sigmasq.1)
+z2.fun <- rgamma(N, shape = 1/sigmasq.2, scale = sigmasq.2)
+
+#Since these are proportional Gompertzian schedules, they will have the same b but different alphas, scaled by R
+
+y1.fun <- rgomp(N, b = beta.fun, a = alpha.fun*z1.fun) 
+y2.fun <- rgomp(N, b = beta.fun, a = R*alpha.fun*z2.fun)
+
+#Now we can calculate hazards using the Dx function from the frailty simulator.
+##Let's do this for the first schedule.
+Dx.1.fun <- get.Dx(y1.fun)
+x.1.fun <- as.numeric(names(Dx.1.fun))
+
+## get lx by reverse-survival
+lx.1.fun <- rev(cumsum(rev(Dx.1.fun)))
+## get person-years as average of adjacent lx
+lxpn.1.fun <- c(lx.1.fun[-1], NA)
+Lx.1.fun <- (lx.1.fun + lxpn.1.fun)/2
+## get hazards
+mx.1.fun <- Dx.1.fun/Lx.1.fun
+
+#Now let's do this for the second schedule.
+
+Dx.2.fun <- get.Dx(y2.fun)
+x.2.fun <- as.numeric(names(Dx.2.fun))
+
+## get lx by reverse-survival
+lx.2.fun <- rev(cumsum(rev(Dx.2.fun)))
+## get person-years as average of adjacent lx
+lxpn.2.fun <- c(lx.2.fun[-1], NA)
+Lx.2.fun <- (lx.2.fun + lxpn.2.fun)/2
+## get hazards
+mx.2.fun <- Dx.2.fun/Lx.2.fun
+
+plot(x.1.fun, log(mx.1.fun), type = "l", lty = 1, lwd = 2, col = "black", xlab = "Age", ylab = "log hx")
+lines(x.2, log(mx.2), type = "l", col = "red", lty = 1, lwd = 2)
+legend(x = 5, y = -1, title = "Variance", legend = c(sigmasq.1.fun, sigmasq.2.fun ), col = c("black", "red"),
+       lwd = 2,lty = 1)
+}
+```
+Now let's run this for different values of alpha, beta, R, and the two variances. In the first set of graphs, changing the two variances to compare when they are very different and when they are very similar. Age of crossover does not seem to change very much.  
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+get.crossover.plot(sigmasq.1.fun = 0.001, sigmasq.2.fun = 0.7, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 1.6 )
+get.crossover.plot(sigmasq.1.fun = 0.3, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 1.6 )
+```
+Then, when changing alpha so that we can compare a very small alpha with a large one, no crossover occurs.  
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-6, beta.fun = 1/9 , R.fun = 1.6 )
+get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-3, beta.fun = 1/9 , R.fun = 1.6 )
+``` 
+By changing beta to compare a very small beta and a large one, we get a crossover very early with a large beta.  
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/20 , R.fun = 1.6 )
+get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/4 , R.fun = 1.6 )
+```
+Finally, if we compare a large and small r, there does not seem to be a crossover.   
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 0.7)
+get.crossover.plot(sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 2.0)
+```
+6. Use mathematics to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and a baseline Gompertz schedule.  
+    The age crossover occurs at $\bar{u_1} = \bar{u_2}$, which occurs at $\bar{R} = 1$.
+    Rearranging 5E after equating it to 1 gives us
+    $$1+R\sigma_2^2(H_1(x_c)) = R+R\sigma_1^2(H_1(x_c))$$
+    $$H_1(x_c)(R\sigma_1^2 - R\sigma_2^2) = 1-R$$
+    $$H_1(x_c) = { R -1 \over R(\sigma_2^2 - \sigma_1^2)}$$
+    Assuming a baseline hazard schedule $H_1(x)$ that is Gompertzian, we can solve to get the age of crossover $x_c$.
+    $$ \begin{aligned} 
+    {a \over b}(e^{bx_c} -1) & = { R -1 \over R(\sigma_2^2 - \sigma_1^2)} \\ 
+    x_c & = {1 \over b} \log \bigg({ {(b/a)(R-1)}\over R(\sigma^2_2-\sigma^2_1)} +1\bigg)
+    \end{aligned}$$
+7. Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age $\rho(x)$ that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with $\sigma^2 = 1/5$.  
+    Let's use the same data as in Problem 2.  
+    ```{r, echo=FALSE, warning= FALSE}
+require(tidyverse)
+italy <- read_table2("data/italy_fltcoh_1x1.txt", skip=1) %>% #HMD Italy cohort data, female lifetable (1x1)
+  filter(Year == 1880|Year == 1900)
+
+italy$Age[italy$Age == "110+"] <- 110
+italy$Age <- as.numeric(italy$Age)
+italy$mx <- as.numeric(italy$mx)
+italy$lx <- italy$lx/100000
+
+italy <- italy %>%
+  select(Year, Age, mx, lx)
+
+italy1880 <- italy %>% filter(Year == 1880)
+italy1900 <- italy %>% filter(Year == 1900)
+
+```
+    The observed rate of mortality improvement can be calculated using $$ \bar{\rho}(x,t) = - {1 \over t} \log {m_{t2}(x) \over m_{t1}(x) }$$ and the version with frailty can be calculated using this equation $$ \rho(x,t) = \bar{\rho}(x,t) + \sigma^2\ {d \over dt}\bar{S}_c (x,t) $$ Now we can calculate the rates of improvement in mortality and compare them.   
+```{r, echo=FALSE}
+sigma.sq.ct <- 1/5
+ages <- 0:110
+rho_bar <- (-1/20)*log(italy1900$mx/italy1880$mx)
+sc_bar <- (1/20)*log(italy1900$lx/italy1880$lx)
+rho <- rho_bar+sigma.sq.ct*sc_bar
+
+plot(ages, rho_bar, type = "l", lty = 1, xlab = "Age", ylab = "Mortality Improvement Rate")
+lines(ages, rho, lty = 2, col = "red")
+legend("topright", legend = c("Observed", "With Frailty"), lty = c(1,2), col = c("black", "red"))
+title("Mortality Improvement for the Cohorts of 1880 and 1900")
+```  
+When we assume frailty, we get a higher rate of improvement at the older ages than in the observed case.  
+8. Extend the CenSoc demonstration of changing characteristics with age in at least one of the following ways (a) Use years of education instead of wage income. (b) Use both years of education and wage income. (c) Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” ($\hat{z}_{obs}$) larger for one group. Discuss briefly.  
+```{r, echo=FALSE, warning= FALSE, message=FALSE}
+require(data.table)
+dt <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
+```
+    Now let's add in the wage cleaning code from Josh's simulation.  
+```{r, echo = T, results = 'hide'}
+
+## Clean wage data
+dt[incwage == 999998, incwage := NA]
+dt[incwage == 0, incwage := NA]
+
+#dt[, hist(incwage)]
+#dt[, hist(log(incwage))]
+
+## Do age at death for 1895-1900 cohorts
+dt[, age.at.death := dyear + dmonth/12 - (byear + bmonth/12)]
+my.dt <- dt[byear %in% 1895:1900 & dyear %in% 1975:2004]
+## now limits to deaths younger than 105
+my.dt[, max(age.at.death), by = byear]
+my.dt[age.at.death >= 105] ## 177 people
+my.dt[floor(age.at.death) == 104] ## 253 people
+## now we have same age range for every cohort
+my.dt <- my.dt[age.at.death < 105]
+my.dt <- my.dt[!is.na(incwage)] ## keep only non-missing 
+
+#now let's center income at 0
+
+## standardized log income
+## log_inc_stan = log(y_orig) - mean(log(y_orig))
+## note: control for byear, since different ages in 1940
+my.dt[, y_orig_inc := incwage]
+my.dt[, log_inc := log(incwage)]
+my.dt[, log_inc_mean := mean(log_inc), by = byear]
+my.dt[, y_inc := log_inc - log_inc_mean]
+#my.dt[, hist(y_inc)]
+#my.dt[, summary(y_inc)]
+```
+    Let's clean the education data in a similar way.  
+```{r, echo = FALSE, results='hide'}
+my.dt <- my.dt[!is.na(educyrs)]
+my.dt[, y_orig_educ := educyrs]
+my.dt[, educyrs_mean := mean(educyrs), by = byear]
+my.dt[, y_educ := educyrs - educyrs_mean]
+#my.dt[, hist(y_educ)]
+#my.dt[, summary(y_educ)] #This is not exactly centered at 0
+```
+    a. Let's see how this changes for education.  
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+x <- 74:104
+y.bar.educ <- NULL
+y_orig.bar.educ <- NULL
+## z.bar <- NULL
+for (i in 1:length(x))
+{
+    y.bar.educ[i] <- my.dt[age.at.death > x[i], mean(y_educ)]
+    y_orig.bar.educ[i] <- my.dt[age.at.death > x[i], mean(y_orig_educ)]
+##    z.bar[i] <- my.dt[age.at.death > x[i], mean(z)]
+}
+
+par(mfrow = c(1,2))
+my.dt[, plot(x, y_orig.bar.educ)]
+title("Years of education by surviving age", cex.main = .7)
+my.dt[, plot(x, y.bar.educ)]
+title("Standardized education by surviving age", cex.main = .7)
+```
+    b. If we wanted to see how income and education work together, we could do this in a variety of ways, such as creating an index for the two variables. Then we could run the same code from earlier. Here, I multiply the two variables by each other, which is not ideal but will give us some proxy for the two.  
+    ```{r, message=FALSE, echo=FALSE, warning=FALSE}
+my.dt[, y_both := y_educ*y_inc]
+my.dt[, y_orig_both := y_orig_educ*y_orig_inc]
+x <- 74:104
+y.bar.both <- NULL
+y_orig.bar.both <- NULL
+
+for (i in 1:length(x))
+{
+    y.bar.both[i] <- my.dt[age.at.death > x[i], mean(y_both)]
+    y_orig.bar.both[i] <- my.dt[age.at.death > x[i], mean(y_orig_both)]
+##    z.bar[i] <- my.dt[age.at.death > x[i], mean(z)]
+}
+
+par(mfrow = c(1,2))
+my.dt[, plot(x, y_orig.bar.both)]
+title("Education and wage by surviving age", cex.main = .7)
+my.dt[, plot(x, y.bar.both)]
+title("Education and wage by surviving age", cex.main = .7)
+```
+    c. We'll run the wage income comparison for Blacks and Whites separately. To this we need the other file that Josh uses, so we'll run the previous data cleaning code again as well.  
+```{r, echo = FALSE, results = 'hide'}
+## Clean wage data
+dt.new <-dt 
+#dt.new[, incwage := INCWAGE]
+dt.new[incwage == 999998, incwage := NA]
+dt.new[incwage == 0, incwage := NA]
+
+#dt.new[, hist(incwage)]
+#dt.new[, hist(log(incwage))]
+
+## Do age at death for 1895-1900 cohorts
+dt.new[, age.at.death := dyear + dmonth/12 - (byear + bmonth/12)]
+my.dt.new <- dt.new[byear %in% 1895:1900 & dyear %in% 1975:2004]
+## now limits to deaths younger than 105
+my.dt.new[, max(age.at.death), by = byear]
+my.dt.new[age.at.death >= 105] ## 177 people
+my.dt.new[floor(age.at.death) == 104] ## 253 people
+## now we have same age range for every cohort
+my.dt.new <- my.dt.new[age.at.death < 105]
+my.dt.new <- my.dt.new[!is.na(incwage)] ## keep only non-missing 
+
+#now let's center income at 0
+
+## standardized log income
+## log_inc_stan = log(y_orig) - mean(log(y_orig))
+## note: control for byear, since different ages in 1940
+my.dt.new[, y_orig_inc := incwage]
+my.dt.new[, log_inc := log(incwage)]
+my.dt.new[, log_inc_mean := mean(log_inc), by = byear]
+my.dt.new[, y_inc := log_inc - log_inc_mean]
+#my.dt.new[, hist(y_inc)]
+#my.dt.new[, summary(y_inc)]
+
+x <- 74:104
+y.bar.inc.white <- NULL
+y_orig.bar.inc.white <- NULL
+my.dt.white <-my.dt.new[race == "White"]
+## z.bar <- NULL
+for (i in 1:length(x))
+{
+    y.bar.inc.white[i] <- my.dt.white[age.at.death > x[i], mean(y_inc)]
+    y_orig.bar.inc.white[i] <- my.dt.white[age.at.death > x[i], mean(y_orig_inc)]
+##    z.bar[i] <- my.dt[age.at.death > x[i], mean(z)]
+}
+
+x <- 74:104
+y.bar.inc.black <- NULL
+y_orig.bar.inc.black <- NULL
+my.dt.black <-my.dt.new[race== "Black/African American"]
+## z.bar <- NULL
+for (i in 1:length(x))
+{
+    y.bar.inc.black[i] <- my.dt.black[age.at.death > x[i], mean(y_inc)]
+    y_orig.bar.inc.black[i] <- my.dt.black[age.at.death > x[i], mean(y_orig_inc)]
+##    z.bar[i] <- my.dt[age.at.death > x[i], mean(z)]
+}
+```
+    Now let's graph these two. We can see a decline in log wages with age for Blacks that we do not observe for Whites, for whom this tends to increase by age. This suggests that we may observe greater variance in heterogeneity for blacks than for Whites.  
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+my.dt.white[, plot(x, y_orig.bar.inc.white)]
+title("Wage income by surviving age: Whites", cex.main = .7)
+my.dt.white[, plot(x, y.bar.inc.white)]
+title("Standardized log wages by surviving age: Whites", cex.main = .7)
+
+par(mfrow = c(1,2))
+my.dt.black[, plot(x, y_orig.bar.inc.black)]
+title("Wage income by surviving age: Blacks", cex.main = .7)
+my.dt.black[, plot(x, y.bar.inc.black)]
+title("Standardized log wages by surviving age: Blacks", cex.main = .7)
+```
+
+
+
