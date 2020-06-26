@@ -3,4 +3,6 @@ language:
   ui:
     chapter_name: "Chapter "
 delete_merged_file: true
-rmd_files: ["index.Rmd", "01-intro.Rmd", "literature.Rmd"]
+rmd_files: ["index.Rmd", "01-heterogeneity.Rmd", "02-frailty.Rmd",
+"03-gamma_censoc_application.Rmd", "04-crossover.Rmd", "05-plateaus.Rmd",
+"06-tempo.Rmd"]

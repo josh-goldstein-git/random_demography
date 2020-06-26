@@ -1,0 +1,317 @@
+# Introduction to Demographic Heterogeneity {#intro}
+
+## Outline
+1. What demographic heterogeneity is (and isn't)
+2. Dynamics of population growth with two sub-groups
+3. Keyfitz's result $\bar{r}'(t) = \sigma^2_r(t)$.
+4. Ken's model of Poisson heterogeneity
+
+## Part I. Conceptual Introduction
+
+### What is Demographic Heterogeneity?
+  
+- If we see different outcomes (e.g., people dying at different ages), 
+is this *Demographic Heterogeneity*? \pause NO.
+- Demographic heterogeneity $=$ different rates for different folks.
+
+>In a *demographically heterogeneous* population, people are of
+different types, with different type-specific rates.
+
+(These types can be discrete, with individuals being
+homogeneous within their type, or they can be continuous with possibly
+no individual having exactly the same risk as another.)
+  
+### An example
+  
+  Let's draw 10 individuals from a homogeneous population and
+  heterogeneous population.
+
+```{r hetero-homo, fig.cap='Homogeneity and Heterogeneity', out.width='80%', fig.align='center', fig.height=4}
+  ## Homogeneous hazard of 1/10
+  set.seed(13)
+  x.homo <- rexp(10, rate = 1/10)
+  ## Heterogeneous hazard (half 1/6 and half 1/13)
+  ## Note: I didn't pick these particular numbers for any specific reason
+  x.hetero <- c(rexp(5, rate = 1/6),
+                rexp(5, rate = 1/13))
+  par(mfrow = c(1,2))
+  dotchart(x.homo, main = "homogenous variation")
+  dotchart(x.hetero, main = "heterogeneous variation")
+```
+
+  
+- Can you tell which is which?
+  - _Homogeneous_: Chance only
+  - *Heterogeneous:* Chance + group variation in risk
+- Would we expect to see a difference if we increased sample?
+
+ANSWER THIS
+  
+- Analogies ?
+  - [Social inequality:] equal opportunity vs. equal outcomes
+  - [Analysis of variance] $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
+  - [Statistical models] $y = a + b x + \epsilon$
+  
+
+- What's new? Dynamics.
+
+  Heterogeneous populations evolve differently. Aggregates $\neq$ Individuals
+  
+  - Rates of growth (or decline)
+  - Changes over time or age or duration
+  - The trajectory of even the \alert{average} individual differs from population average
+  - Relative positions, change of groups, may be misleading.
+
+- Terminology
+  - Heterogeneity
+  - Unobserved heterogeneity
+  - Selection
+  - Selective survival
+  - Other terms?
+  
+<!-- \begin{frame}{1. Heterogeneity at work? Black-White Crossover} -->
+<!-- \end{frame} -->
+
+<!-- \begin{frame}{1. Heterogeneity at work? Mortality Plateus} -->
+<!-- \end{frame} -->
+
+
+- Big Caveat: Fundamental Unidentifiability
+
+  Same data of $N$ observations
+  - $N$ draws from 1 distribution
+  - $1$ draw from $N$ distributions
+  - Something in-between
+  
+
+  Abel (66) and Beth (76) example. 
+
+### A 2nd example: Exponential growth, two countries
+
+  Two countries start equal size, but grow at different rates. What
+  happens to aggregate growth rate?
+
+```{r 2-countries, fig.cap='Aggregate growth rate of sub-populations A + B', out.width='80%', fig.align='center'}
+  rA = .03 ## growth rate of A
+  rB = .01 ## growth rate of A
+  KA = 100 ## starting pop size
+  KB = 100
+  t = 0:200
+  KA.t = KA*exp(rA*t) ## exp growth of A
+  KB.t = KB*exp(rB*t) ## exp growth of B
+  K <- KA.t + KB.t ## combined pop
+  r.bar = diff(log(K)) ## growth rate
+  plot(t[-1], r.bar, type = "l", ylim = c(0, 0.04),
+       ylab = "r.bar", xlab = "time")
+  abline(h = c(rA, rB), lty = 2)
+```
+<!-- title("Aggregate growth rate of sub-populations A + B") -->
+- Questions
+
+  - What determines growth rate?
+  - How does it change over time?
+  - Does the process converge?
+
+
+### More examples to work
+  1. Differential, constant mortality ($\mu_A = .03$; $\mu_B =.01$)
+  2. Differential, {\em time-varying} mortality or growth.
+  3. ``Movers and Stayers'' (Migration)
+  4. ``Movers and Stayers'' (Marriage)
+  5. Fecundity: aging or heterogeneity?
+  6. Divorce: duration or heterogeneity?
+  7. Duration of unemployment: duration or heterogeneity?
+  8. Recidivism by time out of prison
+
+### Application
+
+```{r echo=FALSE}
+knitr::include_url('https://shiny.demog.berkeley.edu/josh/het_ruse/', height = '600px')
+```
+- Questions
+  
+  - Can you create a plateau?
+  - Can you create a crossover?
+  - Can you get aggregate rate to decline?
+  - Anything else?
+  
+## Part II. Formal Analysis
+
+### Outline
+  1. Keyfitz result
+  2. Keyfitz USA-Mexico example
+  3. Ken's Poisson-Exponential Model
+  
+  
+### Keyfitz result
+
+  $${d \over dt}\bar{r}(t) = \sigma^2_r(t)$$
+>When group-specific growth rates are constant the rate of change of the aggregate growth rate equals the variance of the growth rates.
+
+
+- Derivation
+
+By definition, 
+$$ \bar{K}(t) = \sum_i K_i(t) = \sum_i K_i e^{r_i t} $$
+and
+
+$$\bar{r}(t) = {{d \over dt} \bar{K}(t) \over \bar{K}(t)}$$
+
+Let's take derivatives and simplify, recalling definition of variance.
+
+SOLVE?
+
+### US-Mexico Example
+
+```{r us-mx, fig.cap='Keyfitz result for US-Mexico', out.width='80%', fig.asp=.75, fig.align='center', fig.height=5}
+rm = 3.5/100
+ru = .75/100
+Km = 50 
+Ku = 100
+t <- -50:150 ## go back in time to see rise and fall of variance
+Kt = Km * exp(t*rm) + Ku * exp(t*ru)
+bar.rt <- diff(log(Kt))
+par(mfrow = c(2,2))
+plot(t, Kt, lwd = 2, type = 'l')
+title('Total pop size (solid)\n Group m (dashed)')
+lines(t, Km * exp(t*rm), lty = 2, col = "red")
+lines(t, Ku * exp(t*ru), lty = 2, col = "blue")
+my.v = 26
+abline(v = my.v)
+plot(t, Kt, lwd = 2, type = 'l', log = 'y', ylim = c(.5, max(Kt)))
+lines(t, Km * exp(t*rm), lty = 2, col = "red")
+lines(t, Ku * exp(t*ru), lty = 2, col = "blue")
+abline(v = my.v)
+title("Total pop size (solid)\n Group 'm' (dashed): Log-scale")
+plot(t[-1], bar.rt, type = 'l', main = 'Aggregate growth rate')
+plot(t[-(1:2)], diff(bar.rt), type = 'l',
+main = 'Change in aggregate growth rate')
+```
+
+#### Commentary on Keyfitz result
+
+  - Growth rates in heterogeneous populations start at pop average
+    and then increase.
+  - Heterogeneity pop growth
+  - We will extend to cover non-constant growth
+  
+  But
+  
+  - Doesn't tell us how much bigger $\bar{K}(t)$ is projection
+    using constant aggregate rate $\bar{r}(0)$.
+  - Doesn't give us a formula for time path of aggregate $\bar{K}(t)$
+    or $\bar{r}(t)$
+  
+  Note: our homework will try to address some of this using Taylor
+  approximation. 
+  
+### The Origin of Professor Wachter's Poisson-Exponential Model
+  
+Given a world with many sub-populations, each growing expontentially
+at their own rate, what can we say about the time-path of world
+population growth?
+
+From an email: 
+
+> Josh asks: Suppose we have a discrete mix of subpopulations
+growing at different intrinsic rates r whose maximum is r0. Is
+there a handy approximation for the growth path of the aggregate
+populations?
+
+>The assumption of a discrete mix is essential here. Otherwise
+Tauberian theorems apply and, with a vanishingly small portion of
+the population close to the maximum growth rate, we do not obtain
+long-run exponential growth.
+
+>I recommend modeling the discrete distribution of growth rates as
+a mixture of Poisson distributions.
+
+
+We are considering
+
+\begin{equation}
+  \label{mixture}
+\bar{K}(t) = \sum_i e^{r_i t} K_i(0).
+\end{equation}
+
+Ken suggests 
+\begin{equation}
+  \label{ri_def}
+r_i = r_0 - s(\lambda) \cdot a,
+\end{equation}
+
+* [$r_0$] growth rate of the fastest growing sub-population
+* [$s$] a non-negative Poisson distributed integer
+* [$\lambda$] the parameter of the Poisson distribution (also
+  it's mean and variance)
+* [$a$] gap between adjacent growth rates.
+
+
+Example:  sub-populations have growth rates 3, 2, 1, 0, -1, $\ldots$ percent,
+then $r_0 = 0.03$ and $a = 0.01$. Sizes of sub-pops determined by
+Poisson dis'n
+
+
+\begin{frame}
+\begin{figure}[h]
+  \caption{A simulation of heterogeneous growth}
+  \centering
+  \includegraphics[width = 0.8\textwidth]{../ken_model_figure.pdf}
+\end{figure}
+\end{frame}
+
+
+#### Closed-form result
+
+$$
+K(t) = K(0) e^{r_0 t} e^{-\lambda (1 - e^{-at})}.
+$$
+
+To derive:
+
+- Write out mixture to get 
+  $$  K(t) = K(0) e^{r_0 t} \sum_i e^{-sat} f(s)
+  $$ 
+- Substitute for $f(s)$: $Pois ~ {\lambda^s e^{-\lambda} \over s!}$ 
+- Recognize that our mixture contains the series representation of
+  $e^{-at}$
+
+Interpretation 
+$$
+K(t) = K(0) e^{r_0 t} e^{-\lambda (1 - e^{-at})}.
+$$
+
+- Dominant term contains the maximum population growth rate $r_0$,
+- Second term gives the diminishing effect of the
+  sub-populations with smaller population growth rates over time.
+
+
+ Some further analysis, What is the closed-form expression for $\bar{r}(t)$?
+
+
+### Some commentary
+
+
+- Poisson and Exponential ``fit''
+- We'll this complementarity again (e.g., with Gamma)
+- Tractable  models are super powerful for enhancing our understanding.
+- But be careful. Avoid extremes: the model is right/wrong.
+  
+
+A BIG caveat, are disaggregated models necessarily better?
+
+- Some potential problems:
+- Aggregate constraints?
+- Interacting sub-populations?
+- Illusion of precision?
+  
+## Conclusions
+  
+  - Heterogeneity as variation in risk (not just outcome)
+    
+  - Constantly growing parts $\neq$ constantly growth whole
+    
+  - Keyfitz result: Change in growth rate $=$ variance of growth
+    rates
+    
+  - Poisson growth gives us a closed-form solution.

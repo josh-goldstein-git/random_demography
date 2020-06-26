@@ -1,0 +1,316 @@
+# Multiplicative Fixed Frailty {#frailty}
+
+## Outline
+1. Review of Mortality Mathematics
+2. Multiplicative-fixed-frailty and alternatives to it.
+3. Population Survival and Hazards under fixed frailty
+4. Gamma frailty
+
+### Review of mortality mathematics
+
+  - [$\ell(x)$ or $S(x)$] probability of survival to age $x$
+  - [$\mu(x)$ or $h(x)$] hazard rate at age $x$ (``minus the exponential rate of change in
+    survival'')
+
+  Let's treat $\mu$ as a definition.
+  $$
+  \mu(x) \equiv -{d \over dx} \log \ell(x)
+  $$
+
+  Can anti-differentiate (integrate) to solve for survival:
+  $$
+  \ell(x) = s(x) = e^{-\int_0^x \mu(a)\, da}
+  $$
+
+### Application: what is $\ell'(x)$?
+
+  -  in words?
+  -  taking derivative of $\ell(x)$
+  -  interpretation
+
+#### Two special cases
+  
+  -  Constant hazards $\mu(x) = \mu$. What's $\ell(x)$?
+  -  Gompertz hazards $\mu(x) = a e^{b x}$. What's $\ell(x)$?
+  
+
+### Extending Keyfitz to mortality
+
+  $$
+  {d \over dx} \bar{\mu}(x) = \mbox{average rate of change} - \sigma_\mu^2
+  $$
+
+  What is $\bar{\mu}$? It's a weighted average:
+  $$
+  \bar{\mu}(x) = {\int \mu(x | z) \ell(x | z) p(z) \, dz
+    \over
+    \int \ell(x | z) p(z) \, dz}
+  $$
+
+  To derive Keyfitz extension, differentiate with respect to age
+  $x$. (See \vm eq (13)). A good exercise.
+
+
+
+Multiplicative Fixed frailty
+  For individual $i$,
+  $$
+  \mu_i(x) = z_i \mu_0(x).
+  $$
+  
+  - [$z_i$] ``frailty'' of the $i$th individual. (Usually thought
+    of as a random variable with mean $1$.)
+  - [$\mu_0(x)$] ``Baseline hazard'' schedule.  (Also, the
+    schedule of a person with $z = 1$).
+  
+\begin{frame}{What are some alternatives?}
+
+  Let's think of at least three.
+  
+  ($\beta$, $i$, $\Delta$)
+\end{frame}
+
+### fragile
+  Which look like multiplicative fixed frailty?
+```{r, fig.height = 3, echo = F, message = F, warning = F, hide = T, results = F}
+  library(data.table)
+  dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/SWE.Mx_5x5.txt", na.string = ".")
+  dt[, x := as.numeric(gsub("-[0-9]*$", "", Age))]
+  dt[Age == "110+", x := 110]
+  par(mfrow = c(1,3))
+  ## proportional
+  dt[Year == "1990-1994", plot(x, Male, type = "l", col = "blue", log = "y", ylim = c(10^-4, 1), lty = 1)]
+  dt[Year == "1990-1994", lines(x, 2 * Male, type = "l", col = "blue", lty = 3)]
+  dt[Year == "1990-1994", lines(x, 0.5 * Male, type = "l", col = "blue", lty = 2)]
+  title("Male (5Mx) 1990, x 0.5 and x 1.5")
+
+  ## men and women
+  dt[Year == "1990-1994", plot(x, Female, type = "l", col = "pink", log = "y",
+                               ylim = c(10^-4, 1))]
+  dt[Year == "1990-1994", lines(x, Male, type = "l", col = "blue")]
+  title("By Sex (1990-1994)")
+
+  ## time
+  dt[Year == "1790-1794", plot(x, Male, type = "l", col = "blue", log = "y", ylim = c(10^-4, 1), lty = 3)]
+  dt[Year == "1890-1894", lines(x, Male, type = "l", col = "blue", lty = 2)]
+  dt[Year == "1990-1994", lines(x, Male, type = "l", col = "blue")]
+  title("Male 1790, 1890, 1990")
+```
+
+
+
+
+## Part I. Results from Fixed Frailty
+
+
+### A simulation
+
+- Our questions
+  -  How do we do a micro-simulation, with individuals?
+  -  How does fixed frailty fit in?
+  -  How do we compute pop survival, hazards, etc.
+  -  How does life table of heterogeneous pop differ from baseline?
+
+### Let's derive pop survival (Note: $\bar{s} = \bar{\ell}$) 
+
+Pop survival will be a weighted average of group survival curves
+
+  $$
+  \bar{s}(x) = {p(z_1) s_1(x) + p(z_2) s_2(x) + \ldots \over
+    p(z_1) + p(z_2)  + \ldots}
+  $$
+  With continuous $z$ (what are limits of integration?)
+  
+  $$
+  \bar{s}(x) = \int s(x|z) p(z) \, dz
+  $$
+
+  Under Multiplicative Fixed Frailty use
+  $$ \mu(x|z)  = z \mu_0(x) $$
+  
+  to derive
+  
+  $$\bar{s}(x) = \int s_0(x)^z p(z) \,dz.$$
+
+
+### Now population hazards (stepping stones)
+
+  Definition of hazards:
+  
+  $$
+  \bar{\mu}(x) = - {d \over dx} \log \bar{s}(x)
+  $$
+
+  $$
+  \bar{\mu}(x) = \mu_0(x) {\int z s_0(x)^z p(z) \, dz \over
+    \int  s_0(x)^z p(z) \, dz}
+  $$
+
+  $$
+  \bar{\mu}(x) = \mu_0(x) \bar{z}(x)
+  $$
+
+  Let's fill in steps.
+
+
+### Rodriguez question
+  
+Why isn't population hazard a (simple) average of individual hazards?
+
+
+> Answer: selected survival means that the distribution of frailty at 
+age $x$ differs from the starting frailty distribution at age $0$.
+
+
+The rate of increase in hazards
+
+  (AKA "LAR: Lifetable Aging Rate")
+  $$
+  \beta(x) = {d \over dx} \log \mu(x)
+  $$
+
+  Example:
+
+  What is $\beta(x)$ for Gompertz: $\mu(x) = a e^{bx}$?
+  
+
+Vaupel's result
+
+  $$
+  \bar{\beta}(x) = \beta_0(x) - \bar{\mu}(x) CV_z^2(x)
+  $$
+
+-  Hazards rise less slowly in pop than in baseline
+-  If pop hazards plateau, then $\bar{\beta}(x) = 0$
+-  Two special cases
+  -  Homogeneous pop and plateau in baseline
+  -  Gompertz and constant $CV_z$ (e.g., from Gamma)
+
+## Part II. Introduction to Gamma Frailty
+
+### The Gamma distribution
+  
+-  What do we want in a frailty distribution?
+  -  What's the Gamma?
+  -  Last math: closed form pop survival
+  -  positive?
+  -  a single dimension summarizing multiple factors? (Normal?)
+  -  flexible?
+  -  tractable?
+
+
+$$
+p(z | k, \lambda) = {\lambda^k  \over \Gamma(k)} z^{k-1} e^{-\lambda z} 
+$$.
+
+- [$z$] the random variable representing frailty
+- [$k, \lambda$] parameters
+- [$\Gamma(k)$] A normalizing constant.
+
+### Gamma in R
+
+  - [Mean:] $k / \lambda$ 
+  - [Variance:] $ k / \lambda^2$
+  \end{description}
+
+```{r}
+  ## with k and lambda
+  k = 3; lambda = 6
+  x <- rgamma(10000, shape = k, rate= lambda)
+  mean(x)
+  sd(x)
+```
+
+Alternate parameterization
+```{r}
+  ## with mean 1, sigma.sq
+  sigma.sq <- .25
+  z <- rgamma(10000, shape = 1/sigma.sq, rate = 1/sigma.sq)
+  mean(z)
+  var(z)
+```
+
+### Population Survival of Gamma Frailty
+
+  Big picture
+  $$
+  \bar{s}(x) = \int s_0(x)^z p(z) \, dz
+  $$
+
+  Or, using our definition of survival,
+  $$
+  \bar{s}(x) = \int e^{-z H_0(x)} p(z) \, dz
+  $$
+
+
+Completing the gamma
+  $$
+  \bar{s}(x) = \int e^{-z H_0(x)} {\lambda^k  \over \Gamma(k)} z^{k-1} e^{-\lambda z}  \, dz
+  $$
+
+ Rearranging,
+ 
+  $$
+  \bar{s}(x) = \lambda^k \int  { 1 \over \Gamma(k)} z^{k-1}
+  e^{-z (H_0(x)+\lambda)}  \, dz
+  $$ 
+
+Integral is like a $Gamma(z | k, H_0(x) + \lambda)$, but missing
+something. What?
+
+Our Result
+
+  $$
+  \bar{S}(x) = {\lambda^k \over \left[H_0(x) + \lambda\right]^k}
+  $$
+
+  If mean = 1.0, then we can let $\lambda = k = 1/\sigma^2$,
+  $$
+  \bar S(x) = {1/\sigma^2 \over (H_0(x) + 1/\sigma^2)^{1/ \sigma^2}} =
+  {1 \over  \left(1 + \sigma^2 H_0(x)\right)^{1/ \sigma^2}}
+  $$
+  
+
+
+### Interpreting Gamma-frailty survival
+  $$
+  \bar S(x) = {1 \over  \left(1 + \sigma^2 H_0(x)\right)^{1/ \sigma^2}}
+  $$
+
+  
+  -  Older ages, smaller survival.
+  -  Variance not so clear, need a picture. (What if $\sigma^2 = 0$?)
+  
+```{r, fig.height = 3}
+x <- 0:100
+a = 10^-4
+b = 1/10
+mx.0 <- a * exp(b*x)
+Hx.0 <- cumsum(mx.0)
+Sx.0 <- exp(-Hx.0)
+## small sigma
+sigma.sq = .5^2
+bar.S.small.sigma <- 1 / (1 + sigma.sq *Hx.0)^(1/sigma.sq)
+## big sigma
+sigma.sq = 1^2
+bar.S.big.sigma <- 1 / (1 + sigma.sq *Hx.0)^(1/sigma.sq)
+plot(x, Sx.0, lty = 2, type = "l", ylim = c(0,1),
+       ylab = "Survival")
+  lines(x, bar.S.small.sigma, col = "blue")
+  lines(x, bar.S.big.sigma, col = "red")
+  legend("bottomleft", c("Pop big.sigma",
+                       "Pop small.sigma",
+                       "Baseline"),
+         lty = c(1, 1, 2),
+         bty = "n",
+         col = c("red", "blue", "black"))
+  title("Gamma-frailty population survival")
+```
+
+## Conclusions
+  - Multiplicative Fixed Frailty is one option for modeling
+  - Gave us analytical expressions for population survival and
+    hazards including $\bar{\mu}(x) = \mu_0(x) \bar{z}(x)$
+  - Extended Keyfitz result to age-changing hazards
+  - Survival curve for Gamma
+  
