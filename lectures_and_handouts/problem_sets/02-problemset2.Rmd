@@ -26,7 +26,7 @@
 12. Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.
 
 ## Solutions
-```{r setup, include=FALSE, messages= FALSE, warnings= FALSE}
+```{r  include=FALSE, messages= FALSE, warnings= FALSE}
 library(tidyverse)
 library(gridExtra)
 ```

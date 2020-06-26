@@ -1,3 +1,16 @@
+get.Dx <- function(y)
+{
+  ## counts number of x in single year age groups
+  ## including zeros when there's no one
+  ## (note: built-in "table()" won't do this :(
+  x <- 0:max(floor(y))
+  y.fac <- factor(floor(y), levels = x)
+  Dx <- tabulate(y.fac)
+  names(Dx) <- x
+  return(Dx)
+}
+
+
 ## can use RCurl to download files, perhaps
 
 get.year <- function(x) {as.numeric(names(x))}

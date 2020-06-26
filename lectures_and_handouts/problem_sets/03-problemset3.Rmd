@@ -14,7 +14,7 @@
     c. Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” ($\hat{z}_{obs}$) larger for one group. Discuss briefly.
     
 ## Solutions
-```{r setup, include=FALSE, messages= FALSE, warnings= FALSE}
+```{r  include=FALSE, messages= FALSE, warnings= FALSE}
 library(tidyverse)
 library(gridExtra)
 library(data.table)
