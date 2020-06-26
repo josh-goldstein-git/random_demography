@@ -99,7 +99,7 @@ We could argue that only in the long term it is true.
             \end{aligned}$$ 
             c. Aggregated forecast, growing at the “true” value of $\bar{r}(25)$ for the whole period. (Use the value of $\bar{r}(25)$) that you calculate from the disaggregated forecast):
             $$\begin{aligned}
-            \bar{r}(25) &= {\sum K_i(0)r_i e^{r_i t} \over \sum K_i(0)e^{r_i t }}\\
+            \bar{r}(25) &= \sum K_i(0)r_i e^{r_i t} \over \sum K_i(0)e^{r_i t }\\
             & = \frac{K_u(1970)r_u e^{25r_u} + K_m(1970)r_m e^{25r_m} }{K_u(1970)e^{25r_u} + K_m(1970)e^{25r_m} }\\ 
             & =\frac{200\times.0075 e^{.0075\left(25\right)}+50\times.035 e^{.035\left(25\right)}}{200 e^{.0075\left(25\right)}+50 e^{.035\left(25\right)}} \approx 0.0176632\\
             \bar{K}(2020) &= 250e^{0.016632(50)} \approx 574.25316
@@ -124,10 +124,13 @@ We could argue that only in the long term it is true.
         iii. Graphs  
         There are many methods to project populations.
         
-        ```{r pressure, echo=FALSE, out.width = '100%'}
-        knitr::include_graphics(figures/pp1.png)
-        knitr::include_graphics(figures/pp2.png)
+        
+        ```{r, echo=FALSE, out.width = '100%'}
+        knitr::include_graphics('figures/pp1.png')
+        knitr::include_graphics('figures/pp2.png')
+
         ```
+        
    4. For Ken’s Poisson-Exponential model,
       a. What is the closed-form expression for $\hat{r}(t)$  
       $$\begin{aligned}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.6.24)  8 JUN 2020 19:48
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.6.24)  24 JUN 2020 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -791,7 +791,7 @@ tly
 )
 \Hy@SectionHShift=\skip52
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 35.
+Package hyperref Info: Option `breaklinks' set `true' on input line 34.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -897,40 +897,40 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (./bookdown-demo.aux)
 \openout1 = `bookdown-demo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 123.
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 123.
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 123.
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 123.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 123.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 123.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 122.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 123.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 122.
 .................................................
 . fontspec info: "set-scale"
 . 
@@ -967,7 +967,7 @@ th,BoldFont={latinmodern-math.otf}].
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
 .................................................
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 123.
+(Font)              scaled to size 10.0pt on input line 122.
 .................................................
 . fontspec info: "set-scale"
 . 
@@ -1017,18 +1017,18 @@ apping=tex-text;"<-6>s*[1]"[latinmodern-math.otf]/OT:script=math;language=DFLT;
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
 .................................................
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 123.
+(Font)              scaled to size 10.0pt on input line 122.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 123.
+(Font)              `operators' in the math version `normal' on input line 122.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 123.
+ line 122.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 123.
+(Font)              `operators' in the math version `bold' on input line 122.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/bx/n on inp
-ut line 123.
+ut line 122.
 .................................................
 . fontspec info: "set-scale"
 . 
@@ -1101,15 +1101,15 @@ x-text;"
 . \fontdimen 20\font =0pt\relax \fontdimen 21\font =0pt\relax 
 .................................................
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 123.
+(Font)              `symbols' in the math version `normal' on input line 122.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 123.
+t line 122.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 123.
+(Font)              `symbols' in the math version `bold' on input line 122.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/bx/n on inp
-ut line 123.
+ut line 122.
 .................................................
 . fontspec info: "set-scale"
 . 
@@ -1171,17 +1171,17 @@ x-text;"
 .................................................
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-23.
+22.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 123.
+t line 122.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 123
+(Font)              `largesymbols' in the math version `bold' on input line 122
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/bx/n on inp
-ut line 123.
-LaTeX Info: Redefining \microtypecontext on input line 123.
+ut line 122.
+LaTeX Info: Redefining \microtypecontext on input line 122.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1192,7 +1192,7 @@ File: mt-LatinModernRoman.cfg 2013/03/13 v1.0 microtype config. file: Latin Mod
 ern Roman (RS)
 )
 \AtBeginShipoutBox=\box51
-Package hyperref Info: Link coloring OFF on input line 123.
+Package hyperref Info: Link coloring OFF on input line 122.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1200,43 +1200,43 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count289
 )
-LaTeX Info: Redefining \ref on input line 123.
-LaTeX Info: Redefining \pageref on input line 123.
-LaTeX Info: Redefining \nameref on input line 123.
+LaTeX Info: Redefining \ref on input line 122.
+LaTeX Info: Redefining \pageref on input line 122.
+LaTeX Info: Redefining \nameref on input line 122.
 (./bookdown-demo.out) (./bookdown-demo.out)
 \@outlinefile=\write4
 \openout4 = `bookdown-demo.out'.
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 125.
+(Font)              scaled to size 12.0pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 125.
+(Font)              scaled to size 8.0pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 125.
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 125.
+(Font)              scaled to size 6.0pt on input line 124.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 124.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.00018pt on input line 125.
+(Font)              scaled to size 12.00018pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00012pt on input line 125.
+(Font)              scaled to size 8.00012pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00009pt on input line 125.
+(Font)              scaled to size 6.00009pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99982pt on input line 125.
+(Font)              scaled to size 11.99982pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99988pt on input line 125.
+(Font)              scaled to size 7.99988pt on input line 124.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99991pt on input line 125.
-LaTeX Font Info:    Try loading font information for U+msa on input line 125.
+(Font)              scaled to size 5.99991pt on input line 124.
+LaTeX Font Info:    Try loading font information for U+msa on input line 124.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 125.
+LaTeX Font Info:    Try loading font information for U+msb on input line 124.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1248,21 +1248,21 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 ] (./bookdown-demo.toc
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.01236pt on input line 3.
+(Font)              scaled to size 7.01236pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 4.98074pt on input line 3.
+(Font)              scaled to size 4.98074pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00015pt on input line 3.
+(Font)              scaled to size 10.00015pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.01247pt on input line 3.
+(Font)              scaled to size 7.01247pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 4.9808pt on input line 3.
+(Font)              scaled to size 4.9808pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99985pt on input line 3.
+(Font)              scaled to size 9.99985pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.01224pt on input line 3.
+(Font)              scaled to size 7.01224pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.98067pt on input line 3.
+(Font)              scaled to size 4.98067pt on input line 2.
 )
 \tf@toc=\write5
 \openout5 = `bookdown-demo.toc'.
@@ -1271,152 +1271,88 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ]
 Chapter 1.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 137.
-[5] [6
-
-]
-Chapter 2.
-
-Underfull \hbox (badness 10000) in paragraph at lines 162--164
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 198--200
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 178--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--202
+Underfull \hbox (badness 10000) in paragraph at lines 180--182
+
+ []
+
+[6] [7]
+Overfull \hbox (35.36081pt too wide) detected at line 244
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--249
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 254--256
 
  []
 
 [8]
-Overfull \hbox (315.25pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 | $t$ | $\sigma^2_r(t)$ | $K_u(t)$ | $K_m(t)$ | $\bar{K}(t)$
- | $\bar{K}(t)-\bar{K}(t-1)$ | $\bar{r}(t)$ | $\bar{r}[](t)$ |[] 
- []
-
-
-Overfull \hbox (231.25pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |---|---------------|--------|--------|------------|--------
------------------|------------|-------------|[] 
- []
-
-
-Overfull \hbox (73.75pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |0  | 0.00021     | 200     | 50      | 250     |        |  
-      |       |[] 
- []
-
-
-Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |l  | 0.000123 | 201.506 | 51.781  | 253.287 | 3.2866 | 0.01
-31 |       |[] 
- []
-
-
-Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |2  | 0.000125 | 203.023 | 53.625  | 256.648 | 3.3614 | 0.01
-32 | 0.0001|[] 
- []
-
-
-Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |3  | 0.000127 | 204.551 | 55.536  | 260.087 | 3.4385 | 0.01
-33 | 0.0001|[] 
- []
-
-
-Overfull \hbox (147.25pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\v
-dots$ | $\vdots$ | $\vdots$ |[] 
- []
-
-
-Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |49 | 0.000189 | 288.824 | 277.833 | 566.658 |        |     
-   |       |[] 
- []
-
-
-Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |50 | 0.000189 | 290.998 | 287.730 | 578.728 | 12.071 | 0.02
-11 |       |[] 
- []
-
-
-Overfull \hbox (58.0pt too wide) in paragraph at lines 282--282
- []\TU/lmtt/m/n/10 |51 | 0.000189 | 293.189 | 297.979 | 591.168 | 12.440 | 0.02
-13 | 0.0002|[] 
- []
-
-[9]
-Overfull \hbox (101.06073pt too wide) detected at line 309
-[][]
- []
-
-
-Underfull \vbox (badness 2894) has occurred while \output is active []
-
-[10]
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 339.
+(amsmath)                 on input line 268.
 
 
-Overfull \hbox (18.8485pt too wide) detected at line 343
+Underfull \hbox (badness 10000) in paragraph at lines 272--274
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--283
+
+ []
+
+
+Overfull \hbox (83.98499pt too wide) detected at line 289
 [][]
  []
 
 
-Overfull \hbox (166.04787pt too wide) detected at line 362
-[][]
- []
-
-[11]
-File: figures/pp1.png Graphic file (type bmp)
-<figures/pp1.png>
-File: figures/pp2.png Graphic file (type bmp)
-<figures/pp2.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 379--380
+Underfull \hbox (badness 10000) in paragraph at lines 298--300
 
  []
 
-[12] [13] [14
+[9] [10]
+Chapter 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 326--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--330
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 330--332
+
+ []
+
+[11
 
 ]
-Chapter 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 407--409
+Underfull \hbox (badness 10000) in paragraph at lines 344--346
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 409--411
+Underfull \hbox (badness 10000) in paragraph at lines 346--348
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--413
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 425--427
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 427--429
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 442--443
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
 
  []
 
@@ -1427,12 +1363,12 @@ File: figures/beta_hazard.png Graphic file (type bmp)
 File: figures/uniform_hazard.png Graphic file (type bmp)
 <figures/uniform_hazard.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--461
+Underfull \hbox (badness 10000) in paragraph at lines 378--380
 
  []
 
-[16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 470--473
+[12] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 389--392
 
  []
 
@@ -1443,27 +1379,27 @@ File: figures/gamma_avg_hazard.png Graphic file (type bmp)
 File: figures/beta_avg_hazard.png Graphic file (type bmp)
 <figures/beta_avg_hazard.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 479--483
+Underfull \hbox (badness 10000) in paragraph at lines 398--402
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 479--483
+Underfull \hbox (badness 10000) in paragraph at lines 398--402
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 479--483
+Underfull \hbox (badness 10000) in paragraph at lines 398--402
 []
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[18]
+[14]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[19]
+[15]
 File: figures/uniform_hazards_histogram.png Graphic file (type bmp)
 <figures/uniform_hazards_histogram.png>
 File: figures/gamma_hazards_histogram.png Graphic file (type bmp)
@@ -1471,28 +1407,28 @@ File: figures/gamma_hazards_histogram.png Graphic file (type bmp)
 File: figures/beta_histogram_hazard.png Graphic file (type bmp)
 <figures/beta_histogram_hazard.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 484--489
+Underfull \hbox (badness 10000) in paragraph at lines 403--408
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 484--489
+Underfull \hbox (badness 10000) in paragraph at lines 403--408
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 484--489
+Underfull \hbox (badness 10000) in paragraph at lines 403--408
 []
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[20]
+[16]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[21] [22]
-Chapter 4.
+[17] [18]
+Chapter 3.
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf>
@@ -1502,12 +1438,12 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[23
+[19
 
 ]
 Underfull \vbox (badness 7576) has occurred while \output is active []
 
-[24]
+[20]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf>
@@ -1515,29 +1451,32 @@ File: bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 523--529
+Underfull \hbox (badness 10000) in paragraph at lines 442--448
 []
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[25]
-Underfull \hbox (badness 10000) in paragraph at lines 530--531
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 449--450
 
  []
 
 File: bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf>
-[26]
-Underfull \vbox (badness 2460) detected at line 598
+[22]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 473.
+
+Underfull \vbox (badness 2460) detected at line 517
  []
 
 
 Underfull \vbox (badness 2460) has occurred while \output is active []
 
-[27]
+[23]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-18-1.pdf>
@@ -1553,90 +1492,987 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[28]
+[24]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[29] [30]
+[25] [26]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-23-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 624--628
+Underfull \hbox (badness 10000) in paragraph at lines 543--547
 
  []
 
-[31]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (typ
+[27]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (typ
 e pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-27-1.pdf>
+<use bookdown-demo_files/figure-latex/unnamed-chunk-25-1.pdf>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##                                    histid dyear byear dmon
+th bmonth census_age[] 
+ []
 
-[32]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 697--697
-[]\TU/lmtt/m/n/10 ![](bookdown-demo_files/figure-latex/unnamed-chunk-28-1.pdf)<
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1: D4C1CED5-E21B-452F-B027-E07973C8D5A5  2000  1895     
+12      9         44[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2: 4D1C6991-6D01-4903-ADBB-71F379F4AA96  2000  1895     
+11      1         45[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3: 0DD41551-07AF-4D4B-92BF-C11E49007B80  2001  1895     
+ 4      5         44[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4: 800EEA26-72C5-4DED-80B0-A4682677BCED  2003  1897     
+11     12         42[] 
+ []
+
+[28]
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5: 85077BBB-A8B7-4DF0-BDEB-C3382460197B  2000  1895     
+12      9         44[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 125: 8B07E413-E7AA-458F-8759-EA4709AC616B  2003  1897     
+ 5      3         43[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 126: 3CCDDB6D-9CC5-4184-82CA-4795091F80E0  2001  1895     
+12      1         45[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 127: 6E1417C4-AABC-412E-94CC-E1996BC78BDD  2003  1897     
+ 3      6         42[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 128: C518CB1F-04E7-472F-8D08-F222E3889077  2002  1895     
+ 2      2         45[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 129: 688320D5-F9FF-4B98-9EBF-1F7116C53636  2004  1898     
+ 5     11         41[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##      death_age educyrs       hispan                   race
+           bpl[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1:       105      12 Not Hispanic                  White
+      Arkansas[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:       105       8 Not Hispanic                  White
+      Arkansas[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3:       105       9 Not Hispanic                  White
+          Ohio[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4:       105       4 Not Hispanic                Chinese
+         China[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5:       105       9 Not Hispanic                  White
+      Nebraska[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 125:       106      11 Not Hispanic                  White
+     Wisconsin[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 126:       106       9 Not Hispanic Black/African American
+ West Virginia[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 127:       105      10 Not Hispanic                  White
+ West Virginia[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 128:       106      18 Not Hispanic                  White
+     Minnesota[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 129:       105      15 Not Hispanic                  White
+      Nebraska[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##          mbpl     fbpl               empstat incwage      
+             marst[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1:     <NA>     <NA> At work, public emerg     736 Marri
+ed, spouse present[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:     <NA>     <NA>               At work      NA Marri
+ed, spouse present[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3:     <NA>     <NA>               At work    2080      
+          Divorced[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4:     <NA>     <NA>               At work    1200    Ne
+ver married/single[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5: Missouri Missouri               At work    1900 Marri
+ed, spouse present[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 125:     <NA>  Germany               At work      NA    Ne
+ver married/single[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 126:     <NA>     <NA>               At work     300 Marri
+ed, spouse present[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 127:     <NA>     <NA>               At work    1200 Marri
+ed, spouse present[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 128:     <NA>     <NA>               At work    4000 Marri
+ed, spouse present[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 129: Nebraska     <NA>               At work      NA    Ne
+ver married/single[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##                                     incnonwg              
+  educ[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1: Less than $50 nonwage, nonsalary income            Gr
+ade 11[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:          $50+ nonwage, nonsalary income             G
+rade 7[] 
+ []
+
+[29]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3: Less than $50 nonwage, nonsalary income             G
+rade 8[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4: Less than $50 nonwage, nonsalary income             G
+rade 3[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5: Less than $50 nonwage, nonsalary income             G
+rade 8[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 125:          $50+ nonwage, nonsalary income            Gr
+ade 10[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 126: Less than $50 nonwage, nonsalary income             G
+rade 8[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 127: Less than $50 nonwage, nonsalary income             G
+rade 9[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 128: Less than $50 nonwage, nonsalary income 5+ years of c
+ollege[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 129:          $50+ nonwage, nonsalary income  2 years of c
+ollege[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##                                        occ rent   weight d
+day bday y_orig_educ[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1: Clerical and kindred workers (n.e.c.)    7 5.273636  
+  5   27          12[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:    Buyers and shippers, farm products <NA> 5.273636  
+  9   24           8[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3:   Operative and kindred workers (nec) <NA> 4.101000  
+  4   28           9[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4:       Cooks, except private household   25 2.846923  
+  5   27           4[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5:                            Carpenters <NA> 5.273636  
+ 13   14           9[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 125:          Farmers (owners and tenants) <NA> 8.252500  
+  8    3          11[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 126:          Mine operatives and laborers   12 8.002500  
+  8    3           9[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 127:   Operative and kindred workers (nec)   20 2.846923  
+ 31    8          10[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 128:                  Stationary engineers   25 4.200000  
+  4   26          18[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 129:  Farm laborers, unpaid family workers <NA> 4.455455  
+  4    9          15[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##                                    histid dyear byear dmon
+th bmonth census_age[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1: 40263A47-2326-457A-9B39-23C3A1EB6B62  2004  1900     
+ 8      3         40[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2: 2DE26A35-C0A3-4B84-9617-969C7D865411  1999  1895     
+12      8         44[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3: 3847A6C1-CE3E-487B-83D3-E625F67BC0D9  2004  1900     
+ 1      1         40[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4: 913D273F-7569-4440-824D-DEB557477530  1999  1895     
+ 6      6         44[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5: 75DAB0E7-6E5B-4A5B-9593-EFF92395CC8B  2002  1898     
+10      6         41[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 192: FDD066DD-4978-440F-901C-20F6563B0856  2002  1898     
+ 9      3         42[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 193: B1B3AAA0-C054-4E00-B481-E8608E5D72B0  2000  1895     
+10     12         44[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 194: EB838184-1F2B-42F6-B02B-CD91B5B22235  2000  1895     
+ 7     12         44[] 
+ []
+
+[30]
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 195: 33121249-5268-45D5-924E-CE438126D3A3  2001  1897     
+12     11         42[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 196: 5F9FE1CB-FC75-4921-9FAA-CCA4D33696E1  2001  1897     
+ 6      5         42[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##      death_age educyrs       hispan                   race
+           bpl mbpl[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1:       104       5 Not Hispanic Black/African American
+       Alabama <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:       104       8 Not Hispanic                  White
+      Arkansas <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3:       103      13 Not Hispanic                  White
+      Missouri <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4:       104      13        Other                  White
+         Spain <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5:       104      17 Not Hispanic                  White
+    California <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 192:       104       9 Not Hispanic                  White
+ West Virginia <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 193:       104      11 Not Hispanic                  White
+ West Virginia <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 194:       104       6 Not Hispanic                  White
+       Georgia <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 195:       104       9 Not Hispanic                  White
+ West Virginia <NA>[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 196:       104       9 Not Hispanic                  White
+     Minnesota <NA>[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##                                     incnonwg              
+ educ[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1: Less than $50 nonwage, nonsalary income            Gr
+ade 4[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:          $50+ nonwage, nonsalary income            Gr
+ade 7[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3: Less than $50 nonwage, nonsalary income           Gra
+de 12[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4: Less than $50 nonwage, nonsalary income           Gra
+de 12[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5: Less than $50 nonwage, nonsalary income 4 years of co
+llege[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 192: Less than $50 nonwage, nonsalary income            Gr
+ade 8[] 
+ []
+
+[31]
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 193: Less than $50 nonwage, nonsalary income           Gra
+de 10[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 194: Less than $50 nonwage, nonsalary income            Gr
+ade 5[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 195:          $50+ nonwage, nonsalary income            Gr
+ade 8[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 196: Less than $50 nonwage, nonsalary income            Gr
+ade 8[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##                                             occ rent   wei
+ght dday bday[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   1:            Private household workers (nec)    3 3.018
+929   26    4[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   2:                Farm laborers, wage workers    2 3.762
+857    5   12[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   3:    Stenographers, typists, and secretaries <NA> 3.262
+619   21   22[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   4:                             Laborers (nec) <NA> 3.762
+857   15   15[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ##   5:              Mechanics and repairmen (nec) <NA> 5.438
+750    4   14[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 192:                   Policemen and detectives <NA> 5.438
+750   14   18[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 193: Managers, officials, and proprietors (nec) <NA> 3.273
+636    2   18[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 194:    Stenographers, typists, and secretaries <NA> 3.273
+636   27    9[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 195:               Farmers (owners and tenants) <NA> 5.295
+294   18   14[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ## 196: Managers, officials, and proprietors (nec) <NA> 5.295
+294   18   22[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 765--765
+[]\TU/lmtt/m/n/10 ![](bookdown-demo_files/figure-latex/unnamed-chunk-26-1.pdf)<
 !-- -->[] 
  []
 
 
-Overfull \hbox (600.0pt too wide) in paragraph at lines 697--697
+Overfull \hbox (600.0pt too wide) in paragraph at lines 765--765
 []\TU/lmtt/m/n/10 c. We[]ll run the wage income comparison for Blacks and White
 s separately. To this we need the other file that Josh uses, so we[]ll run the 
 previous data cleaning code again as well.[] 
  []
 
 
-Overfull \hbox (972.75pt too wide) in paragraph at lines 697--697
+Overfull \hbox (972.75pt too wide) in paragraph at lines 765--765
 []\TU/lmtt/m/n/10 Now let[]s graph these two. We can see a decline in log wages
  with age for Blacks that we do not observe for Whites, for whom this tends to 
 increase by age. This suggests that we may observe greater variance in heteroge
 neity for blacks than for Whites.[] 
  []
 
+File: bookdown-demo_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-28-1.pdf>
+[32]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-28-2.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-28-2.pdf>
+[33] [34
+
+]
+Chapter 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 805--807
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 810--812
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 812--814
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 814--816
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 816--818
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 818--820
+
+ []
+
+[35]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-29-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-29-2.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-29-2.pdf>
+
+Overfull \hbox (24.94795pt too wide) in paragraph at lines 835--840
+\TU/lmr/m/n/10 year. []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 835--840
+
+ []
+
+[36]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-30-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[33]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-30-2.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-30-2.pdf>
-[34]
-Chapter 5.
-[35
 
-] [36
-
-]
-Chapter 6.
-
-Overfull \hbox (35.31628pt too wide) detected at line 758
-[][]
+Underfull \hbox (badness 10000) in paragraph at lines 840--844
+[]
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 840--844
+
+ []
+
+File: bookdown-demo_files/figure-latex/unnamed-chunk-31-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-31-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-31-2.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-31-2.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 844--847
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [37]
-Overfull \hbox (258.75pt too wide) in paragraph at lines 880--880
-[]\TU/lmtt/m/n/10 The extinction probability is converging to 0.75 (going out t
-o 50 or 60 generations is helpful for observing this).[] 
+Underfull \hbox (badness 10000) in paragraph at lines 849--850
+
  []
 
 [38]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-33-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-33-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[39]
+Underfull \vbox (badness 10000) detected at line 920
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[40]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-34-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-34-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-35-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-35-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 922--925
+[][]
+ []
+
+
+Overfull \hbox (120.53001pt too wide) in paragraph at lines 922--925
+\TU/lmr/m/n/10 line schedule ($[][][][] [] [][][][][]$). [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[41]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-36-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-36-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-36-2.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-36-2.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 931--934
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[42]
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##             5             6             7             8  
+           9[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##           NaN           NaN           NaN           Inf  
+         NaN[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            10            11            12            13  
+          14[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##          -Inf  0.0312862884  0.0318341195  0.0257755560  
+0.0240914985[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            15            16            17            18  
+          19[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##  0.0220761567  0.0203494690  0.0177026566  0.0163372099  
+0.0143186062[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            20            21            22            23  
+          24[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##  0.0126848234  0.0108436929  0.0089098056  0.0070796680  
+0.0051568909[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            25            26            27            28  
+          29[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##  0.0032386086  0.0014074172 -0.0004601001 -0.0023149735 -
+0.0041010547[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            30            31            32            33  
+          34[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ## -0.0059837153 -0.0078870215 -0.0098920056 -0.0116431447 -
+0.0133835674[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            35            36            37            38  
+          39[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ## -0.0153844977 -0.0171328681 -0.0194461843 -0.0212500671 -
+0.0235640808[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ##            40            41            42            43  
+          44[] 
+ []
+
+
+Overfull \hbox (58.0pt too wide) in paragraph at lines 955--955
+ []\TU/lmtt/m/n/10 ## -0.0252550242          -Inf          -Inf          -Inf  
+         NaN[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##           4           5           6           7          
+ 8           9[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##         NaN         NaN         NaN         NaN        -I
+nf        -Inf[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##          10          11          12          13          
+14          15[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ## -0.05434038 -0.05106300 -0.04833859 -0.04727657 -0.052480
+96 -0.05093591[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##          16          17          18          19          
+20          21[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ## -0.05284458 -0.05399392 -0.05346937 -0.05249326 -0.052534
+50 -0.05077978[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##          22          23          24          25          
+26          27[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ## -0.05197731 -0.05258946 -0.05217370 -0.05276821 -0.052840
+69 -0.05246960[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##          28          29          30          31          
+32          33[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ## -0.05211093 -0.05254529 -0.05242693 -0.05357070 -0.052257
+93 -0.04979506[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##          34          35          36          37          
+38          39[] 
+ []
+
+
+Overfull \hbox (68.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ## -0.05387702 -0.05666473 -0.05676065 -0.04638073 -0.047698
+99 -0.03747179[] 
+ []
+
+
+Overfull \hbox (5.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##          40          41          42          43          
+44[] 
+ []
+
+[43]
+Overfull \hbox (5.5pt too wide) in paragraph at lines 972--972
+ []\TU/lmtt/m/n/10 ##        -Inf         NaN         NaN         NaN         N
+aN[] 
+ []
+
+File: bookdown-demo_files/figure-latex/unnamed-chunk-36-3.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-36-3.pdf>
+[44]
+Chapter 5.
+
+Overfull \hbox (35.31628pt too wide) detected at line 1007
+[][]
+ []
+
+[45
+
+] [46]
 File: figures/branch_simulation.png Graphic file (type bmp)
 <figures/branch_simulation.png>
 File: figures/extinctionplot.png Graphic file (type bmp)
 <figures/extinctionplot.png>
 File: figures/generation_dist.png Graphic file (type bmp)
 <figures/generation_dist.png>
-[39] [40] [41]
-Overfull \hbox (290.25pt too wide) in paragraph at lines 965--965
+[47] [48] [49] [50]
+Overfull \hbox (290.25pt too wide) in paragraph at lines 1212--1212
 []    \TU/lmtt/m/n/10 \includegraphics[width=1\linewidth]{figures/meanvar} \cap
-tion{Survival mean and variance}\label{fig:unnamed-chunk-35}[] 
+tion{Survival mean and variance}\label{fig:unnamed-chunk-41}[] 
  []
 
 
-Overfull \hbox (883.5pt too wide) in paragraph at lines 965--965
+Overfull \hbox (883.5pt too wide) in paragraph at lines 1212--1212
 []    \TU/lmtt/m/n/10 The mean and variance calculated above account for all li
 nes, not just surviving ones. In this simulation, the mean tends to hover aroun
 d 1 and the variance tends to increase with generation number, at least up to a
@@ -1644,21 +2480,21 @@ d 1 and the variance tends to increase with generation number, at least up to a
  []
 
 No file bookdown-demo.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 971.
-[42]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 971.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1218.
+[51]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1218.
 (./bookdown-demo.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 971.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 971.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 971.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1218.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1218.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1218.
  ) 
 Here is how much of TeX's memory you used:
- 25517 strings out of 493007
- 470091 string characters out of 6136719
- 686211 words of memory out of 5000000
- 29215 multiletter control sequences out of 15000+600000
+ 25557 strings out of 493007
+ 472564 string characters out of 6136719
+ 687142 words of memory out of 5000000
+ 29245 multiletter control sequences out of 15000+600000
  536625 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,11n,117p,10422b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,11n,117p,10422b,545s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (42 pages).
+Output written on bookdown-demo.pdf (51 pages).
