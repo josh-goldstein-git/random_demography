@@ -1,0 +1,1601 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Problem sets and solutions},
+            pdfauthor={Summer 2020},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Problem sets and solutions}
+\author{Summer 2020}
+\date{2020-06-26}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+Special thank you to the Spring 2020 Mathematical Demography students for the problem set answers.
+
+\hypertarget{problem-set-1}{%
+\chapter{Problem set 1}\label{problem-set-1}}
+
+\hypertarget{questions}{%
+\section{Questions}\label{questions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  True or False? ``If every part grows exponentially at its own rate, then the whole will also grow exponentially.'' Explain your answer briefly.
+\item
+  List what you think are two of the best arguments in favor of doing a disaggregated projection? What are two of the best arguments in favor of doing an aggregated projection?
+\item
+  Let there be two countries: USA (\(u\)) and Mexico (\(m\)). Assume that in 1970, their population size (in millions) is \(K_u(1970) = 200\), \(K_m(1970) = 50\) and that their growth rates are \(r_u = .0075\) and \(r_m = 0.035\), respectively. Project the first few years and verify that the rate of change in the aggregate growth rate equals the variance of the growth rate. Does it matter what time points and period you consider?
+\item
+  Using the information from question 3, notice that the growth rate changes over the course of the 50 years, but there is a constant growth rate that will produce the exact same population after 50 years. A reasonable choice of the constant growth rate to apply is the value of the changing growth rate at year 25 (half-way through the period). We can estimate this using a Taylor series approximation: \[ \bar{r}(25) \approx \bar{r}(0) + 25\bar{r}'(0) + (25)^2 \bar{r}''(0) \]
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Show that \(\bar{r}''(t) = \bar{r}_3(t) - \bar{r}_2(t) \bar{r}(t) - 2 \bar{r}(t) \sigma^2_r(t)\) \textbackslash{}
+  \item
+    Calculate the combined US-Mexico population after 50 years according to the following five (5) methods, plot the total population after 50 years according to these 5 methods on a graph.
+
+    \begin{enumerate}
+    \def\labelenumiii{\roman{enumiii}.}
+    \tightlist
+    \item
+      Dissaggregated (``true'') forecast, with each country growing at its own rate
+    \item
+      Aggregated forecast, pretending it's one country, growing at \(\bar{r}(0)\)) for 50 years
+    \item
+      Aggregated forecast, growing at the ``true'' value of \(\bar{r}(25)\) for the whole period. (Use the value of \(\bar{r}(25)\)) that you calculate from the disaggregated forecast)
+    \item
+      Aggregated forecast, growing at the first-order Taylor series estimate of \(\bar{r}(25)\) for the whole period
+    \item
+      Aggregated forecast, growing at the second-order Taylor series estimate of \(\bar{r}(25)\) for the whole period
+    \end{enumerate}
+  \end{enumerate}
+\item
+  For Ken's Poisson-Exponential model,
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    What is the closed-form expression for \(\hat{r}(t)\)\\
+  \item
+    What is the variance of the growth rate?\\
+  \item
+    Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn't depend on? (difference of \(\bar{r}(t)\) and \(\bar{r}(0)\))
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{solutions}{%
+\section{Solutions}\label{solutions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{True or False? ``If every part grows exponentially at its own rate, then the whole will also grow exponentially.'' Explain your answer briefly.}
+  False.\\
+  From Keyfitz we know that the average growth rate of a heterogeneous population is: \[\bar{r}(t)=\frac{\sum_i{Q_i}{r_i}e^{r_i{t}}}{\sum_i{Q_i}e^{r_i{t}}}\] Here, \(\bar{r}(t)\) is not constant for all t as there is a compositional effect. This should be read as ``If every part grows at a constant exponential rate, then the whole will also grow exponentially''. We could argue that only in the long term it is true.
+\item
+  \emph{List what you think are two of the best arguments in favor of doing a disaggregated projection? What are two of the best arguments in favor of doing an aggregated projection?}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Disaggregated projections:
+
+    \begin{enumerate}
+    \def\labelenumiii{\roman{enumiii}.}
+    \tightlist
+    \item
+      Reveal the ``true'' path, patterns of individuals different from that of the aggregate.\\
+    \item
+      Take into account size of each sub-population, in particular the smaller ones.\\
+    \item
+      Are more precise. Growth rates for sub-populations reflect their intrinsic characteristics, such that projections that do not use appropriate rates can lead to adverse social/policy implications.\\
+    \end{enumerate}
+  \item
+    Aggregated projections:
+
+    \begin{enumerate}
+    \def\labelenumiii{\roman{enumiii}.}
+    \tightlist
+    \item
+      May used if a population is homogeneous rather than projecting many models for sub-populations.\\
+    \item
+      Provide a straightforward method of obtaining overall rates rather than the group-specific rates.
+    \item
+      Are easier to implement as more data available.
+    \end{enumerate}
+  \end{enumerate}
+\item
+  \emph{There are two countries, \(u\) and \(m\), each with growth rates \(r_u = .0075\), \(r_m = 0.035\), and population sizes in 1970 of \(K_u(1970) = 200\), \(K_m(1970) = 50\). Use the first few years of the projection to verify that rate of change in the aggregate growth rate equals the variance of the growth rate. Does it matter what time points and period you consider?}\\
+  From the information given, we can obtain \(\bar{r}(t)\) and \(\sigma_r^2(t)\) by projecting each country's population using individual rates and then obtaining the total population, \[\bar{K}(t)= \sum_{i\in\{u,m\}}K_{i}(t) = \sum_{i\in\{u,m\}}K_{i}e^{r_{i} t}\] Applying the formula for aggregate growth rate to the USA-Mexico case we get:
+  \[\begin{aligned}
+   \bar{r}(t) & = \frac{\frac{d}{dt}\bar{K}(t)}{\bar{K}(t)}\\
+   & = \frac{K_u(0) r_u(t) e^{r_u(t) t} + K_m(0) r_m(t) e^{r_m(t) t}}{K_u(0) e^{r_u(t) t} + K_m(0) e^{r_m (t) t}}
+   \end{aligned}\] For simplicity, time 0 is the year 1970 such that the proyection goes from 1971 (t=1) until 2020 (t=50).\\
+  Then, we can calculate the variance of the growth rates as:
+  \[\begin{aligned}
+   \sigma_r^2(t) &= \frac{{K_u(0) e^{r_u(t) t}(r_u(t) - \bar{r}(t))^2 + K_m(0) e^{r_m(t) t}(r_m(t) - \bar{r}(t))^2}} { {K_u(0) e^{r_u(t) t} + K_m(0) e^{r_m(t) t}}} \\ 
+   &= \frac{K_u(t) r_u(t)^2 + K_m(t) r_u(t)^2}{K_u(t)+K_m(t)}-\bar{r}(t)^2 
+   \end{aligned}\]
+  The table below show these results for projections at the beginning and ending of a 50 year period. Overall, the time points do not matter and we can verify that \(\frac{d\bar{r}(t)}{d(t)}=\sigma_r^2(t)\)
+
+  \begin{longtable}[]{@{}llllllll@{}}
+  \toprule
+  \begin{minipage}[b]{0.02\columnwidth}\raggedright
+  \(t\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+  \(\sigma^2_r(t)\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright
+  \(K_u(t)\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright
+  \(K_m(t)\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright
+  \(\bar{K}(t)\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
+  \(\bar{K}(t)-\bar{K}(t-1)\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright
+  \(\bar{r}(t)\)\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\raggedright
+  \(\bar{r}'(t)\)\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  0\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.00021\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  200\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  50\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  250\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  l\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.000123\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  201.506\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  51.781\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  253.287\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  3.2866\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  0.0131\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  2\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.000125\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  203.023\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  53.625\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  256.648\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  3.3614\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  0.0132\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  0.0001\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  3\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.000127\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  204.551\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  55.536\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  260.087\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  3.4385\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  0.0133\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  0.0001\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  \(\vdots\)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  49\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.000189\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  288.824\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  277.833\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  566.658\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  50\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.000189\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  290.998\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  287.730\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  578.728\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  12.071\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  0.0211\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.02\columnwidth}\raggedright
+  51\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+  0.000189\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  293.189\strut
+  \end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+  297.979\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  591.168\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+  12.440\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+  0.0213\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright
+  0.0002\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
+\item
+  \emph{Using the information from question 3, notice that the growth rate changes over the course of the 50 years, but there is a constant growth rate that will produce the exact same population after 50 years. A reasonable choice of the constant growth rate to apply is the value of the changing growth rate at year 25 (half-way through the period). We can estimate this using a Taylor series approximation:} \[ \bar{r}(25) \approx \bar{r}(0) + 25\bar{r}'(0) + (25)^2 \bar{r}''(0) \]
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    \emph{Show that \(\bar{r}''(t) = \bar{r}_3(t) - \bar{r}_2(t) \bar{r}(t) - 2 \bar{r}(t) \sigma^2_r(t)\)}\\
+    From before, we know that for \(i\in\{u,m\}\):
+    \[\begin{aligned}
+     \sigma_r^2(t) &= \bar{r}'(t) \\
+     & = \frac{d}{dt}\left[ \frac{ \sum K_i r_i e^{r_i t}} {\sum K_i  e^{r_i t}} \right]\\
+     & = \frac{\sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}} - \left(\frac{ \sum K_i(0)r_ie^{r_it}} {\sum K_i(0)e^{r_it}}\right)^2 \\
+     & = \frac{\sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}} - \bar{r}^2(t) 
+     \end{aligned}\]
+    Then, we take the second derivative of the growth rate by using the quotient rule \(\left(\frac{u}{v}\right)'= \frac{u'v-vu'}{v^2}\):
+    \[\begin{aligned}
+     \bar{r}''(t) &= { \frac{\left(\sum K_i(0)e^{r_it}\right)(\sum K_i(0)r_i^3e^{r_it}) -(\sum K_i(0)r_i^2e^{r_it})(\sum K_i(0)r_i e^{r_it})}  {(\sum K_i(0)e^{r_it})^2 }} - 2\bar{r}(t)\times\bar{r}'(t)\\ 
+     &= \frac{ \sum K_i(0)r_i^3e^{r_it}} {\sum K_i(0)e^{r_it} } - \frac{ \sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}}\times \frac{\sum K_i(0)r_i e^{r_it}}{\sum K_i(0)e^{r_it} } - 2\bar{r}(t)\sigma^2_r(t) \\
+     &= \bar{r}_3 (t) - \bar{r}_2(t)\bar{r}(t) - 2\bar{r}(t)\sigma^2_r(t)
+     \end{aligned}\]
+    where \(\bar{r}_n\) is the \(n\)th moment of \(\bar{r}(t)\), and it is known that \(\bar{r}'(t) = \sigma^2_r(t)\).\\
+  \item
+    \emph{Calculate the combined US-Mexico population after 50 years according to the following five (5) methods, plot the total population after 50 years according to these 5 methods on a graph.}
+    For the following exercises, the population is in millions.
+
+    \begin{enumerate}
+    \def\labelenumiii{\roman{enumiii}.}
+    \tightlist
+    \item
+      \emph{Dissaggregated (``true'') forecast, with each country growing at its own rate:}\\
+      \[\begin{aligned}
+       \bar{K}(2020) &= K_u(2020) + K_m(2020)\\ 
+       &=K_u(1970) e^{(2020-1970)r_u} + K_m(1970) e^{(2020-1970)r_m}\\
+       &=200e^{.0075\times 50} + 50e^{.035\times 50}\\
+       &= 578.728 
+       \end{aligned}\]\\
+    \item
+      \emph{Aggregated forecast, pretending it's one country, growing at \(\bar{r}(0)\)) for 50 years:}\\
+      \[\begin{aligned}
+       \overline{r}(1970) &= \frac{\sum K_i(1970)r_i e^{r_i (1970-1970)}} {\sum K_i(1970)e^{r_i (1970-1970) }}\\
+       &=\frac{K_u(1970)r_u + K_m(1970)r_m }{K_u(1970) + K_m(1970) }\\
+       & =  \frac{ 200\times .0075 + 50\times.035} {200+50 } = 0.013
+       \end{aligned}\]
+      \[\begin{aligned}
+       \bar{K}(2020) &= \bar{K}(1970)e^{\bar{r}(1970) (2020-1970)}\\
+       &= 250  e^{.013\times 50} \approx 478.8852
+       \end{aligned}\]\\
+    \item
+      \emph{Aggregated forecast, growing at the ``true'' value of \(\bar{r}(25)\) for the whole period. (Use the value of \(\bar{r}(25)\)) that you calculate from the disaggregated forecast):}
+      Translating \(\bar{r}(25)\) onto the 1970 timeline, we should look at \(\bar{r}(1995)\)
+      \[\begin{aligned}
+       \bar{r}(1995) &= \sum K_i(1970)r_i e^{r_i (1995-1970)} \over \sum K_i(1970)e^{r_i (1995-1970) }\\
+       & = \frac{K_u(1970)r_u e^{r_u (25)} + K_m(1970)r_m e^{r_m (25)} }{K_u(1970)e^{r_u (25)} + K_m(1970)e^{r_m (25)} }\\ 
+       & =\frac{200\times.0075 e^{.0075\left(25\right)}+50\times.035 e^{.035\left(25\right)}}{200 e^{.0075\left(25\right)}+50 e^{.035\left(25\right)}} \approx 0.0176632\\
+       \bar{K}(2020) &= 250e^{0.016632(50)} \approx 574.25316
+       \end{aligned}\]\\
+    \item
+      \emph{Aggregated forecast, growing at the first-order Taylor series estimate of \(\bar{r}(25)\) for the whole period:}\\
+      \[\begin{aligned}
+       \sigma^2_r(1970) &= \frac{K_u(1970)r_u^2 + K_m(1970)r_m^2} {K_u(1970) + K_m(1970)} - \bar{r}^2(0) \\
+       & =  \frac{(200)(0.0075)^2 + (50)(0.035)^2}{250}-(0.013)^2 \\
+       & = 0.000121 \\
+       \hat{\bar{r}}(1995) & \approx \bar{r}(1970) + 25\sigma^2_r(1970) =  0.016025 \\ 
+       \bar{K}(2020) &= 250 e^{0.016025(50)} \approx 557.0811485
+       \end{aligned}\]\\
+    \item
+      \emph{Aggregated forecast, growing at the second-order Taylor series estimate of \(\bar{r}(25)\) for the whole period:}\\
+      For this exercise we need to first calculate the extra second-order term from the Taylor series, \(25^2\bar{r}''(0)\):\\
+      \[\begin{aligned}
+       \bar{r}''(1970) &= \frac{200(0.0075)^3+50(0.035)^3}{250} - \frac{200(0.0075)^2+50(0.035)^2}{250} \times (0.013) - 2(0.013)(0.000121)\\
+       \hat{\bar{r}}(1995) & \approx \bar{r}(1970) + 25\sigma^2_r(1970) +(25)^2\bar{r}''(1970) \\
+       & =  0.01664891\\
+       \bar{K}(2020) &= 250 e^{0.01664891(50)} \\
+       & \approx 574.73337 \\
+       \end{aligned}\]\\
+    \item
+      \emph{Graphs}\\
+      There are many methods to project populations.
+    \end{enumerate}
+
+    \includegraphics[width=1\linewidth]{figures/problemset1_pp1}
+    \includegraphics[width=1\linewidth]{figures/problemset1_pp2}
+  \end{enumerate}
+\item
+  \emph{For Ken's Poisson-Exponential model,}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    \emph{What is the closed-form expression for \(\hat{r}(t)\)}\\
+    \[\begin{aligned}
+     \hat{r}(t) &= \frac{d}{dt}log(\hat{k})\\
+     &= r_0 - \alpha \lambda e^{-\alpha t}
+     \end{aligned}\]
+  \item
+    \emph{What is the variance of the growth rate?}\\
+    The variance of the growth rate is \(\sigma_r^2(t)\):
+    \[\bar{r}'(t)= \sigma^2_r(t) = \alpha^2\lambda e^{-\alpha t}\]
+  \item
+    \emph{Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn't depend on? (difference of \(\bar{r}(t)\) and \(\bar{r}(0)\))}\\
+    Distortion index:
+    \[\begin{aligned}
+     \bar{r}(t) - \bar{r}(0) & = r_0 - \lambda \alpha e^{-\alpha t} - (r_0 - \lambda \alpha e^{0}) \\
+     & = \lambda \alpha - \lambda \alpha e^{-\alpha t}\\
+     & = \lambda \alpha(1-e^{-\alpha t})
+     \end{aligned}\]
+    Depends on \(\lambda\), \(\alpha\), \(t\), but not \(r_0\) or \(s\). That is, it depends on the the gap between growth rates, the relative population sizes, fastest growth rate, the poisson distribution parameter, but not the poisson distributed integers.
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{problem-set-2}{%
+\chapter{Problem set 2}\label{problem-set-2}}
+
+\hypertarget{questions-1}{%
+\section{Questions}\label{questions-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.
+\item
+  Use the fraily simulator to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.
+\item
+  Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this? (This is an open-ended question. You should feel free to use mathematics, intuition, or any other approach to answer.)
+\item
+  Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this? (Also open ended)
+\item
+  At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?
+\item
+  Extend the simulation code to include life expectancy at age x (Shown above.)
+\item
+  Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)
+\item
+  Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?
+\item
+  Use the method of completing the gamma to get the mean of the gamma distribution. (Hint: I believe there are youtube examples of this).
+\item
+  Derive V\&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?
+\item
+  Derive V\&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?
+\item
+  Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.
+\end{enumerate}
+
+\hypertarget{solutions-1}{%
+\section{Solutions}\label{solutions-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.}\\
+  True.\\
+  If each individual has their own hazard schedule proportional to baseline \(z\), there will be more variation in the distribution of deaths than if each person had the baseline case. The variation for homogeneous populations comes from to chance only, while the variation for heterogeneous populations comes from chance and group variation in risk. Therefore, the variance of the population distribution of deaths will always be larger than that of the baseline (unless the variance is 0).\\
+\item
+  \emph{Use the fraily simulator code to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.}\\
+  For simplicity, we take the code and convert it into a function that can use frailty draws from different distributions. We also extend it to include life expectancy calculation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\StringTok{"functions/gomp_funs.R"}\NormalTok{)}
+
+\NormalTok{frailty_sim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( N, z, base.a, base.b )\{}
+  \CommentTok{## (1) simulate ages at death from h0*z  using the gompertz as our baseline##}
+  \CommentTok{## note: we call the continuous ages of death "y"}
+  \CommentTok{## but we'll make a table of deaths at age "x" and}
+  \CommentTok{## using life table notation call the count "Dx"}
+\NormalTok{  y <-}\StringTok{ }\KeywordTok{rgomp}\NormalTok{(N,}
+       \DataTypeTok{b =}\NormalTok{ base.b, }\CommentTok{## doesn't vary}
+       \DataTypeTok{a =}\NormalTok{ base.a }\OperatorTok{*}\StringTok{ }\NormalTok{z) }\CommentTok{## multiplicative fixed frailty}
+
+  \CommentTok{## (2) Lifetables: first define age at death as floor(y) and then}
+  \CommentTok{## make a table of deaths at each age ("Dx")}
+
+\NormalTok{  Dx <-}\StringTok{ }\KeywordTok{get.Dx}\NormalTok{(y)}
+\NormalTok{  x <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{names}\NormalTok{(Dx))  }
+\NormalTok{  lx <-}\StringTok{ }\KeywordTok{rev}\NormalTok{(}\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{rev}\NormalTok{(Dx))) }\CommentTok{## lx by reverse-survival}
+\NormalTok{  lxpn <-}\StringTok{ }\KeywordTok{c}\NormalTok{(lx[}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DecValTok{0}\NormalTok{) }\CommentTok{## Person-years as average of adjacent lx}
+\NormalTok{  Lx <-}\StringTok{ }\NormalTok{(lx }\OperatorTok{+}\StringTok{ }\NormalTok{lxpn)}\OperatorTok{/}\DecValTok{2}
+\NormalTok{  mx <-}\StringTok{ }\NormalTok{Dx}\OperatorTok{/}\NormalTok{Lx }\CommentTok{## Hazards}
+\NormalTok{  Tx <-}\StringTok{ }\KeywordTok{rev}\NormalTok{(}\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{rev}\NormalTok{(Lx))) }\CommentTok{## Remaining person-years}
+\NormalTok{  ex <-}\StringTok{ }\NormalTok{Tx}\OperatorTok{/}\NormalTok{lx }\CommentTok{## Life expectancy at age x}
+
+  \CommentTok{## Baseline lifetable}
+\NormalTok{  lx.base <-}\StringTok{ }\NormalTok{N }\OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{-}\StringTok{ }\KeywordTok{pgomp}\NormalTok{(x, }\DataTypeTok{b =}\NormalTok{ base.b, }\DataTypeTok{a =}\NormalTok{ base.a))}
+\NormalTok{  Dx.base <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\OperatorTok{-}\KeywordTok{diff}\NormalTok{(}\KeywordTok{c}\NormalTok{(lx.base,}\DecValTok{0}\NormalTok{)))}
+\NormalTok{  mx.base <-}\StringTok{ }\NormalTok{base.a }\OperatorTok{*}\StringTok{ }\KeywordTok{exp}\NormalTok{(base.b }\OperatorTok{*}\StringTok{ }\NormalTok{(x }\OperatorTok{+}\StringTok{ }\FloatTok{.5}\NormalTok{)) }\CommentTok{## x + .5}
+\NormalTok{  lxpn.base <-}\StringTok{ }\KeywordTok{c}\NormalTok{(lx.base[}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DecValTok{0}\NormalTok{)}
+\NormalTok{  Lx.base <-}\StringTok{ }\NormalTok{(lx.base }\OperatorTok{+}\StringTok{ }\NormalTok{lxpn.base)}\OperatorTok{/}\DecValTok{2}
+\NormalTok{  Tx.base <-}\StringTok{ }\KeywordTok{rev}\NormalTok{(}\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{rev}\NormalTok{(Lx.base)))}
+\NormalTok{  ex.base <-}\StringTok{ }\NormalTok{Tx.base}\OperatorTok{/}\NormalTok{lx.base}
+
+
+  \CommentTok{# exported tables}
+\NormalTok{lifetables <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
+\NormalTok{lifetables}\OperatorTok{$}\NormalTok{sim <-}\StringTok{ }\NormalTok{y}
+\NormalTok{lifetables}\OperatorTok{$}\NormalTok{z <-}\StringTok{ }\NormalTok{z}
+\NormalTok{lifetables}\OperatorTok{$}\NormalTok{baseline <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(Dx.base, lx.base,lxpn.base, Lx.base, mx.base, Tx.base, ex.base)}
+\NormalTok{lifetables}\OperatorTok{$}\NormalTok{frailty <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(x,Dx, lx,lxpn, Lx, mx, Tx, ex)}
+  \KeywordTok{return}\NormalTok{(lifetables)}
+
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Uniform distribution:\\
+    We find that the uniform-distributed frailty begins to increase more slowly after age 60 compared to baseline.
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Parameters}
+\NormalTok{million =}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{N <-}\StringTok{  }\NormalTok{million}
+\NormalTok{base.a <-}\StringTok{ }\DecValTok{10}\OperatorTok{^-}\DecValTok{4}
+\NormalTok{base.b <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\DecValTok{9}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1047}\NormalTok{) }\CommentTok{# for reproducibility}
+
+\CommentTok{#Uniform distribution}
+\NormalTok{w <-}\StringTok{ }\FloatTok{.3} \CommentTok{## try smaller if you want}
+\NormalTok{z <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(N, }\DataTypeTok{min =} \DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{w , }\DataTypeTok{max =} \DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{w)}
+\NormalTok{uniform_frailty <-}\StringTok{ }\KeywordTok{frailty_sim}\NormalTok{(N, z, base.a, base.b)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-6-1} \caption{Uniform Distribution}\label{fig:unnamed-chunk-6}
+   \end{figure}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+    Gamma frailty distribution:\\
+    Gamma-distributed frailty begins to increase more slowly after age 60 compared to baseline.This is similar to the uniform frailty distribution.
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Parameters}
+\NormalTok{million =}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{N <-}\StringTok{  }\NormalTok{million}
+\NormalTok{base.a <-}\StringTok{ }\DecValTok{10}\OperatorTok{^-}\DecValTok{4}
+\NormalTok{base.b <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\DecValTok{9}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1047}\NormalTok{) }\CommentTok{# for reproducibility}
+
+\CommentTok{#Gamma distribution}
+\NormalTok{my.sd <-}\StringTok{ }\FloatTok{.5}
+\NormalTok{ sigma.sq <-}\StringTok{ }\NormalTok{my.sd}\OperatorTok{^}\DecValTok{2}
+\NormalTok{  z <-}\StringTok{ }\KeywordTok{rgamma}\NormalTok{(N, }\DataTypeTok{shape =} \DecValTok{1}\OperatorTok{/}\NormalTok{sigma.sq, }\DataTypeTok{scale =}\NormalTok{ sigma.sq)}
+\NormalTok{gamma_frailty <-}\StringTok{ }\KeywordTok{frailty_sim}\NormalTok{(N, z, base.a, base.b)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-8-1} \caption{Gamma Distribution}\label{fig:unnamed-chunk-8}
+   \end{figure}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{2}
+  \tightlist
+  \item
+    Beta frailty distribution:\\
+    Beta-distributed frailty begins to increase more slowly after age 60 compared to baseline and eventually stops increasing at age 100.
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Parameters}
+\NormalTok{million =}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{N <-}\StringTok{  }\NormalTok{million}
+\NormalTok{base.a <-}\StringTok{ }\DecValTok{10}\OperatorTok{^-}\DecValTok{4}
+\NormalTok{base.b <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\DecValTok{9}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1047}\NormalTok{) }\CommentTok{# for reproducibility}
+
+\CommentTok{#Beta distribution}
+\NormalTok{z <-}\StringTok{ }\KeywordTok{rbeta}\NormalTok{(N, }\DataTypeTok{shape1 =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{shape2 =} \FloatTok{.5}\NormalTok{)}
+\NormalTok{beta_frailty <-}\StringTok{ }\KeywordTok{frailty_sim}\NormalTok{(N, z, base.a, base.b)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-10-1} \caption{Beta Distribution}\label{fig:unnamed-chunk-10}
+   \end{figure}
+\item
+  \emph{Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this?}\\
+  It doesn't look like two proportional subgroups. It looks like the frailty is drawn from a single distribution.\\
+\item
+  \emph{Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this?}\\
+  The behavior is somewhat similar, as the hazards are increasing more slowly at older ages. However, the beta hazards stops increasing at a certain point. The uniform and the gamma are more similar. For the parameters we used, beta-distributed frailty generates many very-frail or very-robust individuals and fewer medium-frail individuals. Gamma-distributed frailty generates many medium-frail individuals but fewer very-frail or very-robust individuals.\\
+\item
+  \emph{At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?}\\
+  Generally around age 65, but if frailty is beta distributed (with our set of parameters) then we observe a divergence earlier. For the gamma and uniform frailty models roughly half the cohort has to die before unobserved heterogeneity plays a role, but for the beta model we observe divergence in the survival curve much earlier.\\
+\item
+  \emph{Extend the simulation code to include life expectancy at age x.}\\
+  Within the frailty function, we include the steps to calculate life expectancy. We also limit the ages up to 100 for each simulation, to avoid extreme and non-realistic results. This is particularly relevant for the beta frailty distribution which leads to ages above 110 to be sampled.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Tx<-}\StringTok{ }\KeywordTok{rev}\NormalTok{(}\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{rev}\NormalTok{(Lx)))}
+\NormalTok{ex <-}\StringTok{ }\NormalTok{Tx}\OperatorTok{/}\NormalTok{lx}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}
+   \includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-12-1} \caption{Life expectancy comparison}\label{fig:unnamed-chunk-12}
+   \end{figure}
+\item
+  \emph{Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)}
+\end{enumerate}
+
+\begin{figure}
+\includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-14-1} \caption{Uniform Hazards Average Frailty}\label{fig:unnamed-chunk-14}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-15-1} \caption{Gamma Hazards Average Frailty}\label{fig:unnamed-chunk-15}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-16-1} \caption{Beta Hazards Average Frailty}\label{fig:unnamed-chunk-16}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  \emph{Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?}\\
+  The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+.
+
+  \begin{figure}
+  \includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-17-1} \caption{Uniform Hazards Frailty}\label{fig:unnamed-chunk-17}
+  \end{figure}
+  \begin{figure}
+  \includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-18-1} \caption{Gamma Hazards Frailty}\label{fig:unnamed-chunk-18}
+  \end{figure}
+  \begin{figure}
+  \includegraphics[width=0.65\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-19-1} \caption{Beta Hazards Frailty}\label{fig:unnamed-chunk-19}
+  \end{figure}
+\item
+  \emph{Use the method of completing the gamma to get the mean of the gamma distribution.}\\
+  \[\begin{aligned}
+  \mu 
+  & = \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+  & = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k+1) \lambda^{k+1}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+  & = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k) \lambda^{k}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k+1) \lambda^{k+1}} z^{k - 1} e^{-\frac{z}{\lambda}} \\ 
+  & = k \lambda \cdot 1 \\
+  & = k \lambda
+  \end{aligned}\]
+\item
+  \emph{Derive V\&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?}\\
+\item
+  \emph{Derive V\&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?}\\
+\item
+  \emph{Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.}
+\end{enumerate}
+
+\hypertarget{problem-set-3}{%
+\chapter{Problem set 3}\label{problem-set-3}}
+
+\hypertarget{questions-2}{%
+\section{Questions}\label{questions-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Under gamma frailty, we obtained an explicit expression for average frailty by age for any baseline hazard schedule. \[ \bar{z}=\frac{1}{1+\sigma^2 H_0(x)}\] Assume baseline mortality is Gompertz (say with a = \(10^{-4}\) and b = 1/12). Try a couple of different values of \(\sigma^2\) (but make sure one of these values is 1/7 for comparability with the next problem). Describe what happens to average frailty at older ages. Does it decrease exponentially? If so, is there an age at which the rate of decrease equals (or at least comes very close to) the exponential rate of increase in baseline hazards b? Does this age depend on \(\sigma^2\)?\\
+\item
+  Obtain from the Human Mortality Database a schedule of single-year-of-age, cohort mortality rates for females born in 1880 in Italy. Use the ``inversion formula'' for the gamma distribution to obtain the baseline hazards implied by \(\sigma^2= 1/7\). Plot the observed and implied baseline schedule. Plot the average frailty by age. Do your results resemble or differ from the Gompertz case above ?
+\item
+  Derive V\&M 's result (5E):\[\overline{R}(x) \equiv \frac{\bar{\mu}_2(x)}{\bar{\mu}_1(x)} = \frac{R + R \sigma_1^2 H_1(x)}{1 + R \sigma_2^2 H_1(x)} \]\\
+\item
+  Use mathematics to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and a baseline Gompertz schedule.
+\item
+  Simulate this cross over with two proportional Gompertz schedules, with different frailty variances. Can you get a cross-over? If so, does it occur when cumulative hazard satisfy the condition (in small font) at the end of 5E?\\
+\item
+  Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.\\
+\item
+  Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age \(\rho(x)\) that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with \(\sigma^2 = 1/5\).\\
+\item
+  Extend the CenSoc demonstration of changing characteristics with age in at least one of the following ways
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Use years of education instead of wage income.
+  \item
+    Use both years of education and wage income.
+  \item
+    Analyze Blacks and Whites separately using wage income? Is the variance of ``observed heterogeneity'' (\(\hat{z}_{obs}\)) larger for one group. Discuss briefly.
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{solutions-2}{%
+\section{Solutions}\label{solutions-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{Under gamma frailty, we obtained an explicit expression for average frailty by age for any baseline hazard schedule. \[ \bar{z}=\frac{1}{1+\sigma^2 H_0(x)}\] Assume baseline mortality is Gompertz (say with a = \(10^{-4}\) and b = 1/12). Try a couple of different values of \(\sigma^2\) (but make sure one of these values is 1/7 for comparability with the next problem). Describe what happens to average frailty at older ages. Does it decrease exponentially? If so, is there an age at which the rate of decrease equals (or at least comes very close to) the exponential rate of increase in baseline hazards \(b\)? Does this age depend on \(\sigma^2\)?}\\
+  Let \(H_0\) be a gompertz curve with parameters a = \(10^{-4}\) and b = 1/12. The average frailty over age depends on the level of \(\sigma^2\) as seen by the left handside graph. As \(\sigma^2\) increases, average fraily decreases at an exponential rate at earlier ages. That is, when \(\sigma^2\) is very large (ie, 50) the exponential decrease begins almost instantly. However, with a very small \(\sigma^2\) of 0.01 the average frailty is almost constant except at older ages. Therefore \(\sigma^2\) determines when average frailty starts to decrease.\\
+  The graph on the right shows the derivative over ages of each of the average frailty curves as well as the \(b\) parameter of the baseline Gompertz mortality (in blue). Regardless of the the value of \(\sigma^2\), none of the derivatives are close enough to equal the \(b\) parameter.Analytically, the derivative of average frailty is always going to be negative and very small. \[\frac{d}{dx}\bar{z}= -\sigma^2ae^{bx}\bar{z}(x)^2\].\\
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-21-1} \caption{Average frailty by age}\label{fig:unnamed-chunk-21}
+   \end{figure}
+\item
+  \emph{Obtain from the Human Mortality Database a schedule of single-year-of-age, cohort mortality rates for females born in 1880 in Italy. Use the ``inversion formula'' for the gamma distribution to obtain the baseline hazards implied by \(\sigma^2= 1/7\). Plot the observed and implied baseline schedule. Plot the average frailty by age. Do your results resemble or differ from the Gompertz case above ?}
+  In order to get the baseline hazards implied by \(\sigma^2\) = 1/7, we can use the inversion formula \[\mu_0 (x) = \bar{\mu}(x)e^{\sigma^2\bar{H}(x)}\]\\
+  Taking logs, this gives us \[log(\mu_0 (x)) = log(\bar{\mu}(x))+{\sigma^2log(\bar{H}(x))}\]\\
+  \(H(x)\) is equal to the summation of \(\mu(x)\) in continuous time, so we can take the cumulative sum of these mortality rates to get the cumulative hazards. We can then use this to calculate the baseline hazards schedule.\\
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-22-1} \caption{Observed and implied hazards}\label{fig:unnamed-chunk-22}
+   \end{figure}
+
+  Now let's plot average frailty by age. While the shape of the mean frailty graph is the same in both cases, average frailty seems to decline more rapidly here than in the Gompertz case (this is driven by early ages.)\\
+
+  \begin{figure}
+  \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-23-1} \caption{Observed and implied hazards}\label{fig:unnamed-chunk-23}
+  \end{figure}
+\item
+  \emph{Derive V\&M 's result (5E)}
+  Since \(\mu_2(x) = R\mu_1(x)\) and frailty is distributed gamma with variances \(\sigma_1^2\) and \(\sigma_2^2\), respectively, we can rewrite \[\bar{R}(x) = \frac{\bar{\mu_2}(x)}{\bar{\mu_1(x)}}\] as\\
+  \[\begin{aligned}
+  \bar{R}(x) & = {\mu_2(x) \over 1+\sigma^2_2H_2(x)} \times{1+H_1(x)\sigma^2_1 \over \mu_1(x)} \\
+   & = { \bar{\mu}_2(x) \over \bar{\mu}_1(x) }\times { 1+H_1(x)\sigma^2_1 \over 1+H_2(x)\sigma^2_2 }
+  \end{aligned}\]
+  Since \(H_2 = R*H_1\),
+  \[\begin{aligned}
+   & = {R} \times { 1+\sigma^2_1 H_1(x) \over 1+R\sigma^2_2 H_1(x) }\\
+   & = { R+R\sigma^2_1 H_1(x) \over 1+R\sigma^2_2 H_1(x) }
+   \end{aligned}\]
+\item
+  \emph{Use mathematics to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and a baseline Gompertz schedule.}\\
+  The age crossover occurs at \(\bar{u_1} = \bar{u_2}\), which occurs at \(\bar{R} = 1\).
+  Rearranging 5E after equating it to 1 gives us
+  \[1+R\sigma_2^2(H_1(x_c)) = R+R\sigma_1^2(H_1(x_c))\]
+  \[H_1(x_c)(R\sigma_1^2 - R\sigma_2^2) = 1-R\]
+  \[H_1(x_c) = { R -1 \over R(\sigma_2^2 - \sigma_1^2)}\]
+  Assuming a baseline hazard schedule \(H_1(x)\) that is Gompertzian, we can solve to get the age of crossover \(x_c\).
+  \[ \begin{aligned} 
+   {a \over b}(e^{bx_c} -1) & = { R -1 \over R(\sigma_2^2 - \sigma_1^2)} \\ 
+   x_c & = {1 \over b} \log \bigg({ {(b/a)(R-1)}\over R(\sigma^2_2-\sigma^2_1)} +1\bigg)
+   \end{aligned}\]
+\item
+  \emph{Simulate this cross over with two proportional Gompertz schedules, with different frailty variances. Can you get a cross-over? If so, does it occur when cumulative hazard satisfy the condition (in small font) at the end of 5E?}\\
+  We borrow the frailty simulation function from problem set 2 and use it to create two schedules with Gamma frailty distributions (with different variances) and where the scales of the gompertz curves are proportional.
+
+  Now we can graph this to observe the crossover. In Problem 4, we calculate an age where this crossover would occur based on 5E, and here, graphing that line in grey, we see that the crossover occurs at exactly that point.\\
+
+  \begin{figure}
+  \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-25-1} \caption{Mortality crossover}\label{fig:unnamed-chunk-25}
+  \end{figure}
+\item
+  \emph{Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.}\\
+  If we alter any of the parameters here, it would change the age of crossover in accordance with that observed in Problem 4. We can simulate this by writing the previous code as a function and running it with different parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{get.crossover.plot <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{( N, sigmasq.}\FloatTok{1.}\NormalTok{fun, sigmasq.}\FloatTok{2.}\NormalTok{fun, beta.fun, alpha.fun, R.fun) \{}
+
+\CommentTok{#Now let's generate the zs for this using the rgamma function.}
+\NormalTok{z1.fun <-}\StringTok{ }\KeywordTok{rgamma}\NormalTok{(N, }\DataTypeTok{shape =} \DecValTok{1}\OperatorTok{/}\NormalTok{sigmasq}\FloatTok{.1}\NormalTok{, }\DataTypeTok{scale =}\NormalTok{ sigmasq}\FloatTok{.1}\NormalTok{)}
+\NormalTok{z2.fun <-}\StringTok{ }\KeywordTok{rgamma}\NormalTok{(N, }\DataTypeTok{shape =} \DecValTok{1}\OperatorTok{/}\NormalTok{sigmasq}\FloatTok{.2}\NormalTok{, }\DataTypeTok{scale =}\NormalTok{ sigmasq}\FloatTok{.2}\NormalTok{)}
+
+\CommentTok{#Since these are proportional Gompertzian schedules, they will have the same b but different alphas, scaled by R}
+\CommentTok{#We can use the frailty simulation function from now onwards}
+
+\NormalTok{schedule1 <-}\StringTok{ }\KeywordTok{frailty_sim}\NormalTok{(N, z1.fun, }\DataTypeTok{base.a =}\NormalTok{ alpha.fun, }\DataTypeTok{base.b =}\NormalTok{beta.fun)}
+\NormalTok{schedule2 <-}\StringTok{ }\KeywordTok{frailty_sim}\NormalTok{(N, z2.fun, }\DataTypeTok{base.a =}\NormalTok{ R}\OperatorTok{*}\NormalTok{alpha.fun, }\DataTypeTok{base.b =}\NormalTok{beta.fun)}
+
+\CommentTok{#Crossover plots}
+\KeywordTok{plot}\NormalTok{(schedule1}\OperatorTok{$}\NormalTok{frailty}\OperatorTok{$}\NormalTok{x, }\KeywordTok{log}\NormalTok{(schedule1}\OperatorTok{$}\NormalTok{frailty}\OperatorTok{$}\NormalTok{mx), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{"black"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Age"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"log hx"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(schedule2}\OperatorTok{$}\NormalTok{frailty}\OperatorTok{$}\NormalTok{x, }\KeywordTok{log}\NormalTok{(schedule2}\OperatorTok{$}\NormalTok{frailty}\OperatorTok{$}\NormalTok{mx), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Variance"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(sigmasq.}\FloatTok{1.}\NormalTok{fun, sigmasq.}\FloatTok{2.}\NormalTok{fun ), }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+   \DataTypeTok{lwd =} \DecValTok{2}\NormalTok{,}\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"R= "}\NormalTok{, R.fun,}\StringTok{" Base a = "}\NormalTok{, alpha.fun, }\StringTok{" Base b = "}\NormalTok{, }\KeywordTok{round}\NormalTok{(beta.fun,}\DecValTok{2}\NormalTok{) ), }\DataTypeTok{side=}\DecValTok{3}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Now let's run this for different values of alpha, beta, R, and the two variances. In the first set of graphs, changing the two variances to compare when they are very different and when they are very similar. Age of crossover does not seem to change very much.\\
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-27-1} \caption{Crossover: changing variances}\label{fig:unnamed-chunk-27}
+   \end{figure}
+
+  Then, when changing alpha so that we can compare a very small alpha with a large one, a crossover occurs earlier with a larger value.
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-28-1} \caption{Crossover: changing Gompertz $a$ parameter}\label{fig:unnamed-chunk-28}
+   \end{figure}
+
+  By changing beta to compare a very small beta and a large one, we get a crossover very early with a large beta.\\
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-29-1} \caption{Crossover: changing Gompertz $b$ parameter}\label{fig:unnamed-chunk-29}
+   \end{figure}
+
+  Finally, if we compare a large and small r, there does not seem to be a difference in the crossover ages.\\
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-30-1} \caption{Crossover: changing $R$}\label{fig:unnamed-chunk-30}
+   \end{figure}
+\item
+  \emph{Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age \(\rho(x)\) that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with \(\sigma^2 = 1/5\).}\\
+  We obtain the Italian cohort female lifetable (1x1) from the Human Mortality Database (HMD).
+
+  The observed rate of mortality improvement can be calculated using \[ \bar{\rho}(x,t) = - {1 \over t} \log {m_{t2}(x) \over m_{t1}(x) }\] and the version with frailty can be calculated using: \[ \rho(x,t) = \bar{\rho}(x,t) + \sigma^2\ {d \over dt}\bar{S}_c (x,t) \] Now we can calculate the rates of improvement in mortality and compare them. When we assume frailty, we get a higher rate of improvement at the older ages than in the observed case.\\
+
+  \begin{figure}
+   \includegraphics[width=1\linewidth,height=0.65\textheight]{bookdown-demo_files/figure-latex/unnamed-chunk-32-1} \caption{Mortality improvement}\label{fig:unnamed-chunk-32}
+   \end{figure}
+\item
+  \emph{Extend the CenSoc demonstration of changing characteristics with age in at least one of the following ways}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    \emph{Use years of education instead of wage income.}\\
+  \item
+    \emph{Use both years of education and wage income.}\\
+  \item
+    \emph{Analyze Blacks and Whites separately using wage income? Is the variance of ``observed heterogeneity'' (\(\hat{z}_{obs}\)) larger for one group. Discuss briefly.}
+  \item
+    Let's see how this changes for education.
+  \end{enumerate}
+\end{enumerate}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-34-1.pdf}
+b. If we wanted to see how income and education work together, we could do this in a variety of ways, such as creating an index for the two variables. Then we could run the same code from earlier. Here, I multiply the two variables by each other, which is not ideal but will give us some proxy for the two.
+
+\begin{verbatim}
+```
+##    byear       V1
+## 1:  1897 107.0833
+## 2:  1900 104.9167
+## 3:  1899 105.5833
+## 4:  1898 106.8333
+## 5:  1895 109.0833
+## 6:  1896 107.9167
+```
+
+```
+##                                    histid dyear byear dmonth bmonth census_age
+##   1: D4C1CED5-E21B-452F-B027-E07973C8D5A5  2000  1895     12      9         44
+##   2: 4D1C6991-6D01-4903-ADBB-71F379F4AA96  2000  1895     11      1         45
+##   3: 0DD41551-07AF-4D4B-92BF-C11E49007B80  2001  1895      4      5         44
+##   4: 800EEA26-72C5-4DED-80B0-A4682677BCED  2003  1897     11     12         42
+##   5: 85077BBB-A8B7-4DF0-BDEB-C3382460197B  2000  1895     12      9         44
+##  ---                                                                          
+## 125: 8B07E413-E7AA-458F-8759-EA4709AC616B  2003  1897      5      3         43
+## 126: 3CCDDB6D-9CC5-4184-82CA-4795091F80E0  2001  1895     12      1         45
+## 127: 6E1417C4-AABC-412E-94CC-E1996BC78BDD  2003  1897      3      6         42
+## 128: C518CB1F-04E7-472F-8D08-F222E3889077  2002  1895      2      2         45
+## 129: 688320D5-F9FF-4B98-9EBF-1F7116C53636  2004  1898      5     11         41
+##      death_age educyrs       hispan                   race           bpl
+##   1:       105      12 Not Hispanic                  White      Arkansas
+##   2:       105       8 Not Hispanic                  White      Arkansas
+##   3:       105       9 Not Hispanic                  White          Ohio
+##   4:       105       4 Not Hispanic                Chinese         China
+##   5:       105       9 Not Hispanic                  White      Nebraska
+##  ---                                                                    
+## 125:       106      11 Not Hispanic                  White     Wisconsin
+## 126:       106       9 Not Hispanic Black/African American West Virginia
+## 127:       105      10 Not Hispanic                  White West Virginia
+## 128:       106      18 Not Hispanic                  White     Minnesota
+## 129:       105      15 Not Hispanic                  White      Nebraska
+##          mbpl     fbpl               empstat incwage                   marst
+##   1:     <NA>     <NA> At work, public emerg     736 Married, spouse present
+##   2:     <NA>     <NA>               At work      NA Married, spouse present
+##   3:     <NA>     <NA>               At work    2080                Divorced
+##   4:     <NA>     <NA>               At work    1200    Never married/single
+##   5: Missouri Missouri               At work    1900 Married, spouse present
+##  ---                                                                        
+## 125:     <NA>  Germany               At work      NA    Never married/single
+## 126:     <NA>     <NA>               At work     300 Married, spouse present
+## 127:     <NA>     <NA>               At work    1200 Married, spouse present
+## 128:     <NA>     <NA>               At work    4000 Married, spouse present
+## 129: Nebraska     <NA>               At work      NA    Never married/single
+##      occscore              ownershp urban      fipstate
+##   1:       22                Rented Rural      Arkansas
+##   2:       23 Owned or being bought Rural      Arkansas
+##   3:       20 Owned or being bought Rural    California
+##   4:       13                Rented Urban    California
+##   5:       21 Owned or being bought Rural    California
+##  ---                                                   
+## 125:       11 Owned or being bought Rural     Wisconsin
+## 126:       21                Rented Rural West Virginia
+## 127:       20                Rented Urban West Virginia
+## 128:       33                Rented Rural       Wyoming
+## 129:        3 Owned or being bought Rural       Wyoming
+##                                     incnonwg                educ
+##   1: Less than $50 nonwage, nonsalary income            Grade 11
+##   2:          $50+ nonwage, nonsalary income             Grade 7
+##   3: Less than $50 nonwage, nonsalary income             Grade 8
+##   4: Less than $50 nonwage, nonsalary income             Grade 3
+##   5: Less than $50 nonwage, nonsalary income             Grade 8
+##  ---                                                            
+## 125:          $50+ nonwage, nonsalary income            Grade 10
+## 126: Less than $50 nonwage, nonsalary income             Grade 8
+## 127: Less than $50 nonwage, nonsalary income             Grade 9
+## 128: Less than $50 nonwage, nonsalary income 5+ years of college
+## 129:          $50+ nonwage, nonsalary income  2 years of college
+##                                        occ rent   weight dday bday y_orig_educ
+##   1: Clerical and kindred workers (n.e.c.)    7 5.273636    5   27          12
+##   2:    Buyers and shippers, farm products <NA> 5.273636    9   24           8
+##   3:   Operative and kindred workers (nec) <NA> 4.101000    4   28           9
+##   4:       Cooks, except private household   25 2.846923    5   27           4
+##   5:                            Carpenters <NA> 5.273636   13   14           9
+##  ---                                                                          
+## 125:          Farmers (owners and tenants) <NA> 8.252500    8    3          11
+## 126:          Mine operatives and laborers   12 8.002500    8    3           9
+## 127:   Operative and kindred workers (nec)   20 2.846923   31    8          10
+## 128:                  Stationary engineers   25 4.200000    4   26          18
+## 129:  Farm laborers, unpaid family workers <NA> 4.455455    4    9          15
+##      educyrs_mean      y_educ age.at.death
+##   1:     9.779898  2.22010218     105.2500
+##   2:     9.779898 -1.77989782     105.8333
+##   3:     9.779898 -0.77989782     105.9167
+##   4:     9.955029 -5.95502854     105.9167
+##   5:     9.779898 -0.77989782     105.2500
+##  ---                                      
+## 125:     9.955029  1.04497146     106.1667
+## 126:     9.779898 -0.77989782     106.9167
+## 127:     9.955029  0.04497146     105.7500
+## 128:     9.779898  8.22010218     107.0000
+## 129:    10.074551  4.92544906     105.5000
+```
+
+```
+##                                    histid dyear byear dmonth bmonth census_age
+##   1: 40263A47-2326-457A-9B39-23C3A1EB6B62  2004  1900      8      3         40
+##   2: 2DE26A35-C0A3-4B84-9617-969C7D865411  1999  1895     12      8         44
+##   3: 3847A6C1-CE3E-487B-83D3-E625F67BC0D9  2004  1900      1      1         40
+##   4: 913D273F-7569-4440-824D-DEB557477530  1999  1895      6      6         44
+##   5: 75DAB0E7-6E5B-4A5B-9593-EFF92395CC8B  2002  1898     10      6         41
+##  ---                                                                          
+## 192: FDD066DD-4978-440F-901C-20F6563B0856  2002  1898      9      3         42
+## 193: B1B3AAA0-C054-4E00-B481-E8608E5D72B0  2000  1895     10     12         44
+## 194: EB838184-1F2B-42F6-B02B-CD91B5B22235  2000  1895      7     12         44
+## 195: 33121249-5268-45D5-924E-CE438126D3A3  2001  1897     12     11         42
+## 196: 5F9FE1CB-FC75-4921-9FAA-CCA4D33696E1  2001  1897      6      5         42
+##      death_age educyrs       hispan                   race           bpl mbpl
+##   1:       104       5 Not Hispanic Black/African American       Alabama <NA>
+##   2:       104       8 Not Hispanic                  White      Arkansas <NA>
+##   3:       103      13 Not Hispanic                  White      Missouri <NA>
+##   4:       104      13        Other                  White         Spain <NA>
+##   5:       104      17 Not Hispanic                  White    California <NA>
+##  ---                                                                         
+## 192:       104       9 Not Hispanic                  White West Virginia <NA>
+## 193:       104      11 Not Hispanic                  White West Virginia <NA>
+## 194:       104       6 Not Hispanic                  White       Georgia <NA>
+## 195:       104       9 Not Hispanic                  White West Virginia <NA>
+## 196:       104       9 Not Hispanic                  White     Minnesota <NA>
+##      fbpl empstat incwage                   marst occscore
+##   1: <NA> At work     130                 Widowed        4
+##   2: <NA> At work     156 Married, spouse present        7
+##   3: <NA> At work    1500                 Widowed       19
+##   4: <NA> At work    1400 Married, spouse present       17
+##   5: <NA> At work    1560 Married, spouse present       27
+##  ---                                                      
+## 192: <NA> At work    1560 Married, spouse present       29
+## 193: <NA> At work    2519    Never married/single       39
+## 194: <NA> At work    2340 Married, spouse present       19
+## 195: <NA> At work      NA Married, spouse present       11
+## 196: <NA> At work    2200 Married, spouse present       39
+##                   ownershp urban      fipstate
+##   1:                Rented Urban       Alabama
+##   2:                Rented Rural      Arkansas
+##   3: Owned or being bought Urban       Arizona
+##   4: Owned or being bought Urban    California
+##   5: Owned or being bought Rural    California
+##  ---                                          
+## 192: Owned or being bought Rural West Virginia
+## 193: Owned or being bought Urban West Virginia
+## 194: Owned or being bought Rural West Virginia
+## 195: Owned or being bought Rural West Virginia
+## 196: Owned or being bought Urban       Wyoming
+##                                     incnonwg               educ
+##   1: Less than $50 nonwage, nonsalary income            Grade 4
+##   2:          $50+ nonwage, nonsalary income            Grade 7
+##   3: Less than $50 nonwage, nonsalary income           Grade 12
+##   4: Less than $50 nonwage, nonsalary income           Grade 12
+##   5: Less than $50 nonwage, nonsalary income 4 years of college
+##  ---                                                           
+## 192: Less than $50 nonwage, nonsalary income            Grade 8
+## 193: Less than $50 nonwage, nonsalary income           Grade 10
+## 194: Less than $50 nonwage, nonsalary income            Grade 5
+## 195:          $50+ nonwage, nonsalary income            Grade 8
+## 196: Less than $50 nonwage, nonsalary income            Grade 8
+##                                             occ rent   weight dday bday
+##   1:            Private household workers (nec)    3 3.018929   26    4
+##   2:                Farm laborers, wage workers    2 3.762857    5   12
+##   3:    Stenographers, typists, and secretaries <NA> 3.262619   21   22
+##   4:                             Laborers (nec) <NA> 3.762857   15   15
+##   5:              Mechanics and repairmen (nec) <NA> 5.438750    4   14
+##  ---                                                                   
+## 192:                   Policemen and detectives <NA> 5.438750   14   18
+## 193: Managers, officials, and proprietors (nec) <NA> 3.273636    2   18
+## 194:    Stenographers, typists, and secretaries <NA> 3.273636   27    9
+## 195:               Farmers (owners and tenants) <NA> 5.295294   18   14
+## 196: Managers, officials, and proprietors (nec) <NA> 5.295294   18   22
+##      y_orig_educ educyrs_mean     y_educ age.at.death
+##   1:           5    10.081606 -5.0816062     104.4167
+##   2:           8     9.779898 -1.7798978     104.3333
+##   3:          13    10.081606  2.9183938     104.0000
+##   4:          13     9.779898  3.2201022     104.0000
+##   5:          17    10.074551  6.9254491     104.3333
+##  ---                                                 
+## 192:           9    10.074551 -1.0745509     104.5000
+## 193:          11     9.779898  1.2201022     104.8333
+## 194:           6     9.779898 -3.7798978     104.5833
+## 195:           9     9.955029 -0.9550285     104.0833
+## 196:           9     9.955029 -0.9550285     104.0833
+```
+
+```
+## NULL
+```
+
+```
+## NULL
+```
+
+![](bookdown-demo_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
+c. We'll run the wage income comparison for Blacks and Whites separately. To this we need the other file that Josh uses, so we'll run the previous data cleaning code again as well.   
+
+Now let's graph these two. We can see a decline in log wages with age for Blacks that we do not observe for Whites, for whom this tends to increase by age. This suggests that we may observe greater variance in heterogeneity for blacks than for Whites.   
+\end{verbatim}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-37-2.pdf}
+
+\hypertarget{problem-set-6}{%
+\chapter{Problem set 6}\label{problem-set-6}}
+
+\hypertarget{questions-3}{%
+\section{Questions}\label{questions-3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using the tempo\_simu.R file,
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Try with N of 4 million -- does it still work? What happens?
+  \item
+    Try with a shift function that goes up and down. Are the adjusted counts ever LESS than the observed counts? If so, when?\\
+  \item
+    If the cumulative shift was Rt = a + 0.1*t, what would be a formula for tempo-adjusted counts of births? Sketch the 4 panels without the computer and then check to see if you're right.
+  \end{enumerate}
+\item
+  Calculate the age profile of fertility change predicted by the BongaartsFeeney model by taking time derivatives of the log schedules. You will end up with three terms. Describe each of these in words.\\
+\item
+  Use simulation based on tempo simu.R to check your answer.\\
+\item
+  Is there a diagnostic plot that you could do to compare observed agespecific changes to those predicted by the BF model? Hint: use normalized schedules that sum to 1.0\\
+\item
+  Use this diagnostic plot to all-order fertility change during the Great Recession.\\
+\item
+  Use this diagnostic plot to 1st, 2nd, and 3rd births.\\
+\item
+  Fit the two-part normal mixture model to fertility from another country based on what looks interesting in the Burkimsher paper. (E.g., Canada, Portugal, or the Netherlands). I recommend doing this for 1 year, but once you get your code running, you could iterate over years. Use graphs to discuss the goodness of fit. And if you do more than 1 year, discuss whether the time trends in the parameters make substantive sense)
+\end{enumerate}
+
+\hypertarget{solutions-3}{%
+\section{Solutions}\label{solutions-3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Using the tempo\_simu.R file,
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Try with N of 4 million -- does it still work? What happens?
+    This simulation will first sample from a normal distribution draws of ages that represent the ages of women when giving birth for the first time. It also creates as shift function \(R(t)\) which affects all women of a given year.
+    \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-38-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-38-2.pdf}
+    Yes, it still works. In fact, we see that the adjusted births are very close to the observed births when using this number of simulations. (I continue to use an N of 4 million for the rest of this problem).\\
+  \item
+    Try with a shift function that goes up and down. Are the adjusted counts ever LESS than the observed counts? If so, when?\\
+    \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-39-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-39-2.pdf}
+    The adjusted counts are not always less than the observed. Naturally, this only happens when we have spikes on the observed counts that become smoother after the adjusting of the birth counts.\\
+  \item
+    If the cumulative shift was Rt = a + 0.1*t, what would be a formula for tempo-adjusted counts of births? Sketch the 4 panels without the computer and then check to see if you're right.\\
+    Let \(a = -199\), so we get a shift of 0 to about 3 years depending on the time period:\\
+    \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-40-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-40-2.pdf}
+  \end{enumerate}
+\item
+  Calculate the age profile of fertility change predicted by the BongaartsFeeney model by taking time derivatives of the log schedules. You will end up with three terms. Describe each of these in words.\\
+  \[\begin{aligned}
+   f(a,t)&=f_0(a-R(t))[1-R'(t)]q(t)\\
+   log(f(a,t))&=log(f_0(a-R(t))) + log(1-R'(t)) + log(q(t))\\
+   \frac{\partial log(f(a,t))}{\partial t}&=\frac{\partial log(f_0(a-R(t)))}{\partial t} + \frac{\partial
+   log(1-R'(t))}{\partial t} + \frac{\partial log(q(t))}{\partial t}\\
+   \frac{\partial log(f(a,t))}{\partial t}&=-R'(t)\frac{f_0'(a-R(t))}{f_0(a-R(t))} -\frac{R''(t)}{1-R'(t)} + \frac{q'(t)}{q(t)}
+   \end{aligned}\]
+  The first term represents the proportional change in the fertility of the equivalent pre-postponement cohort. In particular, it is divided into (how far someone shifts `over' relative to ages on the baseline fertility schedule) and an \(R'(t)\) term (how much one shifts `up'). The second term represents the proportional change in the rate of change in years of postponement; it is a tempo-effect. The third term represents the proportional change in quantum.
+\item
+  Use simulation based on tempo simu.R to check your answer.
+
+  The \texttt{tempo\_simu.R} function computes \(R(t)\) but we need to obtain the remaining components of the answer from the previous excercise. For simplicity, let's assume that there are no tempo effects (\(q(t)=0\)) and that \(a=25\), that is, our baseline schedule is that of women aged 25.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    \(R(t)\) components:
+    Let's briefly look at \(R(t)\), \(R'(t)\), and \(R''(t)\). In \texttt{tempo\_simu.R} \(R(t)\) refers to the cumulative shift object (\texttt{shift.t} ). We can obtain the derivatives by taking the centered difference of this object.
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shift.t.prime <-}\StringTok{ }\KeywordTok{center.diff}\NormalTok{(shift.t)}
+\NormalTok{shift.t.prime}\FloatTok{.2}\NormalTok{ <-}\StringTok{ }\KeywordTok{center.diff}\NormalTok{(shift.t.prime)}
+
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1991}\OperatorTok{:}\DecValTok{2020}\NormalTok{, shift.t, }\DataTypeTok{main =} \StringTok{'R(t)'}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{''}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{''}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1991}\OperatorTok{:}\DecValTok{2020}\NormalTok{, shift.t.prime, }\DataTypeTok{main =} \StringTok{'R}\CharTok{\textbackslash{}'}\StringTok{(t)'}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{''}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{''}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1991}\OperatorTok{:}\DecValTok{2020}\NormalTok{, shift.t.prime}\FloatTok{.2}\NormalTok{, }\DataTypeTok{main =} \StringTok{'R}\CharTok{\textbackslash{}'\textbackslash{}'}\StringTok{(t)'}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{''}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{''}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1991}\OperatorTok{:}\DecValTok{2020}\NormalTok{,}\OperatorTok{-}\NormalTok{shift.t.prime}\FloatTok{.2}\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{shift.t.prime), }\DataTypeTok{main =} \StringTok{'-R}\CharTok{\textbackslash{}'\textbackslash{}'}\StringTok{(t) / (1- R}\CharTok{\textbackslash{}'}\StringTok{(t))'}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{'year'}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{''}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-42-1.pdf}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+    \(f_0(a-R(t))\) function:
+    In the Bongaarts and Feeney model, the baseline schedule of women of age \(a\) at time \(t\) is \(f_0(a-R(t))\). That is, it is the fertility schedule that is observed because of the shift. From the simulation, we obtain a table of births at each age and the age-specific fertility rates. Then, we can look at the original and the observed ASFRs. The original ASFR is that from the simulation, which we would not observe. Rather we would only the see the ASFR from births that were postponed by year-specific shifts.
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# floor everything}
+\NormalTok{dt_floored <-}\StringTok{ }\NormalTok{dt }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{transmute}\NormalTok{(}\StringTok{'x'}\NormalTok{ =}\StringTok{ }\KeywordTok{floor}\NormalTok{(x), }\StringTok{'t'}\NormalTok{ =}\StringTok{ }\KeywordTok{floor}\NormalTok{(t), }
+          \StringTok{'t.obs'}\NormalTok{ =}\StringTok{ }\KeywordTok{floor}\NormalTok{(t.obs), }\StringTok{'x.obs'}\NormalTok{ =}\StringTok{ }\KeywordTok{floor}\NormalTok{(x.obs)) }\CommentTok{# the .obs values are the ones that go into the baseline function. }
+
+\CommentTok{# Births to women born at each age. }
+\NormalTok{original_sched <-}\StringTok{ }\KeywordTok{table}\NormalTok{(dt_floored}\OperatorTok{$}\NormalTok{x, dt_floored}\OperatorTok{$}\NormalTok{t)}
+\NormalTok{observed_sched <-}\StringTok{ }\KeywordTok{table}\NormalTok{(dt_floored}\OperatorTok{$}\NormalTok{x.obs, dt_floored}\OperatorTok{$}\NormalTok{t.obs)}
+
+\CommentTok{# ASFR (The denominator is 100 person years lived, or 100 women at each age)}
+\NormalTok{asfr_original<-}\StringTok{ }\NormalTok{original_sched}\OperatorTok{/}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\NormalTok{thousand) }\CommentTok{#f(a,t)}
+\NormalTok{asfr_observed <-}\StringTok{ }\NormalTok{observed_sched}\OperatorTok{/}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\NormalTok{thousand) }\CommentTok{#f_0(a,t)}
+
+\CommentTok{#Graph of ASFRs for observed and original births. The lines get lighter with each year. }
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\KeywordTok{matplot}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(asfr_observed), asfr_observed, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{grey}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{length =} \DecValTok{40}\NormalTok{)), }
+    \DataTypeTok{xlab =} \StringTok{'Age'}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{'ASFR'}\NormalTok{, }\DataTypeTok{main =} \StringTok{'Observed ASFR'}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=} \DecValTok{25}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{'black'}\NormalTok{)}
+
+\KeywordTok{matplot}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(asfr_original), asfr_original, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\KeywordTok{grey}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{length =} \DecValTok{40}\NormalTok{)), }
+    \DataTypeTok{xlab =} \StringTok{'Age'}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{'ASFR'}\NormalTok{, }\DataTypeTok{main =} \StringTok{'Original ASFR'}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=} \DecValTok{25}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{, }\DataTypeTok{col =} \StringTok{'black'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-43-1.pdf}
+  The component that we are interersted in is the first derivative of the baseline schedule (\(f_0(a-R(t))\)).
+  \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-44-1.pdf}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{2}
+  \tightlist
+  \item
+    Comparison of terms from original and observed data:
+    We can merge all the terms of the formula from the previous question and compare it to the derivative of the log version of the observed fertility schedules.
+    \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-45-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-45-2.pdf}
+  \end{enumerate}
+
+\begin{verbatim}
+##             5             6             7             8             9 
+##           NaN           NaN           NaN           NaN           Inf 
+##            10            11            12            13            14 
+##           NaN  0.0279104400  0.0284926376  0.0264610984  0.0237212086 
+##            15            16            17            18            19 
+##  0.0217063493  0.0201999478  0.0180307054  0.0163718360  0.0143367711 
+##            20            21            22            23            24 
+##  0.0126676950  0.0108740251  0.0089406636  0.0070038016  0.0051380233 
+##            25            26            27            28            29 
+##  0.0032746533  0.0013796601 -0.0004524888 -0.0022009709 -0.0041665665 
+##            30            31            32            33            34 
+## -0.0059568771 -0.0079508464 -0.0098116081 -0.0116493883 -0.0134483969 
+##            35            36            37            38            39 
+## -0.0152374780 -0.0174666475 -0.0187958955 -0.0213274275 -0.0225088932 
+##            40            41            42            43            44 
+## -0.0246023349 -0.0284561023 -0.0218511609           NaN           NaN 
+##            45            46            47            48 
+##           NaN           NaN           NaN           NaN
+\end{verbatim}
+
+\begin{verbatim}
+##           5           6           7           8           9          10 
+##         NaN         NaN         NaN        -Inf -0.04661512 -0.03769700 
+##          11          12          13          14          15          16 
+## -0.02995997 -0.06192639 -0.05078215 -0.04858363 -0.05152016 -0.05218837 
+##          17          18          19          20          21          22 
+## -0.05159206 -0.05148395 -0.05160988 -0.05209997 -0.05204756 -0.05258484 
+##          23          24          25          26          27          28 
+## -0.05193104 -0.05309911 -0.05345465 -0.05218494 -0.05232512 -0.05222811 
+##          29          30          31          32          33          34 
+## -0.05151393 -0.05223201 -0.05259580 -0.05334486 -0.05261664 -0.05131790 
+##          35          36          37          38          39          40 
+## -0.04743019 -0.05145224 -0.06105139 -0.06151550 -0.04560559        -Inf 
+##          41          42          43          44          45 
+##        -Inf         NaN         NaN         NaN         NaN
+\end{verbatim}
+
+  \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-45-3.pdf}
+\end{enumerate}
+
+\hypertarget{problem-set-8}{%
+\chapter{Problem set 8}\label{problem-set-8}}
+
+\hypertarget{problems}{%
+\section{Problems}\label{problems}}
+
+\hypertarget{solutions-4}{%
+\section{Solutions}\label{solutions-4}}
+
+For the following problems, let \(p_0 = 0.3\), \(p_1=0.3\), \(p_2=0.4\). Use the function \(h(z) = p_0 + p_1 z + p_2 z^2\). This gives \(m= 0.3(0) + 0.3(1) + 0.4(2) = 1.1\), which is supercritical.\\
+1. Multiply out \(h(z)^3\) algebraically and explain how the coefficient on \(z^4\) consists of all of the possible ways for 3 fathers to produce a total of 4 sons
+Finding \(h(z)^2\):
+\[\begin{aligned} 
+    h(z)^2 &= (p_0 + p_1 z + p_2 z^2)\times(p_0 + p_1 z + p_2 z^2) \\
+    &= p_0^2+2p_0p_1z+(2p_0p_2+p_1^2)z^2 + 2p_1p_2z^3 + p_2^2z^4
+    \end{aligned}\]
+Multiplying out again:
+\[\begin{aligned}
+    h(z)^3 &= h(z)^2 h(z) \\
+    &= [p_0^2+2p_0p_1z+(2p_0p_2+p_1^2)z^2 + 2p_1p_2z^3 + p_2^2z^4]\times(p_0 + p_1 z + p_2 z^2) \\
+    &= p_0^3 + (3p_0^2p_1)z + (3p_0^2p_2 + 3p_0p_1^2)z^2 +(6p_0p_1p_2+p_1^3)z^3 + \\
+    & (3p_0p_2^2+3p_1^2p_2)z^4+ (3p_1p_2^2)z^5 + (p_2^3)z^6\\
+    \end{aligned}\]
+To get a total of 4 children, either two of the fathers have 2 sons each and the third has no sons (\(p_0p_2^2\)), or one of the fathers has 2 sons and the others each have 1 son (\(p_1^2p_2\)). With three fathers, there are 3 ways for each of these combinations to appear; corresponding to the \(3p_0p_2^2+3p_1^2p_2\) coefficient on \(z^4\).\\
+2. Multiply out \(h_2(z) = h(h(z))\) algebraically and explain how the coefficient on \(z^2\) consists of all of the possible ways for a woman to have 2 grand-daughters.
+\[\begin{aligned}
+    h(h(z)) & = p_0+p_1h(z)+p_2h(z)^2 \\
+    & = p_0 +p_1[p_0 + p_1 z + p_2 z^2] + p_2[p_0^2+2p_0p_1z+(2p_0p_2+p_1^2)z^2 + 2p_1p_2z^3 + p_2^2z^4] \\
+    &= [p_0+p_0p_1+p_0^2p_2] + [2p_0p_1p_2+p_1^2]z +\\
+    & [2p_0p_2^2+p_1p_2+p_1^2p_2]z^2 + [2p_1p_2^2]z^3+[p_2^3]z^4
+    \end{aligned}\]
+Here are the ways a woman can end up with 2 granddaughters: first, she can have a single daughter who herself has 2 daughters (\(p_1p_2\)). Or, she can have 2 daughters who then each have 1 daughter (\(p_1^2 p_2\)). Lastly, she can have 2 daughters, one of which has 2 daughters and one who has no daughters (\(2p_0 p_2^2\); note there are two ways for this to happen because there are two daughters in the second generation). These possibilities correspond to the \(2p_0p_2^2+p_1p_2+p_1^2p_2\) coefficient on \(z^2\)\\
+3. Write an R-program to reproduce 20 entries of the table (This is for our values of \(p_0 = 0.3\), \(p_1=0.3\), \(p_2=0.4\), not the \(p_k\) values on wikipedia)
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+\begin{minipage}[b]{0.22\columnwidth}\raggedright
+Generation Number\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Extinction probability\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Generation Number\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Extinction probability\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.30000\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+11\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.68599\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.42600\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+12\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.69403\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.50039\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+13\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.70088\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.55027\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+14\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.70676\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+5\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.58620\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+15\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.71183\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+6\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.61331\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+16\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.71623\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+7\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.63446\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+17\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.72006\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.65135\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+18\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.72342\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+9\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.66511\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+19\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.72636\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+10\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.67648\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+20\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+0.72895\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+---\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+---\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+---\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+---\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The extinction probability is converging to 0.75 (going out to 50 or 60 generations is helpful for observing this).\\
+Sample code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d_zero <-}\StringTok{ }\DecValTok{0}
+\NormalTok{p_zero <-}\StringTok{ }\FloatTok{0.3}
+\NormalTok{p_one <-}\StringTok{ }\FloatTok{0.3}
+\NormalTok{p_two <-}\StringTok{ }\FloatTok{0.4}
+\NormalTok{n_gen <-}\StringTok{ }\DecValTok{20}
+
+\NormalTok{value_table <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{nrow =}\NormalTok{ n_gen, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+
+\NormalTok{d_prev <-}\StringTok{ }\NormalTok{d_zero}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n_gen) \{}
+\NormalTok{  prob_extinction <-}\StringTok{ }\NormalTok{p_zero }\OperatorTok{+}\StringTok{ }\NormalTok{d_prev}\OperatorTok{*}\NormalTok{p_one }\OperatorTok{+}\StringTok{ }\NormalTok{(d_prev}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{p_two}
+\NormalTok{  value_table[i,}\DecValTok{1}\NormalTok{] =}\StringTok{ }\NormalTok{i}
+\NormalTok{  value_table[i, }\DecValTok{2}\NormalTok{] =}\StringTok{ }\NormalTok{prob_extinction}
+\NormalTok{  d_prev <-}\StringTok{ }\NormalTok{prob_extinction}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Use the quadratic formula to solve for \(d\), the probability of ultimate extinction: \(d = p_0 + p_1d + p_2d^2\). What do you get for \(d\) given our \(p_k\) values above? Does it correspond to the same value one gets by using iteration, as in the Wikipedia table?\\
+  Do some rearranging of \(d = p_0 + p_1d + p_2d^2\) to get: \[0 = p_2d^2 +(p_1-1)d + p_0  \]\\
+  Solving with the quadratic formula: \[ d^* = {(1-p_1) \pm \sqrt{(p_1-1)^2 - 4p_2p_0}  \over 2p_2 } \]
+  Filling in our given \(p_k\) values:
+  \[\begin{aligned}
+   d^* &= \frac{(1-0.3) \pm \sqrt{(0.3-1)^2 -4(0.4)(0.3)}}{2(0.4)} \\
+   &= \{0.75, 1\} 
+   \end{aligned}\]\\
+  Since \(m>1\), there are two roots: 1 and 0.75. \(d=0.75\) is the solution we are interested in, and it indeed agrees with the probability of the extinction that our iterative solution converges to.
+\item
+  Simulate a critical branching process such that m = 1 by reversing the \(p_1\) and \(p_2\) values we're using. Check that \(m = 1\). You can use the ``branch()'' code in the slides.\\
+  Let \(p_0=0.3\), \(p_1 =0.4\), \(p_2=0.3:\)m = 0(0.3) + 1(0.4)+2(0.3) = 1\$.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    See if you can do a big number of trials, 1000? For many generations, 30, 50, 100?\\
+    Sample simulation with 1000 trials for 100 generations (seed set to 91):
+
+    \begin{figure}
+     \includegraphics[width=1\linewidth]{figures/branch_simulation} \caption{Branch simulation}\label{fig:unnamed-chunk-47}
+     \end{figure}
+  \item
+    What fraction of lines become extinct?\\
+    96.6\% of lines become extinct by generation 100 with the above simulation. The following plot shows extinction at each generation:
+
+    \begin{figure}
+     \includegraphics[width=1\linewidth]{figures/extinctionplot} \caption{Rate of extinction}\label{fig:unnamed-chunk-48}
+     \end{figure}
+  \item
+    What is the distribution of surviving lines? (Hint: Choose a time that is is not so distant that few lines survive)\\
+    The following histograms show surviving lines' sizes at select generations. At each generation, we can see something resembling a geometric distribution.
+
+    \begin{figure}
+     \includegraphics[width=1\linewidth]{figures/generation_dist} \caption{Surviving generations}\label{fig:unnamed-chunk-49}
+     \end{figure}
+  \item
+    What is the mean and variance of of \(Z_{10}\), \(Z_{20}\) and \(Z_{30}\)? What will happen as \(n \to \infty\)?
+  \end{enumerate}
+\end{enumerate}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Generation \(n\) & Mean \(Z_n\) & Var \(Z_n\)\tabularnewline
+\midrule
+\endhead
+10 & 1.009 & 5.20001\tabularnewline
+20 & 1.012 & 10.7426\tabularnewline
+30 & 0.991 & 17.53045\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{verbatim}
+    \begin{figure}
+    \includegraphics[width=1\linewidth]{figures/meanvar} \caption{Survival mean and variance}\label{fig:unnamed-chunk-50}
+    \end{figure}
+    The mean and variance calculated above account for all lines, not just surviving ones. In this simulation, the mean tends to hover around 1 and the variance tends to increase with generation number, at least up to a certain point.
+\end{verbatim}
+
+As \(n\to \infty\), the mean and variance theoretically will go to zero (since \(m=1\) is critical, all lines must eventually die out).
+
+\bibliography{book.bib,packages.bib}
+
+\end{document}

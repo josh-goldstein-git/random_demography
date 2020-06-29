@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Problem set 3 | Problem sets and solutions</title>
+  <meta name="description" content="This groups all the problem sets and solutions for the Spring 2020 Mathematical Demography class" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Problem set 3 | Problem sets and solutions" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This groups all the problem sets and solutions for the Spring 2020 Mathematical Demography class" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Problem set 3 | Problem sets and solutions" />
+  
+  <meta name="twitter:description" content="This groups all the problem sets and solutions for the Spring 2020 Mathematical Demography class" />
+  
+
+<meta name="author" content="Summer 2020" />
+
+
+<meta name="date" content="2020-06-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="problem-set-2.html"/>
+<link rel="next" href="problem-set-6.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="problem-set-1.html"><a href="problem-set-1.html"><i class="fa fa-check"></i><b>1</b> Problem set 1</a><ul>
+<li class="chapter" data-level="1.1" data-path="problem-set-1.html"><a href="problem-set-1.html#questions"><i class="fa fa-check"></i><b>1.1</b> Questions</a></li>
+<li class="chapter" data-level="1.2" data-path="problem-set-1.html"><a href="problem-set-1.html#solutions"><i class="fa fa-check"></i><b>1.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="problem-set-2.html"><a href="problem-set-2.html"><i class="fa fa-check"></i><b>2</b> Problem set 2</a><ul>
+<li class="chapter" data-level="2.1" data-path="problem-set-2.html"><a href="problem-set-2.html#questions-1"><i class="fa fa-check"></i><b>2.1</b> Questions</a></li>
+<li class="chapter" data-level="2.2" data-path="problem-set-2.html"><a href="problem-set-2.html#solutions-1"><i class="fa fa-check"></i><b>2.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="problem-set-3.html"><a href="problem-set-3.html"><i class="fa fa-check"></i><b>3</b> Problem set 3</a><ul>
+<li class="chapter" data-level="3.1" data-path="problem-set-3.html"><a href="problem-set-3.html#questions-2"><i class="fa fa-check"></i><b>3.1</b> Questions</a></li>
+<li class="chapter" data-level="3.2" data-path="problem-set-3.html"><a href="problem-set-3.html#solutions-2"><i class="fa fa-check"></i><b>3.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="problem-set-6.html"><a href="problem-set-6.html"><i class="fa fa-check"></i><b>4</b> Problem set 6</a><ul>
+<li class="chapter" data-level="4.1" data-path="problem-set-6.html"><a href="problem-set-6.html#questions-3"><i class="fa fa-check"></i><b>4.1</b> Questions</a></li>
+<li class="chapter" data-level="4.2" data-path="problem-set-6.html"><a href="problem-set-6.html#solutions-3"><i class="fa fa-check"></i><b>4.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="problem-set-8.html"><a href="problem-set-8.html"><i class="fa fa-check"></i><b>5</b> Problem set 8</a><ul>
+<li class="chapter" data-level="5.1" data-path="problem-set-8.html"><a href="problem-set-8.html#problems"><i class="fa fa-check"></i><b>5.1</b> Problems</a></li>
+<li class="chapter" data-level="5.2" data-path="problem-set-8.html"><a href="problem-set-8.html#solutions-4"><i class="fa fa-check"></i><b>5.2</b> Solutions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Problem sets and solutions</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="problem-set-3" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Problem set 3</h1>
+<div id="questions-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> Questions</h2>
+<ol style="list-style-type: decimal">
+<li>Under gamma frailty, we obtained an explicit expression for average frailty by age for any baseline hazard schedule. <span class="math display">\[ \bar{z}=\frac{1}{1+\sigma^2 H_0(x)}\]</span> Assume baseline mortality is Gompertz (say with a = <span class="math inline">\(10^{-4}\)</span> and b = 1/12). Try a couple of different values of <span class="math inline">\(\sigma^2\)</span> (but make sure one of these values is 1/7 for comparability with the next problem). Describe what happens to average frailty at older ages. Does it decrease exponentially? If so, is there an age at which the rate of decrease equals (or at least comes very close to) the exponential rate of increase in baseline hazards b? Does this age depend on <span class="math inline">\(\sigma^2\)</span>?<br />
+</li>
+<li>Obtain from the Human Mortality Database a schedule of single-year-of-age, cohort mortality rates for females born in 1880 in Italy. Use the “inversion formula” for the gamma distribution to obtain the baseline hazards implied by <span class="math inline">\(\sigma^2= 1/7\)</span>. Plot the observed and implied baseline schedule. Plot the average frailty by age. Do your results resemble or differ from the Gompertz case above ?</li>
+<li>Derive V&amp;M ’s result (5E):<span class="math display">\[\overline{R}(x) \equiv \frac{\bar{\mu}_2(x)}{\bar{\mu}_1(x)} = \frac{R + R \sigma_1^2 H_1(x)}{1 + R \sigma_2^2 H_1(x)} \]</span><br />
+</li>
+<li>Use mathematics to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and a baseline Gompertz schedule.</li>
+<li>Simulate this cross over with two proportional Gompertz schedules, with different frailty variances. Can you get a cross-over? If so, does it occur when cumulative hazard satisfy the condition (in small font) at the end of 5E?<br />
+</li>
+<li>Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.<br />
+</li>
+<li>Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age <span class="math inline">\(\rho(x)\)</span> that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with <span class="math inline">\(\sigma^2 = 1/5\)</span>.<br />
+</li>
+<li>Extend the CenSoc demonstration of changing characteristics with age in at least one of the following ways
+<ol style="list-style-type: lower-alpha">
+<li>Use years of education instead of wage income.</li>
+<li>Use both years of education and wage income.</li>
+<li>Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” (<span class="math inline">\(\hat{z}_{obs}\)</span>) larger for one group. Discuss briefly.</li>
+</ol></li>
+</ol>
+</div>
+<div id="solutions-2" class="section level2">
+<h2><span class="header-section-number">3.2</span> Solutions</h2>
+<ol style="list-style-type: decimal">
+<li><em>Under gamma frailty, we obtained an explicit expression for average frailty by age for any baseline hazard schedule. <span class="math display">\[ \bar{z}=\frac{1}{1+\sigma^2 H_0(x)}\]</span> Assume baseline mortality is Gompertz (say with a = <span class="math inline">\(10^{-4}\)</span> and b = 1/12). Try a couple of different values of <span class="math inline">\(\sigma^2\)</span> (but make sure one of these values is 1/7 for comparability with the next problem). Describe what happens to average frailty at older ages. Does it decrease exponentially? If so, is there an age at which the rate of decrease equals (or at least comes very close to) the exponential rate of increase in baseline hazards <span class="math inline">\(b\)</span>? Does this age depend on <span class="math inline">\(\sigma^2\)</span>?</em><br />
+Let <span class="math inline">\(H_0\)</span> be a gompertz curve with parameters a = <span class="math inline">\(10^{-4}\)</span> and b = 1/12. The average frailty over age depends on the level of <span class="math inline">\(\sigma^2\)</span> as seen by the left handside graph. As <span class="math inline">\(\sigma^2\)</span> increases, average fraily decreases at an exponential rate at earlier ages. That is, when <span class="math inline">\(\sigma^2\)</span> is very large (ie, 50) the exponential decrease begins almost instantly. However, with a very small <span class="math inline">\(\sigma^2\)</span> of 0.01 the average frailty is almost constant except at older ages. Therefore <span class="math inline">\(\sigma^2\)</span> determines when average frailty starts to decrease.<br />
+The graph on the right shows the derivative over ages of each of the average frailty curves as well as the <span class="math inline">\(b\)</span> parameter of the baseline Gompertz mortality (in blue). Regardless of the the value of <span class="math inline">\(\sigma^2\)</span>, none of the derivatives are close enough to equal the <span class="math inline">\(b\)</span> parameter.Analytically, the derivative of average frailty is always going to be negative and very small. <span class="math display">\[\frac{d}{dx}\bar{z}= -\sigma^2ae^{bx}\bar{z}(x)^2\]</span>.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-23"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" alt="Average frailty by age" width="100%" height="65%" />
+<p class="caption">
+Figure 3.1: Average frailty by age
+</p>
+</div></li>
+<li><em>Obtain from the Human Mortality Database a schedule of single-year-of-age, cohort mortality rates for females born in 1880 in Italy. Use the “inversion formula” for the gamma distribution to obtain the baseline hazards implied by <span class="math inline">\(\sigma^2= 1/7\)</span>. Plot the observed and implied baseline schedule. Plot the average frailty by age. Do your results resemble or differ from the Gompertz case above ?</em>
+In order to get the baseline hazards implied by <span class="math inline">\(\sigma^2\)</span> = 1/7, we can use the inversion formula <span class="math display">\[\mu_0 (x) = \bar{\mu}(x)e^{\sigma^2\bar{H}(x)}\]</span><br />
+Taking logs, this gives us <span class="math display">\[log(\mu_0 (x)) = log(\bar{\mu}(x))+{\sigma^2log(\bar{H}(x))}\]</span><br />
+<span class="math inline">\(H(x)\)</span> is equal to the summation of <span class="math inline">\(\mu(x)\)</span> in continuous time, so we can take the cumulative sum of these mortality rates to get the cumulative hazards. We can then use this to calculate the baseline hazards schedule.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-24"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" alt="Observed and implied hazards" width="100%" height="65%" />
+<p class="caption">
+Figure 3.2: Observed and implied hazards
+</p>
+</div>
+Now let’s plot average frailty by age. While the shape of the mean frailty graph is the same in both cases, average frailty seems to decline more rapidly here than in the Gompertz case (this is driven by early ages.)<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" alt="Observed and implied hazards" width="100%" height="65%" />
+<p class="caption">
+Figure 3.3: Observed and implied hazards
+</p>
+</div></li>
+<li><em>Derive V&amp;M ’s result (5E)</em>
+Since <span class="math inline">\(\mu_2(x) = R\mu_1(x)\)</span> and frailty is distributed gamma with variances <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, respectively, we can rewrite <span class="math display">\[\bar{R}(x) = \frac{\bar{\mu_2}(x)}{\bar{\mu_1(x)}}\]</span> as<br />
+<span class="math display">\[\begin{aligned}
+\bar{R}(x) &amp; = {\mu_2(x) \over 1+\sigma^2_2H_2(x)} \times{1+H_1(x)\sigma^2_1 \over \mu_1(x)} \\
+ &amp; = { \bar{\mu}_2(x) \over \bar{\mu}_1(x) }\times { 1+H_1(x)\sigma^2_1 \over 1+H_2(x)\sigma^2_2 }
+\end{aligned}\]</span>
+Since <span class="math inline">\(H_2 = R*H_1\)</span>,
+<span class="math display">\[\begin{aligned}
+ &amp; = {R} \times { 1+\sigma^2_1 H_1(x) \over 1+R\sigma^2_2 H_1(x) }\\
+ &amp; = { R+R\sigma^2_1 H_1(x) \over 1+R\sigma^2_2 H_1(x) }
+ \end{aligned}\]</span></li>
+<li><em>Use mathematics to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and a baseline Gompertz schedule.</em><br />
+The age crossover occurs at <span class="math inline">\(\bar{u_1} = \bar{u_2}\)</span>, which occurs at <span class="math inline">\(\bar{R} = 1\)</span>.
+Rearranging 5E after equating it to 1 gives us
+<span class="math display">\[1+R\sigma_2^2(H_1(x_c)) = R+R\sigma_1^2(H_1(x_c))\]</span>
+<span class="math display">\[H_1(x_c)(R\sigma_1^2 - R\sigma_2^2) = 1-R\]</span>
+<span class="math display">\[H_1(x_c) = { R -1 \over R(\sigma_2^2 - \sigma_1^2)}\]</span>
+Assuming a baseline hazard schedule <span class="math inline">\(H_1(x)\)</span> that is Gompertzian, we can solve to get the age of crossover <span class="math inline">\(x_c\)</span>.
+<span class="math display">\[ \begin{aligned} 
+ {a \over b}(e^{bx_c} -1) &amp; = { R -1 \over R(\sigma_2^2 - \sigma_1^2)} \\ 
+ x_c &amp; = {1 \over b} \log \bigg({ {(b/a)(R-1)}\over R(\sigma^2_2-\sigma^2_1)} +1\bigg)
+ \end{aligned}\]</span></li>
+<li><p><em>Simulate this cross over with two proportional Gompertz schedules, with different frailty variances. Can you get a cross-over? If so, does it occur when cumulative hazard satisfy the condition (in small font) at the end of 5E?</em><br />
+We borrow the frailty simulation function from problem set 2 and use it to create two schedules with Gamma frailty distributions (with different variances) and where the scales of the gompertz curves are proportional.</p>
+Now we can graph this to observe the crossover. In Problem 4, we calculate an age where this crossover would occur based on 5E, and here, graphing that line in grey, we see that the crossover occurs at exactly that point.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-27"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-27-1.png" alt="Mortality crossover" width="100%" height="65%" />
+<p class="caption">
+Figure 3.4: Mortality crossover
+</p>
+</div></li>
+<li><p><em>Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.</em><br />
+If we alter any of the parameters here, it would change the age of crossover in accordance with that observed in Problem 4. We can simulate this by writing the previous code as a function and running it with different parameters.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">get.crossover.plot &lt;-<span class="st"> </span><span class="cf">function</span>( N, sigmasq.<span class="fl">1.</span>fun, sigmasq.<span class="fl">2.</span>fun, beta.fun, alpha.fun, R.fun) {</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#Now let&#39;s generate the zs for this using the rgamma function.</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">z1.fun &lt;-<span class="st"> </span><span class="kw">rgamma</span>(N, <span class="dt">shape =</span> <span class="dv">1</span><span class="op">/</span>sigmasq<span class="fl">.1</span>, <span class="dt">scale =</span> sigmasq<span class="fl">.1</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">z2.fun &lt;-<span class="st"> </span><span class="kw">rgamma</span>(N, <span class="dt">shape =</span> <span class="dv">1</span><span class="op">/</span>sigmasq<span class="fl">.2</span>, <span class="dt">scale =</span> sigmasq<span class="fl">.2</span>)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#Since these are proportional Gompertzian schedules, they will have the same b but different alphas, scaled by R</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#We can use the frailty simulation function from now onwards</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">schedule1 &lt;-<span class="st"> </span><span class="kw">frailty_sim</span>(N, z1.fun, <span class="dt">base.a =</span> alpha.fun, <span class="dt">base.b =</span>beta.fun)</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">schedule2 &lt;-<span class="st"> </span><span class="kw">frailty_sim</span>(N, z2.fun, <span class="dt">base.a =</span> R<span class="op">*</span>alpha.fun, <span class="dt">base.b =</span>beta.fun)</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#Crossover plots</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="kw">plot</span>(schedule1<span class="op">$</span>frailty<span class="op">$</span>x, <span class="kw">log</span>(schedule1<span class="op">$</span>frailty<span class="op">$</span>mx), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;log hx&quot;</span>)</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="kw">lines</span>(schedule2<span class="op">$</span>frailty<span class="op">$</span>x, <span class="kw">log</span>(schedule2<span class="op">$</span>frailty<span class="op">$</span>mx), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Variance&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(sigmasq.<span class="fl">1.</span>fun, sigmasq.<span class="fl">2.</span>fun ), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">   <span class="dt">lwd =</span> <span class="dv">2</span>,<span class="dt">lty =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="kw">mtext</span>(<span class="kw">paste0</span>(<span class="st">&quot;R= &quot;</span>, R.fun,<span class="st">&quot; Base a = &quot;</span>, alpha.fun, <span class="st">&quot; Base b = &quot;</span>, <span class="kw">round</span>(beta.fun,<span class="dv">2</span>) ), <span class="dt">side=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">}</a></code></pre></div>
+Now let’s run this for different values of alpha, beta, R, and the two variances. In the first set of graphs, changing the two variances to compare when they are very different and when they are very similar. Age of crossover does not seem to change very much.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-29"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-29-1.png" alt="Crossover: changing variances" width="100%" height="65%" />
+<p class="caption">
+Figure 3.5: Crossover: changing variances
+</p>
+</div>
+Then, when changing alpha so that we can compare a very small alpha with a large one, a crossover occurs earlier with a larger value.
+<div class="figure"><span id="fig:unnamed-chunk-30"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-30-1.png" alt="Crossover: changing Gompertz $a$ parameter" width="100%" height="65%" />
+<p class="caption">
+Figure 3.6: Crossover: changing Gompertz <span class="math inline">\(a\)</span> parameter
+</p>
+</div>
+By changing beta to compare a very small beta and a large one, we get a crossover very early with a large beta.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-31"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-31-1.png" alt="Crossover: changing Gompertz $b$ parameter" width="100%" height="65%" />
+<p class="caption">
+Figure 3.7: Crossover: changing Gompertz <span class="math inline">\(b\)</span> parameter
+</p>
+</div>
+Finally, if we compare a large and small r, there does not seem to be a difference in the crossover ages.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-32"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-32-1.png" alt="Crossover: changing $R$" width="100%" height="65%" />
+<p class="caption">
+Figure 3.8: Crossover: changing <span class="math inline">\(R\)</span>
+</p>
+</div></li>
+<li><p><em>Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age <span class="math inline">\(\rho(x)\)</span> that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with <span class="math inline">\(\sigma^2 = 1/5\)</span>.</em><br />
+We obtain the Italian cohort female lifetable (1x1) from the Human Mortality Database (HMD).</p>
+The observed rate of mortality improvement can be calculated using <span class="math display">\[ \bar{\rho}(x,t) = - {1 \over t} \log {m_{t2}(x) \over m_{t1}(x) }\]</span> and the version with frailty can be calculated using: <span class="math display">\[ \rho(x,t) = \bar{\rho}(x,t) + \sigma^2\ {d \over dt}\bar{S}_c (x,t) \]</span> Now we can calculate the rates of improvement in mortality and compare them. When we assume frailty, we get a higher rate of improvement at the older ages than in the observed case.<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-34"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-34-1.png" alt="Mortality improvement" width="100%" height="65%" />
+<p class="caption">
+Figure 3.9: Mortality improvement
+</p>
+</div></li>
+<li><em>Extend the CenSoc demonstration of changing characteristics with age in at least one of the following ways</em>
+<ol style="list-style-type: lower-alpha">
+<li><em>Use years of education instead of wage income.</em><br />
+</li>
+<li><em>Use both years of education and wage income.</em><br />
+</li>
+<li><p><em>Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” (<span class="math inline">\(\hat{z}_{obs}\)</span>) larger for one group. Discuss briefly.</em></p></li>
+<li><p>Let’s see how this changes for education.</p></li>
+</ol></li>
+</ol>
+<pre><code>## NULL</code></pre>
+<pre><code>## NULL</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+b. If we wanted to see how income and education work together, we could do this in a variety of ways, such as creating an index for the two variables. Then we could run the same code from earlier. Here, I multiply the two variables by each other, which is not ideal but will give us some proxy for the two.</p>
+<pre><code>```
+##    byear       V1
+## 1:  1897 107.0833
+## 2:  1900 104.9167
+## 3:  1899 105.5833
+## 4:  1898 106.8333
+## 5:  1895 109.0833
+## 6:  1896 107.9167
+```
+
+```
+##                                    histid dyear byear dmonth bmonth census_age death_age educyrs
+##   1: D4C1CED5-E21B-452F-B027-E07973C8D5A5  2000  1895     12      9         44       105      12
+##   2: 4D1C6991-6D01-4903-ADBB-71F379F4AA96  2000  1895     11      1         45       105       8
+##   3: 0DD41551-07AF-4D4B-92BF-C11E49007B80  2001  1895      4      5         44       105       9
+##   4: 800EEA26-72C5-4DED-80B0-A4682677BCED  2003  1897     11     12         42       105       4
+##   5: 85077BBB-A8B7-4DF0-BDEB-C3382460197B  2000  1895     12      9         44       105       9
+##  ---                                                                                            
+## 125: 8B07E413-E7AA-458F-8759-EA4709AC616B  2003  1897      5      3         43       106      11
+## 126: 3CCDDB6D-9CC5-4184-82CA-4795091F80E0  2001  1895     12      1         45       106       9
+## 127: 6E1417C4-AABC-412E-94CC-E1996BC78BDD  2003  1897      3      6         42       105      10
+## 128: C518CB1F-04E7-472F-8D08-F222E3889077  2002  1895      2      2         45       106      18
+## 129: 688320D5-F9FF-4B98-9EBF-1F7116C53636  2004  1898      5     11         41       105      15
+##            hispan                   race           bpl     mbpl     fbpl               empstat incwage
+##   1: Not Hispanic                  White      Arkansas     &lt;NA&gt;     &lt;NA&gt; At work, public emerg     736
+##   2: Not Hispanic                  White      Arkansas     &lt;NA&gt;     &lt;NA&gt;               At work      NA
+##   3: Not Hispanic                  White          Ohio     &lt;NA&gt;     &lt;NA&gt;               At work    2080
+##   4: Not Hispanic                Chinese         China     &lt;NA&gt;     &lt;NA&gt;               At work    1200
+##   5: Not Hispanic                  White      Nebraska Missouri Missouri               At work    1900
+##  ---                                                                                                  
+## 125: Not Hispanic                  White     Wisconsin     &lt;NA&gt;  Germany               At work      NA
+## 126: Not Hispanic Black/African American West Virginia     &lt;NA&gt;     &lt;NA&gt;               At work     300
+## 127: Not Hispanic                  White West Virginia     &lt;NA&gt;     &lt;NA&gt;               At work    1200
+## 128: Not Hispanic                  White     Minnesota     &lt;NA&gt;     &lt;NA&gt;               At work    4000
+## 129: Not Hispanic                  White      Nebraska Nebraska     &lt;NA&gt;               At work      NA
+##                        marst occscore              ownershp urban      fipstate
+##   1: Married, spouse present       22                Rented Rural      Arkansas
+##   2: Married, spouse present       23 Owned or being bought Rural      Arkansas
+##   3:                Divorced       20 Owned or being bought Rural    California
+##   4:    Never married/single       13                Rented Urban    California
+##   5: Married, spouse present       21 Owned or being bought Rural    California
+##  ---                                                                           
+## 125:    Never married/single       11 Owned or being bought Rural     Wisconsin
+## 126: Married, spouse present       21                Rented Rural West Virginia
+## 127: Married, spouse present       20                Rented Urban West Virginia
+## 128: Married, spouse present       33                Rented Rural       Wyoming
+## 129:    Never married/single        3 Owned or being bought Rural       Wyoming
+##                                     incnonwg                educ                                   occ rent
+##   1: Less than $50 nonwage, nonsalary income            Grade 11 Clerical and kindred workers (n.e.c.)    7
+##   2:          $50+ nonwage, nonsalary income             Grade 7    Buyers and shippers, farm products &lt;NA&gt;
+##   3: Less than $50 nonwage, nonsalary income             Grade 8   Operative and kindred workers (nec) &lt;NA&gt;
+##   4: Less than $50 nonwage, nonsalary income             Grade 3       Cooks, except private household   25
+##   5: Less than $50 nonwage, nonsalary income             Grade 8                            Carpenters &lt;NA&gt;
+##  ---                                                                                                       
+## 125:          $50+ nonwage, nonsalary income            Grade 10          Farmers (owners and tenants) &lt;NA&gt;
+## 126: Less than $50 nonwage, nonsalary income             Grade 8          Mine operatives and laborers   12
+## 127: Less than $50 nonwage, nonsalary income             Grade 9   Operative and kindred workers (nec)   20
+## 128: Less than $50 nonwage, nonsalary income 5+ years of college                  Stationary engineers   25
+## 129:          $50+ nonwage, nonsalary income  2 years of college  Farm laborers, unpaid family workers &lt;NA&gt;
+##        weight dday bday y_orig_educ educyrs_mean      y_educ age.at.death
+##   1: 5.273636    5   27          12     9.779898  2.22010218     105.2500
+##   2: 5.273636    9   24           8     9.779898 -1.77989782     105.8333
+##   3: 4.101000    4   28           9     9.779898 -0.77989782     105.9167
+##   4: 2.846923    5   27           4     9.955029 -5.95502854     105.9167
+##   5: 5.273636   13   14           9     9.779898 -0.77989782     105.2500
+##  ---                                                                     
+## 125: 8.252500    8    3          11     9.955029  1.04497146     106.1667
+## 126: 8.002500    8    3           9     9.779898 -0.77989782     106.9167
+## 127: 2.846923   31    8          10     9.955029  0.04497146     105.7500
+## 128: 4.200000    4   26          18     9.779898  8.22010218     107.0000
+## 129: 4.455455    4    9          15    10.074551  4.92544906     105.5000
+```
+
+```
+##                                    histid dyear byear dmonth bmonth census_age death_age educyrs
+##   1: 40263A47-2326-457A-9B39-23C3A1EB6B62  2004  1900      8      3         40       104       5
+##   2: 2DE26A35-C0A3-4B84-9617-969C7D865411  1999  1895     12      8         44       104       8
+##   3: 3847A6C1-CE3E-487B-83D3-E625F67BC0D9  2004  1900      1      1         40       103      13
+##   4: 913D273F-7569-4440-824D-DEB557477530  1999  1895      6      6         44       104      13
+##   5: 75DAB0E7-6E5B-4A5B-9593-EFF92395CC8B  2002  1898     10      6         41       104      17
+##  ---                                                                                            
+## 192: FDD066DD-4978-440F-901C-20F6563B0856  2002  1898      9      3         42       104       9
+## 193: B1B3AAA0-C054-4E00-B481-E8608E5D72B0  2000  1895     10     12         44       104      11
+## 194: EB838184-1F2B-42F6-B02B-CD91B5B22235  2000  1895      7     12         44       104       6
+## 195: 33121249-5268-45D5-924E-CE438126D3A3  2001  1897     12     11         42       104       9
+## 196: 5F9FE1CB-FC75-4921-9FAA-CCA4D33696E1  2001  1897      6      5         42       104       9
+##            hispan                   race           bpl mbpl fbpl empstat incwage                   marst
+##   1: Not Hispanic Black/African American       Alabama &lt;NA&gt; &lt;NA&gt; At work     130                 Widowed
+##   2: Not Hispanic                  White      Arkansas &lt;NA&gt; &lt;NA&gt; At work     156 Married, spouse present
+##   3: Not Hispanic                  White      Missouri &lt;NA&gt; &lt;NA&gt; At work    1500                 Widowed
+##   4:        Other                  White         Spain &lt;NA&gt; &lt;NA&gt; At work    1400 Married, spouse present
+##   5: Not Hispanic                  White    California &lt;NA&gt; &lt;NA&gt; At work    1560 Married, spouse present
+##  ---                                                                                                    
+## 192: Not Hispanic                  White West Virginia &lt;NA&gt; &lt;NA&gt; At work    1560 Married, spouse present
+## 193: Not Hispanic                  White West Virginia &lt;NA&gt; &lt;NA&gt; At work    2519    Never married/single
+## 194: Not Hispanic                  White       Georgia &lt;NA&gt; &lt;NA&gt; At work    2340 Married, spouse present
+## 195: Not Hispanic                  White West Virginia &lt;NA&gt; &lt;NA&gt; At work      NA Married, spouse present
+## 196: Not Hispanic                  White     Minnesota &lt;NA&gt; &lt;NA&gt; At work    2200 Married, spouse present
+##      occscore              ownershp urban      fipstate                                incnonwg
+##   1:        4                Rented Urban       Alabama Less than $50 nonwage, nonsalary income
+##   2:        7                Rented Rural      Arkansas          $50+ nonwage, nonsalary income
+##   3:       19 Owned or being bought Urban       Arizona Less than $50 nonwage, nonsalary income
+##   4:       17 Owned or being bought Urban    California Less than $50 nonwage, nonsalary income
+##   5:       27 Owned or being bought Rural    California Less than $50 nonwage, nonsalary income
+##  ---                                                                                           
+## 192:       29 Owned or being bought Rural West Virginia Less than $50 nonwage, nonsalary income
+## 193:       39 Owned or being bought Urban West Virginia Less than $50 nonwage, nonsalary income
+## 194:       19 Owned or being bought Rural West Virginia Less than $50 nonwage, nonsalary income
+## 195:       11 Owned or being bought Rural West Virginia          $50+ nonwage, nonsalary income
+## 196:       39 Owned or being bought Urban       Wyoming Less than $50 nonwage, nonsalary income
+##                    educ                                        occ rent   weight dday bday y_orig_educ
+##   1:            Grade 4            Private household workers (nec)    3 3.018929   26    4           5
+##   2:            Grade 7                Farm laborers, wage workers    2 3.762857    5   12           8
+##   3:           Grade 12    Stenographers, typists, and secretaries &lt;NA&gt; 3.262619   21   22          13
+##   4:           Grade 12                             Laborers (nec) &lt;NA&gt; 3.762857   15   15          13
+##   5: 4 years of college              Mechanics and repairmen (nec) &lt;NA&gt; 5.438750    4   14          17
+##  ---                                                                                                  
+## 192:            Grade 8                   Policemen and detectives &lt;NA&gt; 5.438750   14   18           9
+## 193:           Grade 10 Managers, officials, and proprietors (nec) &lt;NA&gt; 3.273636    2   18          11
+## 194:            Grade 5    Stenographers, typists, and secretaries &lt;NA&gt; 3.273636   27    9           6
+## 195:            Grade 8               Farmers (owners and tenants) &lt;NA&gt; 5.295294   18   14           9
+## 196:            Grade 8 Managers, officials, and proprietors (nec) &lt;NA&gt; 5.295294   18   22           9
+##      educyrs_mean     y_educ age.at.death
+##   1:    10.081606 -5.0816062     104.4167
+##   2:     9.779898 -1.7798978     104.3333
+##   3:    10.081606  2.9183938     104.0000
+##   4:     9.779898  3.2201022     104.0000
+##   5:    10.074551  6.9254491     104.3333
+##  ---                                     
+## 192:    10.074551 -1.0745509     104.5000
+## 193:     9.779898  1.2201022     104.8333
+## 194:     9.779898 -3.7798978     104.5833
+## 195:     9.955029 -0.9550285     104.0833
+## 196:     9.955029 -0.9550285     104.0833
+```
+
+```
+## NULL
+```
+
+```
+## NULL
+```
+
+&lt;img src=&quot;bookdown-demo_files/figure-html/unnamed-chunk-37-1.png&quot; width=&quot;672&quot; /&gt;
+c. We&#39;ll run the wage income comparison for Blacks and Whites separately. To this we need the other file that Josh uses, so we&#39;ll run the previous data cleaning code again as well.   
+
+Now let&#39;s graph these two. We can see a decline in log wages with age for Blacks that we do not observe for Whites, for whom this tends to increase by age. This suggests that we may observe greater variance in heterogeneity for blacks than for Whites.   </code></pre>
+<pre><code>## NULL</code></pre>
+<pre><code>## NULL</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<pre><code>## NULL</code></pre>
+<pre><code>## NULL</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="problem-set-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="problem-set-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-problemset3.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

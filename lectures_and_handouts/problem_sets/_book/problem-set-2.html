@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Problem set 2 | Problem sets and solutions</title>
+  <meta name="description" content="This groups all the problem sets and solutions for the Spring 2020 Mathematical Demography class" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Problem set 2 | Problem sets and solutions" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This groups all the problem sets and solutions for the Spring 2020 Mathematical Demography class" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Problem set 2 | Problem sets and solutions" />
+  
+  <meta name="twitter:description" content="This groups all the problem sets and solutions for the Spring 2020 Mathematical Demography class" />
+  
+
+<meta name="author" content="Summer 2020" />
+
+
+<meta name="date" content="2020-06-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="problem-set-1.html"/>
+<link rel="next" href="problem-set-3.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="problem-set-1.html"><a href="problem-set-1.html"><i class="fa fa-check"></i><b>1</b> Problem set 1</a><ul>
+<li class="chapter" data-level="1.1" data-path="problem-set-1.html"><a href="problem-set-1.html#questions"><i class="fa fa-check"></i><b>1.1</b> Questions</a></li>
+<li class="chapter" data-level="1.2" data-path="problem-set-1.html"><a href="problem-set-1.html#solutions"><i class="fa fa-check"></i><b>1.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="problem-set-2.html"><a href="problem-set-2.html"><i class="fa fa-check"></i><b>2</b> Problem set 2</a><ul>
+<li class="chapter" data-level="2.1" data-path="problem-set-2.html"><a href="problem-set-2.html#questions-1"><i class="fa fa-check"></i><b>2.1</b> Questions</a></li>
+<li class="chapter" data-level="2.2" data-path="problem-set-2.html"><a href="problem-set-2.html#solutions-1"><i class="fa fa-check"></i><b>2.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="problem-set-3.html"><a href="problem-set-3.html"><i class="fa fa-check"></i><b>3</b> Problem set 3</a><ul>
+<li class="chapter" data-level="3.1" data-path="problem-set-3.html"><a href="problem-set-3.html#questions-2"><i class="fa fa-check"></i><b>3.1</b> Questions</a></li>
+<li class="chapter" data-level="3.2" data-path="problem-set-3.html"><a href="problem-set-3.html#solutions-2"><i class="fa fa-check"></i><b>3.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="problem-set-6.html"><a href="problem-set-6.html"><i class="fa fa-check"></i><b>4</b> Problem set 6</a><ul>
+<li class="chapter" data-level="4.1" data-path="problem-set-6.html"><a href="problem-set-6.html#questions-3"><i class="fa fa-check"></i><b>4.1</b> Questions</a></li>
+<li class="chapter" data-level="4.2" data-path="problem-set-6.html"><a href="problem-set-6.html#solutions-3"><i class="fa fa-check"></i><b>4.2</b> Solutions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="problem-set-8.html"><a href="problem-set-8.html"><i class="fa fa-check"></i><b>5</b> Problem set 8</a><ul>
+<li class="chapter" data-level="5.1" data-path="problem-set-8.html"><a href="problem-set-8.html#problems"><i class="fa fa-check"></i><b>5.1</b> Problems</a></li>
+<li class="chapter" data-level="5.2" data-path="problem-set-8.html"><a href="problem-set-8.html#solutions-4"><i class="fa fa-check"></i><b>5.2</b> Solutions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Problem sets and solutions</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="problem-set-2" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Problem set 2</h1>
+<div id="questions-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Questions</h2>
+<ol style="list-style-type: decimal">
+<li><p>True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.</p></li>
+<li><p>Use the fraily simulator to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.</p></li>
+<li><p>Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this? (This is an open-ended question. You should feel free to use mathematics, intuition, or any other approach to answer.)</p></li>
+<li><p>Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this? (Also open ended)</p></li>
+<li><p>At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?</p></li>
+<li><p>Extend the simulation code to include life expectancy at age x (Shown above.)</p></li>
+<li><p>Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)</p></li>
+<li><p>Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?</p></li>
+<li><p>Use the method of completing the gamma to get the mean of the gamma distribution. (Hint: I believe there are youtube examples of this).</p></li>
+<li><p>Derive V&amp;M equation 13, extending Keyfitz’s result. Did your derivation require you to assume proportional hazards; if so, where?</p></li>
+<li><p>Derive V&amp;M equation 20, extending Keyfitz’s result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?</p></li>
+<li><p>Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don’t cross. If you want, write code and produce a plot.</p></li>
+</ol>
+</div>
+<div id="solutions-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Solutions</h2>
+<ol style="list-style-type: decimal">
+<li><em>True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.</em><br />
+True.<br />
+If each individual has their own hazard schedule proportional to baseline <span class="math inline">\(z\)</span>, there will be more variation in the distribution of deaths than if each person had the baseline case. The variation for homogeneous populations comes from to chance only, while the variation for heterogeneous populations comes from chance and group variation in risk. Therefore, the variance of the population distribution of deaths will always be larger than that of the baseline (unless the variance is 0).<br />
+</li>
+<li><p><em>Use the fraily simulator code to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.</em><br />
+For simplicity, we take the code and convert it into a function that can use frailty draws from different distributions. We also extend it to include life expectancy calculation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;functions/gomp_funs.R&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">frailty_sim &lt;-<span class="st"> </span><span class="cf">function</span>( N, z, base.a, base.b ){</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="co">## (1) simulate ages at death from h0*z  using the gompertz as our baseline##</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="co">## note: we call the continuous ages of death &quot;y&quot;</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="co">## but we&#39;ll make a table of deaths at age &quot;x&quot; and</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co">## using life table notation call the count &quot;Dx&quot;</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  y &lt;-<span class="st"> </span><span class="kw">rgomp</span>(N,</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">       <span class="dt">b =</span> base.b, <span class="co">## doesn&#39;t vary</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">       <span class="dt">a =</span> base.a <span class="op">*</span><span class="st"> </span>z) <span class="co">## multiplicative fixed frailty</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="co">## (2) Lifetables: first define age at death as floor(y) and then</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="co">## make a table of deaths at each age (&quot;Dx&quot;)</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">  Dx &lt;-<span class="st"> </span><span class="kw">get.Dx</span>(y)</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">  x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(Dx))  </a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">  lx &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Dx))) <span class="co">## lx by reverse-survival</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">  lxpn &lt;-<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>], <span class="dv">0</span>) <span class="co">## Person-years as average of adjacent lx</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">  Lx &lt;-<span class="st"> </span>(lx <span class="op">+</span><span class="st"> </span>lxpn)<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">  mx &lt;-<span class="st"> </span>Dx<span class="op">/</span>Lx <span class="co">## Hazards</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">  Tx &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Lx))) <span class="co">## Remaining person-years</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">  ex &lt;-<span class="st"> </span>Tx<span class="op">/</span>lx <span class="co">## Life expectancy at age x</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">  <span class="co">## Baseline lifetable</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">  lx.base &lt;-<span class="st"> </span>N <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="st"> </span><span class="kw">pgomp</span>(x, <span class="dt">b =</span> base.b, <span class="dt">a =</span> base.a))</a>
+<a class="sourceLine" id="cb1-26" data-line-number="26">  Dx.base &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="op">-</span><span class="kw">diff</span>(<span class="kw">c</span>(lx.base,<span class="dv">0</span>)))</a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">  mx.base &lt;-<span class="st"> </span>base.a <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(base.b <span class="op">*</span><span class="st"> </span>(x <span class="op">+</span><span class="st"> </span><span class="fl">.5</span>)) <span class="co">## x + .5</span></a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">  lxpn.base &lt;-<span class="st"> </span><span class="kw">c</span>(lx.base[<span class="op">-</span><span class="dv">1</span>], <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb1-29" data-line-number="29">  Lx.base &lt;-<span class="st"> </span>(lx.base <span class="op">+</span><span class="st"> </span>lxpn.base)<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb1-30" data-line-number="30">  Tx.base &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Lx.base)))</a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">  ex.base &lt;-<span class="st"> </span>Tx.base<span class="op">/</span>lx.base</a>
+<a class="sourceLine" id="cb1-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb1-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34">  <span class="co"># exported tables</span></a>
+<a class="sourceLine" id="cb1-35" data-line-number="35">lifetables &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb1-36" data-line-number="36">lifetables<span class="op">$</span>sim &lt;-<span class="st"> </span>y</a>
+<a class="sourceLine" id="cb1-37" data-line-number="37">lifetables<span class="op">$</span>z &lt;-<span class="st"> </span>z</a>
+<a class="sourceLine" id="cb1-38" data-line-number="38">lifetables<span class="op">$</span>baseline &lt;-<span class="st"> </span><span class="kw">tibble</span>(Dx.base, lx.base,lxpn.base, Lx.base, mx.base, Tx.base, ex.base)</a>
+<a class="sourceLine" id="cb1-39" data-line-number="39">lifetables<span class="op">$</span>frailty &lt;-<span class="st"> </span><span class="kw">tibble</span>(x,Dx, lx,lxpn, Lx, mx, Tx, ex)</a>
+<a class="sourceLine" id="cb1-40" data-line-number="40">  <span class="kw">return</span>(lifetables)</a>
+<a class="sourceLine" id="cb1-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb1-42" data-line-number="42">  }</a></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>Uniform distribution:<br />
+We find that the uniform-distributed frailty begins to increase more slowly after age 60 compared to baseline.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Parameters</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">million =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">N &lt;-<span class="st">  </span>million</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">base.a &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">base.b &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">9</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">set.seed</span>(<span class="dv">1047</span>) <span class="co"># for reproducibility</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#Uniform distribution</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">w &lt;-<span class="st"> </span><span class="fl">.3</span> <span class="co">## try smaller if you want</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">z &lt;-<span class="st"> </span><span class="kw">runif</span>(N, <span class="dt">min =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>w , <span class="dt">max =</span> <span class="dv">1</span> <span class="op">+</span><span class="st"> </span>w)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">uniform_frailty &lt;-<span class="st"> </span><span class="kw">frailty_sim</span>(N, z, base.a, base.b)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-8-1.png" alt="Uniform Distribution" width="100%" />
+<p class="caption">
+Figure 2.1: Uniform Distribution
+</p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Gamma frailty distribution:<br />
+Gamma-distributed frailty begins to increase more slowly after age 60 compared to baseline.This is similar to the uniform frailty distribution.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Parameters</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">million =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">N &lt;-<span class="st">  </span>million</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">base.a &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">base.b &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">9</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">set.seed</span>(<span class="dv">1047</span>) <span class="co"># for reproducibility</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#Gamma distribution</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">my.sd &lt;-<span class="st"> </span><span class="fl">.5</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"> sigma.sq &lt;-<span class="st"> </span>my.sd<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  z &lt;-<span class="st"> </span><span class="kw">rgamma</span>(N, <span class="dt">shape =</span> <span class="dv">1</span><span class="op">/</span>sigma.sq, <span class="dt">scale =</span> sigma.sq)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">gamma_frailty &lt;-<span class="st"> </span><span class="kw">frailty_sim</span>(N, z, base.a, base.b)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" alt="Gamma Distribution" width="100%" />
+<p class="caption">
+Figure 2.2: Gamma Distribution
+</p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Beta frailty distribution:<br />
+Beta-distributed frailty begins to increase more slowly after age 60 compared to baseline and eventually stops increasing at age 100.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Parameters</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">million =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">N &lt;-<span class="st">  </span>million</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">base.a &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">base.b &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">9</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">set.seed</span>(<span class="dv">1047</span>) <span class="co"># for reproducibility</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#Beta distribution</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">z &lt;-<span class="st"> </span><span class="kw">rbeta</span>(N, <span class="dt">shape1 =</span> <span class="fl">.5</span>, <span class="dt">shape2 =</span> <span class="fl">.5</span>)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">beta_frailty &lt;-<span class="st"> </span><span class="kw">frailty_sim</span>(N, z, base.a, base.b)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" alt="Beta Distribution" width="100%" />
+<p class="caption">
+Figure 2.3: Beta Distribution
+</p>
+</div></li>
+<li><em>Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this?</em><br />
+It doesn’t look like two proportional subgroups. It looks like the frailty is drawn from a single distribution.<br />
+</li>
+<li><em>Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this?</em><br />
+The behavior is somewhat similar, as the hazards are increasing more slowly at older ages. However, the beta hazards stops increasing at a certain point. The uniform and the gamma are more similar. For the parameters we used, beta-distributed frailty generates many very-frail or very-robust individuals and fewer medium-frail individuals. Gamma-distributed frailty generates many medium-frail individuals but fewer very-frail or very-robust individuals.<br />
+</li>
+<li><em>At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?</em><br />
+Generally around age 65, but if frailty is beta distributed (with our set of parameters) then we observe a divergence earlier. For the gamma and uniform frailty models roughly half the cohort has to die before unobserved heterogeneity plays a role, but for the beta model we observe divergence in the survival curve much earlier.<br />
+</li>
+<li><p><em>Extend the simulation code to include life expectancy at age x.</em><br />
+Within the frailty function, we include the steps to calculate life expectancy. We also limit the ages up to 100 for each simulation, to avoid extreme and non-realistic results. This is particularly relevant for the beta frailty distribution which leads to ages above 110 to be sampled.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">Tx&lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Lx)))</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">ex &lt;-<span class="st"> </span>Tx<span class="op">/</span>lx</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" alt="Life expectancy comparison" width="65%" height="65%" />
+<p class="caption">
+Figure 2.4: Life expectancy comparison
+</p>
+</div></li>
+<li><p><em>Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)</em></p></li>
+</ol>
+<div class="figure"><span id="fig:unnamed-chunk-16"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-16-1.png" alt="Uniform Hazards Average Frailty" width="65%" height="65%" />
+<p class="caption">
+Figure 2.5: Uniform Hazards Average Frailty
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-17"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" alt="Gamma Hazards Average Frailty" width="65%" height="65%" />
+<p class="caption">
+Figure 2.6: Gamma Hazards Average Frailty
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-18"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" alt="Beta Hazards Average Frailty" width="65%" height="65%" />
+<p class="caption">
+Figure 2.7: Beta Hazards Average Frailty
+</p>
+</div>
+<ol start="8" style="list-style-type: decimal">
+<li><em>Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?</em><br />
+The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+.
+<div class="figure"><span id="fig:unnamed-chunk-19"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" alt="Uniform Hazards Frailty" width="65%" height="65%" />
+<p class="caption">
+Figure 2.8: Uniform Hazards Frailty
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-20"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" alt="Gamma Hazards Frailty" width="65%" height="65%" />
+<p class="caption">
+Figure 2.9: Gamma Hazards Frailty
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-21"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" alt="Beta Hazards Frailty" width="65%" height="65%" />
+<p class="caption">
+Figure 2.10: Beta Hazards Frailty
+</p>
+</div></li>
+<li><em>Use the method of completing the gamma to get the mean of the gamma distribution.</em><br />
+<span class="math display">\[\begin{aligned}
+\mu 
+&amp; = \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+&amp; = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k+1) \lambda^{k+1}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+&amp; = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k) \lambda^{k}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k+1) \lambda^{k+1}} z^{k - 1} e^{-\frac{z}{\lambda}} \\ 
+&amp; = k \lambda \cdot 1 \\
+&amp; = k \lambda
+\end{aligned}\]</span></li>
+<li><em>Derive V&amp;M equation 13, extending Keyfitz’s result. Did your derivation require you to assume proportional hazards; if so, where?</em><br />
+</li>
+<li><em>Derive V&amp;M equation 20, extending Keyfitz’s result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?</em><br />
+</li>
+<li><em>Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don’t cross. If you want, write code and produce a plot.</em></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="problem-set-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="problem-set-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-problemset2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
