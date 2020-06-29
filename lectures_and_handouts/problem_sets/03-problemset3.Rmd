@@ -243,121 +243,135 @@ title("Mortality Improvement for the Cohorts of 1880 and 1900")
     c. *Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” ($\hat{z}_{obs}$) larger for one group. Discuss briefly.*    
     ```{r, echo=FALSE, warning= FALSE, message=FALSE}
     dt <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
-    censoc <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
-    write.csv(censoc, file="data/censoc_dmf_demo")
+    # censoc <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
+    # write.csv(censoc, file="data/censoc_dmf_demo")
+    
+    #Death and age variables
+    dt[, age.at.death := dyear + dmonth/12 - (byear + bmonth/12)]
+    dt <- dt[byear %in% 1895:1900 & dyear %in% 1975:2004,]
+    dt <- dt[age.at.death < 105]
+    
+    #Education variables
     dt <- dt[!is.na(educyrs)]
     dt[, y_orig_educ := educyrs]
     dt[, educyrs_mean := mean(educyrs), by = byear]
     dt[, y_educ := educyrs - educyrs_mean]
-    dt[, age.at.death := dyear + dmonth/12 - (byear + bmonth/12)]
-```
-    a. Let's see how this changes for education.  
-```{r, message=FALSE, echo=FALSE, warning=FALSE}
-x <- 74:104
-y.bar.educ <- NULL
-y_orig.bar.educ <- NULL
-## z.bar <- NULL
-for (i in 1:length(x))
-{
+    
+    x <- 74:104
+    y.bar.educ <- NULL
+    y_orig.bar.educ <- NULL
+    for (i in 1:length(x)){
     y.bar.educ[i] <- dt[age.at.death > x[i], mean(y_educ)]
     y_orig.bar.educ[i] <- dt[age.at.death > x[i], mean(y_orig_educ)]
-##    z.bar[i] <- dt[age.at.death > x[i], mean(z)]
-}
+    }
+    
+    #Income variables
+    dt[incwage == 999998, incwage := NA]
+    dt[incwage == 0, incwage := NA]
+    dt <- dt[!is.na(incwage)] 
+    dt[, y_orig_inc := incwage]
+    dt[, log_inc := log(incwage)]
+    dt[, log_inc_mean := mean(log_inc), by = byear]
+    dt[, y_inc := log_inc - log_inc_mean]
 
+
+
+```
+    a. Let's see how this changes for education.  
+```{r, message=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 par(mfrow = c(1,2))
 dt[, plot(x, y_orig.bar.educ)]
-title("Years of education by surviving age", cex.main = .7)
+title("Years of education by surviving age", cex.main = .7,
+     type="l", ylab = "Education (yrs)", xlab = "Age at death")
 dt[, plot(x, y.bar.educ)]
-title("Standardized education by surviving age", cex.main = .7)
+title("Standardized education by surviving age", cex.main = .7,
+     type="l", ylab = "Standardized Education (yrs)", xlab = "Age at death")
 ```
-    b. If we wanted to see how income and education work together, we could do this in a variety of ways, such as creating an index for the two variables. Then we could run the same code from earlier. Here, I multiply the two variables by each other, which is not ideal but will give us some proxy for the two.  
+    b. The easiest way to compare both income and education is to compare income (on the y-axis) while letting education vary. For simplicity we took 4 education bins: 0-5 years, 5-10 years, 10-15 years and more than 15 years: as well as their standardized analoges. The intensity of colors increases with the number of years of education.
     ```{r, message=FALSE, echo=FALSE, warning=FALSE}
-dt[incwage == 999998, incwage := NA]
-dt[incwage == 0, incwage := NA]
-
-## Do age at death for 1895-1900 cohorts
-dt[, age.at.death := dyear + dmonth/12 - (byear + bmonth/12)]
-dt <- dt[byear %in% 1895:1900 & dyear %in% 1975:2004]
-## now limits to deaths younger than 105
-dt[, max(age.at.death), by = byear]
-dt[age.at.death >= 105] ## 177 people
-dt[floor(age.at.death) == 104] ## 253 people
-## now we have same age range for every cohort
-dt <- dt[age.at.death < 105]
-dt <- dt[!is.na(incwage)] ## keep only non-missing 
-
-#now let's center income at 0
-
-## standardized log income
-## log_inc_stan = log(y_orig) - mean(log(y_orig))
-## note: control for byear, since different ages in 1940
-dt[, y_orig_inc := incwage]
-dt[, log_inc := log(incwage)]
-dt[, log_inc_mean := mean(log_inc), by = byear]
-dt[, y_inc := log_inc - log_inc_mean]
-
-dt[, y_both := y_educ*y_inc]
-dt[, y_orig_both := y_orig_educ*y_orig_inc]
-
-
 x <- 74:104
-y.bar.both <- NULL
-y_orig.bar.both <- NULL
+y_std.bar.both1 <- NULL
+y_std.bar.both2 <- NULL
+y_std.bar.both3 <- NULL
+y_std.bar.both4 <- NULL
+
+y_orig.bar.both1 <- NULL
+y_orig.bar.both2 <- NULL
+y_orig.bar.both3 <- NULL
+y_orig.bar.both4 <- NULL
 
 for (i in 1:length(x))
 {
-    y.bar.both[i] <- dt[age.at.death > x[i], mean(y_both)]
-    y_orig.bar.both[i] <- dt[age.at.death > x[i], mean(y_orig_both)]
-##    z.bar[i] <- dt[age.at.death > x[i], mean(z)]
+    #Original
+    y_orig.bar.both1[i] <- dt[age.at.death > x[i] & educyrs>=0 & educyrs <5 , mean(y_orig_inc)]
+    y_orig.bar.both2[i] <- dt[age.at.death > x[i] & educyrs>=5 & educyrs <10, mean(y_orig_inc)]
+    y_orig.bar.both3[i] <- dt[age.at.death > x[i] & educyrs>=10 & educyrs <15, mean(y_orig_inc)]
+    y_orig.bar.both4[i] <- dt[age.at.death > x[i] & educyrs >=15, mean(y_orig_inc)]
+
+    #Standardized
+    y_std.bar.both1[i] <- dt[age.at.death > x[i] & y_educ >= -10 & y_educ < -5, mean(y_inc)]
+    y_std.bar.both2[i] <- dt[age.at.death > x[i] & y_educ >= -5 & y_educ <0, mean(y_inc)]
+    y_std.bar.both3[i] <- dt[age.at.death > x[i] & y_educ >= 0 & y_educ <5, mean(y_inc)]
+    y_std.bar.both4[i] <- dt[age.at.death > x[i] & y_educ >= 5, mean(y_inc)]
+
 }
 
 par(mfrow = c(1,2))
-dt[, plot(x, y_orig.bar.both)]
+colors <- gray((4:0)/5)
+plot(x, y_orig.bar.both1, col=colors[1], ylim=c(min(y_orig.bar.both1), max(y_orig.bar.both4)),
+     type="l", ylab = "log wage", xlab = "Age at death")
+lines(x, y_orig.bar.both2, col=colors[2])
+lines(x, y_orig.bar.both3, col=colors[3])
+lines(x, y_orig.bar.both4, col=colors[4])
 title("Education and wage by surviving age", cex.main = .7)
-dt[, plot(x, y.bar.both)]
+
+plot(x, y_std.bar.both1, col=colors[1], ylim=c(-2,2), 
+     type="l", ylab = "standardized log wage", xlab = "Age at death")
+lines(x, y_std.bar.both2, col=colors[2])
+lines(x, y_std.bar.both3, col=colors[3])
+lines(x, y_std.bar.both4, col=colors[4])
 title("Education and wage by surviving age", cex.main = .7)
 ```
-    c. We'll run the wage income comparison for Blacks and Whites separately. To this we need the other file that Josh uses, so we'll run the previous data cleaning code again as well.   
+    c. We'll run the wage income comparison for Blacks and Whites separately. 
 ```{r, echo = FALSE, results = 'hide'}
-## Clean wage data
 dt.new <-dt 
 
 x <- 74:104
 y.bar.inc.white <- NULL
 y_orig.bar.inc.white <- NULL
 dt.white <-dt.new[race == "White"]
-## z.bar <- NULL
 for (i in 1:length(x))
 {
     y.bar.inc.white[i] <- dt.white[age.at.death > x[i], mean(y_inc)]
     y_orig.bar.inc.white[i] <- dt.white[age.at.death > x[i], mean(y_orig_inc)]
-##    z.bar[i] <- dt[age.at.death > x[i], mean(z)]
 }
 
 x <- 74:104
 y.bar.inc.black <- NULL
 y_orig.bar.inc.black <- NULL
 dt.black <-dt.new[race== "Black/African American"]
-## z.bar <- NULL
 for (i in 1:length(x))
 {
     y.bar.inc.black[i] <- dt.black[age.at.death > x[i], mean(y_inc)]
     y_orig.bar.inc.black[i] <- dt.black[age.at.death > x[i], mean(y_orig_inc)]
-##    z.bar[i] <- dt[age.at.death > x[i], mean(z)]
 }
 ```
     Now let's graph these two. We can see a decline in log wages with age for Blacks that we do not observe for Whites, for whom this tends to increase by age. This suggests that we may observe greater variance in heterogeneity for blacks than for Whites.   
 ```{r, echo=FALSE}
 par(mfrow = c(1,2))
-dt.white[, plot(x, y_orig.bar.inc.white)]
+plot(x, y_orig.bar.inc.white,
+     type="l", ylab = "log wage", xlab = "Age at death")
 title("Wage income by surviving age: Whites", cex.main = .7)
-dt.white[, plot(x, y.bar.inc.white)]
+plot(x, y.bar.inc.white, 
+     type="l", ylab = "standardized log wage", xlab = "Age at death")
 title("Standardized log wages by surviving age: Whites", cex.main = .7)
 
 par(mfrow = c(1,2))
-dt.black[, plot(x, y_orig.bar.inc.black)]
+plot(x, y_orig.bar.inc.black,
+     type="l", ylab = "log wage", xlab = "Age at death")
 title("Wage income by surviving age: Blacks", cex.main = .7)
-dt.black[, plot(x, y.bar.inc.black)]
+plot(x, y.bar.inc.black, 
+     type="l", ylab = "standardized log wage", xlab = "Age at death")
 title("Standardized log wages by surviving age: Blacks", cex.main = .7)
 ```
 
