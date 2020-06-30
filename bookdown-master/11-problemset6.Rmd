@@ -1,0 +1,544 @@
+# Problem set 6
+
+## Questions
+1. Using the tempo_simu.R file, 
+    a. Try with N of 4 million -- does it still work? What happens?
+    b. Try with a shift function that goes up and down. Are the adjusted counts ever LESS than the observed counts? If so, when?   
+    c. If the cumulative shift was Rt = a + 0.1*t, what would be a formula for tempo-adjusted counts of births? Sketch the 4 panels without the computer and then check to see if you're right.
+2. Calculate the age profile of fertility change predicted by the BongaartsFeeney model by taking time derivatives of the log schedules. You will end up with three terms. Describe each of these in words.  
+3. Use simulation based on tempo simu.R to check your answer.  
+4. Is there a diagnostic plot that you could do to compare observed agespecific changes to those predicted by the BF model? Hint: use normalized schedules that sum to 1.0  
+5. Use this diagnostic plot to all-order fertility change during the Great Recession.  
+6. Use this diagnostic plot to 1st, 2nd, and 3rd births.  
+7. Fit the two-part normal mixture model to fertility from another country based on what looks interesting in the Burkimsher paper. (E.g., Canada, Portugal, or the Netherlands). I recommend doing this for 1 year, but once you get your code running, you could iterate over years. Use graphs to discuss the goodness of fit. And if you do more than 1 year, discuss whether the time trends in the parameters make substantive sense)
+
+## Solutions
+1. Using the tempo_simu.R file, 
+    a. Try with N of 4 million -- does it still work? What happens?
+    This simulation will first sample from a normal distribution draws of ages that represent the ages of women when giving birth for the first time. It also creates as shift function $R(t)$ which affects all women of a given year. 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(data.table)
+source("functions/utility_functions.R")
+source("functions/tempo_functions.R")
+
+million = 10^6
+thousand = 10^3
+N <-  4 * million
+year.vec <- 1990:2020
+
+#######################################
+## simulate originally timed births  ##
+#######################################
+
+## we'll assume normal with age and uniform with time
+x <- rnorm(N, mean = 30, sd = 4)
+t <- runif(N, min = min(year.vec), max(year.vec)+1)
+dt <- data.table(x, t)
+
+#########################
+## shifting the births ##
+#########################
+
+## we'll assume a continuous S-shaped cumulative shift
+shift.t <- 2*plogis(seq(-5, 5, length.out = length(year.vec)))
+
+
+plot(year.vec, shift.t, type = "o",
+     main = "Cumulative shifts")
+
+
+
+## include shifts as a column
+Rt <- approx(x = year.vec, y = shift.t, xout = t)$y
+dt[, Rt := approx(x = year.vec, y = shift.t, xout = t)$y]
+## calculate shifted times and ages of births
+dt[, t.obs := t + Rt]
+dt[, x.obs := x + Rt]
+## retain only the original time window (for convenience)
+dt <- dt[floor(t.obs) %in% year.vec]
+
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+## function version of tabulating and plotting
+
+tempo_simu_plot_fun <- function(dt)
+{
+
+    ## requires x.obs and t.obs and
+    ## (optionally) t, the original unshifted birth times
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+######################
+## plot the results ##
+######################
+
+par(mfrow = c(2,2))
+out[, plot(year, Bt, ylim = c(.8, 1.2) * range(Bt),
+           main = "Observed Births")]
+out[, plot(year, mut,
+           main = "Mean age of birth")]
+out[, plot(year, center.diff(mut),
+           main = "Change in mean age of birth")]
+## observed, adjusted, and original births
+Bt.orig.vec <- dt[, table(floor(t))]
+out[, plot(year, Bt, ylim = c(.8, 1.5) * range(Bt),
+           main = "Observed and Adjusted Births")]
+out[, lines(year, Bt.adj, col = "red")]
+points(names(Bt.orig.vec), Bt.orig.vec, col = "grey")
+legend("top", c("observed", "adjusted", "original"),
+       pch = c(1,-1,1), lty = c(-1, 1,-1),
+       col = c("black", "red", "grey"),
+       bty = "n")
+}
+
+tempo_simu_plot_fun(dt)
+
+```
+    Yes, it still works. In fact, we see that the adjusted births are very close to the observed births when using this number of simulations. (I continue to use an N of 4 million for the rest of this problem).  
+    b. Try with a shift function that goes up and down. Are the adjusted counts ever LESS than the observed counts? If so, when?   
+```{r echo= FALSE, message=FALSE, warning=FALSE}
+
+x <- rnorm(N, mean = 30, sd = 4)
+t <- runif(N, min = min(year.vec), max(year.vec)+1)
+dt <- data.table(x, t)
+
+#########################
+## shifting the births ##
+#########################
+
+# sinusoidal curve
+shift.t <- sin((year.vec - 1990)/2.5)
+
+
+plot(year.vec, shift.t, type = "o",
+     main = "Cumulative shifts")
+
+
+
+## include shifts as a column
+Rt <- approx(x = year.vec, y = shift.t, xout = t)$y
+dt[, Rt := approx(x = year.vec, y = shift.t, xout = t)$y]
+## calculate shifted times and ages of births
+dt[, t.obs := t + Rt]
+dt[, x.obs := x + Rt]
+## retain only the original time window (for convenience)
+dt <- dt[floor(t.obs) %in% year.vec]
+
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+## function version of tabulating and plotting
+
+tempo_simu_plot_fun <- function(dt)
+{
+
+    ## requires x.obs and t.obs and
+    ## (optionally) t, the original unshifted birth times
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+######################
+## plot the results ##
+######################
+
+par(mfrow = c(2,2))
+out[, plot(year, Bt, ylim = c(.8, 1.2) * range(Bt),
+           main = "Observed Births")]
+out[, plot(year, mut,
+           main = "Mean age of birth")]
+out[, plot(year, center.diff(mut),
+           main = "Change in mean age of birth")]
+## observed, adjusted, and original births
+Bt.orig.vec <- dt[, table(floor(t))]
+out[, plot(year, Bt, ylim = c(.8, 1.5) * range(Bt),
+           main = "Observed and Adjusted Births")]
+out[, lines(year, Bt.adj, col = "red")]
+points(names(Bt.orig.vec), Bt.orig.vec, col = "grey")
+legend("top", c("observed", "adjusted", "original"),
+       pch = c(1,-1,1), lty = c(-1, 1,-1),
+       col = c("black", "red", "grey"),
+       bty = "n")
+}
+
+tempo_simu_plot_fun(dt)
+
+```
+    The adjusted counts are not always less than the observed. Naturally, this only happens when we have spikes on the observed counts that become smoother after the adjusting of the birth counts.  
+    c. If the cumulative shift was Rt = a + 0.1*t, what would be a formula for tempo-adjusted counts of births? Sketch the 4 panels without the computer and then check to see if you're right.  
+Let $a = -199$, so we get a shift of 0 to about 3 years depending on the time period:  
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+x <- rnorm(N, mean = 30, sd = 4)
+t <- runif(N, min = min(year.vec), max(year.vec)+1)
+dt <- data.table(x, t)
+
+#########################
+## shifting the births ##
+#########################
+
+
+#linear shift
+alpha = -199
+
+shift.t <-  alpha + 0.1*year.vec
+
+
+plot(year.vec, shift.t, type = "o",
+     main = "Cumulative shifts")
+
+
+
+## include shifts as a column
+Rt <- approx(x = year.vec, y = shift.t, xout = t)$y
+dt[, Rt := approx(x = year.vec, y = shift.t, xout = t)$y]
+## calculate shifted times and ages of births
+dt[, t.obs := t + Rt]
+dt[, x.obs := x + Rt]
+## retain only the original time window (for convenience)
+dt <- dt[floor(t.obs) %in% year.vec]
+
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+## function version of tabulating and plotting
+
+tempo_simu_plot_fun <- function(dt)
+{
+
+    ## requires x.obs and t.obs and
+    ## (optionally) t, the original unshifted birth times
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+######################
+## plot the results ##
+######################
+
+par(mfrow = c(2,2))
+out[, plot(year, Bt, ylim = c(.8, 1.2) * range(Bt),
+           main = "Observed Births")]
+out[, plot(year, mut,
+           main = "Mean age of birth")]
+out[, plot(year, center.diff(mut),
+           main = "Change in mean age of birth")]
+## observed, adjusted, and original births
+Bt.orig.vec <- dt[, table(floor(t))]
+out[, plot(year, Bt, ylim = c(.8, 1.5) * range(Bt),
+           main = "Observed and Adjusted Births")]
+out[, lines(year, Bt.adj, col = "red")]
+points(names(Bt.orig.vec), Bt.orig.vec, col = "grey")
+legend("top", c("observed", "adjusted", "original"),
+       pch = c(1,-1,1), lty = c(-1, 1,-1),
+       col = c("black", "red", "grey"),
+       bty = "n")
+}
+
+tempo_simu_plot_fun(dt)
+```
+2. Calculate the age profile of fertility change predicted by the BongaartsFeeney model by taking time derivatives of the log schedules. You will end up with three terms. Describe each of these in words.  
+    $$\begin{aligned}
+    f(a,t)&=f_0(a-R(t))[1-R'(t)]q(t)\\
+    log(f(a,t))&=log(f_0(a-R(t))) + log(1-R'(t)) + log(q(t))\\
+    \frac{\partial log(f(a,t))}{\partial t}&=\frac{\partial log(f_0(a-R(t)))}{\partial t} + \frac{\partial
+    log(1-R'(t))}{\partial t} + \frac{\partial log(q(t))}{\partial t}\\
+    \frac{\partial log(f(a,t))}{\partial t}&=-R'(t)\frac{f_0'(a-R(t))}{f_0(a-R(t))} -\frac{R''(t)}{1-R'(t)} + \frac{q'(t)}{q(t)}
+    \end{aligned}$$
+    The first term represents the proportional change in the fertility of the equivalent pre-postponement cohort. In particular, it is divided into (how far someone shifts 'over' relative to ages on the baseline fertility schedule) and an $R'(t)$ term (how much one shifts 'up'). The second term represents the proportional change in the rate of change in years of postponement; it is a tempo-effect. The third term represents the proportional change in quantum.
+3. Use simulation based on tempo simu.R to check your answer.  
+```{r, include = FALSE, echo = FALSE}
+#tempo_simu.R
+million = 10^6
+thousand = 10^3
+N <-  8 * million
+year.vec <- 1990:2019
+
+#######################################
+## simulate originally timed births  ##
+#######################################
+
+## we'll assume normal with age and uniform with time
+x <- rnorm(N, mean = 25, sd = 4)
+t <- runif(N, min = min(year.vec), max(year.vec)+1)
+dt <- data.table(x, t)
+
+#########################
+## shifting the births ##
+#########################
+
+## we'll assume a continuous S-shaped cumulative shift
+shift.t <- 4*plogis(seq(-5, 5, length.out = length(year.vec))) ## R(t) curve
+
+
+plot(year.vec, shift.t, type = "o",
+     main = "Cumulative shifts")
+
+
+## include shifts as a column
+Rt <- approx(x = year.vec, y = shift.t, xout = t)$y
+dt[, Rt := approx(x = year.vec, y = shift.t, xout = t)$y]
+## calculate shifted times and ages of births
+dt[, t.obs := t + Rt]
+dt[, x.obs := x + Rt]
+## retain only the original time window (for convenience)
+dt <- dt[floor(t.obs) %in% year.vec]
+
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age/ mean of age + shift in year t 
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)] ## R'(t)
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)] #original births, had there been no shift in births = observed births/ adjustment factor
+
+
+## function version of tabulating and plotting
+
+    ## requires x.obs and t.obs and
+    ## (optionally) t, the original unshifted birth times
+
+##########################################
+## observed births counts and mean ages ##
+##########################################
+
+out <- dt[, .(Bt = .N,                   ## count the events
+              mut = mean(x.obs)),      ## get mean age
+          by = .(year = floor(t.obs))] ## by whole years
+out <- out[order(year)]
+
+############################################
+## change in mean age and adjusted counts ##
+############################################
+
+out[, rt.hat := center.diff(mut, end.fill = T)]
+out[, Rt.hat := cumsum(rt.hat)]
+out[, Bt.adj := Bt / (1 - rt.hat)]
+
+
+######################
+## plot the results ##
+######################
+
+par(mfrow = c(2,2))
+out[, plot(year, Bt, ylim = c(.8, 1.2) * range(Bt),
+           main = "Observed Births")]
+out[, plot(year, mut,
+           main = "Mean age of birth")]
+out[, plot(year, center.diff(mut),
+           main = "Change in mean age of birth")]
+## observed, adjusted, and original births
+Bt.orig.vec <- dt[, table(floor(t))]
+out[, plot(year, Bt, ylim = c(.8, 1.5) * range(Bt),
+           main = "Observed and Adjusted Births")]
+out[, lines(year, Bt.adj, col = "red")]
+points(names(Bt.orig.vec), Bt.orig.vec, col = "grey")
+legend("top", c("observed", "adjusted", "original"),
+       pch = c(1,-1,1), lty = c(-1, 1,-1),
+       col = c("black", "red", "grey"),
+       bty = "n")
+```
+     The  ```tempo_simu.R``` function computes $R(t)$ but we need to obtain the remaining components of the answer from the previous excercise. For simplicity, let's assume that there are no tempo effects ($q(t)=0$) and that $a=25$, that is, our baseline schedule is that of women aged 25.
+    a. $R(t)$ components:
+    Let's briefly look at $R(t)$, $R'(t)$, and $R''(t)$. In ```tempo_simu.R``` $R(t)$ refers to the cumulative shift object (```shift.t``` ). We can obtain the derivatives by taking the centered difference of this object. 
+    ```{r, fig.height=7, fig.width= 8, message=F}
+    shift.t.prime <- center.diff(shift.t)
+    shift.t.prime.2 <- center.diff(shift.t.prime)
+    
+    par(mfrow = c(2,2))
+    plot(1991:2020, shift.t, main = 'R(t)', xlab = '', ylab = '')
+    plot(1991:2020, shift.t.prime, main = 'R\'(t)', xlab = '', ylab = '')
+    plot(1991:2020, shift.t.prime.2, main = 'R\'\'(t)', xlab = '', ylab = '')
+    plot(1991:2020,-shift.t.prime.2/ (1-shift.t.prime), main = '-R\'\'(t) / (1- R\'(t))', xlab = 'year', ylab = '')
+    ```
+    b. $f_0(a-R(t))$ function:
+    In the Bongaarts and Feeney model, the baseline schedule of women of age $a$ at time $t$ is $f_0(a-R(t))$. That is, it is the fertility schedule that is observed because of the shift. From the simulation, we obtain a table of births at each age and the age-specific fertility rates. Then, we can look at the original and the observed ASFRs. The original ASFR is that from the simulation, which we would not observe. Rather we would only the see the ASFR from births that were postponed by year-specific shifts.
+    ```{r, message=F}
+    # floor everything
+dt_floored <- dt %>% 
+    transmute('x' = floor(x), 't' = floor(t), 
+              't.obs' = floor(t.obs), 'x.obs' = floor(x.obs)) # the .obs values are the ones that go into the baseline function. 
+
+# Births to women born at each age. 
+original_sched <- table(dt_floored$x, dt_floored$t)
+observed_sched <- table(dt_floored$x.obs, dt_floored$t.obs)
+
+# ASFR (The denominator is 100 person years lived, or 100 women at each age)
+asfr_original<- original_sched/(100*thousand) #f(a,t)
+asfr_observed <- observed_sched/(100*thousand) #f_0(a,t)
+
+#Graph of ASFRs for observed and original births. The lines get lighter with each year. 
+par(mfrow=c(2,1))
+matplot(rownames(asfr_observed), asfr_observed, type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Age', ylab = 'ASFR', main = 'Observed ASFR')
+abline(v= 25, lty = 2, col = 'black')
+
+matplot(rownames(asfr_original), asfr_original, type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Age', ylab = 'ASFR', main = 'Original ASFR')
+abline(v= 25, lty = 2, col = 'black')
+```
+    The component that we are interersted in is the first derivative of the baseline schedule ($f_0(a-R(t))$). 
+    ```{r echo=FALSE}
+    asfr_observed_prime <- apply(asfr_observed, 1, center.diff)
+    
+    par(mfrow = c(1,3))
+    matplot(rownames(asfr_observed_prime), asfr_observed_prime, type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Year', ylab = 'ASFR', main = "f'0(a-R(t))" )
+    abline(v= 25, lty = 2, col = 'black')
+
+    matplot(rownames(asfr_observed_prime), asfr_observed_prime/t(asfr_observed), type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Year', ylab = 'ASFR', main = "f'0(a-R(t))/f0(a-R(t))" )
+    abline(v= 25, lty = 2, col = 'black')
+    
+    f <- -shift.t.prime*asfr_observed_prime/t(asfr_observed)
+    
+    matplot(rownames(asfr_observed_prime),-shift.t.prime*asfr_observed_prime/t(asfr_observed), type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Year', ylab = 'ASFR', main = "-R'(t)*f'0(a-R(t))/f0(a-R(t))" )
+    abline(v= 25, lty = 2, col = 'black')
+    ```
+    c. Comparison of terms from original and observed data:
+    We can merge all the terms of the formula from the previous question and compare it to the derivative of the log version of the observed fertility schedules. 
+    ```{r echo=FALSE}
+    #Observed data (right-hand side)
+    observed_change <- -shift.t.prime*asfr_observed_prime/t(asfr_observed) - shift.t.prime.2/ (1-shift.t.prime)
+    
+    #Original data (left-hand side)
+    original_change <- apply(log(t(asfr_original)),2,center.diff)
+    
+    #Graphs
+    par(mfrow = c(1,2))
+    matplot(rownames(observed_change), observed_change, type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Year', ylab = 'ASFR', main = 'Observed change (RHS)')
+    abline(v= 25, lty = 2, col = 'black')
+    
+    matplot(rownames(original_change), original_change, type = "l", lty = 1, col=grey(seq(0, 1, length = 40)), 
+        xlab = 'Year', ylab = 'ASFR', main = 'Original change (LHS)')
+    abline(v= 25, lty = 2, col = 'black')
+    
+    #There seems to be a lot of noise here, so let's look at the mean at each year for the RHS and the LHS
+    observed_change_mean <- apply(observed_change, 2, mean, na.rm=TRUE)
+    original_change_mean <- apply(original_change, 2, mean, na.rm=TRUE) 
+    
+    par(mfrow = c(1,2))
+    plot(observed_change_mean[12:39], col="blue")
+    plot(original_change_mean[12:39], col="red")
+    
+    observed_change_mean
+    original_change_mean
+    
+    observed_change_25 <- -shift.t.prime*asfr_observed_prime[,25]/t(asfr_observed)[,25] - shift.t.prime.2/ (1-shift.t.prime)
+    original_change_25 <- center.diff(log(t(asfr_original)[,25]))
+    
+    plot(observed_change_25, col="blue")
+    lines(original_change_25, col="red")
+    
+     plot(observed_change[,25], col="blue")
+    lines(original_change[,25], col="red")  
+    
+    ```
+
