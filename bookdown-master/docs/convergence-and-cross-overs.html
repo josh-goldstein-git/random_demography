@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Convergence and cross-overs | Mathematical Demography</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Convergence and cross-overs | Mathematical Demography" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Convergence and cross-overs | Mathematical Demography" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Josh R. Goldstein" />
+
+
+<meta name="date" content="2020-06-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="gamma-frailty-with-applications.html"/>
+<link rel="next" href="mortality-plateaus.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction to Demographic Heterogeneity</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#outline"><i class="fa fa-check"></i><b>2.1</b> Outline</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#part-i.-conceptual-introduction"><i class="fa fa-check"></i><b>2.2</b> Part I. Conceptual Introduction</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#what-is-demographic-heterogeneity"><i class="fa fa-check"></i><b>2.2.1</b> What is Demographic Heterogeneity?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#an-example"><i class="fa fa-check"></i><b>2.2.2</b> An example</a></li>
+<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#a-2nd-example-exponential-growth-two-countries"><i class="fa fa-check"></i><b>2.2.3</b> A 2nd example: Exponential growth, two countries</a></li>
+<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#more-examples-to-work"><i class="fa fa-check"></i><b>2.2.4</b> More examples to work</a></li>
+<li class="chapter" data-level="2.2.5" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.5</b> Application</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#part-ii.-formal-analysis"><i class="fa fa-check"></i><b>2.3</b> Part II. Formal Analysis</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#outline-1"><i class="fa fa-check"></i><b>2.3.1</b> Outline</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#keyfitz-result"><i class="fa fa-check"></i><b>2.3.2</b> Keyfitz result</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#us-mexico-example"><i class="fa fa-check"></i><b>2.3.3</b> US-Mexico Example</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#the-origin-of-professor-wachters-poisson-exponential-model"><i class="fa fa-check"></i><b>2.3.4</b> The Origin of Professor Wachter’s Poisson-Exponential Model</a></li>
+<li class="chapter" data-level="2.3.5" data-path="intro.html"><a href="intro.html#some-commentary"><i class="fa fa-check"></i><b>2.3.5</b> Some commentary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#conclusions"><i class="fa fa-check"></i><b>2.4</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="frailty.html"><a href="frailty.html"><i class="fa fa-check"></i><b>3</b> Multiplicative Fixed Frailty</a><ul>
+<li class="chapter" data-level="3.1" data-path="frailty.html"><a href="frailty.html#outline-2"><i class="fa fa-check"></i><b>3.1</b> Outline</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="frailty.html"><a href="frailty.html#review-of-mortality-mathematics"><i class="fa fa-check"></i><b>3.1.1</b> Review of mortality mathematics</a></li>
+<li class="chapter" data-level="3.1.2" data-path="frailty.html"><a href="frailty.html#application-what-is-ellx"><i class="fa fa-check"></i><b>3.1.2</b> Application: what is <span class="math inline">\(\ell&#39;(x)\)</span>?</a></li>
+<li class="chapter" data-level="3.1.3" data-path="frailty.html"><a href="frailty.html#extending-keyfitz-to-mortality"><i class="fa fa-check"></i><b>3.1.3</b> Extending Keyfitz to mortality</a></li>
+<li class="chapter" data-level="3.1.4" data-path="frailty.html"><a href="frailty.html#fragile"><i class="fa fa-check"></i><b>3.1.4</b> fragile</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="frailty.html"><a href="frailty.html#part-i.-results-from-fixed-frailty"><i class="fa fa-check"></i><b>3.2</b> Part I. Results from Fixed Frailty</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="frailty.html"><a href="frailty.html#a-simulation"><i class="fa fa-check"></i><b>3.2.1</b> A simulation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="frailty.html"><a href="frailty.html#lets-derive-pop-survival-note-bars-barell"><i class="fa fa-check"></i><b>3.2.2</b> Let’s derive pop survival (Note: <span class="math inline">\(\bar{s} = \bar{\ell}\)</span>)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="frailty.html"><a href="frailty.html#now-population-hazards-stepping-stones"><i class="fa fa-check"></i><b>3.2.3</b> Now population hazards (stepping stones)</a></li>
+<li class="chapter" data-level="3.2.4" data-path="frailty.html"><a href="frailty.html#rodriguez-question"><i class="fa fa-check"></i><b>3.2.4</b> Rodriguez question</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="frailty.html"><a href="frailty.html#part-ii.-introduction-to-gamma-frailty"><i class="fa fa-check"></i><b>3.3</b> Part II. Introduction to Gamma Frailty</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="frailty.html"><a href="frailty.html#the-gamma-distribution"><i class="fa fa-check"></i><b>3.3.1</b> The Gamma distribution</a></li>
+<li class="chapter" data-level="3.3.2" data-path="frailty.html"><a href="frailty.html#gamma-in-r"><i class="fa fa-check"></i><b>3.3.2</b> Gamma in R</a></li>
+<li class="chapter" data-level="3.3.3" data-path="frailty.html"><a href="frailty.html#population-survival-of-gamma-frailty"><i class="fa fa-check"></i><b>3.3.3</b> Population Survival of Gamma Frailty</a></li>
+<li class="chapter" data-level="3.3.4" data-path="frailty.html"><a href="frailty.html#interpreting-gamma-frailty-survival"><i class="fa fa-check"></i><b>3.3.4</b> Interpreting Gamma-frailty survival</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="frailty.html"><a href="frailty.html#conclusions-1"><i class="fa fa-check"></i><b>3.4</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html"><i class="fa fa-check"></i><b>4</b> Gamma Frailty with Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#from-pop-survival-to-pop-hazards"><i class="fa fa-check"></i><b>4.1</b> From pop survival to pop hazards</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#what-happens-to-frailty-of-survivors"><i class="fa fa-check"></i><b>4.1.1</b> What happens to frailty of survivors?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#selection-and-observed-frailty-in-censoc"><i class="fa fa-check"></i><b>4.2</b> Selection and observed frailty in CenSoc</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#read-in-the-data-and-transform-the-variables-to-what-we-want.-we-produce-a-variable-y-in-this-case-a-standardized-version-of-log-wage-income-to-be-transformed-into-a-frailty-score."><i class="fa fa-check"></i><b>4.2.1</b> Read in the data and transform the variables to what we want. We produce a variable <span class="math inline">\(y\)</span> (in this case a standardized version of log wage income) to be transformed into a frailty score.</a></li>
+<li class="chapter" data-level="4.2.2" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#show-how-our-life-long-fixed-characteristic-of-interest-changes-by-age-because-of-mortality-selection."><i class="fa fa-check"></i><b>4.2.2</b> Show how our (life-long fixed) characteristic of interest changes by age because of mortality selection.</a></li>
+<li class="chapter" data-level="4.2.3" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#estimate-an-observed-frailty-for-each-person-call-this-z_obs-to-do-this-we-first-use-cox-regression-to-estimate-the-proportional-effect-of-y-on-hazards.-the-cox-model-has-the-form"><i class="fa fa-check"></i><b>4.2.3</b> Estimate an observed frailty for each person, call this <span class="math inline">\(z_{obs}\)</span> To do this we first use Cox regression to estimate the proportional effect of <span class="math inline">\(y\)</span> on hazards. The Cox model has the form</a></li>
+<li class="chapter" data-level="4.2.4" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#calculate-the-variance-of-z_obs-to-be-used-for-estimating-barz_obs.-also-plot-the-histogram-to-see-if-it-looks-gamma-like"><i class="fa fa-check"></i><b>4.2.4</b> Calculate the variance of <span class="math inline">\(z_{obs}\)</span> to be used for estimating <span class="math inline">\(\bar{z}_{obs}\)</span>. (Also plot the histogram to see if it looks gamma-like)</a></li>
+<li class="chapter" data-level="4.2.5" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#use-extinct-cohort-method-to-estimate-survivorship-barsx"><i class="fa fa-check"></i><b>4.2.5</b> Use extinct cohort method to estimate survivorship <span class="math inline">\(\bar{S}(x)\)</span></a></li>
+<li class="chapter" data-level="4.2.6" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#estimate-hatbarzx-using-the-gamma-frailty-result"><i class="fa fa-check"></i><b>4.2.6</b> Estimate <span class="math inline">\(\hat{\bar{z}}(x)\)</span> using the gamma-frailty result:</a></li>
+<li class="chapter" data-level="4.2.7" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#graph-our-results-showing-plots-for-observed-mortality-selection-and-the-gamma-frailty-based-estimate-of-mortality-selection.-do-this-for-several-measures-including-y-and-raw-unstandardized-income."><i class="fa fa-check"></i><b>4.2.7</b> Graph our results, showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including <span class="math inline">\(y\)</span>, and raw (unstandardized) income.</a></li>
+<li class="chapter" data-level="4.2.8" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#discuss-our-conclusions-and-possible-future-directions-to-follow."><i class="fa fa-check"></i><b>4.2.8</b> Discuss our conclusions and possible future directions to follow.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html"><i class="fa fa-check"></i><b>5</b> Convergence and cross-overs</a><ul>
+<li class="chapter" data-level="5.1" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#outline-3"><i class="fa fa-check"></i><b>5.1</b> Outline</a></li>
+<li class="chapter" data-level="5.2" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#what-happens-to-mortality-disparities-at-older-ages"><i class="fa fa-check"></i><b>5.2</b> What happens to mortality disparities at older ages?</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#a-possible-null-model"><i class="fa fa-check"></i><b>5.2.1</b> A possible null-model</a></li>
+<li class="chapter" data-level="5.2.2" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#a-result-5e"><i class="fa fa-check"></i><b>5.2.2</b> A result: (5E)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#inversion"><i class="fa fa-check"></i><b>5.2.3</b> Inversion</a></li>
+<li class="chapter" data-level="5.2.4" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#an-example-1"><i class="fa fa-check"></i><b>5.2.4</b> An example</a></li>
+<li class="chapter" data-level="5.2.5" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#application-1"><i class="fa fa-check"></i><b>5.2.5</b> Application</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="convergence-and-cross-overs.html"><a href="convergence-and-cross-overs.html#student-presentation"><i class="fa fa-check"></i><b>5.3</b> Student Presentation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html"><i class="fa fa-check"></i><b>6</b> Mortality plateaus</a><ul>
+<li class="chapter" data-level="6.1" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#outline-4"><i class="fa fa-check"></i><b>6.1</b> Outline</a></li>
+<li class="chapter" data-level="6.2" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#heterogeneity-slows-mortality-improvement"><i class="fa fa-check"></i><b>6.2</b> Heterogeneity slows mortality improvement</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#an-example-2"><i class="fa fa-check"></i><b>6.2.1</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#conclusions-2"><i class="fa fa-check"></i><b>6.3</b> Conclusions</a></li>
+<li class="chapter" data-level="6.4" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#kens-class"><i class="fa fa-check"></i><b>6.4</b> Ken’s class</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tempo.html"><a href="tempo.html"><i class="fa fa-check"></i><b>7</b> Tempo</a><ul>
+<li class="chapter" data-level="7.1" data-path="tempo.html"><a href="tempo.html#outline-5"><i class="fa fa-check"></i><b>7.1</b> Outline</a></li>
+<li class="chapter" data-level="7.2" data-path="tempo.html"><a href="tempo.html#summary"><i class="fa fa-check"></i><b>7.2</b> Summary</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="tempo.html"><a href="tempo.html#what-we-see-is-superficial.-heterogeneous-models-reveal-whats-really-going-on.-or-do-they"><i class="fa fa-check"></i><b>7.2.1</b> What we see is superficial. Heterogeneous models reveal what’s ``really’’ going on. (Or do they?)</a></li>
+<li class="chapter" data-level="7.2.2" data-path="tempo.html"><a href="tempo.html#continuous-postponement-a-shiny-simulation"><i class="fa fa-check"></i><b>7.2.2</b> Continuous postponement, a shiny simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="tempo.html"><a href="tempo.html#period-shifts-bongaarts-and-feeneys-model"><i class="fa fa-check"></i><b>7.3</b> Period Shifts: Bongaarts and Feeney’s model</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="tempo.html"><a href="tempo.html#an-example-3"><i class="fa fa-check"></i><b>7.3.1</b> An example</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="tempo.html"><a href="tempo.html#a-derivation-due-to-rodriguez"><i class="fa fa-check"></i><b>7.4</b> A derivation: due to Rodriguez</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="tempo.html"><a href="tempo.html#quantum-comes-at-the-end"><i class="fa fa-check"></i><b>7.4.1</b> Quantum comes at the end</a></li>
+<li class="chapter" data-level="7.4.2" data-path="tempo.html"><a href="tempo.html#tempo-adjusted-tfr-counter-factual-tfr-in-absence-of-timing-changes"><i class="fa fa-check"></i><b>7.4.2</b> Tempo-adjusted TFR: counter-factual, TFR in absence of timing changes</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tempo.html"><a href="tempo.html#how-do-period-schedules-change"><i class="fa fa-check"></i><b>7.4.3</b> How do period schedules change?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="tempo.html"><a href="tempo.html#uniform-shifts---bf-model-assumes-all-ages-shift-by-rt.---bf-model-assumes-all-ages-rise-or-fall-by-same-quantum-qt---violating-these-assumptions-means-change-in-mean-age-will-not-just-reflecttempo."><i class="fa fa-check"></i><b>7.5</b> <code>Uniform'' shifts   - BF model assumes all ages shift by $R(t)$.   - BF model assumes all ages rise or fall by same quantum $q(t)$   - Violating these assumptions means change in mean age will not     just reflect</code>tempo’’.</a></li>
+<li class="chapter" data-level="7.6" data-path="tempo.html"><a href="tempo.html#bf-recommendation-for-achieving-uniformity"><i class="fa fa-check"></i><b>7.6</b> BF recommendation for achieving uniformity</a></li>
+<li class="chapter" data-level="7.7" data-path="tempo.html"><a href="tempo.html#an-application-to-the-united-states"><i class="fa fa-check"></i><b>7.7</b> An Application to the United States</a></li>
+<li class="chapter" data-level="7.8" data-path="tempo.html"><a href="tempo.html#two-americas"><i class="fa fa-check"></i><b>7.8</b> Two Americas</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="tempo.html"><a href="tempo.html#an-algorithm-for-tempo-adjustment-of-mixtures"><i class="fa fa-check"></i><b>7.8.1</b> An algorithm for tempo adjustment of mixtures</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="tempo.html"><a href="tempo.html#conclusions-3"><i class="fa fa-check"></i><b>7.9</b> Conclusions</a><ul>
+<li class="chapter" data-level="7.9.1" data-path="tempo.html"><a href="tempo.html#caveats"><i class="fa fa-check"></i><b>7.9.1</b> Caveats</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="branching-processes.html"><a href="branching-processes.html"><i class="fa fa-check"></i><b>8</b> Branching Processes</a><ul>
+<li class="chapter" data-level="8.1" data-path="branching-processes.html"><a href="branching-processes.html#outline-6"><i class="fa fa-check"></i><b>8.1</b> Outline</a></li>
+<li class="chapter" data-level="8.2" data-path="branching-processes.html"><a href="branching-processes.html#motivation"><i class="fa fa-check"></i><b>8.2</b> Motivation</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="branching-processes.html"><a href="branching-processes.html#very-brief-history-of-branching-processes"><i class="fa fa-check"></i><b>8.2.1</b> Very brief history of Branching Processes</a></li>
+<li class="chapter" data-level="8.2.2" data-path="branching-processes.html"><a href="branching-processes.html#applicability-to-the-coronavirus-yes-and-no."><i class="fa fa-check"></i><b>8.2.2</b> Applicability to the Coronavirus? Yes and no.</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="branching-processes.html"><a href="branching-processes.html#simulated-examples-and-the-questions-they-raise"><i class="fa fa-check"></i><b>8.3</b> Simulated examples and the questions they raise</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="branching-processes.html"><a href="branching-processes.html#our-viral-example"><i class="fa fa-check"></i><b>8.3.1</b> Our viral example</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="branching-processes.html"><a href="branching-processes.html#what-is-a-bienayme-galton-watson-branching-process"><i class="fa fa-check"></i><b>8.4</b> What is a (Bienaym'e-)Galton-Watson branching process?</a></li>
+<li class="chapter" data-level="8.5" data-path="branching-processes.html"><a href="branching-processes.html#simulations"><i class="fa fa-check"></i><b>8.5</b> Simulations</a></li>
+<li class="chapter" data-level="8.6" data-path="branching-processes.html"><a href="branching-processes.html#extinction-vs-breakout"><i class="fa fa-check"></i><b>8.6</b> “Extinction” vs “breakout”</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="branching-processes.html"><a href="branching-processes.html#the-probability-generating-function-our-mathematical-tool"><i class="fa fa-check"></i><b>8.6.1</b> The Probability Generating Function: Our mathematical tool</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="branching-processes.html"><a href="branching-processes.html#good-and-bad-set-ups-for-branching-process"><i class="fa fa-check"></i><b>8.7</b> Good and bad set-ups for branching process</a></li>
+<li class="chapter" data-level="8.8" data-path="branching-processes.html"><a href="branching-processes.html#means-of-offspring-in-generation-n"><i class="fa fa-check"></i><b>8.8</b> Means of offspring in generation <span class="math inline">\(n\)</span></a></li>
+<li class="chapter" data-level="8.9" data-path="branching-processes.html"><a href="branching-processes.html#geometric-offspring-distribution"><i class="fa fa-check"></i><b>8.9</b> Geometric offspring distribution</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="branching-processes.html"><a href="branching-processes.html#the-geometric-distributions-simple-pgf"><i class="fa fa-check"></i><b>8.9.1</b> The Geometric Distribution’s simple PGF</a></li>
+<li class="chapter" data-level="8.9.2" data-path="branching-processes.html"><a href="branching-processes.html#log-scale"><i class="fa fa-check"></i><b>8.9.2</b> log scale</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="branching-processes.html"><a href="branching-processes.html#branching-processes-and-covid-19"><i class="fa fa-check"></i><b>8.10</b> Branching Processes and Covid-19</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="fisher-wright.html"><a href="fisher-wright.html"><i class="fa fa-check"></i><b>9</b> Fisher-Wright</a><ul>
+<li class="chapter" data-level="9.1" data-path="fisher-wright.html"><a href="fisher-wright.html#outline-7"><i class="fa fa-check"></i><b>9.1</b> Outline</a></li>
+<li class="chapter" data-level="9.2" data-path="fisher-wright.html"><a href="fisher-wright.html#parallel"><i class="fa fa-check"></i><b>9.2</b> Parallel</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="fisher-wright.html"><a href="fisher-wright.html#another-cell-phone-example"><i class="fa fa-check"></i><b>9.2.1</b> Another cell phone example</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="fisher-wright.html"><a href="fisher-wright.html#questions-we-can-ask"><i class="fa fa-check"></i><b>9.3</b> Questions we can ask</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="fisher-wright.html"><a href="fisher-wright.html#probability-that-a-particular-line-will-fix"><i class="fa fa-check"></i><b>9.3.1</b> Probability that a particular line will “fix”</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="fisher-wright.html"><a href="fisher-wright.html#path-to-fixation-a-measure-of-homogeneityheterogeneity"><i class="fa fa-check"></i><b>9.4</b> Path to fixation: a measure of homogeneity/heterogeneity</a></li>
+<li class="chapter" data-level="9.5" data-path="fisher-wright.html"><a href="fisher-wright.html#baby-names"><i class="fa fa-check"></i><b>9.5</b> Baby Names</a></li>
+<li class="chapter" data-level="9.6" data-path="fisher-wright.html"><a href="fisher-wright.html#conclusions-4"><i class="fa fa-check"></i><b>9.6</b> Conclusions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mathematical Demography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="convergence-and-cross-overs" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Convergence and cross-overs</h1>
+<div id="outline-3" class="section level2">
+<h2><span class="header-section-number">5.1</span> Outline</h2>
+<ul>
+<li>Concepts</li>
+<li>Student Presentation</li>
+</ul>
+</div>
+<div id="what-happens-to-mortality-disparities-at-older-ages" class="section level2">
+<h2><span class="header-section-number">5.2</span> What happens to mortality disparities at older ages?</h2>
+<ul>
+<li>Cumulative disadvantage</li>
+<li>Age as a leveler
+<ul>
+<li>(Individual adaptation/plasticity, gov support, separation from
+unequal structures like labor market)</li>
+</ul></li>
+<li>Bad data / measurement
+<ul>
+<li>(Unreliable ages, institutionalization changes sample, etc.)</li>
+</ul></li>
+<li>Nothing
+-(It’s all selection (<code>frailty''), pop hazards but individual hazards would have remained</code>parallel’’.)</li>
+</ul>
+<p>Our goal is to examine this last ``null hypothesis.’’ What can<br />
+frailty explain, and what can’t it?</p>
+<div id="a-possible-null-model" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> A possible null-model</h3>
+<ul>
+<li>2 groups, each with internal gamma-frailty</li>
+<li><p>proportional baseline hazards</p>
+<p><span class="math display">\[
+\mu_2(x) =  R \mu_1(x)
+\]</span>
+(see V&amp;M (38))</p>
+<p><span class="math display">\[
+\mu_1(x |z_1) = \mu_1 z_1 \\ \mu_2(x |z_2) = \mu_2 z_2  
+\]</span></p>
+<p>And, frailty terms are each gamma, with mean 1 and own variances.</p></li>
+</ul>
+</div>
+<div id="a-result-5e" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> A result: (5E)</h3>
+<p><span class="math display">\[
+  \bar{R}(x) \equiv {\bar\mu_2(x) \over \bar\mu_1(x)} =
+  {R + R\sigma_1^2 H_1(x) \over 1 + R \sigma_2^2 H_1(x)}
+  \]</span></p>
+<p>Questions:</p>
+
+If variances are equal. What happens at age 0? What happens
+at very old ages.
+
+If the higher mortality group has bigger frailty variance, what
+happens at older ages?
+
+<p>Same if higher mortality group has smaller frailty
+variance?</p>
+<p>(Homework: prove this, simulate this. see if cross of is when
+cumulative hazards satisfy the condition at the end of 5E). (*
+problem. can you solve for x0 in temrs of variances 1 and 2 and R
+with gamma gompertz?)</p>
+</div>
+<div id="inversion" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Inversion</h3>
+<p>Our challenge is to invert a not easy pop hazards formula
+<span class="math display">\[
+\bar{\mu}(x) = {\mu_0(x) \over 1 + \sigma^2 H_0(x)}
+\]</span>
+because we have both hazards and cumulative hazards on right.</p>
+<p>Hazards are slope of log survival</p>
+<p>Recall for Gamma,
+<span class="math display">\[
+\bar{S}(x) = { 1 \over (1 + \sigma^2 H_0(x))^{1/\sigma^2}}
+\]</span></p>
+<p>We write down the hazard as the derivative of log survival
+<span class="math display">\[
+\bar{\mu}(x)  = {1 \over \sigma^2} {d \over dx} \log(1 + \sigma^2 H_0(x)).
+\]</span></p>
+<p>The anti-derivative of both sides, gives
+<span class="math display">\[
+\bar{H}(x) = {1 \over \sigma^2} \log(1 + \sigma^2 H_0(x)).
+\]</span></p>
+<p>And now we have only 1 expression involving the baseline hazards on
+the right.</p>
+<p>Solving
+<span class="math display">\[
+\bar{H}(x) = {1 \over \sigma^2} \log(1 + \sigma^2 H_0(x)).
+\]</span>
+gives us the cumulative hazard
+<span class="math display">\[
+H_0(x) = {1 \over \sigma^2} \left(e^{\sigma^2 \bar{H}(x)} - 1 \right).
+\]</span></p>
+<p>And differencing, gives us a remarkably simple expression for the
+baseline hazard in terms of the observed popualtion hazard
+<span class="math display">\[
+\mu_0(x) = \bar\mu(x) e^{\sigma_2 \bar{H}(x)}
+\]</span></p>
+<ul>
+<li>We don’t observe underlying baseline hazard <span class="math inline">\(\mu_0\)</span> on left</li>
+<li>What is observed (and unobserved) on right?</li>
+</ul>
+</div>
+<div id="an-example-1" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> An example</h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/ITA.cMx_1x1.txt&quot;</span>,</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">            <span class="dt">na.string =</span> <span class="st">&quot;.&quot;</span>)</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">my.dt &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1915</span>]</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">my.dt[, H.f <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cumsum</span>(Female)]</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">my.dt[, H.m <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cumsum</span>(Male)]</a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">my.dt[, h.f <span class="op">:</span><span class="er">=</span><span class="st"> </span>Female]</a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">my.dt[, h.m <span class="op">:</span><span class="er">=</span><span class="st"> </span>Male]</a>
+<a class="sourceLine" id="cb50-9" data-line-number="9">sigma.sq &lt;-<span class="st"> </span><span class="fl">.5</span><span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb50-10" data-line-number="10">my.dt[, h0.f<span class="fl">.5</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</a>
+<a class="sourceLine" id="cb50-11" data-line-number="11">my.dt[, h0.m<span class="fl">.5</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</a>
+<a class="sourceLine" id="cb50-12" data-line-number="12">sigma.sq &lt;-<span class="st"> </span><span class="fl">.2</span><span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb50-13" data-line-number="13">my.dt[, h0.f<span class="fl">.2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</a>
+<a class="sourceLine" id="cb50-14" data-line-number="14">my.dt[, h0.m<span class="fl">.2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</a>
+<a class="sourceLine" id="cb50-15" data-line-number="15">sigma.sq &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb50-16" data-line-number="16">my.dt[, h0.f1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</a>
+<a class="sourceLine" id="cb50-17" data-line-number="17">my.dt[, h0.m1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</a></code></pre></div>
+<p>Italian Females, born 1915 (<span class="math inline">\(\sigma^2 = .2^2, .5^2, 1^2\)</span>)</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, H.f, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="kw">title</span>(<span class="st">&quot;Cumulative Hazards</span><span class="ch">\n</span><span class="st"> Italian Females born 1915&quot;</span>)</a>
+<a class="sourceLine" id="cb51-4" data-line-number="4">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, <span class="kw">log</span>(h.f), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb51-5" data-line-number="5">                    <span class="dt">main =</span> <span class="st">&quot;Observed vs. implied baseline&quot;</span>)]</a>
+<a class="sourceLine" id="cb51-6" data-line-number="6">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.2</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
+<a class="sourceLine" id="cb51-7" data-line-number="7">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
+<a class="sourceLine" id="cb51-8" data-line-number="8">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f1), <span class="dt">lty =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
+<a class="sourceLine" id="cb51-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;obs if s2 = .2^2&quot;</span>, <span class="st">&quot;obs if s2 = .5^2&quot;</span>, <span class="st">&quot;obs if s2 = 1^2&quot;</span>),</a>
+<a class="sourceLine" id="cb51-10" data-line-number="10">       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Italian Females vs Males born 1915 (<span class="math inline">\(\sigma^2 = .5^2\)</span>)</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="co">## title(&quot;Cumulative Hazards\n Italian Females born 1915&quot;)</span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, <span class="kw">log</span>(h.f), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">                    <span class="dt">main =</span> <span class="st">&quot;Observed vs. implied baseline&quot;</span>)]</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
+<a class="sourceLine" id="cb52-6" data-line-number="6">ugh &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h.m), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)]</a>
+<a class="sourceLine" id="cb52-7" data-line-number="7">ugh &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.m<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)]</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;female observed&quot;</span>,</a>
+<a class="sourceLine" id="cb52-9" data-line-number="9">                             <span class="st">&quot;female baseline&quot;</span>,</a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">                             <span class="st">&quot;male observed&quot;</span>,</a>
+<a class="sourceLine" id="cb52-11" data-line-number="11">                             <span class="st">&quot;male baseline&quot;</span>),</a>
+<a class="sourceLine" id="cb52-12" data-line-number="12">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb52-13" data-line-number="13"><span class="co">## now do difference</span></a>
+<a class="sourceLine" id="cb52-14" data-line-number="14">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, h.m<span class="op">/</span>h.f, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb52-15" data-line-number="15">                    <span class="dt">ylab =</span> <span class="kw">c</span>(<span class="st">&quot;h.m/h.f&quot;</span>),</a>
+<a class="sourceLine" id="cb52-16" data-line-number="16">                    <span class="dt">main =</span> <span class="st">&quot;Male-female hazard ratio&quot;</span>)]</a>
+<a class="sourceLine" id="cb52-17" data-line-number="17">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, h0.m<span class="fl">.5</span><span class="op">/</span>h0.f<span class="fl">.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb52-18" data-line-number="18"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>,</a>
+<a class="sourceLine" id="cb52-19" data-line-number="19">                              <span class="st">&quot;implied baseline&quot;</span>),</a>
+<a class="sourceLine" id="cb52-20" data-line-number="20"><span class="co">##       col = c(&quot;red&quot;,&quot;blue&quot;),</span></a>
+<a class="sourceLine" id="cb52-21" data-line-number="21">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Much bigger convergence in ``observed’’ than in baseline</p>
+</div>
+<div id="application-1" class="section level3">
+<h3><span class="header-section-number">5.2.5</span> Application</h3>
+<iframe src="https://grodri.shinyapps.io/heterogeneity/" width="672" height="600px">
+</iframe>
+</div>
+</div>
+<div id="student-presentation" class="section level2">
+<h2><span class="header-section-number">5.3</span> Student Presentation</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="gamma-frailty-with-applications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mortality-plateaus.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-crossover.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

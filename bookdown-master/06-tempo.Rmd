@@ -15,9 +15,7 @@
   
 - Until today, population hazards mislead
 - Today, homogeneous fertility misleads
-
 ### Wwill reverse perspectives
-
   - We see differences we see in genotypes, in lineages, in
     names.
   - These could be due to ``real'' differences
@@ -27,24 +25,18 @@
   - Our models of individual-level randomness will have
     predicted dynamics, which are themselves interesting but can
     also be used as a ``null'' to compare to observations.
-
-
 ## Fertility postponement, a very simple example
-
   Baseline
   
   - A population has a history of 1 birth per day
   - When women turn age 25, they have a daughter.
   - This gives us a constant stream of births, 365 per year.
   
-
   Postponement
   
   - Starting on Jan. 1, 020, everyone postponements childbearing
     an additional month, until they are aged 25 1/12.
-
   -  How many births will there be in 2020?
-
   -  How many births in 2021?
   
 ### Continuous postponement, a shiny simulation
@@ -75,9 +67,7 @@ A bigger microsimulation
   - We'll randomly generate the original planned birthdays
   - Then we'll shift by a continuous function $R(t)$.
   
-
 ## Period Shifts: Bongaarts and Feeney's model
-
   $$
   f(a,t) = f_0(a - R(t)) (1- R'(t)) q(t)
   $$
@@ -182,7 +172,6 @@ A bigger microsimulation
   Let's sketch
 
 ## ``Uniform'' shifts
-
   - BF model assumes all ages shift by $R(t)$.
   - BF model assumes all ages rise or fall by same quantum $q(t)$
   - Violating these assumptions means change in mean age will not
@@ -208,18 +197,13 @@ A bigger microsimulation
 ```{r}
 ## Tempo adjustment of US fertility using HMD data and
 ## Bongaarts-Feeney formula
-
 library(data.table)
 source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_functions.R")
 source("/hdir/0/fmenares/Book/bookdown-master/codes/utility_functions.R")
-
-
 ## (1) read in data and format into an array
 ## (2) fit bongaarts feeney without birth order
 ## (3) fit bongaarts feeney with birth order
-
 ## (1) read in data and format into an array
-
 ## age specific fertility rates by birth order for all countries and times
 ## RR means "rectangles" on Lexis surface
 dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt")
@@ -227,18 +211,14 @@ dt <- dt[Code == "USA"] ## keep only US
 ## keep only ages 15 to 49
 dt <- dt[Age %in% 15:49]
 print(dt)
-
 ## put all order fertiility into a matrix
-
 fat <- dt[, xtabs(ASFR ~ Age + Year)]
 fat <- as.matrix(unclass(fat)) ## may cause problems, we'll see
-
 fat1 <- dt[, xtabs(ASFR1 ~ Age + Year)]
 fat2 <- dt[, xtabs(ASFR2 ~ Age + Year)]
 fat3 <- dt[, xtabs(ASFR3 ~ Age + Year)]
 fat4 <- dt[, xtabs(ASFR4 ~ Age + Year)]
 fat5p <- dt[, xtabs(ASFR5p ~ Age + Year)]
-
 year.vec <- colnames(fat)
 age.vec <- rownames(fat)
 parity.vec <- c("all", 1:5)
@@ -250,16 +230,12 @@ fat.array[,,"2"] <- fat2
 fat.array[,,"3"] <- fat3
 fat.array[,,"4"] <- fat4
 fat.array[,,"5"] <- fat5p
-
 ## (2) fit bongaarts feeney
-
 tfr.vec <- colSums(fat)
-
 ## (2a) by hand
 mu.vec <- apply(fat, 2, get.mean)
 rt.vec <- center.diff(mu.vec)
 adj.tfr.vec <- tfr.vec / (1 - rt.vec)
-
 par(mfrow = c(3,1))
 plot(names(mu.vec), mu.vec)
 plot(names(mu.vec), rt.vec)
@@ -270,18 +246,14 @@ abline(v = c(1945, 2008))
 ## we see fertility since 1980 has been depressed by postponment
 ## we see weird dynamics around end of WW2 and great recession.
 ## what's going on?
-
 par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l")
 lines(year.vec, adj.tfr.vec, lty = 2)
 abline(v = c(1945, 2008))
 abline(h = seq(1.5, 2.5, .1), col = "grey", lty = 3)
-
 ## can also use function to fit
-
 adj.tfr.vec.from.fun <- bf.fit.simple(fat)$tfr.star
 lines(year.vec, adj.tfr.vec.from.fun, col = "red")
-
 ## Now let's look at turbulence around WW2
 par(mfrow = c(2,2))
 plot(age.vec, fat[,"1944"], type = "l", ylim = c(0, .23),
@@ -319,20 +291,13 @@ plot(1943:1947, tfr.vec[paste(1943:1947)],
 lines(1943:1947, adj.tfr.vec[paste(1943:1947)],
       lty = 2)
 title("TFR and adjTFR")
-
 ## From 1945 to 1946, fertility goes up a lot, but more at younger
 ## ages. So mean goes down. BF adjustment over-compensates, and has
 ## quantum declining.
-
 ## What's happening from 1944-45?
-
-
 ## (3) fit bongaarts feeney with birth order
-
 out <- bf.fit(fat.array)
-
 adj.tfr.bo.vec <-  out$tfr.star.out[, "bf.tfr.star"]
-
 ## pdf("usa_tempo_fig.pdf")
 par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l", lwd = 2)
@@ -349,15 +314,11 @@ legend("topright",
        lty = c(1, 2, 1),
        lwd = c(2,1,2))
 hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
-
 ## dev.off()
-
 ## Q. Does taking birth order into account smooth WW2 turbulence?
 ## Q. Does taking birth order into account smooth Recession turbulence?
 ## Q. Does taking birth order into account, retell the baby boom?
 ## Q. Does taking birth order into account, retell the baby bust?
-
-
 ```
 
 
@@ -386,6 +347,7 @@ hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
 - fat_mix_movie.pdf
 
 ```{r}
+library(mixtools)
   ## simulate 2 normals 
   N <- 1000
   x1 <- rnorm(N, mean = 22, sd = 3) ##
@@ -397,7 +359,6 @@ hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
                      lambda = c(.5, .5),
                      mu = c(15, 35),
                      sigma = c(5,5))
-
   print(out$mu)
   print(out$sigma)
   print(out$lambda)
@@ -448,11 +409,3 @@ Identifiability?
   - How do we project forward?
   - Can we use other indicators (e.g., social class, education,
     marriage) to get same results?
-
-
-
-
-
-
-
-
