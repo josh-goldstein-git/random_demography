@@ -1,0 +1,149 @@
+# Problem set 1
+
+## Questions
+
+1. True or False? “If every part grows exponentially at its own rate, then the whole will also grow exponentially.” Explain your answer briefly.  
+
+2. List what you think are two of the best arguments in favor of doing a disaggregated projection? What are two of the best arguments in favor of doing an aggregated projection?   
+
+3. Let there be two countries: USA ($u$) and Mexico ($m$). Assume that in  1970, their population size (in millions) is $K_u(1970) = 200$, $K_m(1970) = 50$ and that their growth rates are $r_u = .0075$ and $r_m = 0.035$, respectively. Project the first few years and verify that the rate of change in the aggregate growth rate equals the variance of the growth rate. Does it matter what time points and period you consider?  
+
+4. Using the information from question 3, notice that the growth rate changes over the course of the 50 years, but there is a constant growth rate that will produce the exact same population after 50 years. A reasonable choice of the constant growth rate to apply is the value of the changing growth rate at year 25 (half-way through the period). We can estimate this using a Taylor series approximation: $$ \bar{r}(25) \approx \bar{r}(0) + 25\bar{r}'(0) + (25)^2 \bar{r}''(0) $$  
+    a. Show that $\bar{r}''(t) = \bar{r}_3(t) - \bar{r}_2(t) \bar{r}(t) - 2 \bar{r}(t) \sigma^2_r(t)$ \\
+    b. Calculate the combined US-Mexico population after 50 years according to the following five (5) methods, plot the total population after 50 years according to these 5 methods on a graph.
+        i. Dissaggregated (“true”) forecast, with each country growing at its own rate
+        ii. Aggregated forecast, pretending it’s one country, growing at $\bar{r}(0)$) for 50 years
+        iii. Aggregated forecast, growing at the “true” value of $\bar{r}(25)$ for the whole period. (Use the value of $\bar{r}(25)$) that you calculate from the disaggregated forecast)
+        iv. Aggregated forecast, growing at the first-order Taylor series estimate of $\bar{r}(25)$ for the whole period
+        v. Aggregated forecast, growing at the second-order Taylor series estimate of $\bar{r}(25)$ for the whole period
+        
+5. For Ken’s Poisson-Exponential model,
+    a. What is the closed-form expression for $\hat{r}(t)$  
+    b. What is the variance of the growth rate?  
+    c. Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn’t depend on? (difference of $\bar{r}(t)$ and $\bar{r}(0)$)  
+
+## Solutions
+1. *True or False? “If every part grows exponentially at its own rate, then the whole will also grow exponentially.” Explain your answer briefly.*
+   False.   
+   From Keyfitz we know that the average growth rate of a heterogeneous population is: $$\bar{r}(t)=\frac{\sum_i{Q_i}{r_i}e^{r_i{t}}}{\sum_i{Q_i}e^{r_i{t}}}$$ Here, $\bar{r}(t)$ is not constant for all t as  there is a compositional effect. This should be read as “If every part grows at a constant exponential rate, then the whole will also grow exponentially”. We could argue that only in the long term it is true.   
+   
+2. *List what you think are two of the best arguments in favor of doing a disaggregated projection? What are two of the best arguments in favor of doing an aggregated projection?*  
+    a. Disaggregated projections:  
+        i. Reveal the "true" path, patterns of individuals different from that of the aggregate.  
+        ii. Take into account size of each sub-population, in particular the smaller ones.  
+        iii. Are more precise. Growth rates for sub-populations reflect their intrinsic characteristics, such that projections that do not use appropriate rates can lead to adverse social/policy implications.   
+    b. Aggregated projections:  
+        i. May used if a population is homogeneous rather than projecting many models for sub-populations.  
+        ii. Provide a straightforward method of obtaining overall rates rather than the group-specific rates. 
+        iii. Are easier to implement as more data available.  
+
+3. *There are two countries, $u$ and $m$, each with growth rates  $r_u = .0075$, $r_m = 0.035$, and population sizes in 1970 of $K_u(1970) = 200$, $K_m(1970) = 50$. Use the first few years of the projection to verify that rate of change in the aggregate growth rate equals the variance of the growth rate. Does it matter what time points and period you consider?*  
+    From the information given, we can obtain $\bar{r}(t)$ and $\sigma_r^2(t)$ by projecting each country's population using individual rates and then obtaining the total population, $$\bar{K}(t)= \sum_{i\in\{u,m\}}K_{i}(t) = \sum_{i\in\{u,m\}}K_{i}e^{r_{i} t}$$ Applying the formula for aggregate growth rate to the USA-Mexico case we get: 
+    $$\begin{aligned}
+    \bar{r}(t) & = \frac{\frac{d}{dt}\bar{K}(t)}{\bar{K}(t)}\\
+    & = \frac{K_u(0) r_u(t) e^{r_u(t) t} + K_m(0) r_m(t) e^{r_m(t) t}}{K_u(0) e^{r_u(t) t} + K_m(0) e^{r_m (t) t}}
+    \end{aligned}$$ For simplicity, time 0 is the year 1970 such that the proyection goes from 1971 (t=1) until 2020 (t=50).  
+    Then, we can calculate the variance of the growth rates as: 
+    $$\begin{aligned}
+    \sigma_r^2(t) &= \frac{{K_u(0) e^{r_u(t) t}(r_u(t) - \bar{r}(t))^2 + K_m(0) e^{r_m(t) t}(r_m(t) - \bar{r}(t))^2}} { {K_u(0) e^{r_u(t) t} + K_m(0) e^{r_m(t) t}}} \\ 
+    &= \frac{K_u(t) r_u(t)^2 + K_m(t) r_u(t)^2}{K_u(t)+K_m(t)}-\bar{r}(t)^2 
+    \end{aligned}$$
+    The table below show these results for projections at the beginning and ending of a 50 year period. Overall, the time points do not matter and we can verify that $\frac{d\bar{r}(t)}{d(t)}=\sigma_r^2(t)$   
+    
+    | $t$ | $\sigma^2_r(t)$ | $K_u(t)$ | $K_m(t)$ | $\bar{K}(t)$ | $\bar{K}(t)-\bar{K}(t-1)$ | $\bar{r}(t)$ | $\bar{r}'(t)$ |
+    |---|---------------|--------|--------|------------|-------------------------|------------|-------------|
+    |0  | 0.00021     | 200     | 50      | 250     |        |        |       |
+    |l  | 0.000123 | 201.506 | 51.781  | 253.287 | 3.2866 | 0.0131 |       |
+    |2  | 0.000125 | 203.023 | 53.625  | 256.648 | 3.3614 | 0.0132 | 0.0001|         
+    |3  | 0.000127 | 204.551 | 55.536  | 260.087 | 3.4385 | 0.0133 | 0.0001|
+    | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+    |49 | 0.000189 | 288.824 | 277.833 | 566.658 |        |        |       |
+    |50 | 0.000189 | 290.998 | 287.730 | 578.728 | 12.071 | 0.0211 |       |
+    |51 | 0.000189 | 293.189 | 297.979 | 591.168 | 12.440 | 0.0213 | 0.0002|  
+    
+4. *Using the information from question 3, notice that the growth rate changes over the course of the 50 years, but there is a constant growth rate that will produce the exact same population after 50 years. A reasonable choice of the constant growth rate to apply is the value of the changing growth rate at year 25 (half-way through the period). We can estimate this using a Taylor series approximation:* $$ \bar{r}(25) \approx \bar{r}(0) + 25\bar{r}'(0) + (25)^2 \bar{r}''(0) $$    
+    a. *Show that $\bar{r}''(t) = \bar{r}_3(t) - \bar{r}_2(t) \bar{r}(t) - 2 \bar{r}(t) \sigma^2_r(t)$*  
+    From before, we know that for $i\in\{u,m\}$:
+    $$\begin{aligned}
+    \sigma_r^2(t) &= \bar{r}'(t) \\
+    & = \frac{d}{dt}\left[ \frac{ \sum K_i r_i e^{r_i t}} {\sum K_i  e^{r_i t}} \right]\\
+    & = \frac{\sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}} - \left(\frac{ \sum K_i(0)r_ie^{r_it}} {\sum K_i(0)e^{r_it}}\right)^2 \\
+    & = \frac{\sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}} - \bar{r}^2(t) 
+    \end{aligned}$$
+   Then, we take the second derivative of the growth rate by using the quotient rule $\left(\frac{u}{v}\right)'= \frac{u'v-vu'}{v^2}$:
+    $$\begin{aligned}
+    \bar{r}''(t) &= { \frac{\left(\sum K_i(0)e^{r_it}\right)(\sum K_i(0)r_i^3e^{r_it}) -(\sum K_i(0)r_i^2e^{r_it})(\sum K_i(0)r_i e^{r_it})}  {(\sum K_i(0)e^{r_it})^2 }} - 2\bar{r}(t)\times\bar{r}'(t)\\ 
+    &= \frac{ \sum K_i(0)r_i^3e^{r_it}} {\sum K_i(0)e^{r_it} } - \frac{ \sum K_i(0)r_i^2e^{r_it}} {\sum K_i(0)e^{r_it}}\times \frac{\sum K_i(0)r_i e^{r_it}}{\sum K_i(0)e^{r_it} } - 2\bar{r}(t)\sigma^2_r(t) \\
+    &= \bar{r}_3 (t) - \bar{r}_2(t)\bar{r}(t) - 2\bar{r}(t)\sigma^2_r(t)
+    \end{aligned}$$
+    where $\bar{r}_n$ is the $n$th moment of $\bar{r}(t)$, and it is known that $\bar{r}'(t) = \sigma^2_r(t)$.  
+    b. *Calculate the combined US-Mexico population after 50 years according to the following five (5) methods, plot the total population after 50 years according to these 5 methods on a graph.*
+    For the following exercises, the population is in millions.
+        i. *Dissaggregated (“true”) forecast, with each country growing at its own rate:*  
+        $$\begin{aligned}
+        \bar{K}(2020) &= K_u(2020) + K_m(2020)\\ 
+        &=K_u(1970) e^{(2020-1970)r_u} + K_m(1970) e^{(2020-1970)r_m}\\
+        &=200e^{.0075\times 50} + 50e^{.035\times 50}\\
+        &= 578.728 
+        \end{aligned}$$  
+        ii. *Aggregated forecast, pretending it’s one country, growing at $\bar{r}(0)$) for 50 years:*  
+        $$\begin{aligned}
+        \overline{r}(1970) &= \frac{\sum K_i(1970)r_i e^{r_i (1970-1970)}} {\sum K_i(1970)e^{r_i (1970-1970) }}\\
+        &=\frac{K_u(1970)r_u + K_m(1970)r_m }{K_u(1970) + K_m(1970) }\\
+        & =  \frac{ 200\times .0075 + 50\times.035} {200+50 } = 0.013
+        \end{aligned}$$
+        $$\begin{aligned}
+        \bar{K}(2020) &= \bar{K}(1970)e^{\bar{r}(1970) (2020-1970)}\\
+        &= 250  e^{.013\times 50} \approx 478.8852
+        \end{aligned}$$  
+        iii. *Aggregated forecast, growing at the “true” value of $\bar{r}(25)$ for the whole period. (Use the value of $\bar{r}(25)$) that you calculate from the disaggregated forecast):* 
+        Translating $\bar{r}(25)$ onto the 1970 timeline, we should look at $\bar{r}(1995)$ 
+        $$\begin{aligned}
+        \bar{r}(1995) &= \sum K_i(1970)r_i e^{r_i (1995-1970)} \over \sum K_i(1970)e^{r_i (1995-1970) }\\
+        & = \frac{K_u(1970)r_u e^{r_u (25)} + K_m(1970)r_m e^{r_m (25)} }{K_u(1970)e^{r_u (25)} + K_m(1970)e^{r_m (25)} }\\ 
+        & =\frac{200\times.0075 e^{.0075\left(25\right)}+50\times.035 e^{.035\left(25\right)}}{200 e^{.0075\left(25\right)}+50 e^{.035\left(25\right)}} \approx 0.0176632\\
+        \bar{K}(2020) &= 250e^{0.016632(50)} \approx 574.25316
+        \end{aligned}$$  
+        iv. *Aggregated forecast, growing at the first-order Taylor series estimate of $\bar{r}(25)$ for the whole period:*  
+        $$\begin{aligned}
+        \sigma^2_r(1970) &= \frac{K_u(1970)r_u^2 + K_m(1970)r_m^2} {K_u(1970) + K_m(1970)} - \bar{r}^2(0) \\
+        & =  \frac{(200)(0.0075)^2 + (50)(0.035)^2}{250}-(0.013)^2 \\
+        & = 0.000121 \\
+        \hat{\bar{r}}(1995) & \approx \bar{r}(1970) + 25\sigma^2_r(1970) =  0.016025 \\ 
+        \bar{K}(2020) &= 250 e^{0.016025(50)} \approx 557.0811485
+        \end{aligned}$$  
+        v. *Aggregated forecast, growing at the second-order Taylor series estimate of $\bar{r}(25)$ for the whole period:*  
+        For this exercise we need to first calculate the extra second-order term from the Taylor series, $25^2\bar{r}''(0)$:  
+        $$\begin{aligned}
+        \bar{r}''(1970) &= \frac{200(0.0075)^3+50(0.035)^3}{250} - \frac{200(0.0075)^2+50(0.035)^2}{250} \times (0.013) - 2(0.013)(0.000121)\\
+        \hat{\bar{r}}(1995) & \approx \bar{r}(1970) + 25\sigma^2_r(1970) +(25)^2\bar{r}''(1970) \\
+        & =  0.01664891\\
+        \bar{K}(2020) &= 250 e^{0.01664891(50)} \\
+        & \approx 574.73337 \\
+        \end{aligned}$$  
+        vi. *Graphs*  
+        There are many methods to project populations.
+        ```{r, echo=FALSE, out.width = '100%'}
+        knitr::include_graphics('figures/problemset1_pp1.png')
+        knitr::include_graphics('figures/problemset1_pp2.png')
+        ```
+        
+5. *For Ken’s Poisson-Exponential model,*
+    a. *What is the closed-form expression for $\hat{r}(t)$*  
+    $$\begin{aligned}
+    \hat{r}(t) &= \frac{d}{dt}log(\hat{k})\\
+    &= r_0 - \alpha \lambda e^{-\alpha t}
+    \end{aligned}$$
+    b. *What is the variance of the growth rate?*  
+    The variance of the growth rate is $\sigma_r^2(t)$:
+    $$\bar{r}'(t)= \sigma^2_r(t) = \alpha^2\lambda e^{-\alpha t}$$
+    c. *Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn’t depend on? (difference of $\bar{r}(t)$ and $\bar{r}(0)$)*  
+    Distortion index: 
+    $$\begin{aligned}
+    \bar{r}(t) - \bar{r}(0) & = r_0 - \lambda \alpha e^{-\alpha t} - (r_0 - \lambda \alpha e^{0}) \\
+    & = \lambda \alpha - \lambda \alpha e^{-\alpha t}\\
+    & = \lambda \alpha(1-e^{-\alpha t})
+    \end{aligned}$$
+    Depends on $\lambda$, $\alpha$, $t$, but not $r_0$ or $s$. That is, it depends on the the gap between growth rates, the relative population sizes, fastest growth rate, the poisson distribution parameter, but not the poisson distributed integers.
+      
+        

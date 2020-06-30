@@ -1,0 +1,385 @@
+# Problem set 2
+
+## Questions
+1. True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly. 
+
+2. Use the fraily simulator to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.  
+
+3. Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this? (This is an open-ended question. You should feel free to use mathematics, intuition, or any other approach to answer.)  
+
+4. Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this? (Also open ended)
+
+5. At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?
+
+6. Extend the simulation code to include life expectancy at age x (Shown above.)
+
+7. Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)
+
+8. Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?
+
+9. Use the method of completing the gamma to get the mean of the gamma distribution. (Hint: I believe there are youtube examples of this).
+
+10. Derive V&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?  
+
+11. Derive V&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?  
+
+12. Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.
+
+## Solutions
+```{r  include=FALSE, messages= FALSE, warnings= FALSE}
+library(tidyverse)
+library(gridExtra)
+```
+1. *True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly.*  
+    True.   
+    If each individual has their own hazard schedule proportional to baseline $z$, there will be more variation in the distribution of deaths than if each person had the baseline case. The variation for homogeneous populations comes from to chance only, while the variation for heterogeneous populations comes from chance and group variation in risk. Therefore, the variance of the population distribution of deaths will always be larger than that of the baseline (unless the variance is 0).   
+2. *Use the fraily simulator code to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.*  
+    For simplicity, we take the code and convert it into a function that can use frailty draws from different distributions. We also extend it to include life expectancy calculation.   
+    ```{r}
+source("functions/gomp_funs.R")
+
+frailty_sim <- function( N, z, base.a, base.b ){
+  ## (1) simulate ages at death from h0*z  using the gompertz as our baseline##
+  ## note: we call the continuous ages of death "y"
+  ## but we'll make a table of deaths at age "x" and
+  ## using life table notation call the count "Dx"
+  y <- rgomp(N,
+           b = base.b, ## doesn't vary
+           a = base.a * z) ## multiplicative fixed frailty
+  
+  ## (2) Lifetables: first define age at death as floor(y) and then
+  ## make a table of deaths at each age ("Dx")
+
+  Dx <- get.Dx(y)
+  x <- as.numeric(names(Dx))  
+  lx <- rev(cumsum(rev(Dx))) ## lx by reverse-survival
+  lxpn <- c(lx[-1], 0) ## Person-years as average of adjacent lx
+  Lx <- (lx + lxpn)/2
+  mx <- Dx/Lx ## Hazards
+  Tx <- rev(cumsum(rev(Lx))) ## Remaining person-years
+  ex <- Tx/lx ## Life expectancy at age x
+  
+  ## Baseline lifetable
+  lx.base <- N * (1- pgomp(x, b = base.b, a = base.a))
+  Dx.base <- round(-diff(c(lx.base,0)))
+  mx.base <- base.a * exp(base.b * (x + .5)) ## x + .5
+  lxpn.base <- c(lx.base[-1], 0)
+  Lx.base <- (lx.base + lxpn.base)/2
+  Tx.base <- rev(cumsum(rev(Lx.base)))
+  ex.base <- Tx.base/lx.base
+  
+  
+  # exported tables
+    lifetables <- list()
+    lifetables$sim <- y
+    lifetables$z <- z
+    lifetables$baseline <- tibble(Dx.base, lx.base,lxpn.base, Lx.base, mx.base, Tx.base, ex.base)
+    lifetables$frailty <- tibble(x,Dx, lx,lxpn, Lx, mx, Tx, ex)
+  return(lifetables)
+  
+  }
+    ```
+    a. Uniform distribution:  
+    We find that the uniform-distributed frailty begins to increase more slowly after age 60 compared to baseline.
+    ```{r echo=TRUE}
+# Parameters
+million = 10^6
+N <-  million
+base.a <- 10^-4
+base.b <- 1/9
+set.seed(1047) # for reproducibility
+
+#Uniform distribution
+w <- .3 ## try smaller if you want
+z <- runif(N, min = 1 - w , max = 1 + w)
+uniform_frailty <- frailty_sim(N, z, base.a, base.b)
+    ```
+    ```{r, echo=FALSE, fig.cap="Uniform Distribution", out.width = '100%'}
+frailty <- uniform_frailty$frailty
+base <- uniform_frailty$baseline
+
+par(mfrow = c(3,2), oma=c(0.1,0.1,0.1,0.1), mar=c(3,4,3,1))
+## frailty
+hist(z, main = "Frailty distribution")
+## deaths
+plot(frailty$x, frailty$Dx, main = "Death distribution",
+     type = "l", ylim = c(0, max(base$Dx.base)),
+     xlab = "Age", ylab ="Dx")
+lines(frailty$x, base$Dx.base, lty = 2)
+legend("topleft", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8,  bty = "n")
+## survival curve
+plot(frailty$x, frailty$lx, main = "Survival curve",
+     type = "l",
+     xlab = "Age", ylab ="lx")
+lines(frailty$x, base$lx.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## hazard curve
+plot(frailty$x, frailty$mx, main = "Hazards",
+     type = "l", log = "y",
+     ylim = range(base$mx.base, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="mx")
+lines(frailty$x, base$mx.base, lty = 2)
+legend("topleft", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## life expectancy
+plot(frailty$x, frailty$ex, main = "Life expectancy",
+     type = "l",
+     ylim = range(base$ex.base, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="ex")
+lines(frailty$x, base$ex.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+
+    ```
+    b. Gamma frailty distribution:  
+    Gamma-distributed frailty begins to increase more slowly after age 60 compared to baseline.This is similar to the uniform frailty distribution. 
+    ```{r echo=TRUE}
+# Parameters
+million = 10^6
+N <-  million
+base.a <- 10^-4
+base.b <- 1/9
+set.seed(1047) # for reproducibility
+
+#Gamma distribution
+my.sd <- .5
+ sigma.sq <- my.sd^2
+  z <- rgamma(N, shape = 1/sigma.sq, scale = sigma.sq)
+gamma_frailty <- frailty_sim(N, z, base.a, base.b)
+```
+    ```{r echo=FALSE, fig.cap="Gamma Distribution", out.width = '100%'}
+frailty <- gamma_frailty$frailty
+base <- gamma_frailty$baseline
+
+par(mfrow = c(3,2), oma=c(0.1,0.1,0.1,0.1), mar=c(3,4,3,1))
+## frailty
+hist(z, main = "Frailty distribution")
+## deaths
+plot(frailty$x, frailty$Dx, main = "Death distribution",
+     type = "l", ylim = c(0, max(base$Dx.base)),
+     xlab = "Age", ylab ="Dx")
+lines(frailty$x, base$Dx.base, lty = 2)
+legend("topleft", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8,  bty = "n")
+## survival curve
+plot(frailty$x, frailty$lx, main = "Survival curve",
+     type = "l",
+     xlab = "Age", ylab ="lx")
+lines(frailty$x, base$lx.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## hazard curve
+plot(frailty$x, frailty$mx, main = "Hazards",
+     type = "l", log = "y",
+     ylim = range(base$mx.base, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="mx")
+lines(frailty$x, base$mx.base, lty = 2)
+legend("topleft", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## life expectancy
+plot(frailty$x, frailty$ex, main = "Life expectancy",
+     type = "l", 
+     ylim = range(base$ex.base, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="ex")
+lines(frailty$x, base$ex.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+    ```    
+    c. Beta frailty distribution:  
+    Beta-distributed frailty begins to increase more slowly after age 60 compared to baseline and eventually stops increasing at age 100.     
+    ```{r echo=TRUE}
+# Parameters
+million = 10^6
+N <-  million
+base.a <- 10^-4
+base.b <- 1/9
+set.seed(1047) # for reproducibility
+
+#Beta distribution
+z <- rbeta(N, shape1 = .5, shape2 = .5)
+beta_frailty <- frailty_sim(N, z, base.a, base.b)
+    ```
+    ```{r, echo=FALSE, warning=F, fig.cap="Beta Distribution", out.width = '100%'}
+frailty <- beta_frailty$frailty
+base <- beta_frailty$baseline
+
+par(mfrow = c(3,2), oma=c(0.1,0.1,0.1,0.1), mar=c(3,4,3,1))
+## frailty
+hist(z, main = "Frailty distribution")
+## deaths
+plot(frailty$x, frailty$Dx, main = "Death distribution",
+     type = "l", ylim = c(0, max(base$Dx.base)),
+     xlab = "Age", ylab ="Dx")
+lines(frailty$x, base$Dx.base, lty = 2)
+legend("topleft", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8,  bty = "n")
+## survival curve
+plot(frailty$x, frailty$lx, main = "Survival curve",
+     type = "l",
+     xlab = "Age", ylab ="lx")
+lines(frailty$x, base$lx.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## hazard curve
+plot(frailty$x, frailty$mx, main = "Hazards",
+     type = "l", log = "y",
+     ylim = range(base$mx.base, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="mx")
+lines(frailty$x, base$mx.base, lty = 2)
+legend("topleft", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## life expectancy
+plot(frailty$x, frailty$ex, main = "Life expectancy",
+     type = "l", 
+     ylim = range(base$ex.base, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="ex")
+lines(frailty$x, base$ex.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+```
+3. *Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this?*  
+    It doesn't look like two proportional subgroups. It looks like the frailty is drawn from a single distribution.   
+4. *Does the behavior of the beta at older ages look like the gamma at older ages? What do you think is driving this?*  
+    The behavior is somewhat similar, as the hazards are increasing more slowly at older ages. However, the beta hazards stops increasing at a certain point. The uniform and the gamma are more similar. For the parameters we used, beta-distributed frailty generates many very-frail or very-robust individuals and fewer medium-frail individuals. Gamma-distributed frailty generates many medium-frail individuals but fewer very-frail or very-robust individuals.   
+5. *At what age do population hazards start to diverge from the baseline in the the three models? Is it fair to say that half the cohort has to have died before unobserved heterogeneity plays a role?*  
+    Generally around age 65, but if frailty is beta distributed (with our set of parameters) then we observe a divergence earlier. For the gamma and uniform frailty models roughly half the cohort has to die before unobserved heterogeneity plays a role, but for the beta model we observe divergence in the survival curve much earlier.     
+6. *Extend the simulation code to include life expectancy at age x.*  
+    Within the frailty function, we include the steps to calculate life expectancy. We also limit the ages up to 100 for each simulation, to avoid extreme and non-realistic results. This is particularly relevant for the beta frailty distribution which leads to ages above 110 to be sampled.   
+    ```{r, eval=FALSE}
+    Tx<- rev(cumsum(rev(Lx)))
+    ex <- Tx/lx
+    ```
+    ```{r, echo=FALSE, fig.cap="Life expectancy comparison", out.width = '65%', out.height = '65%'}
+par(mfrow = c(2,2), oma=c(0.1,0.1,0.1,0.1), mar=c(3,4,3,1))
+## Uniform
+plot(uniform_frailty$frailty$x, uniform_frailty$frailty$ex, main = "Uniform",
+     type = "l", 
+     ylim = range(uniform_frailty$frailty$ex, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="ex")
+lines(uniform_frailty$frailty$x, uniform_frailty$base$ex.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## Gamma
+plot(gamma_frailty$frailty$x, gamma_frailty$frailty$ex, main = "Gamma",
+     type = "l", 
+     ylim = range(gamma_frailty$frailty$ex, na.rm = T, finite = TRUE),
+     xlab = "Age", ylab ="ex")
+lines(gamma_frailty$frailty$x, gamma_frailty$base$ex.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+## Beta
+plot(beta_frailty$frailty$x, beta_frailty$frailty$ex, main = "Beta",
+     type = "l", 
+     ylim = range(beta_frailty$frailty$ex, na.rm = T, finite = TRUE),
+     xlim = c(0, 110),
+     xlab = "Age", ylab ="ex")
+lines(beta_frailty$frailty$x, beta_frailty$base$ex.base, lty = 2)
+legend("topright", legend = c("pop", "baseline"),
+       lty = c(1, 2), cex = .8, bty = "n")
+```
+7. *Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)*  
+```{r, eval = T, echo = F, fig.cap="Average frailty", out.width = '65%', out.height = '65%'}
+
+avg_hazard_uniform <- tibble(age = floor(uniform_frailty$sim),z = uniform_frailty$z) %>% 
+  group_by(age) %>% 
+  summarize(z_mean = mean(z), n = n()) %>% 
+  mutate(z_bar_num = cumsum(rev(z_mean*n)), z_bar_denom = cumsum(rev(n))) %>% 
+  mutate(z_bar = rev(z_bar_num/z_bar_denom) )
+
+avg_hazard_beta <- tibble(age = floor(beta_frailty$sim),z = beta_frailty$z) %>% 
+  group_by(age) %>% 
+  summarize(z_mean = mean(z), n = n()) %>% 
+  mutate(z_bar_num = cumsum(rev(z_mean*n)), z_bar_denom = cumsum(rev(n))) %>% 
+  mutate(z_bar = rev(z_bar_num/z_bar_denom) ) 
+
+avg_hazard_gamma <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %>% 
+  group_by(age) %>% 
+  summarize(z_mean = mean(z), n = n()) %>% 
+  mutate(z_bar_num = cumsum(rev(z_mean*n)), z_bar_denom = cumsum(rev(n))) %>% 
+  mutate(z_bar = rev(z_bar_num/z_bar_denom) ) 
+```
+````{r, eval = T, echo = F, fig.cap="Uniform Hazards Average Frailty", out.width = '65%', out.height = '65%'}
+  ggplot(data=avg_hazard_uniform , aes(x = age, y = z_bar)) +
+  geom_point() + 
+  theme_minimal() + 
+  ylab("")
+```
+````{r, eval = T, echo = F, fig.cap="Gamma Hazards Average Frailty", out.width = '65%', out.height = '65%'}
+  ggplot(data=avg_hazard_gamma , aes(x = age, y = z_bar)) +
+  geom_point() + 
+  theme_minimal() + 
+  ylab("")
+
+```
+````{r, eval = T, echo = F, fig.cap="Beta Hazards Average Frailty", out.width = '65%', out.height = '65%'}
+  ggplot(data=avg_hazard_beta , aes(x = age, y = z_bar)) +
+  geom_point() + 
+  theme_minimal() + 
+  ylab("")
+
+```
+8. *Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?*   
+   The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+. 
+```{r, eval = t, echo = F, message=FALSE, warning=FALSE, fig.cap="Uniform Hazards Frailty", out.width = '65%', out.height = '65%'}
+avg_hazard_uniform_age <- tibble(age = floor(uniform_frailty$sim),z = uniform_frailty$z) %>%
+  filter(age > 0) %>% 
+  mutate(age_group = case_when(
+    age < 25 ~ "(0-25]",
+    age < 50 ~"(25, 50]",
+    age < 75 ~ "(50, 75]",
+    age >= 75 ~"75+"
+  )) %>%
+  ggplot()+
+  geom_histogram(aes(x = z))+ 
+  theme_minimal() + 
+  facet_grid( ~age_group, margins = T)
+
+avg_hazard_uniform_age
+```
+```{r, eval = t, echo = F, message=FALSE, warning=FALSE, fig.cap="Gamma Hazards Frailty", out.width = '65%', out.height = '65%'}
+avg_hazard_gamma_age <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %>%
+  filter(age > 0) %>% 
+  mutate(age_group = case_when(
+    age < 25 ~ "(0-25]",
+    age < 50 ~"(25, 50]",
+    age < 75 ~ "(50, 75]",
+    age >= 75 ~"75+"
+  )) %>%
+  ggplot()+
+  geom_histogram(aes(x = z))+ 
+  theme_minimal() + 
+  facet_grid( ~age_group, margins = T)
+
+avg_hazard_gamma_age
+```
+```{r, eval = t, echo = F, message=FALSE, warning=FALSE, fig.cap="Beta Hazards Frailty", out.width = '65%', out.height = '65%'}
+avg_hazard_beta_age <- tibble(age = floor(beta_frailty$sim),z = beta_frailty$z) %>%
+  filter(age > 0) %>% 
+  mutate(age_group = case_when(
+    age < 25 ~ "(0-25]",
+    age < 50 ~"(25, 50]",
+    age < 75 ~ "(50, 75]",
+    age >= 75 ~"75+"
+  )) %>%
+  ggplot()+
+  geom_histogram(aes(x = z))+ 
+  theme_minimal() + 
+  facet_grid( ~age_group, margins = T)
+
+avg_hazard_beta_age
+```
+ 
+9. *Use the method of completing the gamma to get the mean of the gamma distribution.*  
+$$\begin{aligned}
+\mu 
+& = \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+& = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k+1) \lambda^{k+1}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k) \lambda^k} z^{k - 1} e^{-\frac{z}{\lambda}} \\
+& = \frac{\Gamma(k+1) \lambda^{k+1}}{\Gamma(k) \lambda^{k}} \cdot \int_0^{\infty} \frac{1}{\Gamma(k+1) \lambda^{k+1}} z^{k - 1} e^{-\frac{z}{\lambda}} \\ 
+& = k \lambda \cdot 1 \\
+& = k \lambda
+\end{aligned}$$
+10. *Derive V&M equation 13, extending Keyfitz's result. Did your derivation require you to assume proportional hazards; if so, where?*   
+11. *Derive V&M equation 20, extending Keyfitz's result to proportional changes in the population hazard. Did your derivation require you to assume proportional hazards; if so, where?*  
+12. *Describe a strategy for simulating cross-overs in the aggregate hazards of two groups, which have baseline hazards that don't cross. If you want, write code and produce a plot.*   
