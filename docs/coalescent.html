@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Fisher-Wright | Mathematical Demography</title>
+  <title>Chapter 10 Coalescent | Mathematical Demography</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Fisher-Wright | Mathematical Demography" />
+  <meta property="og:title" content="Chapter 10 Coalescent | Mathematical Demography" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Fisher-Wright | Mathematical Demography" />
+  <meta name="twitter:title" content="Chapter 10 Coalescent | Mathematical Demography" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="branching-processes.html"/>
-<link rel="next" href="coalescent.html"/>
+<link rel="prev" href="fisher-wright.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -296,220 +296,217 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fisher-wright" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Fisher-Wright</h1>
-<div id="outline-7" class="section level2">
-<h2><span class="header-section-number">9.1</span> Outline</h2>
-<p>-Example</p>
+<div id="coalescent" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Coalescent</h1>
+<p>\title{ \ Dem260 Math Demog</p>
+<div id="outline-8" class="section level2">
+<h2><span class="header-section-number">10.1</span> Outline</h2>
+
+Big picture: What is ``coalescent theory’’?
+
+Time to (T)MRCA
+
+Simulation: Inferring population size
+
+<p>An application of Coalescent Theory</p>
 </div>
-<div id="parallel" class="section level2">
-<h2><span class="header-section-number">9.2</span> Parallel</h2>
-<style>
-.column-left{
-  float: left;
-  width: 50%;
-  text-align: left;
-}
-.column-right{
-  float: right;
-  width: 50%;
-  text-align: left;
-}
-</style>
-<div class="column-left">
-<p><em>Fisher-Wright</em></p>
-<ul>
-<li>Children picking their parents (not ``generative’’)</li>
-<li>Total population size is constant</li>
-<li>Qualitatively similar to BP. Extinction and fixation.</li>
-<li>Flexible: mutation, selection, even changes in pop size.</li>
-<li>With apologies, biologists take FW <code>seriously'' even if they don't take it</code>literally.’’</li>
-</ul>
+<div id="big-picture-the-coalescent-expectations-of-the-past" class="section level2">
+<h2><span class="header-section-number">10.2</span> Big picture: The Coalescent: Expectations of the Past</h2>
+
+Coalescent theory is not a theory.
+
+It’s a model for the probability of different histories
+
+<p>``the’’ coalescent is a bit confusing. We’re not inferring the
+actual history of common ancestry, just the probabilities</p>
+<p>An actual``picture’’
+&gt; includegraphics[width=1.1]{../coalescent/cutter_diagram.png}</p>
+
+Top panel is a Fisher-Wright instance, ordered so that lines
+don’t cross.
+
+Haplotype is a sequence (we are diploids, each
+contributing 2 haplotypes). But let’s just think of each line as
+an individual, for now.
+
+<p>We can find The Most Recent Common Ancestor (TMRCA) of
+sample (dark purple). Who and when would the MRCA of the top two individuals be?</p>
+
+Our sample <span class="math inline">\(\neq\)</span> even all {} descendants of the MRCA. What
+does this mean?
+
+Our sample <span class="math inline">\(\neq\)</span> all of the descendants of the MRCA. What
+does this mean?
+
+<p>If we chose two descendants at random, would we always get
+same MRCA?</p>
+<p>When we model coalescence we are thinking backwards in time.</p>
 </div>
-<div class="column-right">
-<p><em>Galton-Watson-Bienaym'e Branching Processe</em>
-- Branching process models independent parents randomly
-producing offspring. <code>Generative''   - Total population size can vary, and has a random component and     deterministic one $m$   - Qualitative result when $m = 1$ is that there is one longest     surviving line. This is</code>fixation’’, when one {} becomes
-universal.</p>
+<div id="our-first-question-when-was-mrca" class="section level2">
+<h2><span class="header-section-number">10.3</span> Our first question: When was MRCA?</h2>
+<p>If we sample two individuals (today), how long ago was their MRCA?\
+(Note: question is not ``who’’)</p>
+
+Our answer will in terms of the probability of MRCA being 1
+generation ago, 2 generations ago, etc.
+
+We’ll assume Fisher-Wright (constant N, each gen randomly
+picks parents)
+
+<p>The answer is surprisingly simple</p>
+<p>Let’s assume we have <span class="math inline">\(N\)</span> lines in Fisher-Wright (Note: I’m not using <span class="math inline">\(2N\)</span>.)</p>
+
+The chance that two sampled people have same parent is <span class="math inline">\(1/N\)</span>, right?
+
+Thus <span class="math inline">\(P(T_{MRCA} = 1) = 1/N\)</span>.
+
+What is $P(T_{MRCA} = 2) = $?
+
+<p>What is $P(T_{MRCA} = n) = $?</p>
+<p>Let’s go to continuous time (reasonable if pop is big and time scale
+is long).</p>
+<p>Hazard of coalescence = <span class="math inline">\(c = 1/N\)</span>.
+Probability of coalescence at time <span class="math inline">\(t\)</span> = <span class="math inline">\(\ell(t) h(t) = e^{-ct} c\)</span></p>
+<p>What is expected time of coalescence? Think life expectancy.</p>
+<p><span class="math inline">\(E(T_{MRCA})\)</span> if two samples: <span class="math inline">\(1/c = 1/(1/N) = N\)</span></p>
+<p>Let’s simulate</p>
+
+1 time, without random seed, letting N = 40, ngen = 200, mu = 0
+
+Average over 100 FW simulations
+
+<p>What is variance of outcome? Is it what we would expect from
+exponential?</p>
 </div>
-<div id="another-cell-phone-example" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Another cell phone example</h3>
-<p>Let’s simulate and draw lines
-Gen 1 0 1 2 3 4 5 6 7 8 9
-Gen 2
-Gen 3
-- What will happen?
-Simulation code</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">  fwm &lt;-<span class="st"> </span><span class="cf">function</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">0</span>) <span class="co">## mu != 4/N</span></a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">  {</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">      <span class="co">## simulate fisher-wright (with mutations)</span></a>
-<a class="sourceLine" id="cb118-4" data-line-number="4">      x &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span>N) <span class="co">## starting types</span></a>
-<a class="sourceLine" id="cb118-5" data-line-number="5">      A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> n_gen, <span class="dt">ncol =</span> N)</a>
-<a class="sourceLine" id="cb118-6" data-line-number="6">      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_gen)</a>
-<a class="sourceLine" id="cb118-7" data-line-number="7">      {</a>
-<a class="sourceLine" id="cb118-8" data-line-number="8">          A[i,] &lt;-<span class="st"> </span>x</a>
-<a class="sourceLine" id="cb118-9" data-line-number="9">          x &lt;-<span class="st"> </span><span class="kw">sample</span>(x, <span class="dt">size =</span> N, <span class="dt">replace =</span> T)</a>
-<a class="sourceLine" id="cb118-10" data-line-number="10">          x &lt;-<span class="st"> </span><span class="kw">mut</span>(x, mu)</a>
-<a class="sourceLine" id="cb118-11" data-line-number="11">          x</a>
-<a class="sourceLine" id="cb118-12" data-line-number="12">      }</a>
-<a class="sourceLine" id="cb118-13" data-line-number="13">      <span class="kw">return</span>(A) <span class="co">## matrix of types, each line a generation.</span></a>
-<a class="sourceLine" id="cb118-14" data-line-number="14">  }</a></code></pre></div>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">  mut &lt;-<span class="st"> </span><span class="cf">function</span>(x, mu)</a>
-<a class="sourceLine" id="cb119-2" data-line-number="2">  {</a>
-<a class="sourceLine" id="cb119-3" data-line-number="3">      <span class="co">## m, the individuals that mutate</span></a>
-<a class="sourceLine" id="cb119-4" data-line-number="4">      m &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(x), <span class="dv">1</span>, mu) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb119-5" data-line-number="5">      <span class="cf">if</span> (<span class="kw">length</span>(m) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## if no-one mutates</span></a>
-<a class="sourceLine" id="cb119-6" data-line-number="6">          <span class="kw">return</span>(x)</a>
-<a class="sourceLine" id="cb119-7" data-line-number="7">      <span class="co">## add a suffix to their ID, so it will be unique (infinite alleles)</span></a>
-<a class="sourceLine" id="cb119-8" data-line-number="8">      suffix &lt;-<span class="st"> </span><span class="dv">10000</span><span class="op">*</span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="kw">length</span>(m)),<span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb119-9" data-line-number="9">      x[m] &lt;-<span class="st"> </span><span class="kw">paste0</span>(x[m], <span class="st">&quot;.&quot;</span>, suffix)</a>
-<a class="sourceLine" id="cb119-10" data-line-number="10">      x</a>
-<a class="sourceLine" id="cb119-11" data-line-number="11">  }</a></code></pre></div>
-<p>Trying it out</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">  <span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb120-2" data-line-number="2">  <span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">2</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</a></code></pre></div>
-<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-## [1,] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; 
-## [2,] &quot;9&quot;  &quot;4&quot;  &quot;7&quot;  &quot;1&quot;  &quot;2&quot;  &quot;7&quot;  &quot;2&quot;  &quot;3&quot;  &quot;1&quot;  &quot;5&quot;</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">  <span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">2</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</a></code></pre></div>
-<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-## [1,] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; 
-## [2,] &quot;5&quot;  &quot;5&quot;  &quot;2&quot;  &quot;10&quot; &quot;9&quot;  &quot;1&quot;  &quot;4&quot;  &quot;3&quot;  &quot;6&quot;  &quot;10&quot;</code></pre>
-<p>Trying it out some more</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">  <span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb124-2" data-line-number="2">  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">20</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb124-3" data-line-number="3">  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></a>
-<a class="sourceLine" id="cb124-4" data-line-number="4">  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></a>
-<a class="sourceLine" id="cb124-5" data-line-number="5">  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">main =</span> <span class="st">&quot;FW simu&quot;</span>)</a>
-<a class="sourceLine" id="cb124-6" data-line-number="6">  <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">y =</span> <span class="kw">jitter</span>(ptt[,<span class="dv">4</span>]), <span class="kw">rownames</span>(ptt), <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
-<p>Qs: What happens at time 15? Why does line 5 rise and fall? What happens at time 2?
-What is <span class="math inline">\(E(p_i(t) | p_i(t-1))\)</span>?</p>
-<p>Bigger pop and more time</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">  <span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb125-2" data-line-number="2">  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">n_gen =</span> <span class="dv">200</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb125-3" data-line-number="3">  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></a>
-<a class="sourceLine" id="cb125-4" data-line-number="4">  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></a>
-<a class="sourceLine" id="cb125-5" data-line-number="5">  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
-<ul>
-<li>What does this remind you of? What will happen in long run?</li>
-<li>What other questions could we ask?</li>
-</ul>
-</div>
-</div>
-<div id="questions-we-can-ask" class="section level2">
-<h2><span class="header-section-number">9.3</span> Questions we can ask</h2>
-<ul>
-<li>What is probability that line <span class="math inline">\(i\)</span> will ``fix’’? (Hint: easy)</li>
-<li>What is expected time until some line fixes? (We’ll demo the result)</li>
-<li>How can we describe the path to fixation? (We’ll derive the result)</li>
-</ul>
-<div id="probability-that-a-particular-line-will-fix" class="section level3">
-<h3><span class="header-section-number">9.3.1</span> Probability that a particular line will “fix”</h3>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">  <span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb126-2" data-line-number="2">  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">20</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb126-3" data-line-number="3">  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></a>
-<a class="sourceLine" id="cb126-4" data-line-number="4">  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></a>
-<a class="sourceLine" id="cb126-5" data-line-number="5">  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">main =</span> <span class="st">&quot;FW simu&quot;</span>)</a>
-<a class="sourceLine" id="cb126-6" data-line-number="6">  <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">y =</span> <span class="kw">jitter</span>(ptt[,<span class="dv">4</span>]), <span class="kw">rownames</span>(ptt), <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-54-1.png" width="672" />
-### Expected time until fixation?
-Answer for us is
+<div id="mutation-and-inference-of-tmrca-and-n" class="section level2">
+<h2><span class="header-section-number">10.4</span> Mutation and inference of TMRCA and <span class="math inline">\(N\)</span></h2>
+
+Say mutations occur at a constant rate <span class="math inline">\(\mu\)</span> (<span class="math inline">\(10^{-8}\)</span>?)
+
+Each year we would expect <span class="math inline">\(\mu\)</span> mutations, and over <span class="math inline">\(T\)</span> years we
+would expect <span class="math inline">\(T\mu\)</span> mutations.
+
+Say we observe that two people differ at <span class="math inline">\(k\)</span> sites of the
+genome.
+
+When was TMRCA?
+
+<p>How big is the population?</p>
+<p>Picture (<span class="math inline">\(\Lambda\)</span>)
+Tree length = <span class="math inline">\(2T\)</span>
+Expected number of mutations:
 <span class="math display">\[
-  \bar{T}_{fixed} = 2 \cdot N
+  E(k) = E(2T\mu) = \bar{T} 2 \mu
   \]</span>
-Note: Biologists say <span class="math inline">\(4 N_e\)</span> \
-See Wikipedia “Genetic drift”
-### Simulation of time to fixation</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">  T.vec &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">  all.the.same &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">length</span>(<span class="kw">unique</span>(x)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>}</a>
-<a class="sourceLine" id="cb127-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb127-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb127-5" data-line-number="5">  {</a>
-<a class="sourceLine" id="cb127-6" data-line-number="6">      A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">n_gen =</span> <span class="dv">1000</span>,<span class="dt">mu =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb127-7" data-line-number="7">      extinction_time =<span class="st"> </span><span class="kw">min</span>(<span class="kw">row</span>(A)[<span class="kw">apply</span>(A, <span class="dv">1</span>, all.the.same)])</a>
-<a class="sourceLine" id="cb127-8" data-line-number="8">      T.vec[i] &lt;-<span class="st"> </span>extinction_time</a>
-<a class="sourceLine" id="cb127-9" data-line-number="9">  }</a>
-<a class="sourceLine" id="cb127-10" data-line-number="10">  <span class="kw">mean</span>(T.vec)</a></code></pre></div>
-<pre><code>## [1] 202.89</code></pre>
-</div>
-</div>
-<div id="path-to-fixation-a-measure-of-homogeneityheterogeneity" class="section level2">
-<h2><span class="header-section-number">9.4</span> Path to fixation: a measure of homogeneity/heterogeneity</h2>
-<p>Chance that two randomly drawn individuals are of same type.
+Since,
 <span class="math display">\[
-  G = \sum_i p_i^2
-  \]</span></p>
-<p>If we have two types, <span class="math inline">\(p_1 = \pi\)</span> , <span class="math inline">\(p_2 = 1-\pi\)</span>?
-What is G if <span class="math inline">\(\pi = 0, .5, 1\)</span>?</p>
-<p>Let’s derive time path of G</p>
-<p>Let’s assume just two types, <span class="math inline">\(\pi(t)\)</span></p>
-<p>Chance two indiv are of same type
-<span class="math display">\[
-  G_{t+1} = P(\mbox{same parent})\cdot 1 +
-  P(\mbox{different parent})\cdot G_{t}
-  \]</span></p>
-<p>Notation: I’m going use <span class="math inline">\(K\)</span> for pop size. Bio uses <span class="math inline">\(2N\)</span>.
-<span class="math display">\[
-  G_{t+1} = {1 \over K} \cdot 1 + (1 - {1\over K}) \cdot G_{t}
-  \]</span></p>
-<p>Easier to solve letting <span class="math inline">\(H = 1 - G\)</span>. Some algebra gives
-<span class="math display">\[
-  H_{t+1} = H_{t} (1 - 1/K)
-  \]</span></p>
-<p>Or,
-<span class="math display">\[
-  H_{t} = H_0 (1 - 1/K)^t % \rightarrow H_0 e^{-t/K}
+  \bar{T} = E(TMRCA) = N
   \]</span>
-So, H goes to 0 exponentially, just as G goes to 1.</p>
+If we observe on average <span class="math inline">\(\bar{k}\)</span> mutations, then
+<span class="math display">\[
+  E(k) = N 2 \mu \rightarrow \hat{N} = {\bar{k} \over 2 \mu}
+  \]</span></p>
 </div>
-<div id="baby-names" class="section level2">
-<h2><span class="header-section-number">9.5</span> Baby Names</h2>
-<p>“Drift as a mechanism for cultural change: an example from baby names”
-by Matthew W. Hahn and R. Alexander Bentley
-&gt; Proc. R. Soc. Lond. B 2003 270, S120-S123</p>
-<p>What’s the basic idea?</p>
-<ul>
-<li>How is naming a baby like Fisher-Wright?</li>
-<li><p>How is it not?</p></li>
-<li>Like Fisher-Wright
-<ul>
-<li>people choose from existing set (?)</li>
-<li>names are ``neutral’’ (?)</li>
-<li>draw proportionally (?)</li>
-</ul></li>
-<li>They test to see if they can reject FW
-<ul>
-<li>compare observed histograms to FW simulation</li>
-</ul></li>
-<li><p>They include mutation to get a stationary disn
-Note: failing to reject FW doesn’t mean it’s correct
-Their picture
-&gt; 
-&gt; 
-### Drawing their picture with the data
-babynames.R
-### Some potential criticism</p></li>
-<li><p>While we can’t reject that there’s some parameterization of
-FW that gives us similar disn, this doesn’t mean that we’ve
-found the right mechanism. (Just that we can’t reject it).</p></li>
-<li><p>What are some other tests of this mechanism?</p></li>
-<li>Markov assumption. We could see if each frequency really
-followed random walk.</li>
-<li><p>Perhaps we could see if variances were scaled to
-frequencies correctly.</p></li>
-</ul>
+<div id="inference-of-population-size-simulation" class="section level2">
+<h2><span class="header-section-number">10.5</span> Inference of population size, simulation</h2>
+
+We do FW with mutations
+
+Average pairwise differences
+
+Divide by <span class="math inline">\(2\mu\)</span> to get our estimate
+
+<p>We can repeat a bunch of times and see average estimate
+converges to the truth</p>
+<p>Coalescence of a sample of <span class="math inline">\(n\)</span> individuals</p>
+
+This is covered on pages 42 and 43 of Gillespie
+
+<p>We’ll just do one quick example, accepting the result</p>
+<p>A sample of 3: Note we’re using <span class="math inline">\(N\)</span> (instead of <span class="math inline">\(2N\)</span>)</p>
+
+<p>Question: If we sample 4, how much of time to TMRCA
+is do we have 4 branches, 3 branches, and 2 branches?</p>
 </div>
-<div id="conclusions-4" class="section level2">
-<h2><span class="header-section-number">9.6</span> Conclusions</h2>
-<ul>
-<li>Fisher-Wright an alternative to branching processes</li>
-<li>It reverses logic of reproduction, but gives similar
-quantitative and qualitative results</li>
-<li>A neutral model for other processes?</li>
-<li>Starting point for coalescent</li>
-</ul>
+<div id="conclusions-5" class="section level2">
+<h2><span class="header-section-number">10.6</span> Conclusions</h2>
+
+We defined the coalescent as the stochastic process going
+back in time to common ancestors
+
+For constant population size, we proved that time to
+coalescence for a sample pair is exponential.
+
+We showed (math and simulation) that <span class="math inline">\(E(T) = N\)</span>.
+
+<p>We showed that we could estimate <span class="math inline">\(N\)</span> from observed mutations
+if we knew the mutation rate</p>
+<p>\end{frame}</p>
+</div>
+<div id="an-application-of-coalescent-theory" class="section level2">
+<h2><span class="header-section-number">10.7</span> An application of coalescent theory</h2>
+<p>Application to making inferences about the real history of human populations.</p>
+<p>Caveat: We’re still using <span class="math inline">\(N\)</span> (not <span class="math inline">\(2N\)</span>) as the number of haploids</p>
+<div id="coalesence-when-population-is-changing" class="section level3">
+<h3><span class="header-section-number">10.7.1</span> Coalesence when population is changing</h3>
+
+Ee said hazard of coalescence was <span class="math inline">\(h = c = 1/N\)</span>.
+
+<p>What is hazard of coalesence in one generation for two
+different populations: <span class="math inline">\(N =  1000\)</span>? <span class="math inline">\(N = 2000\)</span>?</p>
+
+<p>What if within the same population <span class="math inline">\(N(t) = 1000\)</span> and <span class="math inline">\(N(t+1)  = 2000\)</span>? (Hint: we still follow FW in allowing children to
+choose their parents.)</p>
+
+<p>If the population size changes over time <span class="math inline">\(N(t)\)</span>, then hazards
+of coalescence in will change too: <span class="math inline">\(h(t) = 1/N(t)\)</span>.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">  N_recent =<span class="st"> </span><span class="dv">5000</span> <span class="co">## population last T_thresh years</span></a>
+<a class="sourceLine" id="cb129-2" data-line-number="2">  T_thresh =<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3">  N_ancient =<span class="st"> </span><span class="dv">500</span> <span class="co">## earlier population</span></a>
+<a class="sourceLine" id="cb129-4" data-line-number="4">  n =<span class="st"> </span><span class="dv">1000</span> <span class="co">## sampled individuals</span></a>
+<a class="sourceLine" id="cb129-5" data-line-number="5">  <span class="kw">set.seed</span>(<span class="fl">0.4886</span>)</a>
+<a class="sourceLine" id="cb129-6" data-line-number="6">  T1 &lt;-<span class="st"> </span><span class="kw">rexp</span>(n, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_recent) <span class="co">## give everyone a chance to coalesce </span></a>
+<a class="sourceLine" id="cb129-7" data-line-number="7">  T1[T1 <span class="op">&gt;</span><span class="st"> </span>T_thresh] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## if they don&#39;t in 1st 1000 years, resample them</span></a>
+<a class="sourceLine" id="cb129-8" data-line-number="8">  n2 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(T1))</a>
+<a class="sourceLine" id="cb129-9" data-line-number="9">  T2 &lt;-<span class="st"> </span>T_thresh <span class="op">+</span><span class="st"> </span><span class="kw">rexp</span>(n2, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_ancient) <span class="co">## at ancient rate</span></a>
+<a class="sourceLine" id="cb129-10" data-line-number="10">  T.vec &lt;-<span class="st"> </span><span class="kw">c</span>(T1, T2)</a>
+<a class="sourceLine" id="cb129-11" data-line-number="11">  <span class="kw">hist</span>(T.vec, <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">5000</span>, <span class="dv">250</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-56-1.png" width="672" />
+Q: How could we estimate population sizes from this histogram?</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">  T.vec &lt;-<span class="st"> </span><span class="kw">sort</span>(T.vec)</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">  St =<span class="st"> </span>(n<span class="op">:</span><span class="dv">1</span>)<span class="op">/</span>n</a>
+<a class="sourceLine" id="cb130-3" data-line-number="3">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb130-4" data-line-number="4">  <span class="kw">plot</span>(T.vec, St); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh); <span class="kw">plot</span>(T.vec, <span class="kw">log</span>(St)); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-57-1.png" width="672" />
+Q: How can we estimate hazards from this histogram?</p>
+<p>Our approach</p>
+
+Say we have <span class="math inline">\(i\)</span> pairs of haploids
+
+We then compute how many pairwise differences there are,
+but instead of computing <span class="math inline">\(\bar{k}\)</span>, we keep the distributional
+information <span class="math inline">\(k_i\)</span>.
+
+Each <span class="math inline">\(k_i\)</span> implies a <span class="math inline">\(T_i\)</span>
+
+<p>We then have a set of ``death times’’ (coalescence times),
+can build a life table, estimate the hazards, and infer
+<span class="math inline">\(N(t)\)</span>.</p>
+</div>
+<div id="inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths" class="section level3">
+<h3><span class="header-section-number">10.7.2</span> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</h3>
+Detour to length of branches
+A sample of 3: Note we’re using <span class="math inline">\(N\)</span> (not <span class="math inline">\(2N\)</span>)
+
+<p>Intuition: when we have more individuals, there’s more chance that
+some pair of them will coalesce.</p>
+<p>Question: If we sample 4, how much of time to TMRCA
+do we have 4 branches, 3 branches, and 2 branches?</p>
+</div>
+</div>
+<div id="using-real-mtdna-to-estimate-population-sizes." class="section level2">
+<h2><span class="header-section-number">10.8</span> Using real mtDNA to estimate population sizes.</h2>
+<p>Let’s go to .Rmd in RStudio</p>
 
 </div>
 </div>
@@ -518,8 +515,8 @@ quantitative and qualitative results</li>
           </div>
         </div>
       </div>
-<a href="branching-processes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="coalescent.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fisher-wright.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -550,7 +547,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-fw.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-coalescent.Rmd",
 "text": "Edit"
 },
 "history": {
