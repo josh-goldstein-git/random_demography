@@ -70,7 +70,9 @@ We have a large matched sample from the 1940 census to Social Security death dat
 
 In this example, we use observed wage income in 1940 for the cohort born 1895 to 1900. We look at how wages of survivors increase with age as a result of selective mortality and we see if the gamma-frailty model can produce similar results.  
 
-### Read in the data and transform the variables to what we want. We produce a variable $y$ (in this case a standardized version of log wage income) to be transformed into a frailty score.
+### Data
+
+Read in the data and transform the variables to what we want. We produce a variable $y$ (in this case a standardized version of log wage income) to be transformed into a frailty score.
 
 
 ```{r echo=TRUE}
@@ -116,7 +118,7 @@ my.dt[, summary(y)]
 Now we're centered at 0.
 
 
-### Show how our (life-long fixed) characteristic of interest changes by age because of mortality selection.
+Show how our (life-long fixed) characteristic of interest changes by age because of mortality selection.
 
 ```{r include=FALSE}
 x <- 74:104
@@ -143,7 +145,9 @@ So we see annual wage income in 1940 increases by about $100 or so, or about 5% 
 
 > Is this what we would expect from our Gamma frailty model?
 
-### Estimate an observed frailty for each person, call this $z_{obs}$ To do this we first use  Cox regression to estimate the proportional effect of $y$ on hazards. The Cox model has the form
+### Estimation
+
+Estimate an observed frailty for each person, call this $z_{obs}$ To do this we first use  Cox regression to estimate the proportional effect of $y$ on hazards. The Cox model has the form
 
 
 $$
@@ -180,7 +184,7 @@ hist_z <- my.dt[, hist(z, xlim = c(0, 3))]
 > Does this look gamma-like?
 
 
-### Calculate the variance of $z_{obs}$ to be used for estimating $\bar{z}_{obs}$. (Also plot the histogram to see if it looks gamma-like)
+Calculating the variance of $z_{obs}$ to be used for estimating $\bar{z}_{obs}$. (Also plotting the histogram to see if it looks gamma-like)
 
 
 ```{r}
@@ -191,7 +195,7 @@ print(sqrt(sigma.sq))
 > Check SD against histogram. Does it look right?
 
 
-### Use extinct cohort method to estimate survivorship $\bar{S}(x)$
+Extinct cohort method to estimate survivorship $\bar{S}(x)$
 
 ```{r}
 Dx <- my.dt[, table(floor(age.at.death))]
@@ -219,7 +223,7 @@ plot(x, lx)
 
 
 
-### Estimate $\hat{\bar{z}}(x)$ using the gamma-frailty result:
+Estimation of $\hat{\bar{z}}(x)$ using the gamma-frailty result:
 
 $$
 \bar{z}(x) = \bar{S}(x)^{\sigma^2}
@@ -231,7 +235,7 @@ sx.bar <- lx/lx[1]
 z.bar.hat <- sx.bar^sigma.sq
 ```
 
-Compare this to our observed $\bar{z}$
+Comparing this to our observed $\bar{z}$
 
 ```{r}
 x <- 74:104
@@ -242,7 +246,7 @@ for (i in 1:length(x))
 }
 ```
 
-Plot comparison
+Plotting comparison
 
 ```{r}
 plot(x, z.bar.hat, ylim = c(.995, 1.001), type = "l", lty = 2)
@@ -253,7 +257,7 @@ lines(x, z.bar)
 
 > I'm not quite sure why intercept of observed is not exactly 1.0. (Feel free to play around, but I don't think this is important -- I hope.)
 
-### Graph our results, showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including  $y$, and raw (unstandardized) income.
+Showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including  $y$, and raw (unstandardized) income.
 
 ```{r}
 y.bar.hat <- log(z.bar.hat)/beta

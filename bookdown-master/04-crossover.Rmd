@@ -8,16 +8,16 @@
   
   - Cumulative disadvantage
   - Age as a leveler
-    - (Individual adaptation/plasticity, gov support, separation from
-    unequal structures like labor market)
+    - Individual adaptation/plasticity, gov support, separation from
+    unequal structures like labor market
   - Bad data / measurement
-    - (Unreliable ages, institutionalization changes sample, etc.)
+    - Unreliable ages, institutionalization changes sample, etc.
 
   - Nothing
-    -(It's all selection (``frailty''), pop hazards but
-    individual hazards would have remained ``parallel''.)
+    -It's all selection ("frailty"), pop hazards but
+    individual hazards would have remained "parallel".
 
-Our goal is to examine this last ``null hypothesis.'' What can  
+Our goal is to examine this last "null hypothesis". What can  
   frailty explain, and what can't it?
   
 ### A possible null-model
@@ -28,7 +28,7 @@ Our goal is to examine this last ``null hypothesis.'' What can
   $$
   \mu_2(x) =  R \mu_1(x)
   $$
-  (see V&M (38))
+see V&M (38)
 
   $$
   \mu_1(x |z_1) = \mu_1 z_1 \\ \mu_2(x |z_2) = \mu_2 z_2  
@@ -53,10 +53,10 @@ Our goal is to examine this last ``null hypothesis.'' What can
     variance?
   
 
-  (Homework: prove this, simulate this. see if cross of is when
+> Homework: prove this, simulate this. see if cross of is when
   cumulative hazards satisfy the condition at the end of 5E). (*
   problem. can you solve for x0 in temrs of variances 1 and 2 and R
-  with gamma gompertz?)
+with gamma gompertz?
 
 ### Inversion
 
