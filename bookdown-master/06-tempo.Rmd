@@ -380,8 +380,9 @@ for (i in 1:length(my.year.vec))
 dev.off()
 ```
 
-## now fit mixing model and redo the animation
-```{r}
+ now fit mixing model and redo the animation
+
+```{r eval=FALSE, include=FALSE}
 library(data.table)
 library(mixtools)
 source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_mixed_functions.R")
@@ -527,15 +528,13 @@ plot(my.year.vec, tfr.vec, type = "l",
 
 lines(my.year.vec, tfr.star.vec, lty = 2)
 
-
+```
 
   Let's look at 1st births, again as if their are two latent groups:
   $A$ and $B$.  (These could be "early moms" / "late moms",
   non-college / college,
   pre-marital / marital, lower-class / upper class, $\ldots$)
 
-
-- fat_mix_movie.pdf
 
 ```{r}
 library(mixtools)
@@ -569,19 +568,15 @@ library(mixtools)
 
 ### An algorithm for tempo adjustment of mixtures
   
-  - Fit normal mixture to each year.
-  - Refit using constant variance (average). This assures shape
-    invariance of each component, fulfilling BF assumption.
-  - Estimate BF separately for $A$ and $B$, and combine.
+- Fit normal mixture to each year.
+- Refit using constant variance (average). This assures shape
+invariance of each component, fulfilling BF assumption.
+- Estimate BF separately for $A$ and $B$, and combine.
 
 
 
 - tempo_mixed_results_figure.pdf
   
-
-Identifiability?
-
-% could do with 3 sub-populations?
 
 ## Conclusions 
   

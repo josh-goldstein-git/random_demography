@@ -1,6 +1,6 @@
 ## get center.diff
 
-source("~/Documents/tempo_repos/optim_clean/utility_functions.R")
+source("/hdir/0/fmenares/Book/bookdown-master/codes/utility_functions.R")
 
 ## fit mixed model to series of periods
 

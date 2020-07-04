@@ -2,8 +2,8 @@
 
 ## Outline 
   
-  - The Galton-Watson-Bienaym\'e Process
-  - A viral example, simulating a branching process, our questionsThe distribution of the 2nd generation
+  - The Galton-Watson-Bienaym\'e Process: Motivation
+  - Simulating a branching process
   - Moment generating functions
   - Extinction probabilities
   - The distribution of offspring of all generations
@@ -43,9 +43,8 @@
     dynamics take over.
   - One lesson: beyond $R_0$.
   
-## Simulated examples and the questions they raise
+### Simulated examples and the questions they raise
 
-### Our viral example
   Here are the chances that the first carrier passes on the virus to $k$
   people?
   
@@ -73,7 +72,7 @@
 | 2   | .3    | 6-9    |
 +-----+-------+--------+
 
-## What is a (Bienaym\'e-)Galton-Watson branching process?
+### What is a (Bienaym\'e-)Galton-Watson branching process?
 
   - $p_k$: Each individual in each generation reproduces
     independently, following same offspring distribution, with $p_k$
@@ -171,16 +170,15 @@ Long term
 
 What does this remind you of? (Hint: "Leslie"). (See Harris figure)
 
+## The Probability Generating Function: Our mathematical tool
 
-## "Extinction" vs "breakout"
+"Extinction" vs "breakout"
   
   - We see that in a super-critical ($m > 1$) branching process,
     if a line can survive a few generations and reach a large enough
     size, it will grow exponentially.
   - What happens if $m < 1$, if $m = 1$? Discuss.
   
-
-### The Probability Generating Function: Our mathematical tool
 
   $$
   h(z) = p_0 + p_1 z + p_2 z^2 + \ldots
@@ -190,9 +188,9 @@ What does this remind you of? (Hint: "Leslie"). (See Harris figure)
   chance of $k$ is the coefficient on $z^k$.
 
 
-  -$h(0) = $ 
-  -$h(1) = $ 
-  -$h'(1) = $
+- $h(0) = $ 
+- $h(1) = $ 
+- $h'(1) = $
 
 The story of two brothers
 
@@ -203,7 +201,7 @@ The story of two brothers
   [h(z)]^2 = (p_0  + p_1 z + p_2 z^2) \times (p_0  + p_1 z + p_2 z^2)
   $$
 
-  Multiply out, and tell me the coefficients on $z^0, z^1, \ldots $.
+Multiply out, and tell me the coefficients on $z^0, z^1, \ldots$.
 
 What is the probability generating function for the distribution of grandsons?
 
@@ -230,12 +228,13 @@ What is the probability generating function for the distribution of grandsons?
 exercise: write out $h_2(z) = h(h(z))$ for 
   $$
   h(z) =     p_0 + p_1 z + p_2 z^2.
-  $$}
+  $$
 
+## Extinction
 
 - Extinction
   -"Extinction is forever.": So, the probability $d_n$ of extinction
-    {\em by } generation $n$ can never decline over time. (Must it
+    _by_ generation $n$ can never decline over time. (Must it
     always rise?)
 
 - Recursive extinction
@@ -279,7 +278,7 @@ Can $d = 1$, can $d < 1$
 
 Three cases
 
-```{r, fig.height = 7}
+```{r, fig.height = 9}
   par(mfrow = c(1,3), pty = "s")
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
@@ -429,7 +428,9 @@ SIR model in disease spread)
 a
 
 
-## Means of offspring in generation $n$
+## The distribution of offspring of all generations
+
+Means of offspring in generation $n$
 
   - Is it "meaningful"? (If we have a lot of zeros)
   - We'll show that unconditional mean
@@ -476,7 +477,6 @@ Our set-up
   p0 = .3; p1 = .4; p2 = .3 ## what is m?
 ```
 
-
 1000 trials, code 
 
 ```{r, fig.height = 5}
@@ -488,7 +488,7 @@ Our set-up
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
 ```
-`
+
 1000 trials, means, picture
 
 ```{r, fig.height = 5}
@@ -537,7 +537,7 @@ plot(n, var_Zn)
 ```
 
 Distribution of $Z_n$
-```{r, fig.height = 5}
+```{r, fig.height = 6}
    Z20 <- table(table(Z.mat[,20]))
    Z5 <- table(table(Z.mat[,5]))
    par(mfrow = c(2,2))
@@ -642,7 +642,7 @@ for (i in 1:3)
 }
 ```
 
-### log scale
+log scale
 ```{r, fig.height = 5}
 ## b = 0.2126 ;   c = 0.5893 ## lotka
 b = 0.3666; c = .5533 ## Keyfitz (from G&S)
