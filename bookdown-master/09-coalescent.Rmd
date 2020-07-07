@@ -1,6 +1,5 @@
 # Coalescent 
 
-\title{ \\ Dem260 Math Demog
 
 ## Outline   
   

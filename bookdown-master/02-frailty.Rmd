@@ -8,9 +8,9 @@
 
 ### Review of mortality mathematics
 
-  - [$\ell(x)$ or $S(x)$] probability of survival to age $x$
-  - [$\mu(x)$ or $h(x)$] hazard rate at age $x$ (``minus the exponential rate of change in
-    survival'')
+  - $\ell(x)$ or $S(x)$ probability of survival to age $x$
+  - $\mu(x)$ or $h(x)$ hazard rate at age $x$ ("minus the exponential rate of change in
+    survival")
 
   Let's treat $\mu$ as a definition.
   $$
@@ -58,9 +58,9 @@ Multiplicative Fixed frailty
   \mu_i(x) = z_i \mu_0(x).
   $$
   
-  - [$z_i$] ``frailty'' of the $i$th individual. (Usually thought
+  - $z_i$ "frailty" of the $i$th individual. (Usually thought
     of as a random variable with mean $1$.)
-  - [$\mu_0(x)$] ``Baseline hazard'' schedule.  (Also, the
+  - $\mu_0(x)$ "Baseline hazard" schedule.  (Also, the
     schedule of a person with $z = 1$).
   
 \begin{frame}{What are some alternatives?}
@@ -96,9 +96,6 @@ Multiplicative Fixed frailty
   dt[Year == "1990-1994", lines(x, Male, type = "l", col = "blue")]
   title("Male 1790, 1890, 1990")
 ```
-
-
-
 
 ## Part I. Results from Fixed Frailty
 
@@ -203,15 +200,15 @@ $$
 p(z | k, \lambda) = {\lambda^k  \over \Gamma(k)} z^{k-1} e^{-\lambda z} 
 $$.
 
-- [$z$] the random variable representing frailty
-- [$k, \lambda$] parameters
-- [$\Gamma(k)$] A normalizing constant.
+- $z$ the random variable representing frailty
+- $k, \lambda$ parameters
+- $\Gamma(k)$ A normalizing constant.
 
 ### Gamma in R
 
-  - [Mean:] $k / \lambda$ 
-  - [Variance:] $ k / \lambda^2$
-  \end{description}
+  - Mean: $k / \lambda$ 
+  - Variance: $ k / \lambda^2$
+  
 
 ```{r}
   ## with k and lambda

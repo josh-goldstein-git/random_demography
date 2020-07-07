@@ -48,9 +48,9 @@ no individual having exactly the same risk as another.)
 ANSWER THIS
   
 - Analogies ?
-  - [Social inequality:] equal opportunity vs. equal outcomes
-  - [Analysis of variance] $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
-  - [Statistical models] $y = a + b x + \epsilon$
+  - Social inequality: equal opportunity vs. equal outcomes
+  - Analysis of variance $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
+  - Statistical models $y = a + b x + \epsilon$
   
 
 - What's new? Dynamics.
@@ -115,7 +115,7 @@ ANSWER THIS
 
 ### More examples to work
   1. Differential, constant mortality ($\mu_A = .03$; $\mu_B =.01$)
-  2. Differential, {\em time-varying} mortality or growth.
+  2. Differential, _time-varying_ mortality or growth.
   3. ``Movers and Stayers'' (Migration)
   4. ``Movers and Stayers'' (Marriage)
   5. Fecundity: aging or heterogeneity?
@@ -146,6 +146,7 @@ knitr::include_url('https://shiny.demog.berkeley.edu/josh/het_ruse/', height = '
 ### Keyfitz result
 
   $${d \over dt}\bar{r}(t) = \sigma^2_r(t)$$
+  
 >When group-specific growth rates are constant the rate of change of the aggregate growth rate equals the variance of the growth rates.
 
 
@@ -240,11 +241,11 @@ Ken suggests
 r_i = r_0 - s(\lambda) \cdot a,
 \end{equation}
 
-* [$r_0$] growth rate of the fastest growing sub-population
-* [$s$] a non-negative Poisson distributed integer
-* [$\lambda$] the parameter of the Poisson distribution (also
+* $r_0$ growth rate of the fastest growing sub-population
+* $s$ a non-negative Poisson distributed integer
+* $\lambda$ the parameter of the Poisson distribution (also
   it's mean and variance)
-* [$a$] gap between adjacent growth rates.
+* $a$ gap between adjacent growth rates.
 
 
 Example:  sub-populations have growth rates 3, 2, 1, 0, -1, $\ldots$ percent,

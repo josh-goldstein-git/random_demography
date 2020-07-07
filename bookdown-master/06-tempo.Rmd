@@ -84,7 +84,7 @@ A bigger microsimulation
 - $R(t)$ Cumulative shift.
   
 
-### An example
+An example
 
 $$
 f(a,t) = f_0(a - R(t)) (1- R'(t)) q(t)
@@ -99,7 +99,7 @@ $$
 Give an expression for $f(28,2019)$.
 
 
-## A derivation: due to Rodriguez
+### A derivation: due to Rodriguez
 
 Assume no quantum effects. Take a cohort with cumulative fertility
 
@@ -145,9 +145,7 @@ Tempo-adjusted TFR: counter-factual, TFR in absence of timing changes
   TFR(t) = \int_0^\infty f_0(a - R(t)) \left[1 - R'(t)\right]q(t) 
   $$
   gives?
-  \pause
 
-  
   $$
   TFR(t) = TFR_0 \left[1 - R'(t)\right] q(t)
   $$
@@ -229,8 +227,8 @@ fat.array[,,"4"] <- fat4
 fat.array[,,"5"] <- fat5p
 ``` 
 
-2. fit bongaarts feeney without birth order
-```{r}
+2. Fit bongaarts feeney without birth order
+```{r, fig.height=5}
 tfr.vec <- colSums(fat)
 ## (2a) by hand
 mu.vec <- apply(fat, 2, get.mean)
@@ -245,23 +243,23 @@ lines(year.vec, adj.tfr.vec, lty = 2)
 abline(v = c(1945, 2008))
 ```
 
-- we see fertility since 1980 has been depressed by postponment
-- we see weird dynamics around end of WW2 and great recession.
-- what's going on?
+- We see fertility since 1980 has been depressed by postponment
+- We see weird dynamics around end of WW2 and great recession.
+- What's going on?
 
 ```{r}
 par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l")
 lines(year.vec, adj.tfr.vec, lty = 2)
 abline(v = c(1945, 2008))
-abline(h = seq(1.5, 2.5, .1), col = "grey", lty = 3)
+abline(h = seq(1.5, 3.5, .1), col = "grey", lty = 3)
 ## can also use function to fit
 adj.tfr.vec.from.fun <- bf.fit.simple(fat)$tfr.star
 lines(year.vec, adj.tfr.vec.from.fun, col = "red")
 ```
 
 Now let's look at turbulence around WW2
-```{r}
+```{r, fig.height=5}
 par(mfrow = c(2,2))
 plot(age.vec, fat[,"1944"], type = "l", ylim = c(0, .23),
      ylab = "f(a)",
@@ -299,11 +297,12 @@ lines(1943:1947, adj.tfr.vec[paste(1943:1947)],
       lty = 2)
 title("TFR and adjTFR")
 ``` 
+
 From 1945 to 1946, fertility goes up a lot, but more at younger ages. So mean goes down. BF adjustment over-compensates, and has quantum declining.
 
 What's happening from 1944-45?
 
-3. fit bongaarts feeney with birth order
+3. Fit bongaarts feeney with birth order
 
 ```{r}
 out <- bf.fit(fat.array)
@@ -325,6 +324,7 @@ legend("topright",
        lwd = c(2,1,2))
 hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
 ```
+### Questions
 
 1. Does taking birth order into account smooth WW2 turbulence?
 2. Does taking birth order into account smooth Recession turbulence?
@@ -345,10 +345,8 @@ hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
   Let's look at births (all orders).
 
 
-## "animation" of asfr change from about 2000 to about 2018
+"Animation" of asfr change from about 2000 to about 2018 age specific fertility rates by birth order for all countries and times (RR means "rectangles" on Lexis surface)
 
-## age specific fertility rates by birth order for all countries and times
-## RR means "rectangles" on Lexis surface
 ```{r}
 dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt")
 dt <- dt[Code == "USA"] ## keep only US
@@ -365,7 +363,10 @@ fat1 <- as.matrix(unclass(fat1)) ## may cause problems, we'll see
 year.vec <- colnames(fat)
 age.vec <- rownames(fat)
 my.year.vec <- 1975:2017
-pdf("fat_movie.pdf")
+#pdf("fat_movie.pdf")
+par(mar=c(1,1,1,1))
+
+par(mfrow = c(11,4))
 for (i in 1:length(my.year.vec))
 {
     my.year <- my.year.vec[i]
@@ -377,12 +378,12 @@ for (i in 1:length(my.year.vec))
          type = "l")
     title(my.year)
 }
-dev.off()
+#dev.off()
 ```
 
- now fit mixing model and redo the animation
+Now fit mixing model and redo the animation
 
-```{r eval=FALSE, include=FALSE}
+```{r, fig.height=10}
 library(data.table)
 library(mixtools)
 source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_mixed_functions.R")
@@ -417,25 +418,6 @@ colnames(lambda.mat) <- my.year.vec
 colnames(mu.mat) <- my.year.vec
 lambda.mat[,"2015"] <- (lambda.mat[,"2014"] + lambda.mat[,"2016"])/2
 mu.mat[,"2015"]     <- (mu.mat[,"2014"]     + mu.mat[,"2016"])/2
-
-
-
-## ## a bit faster
-## my.fat.1 <- fat1[, paste(my.year.vec)]
-## out1 <- get.mixed.tfr.star(my.fat.1)
-## ##
-## out.1 <- out1
-## ## mu.mat <- get.coefs.mixed(out.1$fert.fit.list.variable.sigma)$mu.mat
-## ## lambda.mat <- get.coefs.mixed(out.1$fert.fit.list.variable.sigma)$lambda.mat
-## ## sigma.mat <- get.coefs.mixed(out.1$fert.fit.list.variable.sigma)$sigma.mat
-
-## mu.mat <- get.coefs.mixed(out.1$fert.fit.list)$mu.mat
-##  lambda.mat <- get.coefs.mixed(out.1$fert.fit.list)$lambda.mat
-##  sigma.mat <- get.coefs.mixed(out.1$fert.fit.list)$sigma.m
-
-
-## ## Aall <- my.fat.1
-
 
 ## plot normalized plot with the normal distributions inside.
 plot.fun3 <- function(last.year, A = Aall)
@@ -489,25 +471,15 @@ plot.fun.nonorm.3 <- function(last.year, A = Aall)
 }
 
 Aall <- my.fat
-pdf("fat_mix_movie.pdf")
+#pdf("fat_mix_movie.pdf")
+par(mar=c(1,1,1,1))
+par(mfrow = c(11,4))
 for (i in 1:length(my.year.vec))
 {
     my.year <- my.year.vec[i]
     plot.fun.nonorm.3(my.year)
 }
-dev.off()
-
-
-year.vec <- my.year.vec
-A1 <- fat
-##pdf("fat_1_mix_movie.pdf")
-for (i in 1:length(my.year.vec))
-{
-    my.year <- my.year.vec[i]
-    print(my.year)
-    plot.fun.nonorm.3(my.year, A = A1)
-}
-## dev.off()
+#dev.off()
 
 
 ## let's do tempo adjustment
