@@ -23,18 +23,14 @@
 ### Very brief history of Branching Processes
   
   - Bienayme's lost notes
-  - Galton  and Watson's (extinction of families)
-    old motivation: to see if elites were dying out because of
-  "degeneration"
-  - Genetics (survival of a mutant)
-    - contemporary motivation: evolution and neutral genetic
+  - Old motivation - Galton  and Watson's: to see if elites were dying out because of
+  "degeneration" 
+  - Contemporary motivation: evolution and neutral genetic
   change. what is the chance that a mutant will survive?
-  - The bomb (chain reactions)
-    - war-time motivation: to see how to build the bomb
-  - Anywhere "incipient dynamics" matter.
-    - sociological: will all of S. Korea be "Kim"?
-  - can we get variance of repro success from name disn?
-  - it will give us a headstart on other (less realistic but easier) "drift" models.
+  - War-time motivation: to see how to build the bomb (chain reactions)
+  - Sociological: Anywhere "incipient dynamics" matter (will all of S. Korea be "Kim"?)
+  - Can we get variance of repro success from name disn?
+  - It will give us a headstart on other (less realistic but easier) "drift" models.
   
 ### Applicability to the Coronavirus? Yes and no.
 
@@ -72,7 +68,7 @@
 | 2   | .3    | 6-9    |
 +-----+-------+--------+
 
-### What is a (Bienaym\'e-)Galton-Watson branching process?
+### What is a (Bienayme)-Galton-Watson branching process?
 
   - $p_k$: Each individual in each generation reproduces
     independently, following same offspring distribution, with $p_k$
@@ -82,10 +78,11 @@
   - Variance: None of the $p_k$ are 1
 
 
-Some questions
+
 
 ![Galton's original question](/hdir/0/fmenares/Book/bookdown-master/images/galton.png)
 
+Some questions
   
   - What is the chance $d$ of eventual extinction (no "outbreak")?
   -  Or, what is the distribution of surviving family
@@ -111,8 +108,10 @@ Some questions
   Let's draw the tree.
 
   /\
- /\/\
-/\/ /\
+ /\\/\
+/\\/ /\
+
+
 
 ```{r}
   #A function   
@@ -188,9 +187,9 @@ What does this remind you of? (Hint: "Leslie"). (See Harris figure)
   chance of $k$ is the coefficient on $z^k$.
 
 
-- $h(0) = $ 
-- $h(1) = $ 
-- $h'(1) = $
+- $h(0)=$ 
+- $h(1)=$ 
+- $h'(1)=$
 
 The story of two brothers
 
@@ -233,12 +232,12 @@ exercise: write out $h_2(z) = h(h(z))$ for
 ## Extinction
 
 - Extinction
-  -"Extinction is forever.": So, the probability $d_n$ of extinction
+  - "Extinction is forever.": So, the probability $d_n$ of extinction
     _by_ generation $n$ can never decline over time. (Must it
     always rise?)
 
 - Recursive extinction
-  -Is non-extinction "forever"?: If $\lim_{n \rightarrow \infty} = d(\infty) <
+  - Is non-extinction "forever"?: If $\lim_{n \rightarrow \infty} = d(\infty) <
     1$, then this says there's a chance $1 - d(\infty)$ of eternal
     persistence. We'll try to figure out more about what this means.
   
@@ -278,7 +277,7 @@ Can $d = 1$, can $d < 1$
 
 Three cases
 
-```{r, fig.height = 9}
+```{r, out.width='80%', fig.asp=.75, fig.height = 9}
   par(mfrow = c(1,3), pty = "s")
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
@@ -411,7 +410,7 @@ doesn't mean they aren't potentially dangerous ($R_0 >> 1.0$).
           generative process forward. (cf. Fisher-Wright)
 </div>
 <div class="column-right">
-Bad
+**Bad**
 
 - When offspring of 1 depends on offspring of other  (e.g., brothers inheriting a farm)
 

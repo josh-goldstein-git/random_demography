@@ -14,7 +14,7 @@
     - Unreliable ages, institutionalization changes sample, etc.
 
   - Nothing
-    -It's all selection ("frailty"), pop hazards but
+    - It's all selection ("frailty"), pop hazards but
     individual hazards would have remained "parallel".
 
 Our goal is to examine this last "null hypothesis". What can  

@@ -23,30 +23,37 @@
 <div class="column-left">
 *Fisher-Wright*
 
-  - Children picking their parents (not ``generative'')
+  - Children picking their parents (not "generative")
   - Total population size is constant
   - Qualitatively similar to BP. Extinction and fixation.
   - Flexible: mutation, selection, even changes in pop size.
-  - With apologies, biologists take FW ``seriously'' even if they
-    don't take it ``literally.''
+  - With apologies, biologists take FW "seriously" even if they
+    don't take it "literally".
     
 </div>
 <div class="column-right">
   *Galton-Watson-Bienaym\'e Branching Processe*
   - Branching process models independent parents randomly
-    producing offspring. ``Generative''
+    producing offspring. "Generative"
   - Total population size can vary, and has a random component and
     deterministic one $m$
   - Qualitative result when $m = 1$ is that there is one longest
-    surviving line. This is ``fixation'', when one {\em type} becomes
+    surviving line. This is "fixation", when one _type_ becomes
     universal.
+    
 </div>
+
 ### Another cell phone example
 Let's simulate and draw lines
+
 Gen 1   0    1    2    3    4    5    6    7    8    9
+
 Gen 2
+
 Gen 3
+
 - What will happen?
+
 Simulation code
 ```{r}
   fwm <- function(N, n_gen, mu = 0) ## mu != 4/N
@@ -98,8 +105,11 @@ Trying it out some more
   text(x = 4, y = jitter(ptt[,4]), rownames(ptt), col = 1:6)
 ``` 
 
-  Qs: What happens at time 15?  Why does line 5 rise and fall? What happens at time 2?
-  What is $E(p_i(t) | p_i(t-1))$?
+  Questions: 
+  - What happens at time 15?
+  - Why does line 5 rise and fall?
+  - What happens at time 2?
+  - What is $E(p_i(t) | p_i(t-1))$?
 
 
 Bigger pop and more time
@@ -115,14 +125,14 @@ Bigger pop and more time
   - What other questions could we ask?
   
 
-## Questions we can ask
+Questions we can ask
   
   - What is probability that line $i$ will ``fix''? (Hint: easy)
   - What is expected time until some line fixes? (We'll demo the result)
   - How can we describe the path to fixation? (We'll derive the result)
   
   
-### Probability that a particular line will "fix"
+Probability that a particular line will "fix"
 ```{r, fig.height = 5}
   set.seed(1)
   A <- fwm(N = 10, n_gen = 20, mu = 0)
@@ -131,14 +141,14 @@ Bigger pop and more time
   matplot(t(ptt), type = 'l', lty = 1, main = "FW simu")
   text(x = 4, y = jitter(ptt[,4]), rownames(ptt), col = 1:6)
 ``` 
-### Expected time until fixation?
+Expected time until fixation?
   Answer for us is
   $$
   \bar{T}_{fixed} = 2 \cdot N
   $$
   Note: Biologists say $4 N_e$ \\
   See Wikipedia "Genetic drift"
-### Simulation of time to fixation
+ Simulation of time to fixation
 ```{r}
   T.vec <- NULL
   all.the.same <- function(x){length(unique(x)) == 1}
@@ -191,9 +201,8 @@ Let's derive time path of G
 
 ## Baby Names
 
-  "Drift as a mechanism for cultural change: an example from baby names"
-  by Matthew W. Hahn and R. Alexander Bentley
->  Proc. R. Soc. Lond. B 2003 270, S120-S123
+>  "Drift as a mechanism for cultural change: an example from baby names"
+by Matthew W. Hahn and R. Alexander Bentley Proc. R. Soc. Lond. B 2003 270, S120-S123
 
 What's the basic idea?
   
@@ -210,6 +219,8 @@ What's the basic idea?
   - They include mutation to get a stationary disn
   Note: failing to reject FW doesn't mean it's correct
 Their picture 
+
+
 >  \includegraphics[width=0.4\textwidth]{./hahn_pic_1.png}
 > \includegraphics[width=0.6\textwidth]{./hahn_pic_2.png}
 ### Drawing their picture with the data

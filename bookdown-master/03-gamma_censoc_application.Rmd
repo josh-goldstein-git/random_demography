@@ -45,6 +45,7 @@ H0.x = (a/b) * (exp(b*x) - 1)
 bar.z = 1 / (1 + sigma.sq * H0.x)
 plot(x, bar.z)
 ```
+
 Look at the apparent exponential decline in tail
 Homework: what is proportional rate of change in $\bar{z}$ as $x$ 
 gets big? Is it close to Gompertz $b$?
@@ -60,7 +61,7 @@ Average frailty in terms of survival
 
   
   Reversing the logic: if we see a characteristic changing with age,
-  then we can estimate ``${\sigma^2}$'' (I put in quotes because its
+  then we can estimate "${\sigma^2}$" (I put in quotes because its
   the variance of the proportional effect of the observed
   characteristic.)
 
