@@ -3,36 +3,35 @@
 
 ## Outline   
   
-  \item Big picture: What is ``coalescent theory''?
-  \item Time to (T)MRCA
-  \item Simulation: Inferring population size
-  \item An application of Coalescent Theory
-  
+  - Big picture: What is "coalescent theory"?
+  - Time to (T)MRCA
+  - Simulation: Inferring population size
+  - An application of Coalescent Theory
 
 ## Big picture: The Coalescent: Expectations of the Past
   
-  \item Coalescent theory is not a theory.
-  \item It's a model for the probability of different histories
-  \item ``the'' coalescent is a bit confusing. We're not inferring the
+  - Coalescent theory is not a theory.
+  - It's a model for the probability of different histories
+  - "the" coalescent is a bit confusing. We're not inferring the
     actual history of common ancestry, just the probabilities
  
-An actual``picture''
+An actual "picture"
 > includegraphics[width=1.1\textwidth]{../coalescent/cutter_diagram.png}
      
-\item Top panel is a Fisher-Wright instance, ordered so that lines
+- Top panel is a Fisher-Wright instance, ordered so that lines
          don't cross.
-\item Haplotype is a sequence (we are diploids, each 
+- Haplotype is a sequence (we are diploids, each 
          contributing 2 haplotypes). But let's just think of each line as
          an individual, for now.
-\item We can find The Most Recent Common Ancestor (TMRCA) of 
+- We can find The Most Recent Common Ancestor (TMRCA) of 
 sample (dark purple). Who and when would the MRCA of the top two individuals be?
 
 
-  \item Our sample $\neq$ even all {\em extant } descendants of the MRCA. What
+  - Our sample $\neq$ even all {\em extant } descendants of the MRCA. What
     does this mean?
-  \item Our sample $\neq$ all of the descendants of the MRCA. What
+  - Our sample $\neq$ all of the descendants of the MRCA. What
     does this mean?
-  \item If we chose two descendants at random, would we always get
+  - If we chose two descendants at random, would we always get
     same MRCA? 
   
 When we model coalescence we are thinking backwards in time.
@@ -42,18 +41,18 @@ When we model coalescence we are thinking backwards in time.
   If we sample two individuals (today), how long ago was their MRCA?\\
   (Note: question is not ``who'')
   
-  \item Our answer will in terms of the probability of MRCA being 1
+  - Our answer will in terms of the probability of MRCA being 1
     generation ago, 2 generations ago, etc.
-  \item We'll assume Fisher-Wright (constant N, each gen randomly
+  - We'll assume Fisher-Wright (constant N, each gen randomly
     picks parents)
-  \item The answer is surprisingly simple
+  - The answer is surprisingly simple
   
 Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
   
-  \item The chance that two sampled people have same parent is $1/N$, right?
-  \item Thus $P(T_{MRCA} = 1) = 1/N$.
-  \item What is $P(T_{MRCA} = 2) = $?
-  \item What is $P(T_{MRCA} = n) = $?
+  - The chance that two sampled people have same parent is $1/N$, right?
+  - Thus $P(T_{MRCA} = 1) = 1/N$.
+  - What is $P(T_{MRCA} = 2) = $?
+  - What is $P(T_{MRCA} = n) = $?
   
   Let's go to continuous time (reasonable if pop is big and time scale
   is long).
@@ -67,21 +66,21 @@ Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
 
   Let's simulate
 
-  \item 1 time, without random seed, letting N = 40, ngen = 200, mu = 0
-  \item Average over 100 FW simulations
-  \item What is variance of outcome? Is it what we would expect from
+  - 1 time, without random seed, letting N = 40, ngen = 200, mu = 0
+  - Average over 100 FW simulations
+  - What is variance of outcome? Is it what we would expect from
     exponential?
 
 
 ## Mutation and inference of TMRCA and $N$
   
-  \item Say mutations occur at a constant rate $\mu$ ($10^{-8}$?)
-  \item Each year we would expect $\mu$ mutations, and over $T$ years we
+  - Say mutations occur at a constant rate $\mu$ ($10^{-8}$?)
+  - Each year we would expect $\mu$ mutations, and over $T$ years we
     would expect $T\mu$ mutations.
-  \item Say we observe that two people differ at $k$ sites of the
+  - Say we observe that two people differ at $k$ sites of the
     genome.
-    \item When was TMRCA?
-    \item How big is the population?
+    - When was TMRCA?
+    - How big is the population?
   
 
 
@@ -102,17 +101,17 @@ Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
 
 ## Inference of population size, simulation
   
-  \item We do FW with mutations
-  \item Average pairwise differences
-  \item Divide by $2\mu$ to get our estimate
-  \item We can repeat a bunch of times and see average estimate
+  - We do FW with mutations
+  - Average pairwise differences
+  - Divide by $2\mu$ to get our estimate
+  - We can repeat a bunch of times and see average estimate
     converges to the truth
   
 
 Coalescence of a sample of $n$ individuals
   
-  \item This is covered on pages 42 and 43 of Gillespie
-  \item We'll just do one quick example, accepting the result
+  - This is covered on pages 42 and 43 of Gillespie
+  - We'll just do one quick example, accepting the result
   
 A sample of 3: Note we're using $N$ (instead of $2N$)
 
@@ -138,12 +137,12 @@ A sample of 3: Note we're using $N$ (instead of $2N$)
 ## Conclusions
 
 
-  \item We defined the coalescent as the stochastic process going
+  - We defined the coalescent as the stochastic process going
     back in time to common ancestors
-  \item For constant population size, we proved that time to
+  - For constant population size, we proved that time to
     coalescence for a sample pair is exponential.
-  \item We showed (math and simulation) that $E(T) = N$.
-  \item We showed that we could estimate $N$ from observed mutations
+  - We showed (math and simulation) that $E(T) = N$.
+  - We showed that we could estimate $N$ from observed mutations
     if we knew the mutation rate
 
 
@@ -159,16 +158,16 @@ Caveat: We're still using $N$ (not $2N$) as the number of haploids
 
 ### Coalesence when population is changing
   
-  \item Ee said hazard of coalescence was $h = c = 1/N$.
-  \item What is hazard of coalesence in one generation for two
+  - Ee said hazard of coalescence was $h = c = 1/N$.
+  - What is hazard of coalesence in one generation for two
     different populations: $N =
     1000$? $N = 2000$?
     
-  \item What if within the same population $N(t) = 1000$ and $N(t+1)
+  - What if within the same population $N(t) = 1000$ and $N(t+1)
     = 2000$? (Hint: we still follow FW in allowing children to
     choose their parents.)
     
-  \item If the population size changes over time $N(t)$, then hazards
+  - If the population size changes over time $N(t)$, then hazards
     of coalescence in will change too: $h(t) = 1/N(t)$.
   
 ```{r ,fig.height = 3}
@@ -198,12 +197,12 @@ Caveat: We're still using $N$ (not $2N$) as the number of haploids
 
 Our approach
   
-  \item Say we have $i$ pairs of haploids
-  \item We then compute how many pairwise differences there are,
+  - Say we have $i$ pairs of haploids
+  - We then compute how many pairwise differences there are,
     but instead of computing $\bar{k}$, we keep the distributional
     information $k_i$.
-  \item Each $k_i$ implies a $T_i$
-  \item We then have a set of ``death times'' (coalescence times),
+  - Each $k_i$ implies a $T_i$
+  - We then have a set of ``death times'' (coalescence times),
     can build a life table, estimate the hazards, and infer
     $N(t)$.
 

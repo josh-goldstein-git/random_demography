@@ -1,0 +1,464 @@
+---
+title: "Reconstruction Ancient European Population Sizes using Batini's sample of Mitochondrial DNA"
+output: html_notebook
+author: Joshua R. Goldstein
+---
+
+In this lab, we use real sequences of mitochondrial DNA to estimate
+ancient population sizes. The sequences were made available by Batini
+et al, who analyzed sub-populations in their paper using software for
+Bayesian inference for comparing groups of individuals. Our approach
+here is to use a simpler, but less powerful approach. We will simply
+look at pairwise differences of random pairs of individuals. For this
+we are not going to do subgroups such as the Greeks or Irish, but are
+going to use the entire European sample. The population sizes we
+estimate are for the entire population represented by the 328
+individuals. 
+
+(Special thanks to Ken Wachter, who taught me this approach and whose
+R-code forms the basis for what we will do today.)
+
+# Summary of Batini et al.
+
+Before we begin our own analysis, let's look at the inputs to
+Batini's analysis -- the mtDNA haplotype sequences, and then at the
+resulting population estimates.
+
+## The mitochondrial DNA
+
+
+```{r}
+source("read_mtdna.R")
+haps <- seqs
+```
+
+Let's inspect just a bit of one of these sequences
+```{r}
+print(nchar(haps[213]))
+a_segment = substr(haps[213], 1, 100)
+print(a_segment)
+## tip: don't try to print the 16,000 character whole string. it will clog up your computer.
+```
+
+
+Let's put the haps in a matrix
+```{r}
+my.list <- strsplit(haps, "")
+H <- do.call(cbind, my.list)
+print(H[1:10, 1:4]) ## all the same
+```
+
+Let's find a site where there's polymorphism
+```{r}
+hap1 = H[,1]
+hap2 = H[,2]
+s <- min(which(hap1 != hap2))
+head(H[s + -2:2, 1:4]) ## the polymorphic site in context
+```
+
+Let's see if that's hap1 is the only "A"
+```{r}
+table(H[s,])
+```
+
+We see that there are 19 individuals with this "A" instead of "G".
+
+> Q: How many pairwise differences in total are there between hap1 and
+> hap2?
+
+These are the kind of comparisons _we_ will be doing.
+
+## Ancient population estimates
+
+Let's look at Figure 2 on page 5. 
+
+> Q. What was effective population size in Ireland 1 thousand years ago
+> (according to mtDNA)?
+
+> Q. What was effective population size in Ireland 50 thousand years ago
+> (according to mtDNA)?
+
+
+> Q. For the "Irish", what is the annual population growth rate? What's the NRR?
+
+The order of magnitude for each these populations appears to be about 10^4
+in  last few KYA and 10^3 50 KYA. Together, perhaps the size is 10
+fold. So we're looking at European effective population sizes on the
+order of 100,000 the last few thousand years and on the order of
+10,000 tens of thousands of years ago.
+
+
+# Using the Coalescent to estimate changing population size
+
+Our procedure will involve a four steps:
+
+1. Pick 100 _pairs_ of people at random and count their pairwise
+   differences.
+   
+2. Estimate 100 different times of MRCA ($T_i$)  using assumed mutation rate.
+
+3. Estimate $h(t)$, the time-varying hazard of coalescence 
+
+4. Estimate the population size as $Ne(t) = 1/h(t)$.
+
+Let's go!
+
+## 1. Pick 100 _pairs_ of people at random and count their pairwise differences.
+
+```{r}
+
+set.seed(1)
+hap_ids = 1:ncol(H)
+hap_id_sample = sample(hap_ids,
+                       size = 200,
+                       replace = FALSE)
+
+hap_id.mat <- matrix(hap_id_sample, 100, 2)
+
+pairwise_diff_fun <- function(hap1, hap2)
+{
+    h1 <- hap1
+    h2 <- hap2
+##    h1 <- unlist(strsplit(hap1, ""))
+##    h2 <- unlist(strsplit(hap2, ""))
+    h1[h1 == "N"] <- NA ## note "N" means missing
+    h2[h2 == "N"] <- NA ## making these NA avoids counting as polymorphism
+    k = sum(h1 != h2, na.rm = T)
+    n_valid = sum(!is.na(h1) & !is.na(h2))
+    return(list(k = k, n_valid = n_valid))
+}
+
+pairwise_diff_fun(H[,1], H[,2])
+```
+
+Now we're ready to do pairwise comparisons of all 100 pairs of
+haplotypes.
+
+We'll define the fraction of locii that have mutated (the pairwise differences) as
+$$
+\bar{Y} = P/C
+$$ 
+
+```{r}
+
+P.vec = NULL
+C.vec = NULL
+for (i in 1:nrow(hap_id.mat))
+{
+    hap_id.1 = hap_id.mat[i,1]
+    hap_id.2 = hap_id.mat[i,2]
+    hap1 = H[,hap_id.1]
+    hap2 = H[,hap_id.2]
+    out = pairwise_diff_fun(hap1, hap2)
+    P.vec[i] = out$k
+    C.vec[i] = out$n_valid
+}
+
+Y.bar = P.vec/C.vec
+head(P.vec)
+head(C.vec)
+head(Y.bar)
+```
+
+## 2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate.
+
+And now we'll use the mutation rate $\theta_m$ given by Batini to
+compute time back to MRCA.
+
+First, some background:
+
+Let $a$ index sites and write $Y_a = 1$ if the letters are different,
+and $Y_a = 0 otherwise. For 1 site, the probability that it there has been a mutation, is 1
+minus the chance that there has been no mutation. 
+$$
+     P( Y_a = 1 ) = 1 - e^{-T\theta}
+     
+$$
+The mean $\bar{Y}$ across the segment is the proportion of $Y_a$ that
+equal 1. So, in expectation for the fraction of sites that mutate is
+the same as the probability that 1 site mutates (assuming 
+independence of mutation probabilities by site). This allows us to write
+$$
+     E{\bar{Y}} = 1 - e^{-2T\theta},
+$$
+where we've added a "2" in order to account that either one of the pairwise branched could have had a mutation, so we our "exposure" is twice the time to MRCA.
+
+Rearranging we get an estimate $\hat{T} of $T$ to be
+$$
+\hat{T} = {-\log (1 - \bar{Y} ) \over \theta}
+$$
+
+
+Now we're ready to estimate the MRCAs
+```{r}
+theta_m = 2.21 * 10^(-8) ## Batini page 6 (TMRCA estimation)
+T.vec <- -(1/2) * (1/theta_m) * log(1 - Y.bar) ## TMRCAs in years ago
+head(T.vec, n = 10)
+```
+
+Let's visualize these
+```{r}
+hist(T.vec)
+```
+
+We see a lot of coalescence about 50 KYA, which is as far back as
+Batini's estimates go. This means the population was small back
+then. 
+
+## 3. Estimate $h(t)$, the time-varying hazard of coalescence 
+
+We'll do this in two ways. First we'll compute the slope of the
+logarithm of the survival curve, but we'll see that it is noisy and
+needs to be smoothed. Second, we'll construct a "life table" of
+coalescence with discrete periods of time.
+
+Let's start with the more continuous version of estimating slopes.
+
+```{r}
+## Plot survival curve by order of T
+St = (100:1)/100 ## or more generally (length(T.vec):1)/length(T.vec)
+t = kya = sort(T.vec)/1000
+plot(kya, St, type = "l",
+     xlab = "Kilo years ago", ylab = "Fraction of pairs without common ancestor",
+     main = "Estimated probability of not coalescing")
+plot(kya, log(St), type = "l",
+     xlab = "Kilo years ago", ylab = "Log fraction of pairs without common ancestor",
+     main = "Etimatated probability of not coalescing, log scale")
+     
+```
+
+> Q: What is happening to slope in first from 1,000 to 50,000 years
+> ago? 
+
+> Q: What does this imply about hazard of coalescence?
+
+> Q: What does this imply about effective population size?
+
+
+### a) Estimating hazards from smoothed survival curve
+
+First we smooth. 
+
+```{r}
+out = lowess(x = kya, y = St, f = 1/5)
+
+St_smooth = out$y
+kya_smooth = out$x
+plot(kya, St, cex = .5)
+lines(kya_smooth, St_smooth, type = 'l')
+```
+
+> Q. Is f=1/5 a decent fit? Try a different value.  
+
+Hazards as minus the slope of log
+
+```{r}
+haz_hat = -diff(St_smooth)/diff(kya_smooth)
+plot(kya_smooth[-1], haz_hat, type = 'l')
+```
+
+> Q. Does this plot tell us anything about uncertainty?
+
+
+### b) Life table appraoch
+
+Now let's estimate the hazards using a "life table", where again
+"death" is coalescence and "survival" is still not having a common
+ancestor.
+
+```{r}
+## we choose these time boundaries arbitrarily ... not sure if
+## we'll be able to see the "expansion" after ice age ...
+## x = c(0, 12,  20, 40, 65,  180 )*1000    # time interval boundaries
+x = c(0,2, 5, 10,  20, 30, 40, 65, 180) * 1000 ## time interval boundaries
+```
+
+Define a function to count "exposure" by those pairs that
+have MRCA in time intervals
+```{r}
+get_nax <- function(Ti, x)
+{
+    ## get person years lived in interval by those who die
+    nax <- NULL
+    for (i in 1:(length(x)-1))
+    {
+        s <- Ti >= x[i] & Ti < x[i+1]
+        nax[i] = mean(Ti[s] - x[i])
+    }
+    return(nax)
+}
+```
+
+Construct the life table
+
+```{r}
+n <- diff(x)
+T.vec.by.cat <- cut(T.vec, x, include.lowest = T, right = F)
+ndx = table(T.vec.by.cat)
+lx = rev(cumsum(rev(ndx)))
+lxpn = c(lx[-1], 0)
+nax = get_nax(Ti = T.vec, x = x)
+nLx = n*lxpn + nax * ndx ## exposure
+nmx = ndx/nLx ## hazard
+lt <- cbind(x = x[-length(x)], n, ndx, lx, nax, nLx, nmx)
+print(lt)
+```
+
+Let's compare the two estimates
+
+```{r}
+x.mid = x[-length(x)] + n/2
+plot(x.mid, nmx, type = 'o')
+axis(2)
+lines(kya_smooth[-1] * 1000, haz_hat/1000, type = "l")
+```
+
+We're getting basically the same thing, with a little more hint of
+rising hazards (shrinking pop size) in first 20 kya. Nearly the same
+thing estimate 40 kya ago, and very little signal before that. 
+
+
+## 4. Estimate the population size  $N_e(t)$
+
+In order to estimate the population size, we have to think for a minute
+about units.
+
+Our hazards are per year, but our logic for why hazards are related to
+population size is per generation. Remember, the chance of coalescence
+_per generation_ was $1/N$. This means we will want to multiply the annual 
+hazard by generation length in order to get hazards per generation unit of time.
+
+Second, mtDNA is inherited only through mothers. So the coalescent
+that we are thinking of is only for women. And the effective
+population size we're estimating is for females only. We can get a rough estimate of 
+both sexes by doubling the number of females.
+
+Putting these two considerations together, we have
+$$
+\hat{N_e(both sexes)} = 2 \times {1 \over 25 \cdot h(t)},
+$$
+where the 2 inflates to both sexes, and the 25 inflates the annual
+hazard into geneations of 25 years in length.
+
+```{r}
+
+Ne_smooth = 2 / (haz_hat/1000 * 25)
+
+Ne_lifetable = 2 / (nmx * 25)
+
+## create step function for plotting
+Ne_lifetable_step = rep(Ne_lifetable, n/1000)
+kya_step = 1:(max(x)/1000)
+
+```
+
+Plotting the results
+
+```{r}
+plot(kya_smooth[-1], Ne_smooth, type = 'l', ylim = c(1000, 60000), log = 'y',
+     lty = 2)
+lines(kya_step, Ne_lifetable_step, type = 'l', lwd = 2)
+```
+
+## [1] 31732.155  8581.928  4999.394  1299.908  1968.916
+
+## Uncertainty
+
+> Q. How could we evaluate undercertainty? (Hint: resampling)
+
+> Q. What does this estimate leave out?
+
+(We probably won't do this in class. If we don't give it a try at
+home.)
+
+
+
+Let's loop through and do the whole estimation 40 times
+
+```{r}
+n_trials = 40
+Ne.mat <- matrix(NA, nrow = n_trials, ncol = max(x)/1000)
+set.seed(1)
+for (r in 1:n_trials)
+{
+    print(r)
+    ## sample
+    hap_id_sample = sample(hap_ids,
+                           size = 200,
+                           replace = FALSE)
+    hap_id.mat <- matrix(hap_id_sample, 100, 2)
+    ## estimate MRCA distribution
+    P.vec = NULL
+    C.vec = NULL
+    for (i in 1:nrow(hap_id.mat))
+    {
+        hap_id.1 = hap_id.mat[i,1]
+        hap_id.2 = hap_id.mat[i,2]
+        hap1 = H[,hap_id.1]
+        hap2 = H[,hap_id.2]
+        out = pairwise_diff_fun(hap1, hap2)
+        P.vec[i] = out$k
+        C.vec[i] = out$n_valid
+    }
+    Y.bar = P.vec/C.vec
+    T.vec <- -(1/2) * (1/theta_m) * log(1 - Y.bar) ## TMRCAs in years ago
+    ## estimate Ne
+    T.vec.by.cat <- cut(T.vec, x, include.lowest = T, right = F)
+    ndx = table(T.vec.by.cat)
+    lx = rev(cumsum(rev(ndx)))
+    lxpn = c(lx[-1], 0)
+    nax = get_nax(Ti = T.vec, x = x)
+    nLx = n*lxpn + nax * ndx ## exposure
+    nmx = ndx/nLx ## hazard
+    Ne_lifetable = 2 / (nmx * 25)
+    ## create step function for plotting
+    Ne_lifetable_step = rep(Ne_lifetable, n/1000)
+    kya_step = 1:(max(x)/1000)
+    ## save result
+    Ne.mat[r,] <- Ne_lifetable_step
+}
+
+Ne.interval <- apply(Ne.mat, 2, quantile, c(.1,.5, .9))
+matplot(t(Ne.interval), type = 'l', log = 'y', col = "grey", lty = 1, lwd = 2)
+lines(Ne.interval["50%",], lwd = 4)
+```
+
+So it seems fairly clear that effective population size has been
+growing the last 50 thousand years, from a low of a few thousand to a
+few tens of thousand. 
+
+The general trend in growth is consistent with Batini but
+
+* Our total population size seems smaller by a factor of about 4 or 5.
+
+* We don't have the resolution to see increase between 10 and 20 kya,
+  the end of the Last Glacial Maximum or the more recent Bronze Age
+  steppe expansion 2 to 5 kya.
+  
+In order to get more resolution and study sub-group differences, we
+would want to turn to methods that do more than pair-wise comparisons,
+giving us more detailed information about the effective population
+sizes of the past.
+
+
+## Some exercises
+
+1. Try doing 150 pairwise comparisons (instead of 100) and see what
+   happens.
+
+2. Try doing 50 pairwise comparisons (instead of 100) and see what
+   happens.
+   
+3. Try changing the interval sizes (or the smoothing parameter) to see
+   if you can see either the post-glaciation population increase or
+   the Bronze Age increase? (I don't know if it's possible with our
+   methods.)
+   
+4. *possible term project* Figure out how to use BEAST or some other software and
+   reproduce their results for one sub-population and tell us what you learned.
+   
+   
+
+   
+
+

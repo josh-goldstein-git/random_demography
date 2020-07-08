@@ -110,7 +110,7 @@ Assume no quantum effects. Take a cohort with cumulative fertility
   Now put in shifts so that observed fertility is from an
   age $R(t)$ years earlier. ("28" is the new "25"!)
   $$
-  F(a,t) = F_0(a - R(t)) \pause = F_0(a - R(c + a))
+  F(a,t) = F_0(a - R(t))  = F_0(a - R(c + a))
   $$
   
   Differentiate with respect to age (which for a cohort is also
@@ -150,9 +150,11 @@ Tempo-adjusted TFR: counter-factual, TFR in absence of timing changes
   TFR(t) = TFR_0 \left[1 - R'(t)\right] q(t)
   $$
   WLG, define $TFR_0 = 1$, then
+  
   $$
-  q(t) =   TFR(t) \over 1 - R'(t)} \equiv TFR^*(t) 
+  q(t) =   TFR(t) \over{1 - R'(t)} \equiv TFR^*(t) 
   $$
+  
   Voila, the BF formula
 
 
@@ -228,7 +230,7 @@ fat.array[,,"5"] <- fat5p
 ``` 
 
 2. Fit bongaarts feeney without birth order
-```{r, fig.height=5}
+```{r, fig.height=8}
 tfr.vec <- colSums(fat)
 ## (2a) by hand
 mu.vec <- apply(fat, 2, get.mean)
@@ -252,14 +254,14 @@ par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l")
 lines(year.vec, adj.tfr.vec, lty = 2)
 abline(v = c(1945, 2008))
-abline(h = seq(1.5, 3.5, .1), col = "grey", lty = 3)
+abline(h = seq(1.5, 4, .1), col = "grey", lty = 3)
 ## can also use function to fit
 adj.tfr.vec.from.fun <- bf.fit.simple(fat)$tfr.star
 lines(year.vec, adj.tfr.vec.from.fun, col = "red")
 ```
 
 Now let's look at turbulence around WW2
-```{r, fig.height=5}
+```{r, fig.height=6}
 par(mfrow = c(2,2))
 plot(age.vec, fat[,"1944"], type = "l", ylim = c(0, .23),
      ylab = "f(a)",
@@ -383,7 +385,7 @@ for (i in 1:length(my.year.vec))
 
 Now fit mixing model and redo the animation
 
-```{r, fig.height=10}
+```{r include=FALSE}
 library(data.table)
 library(mixtools)
 source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_mixed_functions.R")
@@ -394,6 +396,9 @@ my.fat <- fat[, paste(my.year.vec)]
 out <- get.mixed.tfr.star(my.fat)
 ##
 out.all <- out
+```
+
+```{r, fig.height=5}
 
 if (0) {
 mu.mat <- get.coefs.mixed(out.all$fert.fit.list.variable.sigma)$mu.mat
@@ -418,8 +423,12 @@ colnames(lambda.mat) <- my.year.vec
 colnames(mu.mat) <- my.year.vec
 lambda.mat[,"2015"] <- (lambda.mat[,"2014"] + lambda.mat[,"2016"])/2
 mu.mat[,"2015"]     <- (mu.mat[,"2014"]     + mu.mat[,"2016"])/2
+``` 
 
-## plot normalized plot with the normal distributions inside.
+Plot normalized plot with the normal distributions inside.
+
+```{r, fig.height=5}
+
 plot.fun3 <- function(last.year, A = Aall)
 {
     year.vec <- colnames(A)
@@ -469,7 +478,11 @@ plot.fun.nonorm.3 <- function(last.year, A = Aall)
     lines(x, fx1.hat + fx2.hat)
     title(last.year)
 }
+```
 
+Fat Mix
+
+```{r, fig.height=10}
 Aall <- my.fat
 #pdf("fat_mix_movie.pdf")
 par(mar=c(1,1,1,1))
@@ -480,10 +493,10 @@ for (i in 1:length(my.year.vec))
     plot.fun.nonorm.3(my.year)
 }
 #dev.off()
+```
 
-
-## let's do tempo adjustment
-
+Let's do tempo adjustment
+```{r, fig.height=5}
 rt.mat <- t(apply(mu.mat, 1, center.diff))
 tfr.vec <- apply(my.fat, 2, sum)
 tfr.mat <- lambda.mat * tfr.vec
@@ -499,7 +512,6 @@ plot(my.year.vec, tfr.vec, type = "l",
      ylim = c(1, 3))
 
 lines(my.year.vec, tfr.star.vec, lty = 2)
-
 ```
 
   Let's look at 1st births, again as if their are two latent groups:
