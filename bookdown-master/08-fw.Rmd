@@ -361,11 +361,12 @@ matplot(t(G.mat), type = "l")
 
 G.bar <- apply(G.mat, 2, mean)
 lines(G.bar, lwd = 4)
+abline(h = 1/9, lty = 3, col = "yellow", lwd = 5)
 ```
 cool plot, why is it about .11?
 ```{r}
 1/(1 + 8)
-abline(h = 1/9, lty = 3, col = "yellow", lwd = 5)
+
 ```
 
 Gillespie tells us that Gbar is supposed to be 1 / (1 + 4*Ne*mu)
@@ -388,7 +389,11 @@ n_gen = 1001
 N = 1000
 ## set.seed(1)
 ## A <- fwm2(N, n_gen, mu = 4/N)
-A <- fwm2(N, n_gen, mu = 8/N)
+#A <- fwm2(N, n_gen, mu = 8/N)
+###############
+#What about the fwm2 function?
+#######################
+A <- fwm(N, n_gen, mu = 8/N)
 ## ok, lets do power law plot of this
 x <- A[1001,]
 tt <- table(x)
