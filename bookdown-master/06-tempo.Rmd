@@ -198,6 +198,7 @@ Tempo adjustment of US fertility using HFD data using Bongaarts-Feeney formula:
 
 ```{r}
 library(data.table)
+library(dplyr)
 source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_functions.R")
 source("/hdir/0/fmenares/Book/bookdown-master/codes/utility_functions.R")
 
@@ -314,6 +315,11 @@ par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l", lwd = 2)
 lines(year.vec, adj.tfr.vec, lty = 2)
 lines(year.vec, adj.tfr.bo.vec, lty = 1, lwd = 2, col = "red")
+legend("topright",
+       c("tfr", "tfr* (all parities)", "tfr* (by parity)"),
+       col = c("black", "black", "red"),
+       lty = c(1, 2, 1),
+       lwd = c(2,1,2))
 ## let's check against hfd
 hfd.adj.dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/zip_w/adjtfrRR.txt",
                 skip = 2)
@@ -324,7 +330,8 @@ legend("topright",
        col = c("black", "black", "red"),
        lty = c(1, 2, 1),
        lwd = c(2,1,2))
-hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
+# hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)]
+
 ```
 ### Questions
 
