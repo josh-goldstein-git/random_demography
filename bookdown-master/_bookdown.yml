@@ -3,7 +3,9 @@ language:
   ui:
     chapter_name: "Chapter "
 delete_merged_file: true
-output_dir: "/hdir/0/fmenares/Book/docs"
+#output_dir: "/hdir/0/fmenares/Book/docs"
+output_dir: "/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/docs"
+
 rmd_files: ["index.Rmd", "01-heterogeneity.Rmd", "02-frailty.Rmd",
 "03-gamma_censoc_application.Rmd", "04-crossover.Rmd", "05-plateaus.Rmd",
 "06-tempo.Rmd", "07-branching.Rmd", "08-fw.Rmd", "09-coalescent.Rmd"]

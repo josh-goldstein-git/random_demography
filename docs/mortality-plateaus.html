@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-07-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.1" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#an-example-2"><i class="fa fa-check"></i><b>6.2.1</b> An example</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#conclusions-2"><i class="fa fa-check"></i><b>6.3</b> Conclusions</a></li>
-<li class="chapter" data-level="6.4" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#kens-class"><i class="fa fa-check"></i><b>6.4</b> Ken’s class</a></li>
+<li class="chapter" data-level="6.4" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#kens-class---hazards-and-plateaus"><i class="fa fa-check"></i><b>6.4</b> Ken’s class - Hazards and Plateaus</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#extremes-of-longevity-in-humans-and-other-species"><i class="fa fa-check"></i><b>6.4.1</b> Extremes of Longevity in Humans and Other Species</a></li>
+<li class="chapter" data-level="6.4.2" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#gamma-gompertz-fixed-frailty-hazards"><i class="fa fa-check"></i><b>6.4.2</b> Gamma-Gompertz Fixed Frailty Hazards</a></li>
+<li class="chapter" data-level="6.4.3" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#less-restrictive-frailty-models"><i class="fa fa-check"></i><b>6.4.3</b> Less Restrictive Frailty Models</a></li>
+<li class="chapter" data-level="6.4.4" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#mutation-accumulation-gompertz-hazards-with-plateaus"><i class="fa fa-check"></i><b>6.4.4</b> Mutation Accumulation, Gompertz Hazards with Plateaus</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="mortality-plateaus.html"><a href="mortality-plateaus.html#key-points"><i class="fa fa-check"></i><b>6.5</b> Key points</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tempo.html"><a href="tempo.html"><i class="fa fa-check"></i><b>7</b> Tempo</a><ul>
 <li class="chapter" data-level="7.1" data-path="tempo.html"><a href="tempo.html#outline-5"><i class="fa fa-check"></i><b>7.1</b> Outline</a></li>
@@ -355,9 +361,167 @@ cross-over with age</li>
 selection”</li>
 </ul>
 </div>
-<div id="kens-class" class="section level2">
-<h2><span class="header-section-number">6.4</span> Ken’s class</h2>
+<div id="kens-class---hazards-and-plateaus" class="section level2">
+<h2><span class="header-section-number">6.4</span> Ken’s class - Hazards and Plateaus</h2>
+<p>Outline</p>
+<ol style="list-style-type: decimal">
+<li>Extremes of Longevity in Humans and Other Species</li>
+<li>Gamma-Gompertz Fixed Frailty Hazards</li>
+<li>Less Restrictive Frailty Models</li>
+<li>Mutation Accumulation, Gompertz Hazards with Plateaus</li>
+</ol>
+<div id="extremes-of-longevity-in-humans-and-other-species" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Extremes of Longevity in Humans and Other Species</h3>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">    knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&#39;figures/plateau_1.pdf&#39;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:plateaubarbi"></span>
+<img src="figures/plateau_1.pdf" alt="Estimated plateau for cohort of Italian women from 1904. Source: @barbi2018" width="80%" />
+<p class="caption">
+Figure 6.1: Estimated plateau for cohort of Italian women from 1904. Source: <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>
+</p>
+</div>
+<p>What is the importance of plateaus?</p>
+<ul>
+<li>They encourage optimism that future progress against old-age mortality is feasible. Our bodies are not facing an endlessly mounting set of things going wrong.</li>
+<li>They point to commonalities with the life-course demography of other species. The shared genetic heritage of advanced organisms is permissive.</li>
+</ul>
+<p>For instance, we can compare human hazard to that of other species:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">    knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&#39;figures/plateau_2.pdf&#39;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:plateauhoriuchi"></span>
+<img src="figures/plateau_2.pdf" alt="Hazards across selected species. Source: @horiuchi2003" width="80%" />
+<p class="caption">
+Figure 6.2: Hazards across selected species. Source: <span class="citation">Horiuchi (<a href="#ref-horiuchi2003">2003</a>)</span>
+</p>
+</div>
+</div>
+<div id="gamma-gompertz-fixed-frailty-hazards" class="section level3">
+<h3><span class="header-section-number">6.4.2</span> Gamma-Gompertz Fixed Frailty Hazards</h3>
+<ul>
+<li>The Gamma-Gompertz model of <span class="citation">Vaupel, Manton, and Stallard (<a href="#ref-vaupel1979">1979</a>)</span> is familiar from this course and Chapter 8 of Essential Demographic Methods <span class="citation">(Wachter <a href="#ref-wachter2014essential">2014</a>)</span>.</li>
+<li>Gamma Gompertz models are one way of generating plateaus for population hazards out of increasing individual hazards.</li>
+<li>We fit parameters to the data in <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span> and look for a predicted plateau, starting from age 60 onwards.</li>
+<li>We need formulas for the individual hazard <span class="math inline">\(h_x\)</span> , for the individual
+cumulative hazard <span class="math inline">\(H_x\)</span>, and for the aggregate population hazard <span class="math inline">\(\mu_x\)</span> implied by Gamma-distributed frailty with shape parameter <span class="math inline">\(k\)</span> and rate parameter <span class="math inline">\(\theta = k\)</span>.</li>
+<li>Does the prediction show a plateau?</li>
+<li>Does the level of the plateau fit plateau observed in the Italian cohorts over age 105?</li>
+</ul>
+<p>A. How does Gamma Gompertz Make a Plateau?
+- Try alternative values for <span class="math inline">\(k\)</span> and for <span class="math inline">\(\beta\)</span>. Guess a formula for the level of the plateau.
+- This formula can be proved by showing that <span class="math inline">\(h_{x}/H_{x}\)</span> goes to <span class="math inline">\(\beta\)</span> in a Gompertz model and plugging into the formula for Gamma Gompertz aggregate hazards.
+- What happens to the mean frailty of survivors as <span class="math inline">\(x\)</span> increases?
+- What has to balance what in order for a plateau to appear?</p>
+<p>B. Troubles with Gamma Gompertz:
+- Poor fits to observed cohort plateaus.
+- Unrealistic mortality rates at younger ages for those who do survive out onto the plateau. (The frailty distribution reaches down to zero frailty).
+- Individual centenarians still experience exponentially increasing hazards under the model.
+- Why should frailty remain fixed across life?
+- The model assumes rather than explains an underlying Gompertz.
+- There is no full genetic or evolutionary story.</p>
+<p>C. Mathematics of Frailty as a Gamma Random Variable:
+- Probability density: <span class="math inline">\(\left(\frac{\theta^{k}}{\Gamma(k)}\right)z^{k-1}e^{-\theta z}\)</span>
+- Mean:$ $
+- Variance:$ $
+- <span class="math inline">\(\mathbb{E}e^{-ZH}= \left(\frac{\theta}{\theta H}\right)^{k}\)</span></p>
+<pre><code>- Exponential and Gamma Random Variables:
+    - When U has a uniform distribution on $[0, 1]$, then $Y = −log(U)/\theta$ has an exponential probability distribution on $(0,\infty)$ with mean $1/\theta$ and variance $1/\theta^2$.
+    - The sum of $k$ independent exponential random variables with the same mean $1/\theta$ has a gamma probability distribution with shape $k$, scale $\theta$, rate $1/\theta$, mean $k/\theta$ and variance $k/(\theta^2)$.
+    - With an exponential variable Y, we have 
+    $\mathbb{E}e^{-YH}=\int e^{-yH}p(y)dy= \frac{\theta}{\theta+H}$
+    - Because expectation values of independent random variables multiply, with a gamma variable $Z = Y_1 + Y_2 + · · ·Y_k$, we have 
+    $\mathbb{E}e^{-ZH}= \left(\frac{\theta}{\theta+H}\right)^k$</code></pre>
+<p>D. <span class="citation">Vaupel, Manton, and Stallard (<a href="#ref-vaupel1979">1979</a>)</span>
+- Lifelong Fixed Frailty Z.
+- The Gamma distribution has <span class="math inline">\(\mathbb{E}e^{-ZH}= \left(\frac{\theta}{\theta+H}\right)^k\)</span>
+- For starting mean frailty equal to 1, we have <span class="math inline">\(k = \theta\)</span>.
+- The aggregate population hazard is minus the slope of the logarithm of survivorship:
+<span class="math inline">\(\mu_x = -\frac{d}{dx}\left(k log(\theta)- k log(\theta+H_x)\right)= \left(\frac{k}{\theta+H_x}\right)h_x\)</span>
+- For the Gamma Gompertz, we insert Gompertz individual hazards <span class="math inline">\(h_x\)</span> and individual cumulative hazards <span class="math inline">\(H_x\)</span> into the formula.</p>
+</div>
+<div id="less-restrictive-frailty-models" class="section level3">
+<h3><span class="header-section-number">6.4.3</span> Less Restrictive Frailty Models</h3>
+<ul>
+<li>The key property of the Gamma Gompertz model is a frailty distribution that extends all the way down to zero frailty.</li>
+<li>With any initial frailty distribution that extends down to zero and looks like a Gamma near zero, the frailty distribution among survivors comes to look like a Gamma.</li>
+<li>If you do assume a Gamma distribution for frailty, then a plateau in the aggregate population hazard function entails an individual hazard function tending toward a Gompertz.</li>
+<li>However:
+<ul>
+<li>Frailties near zero are unrealistic.</li>
+<li>With frailties bounded away from zero, plateaus in aggregate hazards require plateaus in individual hazards</li>
+<li>Plateaus in individual hazards can arise naturally, for instance from genetic models.</li>
+</ul></li>
+<li>Consider a “semi-circle” frailty whose probability density function is, for instance, <span class="math inline">\(p(z) = (6)(z − 0.7)(1.3 − z)\)</span> on <span class="math inline">\([0.7, 1.3]\)</span>, zero else.</li>
+<li>If the individual hazard were Gompertz, would there be a plateau?</li>
+<li>Suppose the individual hazard were given by <span class="math inline">\(frac{x}{(1 + x)}\)</span>.
+<ul>
+<li>Would there be a plateau in the individual hazard? If so, at what level?</li>
+<li>Would there be a plateau in the aggregate population hazard? If so, at what level?</li>
+</ul></li>
+<li>We ask what genetic processes might shape individual hazards into having stretches that look Gompertz and old-age forms looking like plateaus.</li>
+</ul>
+</div>
+<div id="mutation-accumulation-gompertz-hazards-with-plateaus" class="section level3">
+<h3><span class="header-section-number">6.4.4</span> Mutation Accumulation, Gompertz Hazards with Plateaus</h3>
+<ul>
+<li>We turn to alternative models with plateaus in individual hazards, not just in aggregate population hazards.</li>
+<li>The genetic evolutionary theory of “mutation accumulation” suggests one story to account both for Gompertzian increases over a stretch of adult ages and for plateaus beyond them.</li>
+<li>We each inherit genetic variants or “alleles” in our DNA originating in mutations thousands of generations in the past.</li>
+<li>Picture, say, the time of the cave painters, 40,000 B.C., when people died in their 30s and 40s and 50s rather than their 70s, 80s, and 90s, losing some of their chance to bear and raise offspring.</li>
+</ul>
+<p>A. Mutation-Selection Equilibrium
+- Go back to basic stable (stationary) population theory. Write <span class="math inline">\(\rho(a)\)</span> for the size of the group of individuals (e.g. women) who carry a certain mutant allele indexed by the letter <span class="math inline">\(a\)</span>.
+- The NRR for members of the group is assumed to be <span class="math inline">\(1 − S(a)\)</span> for some small “selective cost” <span class="math inline">\(S(a)\)</span> due to effects of the “deleterious” allele.
+- In the next generation, there are <span class="math inline">\(\rho(a)(1 − S(a))\)</span> daughters.
+- There are also <span class="math inline">\(\nu(a)\)</span> new arrivals due to new mutations.
+- The group keeps growing until it reaches equilibrium, when losses are balanced by new arrivals, and <span class="math inline">\(\rho(a) = \rho(a)(1 − S(a)) + \nu(a)\)</span>.
+- What is <span class="math inline">\(\rho(a)\)</span> as a function of <span class="math inline">\(S(a)\)</span>?</p>
+<p>B. Deleterious Alleles with Age-Specific Effects
+- In our setting, many deaths come from external threats regardless of age, a background level of “extrinsic mortality” with constant hazard <span class="math inline">\(\lambda\)</span>.
+- To keep the story as simple as possible, picture a mutant allele that has a small bad effect on survival only at an “age of onset” <span class="math inline">\(a\)</span>. It raises the hazard of the individual who carries it by an amount <span class="math inline">\(\delta\)</span> in the age interval <span class="math inline">\(a\)</span> to <span class="math inline">\(a + 1\)</span>.
+- Picture a constant level of fertility from age 20 onward, set to make the NRR equal to 1 for women who carry no mutant alleles.
+- Take, for example, <span class="math inline">\(\lambda = 0.080\)</span>, <span class="math inline">\(\delta= 0.002\)</span>, and <span class="math inline">\(\nu(a) = 0.020/50\)</span> for any <span class="math inline">\(a \geq 20\)</span>. For each separate choice of age of onset <span class="math inline">\(a\)</span>, find and plot the
+equilibrium size <span class="math inline">\(rho(a)\)</span> as a function of <span class="math inline">\(a\)</span>.</p>
+<p>C. Allele Counts and Individual Hazards
+- Suppose that the alleles carried by an individual are a random sample of the alleles present in the population, so that <span class="math inline">\(\rho(a)\)</span> can be reinterpreted as the mean number of alleles of type <span class="math inline">\(a\)</span>.
+- Then the hazard for an individual at age <span class="math inline">\(a\)</span> will look on average like the curve <span class="math inline">\(\lambda + \rho(a) \times \delta\)</span>.
+- Does this curve resemble a Gompertz hazard? What about a Makeham hazard, that is, a Gompertz hazard plus a constant?
+- The background intrinsic mortality <span class="math inline">\(\lambda\)</span> comes from the environment, not from the DNA. What might happen to <span class="math inline">\(\lambda\)</span> as we move from the time of the cave painters to the time of the moon landings?</p>
+<p>D. Plateaus in Allele Counts
+- Suppose, now, that each mutant allele raises the hazard by another small amount <span class="math inline">\(\epsilon= 0.0005\)</span> at all ages beyond 20, along with its special effect on raising the hazard by <span class="math inline">\(\delta\)</span> at age a.
+- Find and plot the size <span class="math inline">\(\rho(a)\)</span> of the carriers of a at equilibrium under this new form of action.
+- Is there an appearance of a plateau at high ages?
+- Is it plausible to expect some fixed cost along with an age-specific effect from mildly deleterious mutant alleles?</p>
+<p>E. Questions for Further Study
+- What about the effect of each allele on the selective cost of all the other alleles?
+- Looking across species, under this account would we expect some relationship between the level of extrinsic background mortality and the steepness of the slope of a Gompertz increase in mortality with age?
+- In our calculation we let mortality over the age of 50 continue to reduce the “NRR”. Why might survival beyond ages of childbearing have an effect on generational replacement?
+- We carry in our DNA a load of mutant alleles shaped by natural selection over hundreds and thousands of generations. Why might it be that effects of those alleles that were once lethal in mid-adult life could now be influencing rates of mortality late in life for us?</p>
+</div>
+</div>
+<div id="key-points" class="section level2">
+<h2><span class="header-section-number">6.5</span> Key points</h2>
+<pre><code>- Plateaus are significant information for demographers who try to predict future progress against old-age mortality. Gompertz discouragement – Plateau encouragement
+- Gamma-Gompertz models offer one explanation for plateaus, but no explanation for Gompertz acceleration, which is simply assumed.
+-In frailty models, plateaus come out of the specialness of survivors. The mathematics treats mixtures of survivorship. 
+- Evolutionary genetic models aim to explain both Gompertz acceleration and old-age plateaus.
+- In the mutation-accumulation story, plateaus are present in the hazard functions of individuals, shaped by inherited genetic load.
+- In demography, survivorship is ALWAYS an exponential function of cumulative hazards.
+- In genetic stories, this exponential is the source of the exponential in the Gompertz formula.
+- The study of hazards at extreme age may inform our understanding of hazards at younger ages.  </code></pre>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-barbi2018">
+<p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396). American Association for the Advancement of Science: 1459–61.</p>
+</div>
+<div id="ref-horiuchi2003">
+<p>Horiuchi, Shiro. 2003. “Interspecies Differences in the Life Span Distribution: Humans Versus Invertebrates.” <em>Population and Development Review</em> 29. JSTOR: 127–51.</p>
+</div>
+<div id="ref-vaupel1979">
+<p>Vaupel, James W, Kenneth G Manton, and Eric Stallard. 1979. “The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality.” <em>Demography</em> 16 (3). Springer: 439–54.</p>
+</div>
+<div id="ref-wachter2014essential">
+<p>Wachter, Kenneth W. 2014. <em>Essential Demographic Methods</em>. Harvard University Press.</p>
 </div>
 </div>
             </section>
