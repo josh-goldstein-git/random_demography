@@ -9,6 +9,14 @@
   - The distribution of offspring of all generations
   - A tractable offspring distribution
   
+Additional resources:
+- @grinstead2006: An intermediate/advanced undergraduate textbook with good section on Branching Processes, with references to Harris and Keyﬁtz below.
+- @harris1964theory: Classic reference, but readable if you take your time. We will only read chapter 1 and will only consider the very easiest material.
+- _Surname Extinction: When will we all be ”Smiths”?_ <https://www.youtube.com/watch?v=5p-Jdjo7sSQ>: Popular science video providing good motivation, but without authority.
+- _Is Your Surname about to Go Extinct?_ <https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/>:A brief blog entry, mentionng of ``endangered names".
+- @keyfitz1968: Another introduction to branching process with the details of the empirical example
+cited by Grinstead and Snell.
+
 ## Motivation
 
 - Until now, we've focused on the hidden structures of

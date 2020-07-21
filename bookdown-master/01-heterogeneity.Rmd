@@ -6,25 +6,24 @@
 3. Keyfitz's result $\bar{r}'(t) = \sigma^2_r(t)$.
 4. Ken's model of Poisson heterogeneity
 
+Content is based on Section 8.8 from @wachter2014 as well as @vaupel1985heterogeneity for an accessible introduction to heterogeneity and overview. Derivations also from @keyfitz2005applied.
+
 ## Part I. Conceptual Introduction
 
 ### What is Demographic Heterogeneity?
   
-- If we see different outcomes (e.g., people dying at different ages), 
-is this *Demographic Heterogeneity*? \pause NO.
+- If we see different outcomes (e.g., people dying at different ages), is this *Demographic Heterogeneity*? NO.
 - Demographic heterogeneity $=$ different rates for different folks.
 
->In a *demographically heterogeneous* population, people are of
-different types, with different type-specific rates.
+>In a *demographically heterogeneous* population, people are of different types, with different type-specific rates.
 
-(These types can be discrete, with individuals being
-homogeneous within their type, or they can be continuous with possibly
-no individual having exactly the same risk as another.)
+These types can be discrete, with individuals being homogeneous within their type, or they can be continuous with possibly no individual having exactly the same risk as another.
   
+*NOTE: maybe add here a summary of @vaupel1985heterogeneity?*
+
 ### An example
   
-  Let's draw 10 individuals from a homogeneous population and
-  heterogeneous population.
+  Let's draw 10 individuals from a homogeneous population and heterogeneous population.
 
 ```{r hetero-homo, fig.cap='Homogeneity and Heterogeneity', out.width='80%', fig.align='center', fig.height=4}
   ## Homogeneous hazard of 1/10
