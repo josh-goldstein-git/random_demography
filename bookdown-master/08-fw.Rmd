@@ -6,6 +6,11 @@
 - Extinction
 - Application: Baby Names
 
+Additional resources:
+- Blog ``Introduction to the Wright-Fisher Model" <https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html#pre-requisites>
+- @hahn2003drift:  Evolutionary anthropologists arguing that the neutral explanation of the Fisher-Wright model is consistent with the distribution of 1st names. What other quantitative or qualitative features of 1st name fashion could be used to try to reject the neutral model?
+- @felsenstein2005theoretical: Very complete ``lecture notes" for graduate genetics course. Lots of good commentary, does not assume a lot of math background, but lots of content and can be diffcult to read a piece by itself. 
+
 ## Parallel
 
 
