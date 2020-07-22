@@ -1,0 +1,95 @@
+# Student Presentations
+## Mortality Crossovers
+
+### Outline
+- Paper presentations
+  - @coale1986mortality
+  - @manton1981methods
+- Empirical examples of crossovers with CenSoc data
+- Investigate quality of age of death reporting in CenSoc
+
+### _Mortality Crossovers: Reality or Bad Data?_ [@coale1986mortality]
+They noticed the following patterns in the age-specific death rates for different countries. 
+
+```{r crossover, fig.cap='Age specific death rates for different countries and cohorts. Source: @coale1986mortality', out.width='80%', fig.align='center',  echo=FALSE}
+    knitr::include_graphics('figures/crossover_1.png')
+    ```   
+    
+
+- Selection / heterogeneity:
+  - Elimination of the frailer members of the population at younger ages leaves only the very robust with lower mortality rates.
+- Level playing fields at older ages
+  - Social Security, Medicare, etc.
+- Bad data
+  - Misreporting age of death can lead to biased estimates of mortality rates at older ages
+
+
+#### Age heaping:
+- General pattern of age misstatement, most often rounding up to nearest 5 or 10.
+- Begins with a modest upward transfer at age 60 or 70, increases rapidly with age.
+
+```{r crossover2, fig.cap='Age heaping example Source: IPUMS International', out.width='80%', fig.align='center',  echo=FALSE}
+    knitr::include_graphics('figures/crossover_2.png')
+    ```  
+
+  Implications of age heaping:
+```{r crossover3, fig.cap='Age heaping. Source: @coale1986mortality', out.width='80%', fig.align='center',  echo=FALSE}
+    knitr::include_graphics('figures/crossover_3.png')
+    ```  
+$\text{age heaping on age 70}= \frac{Pop_{70}}{(Pop_{69}+Pop_{71})/2} $
+#### Takeaways
+- Age overstatement at advanced ages is common and downwardly biases estimates of mortality rates
+- Age heaping is associated with age overstatement
+- Low quality mortality data can artificially create a mortality crossover
+
+
+### _Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection_ [@manton1981methods]
+
+#### Summary
+- A model to compute the ratio of Black and White individual age specific mortality risks (within sex) to determine if the adjustments of heterogeneity and mortality selection is sufficient to remove the crossover.
+- Data from the U.S. Black and White populations for the period 1935 to 1975.
+- Mortality crossover (Blacks having relatively lower mortality rates) at age 75.
+- Could be explained under the proposed model.
+- Data quality? Variety of evidence supporting the existence of a crossover.
+- Consequently, careful consideration should be made of the population
+mechanisms by which the crossover might occur.
+
+#### A model of selection
+- Life tables are separately calculated for the Black and White populations in the U.S. over the period 1935 to 1975 based upon the assumptions:
+  - Each population is heterogeneous.
+  - The initial distribution of individuals in each population is identical (within sex) with respect to variables relevant to longevity.
+  -Individual's environmental conditions are fixed at birth.
+- Operationally, they modified standard life table calculations (Chiang, 1968) to reflect the dependence of mortality rates at advanced ages upon the selection of earlier mortality levels on a heterogeneous population.
+
+#### A little bit of math
+- The following partial differential equation governs the change of the distribution as cohort age:
+\begin{equation}
+\frac{\partial f_{x}(z)}{\partial x}= f_{x}(z)(\bar{\mu}_{x}-\mu_{x}(z))
+\end{equation}
+- Each person retains the value of $z$ (longevity characteristics) given at birth.
+- Functional forms: 
+\begin{equation}
+\mu_{x}(z)=z\mu_{x}(1)= z\mu_{x}
+\end{equation}
+- Thus $z$ may be taken to be a measure of relative (to the standard individual) frailty or "susceptibility to death". Alternatively, $1/z$ may be considered as a measure of vitality or "robustness". 
+*NEED TO ADD FORMULAS FROM PRESENTATION*
+
+#### Parameter k
+- Select values of k focus upon the biological rather than statistical
+  a. Biological dimensions underlying longevity are normally distributed at birth.
+  b. Any deviation from an "optimal" biological point will be associated with decreased survival.
+  c. Conditionally on age, mortality will be a quadratic function
+  d. Each individual's endowment for longevity (z) is fixed at birth.
+- The value of к is the result of n, number of dimensions relevant to longevity.
+- The relation of n to the gamma shape parameter is simply n=2k.
+- Lower n, the greater is the heterogeneity (higher variance of gamma)
+- The values of n used are 1 and 2, suggesting that longevity is unidimensional (k=0.5) and bidimensional (k=1), respectively.
+
+## Plateaus
+- @steinsaltz2006understanding
+- @barbi2018: Recent paper claiming to be “the best evidence to date for the existence of extreme-age mortality plateaus in humans”
+
+## Rising Inequality
+- @waldron2007trends: Age-cohort model suggesting growing inequality by income, but includes many caveats about heterogeneity. Our challenge is to apply models of heterogeneity to this issue, particularly the result on mortality improvement over time.
+
+
