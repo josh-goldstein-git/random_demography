@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-17" />
+<meta name="date" content="2020-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Random Demography</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -281,6 +281,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.10" data-path="coalescent.html"><a href="coalescent.html#some-exercises"><i class="fa fa-check"></i><b>10.10</b> Some exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="student-presentations.html"><a href="student-presentations.html"><i class="fa fa-check"></i><b>11</b> Student Presentations</a><ul>
+<li class="chapter" data-level="11.1" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers"><i class="fa fa-check"></i><b>11.1</b> Mortality Crossovers</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="student-presentations.html"><a href="student-presentations.html#outline-9"><i class="fa fa-check"></i><b>11.1.1</b> Outline</a></li>
+<li class="chapter" data-level="11.1.2" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers-reality-or-bad-data-coale1986mortality"><i class="fa fa-check"></i><b>11.1.2</b> <em>Mortality Crossovers: Reality or Bad Data?</em> <span class="citation">(Coale and Kisker <span>1986</span>)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="student-presentations.html"><a href="student-presentations.html#methods-for-evaluating-the-heterogeneity-of-aging-processes-in-human-populations-using-vital-statistics-data-explaining-the-blackwhite-mortality-crossover-by-a-model-of-mortality-selection-manton1981methods"><i class="fa fa-check"></i><b>11.1.3</b> <em>Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection</em> <span class="citation">(Manton and Stallard <span>1981</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="student-presentations.html"><a href="student-presentations.html#plateaus"><i class="fa fa-check"></i><b>11.2</b> Plateaus</a></li>
+<li class="chapter" data-level="11.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>11.3</b> Rising Inequality</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -311,6 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Population Survival and Hazards under fixed frailty</li>
 <li>Gamma frailty</li>
 </ol>
+<p>For additional resources see <span class="citation">Vaupel and Missov (<a href="#ref-vaupel2014unobserved">2014</a>)</span> and <span class="citation">(“Unobserved Heterogeneity,” <a href="#ref-rodriguez2001">n.d.</a>)</span>.</p>
+<p>In particular <span class="citation">(“Unobserved Heterogeneity,” <a href="#ref-rodriguez2001">n.d.</a>)</span> contains is a detailed hand-out for Princeton class. Many of the same results as <span class="citation">Vaupel and Missov (<a href="#ref-vaupel2014unobserved">2014</a>)</span>, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.</p>
 <div id="review-of-mortality-mathematics" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Review of mortality mathematics</h3>
 <ul>
@@ -371,7 +382,7 @@ schedule of a person with <span class="math inline">\(z = 1\)</span>).</li>
 <div id="fragile" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> fragile</h3>
 <p>Which look like multiplicative fixed frailty?
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 </div>
 <div id="part-i.-results-from-fixed-frailty" class="section level2">
@@ -553,7 +564,7 @@ something. What?</p>
 <a class="sourceLine" id="cb12-21" data-line-number="21">         <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,</a>
 <a class="sourceLine" id="cb12-22" data-line-number="22">         <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>))</a>
 <a class="sourceLine" id="cb12-23" data-line-number="23">  <span class="kw">title</span>(<span class="st">&quot;Gamma-frailty population survival&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
 <div id="conclusions-1" class="section level2">
@@ -566,6 +577,15 @@ hazards including <span class="math inline">\(\bar{\mu}(x) = \mu_0(x) \bar{z}(x)
 <li>Survival curve for Gamma</li>
 </ul>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-rodriguez2001">
+<p>“Unobserved Heterogeneity.” n.d. <a href="https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf">https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf</a>.</p>
+</div>
+<div id="ref-vaupel2014unobserved">
+<p>Vaupel, James W, and Trifon I Missov. 2014. “Unobserved Population Heterogeneity: A Review of Formal Relationships.” <em>Demographic Research</em> 31. JSTOR: 659–86.</p>
 </div>
 </div>
             </section>

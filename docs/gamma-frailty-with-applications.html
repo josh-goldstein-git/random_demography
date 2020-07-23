@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-17" />
+<meta name="date" content="2020-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Random Demography</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -281,6 +281,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.10" data-path="coalescent.html"><a href="coalescent.html#some-exercises"><i class="fa fa-check"></i><b>10.10</b> Some exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="student-presentations.html"><a href="student-presentations.html"><i class="fa fa-check"></i><b>11</b> Student Presentations</a><ul>
+<li class="chapter" data-level="11.1" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers"><i class="fa fa-check"></i><b>11.1</b> Mortality Crossovers</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="student-presentations.html"><a href="student-presentations.html#outline-9"><i class="fa fa-check"></i><b>11.1.1</b> Outline</a></li>
+<li class="chapter" data-level="11.1.2" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers-reality-or-bad-data-coale1986mortality"><i class="fa fa-check"></i><b>11.1.2</b> <em>Mortality Crossovers: Reality or Bad Data?</em> <span class="citation">(Coale and Kisker <span>1986</span>)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="student-presentations.html"><a href="student-presentations.html#methods-for-evaluating-the-heterogeneity-of-aging-processes-in-human-populations-using-vital-statistics-data-explaining-the-blackwhite-mortality-crossover-by-a-model-of-mortality-selection-manton1981methods"><i class="fa fa-check"></i><b>11.1.3</b> <em>Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection</em> <span class="citation">(Manton and Stallard <span>1981</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="student-presentations.html"><a href="student-presentations.html#plateaus"><i class="fa fa-check"></i><b>11.2</b> Plateaus</a></li>
+<li class="chapter" data-level="11.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>11.3</b> Rising Inequality</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -340,7 +349,7 @@ Does <span class="math inline">\(\bar{z}\)</span> have the form
 <a class="sourceLine" id="cb13-5" data-line-number="5">H0.x =<span class="st"> </span>(a<span class="op">/</span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb13-6" data-line-number="6">bar.z =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span><span class="st"> </span>H0.x)</a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw">plot</span>(x, bar.z)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Look at the apparent exponential decline in tail
 Homework: what is proportional rate of change in <span class="math inline">\(\bar{z}\)</span> as <span class="math inline">\(x\)</span>
 gets big? Is it close to Gompertz <span class="math inline">\(b\)</span>?</p>
@@ -372,9 +381,9 @@ characteristic.)</p>
 <a class="sourceLine" id="cb14-6" data-line-number="6">dt[incwage <span class="op">==</span><span class="st"> </span><span class="dv">999998</span>, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NA</span>]</a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">dt[incwage <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NA</span>]</a></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">hist_incwage &lt;-<span class="st"> </span>dt[, <span class="kw">hist</span>(incwage)]</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">hist_ln_incwage &lt;-<span class="st"> </span>dt[, <span class="kw">hist</span>(<span class="kw">log</span>(incwage))]</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">## Do age at death for 1895-1900 cohorts</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">dt[, age.at.death <span class="op">:</span><span class="er">=</span><span class="st"> </span>dyear <span class="op">+</span><span class="st"> </span>dmonth<span class="op">/</span><span class="dv">12</span> <span class="op">-</span><span class="st"> </span>(byear <span class="op">+</span><span class="st"> </span>bmonth<span class="op">/</span><span class="dv">12</span>)]</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">my.dt &lt;-<span class="st"> </span>dt[byear <span class="op">%in%</span><span class="st"> </span><span class="dv">1895</span><span class="op">:</span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>dyear <span class="op">%in%</span><span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2004</span>]</a>
@@ -403,7 +412,7 @@ characteristic.)</p>
 <a class="sourceLine" id="cb24-6" data-line-number="6">my.dt[, log_inc_mean <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">mean</span>(log_inc), by =<span class="st"> </span>byear]</a>
 <a class="sourceLine" id="cb24-7" data-line-number="7">my.dt[, y <span class="op">:</span><span class="er">=</span><span class="st"> </span>log_inc <span class="op">-</span><span class="st"> </span>log_inc_mean]</a>
 <a class="sourceLine" id="cb24-8" data-line-number="8">hist_y &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(y)]</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">my.dt[, <span class="kw">summary</span>(y)]</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ## -7.0542 -0.4159  0.1661  0.0000  0.5660  4.2460</code></pre>
@@ -416,7 +425,7 @@ characteristic.)</p>
 <a class="sourceLine" id="cb29-2" data-line-number="2">my.dt[, <span class="kw">plot</span>(x, y.bar)]</a></code></pre></div>
 <pre><code>## NULL</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">title</span>(<span class="st">&quot;Standardized log of Wage income by surviving age&quot;</span>, <span class="dt">cex.main =</span> <span class="fl">.7</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>So we see annual wage income in 1940 increases by about $100 or so, or about 5% from age 75 to age 95. And more after that.</p>
 <blockquote>
 <p>Is this what we would expect from our Gamma frailty model?</p>
@@ -464,7 +473,7 @@ z_{obs} = e^{\hat\beta  y}
 <p>Now estimate our z’s.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">my.dt[, z <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">exp</span>(beta <span class="op">*</span><span class="st"> </span>y)]</a>
 <a class="sourceLine" id="cb35-2" data-line-number="2">hist_z &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(z, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))]</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <blockquote>
 <p>Does this look gamma-like?</p>
 </blockquote>
@@ -491,7 +500,7 @@ z_{obs} = e^{\hat\beta  y}
 <a class="sourceLine" id="cb40-11" data-line-number="11">m &lt;-<span class="st"> </span><span class="kw">lm</span> (<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>x, <span class="dt">subset =</span> x <span class="op">%in%</span><span class="st"> </span><span class="dv">80</span><span class="op">:</span><span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb40-12" data-line-number="12"><span class="kw">lines</span>(<span class="dv">80</span><span class="op">:</span><span class="dv">100</span>, <span class="kw">predict</span>(m), <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb40-13" data-line-number="13"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co">## no slowdown in mortality!!</span></a></code></pre></div>
 <blockquote>
 <p>How does Dx look? Plausible?</p>
@@ -500,7 +509,7 @@ z_{obs} = e^{\hat\beta  y}
 <p>How about hazards? They are Gompertzian for a while, but how do we explain tails?</p>
 </blockquote>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">plot</span>(x, lx)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Estimation of <span class="math inline">\(\hat{\bar{z}}(x)\)</span> using the gamma-frailty result:</p>
 <p><span class="math display">\[
 \bar{z}(x) = \bar{S}(x)^{\sigma^2}
@@ -517,7 +526,7 @@ z_{obs} = e^{\hat\beta  y}
 <p>Plotting comparison</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">plot</span>(x, z.bar.hat, <span class="dt">ylim =</span> <span class="kw">c</span>(.<span class="dv">995</span>, <span class="fl">1.001</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">lines</span>(x, z.bar)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <blockquote>
 <p>How did we do?</p>
 </blockquote>
@@ -531,7 +540,7 @@ z_{obs} = e^{\hat\beta  y}
 <a class="sourceLine" id="cb46-4" data-line-number="4"><span class="kw">title</span>(<span class="st">&quot;Mean standardized log-income&quot;</span>)</a>
 <a class="sourceLine" id="cb46-5" data-line-number="5"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>, <span class="st">&quot;fitted&quot;</span>),</a>
 <a class="sourceLine" id="cb46-6" data-line-number="6">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co">##</span></a>
 <a class="sourceLine" id="cb47-2" data-line-number="2">( <span class="dt">bar.log.y =</span> <span class="kw">mean</span>(<span class="kw">log</span>(my.dt<span class="op">$</span>y_orig)) )</a></code></pre></div>
 <pre><code>## [1] 7.03562</code></pre>
@@ -543,7 +552,7 @@ z_{obs} = e^{\hat\beta  y}
 <a class="sourceLine" id="cb49-6" data-line-number="6">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb49-7" data-line-number="7"><span class="kw">lines</span>(x, y_orig.bar.hat.wrong, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb49-8" data-line-number="8"><span class="kw">lines</span>(x, y_orig.bar.hat.right, <span class="dt">lty =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
 </div>
 <div id="discuss-our-conclusions-and-possible-future-directions-to-follow." class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Discuss our conclusions and possible future directions to follow.</h3>

@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-17" />
+<meta name="date" content="2020-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Random Demography</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -281,6 +281,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.10" data-path="coalescent.html"><a href="coalescent.html#some-exercises"><i class="fa fa-check"></i><b>10.10</b> Some exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="student-presentations.html"><a href="student-presentations.html"><i class="fa fa-check"></i><b>11</b> Student Presentations</a><ul>
+<li class="chapter" data-level="11.1" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers"><i class="fa fa-check"></i><b>11.1</b> Mortality Crossovers</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="student-presentations.html"><a href="student-presentations.html#outline-9"><i class="fa fa-check"></i><b>11.1.1</b> Outline</a></li>
+<li class="chapter" data-level="11.1.2" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers-reality-or-bad-data-coale1986mortality"><i class="fa fa-check"></i><b>11.1.2</b> <em>Mortality Crossovers: Reality or Bad Data?</em> <span class="citation">(Coale and Kisker <span>1986</span>)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="student-presentations.html"><a href="student-presentations.html#methods-for-evaluating-the-heterogeneity-of-aging-processes-in-human-populations-using-vital-statistics-data-explaining-the-blackwhite-mortality-crossover-by-a-model-of-mortality-selection-manton1981methods"><i class="fa fa-check"></i><b>11.1.3</b> <em>Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection</em> <span class="citation">(Manton and Stallard <span>1981</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="student-presentations.html"><a href="student-presentations.html#plateaus"><i class="fa fa-check"></i><b>11.2</b> Plateaus</a></li>
+<li class="chapter" data-level="11.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>11.3</b> Rising Inequality</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -313,6 +322,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The distribution of offspring of all generations</li>
 <li>A tractable offspring distribution</li>
 </ul>
+<p>Additional resources:
+- <span class="citation">(“Introduction to Probability” <a href="#ref-grinstead2006">2006</a>)</span>: An intermediate/advanced undergraduate textbook with good section on Branching Processes, with references to Harris and Keyﬁtz below.
+- <span class="citation">Harris (<a href="#ref-harris1964theory">1964</a>)</span>: Classic reference, but readable if you take your time. We will only read chapter 1 and will only consider the very easiest material.
+- <em>Surname Extinction: When will we all be ”Smiths”?</em> <a href="https://www.youtube.com/watch?v=5p-Jdjo7sSQ" class="uri">https://www.youtube.com/watch?v=5p-Jdjo7sSQ</a>: Popular science video providing good motivation, but without authority.
+- <em>Is Your Surname about to Go Extinct?</em> <a href="https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/" class="uri">https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/</a>:A brief blog entry, mentionng of ``endangered names&quot;.
+- <span class="citation">Keyfitz (<a href="#ref-keyfitz1968">n.d.</a>)</span>: Another introduction to branching process with the details of the empirical example
+cited by Grinstead and Snell.</p>
 </div>
 <div id="motivation" class="section level2">
 <h2><span class="header-section-number">8.2</span> Motivation</h2>
@@ -448,22 +464,22 @@ processes? (Mean growth, variance, time-paths, eventual size)?</li>
 </div>
 <div id="simulations" class="section level2">
 <h2><span class="header-section-number">8.3</span> Simulations</h2>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">  k =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb97-2" data-line-number="2">  p0 =<span class="st"> </span><span class="fl">.3</span>; p1 =<span class="st"> </span><span class="fl">.3</span>; p2 =<span class="st"> </span><span class="fl">.4</span>;</a>
-<a class="sourceLine" id="cb97-3" data-line-number="3">  p_k =<span class="st"> </span><span class="kw">c</span>(p0, p1, p2)</a>
-<a class="sourceLine" id="cb97-4" data-line-number="4">  Z1 =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb97-5" data-line-number="5">  <span class="kw">set.seed</span>(<span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb97-6" data-line-number="6">  (<span class="dt">kids.of.Z1 =</span> <span class="kw">sample</span>(<span class="dt">x =</span> k, <span class="dt">size =</span> Z1, <span class="dt">replace =</span> T, <span class="dt">prob =</span> p_k))</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">  k =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb95-2" data-line-number="2">  p0 =<span class="st"> </span><span class="fl">.3</span>; p1 =<span class="st"> </span><span class="fl">.3</span>; p2 =<span class="st"> </span><span class="fl">.4</span>;</a>
+<a class="sourceLine" id="cb95-3" data-line-number="3">  p_k =<span class="st"> </span><span class="kw">c</span>(p0, p1, p2)</a>
+<a class="sourceLine" id="cb95-4" data-line-number="4">  Z1 =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb95-5" data-line-number="5">  <span class="kw">set.seed</span>(<span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb95-6" data-line-number="6">  (<span class="dt">kids.of.Z1 =</span> <span class="kw">sample</span>(<span class="dt">x =</span> k, <span class="dt">size =</span> Z1, <span class="dt">replace =</span> T, <span class="dt">prob =</span> p_k))</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">  (<span class="dt">Z2 =</span> <span class="kw">sum</span>(kids.of.Z1))</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">  (<span class="dt">Z2 =</span> <span class="kw">sum</span>(kids.of.Z1))</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">  (<span class="dt">kids.of.Z2 =</span> <span class="kw">sample</span>(<span class="dt">x =</span> k, <span class="dt">size =</span> Z2, <span class="dt">replace =</span> T, <span class="dt">prob =</span> p_k))</a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">  (<span class="dt">kids.of.Z2 =</span> <span class="kw">sample</span>(<span class="dt">x =</span> k, <span class="dt">size =</span> Z2, <span class="dt">replace =</span> T, <span class="dt">prob =</span> p_k))</a></code></pre></div>
 <pre><code>## [1] 2 2</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">  (<span class="dt">Z3 =</span> <span class="kw">sum</span>(kids.of.Z2))</a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">  (<span class="dt">Z3 =</span> <span class="kw">sum</span>(kids.of.Z2))</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">  (<span class="dt">kids.of.Z3 =</span> <span class="kw">sample</span>(<span class="dt">x =</span> k, <span class="dt">size =</span> Z3, <span class="dt">replace =</span> T, <span class="dt">prob =</span> p_k))</a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">  (<span class="dt">kids.of.Z3 =</span> <span class="kw">sample</span>(<span class="dt">x =</span> k, <span class="dt">size =</span> Z3, <span class="dt">replace =</span> T, <span class="dt">prob =</span> p_k))</a></code></pre></div>
 <pre><code>## [1] 2 1 2 2</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">  (<span class="dt">Z4 =</span> <span class="kw">sum</span>(kids.of.Z3))</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">  (<span class="dt">Z4 =</span> <span class="kw">sum</span>(kids.of.Z3))</a></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>Let’s draw the tree.</p>
 <p>/\
@@ -474,52 +490,52 @@ processes? (Mean growth, variance, time-paths, eventual size)?</li>
  /\\/\\
 /\\/ /\\
 \]</span></p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">  <span class="co">#A function   </span></a>
-<a class="sourceLine" id="cb109-2" data-line-number="2">  branch &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_max =</span> <span class="dv">30</span>, <span class="dt">pk =</span> <span class="kw">c</span>(p0, p1, p2), <span class="dt">Z1 =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb109-3" data-line-number="3">  {</a>
-<a class="sourceLine" id="cb109-4" data-line-number="4">      Z.vec &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, n_max)</a>
-<a class="sourceLine" id="cb109-5" data-line-number="5">      Z.vec[<span class="dv">1</span>] &lt;-<span class="st"> </span>Z1</a>
-<a class="sourceLine" id="cb109-6" data-line-number="6">      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n_max<span class="dv">-1</span>))</a>
-<a class="sourceLine" id="cb109-7" data-line-number="7">      {</a>
-<a class="sourceLine" id="cb109-8" data-line-number="8">          Z.vec[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dt">x =</span> k,</a>
-<a class="sourceLine" id="cb109-9" data-line-number="9">                                   <span class="dt">size =</span> Z.vec[i],</a>
-<a class="sourceLine" id="cb109-10" data-line-number="10">                                   <span class="dt">replace =</span> T,</a>
-<a class="sourceLine" id="cb109-11" data-line-number="11">                                   <span class="dt">prob =</span> p_k))</a>
-<a class="sourceLine" id="cb109-12" data-line-number="12">      }</a>
-<a class="sourceLine" id="cb109-13" data-line-number="13">      <span class="kw">return</span>(Z.vec)</a>
-<a class="sourceLine" id="cb109-14" data-line-number="14">  }</a>
-<a class="sourceLine" id="cb109-15" data-line-number="15">  <span class="kw">set.seed</span>(<span class="dv">19</span>); <span class="kw">branch</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">  <span class="co">#A function   </span></a>
+<a class="sourceLine" id="cb107-2" data-line-number="2">  branch &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_max =</span> <span class="dv">30</span>, <span class="dt">pk =</span> <span class="kw">c</span>(p0, p1, p2), <span class="dt">Z1 =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb107-3" data-line-number="3">  {</a>
+<a class="sourceLine" id="cb107-4" data-line-number="4">      Z.vec &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, n_max)</a>
+<a class="sourceLine" id="cb107-5" data-line-number="5">      Z.vec[<span class="dv">1</span>] &lt;-<span class="st"> </span>Z1</a>
+<a class="sourceLine" id="cb107-6" data-line-number="6">      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n_max<span class="dv">-1</span>))</a>
+<a class="sourceLine" id="cb107-7" data-line-number="7">      {</a>
+<a class="sourceLine" id="cb107-8" data-line-number="8">          Z.vec[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dt">x =</span> k,</a>
+<a class="sourceLine" id="cb107-9" data-line-number="9">                                   <span class="dt">size =</span> Z.vec[i],</a>
+<a class="sourceLine" id="cb107-10" data-line-number="10">                                   <span class="dt">replace =</span> T,</a>
+<a class="sourceLine" id="cb107-11" data-line-number="11">                                   <span class="dt">prob =</span> p_k))</a>
+<a class="sourceLine" id="cb107-12" data-line-number="12">      }</a>
+<a class="sourceLine" id="cb107-13" data-line-number="13">      <span class="kw">return</span>(Z.vec)</a>
+<a class="sourceLine" id="cb107-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb107-15" data-line-number="15">  <span class="kw">set.seed</span>(<span class="dv">19</span>); <span class="kw">branch</span>()</a></code></pre></div>
 <pre><code>##  [1] 1 2 2 4 5 2 2 3 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">  <span class="kw">set.seed</span>(<span class="dv">99</span>);  <span class="kw">branch</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">  <span class="kw">set.seed</span>(<span class="dv">99</span>);  <span class="kw">branch</span>()</a></code></pre></div>
 <pre><code>##  [1] 1 1 2 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
 <p>Let’s see what happens with 20 trials (up to 30 generations)</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">  n_trials =<span class="st"> </span><span class="dv">20</span>; n_gen =<span class="st"> </span><span class="dv">30</span></a>
-<a class="sourceLine" id="cb113-2" data-line-number="2">  Z.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, n_trials, n_gen)</a>
-<a class="sourceLine" id="cb113-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">131</span>) </a>
-<a class="sourceLine" id="cb113-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
-<a class="sourceLine" id="cb113-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
-<a class="sourceLine" id="cb113-6" data-line-number="6">  <span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat),</a>
-<a class="sourceLine" id="cb113-7" data-line-number="7">          <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">  n_trials =<span class="st"> </span><span class="dv">20</span>; n_gen =<span class="st"> </span><span class="dv">30</span></a>
+<a class="sourceLine" id="cb111-2" data-line-number="2">  Z.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, n_trials, n_gen)</a>
+<a class="sourceLine" id="cb111-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">131</span>) </a>
+<a class="sourceLine" id="cb111-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
+<a class="sourceLine" id="cb111-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
+<a class="sourceLine" id="cb111-6" data-line-number="6">  <span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat),</a>
+<a class="sourceLine" id="cb111-7" data-line-number="7">          <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <p>How many survive (out of 20)?</p>
 <p>log-scale</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">  <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">  surviving =<span class="st"> </span><span class="kw">ifelse</span>(Z.mat[,n_gen] <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;extinct&quot;</span>, <span class="st">&quot;survive&quot;</span>)</a>
-<a class="sourceLine" id="cb115-2" data-line-number="2">  foo &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(surviving))</a>
-<a class="sourceLine" id="cb115-3" data-line-number="3">  <span class="kw">print</span>( <span class="kw">prop.table</span>(<span class="kw">table</span>(surviving)) )</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">  <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">  surviving =<span class="st"> </span><span class="kw">ifelse</span>(Z.mat[,n_gen] <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;extinct&quot;</span>, <span class="st">&quot;survive&quot;</span>)</a>
+<a class="sourceLine" id="cb113-2" data-line-number="2">  foo &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(surviving))</a>
+<a class="sourceLine" id="cb113-3" data-line-number="3">  <span class="kw">print</span>( <span class="kw">prop.table</span>(<span class="kw">table</span>(surviving)) )</a></code></pre></div>
 <pre><code>## surviving
 ## extinct survive 
 ##     0.5     0.5</code></pre>
 <p>How would you discribe the time path of the surviving lines?</p>
 <p>Long term</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">  n_trials =<span class="st"> </span><span class="dv">20</span>; n_gen =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb117-2" data-line-number="2">  Z.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, n_trials, n_gen)</a>
-<a class="sourceLine" id="cb117-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">131</span>) </a>
-<a class="sourceLine" id="cb117-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
-<a class="sourceLine" id="cb117-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
-<a class="sourceLine" id="cb117-6" data-line-number="6">  <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">  n_trials =<span class="st"> </span><span class="dv">20</span>; n_gen =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb115-2" data-line-number="2">  Z.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, n_trials, n_gen)</a>
+<a class="sourceLine" id="cb115-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">131</span>) </a>
+<a class="sourceLine" id="cb115-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
+<a class="sourceLine" id="cb115-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
+<a class="sourceLine" id="cb115-6" data-line-number="6">  <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>What does this remind you of? (Hint: “Leslie”). (See Harris figure)</p>
 </div>
 <div id="the-probability-generating-function-our-mathematical-tool" class="section level2">
@@ -613,52 +629,52 @@ is when the argument equals the PGF of the argument.</p></li>
 interpret that?</li>
 </ul>
 <p>Three cases</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">pty =</span> <span class="st">&quot;s&quot;</span>)</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-4" data-line-number="4">  d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]</a>
-<a class="sourceLine" id="cb118-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb118-6" data-line-number="6">  {</a>
-<a class="sourceLine" id="cb118-7" data-line-number="7">      d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>d <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>d<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb118-9" data-line-number="9">  <span class="co">##  super-critical </span></a>
-<a class="sourceLine" id="cb118-10" data-line-number="10">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-11" data-line-number="11">  plot.fun &lt;-<span class="st"> </span><span class="cf">function</span>(z, hz)</a>
-<a class="sourceLine" id="cb118-12" data-line-number="12">  {</a>
-<a class="sourceLine" id="cb118-13" data-line-number="13">      <span class="kw">plot</span>(z, hz, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">1.6</span>),</a>
-<a class="sourceLine" id="cb118-14" data-line-number="14">           <span class="dt">ylab =</span> <span class="st">&quot;h(z)&quot;</span>,</a>
-<a class="sourceLine" id="cb118-15" data-line-number="15">           <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">axes =</span> F)</a>
-<a class="sourceLine" id="cb118-16" data-line-number="16">      <span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="fl">.5</span>))</a>
-<a class="sourceLine" id="cb118-17" data-line-number="17">      <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="fl">.5</span>))</a>
-<a class="sourceLine" id="cb118-18" data-line-number="18">      <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
-<a class="sourceLine" id="cb118-19" data-line-number="19">      <span class="kw">lines</span>(z, hz)</a>
-<a class="sourceLine" id="cb118-20" data-line-number="20">      <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at =</span> pk[<span class="st">&quot;0&quot;</span>], <span class="dt">labels =</span> <span class="st">&quot;p0&quot;</span>,</a>
-<a class="sourceLine" id="cb118-21" data-line-number="21">           <span class="dt">col.axis =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
-<a class="sourceLine" id="cb118-22" data-line-number="22">           <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">las =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb118-23" data-line-number="23">  }</a>
-<a class="sourceLine" id="cb118-24" data-line-number="24">  <span class="kw">plot.fun</span>(z,hz)</a>
-<a class="sourceLine" id="cb118-25" data-line-number="25">  <span class="kw">points</span>(<span class="kw">c</span>(d, <span class="dv">1</span>),<span class="kw">c</span>(d, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb118-26" data-line-number="26">  <span class="kw">title</span>(<span class="st">&quot;Super-critical (m &gt; 1) </span><span class="ch">\n</span><span class="st"> 2 roots&quot;</span>)</a>
-<a class="sourceLine" id="cb118-27" data-line-number="27">  <span class="co">## sub-critical</span></a>
-<a class="sourceLine" id="cb118-28" data-line-number="28">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.55</span>, <span class="fl">.15</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-29" data-line-number="29">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-30" data-line-number="30">  <span class="kw">plot.fun</span>(z,hz)</a>
-<a class="sourceLine" id="cb118-31" data-line-number="31">  <span class="kw">title</span>(<span class="st">&quot;Sub-critical (m &lt; 1) </span><span class="ch">\n</span><span class="st"> 1 root&quot;</span>)</a>
-<a class="sourceLine" id="cb118-32" data-line-number="32">  <span class="kw">points</span>(<span class="dv">1</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb118-33" data-line-number="33">  <span class="co">## critical</span></a>
-<a class="sourceLine" id="cb118-34" data-line-number="34">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.4</span>, <span class="fl">.3</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-35" data-line-number="35">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb118-36" data-line-number="36">  <span class="kw">plot.fun</span>(z, hz)</a>
-<a class="sourceLine" id="cb118-37" data-line-number="37">  <span class="kw">title</span>(<span class="st">&quot;Critical (m = 1), </span><span class="ch">\n</span><span class="st"> 1 root&quot;</span>)</a>
-<a class="sourceLine" id="cb118-38" data-line-number="38">  <span class="kw">points</span>(<span class="dv">1</span>,<span class="dv">1</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-46-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">pty =</span> <span class="st">&quot;s&quot;</span>)</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
+<a class="sourceLine" id="cb116-3" data-line-number="3">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-4" data-line-number="4">  d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]</a>
+<a class="sourceLine" id="cb116-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb116-6" data-line-number="6">  {</a>
+<a class="sourceLine" id="cb116-7" data-line-number="7">      d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>d <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>d<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb116-9" data-line-number="9">  <span class="co">##  super-critical </span></a>
+<a class="sourceLine" id="cb116-10" data-line-number="10">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-11" data-line-number="11">  plot.fun &lt;-<span class="st"> </span><span class="cf">function</span>(z, hz)</a>
+<a class="sourceLine" id="cb116-12" data-line-number="12">  {</a>
+<a class="sourceLine" id="cb116-13" data-line-number="13">      <span class="kw">plot</span>(z, hz, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">1.6</span>),</a>
+<a class="sourceLine" id="cb116-14" data-line-number="14">           <span class="dt">ylab =</span> <span class="st">&quot;h(z)&quot;</span>,</a>
+<a class="sourceLine" id="cb116-15" data-line-number="15">           <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">axes =</span> F)</a>
+<a class="sourceLine" id="cb116-16" data-line-number="16">      <span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="fl">.5</span>))</a>
+<a class="sourceLine" id="cb116-17" data-line-number="17">      <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="fl">.5</span>))</a>
+<a class="sourceLine" id="cb116-18" data-line-number="18">      <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
+<a class="sourceLine" id="cb116-19" data-line-number="19">      <span class="kw">lines</span>(z, hz)</a>
+<a class="sourceLine" id="cb116-20" data-line-number="20">      <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at =</span> pk[<span class="st">&quot;0&quot;</span>], <span class="dt">labels =</span> <span class="st">&quot;p0&quot;</span>,</a>
+<a class="sourceLine" id="cb116-21" data-line-number="21">           <span class="dt">col.axis =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb116-22" data-line-number="22">           <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">las =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb116-23" data-line-number="23">  }</a>
+<a class="sourceLine" id="cb116-24" data-line-number="24">  <span class="kw">plot.fun</span>(z,hz)</a>
+<a class="sourceLine" id="cb116-25" data-line-number="25">  <span class="kw">points</span>(<span class="kw">c</span>(d, <span class="dv">1</span>),<span class="kw">c</span>(d, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb116-26" data-line-number="26">  <span class="kw">title</span>(<span class="st">&quot;Super-critical (m &gt; 1) </span><span class="ch">\n</span><span class="st"> 2 roots&quot;</span>)</a>
+<a class="sourceLine" id="cb116-27" data-line-number="27">  <span class="co">## sub-critical</span></a>
+<a class="sourceLine" id="cb116-28" data-line-number="28">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.55</span>, <span class="fl">.15</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-29" data-line-number="29">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-30" data-line-number="30">  <span class="kw">plot.fun</span>(z,hz)</a>
+<a class="sourceLine" id="cb116-31" data-line-number="31">  <span class="kw">title</span>(<span class="st">&quot;Sub-critical (m &lt; 1) </span><span class="ch">\n</span><span class="st"> 1 root&quot;</span>)</a>
+<a class="sourceLine" id="cb116-32" data-line-number="32">  <span class="kw">points</span>(<span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb116-33" data-line-number="33">  <span class="co">## critical</span></a>
+<a class="sourceLine" id="cb116-34" data-line-number="34">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.4</span>, <span class="fl">.3</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-35" data-line-number="35">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb116-36" data-line-number="36">  <span class="kw">plot.fun</span>(z, hz)</a>
+<a class="sourceLine" id="cb116-37" data-line-number="37">  <span class="kw">title</span>(<span class="st">&quot;Critical (m = 1), </span><span class="ch">\n</span><span class="st"> 1 root&quot;</span>)</a>
+<a class="sourceLine" id="cb116-38" data-line-number="38">  <span class="kw">points</span>(<span class="dv">1</span>,<span class="dv">1</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-59-1.png" width="100%" /></p>
 <p>We can prove by answering:
 What is <span class="math inline">\(h&#39;(1)\)</span>? What is <span class="math inline">\(h(0)\)</span>? Is <span class="math inline">\(h&#39;&#39;(z) &gt; 0\)</span>?</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb119-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb119-3" data-line-number="3">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb119-4" data-line-number="4">  <span class="kw">plot.fun</span>(z,hz)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb117-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
+<a class="sourceLine" id="cb117-3" data-line-number="3">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">  <span class="kw">plot.fun</span>(z,hz)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <p>Where is <span class="math inline">\(h(p_0)\)</span>, <span class="math inline">\(h(h(p_0))\)</span>, <span class="math inline">\(h(h(h(p_0)))\)</span>, <span class="math inline">\(\ldots\)</span>?</p>
 <p>So how do we actually get <span class="math inline">\(d\)</span>?</p>
 <p>Take the case where <span class="math inline">\(p_0 = .3\)</span>, <span class="math inline">\(p_1 = 0\)</span>, and <span class="math inline">\(p_3 = .7\)</span> (the one I
@@ -668,26 +684,26 @@ just plotted).</p>
 <li>Or we can recursively iterate on the computer.</li>
 </ul>
 <p>Numerical recursion</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span> <span class="co">## our example</span></a>
-<a class="sourceLine" id="cb120-2" data-line-number="2">  d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>] <span class="co"># initial value</span></a>
-<a class="sourceLine" id="cb120-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb120-4" data-line-number="4">  {</a>
-<a class="sourceLine" id="cb120-5" data-line-number="5">      d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>d <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>d<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb120-6" data-line-number="6">      <span class="cf">if</span> (i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">19</span>,<span class="dv">20</span>))</a>
-<a class="sourceLine" id="cb120-7" data-line-number="7">          <span class="kw">print</span>(<span class="kw">paste</span>(i, d))</a>
-<a class="sourceLine" id="cb120-8" data-line-number="8">  }</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span> <span class="co">## our example</span></a>
+<a class="sourceLine" id="cb118-2" data-line-number="2">  d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>] <span class="co"># initial value</span></a>
+<a class="sourceLine" id="cb118-3" data-line-number="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb118-4" data-line-number="4">  {</a>
+<a class="sourceLine" id="cb118-5" data-line-number="5">      d &lt;-<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>d <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>d<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb118-6" data-line-number="6">      <span class="cf">if</span> (i <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">19</span>,<span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb118-7" data-line-number="7">          <span class="kw">print</span>(<span class="kw">paste</span>(i, d))</a>
+<a class="sourceLine" id="cb118-8" data-line-number="8">  }</a></code></pre></div>
 <pre><code>## [1] &quot;1 0.363&quot;
 ## [1] &quot;2 0.3922383&quot;
 ## [1] &quot;19 0.428565882081349&quot;
 ## [1] &quot;20 0.428568100698915&quot;</code></pre>
 <p>Did we get the right value?</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb122-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
-<a class="sourceLine" id="cb122-3" data-line-number="3">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb122-4" data-line-number="4">  <span class="kw">plot.fun</span>(z,hz)</a>
-<a class="sourceLine" id="cb122-5" data-line-number="5">  <span class="kw">abline</span>(<span class="dt">h =</span> d, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a>
-<a class="sourceLine" id="cb122-6" data-line-number="6">  <span class="kw">abline</span>(<span class="dt">v =</span> d, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb120-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
+<a class="sourceLine" id="cb120-3" data-line-number="3">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb120-4" data-line-number="4">  <span class="kw">plot.fun</span>(z,hz)</a>
+<a class="sourceLine" id="cb120-5" data-line-number="5">  <span class="kw">abline</span>(<span class="dt">h =</span> d, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb120-6" data-line-number="6">  <span class="kw">abline</span>(<span class="dt">v =</span> d, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p>Extinction and non-extinction revisited</p>
 <ul>
 <li>If <span class="math inline">\(m &gt; 1\)</span>, there exists <span class="math inline">\(d\)</span> bigger than 0 and less than unity.</li>
@@ -695,8 +711,8 @@ just plotted).</p>
 <li>But also some chance of never-extinction. (What form does
 never-extinction take?)</li>
 </ul>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">    <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">    <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <p>Relevance to Corona virus?</p>
 </div>
 <div id="good-and-bad-set-ups-for-branching-process" class="section level2">
@@ -765,44 +781,44 @@ each condition:
 </ul>
 <p>Let’s check our result using simulation</p>
 <p>Our set-up</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">  branch &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_max =</span> <span class="dv">30</span>, <span class="dt">p_k =</span> <span class="kw">c</span>(p0, p1, p2), <span class="dt">Z1 =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb124-2" data-line-number="2">  {</a>
-<a class="sourceLine" id="cb124-3" data-line-number="3">      <span class="co">## note: this returns 0s when extinct</span></a>
-<a class="sourceLine" id="cb124-4" data-line-number="4">      k &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(p_k)<span class="op">-</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb124-5" data-line-number="5">      Z.vec &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, n_max)</a>
-<a class="sourceLine" id="cb124-6" data-line-number="6">      Z.vec[<span class="dv">1</span>] &lt;-<span class="st"> </span>Z1</a>
-<a class="sourceLine" id="cb124-7" data-line-number="7">      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n_max<span class="dv">-1</span>))</a>
-<a class="sourceLine" id="cb124-8" data-line-number="8">      {</a>
-<a class="sourceLine" id="cb124-9" data-line-number="9">          Z.vec[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dt">x =</span> k,</a>
-<a class="sourceLine" id="cb124-10" data-line-number="10">                                   <span class="dt">size =</span> Z.vec[i],</a>
-<a class="sourceLine" id="cb124-11" data-line-number="11">                                   <span class="dt">replace =</span> T,</a>
-<a class="sourceLine" id="cb124-12" data-line-number="12">                                   <span class="dt">prob =</span> p_k))</a>
-<a class="sourceLine" id="cb124-13" data-line-number="13">      }</a>
-<a class="sourceLine" id="cb124-14" data-line-number="14">      <span class="kw">return</span>(Z.vec)</a>
-<a class="sourceLine" id="cb124-15" data-line-number="15">  }</a>
-<a class="sourceLine" id="cb124-16" data-line-number="16">  p0 =<span class="st"> </span><span class="fl">.3</span>; p1 =<span class="st"> </span><span class="fl">.4</span>; p2 =<span class="st"> </span><span class="fl">.3</span> <span class="co">## what is m?</span></a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">  branch &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_max =</span> <span class="dv">30</span>, <span class="dt">p_k =</span> <span class="kw">c</span>(p0, p1, p2), <span class="dt">Z1 =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2">  {</a>
+<a class="sourceLine" id="cb122-3" data-line-number="3">      <span class="co">## note: this returns 0s when extinct</span></a>
+<a class="sourceLine" id="cb122-4" data-line-number="4">      k &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>(<span class="kw">length</span>(p_k)<span class="op">-</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb122-5" data-line-number="5">      Z.vec &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, n_max)</a>
+<a class="sourceLine" id="cb122-6" data-line-number="6">      Z.vec[<span class="dv">1</span>] &lt;-<span class="st"> </span>Z1</a>
+<a class="sourceLine" id="cb122-7" data-line-number="7">      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(n_max<span class="dv">-1</span>))</a>
+<a class="sourceLine" id="cb122-8" data-line-number="8">      {</a>
+<a class="sourceLine" id="cb122-9" data-line-number="9">          Z.vec[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dt">x =</span> k,</a>
+<a class="sourceLine" id="cb122-10" data-line-number="10">                                   <span class="dt">size =</span> Z.vec[i],</a>
+<a class="sourceLine" id="cb122-11" data-line-number="11">                                   <span class="dt">replace =</span> T,</a>
+<a class="sourceLine" id="cb122-12" data-line-number="12">                                   <span class="dt">prob =</span> p_k))</a>
+<a class="sourceLine" id="cb122-13" data-line-number="13">      }</a>
+<a class="sourceLine" id="cb122-14" data-line-number="14">      <span class="kw">return</span>(Z.vec)</a>
+<a class="sourceLine" id="cb122-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb122-16" data-line-number="16">  p0 =<span class="st"> </span><span class="fl">.3</span>; p1 =<span class="st"> </span><span class="fl">.4</span>; p2 =<span class="st"> </span><span class="fl">.3</span> <span class="co">## what is m?</span></a></code></pre></div>
 <p>1000 trials, code</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">  n_trials =<span class="st"> </span><span class="dv">1000</span>; n_gen =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb125-2" data-line-number="2">  Z.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, n_trials, n_gen)</a>
-<a class="sourceLine" id="cb125-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">131</span>)</a>
-<a class="sourceLine" id="cb125-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
-<a class="sourceLine" id="cb125-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
-<a class="sourceLine" id="cb125-6" data-line-number="6">  <span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat),</a>
-<a class="sourceLine" id="cb125-7" data-line-number="7">          <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">  n_trials =<span class="st"> </span><span class="dv">1000</span>; n_gen =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2">  Z.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, n_trials, n_gen)</a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">131</span>)</a>
+<a class="sourceLine" id="cb123-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
+<a class="sourceLine" id="cb123-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
+<a class="sourceLine" id="cb123-6" data-line-number="6">  <span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat),</a>
+<a class="sourceLine" id="cb123-7" data-line-number="7">          <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>1000 trials, means, picture</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">Zn_bar =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, mean)</a>
-<a class="sourceLine" id="cb126-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(Z.mat)</a>
-<a class="sourceLine" id="cb126-3" data-line-number="3">proportion.zero &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">prop.table</span>(<span class="kw">table</span>(x <span class="op">==</span><span class="st"> </span><span class="dv">0</span>))[<span class="st">&quot;TRUE&quot;</span>]}</a>
-<a class="sourceLine" id="cb126-4" data-line-number="4">d_n =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, proportion.zero)</a>
-<a class="sourceLine" id="cb126-5" data-line-number="5">Z.mat.na &lt;-<span class="st"> </span>Z.mat; Z.mat.na[Z.mat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb126-6" data-line-number="6">Zn_surv_bar =<span class="st"> </span><span class="kw">apply</span>(Z.mat.na, <span class="dv">2</span>, mean, <span class="dt">na.rm =</span> T)</a>
-<a class="sourceLine" id="cb126-7" data-line-number="7"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb126-8" data-line-number="8"><span class="kw">plot</span>(n, Zn_bar, <span class="dt">main =</span> <span class="st">&quot;Mean Zn&quot;</span>)</a>
-<a class="sourceLine" id="cb126-9" data-line-number="9"><span class="kw">plot</span>(n, d_n, <span class="dt">main =</span> <span class="st">&quot;Fraction extinct&quot;</span>)</a>
-<a class="sourceLine" id="cb126-10" data-line-number="10"><span class="kw">plot</span>(n, Zn_surv_bar)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="co">## insert code here for Zn_surv_bar.hat and add a line</span></a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">Zn_bar =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, mean)</a>
+<a class="sourceLine" id="cb124-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(Z.mat)</a>
+<a class="sourceLine" id="cb124-3" data-line-number="3">proportion.zero &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">prop.table</span>(<span class="kw">table</span>(x <span class="op">==</span><span class="st"> </span><span class="dv">0</span>))[<span class="st">&quot;TRUE&quot;</span>]}</a>
+<a class="sourceLine" id="cb124-4" data-line-number="4">d_n =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, proportion.zero)</a>
+<a class="sourceLine" id="cb124-5" data-line-number="5">Z.mat.na &lt;-<span class="st"> </span>Z.mat; Z.mat.na[Z.mat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb124-6" data-line-number="6">Zn_surv_bar =<span class="st"> </span><span class="kw">apply</span>(Z.mat.na, <span class="dv">2</span>, mean, <span class="dt">na.rm =</span> T)</a>
+<a class="sourceLine" id="cb124-7" data-line-number="7"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb124-8" data-line-number="8"><span class="kw">plot</span>(n, Zn_bar, <span class="dt">main =</span> <span class="st">&quot;Mean Zn&quot;</span>)</a>
+<a class="sourceLine" id="cb124-9" data-line-number="9"><span class="kw">plot</span>(n, d_n, <span class="dt">main =</span> <span class="st">&quot;Fraction extinct&quot;</span>)</a>
+<a class="sourceLine" id="cb124-10" data-line-number="10"><span class="kw">plot</span>(n, Zn_surv_bar)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="co">## insert code here for Zn_surv_bar.hat and add a line</span></a></code></pre></div>
 <p>Proving <span class="math inline">\(\mathbb{E} Z_n = m^n\)</span></p>
 <p>Ingredients</p>
 <ul>
@@ -824,19 +840,19 @@ this make sense?)</li>
 or smaller than unconditional variance?</li>
 </ul>
 <p>Variance in our simulation</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">var_Zn =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, var)</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(Z.mat)</a>
-<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="kw">plot</span>(n, var_Zn)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">var_Zn =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, var)</a>
+<a class="sourceLine" id="cb126-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(Z.mat)</a>
+<a class="sourceLine" id="cb126-3" data-line-number="3"><span class="kw">plot</span>(n, var_Zn)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 <p>Distribution of <span class="math inline">\(Z_n\)</span></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">   Z20 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">table</span>(Z.mat[,<span class="dv">20</span>]))</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2">   Z5 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">table</span>(Z.mat[,<span class="dv">5</span>]))</a>
-<a class="sourceLine" id="cb129-3" data-line-number="3">   <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb129-4" data-line-number="4">   <span class="kw">plot</span>(Z20[Z20 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>])</a>
-<a class="sourceLine" id="cb129-5" data-line-number="5">   <span class="kw">plot</span>(<span class="kw">log</span>(Z20[Z20 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>]))</a>
-<a class="sourceLine" id="cb129-6" data-line-number="6">   <span class="kw">plot</span>(Z5[Z5 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>])</a>
-<a class="sourceLine" id="cb129-7" data-line-number="7">   <span class="kw">plot</span>(<span class="kw">log</span>(Z5[Z5 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>]))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">   Z20 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">table</span>(Z.mat[,<span class="dv">20</span>]))</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2">   Z5 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">table</span>(Z.mat[,<span class="dv">5</span>]))</a>
+<a class="sourceLine" id="cb127-3" data-line-number="3">   <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb127-4" data-line-number="4">   <span class="kw">plot</span>(Z20[Z20 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>])</a>
+<a class="sourceLine" id="cb127-5" data-line-number="5">   <span class="kw">plot</span>(<span class="kw">log</span>(Z20[Z20 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>]))</a>
+<a class="sourceLine" id="cb127-6" data-line-number="6">   <span class="kw">plot</span>(Z5[Z5 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>])</a>
+<a class="sourceLine" id="cb127-7" data-line-number="7">   <span class="kw">plot</span>(<span class="kw">log</span>(Z5[Z5 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>]))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 </div>
 <div id="geometric-offspring-distribution" class="section level2">
 <h2><span class="header-section-number">8.8</span> Geometric offspring distribution</h2>
@@ -854,12 +870,12 @@ or smaller than unconditional variance?</li>
   1 / (1-a)
   \]</span></p>
 <p>A picture, Lotka’s parameters for 1920</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">b =<span class="st"> </span><span class="fl">0.2126</span> ;   c =<span class="st"> </span><span class="fl">0.5893</span></a>
-<a class="sourceLine" id="cb130-2" data-line-number="2">kk =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>  ;   p_kk =<span class="st"> </span>b <span class="op">*</span><span class="st"> </span>c<span class="op">^</span>(kk<span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb130-3" data-line-number="3">p0 =<span class="st"> </span>b<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c)</a>
-<a class="sourceLine" id="cb130-4" data-line-number="4">k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, kk) ;   p_k =<span class="st"> </span><span class="kw">c</span>(p0, p_kk)</a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="kw">plot</span>(k, p_k)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">b =<span class="st"> </span><span class="fl">0.2126</span> ;   c =<span class="st"> </span><span class="fl">0.5893</span></a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">kk =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>  ;   p_kk =<span class="st"> </span>b <span class="op">*</span><span class="st"> </span>c<span class="op">^</span>(kk<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb128-3" data-line-number="3">p0 =<span class="st"> </span>b<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c)</a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, kk) ;   p_k =<span class="st"> </span><span class="kw">c</span>(p0, p_kk)</a>
+<a class="sourceLine" id="cb128-5" data-line-number="5"><span class="kw">plot</span>(k, p_k)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Realism?</p>
 <p>See Table 10.3, p 386, Grinstead and Snell.</p>
 <div id="the-geometric-distributions-simple-pgf" class="section level3">
@@ -896,47 +912,47 @@ How does <span class="math inline">\(d\)</span> depend on <span class="math inli
 Big payoff: the full distribution of <span class="math inline">\(Z_n\)</span>}
 See Grinstead and Snell p. 385
 ### A plot of Keyfitz’s numbers for generations 1, 2, and 3. Is it exponential for <span class="math inline">\(k &gt; 0\)</span>?</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="co">## b = 0.2126 ;   c = 0.5893 ## lotka</span></a>
-<a class="sourceLine" id="cb131-2" data-line-number="2">b =<span class="st"> </span><span class="fl">0.3666</span>; c =<span class="st"> </span><span class="fl">.5533</span> <span class="co">## Keyfitz (from GS)</span></a>
-<a class="sourceLine" id="cb131-3" data-line-number="3">m =<span class="st"> </span>b <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c)<span class="op">^</span><span class="dv">2</span> <span class="co">## [1] 1.260416</span></a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">d =<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="op">-</span><span class="st"> </span>c) <span class="op">/</span><span class="st"> </span>(c <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c))           <span class="co">#[1] 0.8185088</span></a>
-<a class="sourceLine" id="cb131-5" data-line-number="5"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb131-6" data-line-number="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb131-7" data-line-number="7">{</a>
-<a class="sourceLine" id="cb131-8" data-line-number="8">    n =<span class="st"> </span>i</a>
-<a class="sourceLine" id="cb131-9" data-line-number="9">    p0_n =<span class="st"> </span>d <span class="op">*</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span>d)</a>
-<a class="sourceLine" id="cb131-10" data-line-number="10">    j =<span class="st"> </span>kk</a>
-<a class="sourceLine" id="cb131-11" data-line-number="11">    pj_n =<span class="st"> </span>m<span class="op">^</span>n <span class="op">*</span></a>
-<a class="sourceLine" id="cb131-12" data-line-number="12"><span class="st">        </span>((<span class="dv">1</span><span class="op">-</span>d) <span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span><span class="dv">2</span> <span class="op">*</span></a>
-<a class="sourceLine" id="cb131-13" data-line-number="13"><span class="st">        </span>((m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span>(j<span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb131-14" data-line-number="14">    pk_n &lt;-<span class="st"> </span><span class="kw">c</span>(p0_n, pj_n)</a>
-<a class="sourceLine" id="cb131-15" data-line-number="15">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb131-16" data-line-number="16">        <span class="kw">plot</span>(k, pk_n, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb131-17" data-line-number="17">    <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb131-18" data-line-number="18">        <span class="kw">lines</span>(k, pk_n, <span class="dt">col =</span> i)</a>
-<a class="sourceLine" id="cb131-19" data-line-number="19">}</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="co">## b = 0.2126 ;   c = 0.5893 ## lotka</span></a>
+<a class="sourceLine" id="cb129-2" data-line-number="2">b =<span class="st"> </span><span class="fl">0.3666</span>; c =<span class="st"> </span><span class="fl">.5533</span> <span class="co">## Keyfitz (from GS)</span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3">m =<span class="st"> </span>b <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c)<span class="op">^</span><span class="dv">2</span> <span class="co">## [1] 1.260416</span></a>
+<a class="sourceLine" id="cb129-4" data-line-number="4">d =<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="op">-</span><span class="st"> </span>c) <span class="op">/</span><span class="st"> </span>(c <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c))           <span class="co">#[1] 0.8185088</span></a>
+<a class="sourceLine" id="cb129-5" data-line-number="5"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb129-6" data-line-number="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb129-7" data-line-number="7">{</a>
+<a class="sourceLine" id="cb129-8" data-line-number="8">    n =<span class="st"> </span>i</a>
+<a class="sourceLine" id="cb129-9" data-line-number="9">    p0_n =<span class="st"> </span>d <span class="op">*</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span>d)</a>
+<a class="sourceLine" id="cb129-10" data-line-number="10">    j =<span class="st"> </span>kk</a>
+<a class="sourceLine" id="cb129-11" data-line-number="11">    pj_n =<span class="st"> </span>m<span class="op">^</span>n <span class="op">*</span></a>
+<a class="sourceLine" id="cb129-12" data-line-number="12"><span class="st">        </span>((<span class="dv">1</span><span class="op">-</span>d) <span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span><span class="dv">2</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb129-13" data-line-number="13"><span class="st">        </span>((m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span>(j<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb129-14" data-line-number="14">    pk_n &lt;-<span class="st"> </span><span class="kw">c</span>(p0_n, pj_n)</a>
+<a class="sourceLine" id="cb129-15" data-line-number="15">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb129-16" data-line-number="16">        <span class="kw">plot</span>(k, pk_n, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb129-17" data-line-number="17">    <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb129-18" data-line-number="18">        <span class="kw">lines</span>(k, pk_n, <span class="dt">col =</span> i)</a>
+<a class="sourceLine" id="cb129-19" data-line-number="19">}</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>log scale</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="co">## b = 0.2126 ;   c = 0.5893 ## lotka</span></a>
-<a class="sourceLine" id="cb132-2" data-line-number="2">b =<span class="st"> </span><span class="fl">0.3666</span>; c =<span class="st"> </span><span class="fl">.5533</span> <span class="co">## Keyfitz (from G&amp;S)</span></a>
-<a class="sourceLine" id="cb132-3" data-line-number="3">m =<span class="st"> </span>b <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c)<span class="op">^</span><span class="dv">2</span> <span class="co">## [1] 1.260416</span></a>
-<a class="sourceLine" id="cb132-4" data-line-number="4">d =<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="op">-</span><span class="st"> </span>c) <span class="op">/</span><span class="st"> </span>(c <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c))           <span class="co">#[1] 0.8185088</span></a>
-<a class="sourceLine" id="cb132-5" data-line-number="5"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb132-6" data-line-number="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb132-7" data-line-number="7">{</a>
-<a class="sourceLine" id="cb132-8" data-line-number="8">    n =<span class="st"> </span>i</a>
-<a class="sourceLine" id="cb132-9" data-line-number="9">    <span class="kw">print</span>(n)</a>
-<a class="sourceLine" id="cb132-10" data-line-number="10">    p0_n =<span class="st"> </span>d <span class="op">*</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span>d)</a>
-<a class="sourceLine" id="cb132-11" data-line-number="11">    j =<span class="st"> </span>kk</a>
-<a class="sourceLine" id="cb132-12" data-line-number="12">    pj_n =<span class="st"> </span>m<span class="op">^</span>n <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span><span class="op">-</span>d) <span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>((m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span>(j<span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb132-13" data-line-number="13">    pk_n &lt;-<span class="st"> </span><span class="kw">c</span>(p0_n, pj_n)</a>
-<a class="sourceLine" id="cb132-14" data-line-number="14">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb132-15" data-line-number="15">        <span class="kw">plot</span>(k, pk_n, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>)</a>
-<a class="sourceLine" id="cb132-16" data-line-number="16">    <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb132-17" data-line-number="17">        <span class="kw">lines</span>(k, pk_n, <span class="dt">col =</span> i)</a>
-<a class="sourceLine" id="cb132-18" data-line-number="18">}</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="co">## b = 0.2126 ;   c = 0.5893 ## lotka</span></a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">b =<span class="st"> </span><span class="fl">0.3666</span>; c =<span class="st"> </span><span class="fl">.5533</span> <span class="co">## Keyfitz (from G&amp;S)</span></a>
+<a class="sourceLine" id="cb130-3" data-line-number="3">m =<span class="st"> </span>b <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c)<span class="op">^</span><span class="dv">2</span> <span class="co">## [1] 1.260416</span></a>
+<a class="sourceLine" id="cb130-4" data-line-number="4">d =<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b <span class="op">-</span><span class="st"> </span>c) <span class="op">/</span><span class="st"> </span>(c <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>c))           <span class="co">#[1] 0.8185088</span></a>
+<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb130-7" data-line-number="7">{</a>
+<a class="sourceLine" id="cb130-8" data-line-number="8">    n =<span class="st"> </span>i</a>
+<a class="sourceLine" id="cb130-9" data-line-number="9">    <span class="kw">print</span>(n)</a>
+<a class="sourceLine" id="cb130-10" data-line-number="10">    p0_n =<span class="st"> </span>d <span class="op">*</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span>d)</a>
+<a class="sourceLine" id="cb130-11" data-line-number="11">    j =<span class="st"> </span>kk</a>
+<a class="sourceLine" id="cb130-12" data-line-number="12">    pj_n =<span class="st"> </span>m<span class="op">^</span>n <span class="op">*</span><span class="st"> </span>((<span class="dv">1</span><span class="op">-</span>d) <span class="op">/</span><span class="st"> </span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>((m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span>(m<span class="op">^</span>n <span class="op">-</span><span class="st"> </span>d))<span class="op">^</span>(j<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb130-13" data-line-number="13">    pk_n &lt;-<span class="st"> </span><span class="kw">c</span>(p0_n, pj_n)</a>
+<a class="sourceLine" id="cb130-14" data-line-number="14">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb130-15" data-line-number="15">        <span class="kw">plot</span>(k, pk_n, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>)</a>
+<a class="sourceLine" id="cb130-16" data-line-number="16">    <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb130-17" data-line-number="17">        <span class="kw">lines</span>(k, pk_n, <span class="dt">col =</span> i)</a>
+<a class="sourceLine" id="cb130-18" data-line-number="18">}</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <pre><code>## [1] 2
 ## [1] 3</code></pre>
 <p>Applications</p>
@@ -963,6 +979,18 @@ contacts, or ?</li>
 <li>Inspire any other approaches?</li>
 </ul>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-harris1964theory">
+<p>Harris, Theodore Edward. 1964. “The Theory of Branching Process.” Rand Corporation. <a href="https://www.rand.org/content/dam/rand/pubs/reports/
+2009/R381.pdf">https://www.rand.org/content/dam/rand/pubs/reports/
+<div id="ref-grinstead2006">
+<p>“Introduction to Probability.” 2006. <a href="https://math.dartmouth.edu/~prob/prob/prob.pdf">https://math.dartmouth.edu/~prob/prob/prob.pdf</a>.</p>
+</div>
+<div id="ref-keyfitz1968">
+<p>Keyfitz, Nathan. n.d. “The Branching Process as a Population Model.” In <em>Introduction to the Mathematics of Populations with Revisions</em>, 399–412.</p>
 </div>
 </div>
             </section>
