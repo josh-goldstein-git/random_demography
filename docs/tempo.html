@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-23" />
+<meta name="date" content="2020-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -286,9 +286,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.1" data-path="student-presentations.html"><a href="student-presentations.html#outline-9"><i class="fa fa-check"></i><b>11.1.1</b> Outline</a></li>
 <li class="chapter" data-level="11.1.2" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers-reality-or-bad-data-coale1986mortality"><i class="fa fa-check"></i><b>11.1.2</b> <em>Mortality Crossovers: Reality or Bad Data?</em> <span class="citation">(Coale and Kisker <span>1986</span>)</span></a></li>
 <li class="chapter" data-level="11.1.3" data-path="student-presentations.html"><a href="student-presentations.html#methods-for-evaluating-the-heterogeneity-of-aging-processes-in-human-populations-using-vital-statistics-data-explaining-the-blackwhite-mortality-crossover-by-a-model-of-mortality-selection-manton1981methods"><i class="fa fa-check"></i><b>11.1.3</b> <em>Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection</em> <span class="citation">(Manton and Stallard <span>1981</span>)</span></a></li>
+<li class="chapter" data-level="11.1.4" data-path="student-presentations.html"><a href="student-presentations.html#censoc-mortality-crossovers"><i class="fa fa-check"></i><b>11.1.4</b> CenSoc Mortality Crossovers</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="student-presentations.html"><a href="student-presentations.html#plateaus"><i class="fa fa-check"></i><b>11.2</b> Plateaus</a></li>
-<li class="chapter" data-level="11.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>11.3</b> Rising Inequality</a></li>
+<li class="chapter" data-level="11.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>11.3</b> Rising Inequality</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="student-presentations.html"><a href="student-presentations.html#trends-in-mortality-differentials-and-life-expectancy-for-male-social-security-covered-workers-by-socioeconomic-status-waldron2007trends"><i class="fa fa-check"></i><b>11.3.1</b> <em>Trends in mortality differentials and life expectancy for male social security-covered workers, by socioeconomic status</em> <span class="citation">(Waldron <span>2007</span>)</span></a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -322,11 +325,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>EM algorithm for unmixing mixtures</li>
 <li>An application to two Americas.</li>
 </ul>
-<p>Additional resources:
-- <span class="citation">Sullivan (<a href="#ref-sullivan2005age">2005</a>)</span>: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.]
-- <span class="citation">Burkimsher (<a href="#ref-burkimsher2017evolution">2017</a>)</span>: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.
-- <span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-hastie2009elements">2009</a>)</span> A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.
-- Victor Lavrenko. Youtube video :”EM algorithm: how it works” &lt;<a href="https://www.youtube" class="uri">https://www.youtube</a>. com/watch?v=REypj2sy_5U&gt;.</p>
+<p>Additional resources:</p>
+<ul>
+<li><span class="citation">Sullivan (<a href="#ref-sullivan2005age">2005</a>)</span>: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.</li>
+<li><span class="citation">Burkimsher (<a href="#ref-burkimsher2017evolution">2017</a>)</span>: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.</li>
+<li><span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-hastie2009elements">2009</a>)</span> A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.</li>
+<li>Victor Lavrenko. Youtube video : “EM algorithm: how it works” <a href="https://www.youtube.com/watch?v=REypj2sy_5U" class="uri">https://www.youtube.com/watch?v=REypj2sy_5U</a>.</li>
+</ul>
 </div>
 <div id="introduction-1" class="section level2">
 <h2><span class="header-section-number">7.2</span> Introduction</h2>
@@ -482,28 +487,17 @@ just reflect “tempo”.</li>
 <li>Read in data and format into an array</li>
 </ol>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
-## 
-##     between, first, last</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/codes/tempo_functions.R&quot;</span>)</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw">source</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/codes/utility_functions.R&quot;</span>)</a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb66-4" data-line-number="4"><span class="co">## age specific fertility rates by birth order for all countries and times</span></a>
-<a class="sourceLine" id="cb66-5" data-line-number="5"><span class="co">## RR means &quot;rectangles&quot; on Lexis surface</span></a>
-<a class="sourceLine" id="cb66-6" data-line-number="6">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt&quot;</span>)</a>
-<a class="sourceLine" id="cb66-7" data-line-number="7">dt &lt;-<span class="st"> </span>dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>] <span class="co">## keep only US</span></a>
-<a class="sourceLine" id="cb66-8" data-line-number="8"><span class="co">## keep only ages 15 to 49</span></a>
-<a class="sourceLine" id="cb66-9" data-line-number="9">dt &lt;-<span class="st"> </span>dt[Age <span class="op">%in%</span><span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">49</span>]</a>
-<a class="sourceLine" id="cb66-10" data-line-number="10"><span class="kw">print</span>(dt)</a></code></pre></div>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="kw">source</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/codes/tempo_functions.R&quot;</span>)</a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="kw">source</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/codes/utility_functions.R&quot;</span>)</a>
+<a class="sourceLine" id="cb61-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb61-6" data-line-number="6"><span class="co">## age specific fertility rates by birth order for all countries and times</span></a>
+<a class="sourceLine" id="cb61-7" data-line-number="7"><span class="co">## RR means &quot;rectangles&quot; on Lexis surface</span></a>
+<a class="sourceLine" id="cb61-8" data-line-number="8">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt&quot;</span>)</a>
+<a class="sourceLine" id="cb61-9" data-line-number="9">dt &lt;-<span class="st"> </span>dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>] <span class="co">## keep only US</span></a>
+<a class="sourceLine" id="cb61-10" data-line-number="10"><span class="co">## keep only ages 15 to 49</span></a>
+<a class="sourceLine" id="cb61-11" data-line-number="11">dt &lt;-<span class="st"> </span>dt[Age <span class="op">%in%</span><span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">49</span>]</a>
+<a class="sourceLine" id="cb61-12" data-line-number="12"><span class="kw">print</span>(dt)</a></code></pre></div>
 <pre><code>##       Code Year Age    ASFR   ASFR1   ASFR2   ASFR3   ASFR4  ASFR5p
 ##    1:  USA 1933  15 0.00672 0.00647 0.00025 0.00000 0.00000 0.00000
 ##    2:  USA 1933  16 0.01875 0.01744 0.00121 0.00009 0.00000 0.00000
@@ -516,123 +510,123 @@ just reflect “tempo”.</li>
 ## 2973:  USA 2017  47 0.00059 0.00019 0.00015 0.00009 0.00005 0.00010
 ## 2974:  USA 2017  48 0.00029 0.00010 0.00008 0.00004 0.00002 0.00005
 ## 2975:  USA 2017  49 0.00023 0.00008 0.00005 0.00004 0.00002 0.00003</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="co">## put all order fertiility into a matrix</span></a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">fat &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb68-3" data-line-number="3">fat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat)) <span class="co">## may cause problems, we&#39;ll see</span></a>
-<a class="sourceLine" id="cb68-4" data-line-number="4">fat1 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR1 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb68-5" data-line-number="5">fat2 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR2 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb68-6" data-line-number="6">fat3 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR3 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb68-7" data-line-number="7">fat4 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR4 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb68-8" data-line-number="8">fat5p &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR5p <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb68-9" data-line-number="9">year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(fat)</a>
-<a class="sourceLine" id="cb68-10" data-line-number="10">age.vec &lt;-<span class="st"> </span><span class="kw">rownames</span>(fat)</a>
-<a class="sourceLine" id="cb68-11" data-line-number="11">parity.vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;all&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb68-12" data-line-number="12">fat.array &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">nrow</span>(fat), <span class="kw">ncol</span>(fat), <span class="kw">length</span>(parity.vec)))</a>
-<a class="sourceLine" id="cb68-13" data-line-number="13"><span class="kw">dimnames</span>(fat.array) &lt;-<span class="st"> </span><span class="kw">list</span>(age.vec, year.vec, parity.vec)</a>
-<a class="sourceLine" id="cb68-14" data-line-number="14">fat.array[,,<span class="st">&quot;all&quot;</span>] &lt;-<span class="st"> </span>fat</a>
-<a class="sourceLine" id="cb68-15" data-line-number="15">fat.array[,,<span class="st">&quot;1&quot;</span>] &lt;-<span class="st"> </span>fat1</a>
-<a class="sourceLine" id="cb68-16" data-line-number="16">fat.array[,,<span class="st">&quot;2&quot;</span>] &lt;-<span class="st"> </span>fat2</a>
-<a class="sourceLine" id="cb68-17" data-line-number="17">fat.array[,,<span class="st">&quot;3&quot;</span>] &lt;-<span class="st"> </span>fat3</a>
-<a class="sourceLine" id="cb68-18" data-line-number="18">fat.array[,,<span class="st">&quot;4&quot;</span>] &lt;-<span class="st"> </span>fat4</a>
-<a class="sourceLine" id="cb68-19" data-line-number="19">fat.array[,,<span class="st">&quot;5&quot;</span>] &lt;-<span class="st"> </span>fat5p</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co">## put all order fertiility into a matrix</span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">fat &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">fat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat)) <span class="co">## may cause problems, we&#39;ll see</span></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">fat1 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR1 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5">fat2 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR2 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb63-6" data-line-number="6">fat3 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR3 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb63-7" data-line-number="7">fat4 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR4 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb63-8" data-line-number="8">fat5p &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR5p <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb63-9" data-line-number="9">year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(fat)</a>
+<a class="sourceLine" id="cb63-10" data-line-number="10">age.vec &lt;-<span class="st"> </span><span class="kw">rownames</span>(fat)</a>
+<a class="sourceLine" id="cb63-11" data-line-number="11">parity.vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;all&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb63-12" data-line-number="12">fat.array &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">nrow</span>(fat), <span class="kw">ncol</span>(fat), <span class="kw">length</span>(parity.vec)))</a>
+<a class="sourceLine" id="cb63-13" data-line-number="13"><span class="kw">dimnames</span>(fat.array) &lt;-<span class="st"> </span><span class="kw">list</span>(age.vec, year.vec, parity.vec)</a>
+<a class="sourceLine" id="cb63-14" data-line-number="14">fat.array[,,<span class="st">&quot;all&quot;</span>] &lt;-<span class="st"> </span>fat</a>
+<a class="sourceLine" id="cb63-15" data-line-number="15">fat.array[,,<span class="st">&quot;1&quot;</span>] &lt;-<span class="st"> </span>fat1</a>
+<a class="sourceLine" id="cb63-16" data-line-number="16">fat.array[,,<span class="st">&quot;2&quot;</span>] &lt;-<span class="st"> </span>fat2</a>
+<a class="sourceLine" id="cb63-17" data-line-number="17">fat.array[,,<span class="st">&quot;3&quot;</span>] &lt;-<span class="st"> </span>fat3</a>
+<a class="sourceLine" id="cb63-18" data-line-number="18">fat.array[,,<span class="st">&quot;4&quot;</span>] &lt;-<span class="st"> </span>fat4</a>
+<a class="sourceLine" id="cb63-19" data-line-number="19">fat.array[,,<span class="st">&quot;5&quot;</span>] &lt;-<span class="st"> </span>fat5p</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Fit bongaarts feeney without birth order</li>
 </ol>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">tfr.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(fat)</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="co">## (2a) by hand</span></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3">mu.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(fat, <span class="dv">2</span>, get.mean)</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4">rt.vec &lt;-<span class="st"> </span><span class="kw">center.diff</span>(mu.vec)</a>
-<a class="sourceLine" id="cb69-5" data-line-number="5">adj.tfr.vec &lt;-<span class="st"> </span>tfr.vec <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.vec)</a>
-<a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb69-7" data-line-number="7"><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), mu.vec)</a>
-<a class="sourceLine" id="cb69-8" data-line-number="8"><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), rt.vec)</a>
-<a class="sourceLine" id="cb69-9" data-line-number="9"><span class="kw">abline</span>(<span class="dt">h =</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb69-10" data-line-number="10"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
-<a class="sourceLine" id="cb69-11" data-line-number="11"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb69-12" data-line-number="12"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="dv">1945</span>, <span class="dv">2008</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">tfr.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(fat)</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="co">## (2a) by hand</span></a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">mu.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(fat, <span class="dv">2</span>, get.mean)</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4">rt.vec &lt;-<span class="st"> </span><span class="kw">center.diff</span>(mu.vec)</a>
+<a class="sourceLine" id="cb64-5" data-line-number="5">adj.tfr.vec &lt;-<span class="st"> </span>tfr.vec <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.vec)</a>
+<a class="sourceLine" id="cb64-6" data-line-number="6"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb64-7" data-line-number="7"><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), mu.vec)</a>
+<a class="sourceLine" id="cb64-8" data-line-number="8"><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), rt.vec)</a>
+<a class="sourceLine" id="cb64-9" data-line-number="9"><span class="kw">abline</span>(<span class="dt">h =</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb64-10" data-line-number="10"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb64-11" data-line-number="11"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb64-12" data-line-number="12"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="dv">1945</span>, <span class="dv">2008</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <ul>
 <li>We see fertility since 1980 has been depressed by postponment</li>
 <li>We see weird dynamics around end of WW2 and great recession.</li>
 <li>What’s going on?</li>
 </ul>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="dv">1945</span>, <span class="dv">2008</span>))</a>
-<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">seq</span>(<span class="fl">1.5</span>, <span class="dv">4</span>, <span class="fl">.1</span>), <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb70-6" data-line-number="6"><span class="co">## can also use function to fit</span></a>
-<a class="sourceLine" id="cb70-7" data-line-number="7">adj.tfr.vec.from.fun &lt;-<span class="st"> </span><span class="kw">bf.fit.simple</span>(fat)<span class="op">$</span>tfr.star</a>
-<a class="sourceLine" id="cb70-8" data-line-number="8"><span class="kw">lines</span>(year.vec, adj.tfr.vec.from.fun, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="dv">1945</span>, <span class="dv">2008</span>))</a>
+<a class="sourceLine" id="cb65-5" data-line-number="5"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">seq</span>(<span class="fl">1.5</span>, <span class="dv">4</span>, <span class="fl">.1</span>), <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb65-6" data-line-number="6"><span class="co">## can also use function to fit</span></a>
+<a class="sourceLine" id="cb65-7" data-line-number="7">adj.tfr.vec.from.fun &lt;-<span class="st"> </span><span class="kw">bf.fit.simple</span>(fat)<span class="op">$</span>tfr.star</a>
+<a class="sourceLine" id="cb65-8" data-line-number="8"><span class="kw">lines</span>(year.vec, adj.tfr.vec.from.fun, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>Now let’s look at turbulence around WW2</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">plot</span>(age.vec, fat[,<span class="st">&quot;1944&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.23</span>),</a>
-<a class="sourceLine" id="cb71-3" data-line-number="3">     <span class="dt">ylab =</span> <span class="st">&quot;f(a)&quot;</span>,</a>
-<a class="sourceLine" id="cb71-4" data-line-number="4">     <span class="dt">xlab =</span> <span class="st">&quot;age a&quot;</span></a>
-<a class="sourceLine" id="cb71-5" data-line-number="5">     )</a>
-<a class="sourceLine" id="cb71-6" data-line-number="6"><span class="kw">lines</span>(age.vec, fat[,<span class="st">&quot;1945&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="kw">lines</span>(age.vec, fat[,<span class="st">&quot;1946&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&#39;orange&#39;</span>)</a>
-<a class="sourceLine" id="cb71-8" data-line-number="8"><span class="kw">lines</span>(age.vec, fat[,<span class="st">&quot;1947&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb71-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
-<a class="sourceLine" id="cb71-10" data-line-number="10">       <span class="dt">legend =</span> <span class="dv">1944</span><span class="op">:</span><span class="dv">1947</span>,</a>
-<a class="sourceLine" id="cb71-11" data-line-number="11">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>),</a>
-<a class="sourceLine" id="cb71-12" data-line-number="12">       <span class="dt">lty =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb71-13" data-line-number="13"><span class="kw">title</span>(<span class="st">&quot;Age specific fertility&quot;</span>)</a>
-<a class="sourceLine" id="cb71-14" data-line-number="14"><span class="co">##</span></a>
-<a class="sourceLine" id="cb71-15" data-line-number="15"><span class="kw">plot</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, mu.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
-<a class="sourceLine" id="cb71-16" data-line-number="16">     <span class="dt">ylab =</span> <span class="st">&quot;mu(t)&quot;</span>,</a>
-<a class="sourceLine" id="cb71-17" data-line-number="17">     <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
-<a class="sourceLine" id="cb71-18" data-line-number="18">     <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>),</a>
-<a class="sourceLine" id="cb71-19" data-line-number="19">     <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb71-20" data-line-number="20"><span class="kw">title</span>(<span class="st">&quot;Mean ages&quot;</span>)</a>
-<a class="sourceLine" id="cb71-21" data-line-number="21"><span class="co">##</span></a>
-<a class="sourceLine" id="cb71-22" data-line-number="22"><span class="kw">plot</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, rt.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
-<a class="sourceLine" id="cb71-23" data-line-number="23">     <span class="dt">ylab =</span> <span class="st">&quot;r(t)&quot;</span>,</a>
-<a class="sourceLine" id="cb71-24" data-line-number="24">     <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
-<a class="sourceLine" id="cb71-25" data-line-number="25">     <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>),</a>
-<a class="sourceLine" id="cb71-26" data-line-number="26">     <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb71-27" data-line-number="27"><span class="kw">title</span>(<span class="st">&quot;Changes in mean, centered&quot;</span>)</a>
-<a class="sourceLine" id="cb71-28" data-line-number="28"><span class="co">##</span></a>
-<a class="sourceLine" id="cb71-29" data-line-number="29"><span class="kw">plot</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, tfr.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
-<a class="sourceLine" id="cb71-30" data-line-number="30">     <span class="dt">ylab =</span> <span class="st">&quot;tfr&quot;</span>,</a>
-<a class="sourceLine" id="cb71-31" data-line-number="31">     <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
-<a class="sourceLine" id="cb71-32" data-line-number="32">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb71-33" data-line-number="33">     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
-<a class="sourceLine" id="cb71-34" data-line-number="34"><span class="kw">lines</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, adj.tfr.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
-<a class="sourceLine" id="cb71-35" data-line-number="35">      <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb71-36" data-line-number="36"><span class="kw">title</span>(<span class="st">&quot;TFR and adjTFR&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw">plot</span>(age.vec, fat[,<span class="st">&quot;1944&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.23</span>),</a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">     <span class="dt">ylab =</span> <span class="st">&quot;f(a)&quot;</span>,</a>
+<a class="sourceLine" id="cb66-4" data-line-number="4">     <span class="dt">xlab =</span> <span class="st">&quot;age a&quot;</span></a>
+<a class="sourceLine" id="cb66-5" data-line-number="5">     )</a>
+<a class="sourceLine" id="cb66-6" data-line-number="6"><span class="kw">lines</span>(age.vec, fat[,<span class="st">&quot;1945&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb66-7" data-line-number="7"><span class="kw">lines</span>(age.vec, fat[,<span class="st">&quot;1946&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&#39;orange&#39;</span>)</a>
+<a class="sourceLine" id="cb66-8" data-line-number="8"><span class="kw">lines</span>(age.vec, fat[,<span class="st">&quot;1947&quot;</span>], <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb66-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
+<a class="sourceLine" id="cb66-10" data-line-number="10">       <span class="dt">legend =</span> <span class="dv">1944</span><span class="op">:</span><span class="dv">1947</span>,</a>
+<a class="sourceLine" id="cb66-11" data-line-number="11">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>),</a>
+<a class="sourceLine" id="cb66-12" data-line-number="12">       <span class="dt">lty =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb66-13" data-line-number="13"><span class="kw">title</span>(<span class="st">&quot;Age specific fertility&quot;</span>)</a>
+<a class="sourceLine" id="cb66-14" data-line-number="14"><span class="co">##</span></a>
+<a class="sourceLine" id="cb66-15" data-line-number="15"><span class="kw">plot</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, mu.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
+<a class="sourceLine" id="cb66-16" data-line-number="16">     <span class="dt">ylab =</span> <span class="st">&quot;mu(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb66-17" data-line-number="17">     <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb66-18" data-line-number="18">     <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>),</a>
+<a class="sourceLine" id="cb66-19" data-line-number="19">     <span class="dt">pch =</span> <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb66-20" data-line-number="20"><span class="kw">title</span>(<span class="st">&quot;Mean ages&quot;</span>)</a>
+<a class="sourceLine" id="cb66-21" data-line-number="21"><span class="co">##</span></a>
+<a class="sourceLine" id="cb66-22" data-line-number="22"><span class="kw">plot</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, rt.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
+<a class="sourceLine" id="cb66-23" data-line-number="23">     <span class="dt">ylab =</span> <span class="st">&quot;r(t)&quot;</span>,</a>
+<a class="sourceLine" id="cb66-24" data-line-number="24">     <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb66-25" data-line-number="25">     <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>),</a>
+<a class="sourceLine" id="cb66-26" data-line-number="26">     <span class="dt">pch =</span> <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb66-27" data-line-number="27"><span class="kw">title</span>(<span class="st">&quot;Changes in mean, centered&quot;</span>)</a>
+<a class="sourceLine" id="cb66-28" data-line-number="28"><span class="co">##</span></a>
+<a class="sourceLine" id="cb66-29" data-line-number="29"><span class="kw">plot</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, tfr.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
+<a class="sourceLine" id="cb66-30" data-line-number="30">     <span class="dt">ylab =</span> <span class="st">&quot;tfr&quot;</span>,</a>
+<a class="sourceLine" id="cb66-31" data-line-number="31">     <span class="dt">xlab =</span> <span class="st">&quot;t&quot;</span>,</a>
+<a class="sourceLine" id="cb66-32" data-line-number="32">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb66-33" data-line-number="33">     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb66-34" data-line-number="34"><span class="kw">lines</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>, adj.tfr.vec[<span class="kw">paste</span>(<span class="dv">1943</span><span class="op">:</span><span class="dv">1947</span>)],</a>
+<a class="sourceLine" id="cb66-35" data-line-number="35">      <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb66-36" data-line-number="36"><span class="kw">title</span>(<span class="st">&quot;TFR and adjTFR&quot;</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>From 1945 to 1946, fertility goes up a lot, but more at younger ages. So mean goes down. BF adjustment over-compensates, and has quantum declining.</p>
 <p>What’s happening from 1944-45?</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Fit bongaarts feeney with birth order</li>
 </ol>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">bf.fit</span>(fat.array)</a>
-<a class="sourceLine" id="cb72-2" data-line-number="2">adj.tfr.bo.vec &lt;-<span class="st">  </span>out<span class="op">$</span>tfr.star.out[, <span class="st">&quot;bf.tfr.star&quot;</span>]</a>
-<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="co">## pdf(&quot;usa_tempo_fig.pdf&quot;)</span></a>
-<a class="sourceLine" id="cb72-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb72-7" data-line-number="7"><span class="kw">lines</span>(year.vec, adj.tfr.bo.vec, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb72-8" data-line-number="8"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
-<a class="sourceLine" id="cb72-9" data-line-number="9">       <span class="kw">c</span>(<span class="st">&quot;tfr&quot;</span>, <span class="st">&quot;tfr* (all parities)&quot;</span>, <span class="st">&quot;tfr* (by parity)&quot;</span>),</a>
-<a class="sourceLine" id="cb72-10" data-line-number="10">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</a>
-<a class="sourceLine" id="cb72-11" data-line-number="11">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb72-12" data-line-number="12">       <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb72-13" data-line-number="13"><span class="co">## let&#39;s check against hfd</span></a>
-<a class="sourceLine" id="cb72-14" data-line-number="14">hfd.adj.dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/zip_w/adjtfrRR.txt&quot;</span>,</a>
-<a class="sourceLine" id="cb72-15" data-line-number="15">                <span class="dt">skip =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb72-16" data-line-number="16">hfd.adj.dt &lt;-<span class="st"> </span>hfd.adj.dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>]</a>
-<a class="sourceLine" id="cb72-17" data-line-number="17">hfd.adj.dt[, <span class="kw">points</span>(Year, adjTFR, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="fl">.8</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">bf.fit</span>(fat.array)</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">adj.tfr.bo.vec &lt;-<span class="st">  </span>out<span class="op">$</span>tfr.star.out[, <span class="st">&quot;bf.tfr.star&quot;</span>]</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="co">## pdf(&quot;usa_tempo_fig.pdf&quot;)</span></a>
+<a class="sourceLine" id="cb67-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb67-5" data-line-number="5"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb67-6" data-line-number="6"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb67-7" data-line-number="7"><span class="kw">lines</span>(year.vec, adj.tfr.bo.vec, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb67-8" data-line-number="8"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
+<a class="sourceLine" id="cb67-9" data-line-number="9">       <span class="kw">c</span>(<span class="st">&quot;tfr&quot;</span>, <span class="st">&quot;tfr* (all parities)&quot;</span>, <span class="st">&quot;tfr* (by parity)&quot;</span>),</a>
+<a class="sourceLine" id="cb67-10" data-line-number="10">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</a>
+<a class="sourceLine" id="cb67-11" data-line-number="11">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb67-12" data-line-number="12">       <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb67-13" data-line-number="13"><span class="co">## let&#39;s check against hfd</span></a>
+<a class="sourceLine" id="cb67-14" data-line-number="14">hfd.adj.dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/zip_w/adjtfrRR.txt&quot;</span>,</a>
+<a class="sourceLine" id="cb67-15" data-line-number="15">                <span class="dt">skip =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb67-16" data-line-number="16">hfd.adj.dt &lt;-<span class="st"> </span>hfd.adj.dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>]</a>
+<a class="sourceLine" id="cb67-17" data-line-number="17">hfd.adj.dt[, <span class="kw">points</span>(Year, adjTFR, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="fl">.8</span>)]</a></code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
-<a class="sourceLine" id="cb74-2" data-line-number="2">       <span class="kw">c</span>(<span class="st">&quot;tfr&quot;</span>, <span class="st">&quot;tfr* (all parities)&quot;</span>, <span class="st">&quot;tfr* (by parity)&quot;</span>),</a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</a>
-<a class="sourceLine" id="cb74-4" data-line-number="4">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb74-5" data-line-number="5">       <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = &quot;red&quot;, lwd = 4)] # commented because filter() caused a problem. I actually don&#39;t think we need this line.</span></a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">       <span class="kw">c</span>(<span class="st">&quot;tfr&quot;</span>, <span class="st">&quot;tfr* (all parities)&quot;</span>, <span class="st">&quot;tfr* (by parity)&quot;</span>),</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">       <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">       <span class="dt">lwd =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co"># hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = &quot;red&quot;, lwd = 4)] # commented because filter() caused a problem. I actually don&#39;t think we need this line.</span></a></code></pre></div>
 <div id="questions" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Questions</h3>
 <ol style="list-style-type: decimal">
@@ -658,11 +652,11 @@ changes in mean age</li>
 <h2><span class="header-section-number">7.5</span> Two Americas</h2>
 <p>Let’s look at births (all orders).</p>
 <p>“Animation” of asfr change from about 2000 to about 2018 age specific fertility rates by birth order for all countries and times (RR means “rectangles” on Lexis surface)</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt&quot;</span>)</a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">dt &lt;-<span class="st"> </span>dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>] <span class="co">## keep only US</span></a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="co">## keep only ages 15 to 49</span></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4">dt &lt;-<span class="st"> </span>dt[Age <span class="op">%in%</span><span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">44</span>]</a>
-<a class="sourceLine" id="cb76-5" data-line-number="5"><span class="kw">print</span>(dt)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt&quot;</span>)</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2">dt &lt;-<span class="st"> </span>dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>] <span class="co">## keep only US</span></a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="co">## keep only ages 15 to 49</span></a>
+<a class="sourceLine" id="cb71-4" data-line-number="4">dt &lt;-<span class="st"> </span>dt[Age <span class="op">%in%</span><span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">44</span>]</a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"><span class="kw">print</span>(dt)</a></code></pre></div>
 <pre><code>##       Code Year Age    ASFR   ASFR1   ASFR2   ASFR3   ASFR4  ASFR5p
 ##    1:  USA 1933  15 0.00672 0.00647 0.00025 0.00000 0.00000 0.00000
 ##    2:  USA 1933  16 0.01875 0.01744 0.00121 0.00009 0.00000 0.00000
@@ -675,169 +669,169 @@ changes in mean age</li>
 ## 2548:  USA 2017  42 0.01004 0.00213 0.00267 0.00198 0.00133 0.00193
 ## 2549:  USA 2017  43 0.00610 0.00131 0.00154 0.00120 0.00079 0.00126
 ## 2550:  USA 2017  44 0.00341 0.00076 0.00087 0.00064 0.00044 0.00070</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="co">## put all order fertiility into a matrix</span></a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">fat &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb78-3" data-line-number="3">fat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat)) <span class="co">## may cause problems, we&#39;ll see</span></a>
-<a class="sourceLine" id="cb78-4" data-line-number="4">fat1 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR1 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb78-5" data-line-number="5">fat1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat1)) <span class="co">## may cause problems, we&#39;ll see</span></a>
-<a class="sourceLine" id="cb78-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb78-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb78-8" data-line-number="8">year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(fat)</a>
-<a class="sourceLine" id="cb78-9" data-line-number="9">age.vec &lt;-<span class="st"> </span><span class="kw">rownames</span>(fat)</a>
-<a class="sourceLine" id="cb78-10" data-line-number="10">my.year.vec &lt;-<span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2017</span></a>
-<a class="sourceLine" id="cb78-11" data-line-number="11"><span class="co">#pdf(&quot;fat_movie.pdf&quot;)</span></a>
-<a class="sourceLine" id="cb78-12" data-line-number="12"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb78-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb78-14" data-line-number="14"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">11</span>,<span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb78-15" data-line-number="15"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my.year.vec))</a>
-<a class="sourceLine" id="cb78-16" data-line-number="16">{</a>
-<a class="sourceLine" id="cb78-17" data-line-number="17">    my.year &lt;-<span class="st"> </span>my.year.vec[i]</a>
-<a class="sourceLine" id="cb78-18" data-line-number="18">    <span class="kw">plot</span>(age.vec, fat[, <span class="kw">paste</span>(my.year)],</a>
-<a class="sourceLine" id="cb78-19" data-line-number="19">         <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.15</span>),</a>
-<a class="sourceLine" id="cb78-20" data-line-number="20">         <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">49</span>),</a>
-<a class="sourceLine" id="cb78-21" data-line-number="21">         <span class="dt">xlab =</span> <span class="st">&quot;age&quot;</span>,</a>
-<a class="sourceLine" id="cb78-22" data-line-number="22">         <span class="dt">ylab =</span> <span class="st">&quot;age-specific fertility rate&quot;</span>,</a>
-<a class="sourceLine" id="cb78-23" data-line-number="23">         <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
-<a class="sourceLine" id="cb78-24" data-line-number="24">    <span class="kw">title</span>(my.year)</a>
-<a class="sourceLine" id="cb78-25" data-line-number="25">}</a>
-<a class="sourceLine" id="cb78-26" data-line-number="26"><span class="co">#dev.off()</span></a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="co">## put all order fertiility into a matrix</span></a>
+<a class="sourceLine" id="cb73-2" data-line-number="2">fat &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">fat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat)) <span class="co">## may cause problems, we&#39;ll see</span></a>
+<a class="sourceLine" id="cb73-4" data-line-number="4">fat1 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR1 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
+<a class="sourceLine" id="cb73-5" data-line-number="5">fat1 &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat1)) <span class="co">## may cause problems, we&#39;ll see</span></a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb73-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb73-8" data-line-number="8">year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(fat)</a>
+<a class="sourceLine" id="cb73-9" data-line-number="9">age.vec &lt;-<span class="st"> </span><span class="kw">rownames</span>(fat)</a>
+<a class="sourceLine" id="cb73-10" data-line-number="10">my.year.vec &lt;-<span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2017</span></a>
+<a class="sourceLine" id="cb73-11" data-line-number="11"><span class="co">#pdf(&quot;fat_movie.pdf&quot;)</span></a>
+<a class="sourceLine" id="cb73-12" data-line-number="12"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb73-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb73-14" data-line-number="14"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">11</span>,<span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb73-15" data-line-number="15"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my.year.vec))</a>
+<a class="sourceLine" id="cb73-16" data-line-number="16">{</a>
+<a class="sourceLine" id="cb73-17" data-line-number="17">    my.year &lt;-<span class="st"> </span>my.year.vec[i]</a>
+<a class="sourceLine" id="cb73-18" data-line-number="18">    <span class="kw">plot</span>(age.vec, fat[, <span class="kw">paste</span>(my.year)],</a>
+<a class="sourceLine" id="cb73-19" data-line-number="19">         <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.15</span>),</a>
+<a class="sourceLine" id="cb73-20" data-line-number="20">         <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">49</span>),</a>
+<a class="sourceLine" id="cb73-21" data-line-number="21">         <span class="dt">xlab =</span> <span class="st">&quot;age&quot;</span>,</a>
+<a class="sourceLine" id="cb73-22" data-line-number="22">         <span class="dt">ylab =</span> <span class="st">&quot;age-specific fertility rate&quot;</span>,</a>
+<a class="sourceLine" id="cb73-23" data-line-number="23">         <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a>
+<a class="sourceLine" id="cb73-24" data-line-number="24">    <span class="kw">title</span>(my.year)</a>
+<a class="sourceLine" id="cb73-25" data-line-number="25">}</a>
+<a class="sourceLine" id="cb73-26" data-line-number="26"><span class="co">#dev.off()</span></a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>Now fit mixing model and redo the animation</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="cf">if</span> (<span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>mu.mat</a>
-<a class="sourceLine" id="cb79-3" data-line-number="3">lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>lambda.mat</a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>sigma.mat</a>
-<a class="sourceLine" id="cb79-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb79-6" data-line-number="6">mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>mu.mat</a>
-<a class="sourceLine" id="cb79-7" data-line-number="7">lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>lambda.mat</a>
-<a class="sourceLine" id="cb79-8" data-line-number="8">sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>sigma.ma</a>
-<a class="sourceLine" id="cb79-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb79-10" data-line-number="10"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(mu.mat))</a>
-<a class="sourceLine" id="cb79-11" data-line-number="11"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">2015</span>)<span class="co">## problem here</span></a>
-<a class="sourceLine" id="cb79-12" data-line-number="12"><span class="kw">points</span>(<span class="kw">c</span>(<span class="dv">2015</span>, <span class="dv">2015</span>), <span class="kw">c</span>(<span class="fl">21.5</span>, <span class="fl">30.3</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(lambda.mat))</a>
-<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">2015</span>)<span class="co">## problem here</span></a>
-<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="kw">points</span>(<span class="kw">c</span>(<span class="dv">2015</span>, <span class="dv">2015</span>), <span class="kw">c</span>(<span class="fl">21.5</span>, <span class="fl">30.3</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="co">## interpolate 1915</span></a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="kw">colnames</span>(lambda.mat) &lt;-<span class="st"> </span>my.year.vec</a>
-<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="kw">colnames</span>(mu.mat) &lt;-<span class="st"> </span>my.year.vec</a>
-<a class="sourceLine" id="cb81-5" data-line-number="5">lambda.mat[,<span class="st">&quot;2015&quot;</span>] &lt;-<span class="st"> </span>(lambda.mat[,<span class="st">&quot;2014&quot;</span>] <span class="op">+</span><span class="st"> </span>lambda.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb81-6" data-line-number="6">mu.mat[,<span class="st">&quot;2015&quot;</span>]     &lt;-<span class="st"> </span>(mu.mat[,<span class="st">&quot;2014&quot;</span>]     <span class="op">+</span><span class="st"> </span>mu.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="cf">if</span> (<span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>mu.mat</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>lambda.mat</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>sigma.mat</a>
+<a class="sourceLine" id="cb74-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb74-6" data-line-number="6">mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>mu.mat</a>
+<a class="sourceLine" id="cb74-7" data-line-number="7">lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>lambda.mat</a>
+<a class="sourceLine" id="cb74-8" data-line-number="8">sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>sigma.ma</a>
+<a class="sourceLine" id="cb74-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb74-10" data-line-number="10"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(mu.mat))</a>
+<a class="sourceLine" id="cb74-11" data-line-number="11"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">2015</span>)<span class="co">## problem here</span></a>
+<a class="sourceLine" id="cb74-12" data-line-number="12"><span class="kw">points</span>(<span class="kw">c</span>(<span class="dv">2015</span>, <span class="dv">2015</span>), <span class="kw">c</span>(<span class="fl">21.5</span>, <span class="fl">30.3</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(lambda.mat))</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">2015</span>)<span class="co">## problem here</span></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3"><span class="kw">points</span>(<span class="kw">c</span>(<span class="dv">2015</span>, <span class="dv">2015</span>), <span class="kw">c</span>(<span class="fl">21.5</span>, <span class="fl">30.3</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-63-2.png" width="672" /></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="co">## interpolate 1915</span></a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="kw">colnames</span>(lambda.mat) &lt;-<span class="st"> </span>my.year.vec</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="kw">colnames</span>(mu.mat) &lt;-<span class="st"> </span>my.year.vec</a>
+<a class="sourceLine" id="cb76-5" data-line-number="5">lambda.mat[,<span class="st">&quot;2015&quot;</span>] &lt;-<span class="st"> </span>(lambda.mat[,<span class="st">&quot;2014&quot;</span>] <span class="op">+</span><span class="st"> </span>lambda.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb76-6" data-line-number="6">mu.mat[,<span class="st">&quot;2015&quot;</span>]     &lt;-<span class="st"> </span>(mu.mat[,<span class="st">&quot;2014&quot;</span>]     <span class="op">+</span><span class="st"> </span>mu.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
 <p>Plot normalized plot with the normal distributions inside.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">plot.fun3 &lt;-<span class="st"> </span><span class="cf">function</span>(last.year, <span class="dt">A =</span> Aall)</a>
-<a class="sourceLine" id="cb82-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb82-3" data-line-number="3">    year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(A)</a>
-<a class="sourceLine" id="cb82-4" data-line-number="4">    fx &lt;-<span class="st"> </span>A[,<span class="kw">paste</span>(last.year)]</a>
-<a class="sourceLine" id="cb82-5" data-line-number="5">    fx &lt;-<span class="st"> </span>fx<span class="op">/</span><span class="kw">sum</span>(fx)</a>
-<a class="sourceLine" id="cb82-6" data-line-number="6">    x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(fx))</a>
-<a class="sourceLine" id="cb82-7" data-line-number="7">    <span class="co">## par(mfrow = c(1,1))</span></a>
-<a class="sourceLine" id="cb82-8" data-line-number="8">    <span class="kw">plot</span>(x, fx,</a>
-<a class="sourceLine" id="cb82-9" data-line-number="9">         <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.1</span>),</a>
-<a class="sourceLine" id="cb82-10" data-line-number="10">         <span class="dt">ylab =</span> <span class="st">&quot;normalized fx&quot;</span>)</a>
-<a class="sourceLine" id="cb82-11" data-line-number="11">    s &lt;-<span class="st"> </span>year.vec <span class="op">==</span><span class="st"> </span>last.year</a>
-<a class="sourceLine" id="cb82-12" data-line-number="12">    <span class="kw">print</span>(s)</a>
-<a class="sourceLine" id="cb82-13" data-line-number="13">    <span class="kw">dim</span>(mu.mat)</a>
-<a class="sourceLine" id="cb82-14" data-line-number="14">    <span class="kw">length</span>(s)</a>
-<a class="sourceLine" id="cb82-15" data-line-number="15">    <span class="kw">print</span>(x)</a>
-<a class="sourceLine" id="cb82-16" data-line-number="16">    <span class="kw">print</span>(mu.mat[<span class="dv">1</span>,s])</a>
-<a class="sourceLine" id="cb82-17" data-line-number="17">    fx1.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">1</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">1</span>,s]) <span class="op">*</span></a>
-<a class="sourceLine" id="cb82-18" data-line-number="18"><span class="st">        </span>lambda.mat[<span class="dv">1</span>,s]</a>
-<a class="sourceLine" id="cb82-19" data-line-number="19">    <span class="kw">lines</span>(x, fx1.hat, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb82-20" data-line-number="20">    fx2.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">2</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">2</span>,s]) <span class="op">*</span></a>
-<a class="sourceLine" id="cb82-21" data-line-number="21"><span class="st">        </span>lambda.mat[<span class="dv">2</span>,s]</a>
-<a class="sourceLine" id="cb82-22" data-line-number="22">    <span class="kw">lines</span>(x, fx2.hat, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb82-23" data-line-number="23">    <span class="kw">lines</span>(x, fx1.hat <span class="op">+</span><span class="st"> </span>fx2.hat)</a>
-<a class="sourceLine" id="cb82-24" data-line-number="24">    <span class="kw">title</span>(last.year)</a>
-<a class="sourceLine" id="cb82-25" data-line-number="25">}</a>
-<a class="sourceLine" id="cb82-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb82-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb82-28" data-line-number="28">plot.fun.nonorm<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="cf">function</span>(last.year, <span class="dt">A =</span> Aall)</a>
-<a class="sourceLine" id="cb82-29" data-line-number="29">{</a>
-<a class="sourceLine" id="cb82-30" data-line-number="30">    <span class="co">## don&#39;t normalize, but this means we have to multiply mixture by TFR</span></a>
-<a class="sourceLine" id="cb82-31" data-line-number="31">    year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(A)</a>
-<a class="sourceLine" id="cb82-32" data-line-number="32">    fx &lt;-<span class="st"> </span>A[,<span class="kw">paste</span>(last.year)]</a>
-<a class="sourceLine" id="cb82-33" data-line-number="33"><span class="co">##     fx &lt;- fx/sum(fx)</span></a>
-<a class="sourceLine" id="cb82-34" data-line-number="34">    x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(fx))</a>
-<a class="sourceLine" id="cb82-35" data-line-number="35">    <span class="co">## par(mfrow = c(1,1))</span></a>
-<a class="sourceLine" id="cb82-36" data-line-number="36">    <span class="kw">plot</span>(x, fx,</a>
-<a class="sourceLine" id="cb82-37" data-line-number="37">         <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.3</span>),</a>
-<a class="sourceLine" id="cb82-38" data-line-number="38">         <span class="dt">ylab =</span> <span class="st">&quot;normalized fx&quot;</span>)</a>
-<a class="sourceLine" id="cb82-39" data-line-number="39">    s &lt;-<span class="st"> </span>year.vec <span class="op">==</span><span class="st"> </span>last.year</a>
-<a class="sourceLine" id="cb82-40" data-line-number="40">    this.tfr &lt;-<span class="st"> </span><span class="kw">sum</span>(fx)</a>
-<a class="sourceLine" id="cb82-41" data-line-number="41">    fx1.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">1</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">1</span>,s]) <span class="op">*</span></a>
-<a class="sourceLine" id="cb82-42" data-line-number="42"><span class="st">        </span>lambda.mat[<span class="dv">1</span>,s]<span class="op">*</span><span class="st"> </span>this.tfr</a>
-<a class="sourceLine" id="cb82-43" data-line-number="43">    <span class="kw">lines</span>(x, fx1.hat, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb82-44" data-line-number="44">    fx2.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">2</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">2</span>,s]) <span class="op">*</span></a>
-<a class="sourceLine" id="cb82-45" data-line-number="45"><span class="st">        </span>lambda.mat[<span class="dv">2</span>,s] <span class="op">*</span><span class="st"> </span>this.tfr</a>
-<a class="sourceLine" id="cb82-46" data-line-number="46">    <span class="kw">lines</span>(x, fx2.hat, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb82-47" data-line-number="47">    <span class="kw">lines</span>(x, fx1.hat <span class="op">+</span><span class="st"> </span>fx2.hat)</a>
-<a class="sourceLine" id="cb82-48" data-line-number="48">    <span class="kw">title</span>(last.year)</a>
-<a class="sourceLine" id="cb82-49" data-line-number="49">}</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">plot.fun3 &lt;-<span class="st"> </span><span class="cf">function</span>(last.year, <span class="dt">A =</span> Aall)</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">    year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(A)</a>
+<a class="sourceLine" id="cb77-4" data-line-number="4">    fx &lt;-<span class="st"> </span>A[,<span class="kw">paste</span>(last.year)]</a>
+<a class="sourceLine" id="cb77-5" data-line-number="5">    fx &lt;-<span class="st"> </span>fx<span class="op">/</span><span class="kw">sum</span>(fx)</a>
+<a class="sourceLine" id="cb77-6" data-line-number="6">    x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(fx))</a>
+<a class="sourceLine" id="cb77-7" data-line-number="7">    <span class="co">## par(mfrow = c(1,1))</span></a>
+<a class="sourceLine" id="cb77-8" data-line-number="8">    <span class="kw">plot</span>(x, fx,</a>
+<a class="sourceLine" id="cb77-9" data-line-number="9">         <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.1</span>),</a>
+<a class="sourceLine" id="cb77-10" data-line-number="10">         <span class="dt">ylab =</span> <span class="st">&quot;normalized fx&quot;</span>)</a>
+<a class="sourceLine" id="cb77-11" data-line-number="11">    s &lt;-<span class="st"> </span>year.vec <span class="op">==</span><span class="st"> </span>last.year</a>
+<a class="sourceLine" id="cb77-12" data-line-number="12">    <span class="kw">print</span>(s)</a>
+<a class="sourceLine" id="cb77-13" data-line-number="13">    <span class="kw">dim</span>(mu.mat)</a>
+<a class="sourceLine" id="cb77-14" data-line-number="14">    <span class="kw">length</span>(s)</a>
+<a class="sourceLine" id="cb77-15" data-line-number="15">    <span class="kw">print</span>(x)</a>
+<a class="sourceLine" id="cb77-16" data-line-number="16">    <span class="kw">print</span>(mu.mat[<span class="dv">1</span>,s])</a>
+<a class="sourceLine" id="cb77-17" data-line-number="17">    fx1.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">1</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">1</span>,s]) <span class="op">*</span></a>
+<a class="sourceLine" id="cb77-18" data-line-number="18"><span class="st">        </span>lambda.mat[<span class="dv">1</span>,s]</a>
+<a class="sourceLine" id="cb77-19" data-line-number="19">    <span class="kw">lines</span>(x, fx1.hat, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb77-20" data-line-number="20">    fx2.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">2</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">2</span>,s]) <span class="op">*</span></a>
+<a class="sourceLine" id="cb77-21" data-line-number="21"><span class="st">        </span>lambda.mat[<span class="dv">2</span>,s]</a>
+<a class="sourceLine" id="cb77-22" data-line-number="22">    <span class="kw">lines</span>(x, fx2.hat, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb77-23" data-line-number="23">    <span class="kw">lines</span>(x, fx1.hat <span class="op">+</span><span class="st"> </span>fx2.hat)</a>
+<a class="sourceLine" id="cb77-24" data-line-number="24">    <span class="kw">title</span>(last.year)</a>
+<a class="sourceLine" id="cb77-25" data-line-number="25">}</a>
+<a class="sourceLine" id="cb77-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb77-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb77-28" data-line-number="28">plot.fun.nonorm<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="cf">function</span>(last.year, <span class="dt">A =</span> Aall)</a>
+<a class="sourceLine" id="cb77-29" data-line-number="29">{</a>
+<a class="sourceLine" id="cb77-30" data-line-number="30">    <span class="co">## don&#39;t normalize, but this means we have to multiply mixture by TFR</span></a>
+<a class="sourceLine" id="cb77-31" data-line-number="31">    year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(A)</a>
+<a class="sourceLine" id="cb77-32" data-line-number="32">    fx &lt;-<span class="st"> </span>A[,<span class="kw">paste</span>(last.year)]</a>
+<a class="sourceLine" id="cb77-33" data-line-number="33"><span class="co">##     fx &lt;- fx/sum(fx)</span></a>
+<a class="sourceLine" id="cb77-34" data-line-number="34">    x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(fx))</a>
+<a class="sourceLine" id="cb77-35" data-line-number="35">    <span class="co">## par(mfrow = c(1,1))</span></a>
+<a class="sourceLine" id="cb77-36" data-line-number="36">    <span class="kw">plot</span>(x, fx,</a>
+<a class="sourceLine" id="cb77-37" data-line-number="37">         <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.3</span>),</a>
+<a class="sourceLine" id="cb77-38" data-line-number="38">         <span class="dt">ylab =</span> <span class="st">&quot;normalized fx&quot;</span>)</a>
+<a class="sourceLine" id="cb77-39" data-line-number="39">    s &lt;-<span class="st"> </span>year.vec <span class="op">==</span><span class="st"> </span>last.year</a>
+<a class="sourceLine" id="cb77-40" data-line-number="40">    this.tfr &lt;-<span class="st"> </span><span class="kw">sum</span>(fx)</a>
+<a class="sourceLine" id="cb77-41" data-line-number="41">    fx1.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">1</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">1</span>,s]) <span class="op">*</span></a>
+<a class="sourceLine" id="cb77-42" data-line-number="42"><span class="st">        </span>lambda.mat[<span class="dv">1</span>,s]<span class="op">*</span><span class="st"> </span>this.tfr</a>
+<a class="sourceLine" id="cb77-43" data-line-number="43">    <span class="kw">lines</span>(x, fx1.hat, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb77-44" data-line-number="44">    fx2.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">2</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">2</span>,s]) <span class="op">*</span></a>
+<a class="sourceLine" id="cb77-45" data-line-number="45"><span class="st">        </span>lambda.mat[<span class="dv">2</span>,s] <span class="op">*</span><span class="st"> </span>this.tfr</a>
+<a class="sourceLine" id="cb77-46" data-line-number="46">    <span class="kw">lines</span>(x, fx2.hat, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb77-47" data-line-number="47">    <span class="kw">lines</span>(x, fx1.hat <span class="op">+</span><span class="st"> </span>fx2.hat)</a>
+<a class="sourceLine" id="cb77-48" data-line-number="48">    <span class="kw">title</span>(last.year)</a>
+<a class="sourceLine" id="cb77-49" data-line-number="49">}</a></code></pre></div>
 <p>Fat Mix</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">Aall &lt;-<span class="st"> </span>my.fat</a>
-<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="co">#pdf(&quot;fat_mix_movie.pdf&quot;)</span></a>
-<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">11</span>,<span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb83-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my.year.vec))</a>
-<a class="sourceLine" id="cb83-6" data-line-number="6">{</a>
-<a class="sourceLine" id="cb83-7" data-line-number="7">    my.year &lt;-<span class="st"> </span>my.year.vec[i]</a>
-<a class="sourceLine" id="cb83-8" data-line-number="8">    <span class="kw">plot.fun.nonorm.3</span>(my.year)</a>
-<a class="sourceLine" id="cb83-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb83-10" data-line-number="10"><span class="co">#dev.off()</span></a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">Aall &lt;-<span class="st"> </span>my.fat</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="co">#pdf(&quot;fat_mix_movie.pdf&quot;)</span></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">11</span>,<span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb78-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my.year.vec))</a>
+<a class="sourceLine" id="cb78-6" data-line-number="6">{</a>
+<a class="sourceLine" id="cb78-7" data-line-number="7">    my.year &lt;-<span class="st"> </span>my.year.vec[i]</a>
+<a class="sourceLine" id="cb78-8" data-line-number="8">    <span class="kw">plot.fun.nonorm.3</span>(my.year)</a>
+<a class="sourceLine" id="cb78-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb78-10" data-line-number="10"><span class="co">#dev.off()</span></a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>Let’s do tempo adjustment</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">rt.mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(mu.mat, <span class="dv">1</span>, center.diff))</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2">tfr.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(my.fat, <span class="dv">2</span>, sum)</a>
-<a class="sourceLine" id="cb84-3" data-line-number="3">tfr.mat &lt;-<span class="st"> </span>lambda.mat <span class="op">*</span><span class="st"> </span>tfr.vec</a>
-<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb84-5" data-line-number="5"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb84-6" data-line-number="6">tfr.star.mat &lt;-<span class="st"> </span>tfr.mat <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.mat)</a>
-<a class="sourceLine" id="cb84-7" data-line-number="7"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.star.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">tfr.star.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(tfr.star.mat)</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb85-4" data-line-number="4"><span class="kw">plot</span>(my.year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
-<a class="sourceLine" id="cb85-5" data-line-number="5">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb85-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb85-7" data-line-number="7"><span class="kw">lines</span>(my.year.vec, tfr.star.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-51-2.png" width="672" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">rt.mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(mu.mat, <span class="dv">1</span>, center.diff))</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">tfr.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(my.fat, <span class="dv">2</span>, sum)</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">tfr.mat &lt;-<span class="st"> </span>lambda.mat <span class="op">*</span><span class="st"> </span>tfr.vec</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb79-5" data-line-number="5"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb79-6" data-line-number="6">tfr.star.mat &lt;-<span class="st"> </span>tfr.mat <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.mat)</a>
+<a class="sourceLine" id="cb79-7" data-line-number="7"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.star.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>))</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">tfr.star.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(tfr.star.mat)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="kw">plot</span>(my.year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
+<a class="sourceLine" id="cb80-5" data-line-number="5">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb80-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb80-7" data-line-number="7"><span class="kw">lines</span>(my.year.vec, tfr.star.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-66-2.png" width="672" /></p>
 <p>Let’s look at 1st births, again as if their are two latent groups:
 <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. (These could be “early moms” / “late moms”,
 non-college / college,
 pre-marital / marital, lower-class / upper class, <span class="math inline">\(\ldots\)</span>)</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">library</span>(mixtools)</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">  <span class="co">## simulate 2 normals </span></a>
-<a class="sourceLine" id="cb86-3" data-line-number="3">  N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb86-4" data-line-number="4">  x1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co">##</span></a>
-<a class="sourceLine" id="cb86-5" data-line-number="5">  x2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2</span><span class="op">*</span>N, <span class="dt">mean =</span> <span class="dv">30</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb86-6" data-line-number="6">  <span class="co">## combine them</span></a>
-<a class="sourceLine" id="cb86-7" data-line-number="7">  x &lt;-<span class="st"> </span><span class="kw">c</span>(x1,x2)</a>
-<a class="sourceLine" id="cb86-8" data-line-number="8">  <span class="co">## use EM to infer mixture</span></a>
-<a class="sourceLine" id="cb86-9" data-line-number="9">  out &lt;-<span class="st"> </span><span class="kw">normalmixEM</span>(x,</a>
-<a class="sourceLine" id="cb86-10" data-line-number="10">                     <span class="dt">lambda =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>),</a>
-<a class="sourceLine" id="cb86-11" data-line-number="11">                     <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">35</span>),</a>
-<a class="sourceLine" id="cb86-12" data-line-number="12">                     <span class="dt">sigma =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">library</span>(mixtools)</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">  <span class="co">## simulate 2 normals </span></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3">  N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb81-4" data-line-number="4">  x1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co">##</span></a>
+<a class="sourceLine" id="cb81-5" data-line-number="5">  x2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2</span><span class="op">*</span>N, <span class="dt">mean =</span> <span class="dv">30</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb81-6" data-line-number="6">  <span class="co">## combine them</span></a>
+<a class="sourceLine" id="cb81-7" data-line-number="7">  x &lt;-<span class="st"> </span><span class="kw">c</span>(x1,x2)</a>
+<a class="sourceLine" id="cb81-8" data-line-number="8">  <span class="co">## use EM to infer mixture</span></a>
+<a class="sourceLine" id="cb81-9" data-line-number="9">  out &lt;-<span class="st"> </span><span class="kw">normalmixEM</span>(x,</a>
+<a class="sourceLine" id="cb81-10" data-line-number="10">                     <span class="dt">lambda =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>),</a>
+<a class="sourceLine" id="cb81-11" data-line-number="11">                     <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">35</span>),</a>
+<a class="sourceLine" id="cb81-12" data-line-number="12">                     <span class="dt">sigma =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))</a></code></pre></div>
 <pre><code>## number of iterations= 371</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>mu)</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>mu)</a></code></pre></div>
 <pre><code>## [1] 22.62401 30.73713</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>sigma)</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>sigma)</a></code></pre></div>
 <pre><code>## [1] 3.265651 3.645539</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>lambda)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>lambda)</a></code></pre></div>
 <pre><code>## [1] 0.4259413 0.5740587</code></pre>
 <p>Seems to work great.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">  ages &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">49</span></a>
-<a class="sourceLine" id="cb94-2" data-line-number="2">  dens1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">1</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb94-3" data-line-number="3">  dens2 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">2</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb94-4" data-line-number="4">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb94-5" data-line-number="5">  <span class="kw">hist</span>(x, <span class="dt">probability =</span> T, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
-<a class="sourceLine" id="cb94-6" data-line-number="6">  <span class="kw">lines</span>(ages, dens1, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb94-7" data-line-number="7">  <span class="kw">lines</span>(ages, dens2, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb94-8" data-line-number="8">  <span class="kw">lines</span>(ages, dens1 <span class="op">+</span><span class="st"> </span>dens2, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">  ages &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">49</span></a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">  dens1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">1</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">  dens2 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">2</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">  <span class="kw">hist</span>(x, <span class="dt">probability =</span> T, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
+<a class="sourceLine" id="cb89-6" data-line-number="6">  <span class="kw">lines</span>(ages, dens1, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb89-7" data-line-number="7">  <span class="kw">lines</span>(ages, dens2, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb89-8" data-line-number="8">  <span class="kw">lines</span>(ages, dens1 <span class="op">+</span><span class="st"> </span>dens2, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <div id="an-algorithm-for-tempo-adjustment-of-mixtures" class="section level3">
 <h3><span class="header-section-number">7.5.1</span> An algorithm for tempo adjustment of mixtures</h3>
 <ul>
