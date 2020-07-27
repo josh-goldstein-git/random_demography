@@ -4,9 +4,10 @@
 - Concepts
 - Student Presentation
 
-Additional resources:
-- @coale1986mortality: Non-technical overview of data issues that could create the appearance of mor-tality cross-overs.
-- @manton1981methods: interesting discussion on parameter choice of the Gamma and the empirical results.
+Additional resources:   
+
+  - @coale1986mortality: Non-technical overview of data issues that could create the appearance of mor-tality cross-overs.  
+  - @manton1981methods: interesting discussion on parameter choice of the Gamma and the empirical results.  
 
 
 ## What happens to mortality disparities at older ages?

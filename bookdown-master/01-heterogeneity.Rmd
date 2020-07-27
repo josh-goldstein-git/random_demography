@@ -6,7 +6,9 @@
 3. Keyfitz's result $\bar{r}'(t) = \sigma^2_r(t)$.
 4. Ken's model of Poisson heterogeneity
 
-Content is based on Section 8.8 from @wachter2014 as well as @vaupel1985heterogeneity for an accessible introduction to heterogeneity and overview. Derivations also from @keyfitz2005applied.
+Resources:
+
+Content is based on Section 8.8 from @wachter2014essential as well as @vaupel1985heterogeneity for an accessible introduction to heterogeneity and overview. Derivations also from @keyfitz2005applied.
 
 ## Part I. Conceptual Introduction
 

@@ -10,10 +10,11 @@
 - An application to two Americas.
 
 Additional resources:
-- @sullivan2005age: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.]
-- @burkimsher2017evolution: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.
-- @hastie2009elements A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.
-- Victor Lavrenko. Youtube video :”EM algorithm: how it works” <https://www.youtube. com/watch?v=REypj2sy_5U>. 
+
+  - @sullivan2005age: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.
+  - @burkimsher2017evolution: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.
+  - @hastie2009elements A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.
+  - Victor Lavrenko. Youtube video : "EM algorithm: how it works" <https://www.youtube.com/watch?v=REypj2sy_5U>. 
 
 ## Introduction
 

@@ -6,9 +6,10 @@
 3. Population Survival and Hazards under fixed frailty
 4. Gamma frailty
 
-For additional resources see @vaupel2014unobserved and @rodriguez2001. 
+Additional resources 
 
-In particular @rodriguez2001 contains is a detailed hand-out for Princeton class. Many of the same results as @vaupel2014unobserved, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.
+  - @vaupel2014unobserved:
+  - @rodriguez2001: detailed hand-out for Princeton class. Many of the same results as @vaupel2014unobserved, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.
 
 ### Review of mortality mathematics
 
