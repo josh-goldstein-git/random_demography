@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-28" />
+<meta name="date" content="2020-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -234,13 +238,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.3" data-path="branching-processes.html"><a href="branching-processes.html#simulated-examples-and-the-questions-they-raise"><i class="fa fa-check"></i><b>8.2.3</b> Simulated examples and the questions they raise</a></li>
 <li class="chapter" data-level="8.2.4" data-path="branching-processes.html"><a href="branching-processes.html#what-is-a-bienayme-galton-watson-branching-process"><i class="fa fa-check"></i><b>8.2.4</b> What is a (Bienayme)-Galton-Watson branching process?</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="branching-processes.html"><a href="branching-processes.html#simulations"><i class="fa fa-check"></i><b>8.3</b> Simulations</a></li>
+<li class="chapter" data-level="8.3" data-path="branching-processes.html"><a href="branching-processes.html#simulations-of-parents-having-children"><i class="fa fa-check"></i><b>8.3</b> Simulations of parents having children</a></li>
 <li class="chapter" data-level="8.4" data-path="branching-processes.html"><a href="branching-processes.html#the-probability-generating-function-our-mathematical-tool"><i class="fa fa-check"></i><b>8.4</b> The Probability Generating Function: Our mathematical tool</a></li>
 <li class="chapter" data-level="8.5" data-path="branching-processes.html"><a href="branching-processes.html#extinction"><i class="fa fa-check"></i><b>8.5</b> Extinction</a></li>
 <li class="chapter" data-level="8.6" data-path="branching-processes.html"><a href="branching-processes.html#good-and-bad-set-ups-for-branching-process"><i class="fa fa-check"></i><b>8.6</b> Good and bad set-ups for branching process</a></li>
 <li class="chapter" data-level="8.7" data-path="branching-processes.html"><a href="branching-processes.html#the-distribution-of-offspring-of-all-generations"><i class="fa fa-check"></i><b>8.7</b> The distribution of offspring of all generations</a></li>
 <li class="chapter" data-level="8.8" data-path="branching-processes.html"><a href="branching-processes.html#geometric-offspring-distribution"><i class="fa fa-check"></i><b>8.8</b> Geometric offspring distribution</a><ul>
 <li class="chapter" data-level="8.8.1" data-path="branching-processes.html"><a href="branching-processes.html#the-geometric-distributions-simple-pgf"><i class="fa fa-check"></i><b>8.8.1</b> The Geometric Distribution’s simple PGF</a></li>
+<li class="chapter" data-level="8.8.2" data-path="branching-processes.html"><a href="branching-processes.html#a-plot-of-keyfitzs-numbers-for-generations-1-2-and-3.-is-it-exponential-for-k-0"><i class="fa fa-check"></i><b>8.8.2</b> A plot of Keyfitz’s numbers for generations 1, 2, and 3. Is it exponential for <span class="math inline">\(k &gt; 0\)</span>?</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="branching-processes.html"><a href="branching-processes.html#branching-processes-and-covid-19"><i class="fa fa-check"></i><b>8.9</b> Branching Processes and Covid-19</a></li>
 </ul></li>
@@ -457,7 +462,7 @@ baseline hazard in terms of the observed popualtion hazard
 <a class="sourceLine" id="cb51-8" data-line-number="8">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f1), <span class="dt">lty =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
 <a class="sourceLine" id="cb51-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;obs if s2 = .2^2&quot;</span>, <span class="st">&quot;obs if s2 = .5^2&quot;</span>, <span class="st">&quot;obs if s2 = 1^2&quot;</span>),</a>
 <a class="sourceLine" id="cb51-10" data-line-number="10">       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Italian Females vs Males born 1915 (<span class="math inline">\(\sigma^2 = .5^2\)</span>)</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb52-2" data-line-number="2"><span class="co">## title(&quot;Cumulative Hazards\n Italian Females born 1915&quot;)</span></a>
@@ -480,7 +485,7 @@ baseline hazard in terms of the observed popualtion hazard
 <a class="sourceLine" id="cb52-19" data-line-number="19">                              <span class="st">&quot;implied baseline&quot;</span>),</a>
 <a class="sourceLine" id="cb52-20" data-line-number="20"><span class="co">##       col = c(&quot;red&quot;,&quot;blue&quot;),</span></a>
 <a class="sourceLine" id="cb52-21" data-line-number="21">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Much bigger convergence in ``observed’’ than in baseline</p>
 </div>
 <div id="application-1" class="section level3">

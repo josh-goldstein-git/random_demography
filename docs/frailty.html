@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-28" />
+<meta name="date" content="2020-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -234,13 +238,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.3" data-path="branching-processes.html"><a href="branching-processes.html#simulated-examples-and-the-questions-they-raise"><i class="fa fa-check"></i><b>8.2.3</b> Simulated examples and the questions they raise</a></li>
 <li class="chapter" data-level="8.2.4" data-path="branching-processes.html"><a href="branching-processes.html#what-is-a-bienayme-galton-watson-branching-process"><i class="fa fa-check"></i><b>8.2.4</b> What is a (Bienayme)-Galton-Watson branching process?</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="branching-processes.html"><a href="branching-processes.html#simulations"><i class="fa fa-check"></i><b>8.3</b> Simulations</a></li>
+<li class="chapter" data-level="8.3" data-path="branching-processes.html"><a href="branching-processes.html#simulations-of-parents-having-children"><i class="fa fa-check"></i><b>8.3</b> Simulations of parents having children</a></li>
 <li class="chapter" data-level="8.4" data-path="branching-processes.html"><a href="branching-processes.html#the-probability-generating-function-our-mathematical-tool"><i class="fa fa-check"></i><b>8.4</b> The Probability Generating Function: Our mathematical tool</a></li>
 <li class="chapter" data-level="8.5" data-path="branching-processes.html"><a href="branching-processes.html#extinction"><i class="fa fa-check"></i><b>8.5</b> Extinction</a></li>
 <li class="chapter" data-level="8.6" data-path="branching-processes.html"><a href="branching-processes.html#good-and-bad-set-ups-for-branching-process"><i class="fa fa-check"></i><b>8.6</b> Good and bad set-ups for branching process</a></li>
 <li class="chapter" data-level="8.7" data-path="branching-processes.html"><a href="branching-processes.html#the-distribution-of-offspring-of-all-generations"><i class="fa fa-check"></i><b>8.7</b> The distribution of offspring of all generations</a></li>
 <li class="chapter" data-level="8.8" data-path="branching-processes.html"><a href="branching-processes.html#geometric-offspring-distribution"><i class="fa fa-check"></i><b>8.8</b> Geometric offspring distribution</a><ul>
 <li class="chapter" data-level="8.8.1" data-path="branching-processes.html"><a href="branching-processes.html#the-geometric-distributions-simple-pgf"><i class="fa fa-check"></i><b>8.8.1</b> The Geometric Distribution’s simple PGF</a></li>
+<li class="chapter" data-level="8.8.2" data-path="branching-processes.html"><a href="branching-processes.html#a-plot-of-keyfitzs-numbers-for-generations-1-2-and-3.-is-it-exponential-for-k-0"><i class="fa fa-check"></i><b>8.8.2</b> A plot of Keyfitz’s numbers for generations 1, 2, and 3. Is it exponential for <span class="math inline">\(k &gt; 0\)</span>?</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="branching-processes.html"><a href="branching-processes.html#branching-processes-and-covid-19"><i class="fa fa-check"></i><b>8.9</b> Branching Processes and Covid-19</a></li>
 </ul></li>
@@ -388,7 +393,7 @@ schedule of a person with <span class="math inline">\(z = 1\)</span>).</li>
 <div id="fragile" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> fragile</h3>
 <p>Which look like multiplicative fixed frailty?
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 </div>
 <div id="part-i.-results-from-fixed-frailty" class="section level2">
@@ -570,7 +575,7 @@ something. What?</p>
 <a class="sourceLine" id="cb12-21" data-line-number="21">         <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,</a>
 <a class="sourceLine" id="cb12-22" data-line-number="22">         <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>))</a>
 <a class="sourceLine" id="cb12-23" data-line-number="23">  <span class="kw">title</span>(<span class="st">&quot;Gamma-frailty population survival&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 </div>
 <div id="conclusions-1" class="section level2">
