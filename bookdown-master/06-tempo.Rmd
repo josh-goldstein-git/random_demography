@@ -76,7 +76,7 @@ knitr::include_url('https://shiny.demog.berkeley.edu/josh/tempo/', height = '600
   b_orig2 <- b_obs/(1-rt)
   b_orig <- tibble(rt,b_obs, b_orig1, b_orig2)
   names(b_orig) <- c("r(t)","B(obs)", "B(orig) formula 1", "B(orig) formula 2")
-  b_orig
+  knitr::kable(b_orig)
 ```
   
   The correct formula is equation 2. **NOTE: is this correct? If so, why?** 
@@ -224,6 +224,7 @@ Tempo adjustment of US fertility using HFD data using Bongaarts-Feeney formula:
 ```{r, message=FALSE}
 library(data.table)
 library(dplyr)
+library(knitr)
 
 source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R")
 source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/utility_functions.R")
@@ -255,7 +256,7 @@ fat.array[,,"3"] <- fat3
 fat.array[,,"4"] <- fat4
 fat.array[,,"5"] <- fat5p
 
-fat.array[,1:2,"all"] 
+kable(fat.array[,1:2,"all"], caption="An extract of period age-specific fertility rates") 
 ``` 
 
 2. Fit bongaarts feeney without birth order
