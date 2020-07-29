@@ -13,25 +13,20 @@ Additional resources:
 
   - @sullivan2005age: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.
   - @burkimsher2017evolution: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.
-  - @hastie2009elements A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.
+  - @hastie2009elements: A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.
   - Victor Lavrenko. Youtube video : "EM algorithm: how it works" <https://www.youtube.com/watch?v=REypj2sy_5U>. 
+  - @bongaarts1998quantum
 
 ## Introduction
 
-What we see is superficial. Heterogeneous models reveal what's "really" going on. (Or do they?)
-  - Until today, population hazards mislead
-  - Today, homogeneous fertility misleads
+What we see is superficial. Heterogeneous models reveal what's "really" going on. (Or do they?). Until the past sections, population hazards mislead. However in this section, homogeneous fertility misleads.
   
-Now we will reverse perspectives
+We now reverse perspectives:
 
-  - We see differences we see in genotypes, in lineages, in
-    names.
+  - We see differences we see in genotypes, in lineages, in names.
   - These could be due to "real" differences (heterogeneity).
-  - But they could also be due to luck. Everyone is the same
-    but stochastic outcomes differ.
-  - Our models of individual-level randomness will have
-    predicted dynamics, which are themselves interesting but can
-    also be used as a "null" to compare to observations.
+  - But they could also be due to luck: everyone is the same but stochastic outcomes differ.
+  - Our models of individual-level randomness will have predicted dynamics, which are themselves interesting but can also be used as a "null" to compare to observations.
 
 ### Fertility postponement, a very simple example
 
@@ -43,13 +38,14 @@ Now we will reverse perspectives
   
   Postponement
   
-  - Starting on Jan. 1, 020, everyone postponements childbearing
-    an additional month, until they are aged 25 1/12.
+  - Starting on Jan. 1, 2020, everyone postpones childbearing an additional month, until they are aged 25 1/12.
   -  How many births will there be in 2020?
   -  How many births in 2021?
   
-### Continuous postponement, a shiny simulation
+  As everybody postpones childbearing for a month, then the first birth of 2020 occurs on February 1st so that 31 babies have not been born by then. This means that during 2020 there are $365-31=334$ births. For this year, births and total fertility rate decrease. However, the postponement doesn't affect the birth stream in 2021 as there will still be one birth per day, even if in the absence of postponing these some of the births should've occured in 2020.
   
+### Continuous postponement, a shiny simulation
+  To answer these questions, we can use the following shiny app. 
 ```{r echo=FALSE}
 knitr::include_url('https://shiny.demog.berkeley.edu/josh/tempo/', height = '600px')
 ```
@@ -61,34 +57,49 @@ knitr::include_url('https://shiny.demog.berkeley.edu/josh/tempo/', height = '600
 
 
   What is a formula for recovering original birth stream?
-  $$
-  \hat{B}_{orig} = B_{obs} \times (1 + R'(t))
-  $$
-  or
-  $$
-  \hat{B}_{orig} = B_{obs} \times 1/  \left[1 - R'(t)\right]?
-  $$
+  \begin{align}
+  \hat{B}_{orig} &= B_{obs} \times (1 + R'(t)) \\
+   \text{or}\\
+  \hat{B}_{orig} &= B_{obs} \times 1/  \left[1 - R'(t)\right]?
+  \end{align}
 
   Note: this idea of ``recovering original'' is one way to think
   about tempo adjustment.
   
+  We can think of the original version as that which should have ocurred in the absence of postponement. Intuitively, it should be higher than the observed birth stream, but how much larger? The table below shows an example of how to recover the original births where each formula refers to the equations above.
+
+```{r, echo=FALSE, message=FALSE}
+  library(tidyverse)
+  rt <- seq(0.1,0.4,0.1)
+  b_obs <- c(91,84, 77, 72 ) 
+  b_orig1 <- b_obs*(1+rt)
+  b_orig2 <- b_obs/(1-rt)
+  b_orig <- tibble(rt,b_obs, b_orig1, b_orig2)
+  names(b_orig) <- c("r(t)","B(obs)", "B(orig) formula 1", "B(orig) formula 2")
+  b_orig
+```
+  
+  The correct formula is equation 2. **NOTE: is this correct? If so, why?** 
+  
 ## Period Shifts: Bongaarts and Feeney's model
 
-A bigger microsimulation
+In a bigger microsimulation
+
   - Each period will have births across a range of ages
   - We'll randomly generate the original planned birthdays
   - Then we'll shift by a continuous function $R(t)$.
   
 
+The birth rate of women, $f(a,t)$, aged $a$ in period $t$ is: 
   $$
   f(a,t) = f_0(a - R(t)) (1- R'(t)) q(t)
   $$
   
-  
-- $f(a,t)$ birth rate of women aged $a$ in period $t$
-- $f_0$ A constant baseline schedule (can be norm'd to sum to 1).
-- $q(t)$ A period intensity parameter: ``quantum''
-- $R(t)$ Cumulative shift.
+Where
+
+- $f_0$:  constant baseline schedule (can be normalized to sum to 1).
+- $q(t)$: period intensity parameter: "quantum"
+- $R(t)$: cumulative shift.
   
 
 An example
@@ -105,27 +116,34 @@ $$
 
 Give an expression for $f(28,2019)$.
 
+$$ \begin{aligned} 
+ f(28,2019) &= f_{0}(28-3)\times(1-0.1)\times(1) \\
+  & = (0.9)f_{0}(25)
+ \end{aligned}
+$$  Therefore, the fertility rate for a 28 year-old in 2019 would be 0.9 of the baseline fertility rate at age 25. Another way of thinking about it is that had there been no postponement, the fertility rate that we are observing in 2019 for this 28 year-old would actually be similar to that of a 25 year old. 
 
-### A derivation: due to Rodriguez
+Small changes in the stock can have huge effect in the flows.
 
-Assume no quantum effects. Take a cohort with cumulative fertility
+
+### A derivation: due to Rodriguez *NOTE: not sure what the reference is here*
+
+Assume no quantum effects (i.e, no $q(t)$). Take a cohort with cumulative fertility
 
   $$
   F_0(a) = \int_0^a f(x) \,dx
   $$
 
-  Now put in shifts so that observed fertility is from an
-  age $R(t)$ years earlier. ("28" is the new "25"!)
+  Now put in shifts so that observed fertility is from an age $R(t)$ years earlier. ("28" is the new "25"!)
   $$
   F(a,t) = F_0(a - R(t))  = F_0(a - R(c + a))
   $$
   
-  Differentiate with respect to age (which for a cohort is also
-  time $t$), using chain rule
+  Differentiate with respect to age (which for a cohort is also time $t$), using chain rule
   
-  $$
-  f(a,t) = f_0(a - R(t)) \left[1 - R'(t)\right]
-  $$
+  $$ \begin{aligned}
+  \frac{d }{dt}F(a,t)= f(a,t) &= F'_{0}(a-R(c+a))\times(1-R'(c+a)) \\
+  &= f_0(a - R(t)) \left[1 - R'(t)\right]
+  \end{aligned}$$
 
 Let's re-notate our constant quantum result
   $$
@@ -136,12 +154,11 @@ Let's re-notate our constant quantum result
   f(a,t) = f_0(a,t | R(t) ) q(t) = f_0(a - R(t)) \left[1 - R'(t)\right]q(t)
   $$
 
-  Note: If we vary quantum before shifts, then $q(t)$ will
-  bleed into neighboring years. (a small effect, but makes model
-  messier).
+  Note: If we vary quantum before shifts, then $q(t)$ will bleed into neighboring years. (a small effect, but makes model
+  messier). **NOTE: I don't understand this, could you explain Josh?**
 
 
-Tempo-adjusted TFR: counter-factual, TFR in absence of timing changes
+**Tempo-adjusted TFR:** counter-factual, TFR in absence of timing changes
 
   $$
   TFR(t) = \int_0^\infty f(a,t) \, da
@@ -149,45 +166,46 @@ Tempo-adjusted TFR: counter-factual, TFR in absence of timing changes
 
   Substituting our shifted birth rates with quantum
   $$
-  TFR(t) = \int_0^\infty f_0(a - R(t)) \left[1 - R'(t)\right]q(t) 
+  \begin{aligned}
+  TFR(t) &= \int_0^\infty f_0(a - R(t)) \left[1 - R'(t)\right]q(t) da \\
+  &=\left[1 - R'(t)\right]q(t) \int_0^\infty f_0(a - R(t))  da \\
+  &= TFR_0 \left[1 - R'(t)\right] q(t)\\
+  \end{aligned}
   $$
-  gives?
-
-  $$
-  TFR(t) = TFR_0 \left[1 - R'(t)\right] q(t)
-  $$
-  WLG, define $TFR_0 = 1$, then
+  Without loss of generality, define $TFR_0 = 1$, then 
   
   $$
-  q(t) =   TFR(t) \over{1 - R'(t)} \equiv TFR^*(t) 
+  q(t) =   \frac{TFR(t)} {1 - R'(t)} \equiv TFR^*(t) 
   $$
-  
-  Voila, the BF formula
+  The observed $TFR(t)$ deflated by the rate of change ($1 - R'(t)$) is the BF formula.
 
 
 How do period schedules change?
 
-  For homework
   $$
-  f(a,t) = f_0(a - R(t)) \left[1 - R'(t)\right]
+  f(a,t) = f_0(a - R(t)) \left[1 - R'(t)\right]q(t)
   $$
 
 
-  What does
+  What is
   $$
-  {\partial \over \partial t} \log f(a,t) = ?
+  \begin{aligned}
+  {\partial \over \partial t} \log f(a,t) &= ?\\
+  \\
+  & = \frac{d}{dt}log(f_{0}(a-R(t))) + \frac{d}{dt}log(1-R'(t)) + \frac{d}{dt}log(q(t)) \\
+  & = \frac{-f'_{0}(a-R(t)) R'(t)}{f_{0}(a-R(t))} - \frac{R''(t)}{1-R'(t)}+ \frac{q'(t)}{q(t)}
+  \end{aligned}
   $$
-  Let's sketch
+  If we sketch this, where the age is on the x-axis, then the last two components affect the intercept of the curve. If births are postponed, $R'(t)>0$ but if they are actually advanced then $R'(t)<0$, which affects the slope of $ {\partial \over \partial t} \log f(a,t)$.
 
-*Uniform shifts*
+**Uniform shifts**
 
 - BF model assumes all ages shift by $R(t)$.
 - BF model assumes all ages rise or fall by same quantum $q(t)$
-- Violating these assumptions means change in mean age will not
-  just reflect "tempo".
+- Violating these assumptions means change in mean age will not just reflect "tempo".
 - Example: What happens if people have fewer higher order births?
   
-*BF recommendation for achieving uniformity*
+**BF recommendation for achieving uniformity**
 
   Separate estimates for each birth order, and then combine:
   $$
@@ -201,25 +219,26 @@ This will protect against order-specific quantum effects.
 
 Tempo adjustment of US fertility using HFD data using Bongaarts-Feeney formula:
 
-1. Read in data and format into an array
-
-```{r}
+1. Read in data and format into an array. 
+   Below we show the period fertility rates for all parities at each age for 1933 and 1934 of US women. 
+```{r, message=FALSE}
 library(data.table)
 library(dplyr)
-source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_functions.R")
-source("/hdir/0/fmenares/Book/bookdown-master/codes/utility_functions.R")
+
+source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R")
+source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/utility_functions.R")
 
 ## age specific fertility rates by birth order for all countries and times
 ## RR means "rectangles" on Lexis surface
-dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt")
+dt <- fread("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/data/zip_w/asfrRRbo.txt", showProgress = FALSE)
+
 dt <- dt[Code == "USA"] ## keep only US
-## keep only ages 15 to 49
-dt <- dt[Age %in% 15:49]
-print(dt)
-## put all order fertiility into a matrix
-fat <- dt[, xtabs(ASFR ~ Age + Year)]
-fat <- as.matrix(unclass(fat)) ## may cause problems, we'll see
-fat1 <- dt[, xtabs(ASFR1 ~ Age + Year)]
+dt <- dt[Age %in% 15:49] ## keep only ages 15 to 49
+
+## put all order fertility into a matrix
+fat <- dt[, xtabs(ASFR ~ Age + Year)] # age (rows) by cohort year (column) matrix of ASFR
+fat <- as.matrix(unclass(fat)) 
+fat1 <- dt[, xtabs(ASFR1 ~ Age + Year)] #age specific fertility rates for parity = 1 
 fat2 <- dt[, xtabs(ASFR2 ~ Age + Year)]
 fat3 <- dt[, xtabs(ASFR3 ~ Age + Year)]
 fat4 <- dt[, xtabs(ASFR4 ~ Age + Year)]
@@ -235,41 +254,48 @@ fat.array[,,"2"] <- fat2
 fat.array[,,"3"] <- fat3
 fat.array[,,"4"] <- fat4
 fat.array[,,"5"] <- fat5p
+
+fat.array[,1:2,"all"] 
 ``` 
 
 2. Fit bongaarts feeney without birth order
-```{r, fig.height=8}
-tfr.vec <- colSums(fat)
-## (2a) by hand
-mu.vec <- apply(fat, 2, get.mean)
-rt.vec <- center.diff(mu.vec)
-adj.tfr.vec <- tfr.vec / (1 - rt.vec)
+```{r}
+tfr.vec <- colSums(fat)          # total fertility rate for each cohort
+mu.vec <- apply(fat, 2, get.mean) # mean age at childbearing
+rt.vec <- center.diff(mu.vec)     # increments of postponement
+adj.tfr.vec <- tfr.vec / (1 - rt.vec) # Assuming no quantum effect, tempo-adjusted TFR
+```
+
+```{r, echo=FALSE, fig.cap='Adjusted TFR',fig.height=8}
 par(mfrow = c(3,1))
-plot(names(mu.vec), mu.vec)
-plot(names(mu.vec), rt.vec)
+plot(names(mu.vec), mu.vec, xlab = "Year", ylab="Mean age of childbearing")
+plot(names(mu.vec), rt.vec, xlab = "Year", ylab= "Shifts")
 abline(h =0)
-plot(year.vec, tfr.vec, type = "l")
+plot(year.vec, tfr.vec, type = "l", xlab = "Year", ylab= "TFR")
 lines(year.vec, adj.tfr.vec, lty = 2)
 abline(v = c(1945, 2008))
+legend("topright", c("Observed TFR", "Tempo-adjusted TFR"), lty= c(1,2))
 ```
 
 - We see fertility since 1980 has been depressed by postponment
 - We see weird dynamics around end of WW2 and great recession.
-- What's going on?
+- What's going on? Here is a closeup
 
-```{r}
+```{r, echo=F, fig.cap='Observed and tempo-adjusted TFRs'}
 par(mfrow = c(1,1))
-plot(year.vec, tfr.vec, type = "l")
-lines(year.vec, adj.tfr.vec, lty = 2)
+plot(year.vec, tfr.vec, type = "l", xlab = "Year", ylab= "TFR") # Observed TFR
+lines(year.vec, adj.tfr.vec, lty = 2) # Tempo-adjusted TFR
 abline(v = c(1945, 2008))
 abline(h = seq(1.5, 4, .1), col = "grey", lty = 3)
+legend("topright", c("Observed TFR", "Tempo-adjusted TFR"), col= c("black","red"), lty=c(1,1))
+
 ## can also use function to fit
 adj.tfr.vec.from.fun <- bf.fit.simple(fat)$tfr.star
 lines(year.vec, adj.tfr.vec.from.fun, col = "red")
 ```
 
-Now let's look at turbulence around WW2
-```{r, fig.height=6}
+Now let's look at turbulence around WWII
+```{r, echo=FALSE,fig.cap='Change in fertility rates around WWII', fig.height=6}
 par(mfrow = c(2,2))
 plot(age.vec, fat[,"1944"], type = "l", ylim = c(0, .23),
      ylab = "f(a)",
@@ -306,6 +332,8 @@ plot(1943:1947, tfr.vec[paste(1943:1947)],
 lines(1943:1947, adj.tfr.vec[paste(1943:1947)],
       lty = 2)
 title("TFR and adjTFR")
+legend("topright", c("Observed TFR", "Tempo-adjusted TFR"), lty=c(1,2))
+
 ``` 
 
 From 1945 to 1946, fertility goes up a lot, but more at younger ages. So mean goes down. BF adjustment over-compensates, and has quantum declining.
@@ -315,41 +343,50 @@ What's happening from 1944-45?
 3. Fit bongaarts feeney with birth order
 
 ```{r}
-out <- bf.fit(fat.array)
-adj.tfr.bo.vec <-  out$tfr.star.out[, "bf.tfr.star"]
-## pdf("usa_tempo_fig.pdf")
+out <- bf.fit(fat.array)  #function to obtain BF tempo-adjusted TFR
+adj.tfr.bo.vec <-  out$tfr.star.out[, "bf.tfr.star"] # sum of parity specific tempo-adjusted TFRs
+```
+```{r, echo=FALSE,fig.cap='TFR by parities', fig.height=6}
 par(mfrow = c(1,1))
-plot(year.vec, tfr.vec, type = "l", lwd = 2)
+plot(year.vec, tfr.vec, type = "l", lwd = 2, xlab="Year", ylab= "TFR")
 lines(year.vec, adj.tfr.vec, lty = 2)
 lines(year.vec, adj.tfr.bo.vec, lty = 1, lwd = 2, col = "red")
 legend("topright",
-       c("tfr", "tfr* (all parities)", "tfr* (by parity)"),
+       c("tfr", "tfr* (all parities)", "tfr* (sum of parities)"),
        col = c("black", "black", "red"),
        lty = c(1, 2, 1),
        lwd = c(2,1,2))
+```
+4. Use HFD data to verify adjusted TFR
+  HFD uses a tempo-adjusted TFR that is the sum of the parity specific adjusted BF TFR.
+```{r}
 ## let's check against hfd
-hfd.adj.dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/zip_w/adjtfrRR.txt",
-                skip = 2)
+hfd.adj.dt <- fread("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/data/zip_w/adjtfrRR.txt", showProgress = FALSE, skip = 2)
 hfd.adj.dt <- hfd.adj.dt[Code == "USA"]
-hfd.adj.dt[, points(Year, adjTFR, col = "red", cex = .8)]
+```
+
+  We find that:  
+  
+  - Taking birth order into account smooths out WW2 turbulence (large fluctuations) but increases the variation during the Great Recession.  
+  - The baby boom appears to initially be even greater than observed when we take into account birth order, but then it fall more than observed. 
+  - Finally, the baby bust was not as bad as it seemed.
+
+```{r, echo=FALSE,fig.cap='TFR by parities using HFD data', fig.height=6}
+plot(year.vec, tfr.vec, type = "l", lwd = 2, xlab="Year", ylab= "TFR")
+lines(year.vec, adj.tfr.vec, lty = 2)
+lines(year.vec, adj.tfr.bo.vec, lty = 1, lwd = 2, col = "red")
+lines(hfd.adj.dt$Year, hfd.adj.dt$adjTFR, col = "blue")
 legend("topright",
-       c("tfr", "tfr* (all parities)", "tfr* (by parity)"),
-       col = c("black", "black", "red"),
-       lty = c(1, 2, 1),
-       lwd = c(2,1,2))
-# hfd.adj.dt[, lines(Year, filter(adjTFR, rep(1/7, 7)), col = "red", lwd = 4)] # commented because filter() caused a problem. I actually don't think we need this line.
+       c("tfr", "tfr* (all parities)", "tfr* (sum of parities)", "HFD adj TFR"),
+       col = c("black", "black", "red", "blue"),
+       lty = c(1, 2, 1, 1),
+       lwd = c(2,1,2,2))
 
 ```
-### Questions
-
-1. Does taking birth order into account smooth WW2 turbulence?
-2. Does taking birth order into account smooth Recession turbulence?
-3. Does taking birth order into account, retell the baby boom?
-4. Does taking birth order into account, retell the baby bust?
 
 ### Conclusions
 
-- Baby boom smaller if we account for "pre-ponement".
+- Baby boom smaller if we account for "pre-ponement".  
 - Fertility lull in 1970s and 80s disappears if we account for
     "postponement". 
 - Birth order disaggregation improves estimates of shifts from
@@ -358,62 +395,41 @@ legend("topright",
 
 ## Two Americas
 
-  Let's look at births (all orders).
-
-
-"Animation" of asfr change from about 2000 to about 2018 age specific fertility rates by birth order for all countries and times (RR means "rectangles" on Lexis surface)
-
-```{r}
-dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/zip_w/asfrRRbo.txt")
-dt <- dt[Code == "USA"] ## keep only US
-## keep only ages 15 to 49
-dt <- dt[Age %in% 15:44]
-print(dt)
-## put all order fertiility into a matrix
-fat <- dt[, xtabs(ASFR ~ Age + Year)]
-fat <- as.matrix(unclass(fat)) ## may cause problems, we'll see
-fat1 <- dt[, xtabs(ASFR1 ~ Age + Year)]
-fat1 <- as.matrix(unclass(fat1)) ## may cause problems, we'll see
-
-
-year.vec <- colnames(fat)
-age.vec <- rownames(fat)
+  Let's look at births (all orders). Here we have some animations of the ASFR over time. 
+```{r, message=FALSE, warning=FALSE, fig.height=7}
 my.year.vec <- 1975:2017
-#pdf("fat_movie.pdf")
-par(mar=c(1,1,1,1))
-
-par(mfrow = c(11,4))
-for (i in 1:length(my.year.vec))
-{
-    my.year <- my.year.vec[i]
-    plot(age.vec, fat[, paste(my.year)],
-         ylim = c(0, .15),
-         xlim = c(15,49),
-         xlab = "age",
-         ylab = "age-specific fertility rate",
-         type = "l")
-    title(my.year)
-}
-#dev.off()
-```
-
-Now fit mixing model and redo the animation
-
-```{r include=FALSE}
+# library(devtools)
+# install_github("dgrtwo/gganimate")
+# install.packages("transformr")
+# install.packages("animation")
+library(gganimate)
 library(data.table)
 library(mixtools)
-source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_mixed_functions.R")
-source("/hdir/0/fmenares/Book/bookdown-master/codes/tempo_functions.R")
+library(ggplot2)
 
+source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_mixed_functions.R")
+source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R")
+
+# plot1 <- ggplot(data=dt[Year %in% my.year.vec,2:4], aes(x=Age, y= ASFR)) + 
+#   geom_line(aes(group=Year))+
+#   transition_time(Year)+
+#   labs(title = "Year: {frame_time}")
+
+# anim_save("plot1.gif", plot1)
+```
+![](plot1.gif)
+
+During the earlier years, the mean childbearing age seems to be in the early 20s. However with time, the AFR seems to become bimodal. So what is happening here? Are there two underlying groups of women that experience different fertility rates. Now fit mixing model and redo the animation.
+
+**NOTE: Not sure of all the lines in this mixture code. Josh, could you add some notes please?**
+```{r mixture1, results='hide'}
 ## takes few minutes to run
 my.fat <- fat[, paste(my.year.vec)]
 out <- get.mixed.tfr.star(my.fat)
 ##
 out.all <- out
-```
 
-```{r, fig.height=5}
-
+#Mixture simulation 
 if (0) {
 mu.mat <- get.coefs.mixed(out.all$fert.fit.list.variable.sigma)$mu.mat
 lambda.mat <- get.coefs.mixed(out.all$fert.fit.list.variable.sigma)$lambda.mat
@@ -423,13 +439,14 @@ mu.mat <- get.coefs.mixed(out.all$fert.fit.list)$mu.mat
 lambda.mat <- get.coefs.mixed(out.all$fert.fit.list)$lambda.mat
 sigma.mat <- get.coefs.mixed(out.all$fert.fit.list)$sigma.ma
 
-matplot(my.year.vec, t(mu.mat))
-abline(v = 2015)## problem here
-points(c(2015, 2015), c(21.5, 30.3))
-
-matplot(my.year.vec, t(lambda.mat))
-abline(v = 2015)## problem here
-points(c(2015, 2015), c(21.5, 30.3))
+#Temporary comment out until we figure out what these graphs actually are
+# matplot(my.year.vec, t(mu.mat))
+# abline(v = 2015)## problem here
+# points(c(2015, 2015), c(21.5, 30.3))
+# 
+# matplot(my.year.vec, t(lambda.mat))
+# abline(v = 2015)## problem here
+# points(c(2015, 2015), c(21.5, 30.3))
 
 ## interpolate 1915
 
@@ -439,82 +456,66 @@ lambda.mat[,"2015"] <- (lambda.mat[,"2014"] + lambda.mat[,"2016"])/2
 mu.mat[,"2015"]     <- (mu.mat[,"2014"]     + mu.mat[,"2016"])/2
 ``` 
 
-Plot normalized plot with the normal distributions inside.
+  Now we create the animation with the normal distributions inside as well as the observed ASFR.
+```{r mixture2, fig.height=7}
+# Obtaining different ASFRs per group (1 and 2)
+my.dt <- dt[Year %in% my.year.vec,]
 
-```{r, fig.height=5}
-
-plot.fun3 <- function(last.year, A = Aall)
-{
-    year.vec <- colnames(A)
-    fx <- A[,paste(last.year)]
-    fx <- fx/sum(fx)
+for (i in 1:length(my.year.vec)){
+    my.year <- my.year.vec[i]
+    year.vec <- colnames(my.fat)
+    fx <- my.fat[,paste(my.year)]
+    # fx <- fx/sum(fx)
     x <- as.numeric(names(fx))
     ## par(mfrow = c(1,1))
-    plot(x, fx,
-         ylim = c(0, .1),
-         ylab = "normalized fx")
-    s <- year.vec == last.year
-    print(s)
-    dim(mu.mat)
-    length(s)
-    print(x)
-    print(mu.mat[1,s])
-    fx1.hat <- dnorm(x, mean = mu.mat[1,s], sd = sigma.mat[1,s]) *
-        lambda.mat[1,s]
-    lines(x, fx1.hat, col = "red")
-    fx2.hat <- dnorm(x, mean = mu.mat[2,s], sd = sigma.mat[2,s]) *
-        lambda.mat[2,s]
-    lines(x, fx2.hat, col = "blue")
-    lines(x, fx1.hat + fx2.hat)
-    title(last.year)
-}
-
-
-plot.fun.nonorm.3 <- function(last.year, A = Aall)
-{
-    ## don't normalize, but this means we have to multiply mixture by TFR
-    year.vec <- colnames(A)
-    fx <- A[,paste(last.year)]
-##     fx <- fx/sum(fx)
-    x <- as.numeric(names(fx))
-    ## par(mfrow = c(1,1))
-    plot(x, fx,
-         ylim = c(0, .3),
-         ylab = "normalized fx")
-    s <- year.vec == last.year
+    # plot(x, fx,
+    #      ylim = c(0, .3),
+    #      ylab = "normalized fx")
+    s <- year.vec == my.year
     this.tfr <- sum(fx)
     fx1.hat <- dnorm(x, mean = mu.mat[1,s], sd = sigma.mat[1,s]) *
         lambda.mat[1,s]* this.tfr
-    lines(x, fx1.hat, col = "red")
+    # lines(x, fx1.hat, col = "red")
     fx2.hat <- dnorm(x, mean = mu.mat[2,s], sd = sigma.mat[2,s]) *
         lambda.mat[2,s] * this.tfr
-    lines(x, fx2.hat, col = "blue")
-    lines(x, fx1.hat + fx2.hat)
-    title(last.year)
+    # lines(x, fx2.hat, col = "blue")
+    # lines(x, fx1.hat + fx2.hat)
+    # title(last.year)
+    my.dt <- my.dt[Year==my.year, fx := fx]
+    my.dt <- my.dt[Year==my.year, fx1 := fx1.hat]
+    my.dt <- my.dt[Year==my.year, fx2 := fx2.hat]
+    my.dt <- my.dt[Year==my.year, fx1fx2 := fx1.hat + fx2.hat]
+
 }
+
+labels <- c("Observed" = "black", "Mixture 1" = "blue", "Mixture 2" = "red", "Sum of mixtures"="orange")
+
+# plot2 <-
+#   ggplot(data=my.dt, aes(x=Age)) + 
+#   geom_line(aes( y= ASFR, group=Year, color = "Observed"))+
+#   geom_line(aes( y= fx1, group=Year, color = "Mixture 1"))+
+#   geom_line(aes( y= fx2, group=Year, color = "Mixture 2"))+
+#   geom_line(aes( y= fx1fx2, group=Year, color = "Sum of mixtures"))+
+#   labs(color = "Legend") +
+#   scale_color_manual(values = labels)+
+#   theme_bw()#+
+#   transition_time(Year)+
+#   labs(title = "Year: {frame_time}")
+
+# anim_save("plot2.gif", plot2)
+
+
 ```
+![](plot2.gif)
+  The animation shows how the distributions operate under the AFSR curve. There could be two separate normal distributions with distinct mean ages of childbearing.
 
-Fat Mix
-
-```{r, fig.height=10}
-Aall <- my.fat
-#pdf("fat_mix_movie.pdf")
-par(mar=c(1,1,1,1))
-par(mfrow = c(11,4))
-for (i in 1:length(my.year.vec))
-{
-    my.year <- my.year.vec[i]
-    plot.fun.nonorm.3(my.year)
-}
-#dev.off()
-```
-
-Let's do tempo adjustment
+  Let's do tempo adjustment:**NOTE: Help! I don't know how to interpret these graphs**
 ```{r, fig.height=5}
 rt.mat <- t(apply(mu.mat, 1, center.diff))
 tfr.vec <- apply(my.fat, 2, sum)
 tfr.mat <- lambda.mat * tfr.vec
 par(mfrow = c(1,2))
+
 matplot(my.year.vec, t(tfr.mat), ylim = c(0, 3))
 tfr.star.mat <- tfr.mat / (1 - rt.mat)
 matplot(my.year.vec, t(tfr.star.mat), ylim = c(0,3))
@@ -528,12 +529,8 @@ plot(my.year.vec, tfr.vec, type = "l",
 lines(my.year.vec, tfr.star.vec, lty = 2)
 ```
 
-  Let's look at 1st births, again as if their are two latent groups:
-  $A$ and $B$.  (These could be "early moms" / "late moms",
-  non-college / college,
-  pre-marital / marital, lower-class / upper class, $\ldots$)
-
-
+### Mixture
+  Let's look at 1st births, again as if their are two latent groups: $A$ and $B$.  (These could be "early moms" / "late moms", non-college / college, pre-marital / marital, lower-class / upper class, $\ldots$)
 ```{r}
 library(mixtools)
   ## simulate 2 normals 
@@ -567,13 +564,12 @@ library(mixtools)
 ### An algorithm for tempo adjustment of mixtures
   
 - Fit normal mixture to each year.
-- Refit using constant variance (average). This assures shape
-invariance of each component, fulfilling BF assumption.
+- Refit using constant variance (average). This assures shape invariance of each component, fulfilling BF assumption.
 - Estimate BF separately for $A$ and $B$, and combine.
 
 
 
-- tempo_mixed_results_figure.pdf
+- tempo_mixed_results_figure.pdf **NOTE: not sure about this...**
   
 
 ## Conclusions 
@@ -588,8 +584,7 @@ invariance of each component, fulfilling BF assumption.
   
 ### Caveats
   
-  - Who are these latent groups? Do you start out in one and end
-    up in the other? Do you stay in one your whole life?
+  - Who are these latent groups? Do you start out in one and end up in the other? Do you stay in one your whole life?
   - How do we project forward?
   - Can we use other indicators (e.g., social class, education,
     marriage) to get same results?
