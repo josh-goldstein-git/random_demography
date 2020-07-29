@@ -23,46 +23,47 @@ Additional resources:
 - Now, we're switching gears:
   - Stochastic not deterministic
   - In small populations, randomness matters. (Even when risks are homogeneous.)
-  - branching processes ("parents producing children"), next
-      Fisher-Wright ("children choosing parents"), and then historical
-      reconstruction from contemporary diversity ("coalescent").
+  - We will look at branching processes ("parents producing children"), next Fisher-Wright ("children choosing parents"), and then historical reconstruction from contemporary diversity ("coalescent").
 
-### Very brief history of Branching Processes
+### Very brief history of Branching Processes 
   
-  - Bienayme's lost notes
-  - Old motivation - Galton  and Watson's: to see if elites were dying out because of "degeneration" 
-  - Contemporary motivation: evolution and neutral genetic
-  change. what is the chance that a mutant will survive?
+  - Bienaymé's lost notes
+  - Old motivation: Galton and Watson's: to see if elites were dying out because of "degeneration" 
+  - Contemporary motivation: evolution and neutral genetic change. What is the chance that a mutant will survive?
   - War-time motivation: to see how to build the bomb (chain reactions)
   - Sociological: Anywhere "incipient dynamics" matter (will all of S. Korea be "Kim"?)
-  - Can we get variance of repro success from name disn?
+  - Can we get variance of reproductive success from name disambiguation?
   - It will give us a headstart on other (less realistic but easier) "drift" models.
   
 ### Applicability to the Coronavirus? Yes and no.
 
   - Perhaps the beginning, with first few cases.
-  - But once scale gets large, we'll see that deterministic
-    dynamics take over.
+  - But once scale gets large, we'll see that deterministic dynamics take over.
   - One lesson: beyond $R_0$.
   
 ### Simulated examples and the questions they raise
 
-  Here are the chances that the first carrier passes on the virus to $k$
-  people?
+  Here are the chances, $p_k$, that the first carrier passes on the virus to $k$
+  people
   
-+----+------+-------+
-| $k$| $p_k$| digits|
-+====+======+=======+
-| 0  | .3   | 0-2   |
-+----+------+-------+
-| 1  | .4   | 3-5   |
-+----+------+-------+
-| 2  | .3   | 6-9   |
-+----+------+-------+
++----+------+
+| $k$| $p_k$|
++====+======+
+| 0  | .3   |
++----+------+
+| 1  | .4   | 
++----+------+
+| 2  | .3   |
++----+------+
 
-  - What is $R_0$, (aka $m$)? Calculate.
-  - Let's diagram one chance outcome, using my number "(xxx) xxx-9056"
-
+  - What is $R_0$, (aka $m$)? This is the expected number of infected cases: 
+  $$\begin{aligned}
+  R_{0} & = 0\times 0.3 + 1\times 0.4 + 2\times 0.3 \\
+  & = 1 
+  \end{aligned}$$ **NOTE: is this correct?**
+  
+  -  Now assume that people will infect $k$ other people based on a random number, for instance the last 4 digits of their phone number. 
+  
 
 +-----+-------+--------+
 | $k$ | $p_k$ | digits |
@@ -74,61 +75,91 @@ Additional resources:
 | 2   | .3    | 6-9    |
 +-----+-------+--------+
 
+  -  Let's diagram one chance outcome, using my number "(xxx) xxx-9056". As each of the four digits is associated with a probability of infecting more people, they can be seen as different the carrier generations. For instance, the first carrier has a probability $p_k=0.3$ of infecting $k=2$ other people. So that first carrier may infect 2.7 people, (3 for simplicity). Each of these three people will have a $p_k=0.2$ of each infecting $k=0$ people. Since they don't infect anybody then there are no further carrier generations. In the table, we include their rows but the expected number of infected people is still 0 because the spreading stopped in generation 2.  
+
++--------------+---------+-------+-------------------+
+| carrier      | random  |       | expected          | 
+| generation # | digit   | $p_k$ | # infected        | 
++==============+=========+=======+===================+
+| 1            | 9       | 0.3   |$2\times 0.3 = 2.7$|
++--------------+---------+-------+-------------------+
+| 2            | 0       | 0.2   |$0\times 0.3 = 0$  |  
++--------------+---------+-------+-------------------+ 
+| 3            | 5       | 0.4   | 0                 |
++--------------+---------+-------+-------------------+
+| 4            | 6       | 0.4   | 0                 |
++--------------+---------+-------+-------------------+
+
+**NOTE: does this sound reasonable? **
+
 ### What is a (Bienayme)-Galton-Watson branching process?
 
-  - $p_k$: Each individual in each generation reproduces
-    independently, following same offspring distribution, with $p_k$
-    as the probability of having $k$ offspring.
+  - $p_k$: Each individual in each generation reproduces independently, following same offspring distribution, with $p_k$ as the probability of having $k$ offspring.
   - $Z_n$: The si$Z$e of the $n$'th generation $Z_n$. ($Z_1 \equiv 1$)
   - $p_0 > 0$: Some non-zero probability of no children.
   - Variance: None of the $p_k$ are 1
 
 
-
-
-![Galton's original question](/hdir/0/fmenares/Book/bookdown-master/images/galton.png)
+![Galton's original question](./images/galton.png)
 
 Some questions
   
   - What is the chance $d$ of eventual extinction (no "outbreak")?
-  -  Or, what is the distribution of surviving family
-    sizes?
-  - What are the aggregate properties of many branching
-    processes? (Mean growth, variance, time-paths, eventual size)?
+  - Or, what is the distribution of surviving family sizes?
+  - What are the aggregate properties of many branching processes? (Mean growth, variance, time-paths, eventual size)?
   
-## Simulations 
+## Simulations of parents having children
   
-```{r} 
-  k = 0:2
-  p0 = .3; p1 = .3; p2 = .4;
-  p_k = c(p0, p1, p2)
-  Z1 = 1
+```{r, cache= T} 
+  k = 0:2 #number of possible children
+  p0 = .3; p1 = .3; p2 = .4; 
+  p_k = c(p0, p1, p2)  #probabilities of having k children
+  Z1 = 1               #initial cohort size
   set.seed(9)
-  (kids.of.Z1 = sample(x = k, size = Z1, replace = T, prob = p_k))
-  (Z2 = sum(kids.of.Z1))
-  (kids.of.Z2 = sample(x = k, size = Z2, replace = T, prob = p_k))
-  (Z3 = sum(kids.of.Z2))
-  (kids.of.Z3 = sample(x = k, size = Z3, replace = T, prob = p_k))
-  (Z4 = sum(kids.of.Z3))
+  kids.of.Z1 = sample(x = k, size = Z1, replace = T, prob = p_k)
+  Z2 = sum(kids.of.Z1)
+  kids.of.Z2 = sample(x = k, size = Z2, replace = T, prob = p_k)
+  Z3 = sum(kids.of.Z2)
+  kids.of.Z3 = sample(x = k, size = Z3, replace = T, prob = p_k)
+  Z4 = sum(kids.of.Z3)
 ```
-  Let's draw the tree.
+```{r, message=FALSE,  echo=FALSE}
+  gen_size <- c(rep(Z1, 1), rep(Z2, Z2), rep(Z3, Z3), rep(Z4, Z4))
+  gen <- c(rep(1, 1), rep(2, Z2), rep(3, Z3), rep(4, Z4))
+  person <- c(1, seq(2.1,by=0.1, to=2 + Z2*0.1), 
+              seq(3.1,by=0.1, to=3 +Z3*0.1),
+              seq(4.1,by=0.1, to=4 +Z4*0.1))
+  total_children <- c(kids.of.Z1, kids.of.Z2, kids.of.Z3, rep(0, Z4))
 
-  /\\
- /\\/\\
-/\\/ /\\
+  library(tidyverse)
+  growth <- tibble(gen, person, total_children, gen_size)
+  names(growth) <- c("Generation #", "Person ID", "Total children", "Generation size")
+  knitr::kable(growth)
+```
 
-$$
-  /\\
- /\\/\\
-/\\/ /\\
-$$
+  - Here's a more visual representation. 
 
+```{r, echo= FALSE,fig.cap=''}
+# install.packages('DiagrammeR')
+DiagrammeR::grViz("
+                  digraph rmarkdown{
+                  1 ->{2.1 2.2}
+                  2.1->{3.1 3.2}
+                  2.2->{3.3 3.4}
+                  3.1->{4.1 4.2}
+                  3.2->{4.3}
+                  3.3->{4.4 4.5}
+                  3.4->{4.6 4.7}
+                  }")
+```
+
+  - However, we can extend the number of generations in a function:
 
 ```{r}
   #A function   
   branch <- function(n_max = 30, pk = c(p0, p1, p2), Z1 = 1)
   {
-      Z.vec <- rep(NA, n_max)
+      Z.vec <- rep(NA, n_max) # n_max handles the total number of generations
       Z.vec[1] <- Z1
       for (i in 1:(n_max-1))
       {
@@ -137,160 +168,135 @@ $$
                                    replace = T,
                                    prob = p_k))
       }
-      return(Z.vec)
+      return(Z.vec) # returns a vector of the number of children at every generation
   }
-  set.seed(19); branch()
-  set.seed(99);  branch()
 ```
-
-  Let's see what happens with 20 trials (up to 30 generations)
-
-```{r, fig.height = 5}
-  n_trials = 20; n_gen = 30
+  - Sometimes generations die out:  
+```{r}
+  set.seed(19) ; branch()
+  set.seed(99) ; branch()
+```
+  - Let's see what happens with 20 trials (up to 30 generations). Not all generations go extinct here. 
+```{r }
+  n_trials = 20
+  n_gen = 30
+  k = 0:2 #number of possible children
+  p0 = .3; p1 = .3; p2 = .4; 
+  p_k = c(p0, p1, p2)  #probabilities of having k children
+  Z1 = 1               #initial cohort size
+  
   Z.mat <- matrix(NA, n_trials, n_gen)
   set.seed(131) 
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
+```
+```{r, echo=FALSE, fig.cap='Generation size'}  
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
 ```
-  
-How many survive (out of 20)?
-
-
-log-scale
-```{r, fig.height = 4}
+  - How many survive (out of 20)? log-scale
+```{r, echo=FALSE, fig.cap='Generation sizes (log-scale)'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
   surviving = ifelse(Z.mat[,n_gen] == 0, "extinct", "survive")
   foo <- prop.table(table(surviving))
-  print( prop.table(table(surviving)) )
+  print(prop.table(table(surviving)) )
 ```
-  
-How would you discribe the time path of the surviving lines?
-
-Long term
+  - How would you discribe the time path of the surviving lines? Let's extend the number of generations to observe any long-term trends.
 ```{r, fig.height = 4}
   n_trials = 20; n_gen = 100
   Z.mat <- matrix(NA, n_trials, n_gen)
   set.seed(131) 
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
+```
+```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
-
-What does this remind you of? (Hint: "Leslie"). (See Harris figure)
+  - What does this remind you of? (Hint: "Leslie"). (See Harris figure) **NOTE: Josh, which Harris figure?**
 
 ## The Probability Generating Function: Our mathematical tool
 
-"Extinction" vs "breakout"
+  - "Extinction" vs "breakout"
   
-  - We see that in a super-critical ($m > 1$) branching process,
-    if a line can survive a few generations and reach a large enough
-    size, it will grow exponentially.
-  - What happens if $m < 1$, if $m = 1$? Discuss.
-  
-
+    - We see that in a super-critical ($m > 1$) branching process, if a line can survive a few generations and reach a large enough size, it will grow exponentially.
+    - What happens if $m < 1$, if $m = 1$? Discuss.
   $$
   h(z) = p_0 + p_1 z + p_2 z^2 + \ldots
   $$
+    - The PGF "keeps book" on the probabilities. The chance of $k$ is the coefficient on $z^k$.  
+    - $h(0)= p_{0}$   
+    - $h(1)= p_{0} + p_{1}$   
+    - $h'(1)= p_{1} + 2p_{2}$
 
-  The PGF "keeps book" on the probabilities. The
-  chance of $k$ is the coefficient on $z^k$.
-
-
-- $h(0)=$ 
-- $h(1)=$ 
-- $h'(1)=$
-
-The story of two brothers
-
-  A father has two sons. The probability generating function of their
-  children combined is:
-
+  - The story of two brothers. A father has two sons. The probability generating function of their children combined is:
   $$
-  [h(z)]^2 = (p_0  + p_1 z + p_2 z^2) \times (p_0  + p_1 z + p_2 z^2)
+  h(z)^2 = (p_0  + p_1 z + p_2 z^2) \times (p_0  + p_1 z + p_2 z^2)
   $$
+    - If we multiply it out we get:
+ $$
+ \begin{aligned}
+ \left[h(z)\right]^2  = & p_0^2  + p_0 p_1 z + p_0 p_2 z^2 +\\
+ & p_1 z p_0 + p_1^2 z^2 + p_1 p_2 z^3 + \\
+ & p_2 z^2 p_0 + p_2 z^3 p_1 + p_2^2 z^4 \\
+ & = p_0^2 + (2p_0 p_1 )z + (2p_0 p_2 + p_1^2)z^2 + (2p_1 p_2)z^3 + p_2^2 z^4
+ \end{aligned}
+ $$
+ 
+    - The coefficients on $z^0, z^1, \ldots$ tell us the probability that the sons will have $k=0,1,2,3,4$ sons.
 
-Multiply out, and tell me the coefficients on $z^0, z^1, \ldots$.
-
-What is the probability generating function for the distribution of grandsons?
-
-  
-  - A man has two sons, with probability $p_2$, so PGF in that case
-    is $  p_2 [h(z)]^2 $.
-  - But let's sum over all possible numbers of
-    sons.
-
+  - What is the probability generating function for the distribution of grandsons?
+    - A man has two sons, with probability $p_2$, so PGF in that case is $p_2 [h(z)]^2$.
+    - But let's sum over all possible numbers of sons.
     $$
     p_0 + p_1 h(z) + p_2 [h(z)]^2 + p_3 [h(z)]^3 + \ldots
     $$
-
-  - Which is? (Hint: write a new argument for PGF) 
+    - This is the cumulative probability of drawing $k$ children within a generation of size $Z$ 
+    - Which is?
     $$
     h(h(z))
     $$
-
   - Can show PGF for the n'th generation is
     $$
     h(h(h ... \mbox{$n$ times}  h(z)))  = h_n(z)
     $$
-
-exercise: write out $h_2(z) = h(h(z))$ for 
-  $$
-  h(z) =     p_0 + p_1 z + p_2 z^2.
-  $$
+  - For instance, let's get $h_2(z) = h(h(z))$ for $ h(z) = p_0 + p_1 z + p_2 z^2$
+  $$\begin{aligned}
+  h(h(z)) = &  p_0 + p_1 \left[p_0 + p_1 z + p_2 z^2\right] + p_2 \left[p_0 + p_1 z + p_2 z^2\right]^2\\
+   = &  p_0 + p_1 p_0 + p_1^2 z + p_1 p_2 z^2 + p_2p_0^2 + (2p_0 p_1 p_2)z + (2p_0 p_2^2 + p_2p_1^2)z^2 + (2p_1 p_2^2)z^3 + p_2^3 z^4
+  \end{aligned}$$
 
 ## Extinction
 
 - Extinction
-  - "Extinction is forever.": So, the probability $d_n$ of extinction
-    _by_ generation $n$ can never decline over time. (Must it
+  - "Extinction is forever.": So, the probability $d_n$ of extinction _by_ generation $n$ can never decline over time. (Must it
     always rise?)
 
 - Recursive extinction
-  - Is non-extinction "forever"?: If $\lim_{n \rightarrow \infty} = d(\infty) <
-    1$, then this says there's a chance $1 - d(\infty)$ of eternal
-    persistence. We'll try to figure out more about what this means.
+  - Is non-extinction "forever"?: If $\lim_{n \rightarrow \infty} = d(\infty) < 1$, then this says there's a chance $1 - d(\infty)$ of eternal persistence. We'll try to figure out more about what this means.
   
-
-  If the probability of a female line going extinct in $n$ generations
-  is $d_n$, then this is equivalent to her daughter(s) line(s) going
-  extinct in $n-1$ generations. With $p_k$ chance of having
-  $k$ daughters, we have
+- If the probability of a female line going extinct in $n$ generations is $d_n$, then this is equivalent to her daughter(s) line(s) going extinct in $n-1$ generations. With $p_k$ chance of having $k$ daughters, we have
   $$
   d_n = p_0 + p_1 d_{n-1} + \mbox{What is next term in series?}
   $$
 
-
-  What can we do with 
+  - What can we do with 
   $$
   d_n = h(d_{n-1})?
   $$ 
   
-  Well, remember that $d_n$ is non-decreasing, and that it's maximum
-  can be no greater than $1.0$. When $d_n$ reaches it's limit, say
-  $d$,  we won't need generational subscripts, $d$ will be constant,
-  and will obey
+  - Well, remember that $d_n$ is non-decreasing, and that it's maximum can be no greater than $1.0$. When $d_n$ reaches it's limit, say $d$,  we won't need generational subscripts, $d$ will be constant, and will obey
   $$
   d = h(d)
   $$
 
-  Thus, an amazing result: the probability of ultimate extinction
-  is when the argument equals the PGF of the argument.
-
-Can $d = 1$, can $d < 1$
-  
-  
+  - Thus, an amazing result: the probability of ultimate extinction is when the argument equals the PGF of the argument.
+- Can $d = 1$, can $d < 1$
   - Try $d = 1$. What happens?
   - If we were to find a solution less than 1.0, how would we
     interpret that?
-  
+  - Three cases
+```{r}
 
-
-Three cases
-
-```{r, out.width='100%', fig.asp=1.5, fig.height =8}
-  par(mfrow = c(1,3), pty = "s")
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
   d <- pk["0"]
@@ -313,6 +319,8 @@ Three cases
            col.axis = "red", col = "red",
            lwd = 1, las = 2)
   }
+  
+  par(mfrow = c(1,3), pty = "s")
   plot.fun(z,hz)
   points(c(d, 1),c(d, 1))
   title("Super-critical (m > 1) \n 2 roots")
@@ -330,31 +338,42 @@ Three cases
   points(1,1)
 ```
 
-  We can prove by answering: 
-  What is $h'(1)$? What is $h(0)$? Is $h''(z) > 0$? 
+  - We can prove by answering: What is $h'(1)$? What is $h(0)$? Is $h''(z) > 0$? 
 
-
-
-```{r,  fig.height = 4}
+  - In the following cobwed diagram (like a staircase), we can see the values of $h(p_0)$, $h(h(p_0))$, $h(h(h(p_0)))$, $\ldots$?
+    - The orange dot is $h(p_0)$.
+    - The purple dot is $h(h(p_0))$.
+    - The blue dot is $h(h(h(p_0)))$.
+    - The points would converge until we reach the intersection between $h(z)$ and the diagonal.
+```{r,  echo= FALSE}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
   hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
   plot.fun(z,hz)
+  hzp0 <- pk["0"]  + pk["1"]*pk["0"] + pk["2"]*pk["0"]^2
+  hhzp0 <- pk["0"]  + pk["1"]*hzp0 + pk["2"]*hzp0^2
+  hhhzp0 <- pk["0"]  + pk["1"]*hhzp0 + pk["2"]*hhzp0^2
+
+  segments(x0=0, y0=pk["0"],x1=pk["0"], y1= pk["0"], col = "orange", lwd=2)#h(p_0)
+  segments(x0=pk["0"], y0=pk["0"], y1= hzp0, col = "orange", lwd=2)
+  
+  segments(x0=pk["0"], y0=hzp0,x1=hzp0, y1= hzp0, col = "purple", lwd=2) #h(h(p_0))
+  segments(x0=hzp0, y0=hzp0, y1= hhzp0, col = "purple", lwd=2)
+
+  segments(x0=hzp0, y0=hhzp0,x1=hhzp0, y1= hhzp0, col = "blue", lwd=2)
+  segments(x0=hhzp0, y0=hhzp0, y1= hhhzp0, col = "blue", lwd=2)
+  
+  points(x= pk["0"], y =hzp0, pch=19, col="orange") #h(p_0)
+  points(x= hzp0, y =hhzp0, pch=19, col="purple") #h(h(p_0))
+  points(x= hhzp0, y =hhhzp0, pch=19, col="blue") #h(h(h(p_0)))
+
+
 ``` 
-  
-  Where is $h(p_0)$, $h(h(p_0))$, $h(h(h(p_0)))$, $\ldots$?
-
-
-So how do we actually get $d$?
-
-  Take the case where $p_0 = .3$, $p_1 = 0$, and $p_3 = .7$ (the one I
-  just plotted).
-  
-  - Can do some algebra \pause
-  - Or we can recursively iterate on the computer.
-  
-Numerical recursion
-
+- So how do we actually get $d$?
+  - Take the case where $p_0 = .3$, $p_1 = 0$, and $p_3 = .7$ (the one I just plotted).
+    - Can do some algebra
+    - Or we can recursively iterate on the computer.
+      - Numerical recursion: below we start at the first value of the probability vector and sequentially try exploring values of $h(z)$ until we find one that doesn't change as much. We illustrate the case for up to 20 iterations.  
 ```{r}
   pk = c(.3, .0, .7); names(pk) <- 0:2 ## our example
   d <- pk["0"] # initial value
@@ -365,10 +384,8 @@ Numerical recursion
           print(paste(i, d))
   }
 ```
-
-Did we get the right value?
-  
-```{r,  fig.height = 4}
+      - Did we get the right value? Apparently, yes! The green lines take as vertical and horizontal values our $d=0.428568100698915$  
+```{r, echo=FALSE}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
   hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
@@ -377,14 +394,12 @@ Did we get the right value?
   abline(v = d, col = "green")
 ```
 
-Extinction and non-extinction revisited
+- Extinction and non-extinction revisited  
+  - If $m > 1$, there exists $d$ bigger than 0 and less than unity.
+  - This means there's some positive chance of extinction.
+  - But also some chance of never-extinction. (What form does never-extinction take?)
 
-- If $m > 1$, there exists $d$ bigger than 0 and less than unity.
-- This means there's some positive chance of extinction.
-- But also some chance of never-extinction. (What form does
-      never-extinction take?)
-
-```{r, fig.height = 5}
+```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations'}
     suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
 
@@ -436,100 +451,97 @@ SIR model in disease spread)
 - Big populations -- law of large numbers means randomness
           doesn't matter.
 </div>
-a
+
 
 
 ## The distribution of offspring of all generations
 
-Means of offspring in generation $n$
-
-  - Is it "meaningful"? (If we have a lot of zeros)
-  - We'll show that unconditional mean
+- Means of offspring in generation $n$  
+  - Is it "meaningful"? It tells you about the average number of offspring but it might be a skewed distributions because of the large number of zeros.
+  - We'll show that unconditional mean is the expectation of  random sum, which in this case is the expectation of a product.
     $$
     \mathbb{E} Z_n = m^n
     $$
   - What if $m = 1$?
   
-size of surviving lines?
-
-  Total probability is sum of conditional probabilities, times the chance of
-  each condition:
+- Mean size of surviving lines?  
+    - Total probability is sum of conditional probabilities, times the chance of each condition:
   $$
   \mathbb{E} Z_n = \mathbb{E}( Z_n | Z_n > 0) P(Z_n > 0) +
   \mathbb{E}( Z_n | Z_n = 0) P(Z_n = 0)
   $$
-  
-  What is mean size of surviving lines?
-
-  - Hint 1: $P(Z_n = 0) = d_n$
-  - Hint 2:     $\mathbb{E} Z_n = m^n$
-
-  
-Let's check our result using simulation
-
-Our set-up
-
-```{r} 
-  branch <- function(n_max = 30, p_k = c(p0, p1, p2), Z1 = 1)
-  {
-      ## note: this returns 0s when extinct
-      k <- 0:(length(p_k)-1)
-      Z.vec <- rep(NA, n_max)
-      Z.vec[1] <- Z1
-      for (i in 1:(n_max-1))
-      {
-          Z.vec[i+1] <- sum(sample(x = k,
-                                   size = Z.vec[i],
-                                   replace = T,
-                                   prob = p_k))
-      }
-      return(Z.vec)
-  }
-  p0 = .3; p1 = .4; p2 = .3 ## what is m?
-```
-
-1000 trials, code 
-
-```{r, fig.height = 5}
+    - where $\mathbb{E}( Z_n | Z_n > 0) P(Z_n > 0)$ is the expected size given no extinction and $\mathbb{E}( Z_n | Z_n = 0) P(Z_n = 0)$ is the expected size given extinction.  
+    - What is mean size of surviving lines? That is, we want to find $\mathbb{E}( Z_n | Z_n > 0)$
+      - Hint 1: $P(Z_n = 0) = d_n$
+        - So $P(Z_n > 0) = 1- d_n$
+      - Hint 2: $\mathbb{E} Z_n = m^n$
+      - Also note that by definition, $\mathbb{E}( Z_n | Z_n = 0)=0$
+      $$
+      \begin{aligned}
+      \mathbb{E} Z_n = m^n = & \mathbb{E}( Z_n | Z_n > 0) (1- d_n) + (0)d_n\\
+      m^n = & \mathbb{E}( Z_n | Z_n > 0) (1- d_n)\\
+      \mathbb{E}( Z_n | Z_n > 0) =&\frac{m^n}{(1- d_n)}
+      \end{aligned}
+      $$
+      
+    - Let's check our result using simulation for 1000 trials. Note that for this case $m= 0\times p_0 + 1\times p_1  + 2\times p_2= 1$, so $m^n= 1$  
+    
+```{r}
   n_trials = 1000; n_gen = 100
+  p0 = .3; p1 = .4; p2 = .3 ## what is m?
+  p_k <- c(p0, p1, p2)
+  k <- 0:(length(p_k)-1)
   Z.mat <- matrix(NA, n_trials, n_gen)
   set.seed(131)
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
+```
+```{r, echo=FALSE}
+Zn_bar = apply(Z.mat, 2, mean)
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
 ```
-
-1000 trials, means, picture
-
+    - Using the means for all 1000 simulations, we calculate $\mathbb{E} Z_n$ (left plot), $d_n$ (center plot) and $\mathbb{E}( Z_n | Z_n > 0)$.   
 ```{r, fig.height = 5}
-Zn_bar = apply(Z.mat, 2, mean)
+Zn_bar = apply(Z.mat, 2, mean)  #expected value Z_n (E(Z_n))
 n <- 1:ncol(Z.mat)
 proportion.zero <- function(x){prop.table(table(x == 0))["TRUE"]}
-d_n = apply(Z.mat, 2, proportion.zero)
-Z.mat.na <- Z.mat; Z.mat.na[Z.mat == 0] <- NA
-Zn_surv_bar = apply(Z.mat.na, 2, mean, na.rm = T)
+d_n = apply(Z.mat, 2, proportion.zero) # fraction extinct 
+Z.mat.na <- Z.mat; Z.mat.na[Z.mat == 0] <- NA 
+Zn_surv_bar = apply(Z.mat.na, 2, mean, na.rm = T) #expected value of survivors (E(Z_n|Z_n>0))
+```
+```{r, echo=FALSE}
 par(mfrow = c(1,3))
 plot(n, Zn_bar, main = "Mean Zn")
 plot(n, d_n, main = "Fraction extinct")
-plot(n, Zn_surv_bar)
+plot(n, Zn_surv_bar, main= "Mean Zn given Zn>0") 
 ## insert code here for Zn_surv_bar.hat and add a line
 ```
+ 
+  - Proving  $\mathbb{E} Z_n = m^n$ 
+    - Ingredients  
+      - $h(z)=p_{0}+p_{1}z+ p_{2} z^2+ \ldots$
+      - $h'(z)=p_{1}+ 2zp_{2} + \ldots$      
+      - Specifically, when $z=1$:
+        - $h(1)= 1$
+        - $h'(1) =(1)p_1+ (2)p_2+(3)p_3+\ldots= \sum_1^k k p_k = m = \bar{Z}$
+        - $h_n'(1) = m_n = \bar{Z}_n$
+      - $h_{n+1}(z) = h(h_n(z))$
+    - Derivation: 
+      Take derivative of $h_{n+1}(z)$
+      $$
+      \begin{aligned}
+      h'_{n+1}(z)&= h'_n(h(z)) h'(z) \\
+      h'_{n+1}(1)&= h'_n(h(1)) h'(1) \\
+      &= h'_n(1) m \\
+      &= \bar{Z}_n m
+      \end{aligned}
+      $$ **NOTE: Can't find the complete derivation. Help!**
+      
 
-Proving     $\mathbb{E} Z_n = m^n$
-
-Ingredients
-
-- $h'(1) = m = \bar{Z}$
-- $h_n'(1) = \bar{Z}_n$
-- $h_{n+1}(z) = h(h_n(z))$
-
-Derivation
-
-
-Variance result.  (Too much algebra to do here). 
-  
-  For $m = 1$,
+  - Variance result.  
+    - We proved that $\mathbb{E} Z_n = m^n$ using recursion. For the variance, one can also do recursion but this time we start by taking the second derivative of $h(z)$ 
+    - For $m = 1$,
   $$
   \sigma_n^2 = n \sigma^2 
   $$
@@ -540,13 +552,14 @@ Variance result.  (Too much algebra to do here).
   - What happens to variance of lines that survive? Is it bigger
     or smaller than unconditional variance?
 
-Variance in our simulation
-```{r, fig.height = 5}
+Variance in our simulation increases with generation number: 
+```{r}
 var_Zn = apply(Z.mat, 2, var)
-n <- 1:ncol(Z.mat)
-plot(n, var_Zn)
 ```
-
+```{r, echo=FALSE}
+n <- 1:ncol(Z.mat)
+plot(n, var_Zn, main="Variance of Zn")
+```
 Distribution of $Z_n$
 ```{r, fig.height = 6}
    Z20 <- table(table(Z.mat[,20]))
@@ -577,20 +590,29 @@ Distribution of $Z_n$
   1 + a + a^2 + \ldots =
   1 / (1-a)
   $$
+$$
+\begin{aligned}
+p_0 &= 1  - (p_1 + p_2 + p_3 +\ldots) \\
+&= 1 - (bc^{0}+ bc^{1} +b c^{2} + \ldots) \\
+&= 1 - (b+ bc^{1} +b c^{2} + \ldots) \\
+&= 1 - b(1+ c^{1} + c^{2} + \ldots) \\
+&= 1-  \frac{b}{1-c} \\
+\end{aligned}
+$$
+So, now we have all $p_k$ used as inputs for $h(z)$ given value for $b$ and $c$.
 
-
-A picture, Lotka's parameters for 1920
-```{r, fig.height = 4}
+A picture, Lotka's parameters for 1920. The graph shows the probability of having exactly $k$ number of girls. When $k=0$ then all children were boys.
+```{r}
 b = 0.2126 ;   c = 0.5893
 kk = 1:10  ;   p_kk = b * c^(kk-1)
 p0 = b/(1-c)
 k = c(0, kk) ;   p_k = c(p0, p_kk)
+```
+```{r, echo=FALSE}
 plot(k, p_k)
 ```
 
-Realism?
-
-  See Table 10.3, p 386, Grinstead and Snell.
+Realism? See Table 10.3, p 386, Grinstead and Snell.
 
 
 
@@ -606,37 +628,53 @@ Realism?
   $$
   Substituting for $p_0$ and rewriting
   $$
-  h(z) = \left( 1 - {b / (1-c)}\right) + bz \sum_{k= 1}^\infty 
+  h(z) = \left( 1 - \frac{b}{(1-c)}\right) + bz \sum_{k= 1}^\infty 
   (cz)^{k-1}.
   $$
   Substituting $j = k-1$,
   $$
-  h(z) = \left( 1 - {b / (1-c)}\right) + bz \sum_{j= 0}^\infty 
-  (cz)^{j} = \left( 1 - {b / (1-c)}\right) + {bz \over (1 - cz)}
+  h(z) = \left( 1 - \frac{b}{(1-c)}\right) + bz \sum_{j= 0}^\infty 
+  (cz)^{j} = \left( 1 - \frac{b}{(1-c)}\right) + {bz \over (1 - cz)}
   $$
 
-  The PGF is now ``tractable''
-$m$ and extinction
+  The PGF is now "tractable"
+  
+- $m$ and extinction
   $$
   h(z) =  \left( 1 - {b / 1-c}\right) + {bz \over 1 - cz}
   $$
-  Please solve for $m$. (Hint: $h'(1)$). What is $m$ with Lotka's $b$
-  and $c$?
+    - Please solve for $m$. (Hint: $h'(1)$). 
+      - We kmow that $h'(1)=m$, so we start off taking the first derivative of $h(z)$ given the tractable form.
+      $$
+      \begin{aligned}
+      h'(z) &= \frac{bz(-c)-(1-cz)b}{(1-cz)^2}\\
+      &= \frac{-1}{(1-cz)^2}\\
+      h'(1) &= \frac{-1}{(1-c)^2} = m\\
+      \end{aligned}
+      $$
+    - What is $m$ with Lotka's $b$ and $c$? 
+    $$
+    m= \frac{-1}{(1-0.5893)^2}= 5.928579
+    $$
+    **NOTE: does this look reasonable?**
   
-  We solve $z = h(z)$ with a bunch of algebra to get
+- We solve $z = h(z)$ with a bunch of algebra to get
   $$
   d = {1 - b - c \over c(1-c)}
   $$
-  How does $d$ depend on $b$ and $c$?
+    - How does $d$ depend on $b$ and $c$? $d$ decreases with $b$  at a rate of $\frac{-1}{c(1-c)}$ and changes at rate $\frac{-(1-b)(1-2c)-c^2}{c^2(1-c)^2}$.
+
 Big payoff: the full distribution of $Z_n$}
   See Grinstead and Snell p. 385
+  
 ### A plot of Keyfitz's numbers for generations 1, 2, and 3. Is it exponential for $k > 0$?
-```{r, size = "tiny"}
+```{r}
 ## b = 0.2126 ;   c = 0.5893 ## lotka
 b = 0.3666; c = .5533 ## Keyfitz (from GS)
 m = b / (1-c)^2 ## [1] 1.260416
 d = (1 - b - c) / (c * (1-c))           #[1] 0.8185088
-par(mfrow = c(1,1))
+
+par(mfrow = c(1,2))
 for (i in 1:3)
 {
     n = i
@@ -651,38 +689,28 @@ for (i in 1:3)
     if (i > 1)
         lines(k, pk_n, col = i)
 }
-```
 
-log scale
-```{r, fig.height = 5}
-## b = 0.2126 ;   c = 0.5893 ## lotka
-b = 0.3666; c = .5533 ## Keyfitz (from G&S)
-m = b / (1-c)^2 ## [1] 1.260416
-d = (1 - b - c) / (c * (1-c))           #[1] 0.8185088
-par(mfrow = c(1,1))
 for (i in 1:3)
 {
     n = i
-    print(n)
     p0_n = d * (m^n - 1)/ (m^n -d)
     j = kk
     pj_n = m^n * ((1-d) / (m^n - d))^2 * ((m^n - 1)/(m^n - d))^(j-1)
     pk_n <- c(p0_n, pj_n)
     if (i == 1)
-        plot(k, pk_n, type = "l", log = "y")
+        plot(k, pk_n, type = "l", log = "y", main="Log scaled")
     if (i > 1)
         lines(k, pk_n, col = i)
 }
 ```
-Applications
 
-  We have exponential distribution with a few  very large lines, and a
-  lot of small lines.
+- Applications
+
+  We have exponential distribution with a few  very large lines, and a lot of small lines.
   
   - Distribution of neutral alleles
   - Distribution of family lines (Y-chromosome, mtDNA, last names)
-  
-Our result
+- Our result
   With geometric $p_k$, we get geometric $Z_n$, for all $n$.
 
   Conjecture: geometric is to BP as gamma is to frailty? 
