@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-27" />
+<meta name="date" content="2020-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,14 +213,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.2" data-path="tempo.html"><a href="tempo.html#continuous-postponement-a-shiny-simulation"><i class="fa fa-check"></i><b>7.2.2</b> Continuous postponement, a shiny simulation</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="tempo.html"><a href="tempo.html#period-shifts-bongaarts-and-feeneys-model"><i class="fa fa-check"></i><b>7.3</b> Period Shifts: Bongaarts and Feeney’s model</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="tempo.html"><a href="tempo.html#a-derivation-due-to-rodriguez"><i class="fa fa-check"></i><b>7.3.1</b> A derivation: due to Rodriguez</a></li>
+<li class="chapter" data-level="7.3.1" data-path="tempo.html"><a href="tempo.html#a-derivation-due-to-rodriguez-note-not-sure-what-the-reference-is-here"><i class="fa fa-check"></i><b>7.3.1</b> A derivation: due to Rodriguez <em>NOTE: not sure what the reference is here</em></a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="tempo.html"><a href="tempo.html#an-application-to-the-united-states"><i class="fa fa-check"></i><b>7.4</b> An Application to the United States</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="tempo.html"><a href="tempo.html#questions"><i class="fa fa-check"></i><b>7.4.1</b> Questions</a></li>
-<li class="chapter" data-level="7.4.2" data-path="tempo.html"><a href="tempo.html#conclusions-3"><i class="fa fa-check"></i><b>7.4.2</b> Conclusions</a></li>
+<li class="chapter" data-level="7.4.1" data-path="tempo.html"><a href="tempo.html#conclusions-3"><i class="fa fa-check"></i><b>7.4.1</b> Conclusions</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tempo.html"><a href="tempo.html#two-americas"><i class="fa fa-check"></i><b>7.5</b> Two Americas</a><ul>
-<li class="chapter" data-level="7.5.1" data-path="tempo.html"><a href="tempo.html#an-algorithm-for-tempo-adjustment-of-mixtures"><i class="fa fa-check"></i><b>7.5.1</b> An algorithm for tempo adjustment of mixtures</a></li>
+<li class="chapter" data-level="7.5.1" data-path="tempo.html"><a href="tempo.html#mixture"><i class="fa fa-check"></i><b>7.5.1</b> Mixture</a></li>
+<li class="chapter" data-level="7.5.2" data-path="tempo.html"><a href="tempo.html#an-algorithm-for-tempo-adjustment-of-mixtures"><i class="fa fa-check"></i><b>7.5.2</b> An algorithm for tempo adjustment of mixtures</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tempo.html"><a href="tempo.html#conclusions-4"><i class="fa fa-check"></i><b>7.6</b> Conclusions</a><ul>
 <li class="chapter" data-level="7.6.1" data-path="tempo.html"><a href="tempo.html#caveats"><i class="fa fa-check"></i><b>7.6.1</b> Caveats</a></li>
@@ -610,13 +610,13 @@ Figure 11.15: Heaping: birth year
 <li><span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>: Recent paper claiming to be “the best evidence to date for the existence of extreme-age mortality plateaus in humans”</li>
 </ul>
 <p>Using total mortality rates for italian cohorts from 1900 to 1926 (from HMD), we can look at mortality rates over ages and cohorts, as an introduction to <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>. When focusing on mortality rates above age 60, we see a constantly increasing curve with some variation at very old ages (beyond 100). One important limitation of our life tables is that the rates are only observed up until age 109.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb199-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb199-3" data-line-number="3">it &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;data/ITA.bltcoh_1x1.txt&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb199-4" data-line-number="4">it<span class="op">$</span>Age &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb199-5" data-line-number="5">it<span class="op">$</span>mx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it<span class="op">$</span>mx)</a>
-<a class="sourceLine" id="cb199-6" data-line-number="6">it<span class="op">$</span>qx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it<span class="op">$</span>qx)</a>
-<a class="sourceLine" id="cb199-7" data-line-number="7">it &lt;-<span class="st"> </span>it <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mx =</span> <span class="kw">if_else</span>(mx <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">as.numeric</span>(<span class="ot">NA</span>), mx))</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb190-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb190-3" data-line-number="3">it &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;data/ITA.bltcoh_1x1.txt&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb190-4" data-line-number="4">it<span class="op">$</span>Age &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it<span class="op">$</span>Age)</a>
+<a class="sourceLine" id="cb190-5" data-line-number="5">it<span class="op">$</span>mx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it<span class="op">$</span>mx)</a>
+<a class="sourceLine" id="cb190-6" data-line-number="6">it<span class="op">$</span>qx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it<span class="op">$</span>qx)</a>
+<a class="sourceLine" id="cb190-7" data-line-number="7">it &lt;-<span class="st"> </span>it <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mx =</span> <span class="kw">if_else</span>(mx <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">as.numeric</span>(<span class="ot">NA</span>), mx))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:plateau1"></span>
 <img src="bookdown-demo_files/figure-html/plateau1-1.png" alt="Log mortality rates above age 60 after 1900" width="80%" />
 <p class="caption">
@@ -629,16 +629,16 @@ h(x) = a e^{b</em>x} \
 log(h{_x}) = log(a) + bx
 \end{aligned*}
 Since we don’t have <span class="math inline">\(h(x)\)</span> from the lifetable, we use <span class="math inline">\({_1}m_x\)</span></p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">min_gomp_age &lt;-<span class="st"> </span><span class="dv">60</span></a>
-<a class="sourceLine" id="cb200-2" data-line-number="2">max_gomp_age &lt;-<span class="st"> </span><span class="dv">105</span></a>
-<a class="sourceLine" id="cb200-3" data-line-number="3">max_plateau_age &lt;-<span class="st"> </span><span class="dv">109</span></a>
-<a class="sourceLine" id="cb200-4" data-line-number="4">min_year &lt;-<span class="st"> </span><span class="dv">1900</span> </a>
-<a class="sourceLine" id="cb200-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb200-6" data-line-number="6">gomp &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>Age, <span class="dt">data =</span> it <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span>min_gomp_age <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">&lt;</span><span class="st"> </span>max_gomp_age <span class="op">&amp;</span><span class="st"> </span>Year <span class="op">&gt;</span><span class="st"> </span>min_year))</a>
-<a class="sourceLine" id="cb200-7" data-line-number="7">new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Age =</span> max_gomp_age<span class="op">:</span>max_plateau_age)</a>
-<a class="sourceLine" id="cb200-8" data-line-number="8">new<span class="op">$</span>Gomp.pred &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">predict</span>(gomp, new))</a>
-<a class="sourceLine" id="cb200-9" data-line-number="9">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(it <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span>max_gomp_age<span class="dv">-1</span>, Year <span class="op">&gt;</span><span class="st"> </span>min_year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age, Year,mx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Year, mx))</a>
-<a class="sourceLine" id="cb200-10" data-line-number="10">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;mx&quot;</span>, <span class="op">-</span>Age)</a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">min_gomp_age &lt;-<span class="st"> </span><span class="dv">60</span></a>
+<a class="sourceLine" id="cb191-2" data-line-number="2">max_gomp_age &lt;-<span class="st"> </span><span class="dv">105</span></a>
+<a class="sourceLine" id="cb191-3" data-line-number="3">max_plateau_age &lt;-<span class="st"> </span><span class="dv">109</span></a>
+<a class="sourceLine" id="cb191-4" data-line-number="4">min_year &lt;-<span class="st"> </span><span class="dv">1900</span> </a>
+<a class="sourceLine" id="cb191-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb191-6" data-line-number="6">gomp &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>Age, <span class="dt">data =</span> it <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span>min_gomp_age <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">&lt;</span><span class="st"> </span>max_gomp_age <span class="op">&amp;</span><span class="st"> </span>Year <span class="op">&gt;</span><span class="st"> </span>min_year))</a>
+<a class="sourceLine" id="cb191-7" data-line-number="7">new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Age =</span> max_gomp_age<span class="op">:</span>max_plateau_age)</a>
+<a class="sourceLine" id="cb191-8" data-line-number="8">new<span class="op">$</span>Gomp.pred &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">predict</span>(gomp, new))</a>
+<a class="sourceLine" id="cb191-9" data-line-number="9">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(it <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span>max_gomp_age<span class="dv">-1</span>, Year <span class="op">&gt;</span><span class="st"> </span>min_year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age, Year,mx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Year, mx))</a>
+<a class="sourceLine" id="cb191-10" data-line-number="10">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;mx&quot;</span>, <span class="op">-</span>Age)</a></code></pre></div>
 It seems that the Gompertz prediction is in line with the data, at least in its trend. However, note the variation in rates between every cohort.
 <div class="figure" style="text-align: center"><span id="fig:plateau2"></span>
 <img src="bookdown-demo_files/figure-html/plateau2-1.png" alt="Predicted log mortality rates above age 104 after 1900" width="80%" />
@@ -647,19 +647,19 @@ Figure 11.17: Predicted log mortality rates above age 104 after 1900
 </p>
 </div>
 <p>Now, we look at predicted mortality rates by gender. The graphs below show a similar trend as the previous graph for overall mortality rates. Although the predictions seem to fit the data, that is Gompertz is an adequate method to model mortality between the ages of 100 to 109, a plateau may appear for even later ages. Since HMD data uses ages up to 109, we are unable to observe a plateau as in <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># For men:</span></a>
-<a class="sourceLine" id="cb201-2" data-line-number="2">it_m &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;data/ITA.mltcoh_1x1.txt&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb201-3" data-line-number="3">it_m<span class="op">$</span>Age &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_m<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb201-4" data-line-number="4">it_m<span class="op">$</span>mx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_m<span class="op">$</span>mx)</a>
-<a class="sourceLine" id="cb201-5" data-line-number="5">it_m<span class="op">$</span>qx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_m<span class="op">$</span>qx)</a>
-<a class="sourceLine" id="cb201-6" data-line-number="6">it_m &lt;-<span class="st"> </span>it_m <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mx =</span> <span class="kw">if_else</span>(mx <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">as.numeric</span>(<span class="ot">NA</span>), mx))</a>
-<a class="sourceLine" id="cb201-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb201-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb201-9" data-line-number="9">gomp &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>Age, <span class="dt">data =</span> it_m <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">&amp;</span><span class="st"> </span>Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>))</a>
-<a class="sourceLine" id="cb201-10" data-line-number="10">new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Age =</span> <span class="dv">101</span><span class="op">:</span><span class="dv">109</span>)</a>
-<a class="sourceLine" id="cb201-11" data-line-number="11">new<span class="op">$</span>Gomp.pred &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">predict</span>(gomp, new))</a>
-<a class="sourceLine" id="cb201-12" data-line-number="12">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(it_m <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">95</span>, Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age, Year,mx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Year, mx))</a>
-<a class="sourceLine" id="cb201-13" data-line-number="13">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;mx&quot;</span>, <span class="op">-</span>Age)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="co"># For men:</span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2">it_m &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;data/ITA.mltcoh_1x1.txt&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb192-3" data-line-number="3">it_m<span class="op">$</span>Age &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_m<span class="op">$</span>Age)</a>
+<a class="sourceLine" id="cb192-4" data-line-number="4">it_m<span class="op">$</span>mx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_m<span class="op">$</span>mx)</a>
+<a class="sourceLine" id="cb192-5" data-line-number="5">it_m<span class="op">$</span>qx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_m<span class="op">$</span>qx)</a>
+<a class="sourceLine" id="cb192-6" data-line-number="6">it_m &lt;-<span class="st"> </span>it_m <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mx =</span> <span class="kw">if_else</span>(mx <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">as.numeric</span>(<span class="ot">NA</span>), mx))</a>
+<a class="sourceLine" id="cb192-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb192-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb192-9" data-line-number="9">gomp &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>Age, <span class="dt">data =</span> it_m <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">&amp;</span><span class="st"> </span>Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>))</a>
+<a class="sourceLine" id="cb192-10" data-line-number="10">new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Age =</span> <span class="dv">101</span><span class="op">:</span><span class="dv">109</span>)</a>
+<a class="sourceLine" id="cb192-11" data-line-number="11">new<span class="op">$</span>Gomp.pred &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">predict</span>(gomp, new))</a>
+<a class="sourceLine" id="cb192-12" data-line-number="12">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(it_m <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">95</span>, Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age, Year,mx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Year, mx))</a>
+<a class="sourceLine" id="cb192-13" data-line-number="13">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;mx&quot;</span>, <span class="op">-</span>Age)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:plateau3"></span>
 <img src="bookdown-demo_files/figure-html/plateau3-1.png" alt="Log mortality rates for men above age 60 after 1900" width="80%" />
 <p class="caption">
@@ -672,18 +672,18 @@ Figure 11.18: Log mortality rates for men above age 60 after 1900
 Figure 11.19: Predicted log mortality rates for men above age 99 after 1900
 </p>
 </div>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="co"># Women</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2">it_f &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;data/ITA.fltcoh_1x1.txt&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb202-3" data-line-number="3">it_f<span class="op">$</span>Age &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_f<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb202-4" data-line-number="4">it_f<span class="op">$</span>mx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_f<span class="op">$</span>mx)</a>
-<a class="sourceLine" id="cb202-5" data-line-number="5">it_f<span class="op">$</span>qx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_f<span class="op">$</span>qx)</a>
-<a class="sourceLine" id="cb202-6" data-line-number="6">it_f &lt;-<span class="st"> </span>it_f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mx =</span> <span class="kw">if_else</span>(mx <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">as.numeric</span>(<span class="ot">NA</span>), mx))</a>
-<a class="sourceLine" id="cb202-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb202-8" data-line-number="8">gomp &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>Age, <span class="dt">data =</span> it_f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">45</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">&amp;</span><span class="st"> </span>Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>))</a>
-<a class="sourceLine" id="cb202-9" data-line-number="9">new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Age =</span> <span class="dv">101</span><span class="op">:</span><span class="dv">109</span>)</a>
-<a class="sourceLine" id="cb202-10" data-line-number="10">new<span class="op">$</span>Gomp.pred &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">predict</span>(gomp, new))</a>
-<a class="sourceLine" id="cb202-11" data-line-number="11">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(it_f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">95</span>, Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age, Year,mx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Year, mx))</a>
-<a class="sourceLine" id="cb202-12" data-line-number="12">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;mx&quot;</span>, <span class="op">-</span>Age)</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="co"># Women</span></a>
+<a class="sourceLine" id="cb193-2" data-line-number="2">it_f &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;data/ITA.fltcoh_1x1.txt&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb193-3" data-line-number="3">it_f<span class="op">$</span>Age &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_f<span class="op">$</span>Age)</a>
+<a class="sourceLine" id="cb193-4" data-line-number="4">it_f<span class="op">$</span>mx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_f<span class="op">$</span>mx)</a>
+<a class="sourceLine" id="cb193-5" data-line-number="5">it_f<span class="op">$</span>qx &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(it_f<span class="op">$</span>qx)</a>
+<a class="sourceLine" id="cb193-6" data-line-number="6">it_f &lt;-<span class="st"> </span>it_f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">mx =</span> <span class="kw">if_else</span>(mx <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">as.numeric</span>(<span class="ot">NA</span>), mx))</a>
+<a class="sourceLine" id="cb193-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb193-8" data-line-number="8">gomp &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>Age, <span class="dt">data =</span> it_f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">45</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span> <span class="op">&amp;</span><span class="st"> </span>Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>))</a>
+<a class="sourceLine" id="cb193-9" data-line-number="9">new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Age =</span> <span class="dv">101</span><span class="op">:</span><span class="dv">109</span>)</a>
+<a class="sourceLine" id="cb193-10" data-line-number="10">new<span class="op">$</span>Gomp.pred &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">predict</span>(gomp, new))</a>
+<a class="sourceLine" id="cb193-11" data-line-number="11">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(it_f <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Age <span class="op">&gt;</span><span class="st"> </span><span class="dv">95</span>, Year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1900</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age, Year,mx) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(Year, mx))</a>
+<a class="sourceLine" id="cb193-12" data-line-number="12">new &lt;-<span class="st"> </span>new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;mx&quot;</span>, <span class="op">-</span>Age)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:plateau5"></span>
 <img src="bookdown-demo_files/figure-html/plateau5-1.png" alt="Log mortality rates for women above age 60 after 1900" width="80%" />
 <p class="caption">
@@ -790,35 +790,35 @@ Figure 11.25: Odds ratio (confidence intervals) for the bottom half of the earni
 Waldron’s observations of hazard ratios declining by age and increasing from one cohort to the next. The key idea is that moving from one cohort to the next, holding age constant, is like moving to younger ages within a cohort. Just as moving to younger ages makes the observed hazard ratio larger, moving to a lower baseline mortality rate, holding age constant,
 also makes the hazard ratio larger.</li>
 </ul>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"> <span class="co">## Waldron Simulation using Gamma-Gompertz</span></a>
-<a class="sourceLine" id="cb203-2" data-line-number="2">t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span> <span class="co">## five different cohrots (say each 10 years apart)</span></a>
-<a class="sourceLine" id="cb203-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="fl">.25</span> <span class="co">## amount of mortality decline per decade (about 2.5% per year)</span></a>
-<a class="sourceLine" id="cb203-4" data-line-number="4">b &lt;-<span class="st"> </span><span class="fl">.1</span> <span class="co">## gompertz slope</span></a>
-<a class="sourceLine" id="cb203-5" data-line-number="5">a0 &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">^</span>{<span class="op">-</span><span class="dv">3</span>} <span class="co">## starting hazard (rather high)</span></a>
-<a class="sourceLine" id="cb203-6" data-line-number="6">a0.vec &lt;-<span class="st"> </span>a0 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>k <span class="op">*</span><span class="st"> </span>t) <span class="co">#hazard vector for every cohort, including a mortality decline</span></a>
-<a class="sourceLine" id="cb203-7" data-line-number="7">x &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb203-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb203-9" data-line-number="9"><span class="co"># mu.bar &lt;- a * exp(b * x) / (1 + (a * s2 / b) * (exp(b*x) - 1)) #gamma gompertz formula, where s2 is sigma^2</span></a>
-<a class="sourceLine" id="cb203-10" data-line-number="10">mu.<span class="fl">1.</span>bar.xt &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="kw">length</span>(t), <span class="kw">length</span>(x)) <span class="co"># matrix of cohorts (rows) by ages (columns)</span></a>
-<a class="sourceLine" id="cb203-11" data-line-number="11">mu.<span class="fl">2.</span>bar.xt &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="kw">length</span>(t), <span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb203-12" data-line-number="12"><span class="kw">dimnames</span>(mu.<span class="fl">1.</span>bar.xt) &lt;-<span class="st"> </span><span class="kw">list</span>(t, x)</a>
-<a class="sourceLine" id="cb203-13" data-line-number="13"><span class="kw">dimnames</span>(mu.<span class="fl">2.</span>bar.xt) &lt;-<span class="st"> </span><span class="kw">list</span>(t, x)</a>
-<a class="sourceLine" id="cb203-14" data-line-number="14">s2 &lt;-<span class="st"> </span><span class="fl">.2</span></a>
-<a class="sourceLine" id="cb203-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb203-16" data-line-number="16"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(t)) <span class="co">#i: cohort counter</span></a>
-<a class="sourceLine" id="cb203-17" data-line-number="17">{</a>
-<a class="sourceLine" id="cb203-18" data-line-number="18">    a1 &lt;-<span class="st"> </span>a0.vec[i]</a>
-<a class="sourceLine" id="cb203-19" data-line-number="19">    a2 &lt;-<span class="st"> </span>a1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>                           </a>
-<a class="sourceLine" id="cb203-20" data-line-number="20">    mu.<span class="fl">1.</span>bar.xt[i,] &lt;-<span class="st"> </span>a1 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(b <span class="op">*</span><span class="st"> </span>x) <span class="op">/</span></a>
-<a class="sourceLine" id="cb203-21" data-line-number="21"><span class="st">        </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(a1 <span class="op">*</span><span class="st"> </span>s2 <span class="op">/</span><span class="st"> </span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="co"># baseline hazard</span></a>
-<a class="sourceLine" id="cb203-22" data-line-number="22">    mu.<span class="fl">2.</span>bar.xt[i,] &lt;-<span class="st"> </span>a2 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(b <span class="op">*</span><span class="st"> </span>x) <span class="op">/</span></a>
-<a class="sourceLine" id="cb203-23" data-line-number="23"><span class="st">        </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(a2 <span class="op">*</span><span class="st"> </span>s2 <span class="op">/</span><span class="st"> </span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="co"># population hazard</span></a>
-<a class="sourceLine" id="cb203-24" data-line-number="24">}</a>
-<a class="sourceLine" id="cb203-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb203-26" data-line-number="26">R.mat &lt;-<span class="st"> </span>mu.<span class="fl">2.</span>bar.xt<span class="op">/</span>mu.<span class="fl">1.</span>bar.xt <span class="co">#odds ratio</span></a>
-<a class="sourceLine" id="cb203-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb203-28" data-line-number="28">waldron.simu &lt;-<span class="st"> </span>R.mat[, x <span class="op">%in%</span><span class="st"> </span><span class="kw">seq</span>(<span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">10</span>)]</a>
-<a class="sourceLine" id="cb203-29" data-line-number="29"><span class="kw">print</span>(waldron.simu)</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"> <span class="co">## Waldron Simulation using Gamma-Gompertz</span></a>
+<a class="sourceLine" id="cb194-2" data-line-number="2">t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span> <span class="co">## five different cohrots (say each 10 years apart)</span></a>
+<a class="sourceLine" id="cb194-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="fl">.25</span> <span class="co">## amount of mortality decline per decade (about 2.5% per year)</span></a>
+<a class="sourceLine" id="cb194-4" data-line-number="4">b &lt;-<span class="st"> </span><span class="fl">.1</span> <span class="co">## gompertz slope</span></a>
+<a class="sourceLine" id="cb194-5" data-line-number="5">a0 &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">^</span>{<span class="op">-</span><span class="dv">3</span>} <span class="co">## starting hazard (rather high)</span></a>
+<a class="sourceLine" id="cb194-6" data-line-number="6">a0.vec &lt;-<span class="st"> </span>a0 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>k <span class="op">*</span><span class="st"> </span>t) <span class="co">#hazard vector for every cohort, including a mortality decline</span></a>
+<a class="sourceLine" id="cb194-7" data-line-number="7">x &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb194-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb194-9" data-line-number="9"><span class="co"># mu.bar &lt;- a * exp(b * x) / (1 + (a * s2 / b) * (exp(b*x) - 1)) #gamma gompertz formula, where s2 is sigma^2</span></a>
+<a class="sourceLine" id="cb194-10" data-line-number="10">mu.<span class="fl">1.</span>bar.xt &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="kw">length</span>(t), <span class="kw">length</span>(x)) <span class="co"># matrix of cohorts (rows) by ages (columns)</span></a>
+<a class="sourceLine" id="cb194-11" data-line-number="11">mu.<span class="fl">2.</span>bar.xt &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="kw">length</span>(t), <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb194-12" data-line-number="12"><span class="kw">dimnames</span>(mu.<span class="fl">1.</span>bar.xt) &lt;-<span class="st"> </span><span class="kw">list</span>(t, x)</a>
+<a class="sourceLine" id="cb194-13" data-line-number="13"><span class="kw">dimnames</span>(mu.<span class="fl">2.</span>bar.xt) &lt;-<span class="st"> </span><span class="kw">list</span>(t, x)</a>
+<a class="sourceLine" id="cb194-14" data-line-number="14">s2 &lt;-<span class="st"> </span><span class="fl">.2</span></a>
+<a class="sourceLine" id="cb194-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb194-16" data-line-number="16"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(t)) <span class="co">#i: cohort counter</span></a>
+<a class="sourceLine" id="cb194-17" data-line-number="17">{</a>
+<a class="sourceLine" id="cb194-18" data-line-number="18">    a1 &lt;-<span class="st"> </span>a0.vec[i]</a>
+<a class="sourceLine" id="cb194-19" data-line-number="19">    a2 &lt;-<span class="st"> </span>a1 <span class="op">*</span><span class="st"> </span><span class="dv">2</span>                           </a>
+<a class="sourceLine" id="cb194-20" data-line-number="20">    mu.<span class="fl">1.</span>bar.xt[i,] &lt;-<span class="st"> </span>a1 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(b <span class="op">*</span><span class="st"> </span>x) <span class="op">/</span></a>
+<a class="sourceLine" id="cb194-21" data-line-number="21"><span class="st">        </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(a1 <span class="op">*</span><span class="st"> </span>s2 <span class="op">/</span><span class="st"> </span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="co"># baseline hazard</span></a>
+<a class="sourceLine" id="cb194-22" data-line-number="22">    mu.<span class="fl">2.</span>bar.xt[i,] &lt;-<span class="st"> </span>a2 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(b <span class="op">*</span><span class="st"> </span>x) <span class="op">/</span></a>
+<a class="sourceLine" id="cb194-23" data-line-number="23"><span class="st">        </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(a2 <span class="op">*</span><span class="st"> </span>s2 <span class="op">/</span><span class="st"> </span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)) <span class="co"># population hazard</span></a>
+<a class="sourceLine" id="cb194-24" data-line-number="24">}</a>
+<a class="sourceLine" id="cb194-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb194-26" data-line-number="26">R.mat &lt;-<span class="st"> </span>mu.<span class="fl">2.</span>bar.xt<span class="op">/</span>mu.<span class="fl">1.</span>bar.xt <span class="co">#odds ratio</span></a>
+<a class="sourceLine" id="cb194-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb194-28" data-line-number="28">waldron.simu &lt;-<span class="st"> </span>R.mat[, x <span class="op">%in%</span><span class="st"> </span><span class="kw">seq</span>(<span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">10</span>)]</a>
+<a class="sourceLine" id="cb194-29" data-line-number="29"><span class="kw">print</span>(waldron.simu)</a></code></pre></div>
 <pre><code>##         60       70       80       90      100
 ## 1 1.443725 1.226597 1.097246 1.038110 1.014365
 ## 2 1.505985 1.273363 1.121510 1.048411 1.018370
@@ -841,6 +841,9 @@ also makes the hazard ratio larger.</li>
 <div id="refs" class="references">
 <div>
 <p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396). American Association for the Advancement of Science: 1459–61.</p>
+</div>
+<div>
+<p>Bongaarts, John, and Griffith Feeney. 1998. “On the Quantum and Tempo of Fertility.” <em>Population and Development Review</em>. JSTOR, 271–91.</p>
 </div>
 <div>
 <p>Burkimsher, Marion. 2017. “Evolution of the Shape of the Fertility Curve: Why Might Some Countries Develop a Bimodal Curve?” <em>Demographic Research</em> 37. JSTOR: 295–324.</p>
