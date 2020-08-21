@@ -426,14 +426,15 @@ First, some background:
 Let $a$ index sites and write $Y_a = 1$ if the letters are different,
 and $Y_a = 0 otherwise. For 1 site, the probability that it there has been a mutation, is 1
 minus the chance that there has been no mutation. 
+
 $$
      P( Y_a = 1 ) = 1 - e^{-T\theta}
-     
 $$
 The mean $\bar{Y}$ across the segment is the proportion of $Y_a$ that
 equal 1. So, in expectation for the fraction of sites that mutate is
 the same as the probability that 1 site mutates (assuming 
 independence of mutation probabilities by site). This allows us to write
+
 $$
      E{\bar{Y}} = 1 - e^{-2T\theta},
 $$
@@ -713,7 +714,7 @@ sizes of the past.
    the Bronze Age increase? (I don't know if it's possible with our
    methods.)
    
-4. *possible term project* Figure out how to use BEAST or some other software and
+4. Figure out how to use BEAST or some other software and
    reproduce their results for one sub-population and tell us what you learned.
    
    
