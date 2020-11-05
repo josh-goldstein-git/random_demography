@@ -6,6 +6,11 @@
 3. Population Survival and Hazards under fixed frailty
 4. Gamma frailty
 
+Additional resources 
+
+  - @vaupel2014unobserved:
+  - @rodriguez2001: detailed hand-out for Princeton class. Many of the same results as @vaupel2014unobserved, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.
+
 ### Review of mortality mathematics
 
   - $\ell(x)$ or $S(x)$ probability of survival to age $x$
