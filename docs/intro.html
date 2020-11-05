@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,10 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#outline"><i class="fa fa-check"></i><b>2.1</b> Outline</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#part-i.-conceptual-introduction"><i class="fa fa-check"></i><b>2.2</b> Part I. Conceptual Introduction</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#what-is-demographic-heterogeneity"><i class="fa fa-check"></i><b>2.2.1</b> What is Demographic Heterogeneity?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#an-example"><i class="fa fa-check"></i><b>2.2.2</b> An example</a></li>
-<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#a-2nd-example-exponential-growth-two-countries"><i class="fa fa-check"></i><b>2.2.3</b> A 2nd example: Exponential growth, two countries</a></li>
-<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#more-examples-to-work"><i class="fa fa-check"></i><b>2.2.4</b> More examples to work</a></li>
-<li class="chapter" data-level="2.2.5" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.5</b> Application</a></li>
+<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#analogies"><i class="fa fa-check"></i><b>2.2.2</b> Analogies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#whats-new"><i class="fa fa-check"></i><b>2.2.3</b> What’s new?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.4</b> Application</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#part-ii.-formal-analysis"><i class="fa fa-check"></i><b>2.3</b> Part II. Formal Analysis</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#outline-1"><i class="fa fa-check"></i><b>2.3.1</b> Outline</a></li>
@@ -322,9 +321,8 @@ different types, with different type-specific rates.</p>
 <p>(These types can be discrete, with individuals being
 homogeneous within their type, or they can be continuous with possibly
 no individual having exactly the same risk as another.)</p>
-</div>
-<div id="an-example" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> An example</h3>
+<div id="an-example" class="section level4">
+<h4><span class="header-section-number">2.2.1.1</span> An example</h4>
 <p>Let’s draw 10 individuals from a homogeneous population and
 heterogeneous population.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="co">## Homogeneous hazard of 1/10</span></a>
@@ -349,19 +347,28 @@ Figure 2.1: Homogeneity and Heterogeneity
 <li><em>Homogeneous</em>: Chance only</li>
 <li><em>Heterogeneous:</em> Chance + group variation in risk</li>
 </ul></li>
-<li>Would we expect to see a difference if we increased sample?</li>
-</ul>
-<p>ANSWER THIS</p>
+<li><p>Would we expect to see a difference if we increased sample?</p>
 <ul>
-<li>Analogies ?
+<li>NOTE: ANSWER THIS</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="analogies" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Analogies</h3>
 <ul>
 <li>Social inequality: equal opportunity vs. equal outcomes</li>
-<li>Analysis of variance <span class="math inline">\(\mbox{total variance} = \mbox{within group} + \mbox{between group}\)</span></li>
+<li>Analysis of variance: <span class="math inline">\(\mbox{total variance} = \mbox{within group} + \mbox{between group}\)</span></li>
 <li>Statistical models <span class="math inline">\(y = a + b x + \epsilon\)</span></li>
-</ul></li>
-<li><p>What’s new? Dynamics.</p>
-<p>Heterogeneous populations evolve differently. Aggregates <span class="math inline">\(\neq\)</span> Individuals</p>
+</ul>
+</div>
+<div id="whats-new" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> What’s new?</h3>
 <ul>
+<li>Dynamics.</li>
+<li>Heterogeneous populations evolve differently.
+<ul>
+<li>Aggregates <span class="math inline">\(\neq\)</span> Individuals</li>
 <li>Rates of growth (or decline)</li>
 <li>Changes over time or age or duration</li>
 <li>The trajectory of even the  individual differs from population average</li>
@@ -382,17 +389,18 @@ Figure 2.1: Homogeneity and Heterogeneity
 <!-- \end{frame} -->
 <ul>
 <li><p>Big Caveat: Fundamental Unidentifiability</p>
-Same data of <span class="math inline">\(N\)</span> observations
+<ul>
+<li>Same data of <span class="math inline">\(N\)</span> observations
 <ul>
 <li><span class="math inline">\(N\)</span> draws from 1 distribution</li>
 <li><span class="math inline">\(1\)</span> draw from <span class="math inline">\(N\)</span> distributions</li>
 <li>Something in-between</li>
+</ul></li>
+</ul></li>
 </ul>
-<p>Abel (66) and Beth (76) example.</p></li>
-</ul>
-</div>
-<div id="a-2nd-example-exponential-growth-two-countries" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> A 2nd example: Exponential growth, two countries</h3>
+<p>Abel (66) and Beth (76) example.</p>
+<div id="a-2nd-example-exponential-growth-two-countries" class="section level4">
+<h4><span class="header-section-number">2.2.3.1</span> A 2nd example: Exponential growth, two countries</h4>
 <p>Two countries start equal size, but grow at different rates. What
 happens to aggregate growth rate?</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">  rA =<span class="st"> </span><span class="fl">.03</span> <span class="co">## growth rate of A</span></a>
@@ -423,8 +431,8 @@ Figure 2.2: Aggregate growth rate of sub-populations A + B
 </ul></li>
 </ul>
 </div>
-<div id="more-examples-to-work" class="section level3">
-<h3><span class="header-section-number">2.2.4</span> More examples to work</h3>
+<div id="more-examples-to-work" class="section level4">
+<h4><span class="header-section-number">2.2.3.2</span> More examples to work</h4>
 <ol style="list-style-type: decimal">
 <li>Differential, constant mortality (<span class="math inline">\(\mu_A = .03\)</span>; <span class="math inline">\(\mu_B =.01\)</span>)</li>
 <li>Differential, <em>time-varying</em> mortality or growth.</li>
@@ -436,18 +444,16 @@ Figure 2.2: Aggregate growth rate of sub-populations A + B
 <li>Recidivism by time out of prison</li>
 </ol>
 </div>
+</div>
 <div id="application" class="section level3">
-<h3><span class="header-section-number">2.2.5</span> Application</h3>
+<h3><span class="header-section-number">2.2.4</span> Application</h3>
 <iframe src="https://shiny.demog.berkeley.edu/josh/het_ruse/" width="672" height="600px">
 </iframe>
-<ul>
-<li><p>Questions</p>
 <ul>
 <li>Can you create a plateau?</li>
 <li>Can you create a crossover?</li>
 <li>Can you get aggregate rate to decline?</li>
 <li>Anything else?</li>
-</ul></li>
 </ul>
 </div>
 </div>
@@ -605,10 +611,12 @@ sub-populations with smaller population growth rates over time.</li>
 </ul>
 <p>A BIG caveat, are disaggregated models necessarily better?</p>
 <ul>
-<li>Some potential problems:</li>
+<li>Some potential problems:
+<ul>
 <li>Aggregate constraints?</li>
 <li>Interacting sub-populations?</li>
 <li>Illusion of precision?</li>
+</ul></li>
 </ul>
 </div>
 </div>

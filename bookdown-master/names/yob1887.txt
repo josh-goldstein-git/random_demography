@@ -46,7 +46,7 @@ Ada,F,910
 Agnes,F,896
 Lula,F,891
 Dora,F,842
-Elsie,F,832
+Elsie,F,833
 Josephine,F,815
 Lucy,F,811
 Fannie,F,798

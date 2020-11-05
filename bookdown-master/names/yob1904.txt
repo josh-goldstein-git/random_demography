@@ -2171,7 +2171,7 @@ Robert,M,3414
 Charles,M,3406
 Joseph,M,3291
 Frank,M,2799
-Edward,M,2334
+Edward,M,2335
 Henry,M,2086
 Thomas,M,2057
 Walter,M,1873
@@ -2893,7 +2893,6 @@ Beverly,M,11
 Brooks,M,11
 Buddie,M,11
 Buddy,M,11
-Burley,M,11
 Collins,M,11
 Connie,M,11
 Dana,M,11
@@ -2930,6 +2929,7 @@ Author,M,10
 Bailey,M,10
 Benjiman,M,10
 Bertrand,M,10
+Burley,M,10
 Caleb,M,10
 Carson,M,10
 Dawson,M,10

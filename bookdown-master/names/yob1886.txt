@@ -1292,7 +1292,7 @@ Henry,M,2404
 Thomas,M,2337
 Edward,M,2312
 Harry,M,2257
-Walter,M,1881
+Walter,M,1880
 Arthur,M,1656
 Fred,M,1599
 Albert,M,1488

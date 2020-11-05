@@ -21,7 +21,7 @@ different types, with different type-specific rates.
 homogeneous within their type, or they can be continuous with possibly
 no individual having exactly the same risk as another.)
   
-### An example
+#### An example
   
   Let's draw 10 individuals from a homogeneous population and
   heterogeneous population.
@@ -43,31 +43,31 @@ no individual having exactly the same risk as another.)
 - Can you tell which is which?
   - _Homogeneous_: Chance only
   - *Heterogeneous:* Chance + group variation in risk
+  
 - Would we expect to see a difference if we increased sample?
 
-ANSWER THIS
+  - NOTE: ANSWER THIS
   
-- Analogies ?
+### Analogies
   - Social inequality: equal opportunity vs. equal outcomes
-  - Analysis of variance $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
+  - Analysis of variance: $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
   - Statistical models $y = a + b x + \epsilon$
   
 
-- What's new? Dynamics.
-
-  Heterogeneous populations evolve differently. Aggregates $\neq$ Individuals
-  
-  - Rates of growth (or decline)
-  - Changes over time or age or duration
-  - The trajectory of even the \alert{average} individual differs from population average
-  - Relative positions, change of groups, may be misleading.
-
-- Terminology
-  - Heterogeneity
-  - Unobserved heterogeneity
-  - Selection
-  - Selective survival
-  - Other terms?
+### What's new? 
+  - Dynamics.
+  - Heterogeneous populations evolve differently. 
+    - Aggregates $\neq$ Individuals
+    - Rates of growth (or decline)
+    - Changes over time or age or duration
+    - The trajectory of even the \alert{average} individual differs from population average
+    - Relative positions, change of groups, may be misleading.
+  - Terminology
+    - Heterogeneity
+    - Unobserved heterogeneity
+    - Selection
+    - Selective survival
+    - Other terms?
   
 <!-- \begin{frame}{1. Heterogeneity at work? Black-White Crossover} -->
 <!-- \end{frame} -->
@@ -76,17 +76,17 @@ ANSWER THIS
 <!-- \end{frame} -->
 
 
-- Big Caveat: Fundamental Unidentifiability
+  - Big Caveat: Fundamental Unidentifiability
 
-  Same data of $N$ observations
-  - $N$ draws from 1 distribution
-  - $1$ draw from $N$ distributions
-  - Something in-between
+    - Same data of $N$ observations
+      - $N$ draws from 1 distribution
+      - $1$ draw from $N$ distributions
+      - Something in-between
   
 
   Abel (66) and Beth (76) example. 
 
-### A 2nd example: Exponential growth, two countries
+#### A 2nd example: Exponential growth, two countries
 
   Two countries start equal size, but grow at different rates. What
   happens to aggregate growth rate?
@@ -113,7 +113,7 @@ ANSWER THIS
   - Does the process converge?
 
 
-### More examples to work
+#### More examples to work
   1. Differential, constant mortality ($\mu_A = .03$; $\mu_B =.01$)
   2. Differential, _time-varying_ mortality or growth.
   3. ``Movers and Stayers'' (Migration)
@@ -128,12 +128,10 @@ ANSWER THIS
 ```{r echo=FALSE}
 knitr::include_url('https://shiny.demog.berkeley.edu/josh/het_ruse/', height = '600px')
 ```
-- Questions
-  
-  - Can you create a plateau?
-  - Can you create a crossover?
-  - Can you get aggregate rate to decline?
-  - Anything else?
+- Can you create a plateau?
+- Can you create a crossover?
+- Can you get aggregate rate to decline?
+- Anything else?
   
 ## Part II. Formal Analysis
 
@@ -302,9 +300,9 @@ $$
 A BIG caveat, are disaggregated models necessarily better?
 
 - Some potential problems:
-- Aggregate constraints?
-- Interacting sub-populations?
-- Illusion of precision?
+  - Aggregate constraints?
+  - Interacting sub-populations?
+  - Illusion of precision?
   
 ## Conclusions
   

@@ -1,4 +1,5 @@
 library(bookdown)
+library(data.table)
 setwd("/hdir/0/fmenares/Book/bookdown-master/")
 render_book("index.Rmd","bookdown::gitbook",
             clean = TRUE, envir = parent.frame(),

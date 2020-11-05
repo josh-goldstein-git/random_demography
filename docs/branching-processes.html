@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,10 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#outline"><i class="fa fa-check"></i><b>2.1</b> Outline</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#part-i.-conceptual-introduction"><i class="fa fa-check"></i><b>2.2</b> Part I. Conceptual Introduction</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#what-is-demographic-heterogeneity"><i class="fa fa-check"></i><b>2.2.1</b> What is Demographic Heterogeneity?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#an-example"><i class="fa fa-check"></i><b>2.2.2</b> An example</a></li>
-<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#a-2nd-example-exponential-growth-two-countries"><i class="fa fa-check"></i><b>2.2.3</b> A 2nd example: Exponential growth, two countries</a></li>
-<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#more-examples-to-work"><i class="fa fa-check"></i><b>2.2.4</b> More examples to work</a></li>
-<li class="chapter" data-level="2.2.5" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.5</b> Application</a></li>
+<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#analogies"><i class="fa fa-check"></i><b>2.2.2</b> Analogies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#whats-new"><i class="fa fa-check"></i><b>2.2.3</b> What’s new?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.4</b> Application</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#part-ii.-formal-analysis"><i class="fa fa-check"></i><b>2.3</b> Part II. Formal Analysis</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#outline-1"><i class="fa fa-check"></i><b>2.3.1</b> Outline</a></li>
@@ -494,11 +493,11 @@ processes? (Mean growth, variance, time-paths, eventual size)?</li>
 <a class="sourceLine" id="cb104-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
 <a class="sourceLine" id="cb104-6" data-line-number="6">  <span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat),</a>
 <a class="sourceLine" id="cb104-7" data-line-number="7">          <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>How many survive (out of 20)?</p>
 <p>log-scale</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">  <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">  surviving =<span class="st"> </span><span class="kw">ifelse</span>(Z.mat[,n_gen] <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;extinct&quot;</span>, <span class="st">&quot;survive&quot;</span>)</a>
 <a class="sourceLine" id="cb106-2" data-line-number="2">  foo &lt;-<span class="st"> </span><span class="kw">prop.table</span>(<span class="kw">table</span>(surviving))</a>
 <a class="sourceLine" id="cb106-3" data-line-number="3">  <span class="kw">print</span>( <span class="kw">prop.table</span>(<span class="kw">table</span>(surviving)) )</a></code></pre></div>
@@ -513,7 +512,7 @@ processes? (Mean growth, variance, time-paths, eventual size)?</li>
 <a class="sourceLine" id="cb108-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
 <a class="sourceLine" id="cb108-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
 <a class="sourceLine" id="cb108-6" data-line-number="6">  <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>What does this remind you of? (Hint: “Leslie”). (See Harris figure)</p>
 </div>
 <div id="the-probability-generating-function-our-mathematical-tool" class="section level2">
@@ -645,14 +644,14 @@ interpret that?</li>
 <a class="sourceLine" id="cb109-36" data-line-number="36">  <span class="kw">plot.fun</span>(z, hz)</a>
 <a class="sourceLine" id="cb109-37" data-line-number="37">  <span class="kw">title</span>(<span class="st">&quot;Critical (m = 1), </span><span class="ch">\n</span><span class="st"> 1 root&quot;</span>)</a>
 <a class="sourceLine" id="cb109-38" data-line-number="38">  <span class="kw">points</span>(<span class="dv">1</span>,<span class="dv">1</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-138-1.png" width="100%" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-46-1.png" width="100%" /></p>
 <p>We can prove by answering:
 What is <span class="math inline">\(h&#39;(1)\)</span>? What is <span class="math inline">\(h(0)\)</span>? Is <span class="math inline">\(h&#39;&#39;(z) &gt; 0\)</span>?</p>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">  pk =<span class="st"> </span><span class="kw">c</span>(.<span class="dv">3</span>, <span class="fl">.0</span>, <span class="fl">.7</span>); <span class="kw">names</span>(pk) &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb110-2" data-line-number="2">  z =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">.01</span>)</a>
 <a class="sourceLine" id="cb110-3" data-line-number="3">  hz =<span class="st"> </span>pk[<span class="st">&quot;0&quot;</span>]  <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;1&quot;</span>]<span class="op">*</span>z <span class="op">+</span><span class="st"> </span>pk[<span class="st">&quot;2&quot;</span>]<span class="op">*</span>z<span class="op">^</span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb110-4" data-line-number="4">  <span class="kw">plot.fun</span>(z,hz)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>Where is <span class="math inline">\(h(p_0)\)</span>, <span class="math inline">\(h(h(p_0))\)</span>, <span class="math inline">\(h(h(h(p_0)))\)</span>, <span class="math inline">\(\ldots\)</span>?</p>
 <p>So how do we actually get <span class="math inline">\(d\)</span>?</p>
 <p>Take the case where <span class="math inline">\(p_0 = .3\)</span>, <span class="math inline">\(p_1 = 0\)</span>, and <span class="math inline">\(p_3 = .7\)</span> (the one I
@@ -681,7 +680,7 @@ just plotted).</p>
 <a class="sourceLine" id="cb113-4" data-line-number="4">  <span class="kw">plot.fun</span>(z,hz)</a>
 <a class="sourceLine" id="cb113-5" data-line-number="5">  <span class="kw">abline</span>(<span class="dt">h =</span> d, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a>
 <a class="sourceLine" id="cb113-6" data-line-number="6">  <span class="kw">abline</span>(<span class="dt">v =</span> d, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Extinction and non-extinction revisited</p>
 <ul>
 <li>If <span class="math inline">\(m &gt; 1\)</span>, there exists <span class="math inline">\(d\)</span> bigger than 0 and less than unity.</li>
@@ -690,7 +689,7 @@ just plotted).</p>
 never-extinction take?)</li>
 </ul>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">    <span class="kw">suppressWarnings</span>(<span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat), <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>Relevance to Corona virus?</p>
 </div>
 <div id="good-and-bad-set-ups-for-branching-process" class="section level2">
@@ -783,7 +782,7 @@ each condition:
 <a class="sourceLine" id="cb116-5" data-line-number="5">      Z.mat[i,] &lt;-<span class="st"> </span><span class="kw">branch</span>(<span class="dt">n_max =</span> n_gen)</a>
 <a class="sourceLine" id="cb116-6" data-line-number="6">  <span class="kw">matplot</span>(<span class="kw">t</span>(Z.mat),</a>
 <a class="sourceLine" id="cb116-7" data-line-number="7">          <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;Zn&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>1000 trials, means, picture</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">Zn_bar =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, mean)</a>
 <a class="sourceLine" id="cb117-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(Z.mat)</a>
@@ -795,7 +794,7 @@ each condition:
 <a class="sourceLine" id="cb117-8" data-line-number="8"><span class="kw">plot</span>(n, Zn_bar, <span class="dt">main =</span> <span class="st">&quot;Mean Zn&quot;</span>)</a>
 <a class="sourceLine" id="cb117-9" data-line-number="9"><span class="kw">plot</span>(n, d_n, <span class="dt">main =</span> <span class="st">&quot;Fraction extinct&quot;</span>)</a>
 <a class="sourceLine" id="cb117-10" data-line-number="10"><span class="kw">plot</span>(n, Zn_surv_bar)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="co">## insert code here for Zn_surv_bar.hat and add a line</span></a></code></pre></div>
 <p>Proving <span class="math inline">\(\mathbb{E} Z_n = m^n\)</span></p>
 <p>Ingredients</p>
@@ -821,7 +820,7 @@ or smaller than unconditional variance?</li>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">var_Zn =<span class="st"> </span><span class="kw">apply</span>(Z.mat, <span class="dv">2</span>, var)</a>
 <a class="sourceLine" id="cb119-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(Z.mat)</a>
 <a class="sourceLine" id="cb119-3" data-line-number="3"><span class="kw">plot</span>(n, var_Zn)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p>Distribution of <span class="math inline">\(Z_n\)</span></p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">   Z20 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">table</span>(Z.mat[,<span class="dv">20</span>]))</a>
 <a class="sourceLine" id="cb120-2" data-line-number="2">   Z5 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">table</span>(Z.mat[,<span class="dv">5</span>]))</a>
@@ -830,7 +829,7 @@ or smaller than unconditional variance?</li>
 <a class="sourceLine" id="cb120-5" data-line-number="5">   <span class="kw">plot</span>(<span class="kw">log</span>(Z20[Z20 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>]))</a>
 <a class="sourceLine" id="cb120-6" data-line-number="6">   <span class="kw">plot</span>(Z5[Z5 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>])</a>
 <a class="sourceLine" id="cb120-7" data-line-number="7">   <span class="kw">plot</span>(<span class="kw">log</span>(Z5[Z5 <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>]))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 </div>
 <div id="geometric-offspring-distribution" class="section level2">
 <h2><span class="header-section-number">8.8</span> Geometric offspring distribution</h2>
@@ -853,7 +852,7 @@ or smaller than unconditional variance?</li>
 <a class="sourceLine" id="cb121-3" data-line-number="3">p0 =<span class="st"> </span>b<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c)</a>
 <a class="sourceLine" id="cb121-4" data-line-number="4">k =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, kk) ;   p_k =<span class="st"> </span><span class="kw">c</span>(p0, p_kk)</a>
 <a class="sourceLine" id="cb121-5" data-line-number="5"><span class="kw">plot</span>(k, p_k)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <p>Realism?</p>
 <p>See Table 10.3, p 386, Grinstead and Snell.</p>
 <div id="the-geometric-distributions-simple-pgf" class="section level3">
@@ -909,7 +908,7 @@ See Grinstead and Snell p. 385
 <a class="sourceLine" id="cb122-17" data-line-number="17">    <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb122-18" data-line-number="18">        <span class="kw">lines</span>(k, pk_n, <span class="dt">col =</span> i)</a>
 <a class="sourceLine" id="cb122-19" data-line-number="19">}</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <p>log scale</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="co">## b = 0.2126 ;   c = 0.5893 ## lotka</span></a>
 <a class="sourceLine" id="cb123-2" data-line-number="2">b =<span class="st"> </span><span class="fl">0.3666</span>; c =<span class="st"> </span><span class="fl">.5533</span> <span class="co">## Keyfitz (from G&amp;S)</span></a>
@@ -930,7 +929,7 @@ See Grinstead and Snell p. 385
 <a class="sourceLine" id="cb123-17" data-line-number="17">        <span class="kw">lines</span>(k, pk_n, <span class="dt">col =</span> i)</a>
 <a class="sourceLine" id="cb123-18" data-line-number="18">}</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <pre><code>## [1] 2
 ## [1] 3</code></pre>
 <p>Applications</p>

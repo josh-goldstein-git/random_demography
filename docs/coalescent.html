@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,10 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#outline"><i class="fa fa-check"></i><b>2.1</b> Outline</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#part-i.-conceptual-introduction"><i class="fa fa-check"></i><b>2.2</b> Part I. Conceptual Introduction</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#what-is-demographic-heterogeneity"><i class="fa fa-check"></i><b>2.2.1</b> What is Demographic Heterogeneity?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#an-example"><i class="fa fa-check"></i><b>2.2.2</b> An example</a></li>
-<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#a-2nd-example-exponential-growth-two-countries"><i class="fa fa-check"></i><b>2.2.3</b> A 2nd example: Exponential growth, two countries</a></li>
-<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#more-examples-to-work"><i class="fa fa-check"></i><b>2.2.4</b> More examples to work</a></li>
-<li class="chapter" data-level="2.2.5" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.5</b> Application</a></li>
+<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#analogies"><i class="fa fa-check"></i><b>2.2.2</b> Analogies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#whats-new"><i class="fa fa-check"></i><b>2.2.3</b> What’s new?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.4</b> Application</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#part-ii.-formal-analysis"><i class="fa fa-check"></i><b>2.3</b> Part II. Formal Analysis</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#outline-1"><i class="fa fa-check"></i><b>2.3.1</b> Outline</a></li>
@@ -453,13 +452,13 @@ of coalescence in will change too: <span class="math inline">\(h(t) = 1/N(t)\)</
 <a class="sourceLine" id="cb152-9" data-line-number="9">  T2 &lt;-<span class="st"> </span>T_thresh <span class="op">+</span><span class="st"> </span><span class="kw">rexp</span>(n2, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_ancient) <span class="co">## at ancient rate</span></a>
 <a class="sourceLine" id="cb152-10" data-line-number="10">  T.vec &lt;-<span class="st"> </span><span class="kw">c</span>(T1, T2)</a>
 <a class="sourceLine" id="cb152-11" data-line-number="11">  <span class="kw">hist</span>(T.vec, <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">5000</span>, <span class="dv">250</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-169-1.png" width="672" />
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-77-1.png" width="672" />
 Q: How could we estimate population sizes from this histogram?</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">  T.vec &lt;-<span class="st"> </span><span class="kw">sort</span>(T.vec)</a>
 <a class="sourceLine" id="cb153-2" data-line-number="2">  St =<span class="st"> </span>(n<span class="op">:</span><span class="dv">1</span>)<span class="op">/</span>n</a>
 <a class="sourceLine" id="cb153-3" data-line-number="3">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb153-4" data-line-number="4">  <span class="kw">plot</span>(T.vec, St); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh); <span class="kw">plot</span>(T.vec, <span class="kw">log</span>(St)); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-170-1.png" width="672" />
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-78-1.png" width="672" />
 Q: How can we estimate hazards from this histogram?</p>
 <p>Our approach</p>
 <ul>
@@ -510,27 +509,32 @@ resulting population estimates.</p>
 <p>There are 380 individuals grouped into regional sub-populations. I select out the Greeks, whose labels begin with “gre”.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/mtdna.csv&quot;</span>, <span class="dt">what =</span> <span class="kw">character</span>())</a>
 <a class="sourceLine" id="cb154-2" data-line-number="2"><span class="kw">nchar</span>(x)</a></code></pre></div>
-<pre><code>##   [1]     4     3     4     2     5    11     1    15 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577
-##  [20] 16577 16577 16577 16577 16577 16577 16577 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574
-##  [39] 16575 16574 16574 16574 16574 16574 16574 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575
-##  [58] 16575 16575 16575 16575 16575 16575 16575 16575 16574 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576
-##  [77] 16576 16576 16576 16576 16575 16575 16575 16578 16578 16575 16575 16575 16576 16577 16577 16577 16577 16577 16577
-##  [96] 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16575 16574 16575 16575 16575
-## [115] 16575 16575 16574 16574 16574 16574 16575 16575 16575 16575 16575 16576 16576 16576 16575 16575 16576 16576 16574
-## [134] 16574 16575 16575 16575 16575 16575 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16574
-## [153] 16575 16575 16575 16575 16575 16575 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16574 16574
-## [172] 16574 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
-## [191] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
-## [210] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
-## [229] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
-## [248] 16580 16580 16580 16580 16580 16575 16576 16576 16576 16576 16577 16577 16577 16576 16576 16576 16576 16576 16576
-## [267] 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16577 16577 16577 16577
-## [286] 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16576 16577 16577 16576 16575 16577 16575 16575 16577
-## [305] 16574 16575 16575 16575 16575 16574 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574 16574
-## [324] 16574 16575 16575 16574 16575 16575 16575 16576 16575 16575 16575 16575 16575 16575 16575 16575 16576 16575 16576
-## [343] 16575 16575 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574 16574
-## [362] 16574 16574 16574 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574
-## [381] 16574 16574 16574 16574 16576 16576 16576 16576</code></pre>
+<pre><code>##   [1]     4     3     4     2     5    11     1    15 16577 16577 16577 16577 16577 16577 16577
+##  [16] 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16574 16575 16575 16575
+##  [31] 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574 16574 16574 16574
+##  [46] 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575
+##  [61] 16575 16575 16575 16575 16575 16574 16576 16576 16576 16576 16576 16576 16576 16576 16576
+##  [76] 16576 16576 16576 16576 16576 16575 16575 16575 16578 16578 16575 16575 16575 16576 16577
+##  [91] 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577
+## [106] 16577 16577 16577 16577 16575 16574 16575 16575 16575 16575 16575 16574 16574 16574 16574
+## [121] 16575 16575 16575 16575 16575 16576 16576 16576 16575 16575 16576 16576 16574 16574 16575
+## [136] 16575 16575 16575 16575 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575
+## [151] 16574 16574 16575 16575 16575 16575 16575 16575 16574 16575 16575 16575 16575 16575 16575
+## [166] 16575 16575 16575 16574 16574 16574 16574 16580 16580 16580 16580 16580 16580 16580 16580
+## [181] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
+## [196] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
+## [211] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
+## [226] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580
+## [241] 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16580 16575 16576 16576
+## [256] 16576 16576 16577 16577 16577 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576
+## [271] 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16576 16577 16577 16577 16577
+## [286] 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16576 16577 16577 16576 16575
+## [301] 16577 16575 16575 16577 16574 16575 16575 16575 16575 16574 16575 16575 16575 16575 16575
+## [316] 16575 16575 16574 16575 16574 16574 16574 16574 16574 16575 16575 16574 16575 16575 16575
+## [331] 16576 16575 16575 16575 16575 16575 16575 16575 16575 16576 16575 16576 16575 16575 16574
+## [346] 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574
+## [361] 16574 16574 16574 16574 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575
+## [376] 16574 16575 16574 16574 16574 16574 16574 16574 16574 16576 16576 16576 16576</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="co">## note the strings have different length</span></a>
 <a class="sourceLine" id="cb156-2" data-line-number="2"><span class="co">## because there is some header information</span></a>
 <a class="sourceLine" id="cb156-3" data-line-number="3"><span class="co">## and then because the labels are mixed with the sequences</span></a>
@@ -551,8 +555,8 @@ resulting population estimates.</p>
 <a class="sourceLine" id="cb156-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb156-19" data-line-number="19">my.seqs =<span class="st"> </span>seqs[s]</a>
 <a class="sourceLine" id="cb156-20" data-line-number="20"><span class="kw">nchar</span>(my.seqs) <span class="co">## note the sequences all have same number of bases.</span></a></code></pre></div>
-<pre><code>##  [1] 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568
-## [20] 16568</code></pre>
+<pre><code>##  [1] 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568
+## [16] 16568 16568 16568 16568 16568</code></pre>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="co">## now put the bases in a matrix, with each column an indiviual and</span></a>
 <a class="sourceLine" id="cb158-2" data-line-number="2"><span class="co">## each row a base.</span></a>
 <a class="sourceLine" id="cb158-3" data-line-number="3">my.list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(my.seqs, <span class="st">&quot;&quot;</span>)</a>
@@ -696,17 +700,17 @@ compute time back to MRCA.</p>
 <p>First, some background:</p>
 <p>Let <span class="math inline">\(a\)</span> index sites and write <span class="math inline">\(Y_a = 1\)</span> if the letters are different,
 and $Y_a = 0 otherwise. For 1 site, the probability that it there has been a mutation, is 1
-minus the chance that there has been no mutation.
-$$
-P( Y_a = 1 ) = 1 - e^{-T}</p>
+minus the chance that there has been no mutation.</p>
 <p><span class="math display">\[
-The mean $\bar{Y}$ across the segment is the proportion of $Y_a$ that
-equal 1. So, in expectation for the fraction of sites that mutate is
-the same as the probability that 1 site mutates (assuming 
-independence of mutation probabilities by site). This allows us to write
+     P( Y_a = 1 ) = 1 - e^{-T\theta}
 \]</span>
-E{{Y}} = 1 - e^{-2T},
-$$
+The mean <span class="math inline">\(\bar{Y}\)</span> across the segment is the proportion of <span class="math inline">\(Y_a\)</span> that
+equal 1. So, in expectation for the fraction of sites that mutate is
+the same as the probability that 1 site mutates (assuming
+independence of mutation probabilities by site). This allows us to write</p>
+<p><span class="math display">\[
+     E{\bar{Y}} = 1 - e^{-2T\theta},
+\]</span>
 where we’ve added a “2” in order to account that either one of the pairwise branched could have had a mutation, so we our “exposure” is twice the time to MRCA.</p>
 <p>Rearranging we get an estimate $ of <span class="math inline">\(T\)</span> to be
 <span class="math display">\[
@@ -716,10 +720,11 @@ where we’ve added a “2” in order to account that either one of the pairwis
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">theta_m =<span class="st"> </span><span class="fl">2.21</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">8</span>) <span class="co">## Batini page 6 (TMRCA estimation)</span></a>
 <a class="sourceLine" id="cb180-2" data-line-number="2">T.vec &lt;-<span class="st"> </span><span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>theta_m) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Y.bar) <span class="co">## TMRCAs in years ago</span></a>
 <a class="sourceLine" id="cb180-3" data-line-number="3"><span class="kw">head</span>(T.vec, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##  [1]  25963.477  49464.349  17790.271  53328.902   6830.018 115165.228  56610.650  12294.775  21863.319  54701.270</code></pre>
+<pre><code>##  [1]  25963.477  49464.349  17790.271  53328.902   6830.018 115165.228  56610.650  12294.775
+##  [9]  21863.319  54701.270</code></pre>
 <p>Let’s visualize these</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">hist</span>(T.vec)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>We see a lot of coalescence about 50 KYA, which is as far back as
 Batini’s estimates go. This means the population was small back
 then.</p>
@@ -737,11 +742,11 @@ coalescence with discrete periods of time.</p>
 <a class="sourceLine" id="cb183-4" data-line-number="4"><span class="kw">plot</span>(kya, St, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
 <a class="sourceLine" id="cb183-5" data-line-number="5">     <span class="dt">xlab =</span> <span class="st">&quot;Kilo years ago&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fraction of pairs without common ancestor&quot;</span>,</a>
 <a class="sourceLine" id="cb183-6" data-line-number="6">     <span class="dt">main =</span> <span class="st">&quot;Estimated probability of not coalescing&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">plot</span>(kya, <span class="kw">log</span>(St), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
 <a class="sourceLine" id="cb184-2" data-line-number="2">     <span class="dt">xlab =</span> <span class="st">&quot;Kilo years ago&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Log fraction of pairs without common ancestor&quot;</span>,</a>
 <a class="sourceLine" id="cb184-3" data-line-number="3">     <span class="dt">main =</span> <span class="st">&quot;Etimatated probability of not coalescing, log scale&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-180-2.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-88-2.png" width="672" /></p>
 <blockquote>
 <p>Q: What is happening to slope in first from 1,000 to 50,000 years
 ago?</p>
@@ -764,14 +769,14 @@ ago?</p>
 <a class="sourceLine" id="cb185-4" data-line-number="4">kya_smooth =<span class="st"> </span>out<span class="op">$</span>x</a>
 <a class="sourceLine" id="cb185-5" data-line-number="5"><span class="kw">plot</span>(kya, St, <span class="dt">cex =</span> <span class="fl">.5</span>)</a>
 <a class="sourceLine" id="cb185-6" data-line-number="6"><span class="kw">lines</span>(kya_smooth, St_smooth, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <blockquote>
 <p>Q. Is f=1/5 a decent fit? Try a different value.</p>
 </blockquote>
 <p>Hazards as minus the slope of log</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">haz_hat =<span class="st"> </span><span class="op">-</span><span class="kw">diff</span>(St_smooth)<span class="op">/</span><span class="kw">diff</span>(kya_smooth)</a>
 <a class="sourceLine" id="cb186-2" data-line-number="2"><span class="kw">plot</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>], haz_hat, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
 <blockquote>
 <p>Q. Does this plot tell us anything about uncertainty?</p>
 </blockquote>
@@ -828,7 +833,7 @@ have MRCA in time intervals</p>
 <a class="sourceLine" id="cb191-2" data-line-number="2"><span class="kw">plot</span>(x.mid, nmx, <span class="dt">type =</span> <span class="st">&#39;o&#39;</span>)</a>
 <a class="sourceLine" id="cb191-3" data-line-number="3"><span class="kw">axis</span>(<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb191-4" data-line-number="4"><span class="kw">lines</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>, haz_hat<span class="op">/</span><span class="dv">1000</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-186-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 <p>We’re getting basically the same thing, with a little more hint of
 rising hazards (shrinking pop size) in first 20 kya. Nearly the same
 thing estimate 40 kya ago, and very little signal before that.</p>
@@ -862,7 +867,7 @@ hazard into geneations of 25 years in length.</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">plot</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>], Ne_smooth, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">60000</span>), <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>,</a>
 <a class="sourceLine" id="cb193-2" data-line-number="2">     <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb193-3" data-line-number="3"><span class="kw">lines</span>(kya_step, Ne_lifetable_step, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 <p>Uncertainty</p>
 <blockquote>
 <p>Q. How could we evaluate undercertainty? (Hint: resampling)</p>
@@ -958,7 +963,7 @@ home.)</p>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">Ne.interval &lt;-<span class="st"> </span><span class="kw">apply</span>(Ne.mat, <span class="dv">2</span>, quantile, <span class="kw">c</span>(.<span class="dv">1</span>,.<span class="dv">5</span>, <span class="fl">.9</span>))</a>
 <a class="sourceLine" id="cb196-2" data-line-number="2"><span class="kw">matplot</span>(<span class="kw">t</span>(Ne.interval), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb196-3" data-line-number="3"><span class="kw">lines</span>(Ne.interval[<span class="st">&quot;50%&quot;</span>,], <span class="dt">lwd =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 <p>So it seems fairly clear that effective population size has been
 growing the last 50 thousand years, from a low of a few thousand to a
 few tens of thousand.</p>
@@ -987,7 +992,7 @@ happens.</p></li>
 if you can see either the post-glaciation population increase or
 the Bronze Age increase? (I don’t know if it’s possible with our
 methods.)</p></li>
-<li><p><em>possible term project</em> Figure out how to use BEAST or some other software and
+<li><p>Figure out how to use BEAST or some other software and
 reproduce their results for one sub-population and tell us what you learned.</p></li>
 </ol>
 

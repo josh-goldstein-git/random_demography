@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,10 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#outline"><i class="fa fa-check"></i><b>2.1</b> Outline</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#part-i.-conceptual-introduction"><i class="fa fa-check"></i><b>2.2</b> Part I. Conceptual Introduction</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#what-is-demographic-heterogeneity"><i class="fa fa-check"></i><b>2.2.1</b> What is Demographic Heterogeneity?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#an-example"><i class="fa fa-check"></i><b>2.2.2</b> An example</a></li>
-<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#a-2nd-example-exponential-growth-two-countries"><i class="fa fa-check"></i><b>2.2.3</b> A 2nd example: Exponential growth, two countries</a></li>
-<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#more-examples-to-work"><i class="fa fa-check"></i><b>2.2.4</b> More examples to work</a></li>
-<li class="chapter" data-level="2.2.5" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.5</b> Application</a></li>
+<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#analogies"><i class="fa fa-check"></i><b>2.2.2</b> Analogies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#whats-new"><i class="fa fa-check"></i><b>2.2.3</b> What’s new?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.4</b> Application</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#part-ii.-formal-analysis"><i class="fa fa-check"></i><b>2.3</b> Part II. Formal Analysis</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#outline-1"><i class="fa fa-check"></i><b>2.3.1</b> Outline</a></li>
@@ -433,7 +432,7 @@ baseline hazard in terms of the observed popualtion hazard
 <a class="sourceLine" id="cb51-8" data-line-number="8">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f1), <span class="dt">lty =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
 <a class="sourceLine" id="cb51-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;obs if s2 = .2^2&quot;</span>, <span class="st">&quot;obs if s2 = .5^2&quot;</span>, <span class="st">&quot;obs if s2 = 1^2&quot;</span>),</a>
 <a class="sourceLine" id="cb51-10" data-line-number="10">       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Italian Females vs Males born 1915 (<span class="math inline">\(\sigma^2 = .5^2\)</span>)</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb52-2" data-line-number="2"><span class="co">## title(&quot;Cumulative Hazards\n Italian Females born 1915&quot;)</span></a>
@@ -456,7 +455,7 @@ baseline hazard in terms of the observed popualtion hazard
 <a class="sourceLine" id="cb52-19" data-line-number="19">                              <span class="st">&quot;implied baseline&quot;</span>),</a>
 <a class="sourceLine" id="cb52-20" data-line-number="20"><span class="co">##       col = c(&quot;red&quot;,&quot;blue&quot;),</span></a>
 <a class="sourceLine" id="cb52-21" data-line-number="21">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>Much bigger convergence in ``observed’’ than in baseline</p>
 </div>
 <div id="application-1" class="section level3">

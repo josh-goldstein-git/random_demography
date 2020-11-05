@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-07-08" />
+<meta name="date" content="2020-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,10 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#outline"><i class="fa fa-check"></i><b>2.1</b> Outline</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#part-i.-conceptual-introduction"><i class="fa fa-check"></i><b>2.2</b> Part I. Conceptual Introduction</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#what-is-demographic-heterogeneity"><i class="fa fa-check"></i><b>2.2.1</b> What is Demographic Heterogeneity?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#an-example"><i class="fa fa-check"></i><b>2.2.2</b> An example</a></li>
-<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#a-2nd-example-exponential-growth-two-countries"><i class="fa fa-check"></i><b>2.2.3</b> A 2nd example: Exponential growth, two countries</a></li>
-<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#more-examples-to-work"><i class="fa fa-check"></i><b>2.2.4</b> More examples to work</a></li>
-<li class="chapter" data-level="2.2.5" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.5</b> Application</a></li>
+<li class="chapter" data-level="2.2.2" data-path="intro.html"><a href="intro.html#analogies"><i class="fa fa-check"></i><b>2.2.2</b> Analogies</a></li>
+<li class="chapter" data-level="2.2.3" data-path="intro.html"><a href="intro.html#whats-new"><i class="fa fa-check"></i><b>2.2.3</b> What’s new?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="intro.html"><a href="intro.html#application"><i class="fa fa-check"></i><b>2.2.4</b> Application</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#part-ii.-formal-analysis"><i class="fa fa-check"></i><b>2.3</b> Part II. Formal Analysis</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#outline-1"><i class="fa fa-check"></i><b>2.3.1</b> Outline</a></li>
@@ -400,7 +399,7 @@ universal.</li>
 <a class="sourceLine" id="cb132-4" data-line-number="4">  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></a>
 <a class="sourceLine" id="cb132-5" data-line-number="5">  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">main =</span> <span class="st">&quot;FW simu&quot;</span>)</a>
 <a class="sourceLine" id="cb132-6" data-line-number="6">  <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">y =</span> <span class="kw">jitter</span>(ptt[,<span class="dv">4</span>]), <span class="kw">rownames</span>(ptt), <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p>Questions:</p>
 <ul>
 <li>What happens at time 15?</li>
@@ -414,7 +413,7 @@ universal.</li>
 <a class="sourceLine" id="cb133-3" data-line-number="3">  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></a>
 <a class="sourceLine" id="cb133-4" data-line-number="4">  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></a>
 <a class="sourceLine" id="cb133-5" data-line-number="5">  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <ul>
 <li>What does this remind you of? What will happen in long run?</li>
 <li>What other questions could we ask?</li>
@@ -435,7 +434,7 @@ universal.</li>
 <a class="sourceLine" id="cb134-4" data-line-number="4">  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></a>
 <a class="sourceLine" id="cb134-5" data-line-number="5">  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">main =</span> <span class="st">&quot;FW simu&quot;</span>)</a>
 <a class="sourceLine" id="cb134-6" data-line-number="6">  <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">y =</span> <span class="kw">jitter</span>(ptt[,<span class="dv">4</span>]), <span class="kw">rownames</span>(ptt), <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <p>Expected time until fixation?</p>
 <p>Answer for us is
 <span class="math display">\[
@@ -556,7 +555,7 @@ Note: failing to reject FW doesn’t mean it’s correct</li>
 <a class="sourceLine" id="cb139-8" data-line-number="8">my.x &lt;-<span class="st"> </span>my.breaks[<span class="op">-</span><span class="kw">length</span>(my.breaks)] <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(my.breaks)<span class="op">/</span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb139-9" data-line-number="9"><span class="kw">plot</span>(my.x, out, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning in xy.coords(x, y, xlabel, ylabel, log): 1 y value &lt;= 0 omitted from logarithmic plot</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 </div>
 <div id="drawing-their-picture-with-simulation" class="section level3">
 <h3><span class="header-section-number">9.5.3</span> Drawing their picture with simulation</h3>
@@ -596,13 +595,13 @@ Note: failing to reject FW doesn’t mean it’s correct</li>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dv">1000</span>, <span class="dt">n_gen =</span> <span class="dv">4000</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb143-2" data-line-number="2">G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</a>
 <a class="sourceLine" id="cb143-3" data-line-number="3"><span class="kw">plot</span>(G.vec)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <p>with mutation, 1 trial</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">N =<span class="st"> </span><span class="dv">1000</span></a>
 <a class="sourceLine" id="cb144-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, <span class="dt">n_gen =</span> <span class="dv">3000</span>, <span class="dt">mu =</span> <span class="dv">4</span><span class="op">/</span>N)</a>
 <a class="sourceLine" id="cb144-3" data-line-number="3">G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</a>
 <a class="sourceLine" id="cb144-4" data-line-number="4"><span class="kw">plot</span>(G.vec)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-164-1.png" width="672" />
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-72-1.png" width="672" />
 average over 100 trials</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">n_gen =<span class="st"> </span><span class="dv">2000</span></a>
 <a class="sourceLine" id="cb145-2" data-line-number="2">n_trials =<span class="st"> </span><span class="dv">100</span></a>
@@ -619,7 +618,7 @@ average over 100 trials</p>
 <a class="sourceLine" id="cb145-13" data-line-number="13">G.bar &lt;-<span class="st"> </span><span class="kw">apply</span>(G.mat, <span class="dv">2</span>, mean)</a>
 <a class="sourceLine" id="cb145-14" data-line-number="14"><span class="kw">lines</span>(G.bar, <span class="dt">lwd =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb145-15" data-line-number="15"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">lwd =</span> <span class="dv">5</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-165-1.png" width="672" />
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-73-1.png" width="672" />
 cool plot, why is it about .11?</p>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">8</span>)</a></code></pre></div>
 <pre><code>## [1] 0.1111111</code></pre>
@@ -660,7 +659,7 @@ cool plot, why is it about .11?</p>
 <a class="sourceLine" id="cb149-22" data-line-number="22"><span class="kw">plot</span>(my.x, out, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning in xy.coords(x, y, xlabel, ylabel, log): 1 y value &lt;= 0 omitted from logarithmic plot</code></pre>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">lines</span>(my.x, out.hat)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 </div>
 <div id="conclusions-5" class="section level2">
 <h2><span class="header-section-number">9.7</span> Conclusions</h2>
