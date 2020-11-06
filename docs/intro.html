@@ -24,11 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<<<<<<< HEAD
-<meta name="date" content="2020-11-04" />
-=======
-<meta name="date" content="2020-07-29" />
->>>>>>> f0614114de38ec3c060c45ecec38f3138c202de1
+<meta name="date" content="2020-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -331,21 +327,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Keyfitz’s result <span class="math inline">\(\bar{r}&#39;(t) = \sigma^2_r(t)\)</span>.</li>
 <li>Ken’s model of Poisson heterogeneity</li>
 </ol>
-<p>Resources:</p>
-<p>Content is based on Section 8.8 from <span class="citation">Wachter (<a href="#ref-wachter2014essential">2014</a>)</span> as well as <span class="citation">Vaupel and Yashin (<a href="#ref-vaupel1985heterogeneity">1985</a>)</span> for an accessible introduction to heterogeneity and overview. Derivations also from <span class="citation">Keyfitz (<a href="#ref-keyfitz2005applied">2005</a>)</span>.</p>
 </div>
 <div id="part-i.-conceptual-introduction" class="section level2">
 <h2><span class="header-section-number">2.2</span> Part I. Conceptual Introduction</h2>
 <div id="what-is-demographic-heterogeneity" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> What is Demographic Heterogeneity?</h3>
 <ul>
-<li>If we see different outcomes (e.g., people dying at different ages), is this <em>Demographic Heterogeneity</em>? NO.</li>
+<li>If we see different outcomes (e.g., people dying at different ages),
+is this <em>Demographic Heterogeneity</em>? NO.</li>
 <li>Demographic heterogeneity <span class="math inline">\(=\)</span> different rates for different folks.</li>
 </ul>
 <blockquote>
-<p>In a <em>demographically heterogeneous</em> population, people are of different types, with different type-specific rates.</p>
+<p>In a <em>demographically heterogeneous</em> population, people are of
+different types, with different type-specific rates.</p>
 </blockquote>
-<<<<<<< HEAD
 <p>(These types can be discrete, with individuals being
 homogeneous within their type, or they can be continuous with possibly
 no individual having exactly the same risk as another.)</p>
@@ -353,14 +348,6 @@ no individual having exactly the same risk as another.)</p>
 <h4><span class="header-section-number">2.2.1.1</span> An example</h4>
 <p>Let’s draw 10 individuals from a homogeneous population and
 heterogeneous population.</p>
-=======
-<p>These types can be discrete, with individuals being homogeneous within their type, or they can be continuous with possibly no individual having exactly the same risk as another.</p>
-<p><em>NOTE: maybe add here a summary of <span class="citation">Vaupel and Yashin (<a href="#ref-vaupel1985heterogeneity">1985</a>)</span>?</em></p>
-</div>
-<div id="an-example" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> An example</h3>
-<p>Let’s draw 10 individuals from a homogeneous population and heterogeneous population.</p>
->>>>>>> f0614114de38ec3c060c45ecec38f3138c202de1
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="co">## Homogeneous hazard of 1/10</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">set.seed</span>(<span class="dv">13</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  x.homo &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)</a>
@@ -666,18 +653,6 @@ rates</p></li>
 <li><p>Poisson growth gives us a closed-form solution.</p></li>
 </ul>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-keyfitz2005applied">
-<p>Keyfitz, Nathan. 2005. <em>Applied Mathematical Demography</em>. Springer.</p>
-</div>
-<div id="ref-vaupel1985heterogeneity">
-<p>Vaupel, James W, and Anatoli I Yashin. 1985. “Heterogeneity’s Ruses: Some Surprising Effects of Selection on Population Dynamics.” <em>The American Statistician</em> 39 (3). Taylor &amp; Francis: 176–85.</p>
-</div>
-<div id="ref-wachter2014essential">
-<p>Wachter, Kenneth W. 2014. <em>Essential Demographic Methods</em>. Harvard University Press.</p>
 </div>
 </div>
             </section>
