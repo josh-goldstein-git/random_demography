@@ -1,7 +1,7 @@
 # Mortality plateaus
 
 ## Outline
-- Math
+- Mathematical background
 - Ken's class
 - Presentation
 
@@ -19,14 +19,30 @@
   \bar\mu(x,t) = \mu_0(x,t) \bar{S}_c(x,t)^{\sigma^2}
   $$ 
 
-  We take the log and the time-derivative of hazards  give \vm (39^*)
+  We take the log and the time-derivative of hazards  give V&M (39*)
   $$ 
   \rho(x,t) = \rho_0(x,t) - \sigma^2 {d \over dt} \log
   \bar{S}_c(x,t)^{\sigma^2}
   $$ 
 
-  So individual risks from one cohort to the next are going down
-  faster it seems. Intuition?
+> Note: this formula should be correct. V&M contains a mistake: an extra minus sign in the definition of   $\bar{S}_c(x,t)$. 
+
+We take the log and the time-derivative of hazards  give V&M (39*)
+
+  $$ 
+  \rho(x,t) = \rho_0(x,t) - \sigma^2 {d \over dt} \log
+  \bar{S}_c(x,t)
+  $$ 
+
+So individual risks from one cohort to the next are going down faster it seems. Intuition?
+
+Reversing perspective,
+
+  $$ 
+   \rho_0(x,t) = \rho(x,t) + \sigma^2 {d \over dt} \log
+  \bar{S}_c(x,t)
+  $$ 
+
   
 ### An example
 
@@ -44,9 +60,7 @@ library(data.table)
   (d.log.Sx <- log(Sx.80.c1900/Sx.80.c1880)/20)
   (rho.0.80 = rho.bar.80 + sigma.sq * d.log.Sx) ##  about 1.3%
 ```
-So mortality progress is more than 50\% faster than it appears!
-
-Issues?
+So individual-level mortality progress is nearly 50% faster (1.3% vs. 0.9%) than it appears! 
 
 ## Conclusions 
 - Gamma frailty gives simple expressions for population survival,
@@ -59,15 +73,16 @@ cross-over with age
 selection”
 
 
-## Ken's class - Hazards and Plateaus
-Outline
+## Hazards and Plateaus by Professor Ken Wachter
+
+### Outline
 
 1. Extremes of Longevity in Humans and Other Species 
 2. Gamma-Gompertz Fixed Frailty Hazards 
 3. Less Restrictive Frailty Models
 4. Mutation Accumulation, Gompertz Hazards with Plateaus
 
-Note: we thank Professor Kenneth Wachter for letting us use the presentation and code from his class on Hazards and Plateaus on February 20, 2020 at Demography UC Berkeley. 
+> Note: we thank Professor Kenneth Wachter for letting us use the presentation and code from his class on Hazards and Plateaus on February 20, 2020 at Demography UC Berkeley. 
 
 ### Extremes of Longevity in Humans and Other Species 
 ```{r plateaubarbi, fig.cap='Estimated plateau for cohort of Italian women from 1904. Source: @barbi2018', out.width='80%',fig.align='center',  echo=FALSE}
@@ -80,11 +95,13 @@ Note: we thank Professor Kenneth Wachter for letting us use the presentation and
    - They point to commonalities with the life-course demography of other species. The shared genetic heritage of advanced organisms is permissive.
    
    For instance, we can compare human hazard to that of other species:  
-```{r plateauhoriuchi, fig.cap='Hazards across selected species. Source: @horiuchi2003', out.width='80%', fig.align='center', fig.height=4,  echo=FALSE}
+   
+```{r plateauhoriuchi, echo=FALSE, fig.align='center', fig.cap='Hazards across selected species. Source: @horiuchi2003', fig.height=5, out.width='80%'}
     knitr::include_graphics('figures/plateau_2.png')
     ```   
     
 ### Gamma-Gompertz Fixed Frailty Hazards
+
 - The Gamma-Gompertz model of @vaupel1979 is familiar from this course and Chapter 8 of Essential Demographic Methods [@wachter2014essential].
 - Gamma Gompertz models are one way of generating plateaus for population hazards out of increasing individual hazards.
 - We fit parameters to the data in @barbi2018 and look for a predicted plateau, starting from age 60 onwards.
@@ -94,6 +111,7 @@ cumulative hazard $H_x$, and for the aggregate population hazard $\mu_x$ implied
 - Does the level of the plateau fit plateau observed in the Italian cohorts over age 105?   
 
   To answer these questions, we create the process below to calculate the aggregate population hazard function predicted from Gompertz hazards for individuals combined with a Gamma distribution for fixed proportional frailty, using parameters matched to the Italian cohort data for @barbi2018.  
+  
 ```{r, echo=TRUE}
     # Parameters for Gompertz and Gamma 
     beta     <-  0.088            #  Gompertz slope parameter,  Barbi et al.
@@ -113,7 +131,8 @@ cumulative hazard $H_x$, and for the aggregate population hazard $\mu_x$ implied
     ###  Aggregate population hazard mu_x with Gamma frailty:
     mux       <-  hx *khat/ (khat + Hx)
 ```
-```{r,  fig.cap='Hazards and plateau with Gamma frailty', out.width='80%', fig.align='center', echo=FALSE }
+
+```{r echo=TRUE, fig.align='center', fig.cap='Hazards and plateau with Gamma frailty', out.width='80%'}
     #Plot:
     plot(age, log(hx), type= "l", col="blue", xlim = c(60,130), ylim =c(min(log(hx)),4),
          xlab= "Ages for estimated Gompertz", ylab="Log hazard") #individual hazard
@@ -124,11 +143,16 @@ cumulative hazard $H_x$, and for the aggregate population hazard $\mu_x$ implied
                                "Plateau estimate Barbi et al. (2018)"),
        col=c( "blue","red", "black"), lty=rep(1,3))
 ```
-  Note that the x-axis shows the ages for the estimated Gompertz, that is for a population of ages 60 and above. $\mu_x$ appears to reach its own plateau due to the chosen parameters from the Gamma-Gompertz model. In this case, we get a plateau further along than in the italian case of @barbi2018. Gamma gompertz models are good at fitting plateaus mathematically but may not be aplicable with the data.  
+
+- Note that the x-axis shows the ages for the estimated Gompertz, that is for a population of ages 60 and above.
+- $\mu_x$ appears to reach its own plateau due to the chosen parameters from the Gamma-Gompertz model. 
+- In this case, we get a plateau further along than in the italian case of @barbi2018. 
+- Gamma gompertz models are good at fitting plateaus mathematically but may not be aplicable with the data.  
  
 #### How does Gamma Gompertz Make a Plateau?  
-- Try alternative values for $k$ and for $\beta$. Guess a formula for the level of the plateau.  
-```{r, echo=FALSE, warning=FALSE}
+- Try alternative values for $k$ and for $\beta$. Guess a formula for the level of the plateau. 
+
+```{r echo=TRUE, warning=FALSE}
 beta_vals <- c(0.001, 0.1, beta, 0.5,1,10)
 k_vals <- c(0.1, 1, 3, khat,10)
 
@@ -193,8 +217,12 @@ mux      <-  hx *k_vals/ (k_vals + Hx)
 
 }
 ```
-  - Here, we change the values of $\beta$ while fixing the $k$ shape factor of the Gamma frailty distribution. As $\beta$ increases, the individual and population hazards rise (or shift upwards). For comparison, the third panel contains the $\beta=0.088$  and $k=7.045455$ values used in the previous excercise.
-```{r,warning=FALSE,fig.cap='Changing values of beta in Gompertz hazards', fig.align='center',  echo=FALSE, message=FALSE}
+  
+- Here, we change the values of $\beta$ while fixing the $k$ shape factor of the Gamma frailty distribution. 
+- As $\beta$ increases, the individual and population hazards rise (or shift upwards). 
+- For comparison, the third panel contains the $\beta=0.088$  and $k=7.045455$ values used in the previous excercise.
+
+```{r echo=TRUE, fig.height=6, message=FALSE, fig.cap ='Changing values of beta in Gompertz hazards', fig.align='center'}
 par(mfrow=c(2,3))
 plateau_beta_nolegend(beta_vals[1],khat)
 plateau_beta_nolegend(beta_vals[2],khat)
@@ -202,8 +230,14 @@ plateau_beta_nolegend(beta_vals[3],khat)
 plateau_beta_nolegend(beta_vals[4],khat)
 plateau_beta_legend(beta_vals[5],khat)
 ```
-  - The following graphs fix $\beta=0.088$ but use different values of $k$. Contrary to what happens when $\beta$ varies, when the shape parameter of the Gamma frailty distribution changes, only the population hazards appear to change. Population hazards expand upwards with increases in $k$. The fourth panel uses the baseline  values for $\beta=0.088$ and $k=7.045455$.
-```{r,warning=FALSE,fig.cap='Changing values of k (Gamma shape parameter)', fig.align='center', echo=FALSE}
+
+- The following graphs fix $\beta=0.088$ but use different values of $k$. 
+
+- Contrary to what happens when $\beta$ varies, when the shape parameter of the Gamma frailty distribution changes, only the population hazards appear to change. 
+
+- Population hazards expand upwards with increases in $k$. The fourth panel uses the baseline  values for $\beta=0.088$ and $k=7.045455$.
+
+```{r echo=TRUE, fig.height=6, fig.cap = 'Changing values of k (Gamma shape parameter)', fig.align='center'}
 par(mfrow=c(2,3))
 plateau_k_nolegend(beta,k_vals[1] )
 plateau_k_nolegend(beta,k_vals[2] )
@@ -211,6 +245,7 @@ plateau_k_nolegend(beta,k_vals[3] )
 plateau_k_nolegend(beta,k_vals[4] )
 plateau_k_legend(beta,k_vals[5] )
 ```
+
 - This formula can be proved by showing that $h_{x}/H_{x}$ goes to $\beta$ in a Gompertz model and plugging into the formula for Gamma Gompertz aggregate hazards. 
 (**Note for Josh: I don't think Ken really explained this in class and I'm confused on how to answer this.**)
 - What happens to the mean frailty of survivors as $x$ increases? What has to balance what in order for a plateau to appear?  
@@ -218,7 +253,7 @@ plateau_k_legend(beta,k_vals[5] )
   - The mean frailty falls across ages, such that around 105 years, the mean frailty is about 0.5. It continues decreasing until it reaches a plateau of about 0.1 starting from age 130 onwards. Survivors past 130 have a low mean frailty but at a higher hazard, as seen by the plateau from previous graph. 
   - The plateau comes from the people that are low frailty but that die. This loss balances out the increase that everyone is experiencing. Selection is balancing senescence. 
 
-```{r,warning=FALSE,fig.cap='Mean frailty', fig.align='center', echo=FALSE}
+```{r echo=TRUE, fig.cap = 'Mean frailty', fig.align='center'}
 plot( age, mux/hx, xlim = c(60, 200), type = "l"  , xlab = "", ylab = "Mean Frailty" )
 abline( h = 0.5,  lty = 3     )                     # vertical age 105   
 abline( h = 0.1,  lty = 3     )                     # vertical age 105   
@@ -288,7 +323,7 @@ $\mu_x = -\frac{d}{dx}\left(k  log(\theta)- k  log(\theta+H_x)\right)= \left(\fr
 - Take, for example, $\lambda = 0.080$, $\delta= 0.002$, and $\nu(a) = 0.020/50$ for any $a \geq 20$. For each separate choice of age of onset $a$, find and plot the
 equilibrium size $rho(a)$ as a function of $a$.
   - Here, we explore a genetic process which can generate a plateau in individual hazard functions. In particular, this is the case where a harmful mutant allele increases the hazard function of those that carry such allele with onset only in a single age interval.
-```{r,echo=FALSE, warning=FALSE}
+```{r echo=TRUE, warning=FALSE}
 # Parameters
 lambda   <-   0.080           #  background extrinsic hazard 
 delta    <-   0.002           #  increment to hazard from mutant allele
@@ -324,10 +359,10 @@ for  ( a in seq(xxx))      {
 ```
   - $\rho(a)$ increases exponentially, this comes from the exponential survival. This graph tells us, the number of people that survive when the mutation is triggered at a given age. So at age 70, about 1400 people survive but if the mutation hit at age 20, nobody would survive. 
 
-```{r,warning=FALSE,fig.cap='$\rho(a)$ as a function of age', fig.align='center', echo=FALSE}
+```{r echo=TRUE, fig.cap="$\\rho(a)$ as a function of age", fig.align='center'}
 par(mfrow=c(1,2))
 plot(  age,  bigrho, ylab=expression(~rho(a)))
-plot(  age,  log(bigrho), ylab =expression("log"~rho(a))  )
+plot(  age,  log(bigrho), ylab =expression("log" ~rho(a))  )
 ```
 
 #### Allele Counts and Individual Hazards
@@ -338,7 +373,7 @@ plot(  age,  log(bigrho), ylab =expression("log"~rho(a))  )
 ```{r}
 hxx  <-  lambda +  bigrho*delta  
 ```
-```{r,warning=FALSE,fig.cap='Hazard after exposure to allele', fig.align='center', echo=FALSE}
+```{r echo=TRUE, fig.cap = 'Hazard after exposure to allele', fig.align='center'}
 plot ( age, hxx,  ylim = c(0,0.500) , ylab= "hazard")     
 ```
 - The background intrinsic mortality $\lambda$ comes from the environment, not from the DNA. What might happen to $\lambda$ as we move from the time of the cave painters to the time of the moon landings?
@@ -351,7 +386,7 @@ plot ( age, hxx,  ylim = c(0,0.500) , ylab= "hazard")
 - Is it plausible to expect some fixed cost along with an age-specific effect from mildly deleterious mutant alleles?
   - Here is the case were a deleterious mutant allele imposes a fixed cost of size $\epsilon$ as well as adding an increment of size $\delta$ to the hazard in age interval $a$.
   - There appears to be a plateau on the survivors after the onset of the mutation at age $a$ when we add a fixed cost to the mutation, even if it is happening late in the reproductive cycle. 
-```{r,warning=FALSE,fig.cap='', fig.align='center', echo=FALSE}
+```{r echo=TRUE, fig.align='center'}
 #Loop over choices of an age interval a at which the mutant allele affects the hazard with fixed cost
 
 bigrho2   <-  NULL             #  vector for holding values of rho  
@@ -369,7 +404,8 @@ for  ( a in seq(xxx))      {
   bigrho2 <- c(bigrho2, rho)
 }      
 ```
-```{r warning=FALSE,fig.cap='$\rho(a)$ as a function of age', fig.align='center', echo=FALSE}
+
+```{r echo=TRUE, fig.align='center', fig.cap="$\\rho(a)$ as a function of age", warning=FALSE}
 par(mfrow=c(1,2))
 plot(  age,  bigrho2, ylab=expression(~rho(a)))
 plot(  age,  log(bigrho2), ylab =expression("log"~rho(a))  )
