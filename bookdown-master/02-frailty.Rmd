@@ -2,7 +2,7 @@
 
 ## Outline
 1. Review of Mortality Mathematics
-2. Multiplicative-fixed-frailty and alternatives to it.
+2. Multiplicative-fixed-frailty and alternatives.
 3. Population Survival and Hazards under fixed frailty
 4. Gamma frailty
 
@@ -57,7 +57,7 @@ Additional resources
 
 
 
-Multiplicative Fixed frailty
+### Multiplicative Fixed frailty
   For individual $i$,
   $$
   \mu_i(x) = z_i \mu_0(x).
@@ -67,16 +67,10 @@ Multiplicative Fixed frailty
     of as a random variable with mean $1$.)
   - $\mu_0(x)$ "Baseline hazard" schedule.  (Also, the
     schedule of a person with $z = 1$).
-  
-\begin{frame}{What are some alternatives?}
+  - Let's think of at least three. ($\beta$, $i$, $\Delta$)
 
-  Let's think of at least three.
-  
-  ($\beta$, $i$, $\Delta$)
-\end{frame}
+Which look like multiplicative fixed frailty?
 
-### fragile
-  Which look like multiplicative fixed frailty?
 ```{r, fig.height = 3, echo = F, message = F, warning = F, hide = T, results = F}
   library(data.table)
   dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/SWE.Mx_5x5.txt", na.string = ".")
@@ -192,13 +186,13 @@ Vaupel's result
 
 ### The Gamma distribution
   
--  What do we want in a frailty distribution?
-  -  What's the Gamma?
-  -  Last math: closed form pop survival
+- What do we want in a frailty distribution?
   -  positive?
   -  a single dimension summarizing multiple factors? (Normal?)
   -  flexible?
   -  tractable?
+
+-  What's the Gamma?
 
 
 $$
@@ -211,8 +205,8 @@ $$.
 
 ### Gamma in R
 
-  - Mean: $k / \lambda$ 
-  - Variance: $ k / \lambda^2$
+- Mean: $k / \lambda$ 
+- Variance: $k / \lambda^2$
   
 
 ```{r}
