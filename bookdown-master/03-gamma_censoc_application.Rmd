@@ -3,7 +3,7 @@
 # Gamma Frailty with Applications
 
   
-## From pop survival to pop hazards
+## From survival to hazards
   We have
   $$
   \bar S(x) = {1 \over  \left(1 + \sigma^2 H_0(x)\right)^{1/ \sigma^2}}
@@ -28,13 +28,14 @@
 
 #### Example: Gamma-Gompertz
   
-  \item If $H_0(x)$ be Gompertz, we have closed-form
+  - If $H_0(x)$ be Gompertz, we have closed-form
     expression. What is it?
-  \item Does $\bar{z}$ have the form
-    $$
-    {1 \over 1 + v*e^{w x}}
-    $$
-  \item This is a backwards S, going down.
+    
+  - Does $\bar{z}$ have the form
+  
+    $${1 \over 1 + v*e^{w x}}$$
+    
+  - This is a backwards S, going down.
   
 ```{r, fig.height = 3}
 sigma.sq = .2
@@ -46,15 +47,14 @@ bar.z = 1 / (1 + sigma.sq * H0.x)
 plot(x, bar.z)
 ```
 
-Look at the apparent exponential decline in tail
-Homework: what is proportional rate of change in $\bar{z}$ as $x$ 
-gets big? Is it close to Gompertz $b$?
+Look at the apparent exponential decline in tail.
 
-Average frailty in terms of survival
+> Homework: what is proportional rate of change in $\bar{z}$ as $x$ gets big? Is it close to Gompertz $b$?
 
-  $$ 
-  \bar{z}(x) = [\bar{S}(x)]^{\sigma^2}!
-  $$
+### Average frailty in terms of survival
+
+  $$ \bar{z}(x) = [\bar{S}(x)]^{\sigma^2}$$
+Let's derive?
 
   In real life, we observe $\bar{S}(x)$. So this allows us to say
   something about implied $\bar{z}$ from hazards.
@@ -65,9 +65,9 @@ Average frailty in terms of survival
   the variance of the proportional effect of the observed
   characteristic.)
 
-## Selection and observed frailty in CenSoc
+## CenSoc: Selection and observed frailty
 
-We have a large matched sample from the 1940 census to Social Security death data observed from 1975 to 2004.  This means that we can compute the survival curves of extinct cohorts and see how mortality selection changes the composition of the cohort as it ages.
+We have a large matched sample from the 1940 census to Social Security death data observed from 1975 to 2004. This means that we can compute the survival curves of extinct cohorts and see how mortality selection changes the composition of the cohort as it ages.
 
 In this example, we use observed wage income in 1940 for the cohort born 1895 to 1900. We look at how wages of survivors increase with age as a result of selective mortality and we see if the gamma-frailty model can produce similar results.  
 
@@ -144,7 +144,7 @@ title("Standardized log of Wage income by surviving age", cex.main = .7)
 
 So we see annual wage income in 1940 increases by about $100 or so, or about 5% from age 75 to age 95. And more after that.
 
-> Is this what we would expect from our Gamma frailty model?
+- Is this what we would expect from our Gamma frailty model?
 
 ### Estimation
 
@@ -173,7 +173,7 @@ beta <- coef(m)
 
 ```
 
-> The effect is very small. Any ideas why?
+- The effect is very small. Any ideas why?
 
 Now estimate our z's.
 
@@ -182,7 +182,7 @@ my.dt[, z := exp(beta * y)]
 hist_z <- my.dt[, hist(z, xlim = c(0, 3))]
 ```
 
-> Does this look gamma-like?
+- Does this look gamma-like?
 
 
 Calculating the variance of $z_{obs}$ to be used for estimating $\bar{z}_{obs}$. (Also plotting the histogram to see if it looks gamma-like)
@@ -214,9 +214,9 @@ lines(80:100, predict(m), lwd = 2)
 axis(2)
 ## no slowdown in mortality!!
 ```
-> How does Dx look? Plausible?
+- How does Dx look? Plausible?
 
-> How about hazards? They are Gompertzian for a while, but how do we explain tails?
+- How about hazards? They are Gompertzian for a while, but how do we explain tails?
 
 ```{r}
 plot(x, lx)
@@ -254,9 +254,9 @@ plot(x, z.bar.hat, ylim = c(.995, 1.001), type = "l", lty = 2)
 lines(x, z.bar)
 ```
 
-> How did we do?
+- How did we do?
 
-> I'm not quite sure why intercept of observed is not exactly 1.0. (Feel free to play around, but I don't think this is important -- I hope.)
+<!-- > I'm not quite sure why intercept of observed is not exactly 1.0. (Feel free to play around, but I don't think this is important -- I hope.) -->
 
 Showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including  $y$, and raw (unstandardized) income.
 
@@ -281,19 +281,19 @@ lines(x, y_orig.bar.hat.right, lty = 1)
 
 ###  Discuss our conclusions and possible future directions to follow.
 
-> How did we do? Does our gamma frailty model give basically the right prediction?
+- How did we do? Does our gamma frailty model give basically the right prediction?
 
-> How come it appears that wage income matters so little?
+- How come it appears that wage income matters so little?
 
-> How could we improve the measurement of wage income?
+- How could we improve the measurement of wage income?
 
-> What other variables could we look at? 
+- What other variables could we look at? 
 
-> How would we expect the gamma model do with another variable, e.g. educational attainment?
+- How would we expect the gamma model do with another variable, e.g. educational attainment?
 
-> What is the relationship between "observed" and "unobserved" frailty?
+- What is the relationship between "observed" and "unobserved" frailty?
 
-> IMPORTANT: Is our work here a validation of the model's applicability to real life? If so what are we validating?  That our transformed covariate is roughly gamma distributed? Are we assuming multiplicative fixed frailty -- or are we validating it's applicability?
+- IMPORTANT: Is our work here a validation of the model's applicability to real life? If so what are we validating?  That our transformed covariate is roughly gamma distributed? Are we assuming multiplicative fixed frailty -- or are we validating it's applicability?
 
 
 

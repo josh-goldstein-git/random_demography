@@ -175,10 +175,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="frailty.html"><a href="frailty.html#conclusions-1"><i class="fa fa-check"></i><b>3.4</b> Conclusions</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html"><i class="fa fa-check"></i><b>4</b> Gamma Frailty with Applications</a><ul>
-<li class="chapter" data-level="4.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#from-pop-survival-to-pop-hazards"><i class="fa fa-check"></i><b>4.1</b> From pop survival to pop hazards</a><ul>
+<li class="chapter" data-level="4.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#from-survival-to-hazards"><i class="fa fa-check"></i><b>4.1</b> From survival to hazards</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#what-happens-to-frailty-of-survivors"><i class="fa fa-check"></i><b>4.1.1</b> What happens to frailty of survivors?</a></li>
+<li class="chapter" data-level="4.1.2" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#average-frailty-in-terms-of-survival"><i class="fa fa-check"></i><b>4.1.2</b> Average frailty in terms of survival</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#selection-and-observed-frailty-in-censoc"><i class="fa fa-check"></i><b>4.2</b> Selection and observed frailty in CenSoc</a><ul>
+<li class="chapter" data-level="4.2" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#censoc-selection-and-observed-frailty"><i class="fa fa-check"></i><b>4.2</b> CenSoc: Selection and observed frailty</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#data"><i class="fa fa-check"></i><b>4.2.1</b> Data</a></li>
 <li class="chapter" data-level="4.2.2" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#estimation"><i class="fa fa-check"></i><b>4.2.2</b> Estimation</a></li>
 <li class="chapter" data-level="4.2.3" data-path="gamma-frailty-with-applications.html"><a href="gamma-frailty-with-applications.html#discuss-our-conclusions-and-possible-future-directions-to-follow."><i class="fa fa-check"></i><b>4.2.3</b> Discuss our conclusions and possible future directions to follow.</a></li>
@@ -319,8 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="gamma-frailty-with-applications" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Gamma Frailty with Applications</h1>
-<div id="from-pop-survival-to-pop-hazards" class="section level2">
-<h2><span class="header-section-number">4.1</span> From pop survival to pop hazards</h2>
+<div id="from-survival-to-hazards" class="section level2">
+<h2><span class="header-section-number">4.1</span> From survival to hazards</h2>
 <p>We have
 <span class="math display">\[
   \bar S(x) = {1 \over  \left(1 + \sigma^2 H_0(x)\right)^{1/ \sigma^2}}
@@ -339,16 +340,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Sketch <span class="math inline">\(\bar{z}(x)\)</span>. Hint: what form does <span class="math inline">\(H_0(x)\)</span> have?</p>
 <div id="example-gamma-gompertz" class="section level4">
 <h4><span class="header-section-number">4.1.1.1</span> Example: Gamma-Gompertz</h4>
-
-If <span class="math inline">\(H_0(x)\)</span> be Gompertz, we have closed-form
-expression. What is it?
-
-Does <span class="math inline">\(\bar{z}\)</span> have the form
-<span class="math display">\[
-    {1 \over 1 + v*e^{w x}}
-    \]</span>
-
-<p>This is a backwards S, going down.</p>
+<ul>
+<li><p>If <span class="math inline">\(H_0(x)\)</span> be Gompertz, we have closed-form
+expression. What is it?</p></li>
+<li><p>Does <span class="math inline">\(\bar{z}\)</span> have the form</p>
+<p><span class="math display">\[{1 \over 1 + v*e^{w x}}\]</span></p></li>
+<li><p>This is a backwards S, going down.</p></li>
+</ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">sigma.sq =<span class="st"> </span><span class="fl">.2</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">x =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">a =<span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></a>
@@ -357,13 +355,16 @@ Does <span class="math inline">\(\bar{z}\)</span> have the form
 <a class="sourceLine" id="cb13-6" data-line-number="6">bar.z =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span><span class="st"> </span>H0.x)</a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw">plot</span>(x, bar.z)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Look at the apparent exponential decline in tail
-Homework: what is proportional rate of change in <span class="math inline">\(\bar{z}\)</span> as <span class="math inline">\(x\)</span>
-gets big? Is it close to Gompertz <span class="math inline">\(b\)</span>?</p>
-<p>Average frailty in terms of survival</p>
-<p><span class="math display">\[ 
-  \bar{z}(x) = [\bar{S}(x)]^{\sigma^2}!
-  \]</span></p>
+<p>Look at the apparent exponential decline in tail.</p>
+<blockquote>
+<p>Homework: what is proportional rate of change in <span class="math inline">\(\bar{z}\)</span> as <span class="math inline">\(x\)</span> gets big? Is it close to Gompertz <span class="math inline">\(b\)</span>?</p>
+</blockquote>
+</div>
+</div>
+<div id="average-frailty-in-terms-of-survival" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Average frailty in terms of survival</h3>
+<p><span class="math display">\[ \bar{z}(x) = [\bar{S}(x)]^{\sigma^2}\]</span>
+Let’s derive?</p>
 <p>In real life, we observe <span class="math inline">\(\bar{S}(x)\)</span>. So this allows us to say
 something about implied <span class="math inline">\(\bar{z}\)</span> from hazards.</p>
 <p>Reversing the logic: if we see a characteristic changing with age,
@@ -372,9 +373,8 @@ the variance of the proportional effect of the observed
 characteristic.)</p>
 </div>
 </div>
-</div>
-<div id="selection-and-observed-frailty-in-censoc" class="section level2">
-<h2><span class="header-section-number">4.2</span> Selection and observed frailty in CenSoc</h2>
+<div id="censoc-selection-and-observed-frailty" class="section level2">
+<h2><span class="header-section-number">4.2</span> CenSoc: Selection and observed frailty</h2>
 <p>We have a large matched sample from the 1940 census to Social Security death data observed from 1975 to 2004. This means that we can compute the survival curves of extinct cohorts and see how mortality selection changes the composition of the cohort as it ages.</p>
 <p>In this example, we use observed wage income in 1940 for the cohort born 1895 to 1900. We look at how wages of survivors increase with age as a result of selective mortality and we see if the gamma-frailty model can produce similar results.</p>
 <div id="data" class="section level3">
@@ -434,9 +434,9 @@ characteristic.)</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">title</span>(<span class="st">&quot;Standardized log of Wage income by surviving age&quot;</span>, <span class="dt">cex.main =</span> <span class="fl">.7</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>So we see annual wage income in 1940 increases by about $100 or so, or about 5% from age 75 to age 95. And more after that.</p>
-<blockquote>
-<p>Is this what we would expect from our Gamma frailty model?</p>
-</blockquote>
+<ul>
+<li>Is this what we would expect from our Gamma frailty model?</li>
+</ul>
 </div>
 <div id="estimation" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Estimation</h3>
@@ -474,16 +474,16 @@ z_{obs} = e^{\hat\beta  y}
 <a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co">## y -0.03073   0.96974  0.00177 -17.36   &lt;2e-16 ***</span></a>
 <a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">## so a 10% increase in income reduces mortality by .3% (quite a tiny effect!)</span></a>
 <a class="sourceLine" id="cb34-4" data-line-number="4">beta &lt;-<span class="st"> </span><span class="kw">coef</span>(m)</a></code></pre></div>
-<blockquote>
-<p>The effect is very small. Any ideas why?</p>
-</blockquote>
+<ul>
+<li>The effect is very small. Any ideas why?</li>
+</ul>
 <p>Now estimate our z’s.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">my.dt[, z <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">exp</span>(beta <span class="op">*</span><span class="st"> </span>y)]</a>
 <a class="sourceLine" id="cb35-2" data-line-number="2">hist_z &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(z, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))]</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<blockquote>
-<p>Does this look gamma-like?</p>
-</blockquote>
+<ul>
+<li>Does this look gamma-like?</li>
+</ul>
 <p>Calculating the variance of <span class="math inline">\(z_{obs}\)</span> to be used for estimating <span class="math inline">\(\bar{z}_{obs}\)</span>. (Also plotting the histogram to see if it looks gamma-like)</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">sigma.sq &lt;-<span class="st"> </span><span class="kw">var</span>(my.dt<span class="op">$</span>z)</a>
 <a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">print</span>(sigma.sq)</a></code></pre></div>
@@ -509,12 +509,10 @@ z_{obs} = e^{\hat\beta  y}
 <a class="sourceLine" id="cb40-13" data-line-number="13"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co">## no slowdown in mortality!!</span></a></code></pre></div>
-<blockquote>
-<p>How does Dx look? Plausible?</p>
-</blockquote>
-<blockquote>
-<p>How about hazards? They are Gompertzian for a while, but how do we explain tails?</p>
-</blockquote>
+<ul>
+<li><p>How does Dx look? Plausible?</p></li>
+<li><p>How about hazards? They are Gompertzian for a while, but how do we explain tails?</p></li>
+</ul>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">plot</span>(x, lx)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Estimation of <span class="math inline">\(\hat{\bar{z}}(x)\)</span> using the gamma-frailty result:</p>
@@ -534,12 +532,10 @@ z_{obs} = e^{\hat\beta  y}
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">plot</span>(x, z.bar.hat, <span class="dt">ylim =</span> <span class="kw">c</span>(.<span class="dv">995</span>, <span class="fl">1.001</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">lines</span>(x, z.bar)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<blockquote>
-<p>How did we do?</p>
-</blockquote>
-<blockquote>
-<p>I’m not quite sure why intercept of observed is not exactly 1.0. (Feel free to play around, but I don’t think this is important – I hope.)</p>
-</blockquote>
+<ul>
+<li>How did we do?</li>
+</ul>
+<!-- > I'm not quite sure why intercept of observed is not exactly 1.0. (Feel free to play around, but I don't think this is important -- I hope.) -->
 <p>Showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including <span class="math inline">\(y\)</span>, and raw (unstandardized) income.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">y.bar.hat &lt;-<span class="st"> </span><span class="kw">log</span>(z.bar.hat)<span class="op">/</span>beta</a>
 <a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">plot</span>(x, y.bar, <span class="dt">ylab =</span> <span class="st">&quot;log(inc) - mean(log(inc))&quot;</span>)</a>
@@ -563,27 +559,15 @@ z_{obs} = e^{\hat\beta  y}
 </div>
 <div id="discuss-our-conclusions-and-possible-future-directions-to-follow." class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Discuss our conclusions and possible future directions to follow.</h3>
-<blockquote>
-<p>How did we do? Does our gamma frailty model give basically the right prediction?</p>
-</blockquote>
-<blockquote>
-<p>How come it appears that wage income matters so little?</p>
-</blockquote>
-<blockquote>
-<p>How could we improve the measurement of wage income?</p>
-</blockquote>
-<blockquote>
-<p>What other variables could we look at?</p>
-</blockquote>
-<blockquote>
-<p>How would we expect the gamma model do with another variable, e.g. educational attainment?</p>
-</blockquote>
-<blockquote>
-<p>What is the relationship between “observed” and “unobserved” frailty?</p>
-</blockquote>
-<blockquote>
-<p>IMPORTANT: Is our work here a validation of the model’s applicability to real life? If so what are we validating? That our transformed covariate is roughly gamma distributed? Are we assuming multiplicative fixed frailty – or are we validating it’s applicability?</p>
-</blockquote>
+<ul>
+<li><p>How did we do? Does our gamma frailty model give basically the right prediction?</p></li>
+<li><p>How come it appears that wage income matters so little?</p></li>
+<li><p>How could we improve the measurement of wage income?</p></li>
+<li><p>What other variables could we look at?</p></li>
+<li><p>How would we expect the gamma model do with another variable, e.g. educational attainment?</p></li>
+<li><p>What is the relationship between “observed” and “unobserved” frailty?</p></li>
+<li><p>IMPORTANT: Is our work here a validation of the model’s applicability to real life? If so what are we validating? That our transformed covariate is roughly gamma distributed? Are we assuming multiplicative fixed frailty – or are we validating it’s applicability?</p></li>
+</ul>
 
 </div>
 </div>
