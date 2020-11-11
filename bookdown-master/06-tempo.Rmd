@@ -1,4 +1,4 @@
-# Tempo
+# Fertility Heterogeneity: Tempo Distortions and Distorted TempoTempo
 
 ## Outline
 
@@ -19,7 +19,10 @@ Additional resources:
 
 ## Introduction
 
-What we see is superficial. Heterogeneous models reveal what's "really" going on. (Or do they?). Until the past sections, population hazards mislead. However in this section, homogeneous fertility misleads.
+What we see is superficial. Heterogeneous models reveal what's "really" going on. (Or do they?). 
+
+- Until the past sections, population hazards mislead. 
+- However in this section, homogeneous fertility misleads.
   
 We now reverse perspectives:
 
@@ -59,14 +62,14 @@ knitr::include_url('https://shiny.demog.berkeley.edu/josh/tempo/', height = '600
   What is a formula for recovering original birth stream?
   \begin{align}
   \hat{B}_{orig} &= B_{obs} \times (1 + R'(t)) \\
-   \text{or}\\
+\text{or}\\
   \hat{B}_{orig} &= B_{obs} \times 1/  \left[1 - R'(t)\right]?
   \end{align}
 
   Note: this idea of ``recovering original'' is one way to think
   about tempo adjustment.
   
-  We can think of the original version as that which should have ocurred in the absence of postponement. Intuitively, it should be higher than the observed birth stream, but how much larger? The table below shows an example of how to recover the original births where each formula refers to the equations above.
+We can think of the original version as that which should have ocurred in the absence of postponement. Intuitively, it should be higher than the observed birth stream, but how much larger? The table below shows an example of how to recover the original births where each formula refers to the equations above.
 
 ```{r, echo=FALSE, message=FALSE}
   library(tidyverse)
@@ -120,7 +123,8 @@ $$ \begin{aligned}
  f(28,2019) &= f_{0}(28-3)\times(1-0.1)\times(1) \\
   & = (0.9)f_{0}(25)
  \end{aligned}
-$$  Therefore, the fertility rate for a 28 year-old in 2019 would be 0.9 of the baseline fertility rate at age 25. Another way of thinking about it is that had there been no postponement, the fertility rate that we are observing in 2019 for this 28 year-old would actually be similar to that of a 25 year old. 
+$$  
+Therefore, the fertility rate for a 28 year-old in 2019 would be 0.9 of the baseline fertility rate at age 25. Another way of thinking about it is that had there been no postponement, the fertility rate that we are observing in 2019 for this 28 year-old would actually be similar to that of a 25 year old. 
 
 Small changes in the stock can have huge effect in the flows.
 
@@ -158,7 +162,10 @@ Let's re-notate our constant quantum result
   messier). **NOTE: I don't understand this, could you explain Josh?**
 
 
-**Tempo-adjusted TFR:** counter-factual, TFR in absence of timing changes
+### Tempo-adjusted TFR:
+
+- counter-factual
+- TFR in absence of timing changes
 
   $$
   TFR(t) = \int_0^\infty f(a,t) \, da
@@ -187,16 +194,20 @@ How do period schedules change?
   $$
 
 
-  What is
+  What is ${\partial \over \partial t} \log f(a,t)$?
+  
+  Solving 
+  
   $$
   \begin{aligned}
-  {\partial \over \partial t} \log f(a,t) &= ?\\
-  \\
-  & = \frac{d}{dt}log(f_{0}(a-R(t))) + \frac{d}{dt}log(1-R'(t)) + \frac{d}{dt}log(q(t)) \\
+  {\partial \over \partial t} \log f(a,t) & = \frac{d}{dt}log(f_{0}(a-R(t))) + \frac{d}{dt}log(1-R'(t)) + \frac{d}{dt}log(q(t)) \\
   & = \frac{-f'_{0}(a-R(t)) R'(t)}{f_{0}(a-R(t))} - \frac{R''(t)}{1-R'(t)}+ \frac{q'(t)}{q(t)}
   \end{aligned}
   $$
-  If we sketch this, where the age is on the x-axis, then the last two components affect the intercept of the curve. If births are postponed, $R'(t)>0$ but if they are actually advanced then $R'(t)<0$, which affects the slope of $ {\partial \over \partial t} \log f(a,t)$.
+  
+  
+  If we sketch this, where the age is on the x-axis, then the last two components affect the intercept of the curve. If births are postponed, $R'(t)>0$ but if they are actually advanced then $R'(t)<0$, which affects the slope, $ {\partial \over \partial t} \log f(a,t)$.
+  
 
 **Uniform shifts**
 
@@ -267,7 +278,7 @@ rt.vec <- center.diff(mu.vec)     # increments of postponement
 adj.tfr.vec <- tfr.vec / (1 - rt.vec) # Assuming no quantum effect, tempo-adjusted TFR
 ```
 
-```{r, echo=FALSE, fig.cap='Adjusted TFR',fig.height=8}
+```{r echo=TRUE, fig.align='center', fig.cap='Adjusted TFR', fig.height=8}
 par(mfrow = c(3,1))
 plot(names(mu.vec), mu.vec, xlab = "Year", ylab="Mean age of childbearing")
 plot(names(mu.vec), rt.vec, xlab = "Year", ylab= "Shifts")
@@ -282,7 +293,7 @@ legend("topright", c("Observed TFR", "Tempo-adjusted TFR"), lty= c(1,2))
 - We see weird dynamics around end of WW2 and great recession.
 - What's going on? Here is a closeup
 
-```{r, echo=F, fig.cap='Observed and tempo-adjusted TFRs'}
+```{r, echo=F, fig.align='center',fig.cap='Observed and tempo-adjusted TFRs'}
 par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l", xlab = "Year", ylab= "TFR") # Observed TFR
 lines(year.vec, adj.tfr.vec, lty = 2) # Tempo-adjusted TFR
@@ -296,7 +307,8 @@ lines(year.vec, adj.tfr.vec.from.fun, col = "red")
 ```
 
 Now let's look at turbulence around WWII
-```{r, echo=FALSE,fig.cap='Change in fertility rates around WWII', fig.height=6}
+
+```{r, echo=FALSE, fig.align='center', fig.cap='Change in fertility rates around WWII', fig.height=6}
 par(mfrow = c(2,2))
 plot(age.vec, fat[,"1944"], type = "l", ylim = c(0, .23),
      ylab = "f(a)",
@@ -334,7 +346,6 @@ lines(1943:1947, adj.tfr.vec[paste(1943:1947)],
       lty = 2)
 title("TFR and adjTFR")
 legend("topright", c("Observed TFR", "Tempo-adjusted TFR"), lty=c(1,2))
-
 ``` 
 
 From 1945 to 1946, fertility goes up a lot, but more at younger ages. So mean goes down. BF adjustment over-compensates, and has quantum declining.
@@ -347,7 +358,7 @@ What's happening from 1944-45?
 out <- bf.fit(fat.array)  #function to obtain BF tempo-adjusted TFR
 adj.tfr.bo.vec <-  out$tfr.star.out[, "bf.tfr.star"] # sum of parity specific tempo-adjusted TFRs
 ```
-```{r, echo=FALSE,fig.cap='TFR by parities', fig.height=6}
+```{r, echo=FALSE, fig.align='center', fig.cap='TFR by parities', fig.height=6}
 par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l", lwd = 2, xlab="Year", ylab= "TFR")
 lines(year.vec, adj.tfr.vec, lty = 2)
@@ -372,7 +383,7 @@ hfd.adj.dt <- hfd.adj.dt[Code == "USA"]
   - The baby boom appears to initially be even greater than observed when we take into account birth order, but then it fall more than observed. 
   - Finally, the baby bust was not as bad as it seemed.
 
-```{r, echo=FALSE,fig.cap='TFR by parities using HFD data', fig.height=6}
+```{r, echo=FALSE, fig.align='center', fig.cap='TFR by parities using HFD data', fig.height=6}
 plot(year.vec, tfr.vec, type = "l", lwd = 2, xlab="Year", ylab= "TFR")
 lines(year.vec, adj.tfr.vec, lty = 2)
 lines(year.vec, adj.tfr.bo.vec, lty = 1, lwd = 2, col = "red")
@@ -397,7 +408,7 @@ legend("topright",
 ## Two Americas
 
   Let's look at births (all orders). Here we have some animations of the ASFR over time. 
-```{r, message=FALSE, warning=FALSE, fig.height=7}
+```{r, message=FALSE, fig.align='center', warning=FALSE, fig.height=7, fig.cap='ASFR animation'}
 my.year.vec <- 1975:2017
 # library(devtools)
 # install_github("dgrtwo/gganimate")
@@ -423,7 +434,7 @@ source("https://raw.githubusercontent.com/josh-goldstein-git/random_demography/m
 During the earlier years, the mean childbearing age seems to be in the early 20s. However with time, the AFR seems to become bimodal. So what is happening here? Are there two underlying groups of women that experience different fertility rates. Now fit mixing model and redo the animation.
 
 **NOTE: Not sure of all the lines in this mixture code. Josh, could you add some notes please?**
-```{r mixture1, results='hide'}
+```{r mixture1, fig.align='center', results='hide'}
 ## takes few minutes to run
 my.fat <- fat[, paste(my.year.vec)]
 out <- get.mixed.tfr.star(my.fat)
@@ -457,8 +468,9 @@ lambda.mat[,"2015"] <- (lambda.mat[,"2014"] + lambda.mat[,"2016"])/2
 mu.mat[,"2015"]     <- (mu.mat[,"2014"]     + mu.mat[,"2016"])/2
 ``` 
 
-  Now we create the animation with the normal distributions inside as well as the observed ASFR.
-```{r mixture2, fig.height=7}
+Now we create the animation with the normal distributions inside as well as the observed ASFR.
+
+```{r mixture2, fig.height=7, fig.align='center', fig.cap='Mixtures and ASFR' }
 # Obtaining different ASFRs per group (1 and 2)
 my.dt <- dt[Year %in% my.year.vec,]
 
@@ -508,10 +520,12 @@ labels <- c("Observed" = "black", "Mixture 1" = "blue", "Mixture 2" = "red", "Su
 
 ```
 ![](plot2.gif)
-  The animation shows how the distributions operate under the AFSR curve. There could be two separate normal distributions with distinct mean ages of childbearing.
+  
+  The animation shows how the distributions operate under the ASFR curve. There could be two separate normal distributions with distinct mean ages of childbearing.
 
   Let's do tempo adjustment:**NOTE: Help! I don't know how to interpret these graphs**
-```{r, fig.height=5}
+  
+```{r, fig.align='center', fig.height=5, fig.align='center', fig.cap='Tempo Adjustment' }
 rt.mat <- t(apply(mu.mat, 1, center.diff))
 tfr.vec <- apply(my.fat, 2, sum)
 tfr.mat <- lambda.mat * tfr.vec
@@ -551,12 +565,12 @@ library(mixtools)
 ```
   Seems to work great.
 
-```{r, fig.height = 4}
+```{r, fig.height = 4, fig.align='center', fig.cap='Histogram of ages (x)'}
   ages <- 10:49
   dens1 <- dnorm(x = ages, mean = out$mu[1], sd = out$sigma[1]) * out$lambda[1]
   dens2 <- dnorm(x = ages, mean = out$mu[2], sd = out$sigma[2]) * out$lambda[2]
   par(mfrow = c(1,1))
-  hist(x, probability = T, col = "grey")
+  hist(x, probability = T, col = "grey", main = "", xlab="Ages")
   lines(ages, dens1, col = "red", lwd = 2)
   lines(ages, dens2, col = "blue", lwd = 2)
   lines(ages, dens1 + dens2, col = "black", lwd = 2)

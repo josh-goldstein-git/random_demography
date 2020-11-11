@@ -37,7 +37,7 @@
     
   - This is a backwards S, going down.
   
-```{r, fig.height = 3}
+```{r, fig.height = 3,  fig.align='center', fig.cap='Gamma-Gompertz'}
 sigma.sq = .2
 x = 0:100
 a = 5 * 10^-4
@@ -86,9 +86,12 @@ dt[incwage == 999998, incwage := NA]
 dt[incwage == 0, incwage := NA]
 ```
 
-```{r message=FALSE}
-hist_incwage <- dt[, hist(incwage)]
-hist_ln_incwage <- dt[, hist(log(incwage))]
+```{r message=FALSE, fig.align='center', fig.cap='Histogram of Income-Wage'}
+hist_incwage <- dt[, hist(incwage, main ="", xlab = "Income-Wage")]
+```
+
+```{r message=FALSE, fig.align='center', fig.cap='Histogram of LOG(Income-Wage)'}
+hist_ln_incwage <- dt[, hist(log(incwage),main ="", xlab = "Log(Income-Wage)")]
 ```
 
 ```{r}
@@ -105,7 +108,7 @@ my.dt <- my.dt[!is.na(incwage)] ## keep only non-missing
 ```
 Log-wages look reasonable, unimodal, kind of symmetric. We now center our variable to 0 before estimating the effect on mortality. Our model exponentiates this 0 to become 1, which is where we want our frailty measure to be centered.
 
-```{r}
+```{r , fig.align='center', fig.cap='Histogram of standardized Log(Income-Wage)'}
 ## standardized log income
 ## log_inc_stan = log(y_orig) - mean(log(y_orig))
 ## note: control for byear, since different ages in 1940
@@ -114,7 +117,7 @@ my.dt[, log_inc := log(incwage)]
 my.dt[, log_inc_mean := mean(log_inc), by = byear]
 my.dt[, y := log_inc - log_inc_mean]
 hist_y <- my.dt[, hist(y)]
-my.dt[, summary(y)]
+my.dt[, summary(y, main="", xlab = "Standardized Log(Income-Wage)")]
 ```
 Now we're centered at 0.
 
@@ -134,7 +137,7 @@ for (i in 1:length(x))
 }
 ```
 
-```{r}
+```{r, fig.align='center', fig.cap='Wage Income by age'}
 par(mfrow = c(1,2))
 my.dt[, plot(x, y_orig.bar)]
 title("Wage income by surviving age", cex.main = .7)
@@ -177,7 +180,7 @@ beta <- coef(m)
 
 Now estimate our z's.
 
-```{r}
+```{r, fig.align='center', fig.cap='Histogram of Fraility'}
 my.dt[, z := exp(beta * y)]
 hist_z <- my.dt[, hist(z, xlim = c(0, 3))]
 ```
@@ -198,7 +201,7 @@ print(sqrt(sigma.sq))
 
 Extinct cohort method to estimate survivorship $\bar{S}(x)$
 
-```{r}
+```{r,  fig.align='center', fig.cap='Deaths and Mortality' }
 Dx <- my.dt[, table(floor(age.at.death))]
 par(mfrow = c(1,2))
 plot(Dx)
@@ -218,7 +221,7 @@ axis(2)
 
 - How about hazards? They are Gompertzian for a while, but how do we explain tails?
 
-```{r}
+```{r, fig.align='center', fig.cap='Survirship' }
 plot(x, lx)
 ```
 
@@ -249,7 +252,7 @@ for (i in 1:length(x))
 
 Plotting comparison
 
-```{r}
+```{r, fig.align='center', fig.cap='Frailty comparison' }
 plot(x, z.bar.hat, ylim = c(.995, 1.001), type = "l", lty = 2)
 lines(x, z.bar)
 ```
@@ -260,7 +263,7 @@ lines(x, z.bar)
 
 Showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including  $y$, and raw (unstandardized) income.
 
-```{r}
+```{r, fig.align='center', fig.cap='Frailty comparison'}
 y.bar.hat <- log(z.bar.hat)/beta
 plot(x, y.bar, ylab = "log(inc) - mean(log(inc))")
 lines(x, y.bar.hat)
@@ -268,7 +271,7 @@ title("Mean standardized log-income")
 legend("topleft", legend = c("observed", "fitted"),
        pch = c(1, -1), lty = c(-1, 1))
 ##
-( bar.log.y = mean(log(my.dt$y_orig)) )
+bar.log.y = mean(log(my.dt$y_orig))
 y_orig.bar.hat.wrong <- exp(y.bar.hat) * exp( bar.log.y) ## this is geometric mean
 y_orig.bar.hat.right <- exp(y.bar.hat)*y_orig.bar[1]
 plot(x, y_orig.bar, ylab = "$ per year")
