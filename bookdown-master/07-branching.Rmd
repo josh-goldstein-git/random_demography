@@ -300,7 +300,7 @@ DiagrammeR::grViz("
   - If we were to find a solution less than 1.0, how would we
     interpret that?
   - Three cases
-```{r, fig.cap='PGF for a variety of z's', fig.align = 'center'}
+```{r, fig.cap='PGF for a variety of z', fig.align = 'center'}
 
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
@@ -506,12 +506,14 @@ SIR model in disease spread)
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
 ```
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap='Extinction simulation', fig.align = 'center'}
 Zn_bar = apply(Z.mat, 2, mean)
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
 ```
-    - Using the means for all 1000 simulations, we calculate $\mathbb{E} Z_n$ (left plot), $d_n$ (center plot) and $\mathbb{E}( Z_n | Z_n > 0)$.   
+    
+ 
+
 ```{r, fig.height = 5}
 Zn_bar = apply(Z.mat, 2, mean)  #expected value Z_n (E(Z_n))
 n <- 1:ncol(Z.mat)
@@ -520,7 +522,10 @@ d_n = apply(Z.mat, 2, proportion.zero) # fraction extinct
 Z.mat.na <- Z.mat; Z.mat.na[Z.mat == 0] <- NA 
 Zn_surv_bar = apply(Z.mat.na, 2, mean, na.rm = T) #expected value of survivors (E(Z_n|Z_n>0))
 ```
-```{r, echo=FALSE}
+
+Using the means for all 1000 simulations, we calculate $\mathbb{E} Z_n$ (left plot), $d_n$ (center plot) and $\mathbb{E}( Z_n | Z_n > 0)$.
+
+```{r, echo=FALSE, fig.cap='Extinction simulations', fig.align = 'center'}
 par(mfrow = c(1,3))
 plot(n, Zn_bar, main = "Mean Zn")
 plot(n, d_n, main = "Fraction extinct")
@@ -566,12 +571,15 @@ Variance in our simulation increases with generation number:
 ```{r}
 var_Zn = apply(Z.mat, 2, var)
 ```
-```{r, echo=FALSE}
+
+```{r, echo=FALSE, fig.cap='Distribution of $Z_n$', fig.align = 'center'}
 n <- 1:ncol(Z.mat)
-plot(n, var_Zn, main="Variance of Zn")
+plot(n, var_Zn, xlab = 'variance of Zn')
 ```
-Distribution of $Z_n$
-```{r, fig.height = 6}
+
+
+
+```{r, fig.height = 6, fig.cap='Histogram of selected $Z_n$', fig.align = 'center'}
    Z20 <- table(table(Z.mat[,20]))
    Z5 <- table(table(Z.mat[,5]))
    par(mfrow = c(2,2))
@@ -618,7 +626,7 @@ kk = 1:10  ;   p_kk = b * c^(kk-1)
 p0 = b/(1-c)
 k = c(0, kk) ;   p_k = c(p0, p_kk)
 ```
-```{r, echo=FALSE}
+```{r, echo=FALSE,  fig.cap = 'probability of having exactly $k$ number of girls', fig.align='center'}
 plot(k, p_k)
 ```
 
@@ -674,11 +682,11 @@ Realism? See Table 10.3, p 386, Grinstead and Snell.
   $$
     - How does $d$ depend on $b$ and $c$? $d$ decreases with $b$  at a rate of $\frac{-1}{c(1-c)}$ and changes at rate $\frac{-(1-b)(1-2c)-c^2}{c^2(1-c)^2}$.
 
-Big payoff: the full distribution of $Z_n$}
-  See Grinstead and Snell p. 385
+Big payoff: the full distribution of $Z_n$ (See Grinstead and Snell p. 385)
   
 ### A plot of Keyfitz's numbers for generations 1, 2, and 3. Is it exponential for $k > 0$?
-```{r}
+
+```{r, fig.cap = 'Keyfitz’s plot for generations 1, 2, and 3', fig.align='center'}
 ## b = 0.2126 ;   c = 0.5893 ## lotka
 b = 0.3666; c = .5533 ## Keyfitz (from GS)
 m = b / (1-c)^2 ## [1] 1.260416
@@ -695,7 +703,7 @@ for (i in 1:3)
         ((m^n - 1)/(m^n - d))^(j-1)
     pk_n <- c(p0_n, pj_n)
     if (i == 1)
-        plot(k, pk_n, type = "l", log = "")
+        plot(k, pk_n, type = "l", log = "",  main="Absolute")
     if (i > 1)
         lines(k, pk_n, col = i)
 }

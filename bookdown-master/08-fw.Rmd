@@ -272,7 +272,7 @@ Source: Hahn and Bentley (2003)
 ### Fisher-Wright simulation of Baby Names (Hahn and Bentley)
 
 We download and prepare the data: 
-```{r, eval=FALSE}
+```{r}
 download.file(url= "https://www.ssa.gov/oact/babynames/names.zip",
               "./names.zip")
 unzip("names.zip", exdir = "./names")
@@ -342,7 +342,7 @@ plot(G.vec, ylab = "G", xlab= "# Generation", type ="l")
 ```
 We can increase the number of trials (up to 100 here) and look at the average (yellow horizontal line). 
 
-```{r,fig.height=4, fig.width= 5, fig.cap='G path (with mutation, 100 trials)}
+```{r,fig.height=4, fig.width= 5, fig.cap='G path (with mutation, 100 trials)'}
 n_gen = 2000
 n_trials = 100
 G.mat <- matrix(NA,  n_trials, n_gen)

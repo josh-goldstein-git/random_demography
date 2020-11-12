@@ -7,6 +7,6 @@ render_book("index.Rmd","bookdown::gitbook",
             clean_envir = !interactive(), output_dir = NULL,
             new_session = NA, preview = FALSE,
             config_file = "_bookdown.yml")
-
+#In order to modify  the chapters included, you must edit _bookdown.yml list. 
 
 
