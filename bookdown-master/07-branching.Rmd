@@ -264,7 +264,7 @@ DiagrammeR::grViz("
     $$
     h(h(h ... \mbox{$n$ times}  h(z)))  = h_n(z)
     $$
-  - For instance, let's get $h_2(z) = h(h(z))$ for $ h(z) = p_0 + p_1 z + p_2 z^2$
+  - For instance, let's get $h_2(z) = h(h(z))$ for $h(z) = p_0 + p_1 z + p_2 z^2$
   $$\begin{aligned}
   h(h(z)) = &  p_0 + p_1 \left[p_0 + p_1 z + p_2 z^2\right] + p_2 \left[p_0 + p_1 z + p_2 z^2\right]^2\\
    = &  p_0 + p_1 p_0 + p_1^2 z + p_1 p_2 z^2 + p_2p_0^2 + (2p_0 p_1 p_2)z + (2p_0 p_2^2 + p_2p_1^2)z^2 + (2p_1 p_2^2)z^3 + p_2^3 z^4
@@ -300,7 +300,7 @@ DiagrammeR::grViz("
   - If we were to find a solution less than 1.0, how would we
     interpret that?
   - Three cases
-```{r}
+```{r, fig.cap='PGF for a variety of z's', fig.align = 'center'}
 
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
@@ -350,7 +350,7 @@ DiagrammeR::grViz("
     - The purple dot is $h(h(p_0))$.
     - The blue dot is $h(h(h(p_0)))$.
     - The points would converge until we reach the intersection between $h(z)$ and the diagonal.
-```{r,  echo= FALSE}
+```{r,  echo= FALSE, fig.cap='Cobwed diagram (staircase)', fig.align = 'center'}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
   hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
@@ -389,8 +389,10 @@ DiagrammeR::grViz("
           print(paste(i, d))
   }
 ```
-      - Did we get the right value? Apparently, yes! The green lines take as vertical and horizontal values our $d=0.428568100698915$  
-```{r, echo=FALSE}
+
+Did we get the right value? Apparently, yes! The green lines take as vertical and horizontal values our $d=0.428568100698915$  
+      
+```{r, echo=FALSE, fig.cap='??', fig.align = 'center'}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
   hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
@@ -404,7 +406,7 @@ DiagrammeR::grViz("
   - This means there's some positive chance of extinction.
   - But also some chance of never-extinction. (What form does never-extinction take?)
 
-```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations'}
+```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations', fig.align = 'center'}
     suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
 
@@ -455,6 +457,7 @@ SIR model in disease spread)
 
 - Big populations -- law of large numbers means randomness
           doesn't matter.
+-
 </div>
 
 
