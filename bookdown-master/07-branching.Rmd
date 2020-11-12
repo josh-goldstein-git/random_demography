@@ -462,6 +462,8 @@ SIR model in disease spread)
 
 
 
+
+
 ## The distribution of offspring of all generations
 
 - Means of offspring in generation $n$  
