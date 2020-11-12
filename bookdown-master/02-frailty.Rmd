@@ -71,7 +71,7 @@ Additional resources
 
 Which look like multiplicative fixed frailty?
 
-```{r, fig.height = 3, echo = F, message = F, warning = F, hide = T, results = F}
+```{r, fig.height = 3,  fig.align='center', fig.cap='Multiplicative fixed frailty', echo = F, message = F, warning = F, hide = T, results = F}
   library(data.table)
   dt <- fread("/hdir/0/fmenares/Book/bookdown-master/data/SWE.Mx_5x5.txt", na.string = ".")
   dt[, x := as.numeric(gsub("-[0-9]*$", "", Age))]
@@ -277,7 +277,7 @@ Our Result
   -  Older ages, smaller survival.
   -  Variance not so clear, need a picture. (What if $\sigma^2 = 0$?)
   
-```{r, fig.height = 3}
+```{r, fig.height = 3, fig.align='center', fig.cap='Gamma-frailty population survival'}
 x <- 0:100
 a = 10^-4
 b = 1/10
@@ -300,7 +300,6 @@ plot(x, Sx.0, lty = 2, type = "l", ylim = c(0,1),
          lty = c(1, 1, 2),
          bty = "n",
          col = c("red", "blue", "black"))
-  title("Gamma-frailty population survival")
 ```
 
 ## Conclusions
