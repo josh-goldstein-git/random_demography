@@ -65,17 +65,22 @@ Additional resources:
   -  Now assume that people will infect $k$ other people based on a random number, for instance the last 4 digits of their phone number. 
   
 
-+-----+-------+--------+
-| $k$ | $p_k$ | digits |
-+=====+=======+========+
-| 0   | .3    | 0-2    |
-+-----+-------+--------+
-| 1   | .4    | 3-5    |
-+-----+-------+--------+
-| 2   | .3    | 6-9    |
-+-----+-------+--------+
+    +-----+-------+--------+
+    | $k$ | $p_k$ | digits |
+    +=====+=======+========+
+    | 0   | .3    | 0-2    |
+    +-----+-------+--------+
+    | 1   | .4    | 3-5    |
+    +-----+-------+--------+
+    | 2   | .3    | 6-9    |
+    +-----+-------+--------+
 
-  -  Let's diagram one chance outcome, using my number "(xxx) xxx-9056". As each of the four digits is associated with a probability of infecting more people, they can be seen as different the carrier generations. For instance, the first carrier has a probability $p_k=0.3$ of infecting $k=2$ other people. So that first carrier may infect 2.7 people, (3 for simplicity). Each of these three people will have a $p_k=0.2$ of each infecting $k=0$ people. Since they don't infect anybody then there are no further carrier generations. In the table, we include their rows but the expected number of infected people is still 0 because the spreading stopped in generation 2.  
+  -  Let's diagram one chance outcome, using my number "(xxx) xxx-9056". 
+    - As each of the four digits is associated with a probability of infecting more people, they can be seen as different the carrier generations. 
+    - For instance, the first carrier has a probability $p_k=0.3$ of infecting $k=2$ other people. So that first carrier may infect 2.7 people, (3 for simplicity). 
+    - Each of these three people will have a $p_k=0.2$ of each infecting $k=0$ people. Since they don't infect anybody then there are no further carrier generations. 
+    
+In the table, we include their rows but the expected number of infected people is still 0 because the spreading stopped in generation 2.  
 
 +--------------+---------+-------+-------------------+
 | carrier      | random  |       | expected          | 
@@ -137,9 +142,9 @@ Some questions
   knitr::kable(growth)
 ```
 
-  - Here's a more visual representation. 
+  - Here's a more visual representation . 
 
-```{r, echo= FALSE,fig.cap=''}
+```{r, echo= FALSE, fig.cap='Parents having childrens', fig.align = 'center'}
 # install.packages('DiagrammeR')
 DiagrammeR::grViz("
                   digraph rmarkdown{
@@ -209,10 +214,10 @@ DiagrammeR::grViz("
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
 ```
-```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations'}
+```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations', fig.align='center'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
-  - What does this remind you of? (Hint: "Leslie"). (See Harris figure) **NOTE: Josh, which Harris figure?**
+  - What does this remind you of? (Hint: "Leslie"). (See @harris1964theory, Figure 2, Chapter 1) 
 
 ## The Probability Generating Function: Our mathematical tool
 
@@ -224,9 +229,9 @@ DiagrammeR::grViz("
   h(z) = p_0 + p_1 z + p_2 z^2 + \ldots
   $$
     - The PGF "keeps book" on the probabilities. The chance of $k$ is the coefficient on $z^k$.  
-    - $h(0)= p_{0}$   
-    - $h(1)= p_{0} + p_{1}$   
-    - $h'(1)= p_{1} + 2p_{2}$
+      - $h(0)= p_{0}$   
+      - $h(1)= p_{0} + p_{1}$   
+      - $h'(1)= p_{1} + 2p_{2}$
 
   - The story of two brothers. A father has two sons. The probability generating function of their children combined is:
   $$
