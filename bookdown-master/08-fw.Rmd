@@ -272,7 +272,7 @@ Source: Hahn and Bentley (2003)
 ### Fisher-Wright simulation of Baby Names (Hahn and Bentley)
 
 We download and prepare the data: 
-```{r, eval=FALSE}
+```{r}
 download.file(url= "https://www.ssa.gov/oact/babynames/names.zip",
               "./names.zip")
 unzip("names.zip", exdir = "./names")

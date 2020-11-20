@@ -45,8 +45,31 @@ no individual having exactly the same risk as another.)
   - *Heterogeneous:* Chance + group variation in risk
   
 - Would we expect to see a difference if we increased sample?
-
-  - NOTE: ANSWER THIS
+  - A good question. We suspect that with a large enough sample we might be able to tell the difference between a mixture of two types and a single type. We can try a sample of, say, 1 million, and see if we can tell which is which.
+  
+```{r hetero-homo-big, fig.cap='Homogeneity and Heterogeneity (N = 1 million)', out.width='80%', fig.align='center', fig.height=4}
+  ## Homogeneous hazard of 1/10
+  set.seed(13)
+n = 10^6
+  x.homo <- rexp(n, rate = 1/10)
+  ## Heterogeneous hazard (half 1/6 and half 1/13)
+  ## Note: I didn't pick these particular numbers for any specific reason
+  x.hetero <- c(rexp(n/2, rate = 1/6),
+                rexp(n/2, rate = 1/13))
+  ## Look at histograms
+  par(mfrow = c(1,2))
+  hist(x.homo, main = "homogenous variation")
+  hist(x.hetero, main = "heterogeneous variation")
+  ## we don't see much at this resolution
+  ## To see in log scale, try
+  par(mfrow = c(1,2))
+out.hom = hist(x.homo, breaks = 100)
+out.het = hist(x.hetero, breaks = 100)
+plot(out.het$breaks[-1], out.het$counts, log = 'y')
+plot(out.hom$breaks[-1], out.hom$counts, log = 'y')
+## And now we can see a bit of curvature in the heterogeneous case.
+## So our conclusion is that it can be possible to detect the difference but it is not easy or sure.
+```
   
 ### Analogies
   - Social inequality: equal opportunity vs. equal outcomes

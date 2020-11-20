@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction to Demographic Heterogeneity | Mathematical Demography</title>
+  <title>Chapter 12 Demographic theory and COVID-19 | Mathematical Demography</title>
   <meta name="description" content="This is a book from the Mathematical Demography lecture notes." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction to Demographic Heterogeneity | Mathematical Demography" />
+  <meta property="og:title" content="Chapter 12 Demographic theory and COVID-19 | Mathematical Demography" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction to Demographic Heterogeneity | Mathematical Demography" />
+  <meta name="twitter:title" content="Chapter 12 Demographic theory and COVID-19 | Mathematical Demography" />
   
   <meta name="twitter:description" content="This is a book from the Mathematical Demography lecture notes." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="frailty.html"/>
+<link rel="prev" href="student-presentations.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -332,342 +332,219 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Introduction to Demographic Heterogeneity</h1>
-<div id="outline" class="section level2">
-<h2><span class="header-section-number">2.1</span> Outline</h2>
+<div id="demographic-theory-and-covid-19" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Demographic theory and COVID-19</h1>
+<div id="outline-11" class="section level2">
+<h2><span class="header-section-number">12.1</span> Outline</h2>
+<ul>
+<li>Formal demography of epidemic mortality</li>
+</ul>
+</div>
+<div id="motivating-questions" class="section level2">
+<h2><span class="header-section-number">12.2</span> Motivating questions</h2>
 <ol style="list-style-type: decimal">
-<li>What demographic heterogeneity is (and isn’t)</li>
-<li>Dynamics of population growth with two sub-groups</li>
-<li>Keyfitz’s result <span class="math inline">\(\bar{r}&#39;(t) = \sigma^2_r(t)\)</span>.</li>
-<li>Ken’s model of Poisson heterogeneity</li>
+<li>How does <strong>age-structure</strong> of population affect epidemic mortality?</li>
+<li>How does mortality change affect <strong>life expectancy</strong> in normal
+times?</li>
+<li>How much <strong>remaining life is lost</strong> from an epidemic?</li>
 </ol>
 </div>
-<div id="part-i.-conceptual-introduction" class="section level2">
-<h2><span class="header-section-number">2.2</span> Part I. Conceptual Introduction</h2>
-<div id="what-is-demographic-heterogeneity" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> What is Demographic Heterogeneity?</h3>
+<div id="population-aging" class="section level2">
+<h2><span class="header-section-number">12.3</span> Population aging</h2>
+<div class="figure">
+<img src="figures/covid_1.png" alt="Worldwide distribution of the elderly" />
+<p class="caption">Worldwide distribution of the elderly</p>
+</div>
+<p>Source: Tuljapurkar and Zuo </p>
 <ul>
-<li>If we see different outcomes (e.g., people dying at different ages),
-is this <em>Demographic Heterogeneity</em>? NO.</li>
-<li>Demographic heterogeneity <span class="math inline">\(=\)</span> different rates for different folks.</li>
+<li>Covid19 has affected the elderly the most which accounts for a substantial share of the population of the Global North.</li>
 </ul>
-<blockquote>
-<p>In a <em>demographically heterogeneous</em> population, people are of
-different types, with different type-specific rates.</p>
-</blockquote>
-<p>(These types can be discrete, with individuals being
-homogeneous within their type, or they can be continuous with possibly
-no individual having exactly the same risk as another.)</p>
-<div id="an-example" class="section level4">
-<h4><span class="header-section-number">2.2.1.1</span> An example</h4>
-<p>Let’s draw 10 individuals from a homogeneous population and
-heterogeneous population.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="co">## Homogeneous hazard of 1/10</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">set.seed</span>(<span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  x.homo &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">10</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="co">## Heterogeneous hazard (half 1/6 and half 1/13)</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="co">## Note: I didn&#39;t pick these particular numbers for any specific reason</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  x.hetero &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rexp</span>(<span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>),</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">                <span class="kw">rexp</span>(<span class="dv">5</span>, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">13</span>))</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">dotchart</span>(x.homo, <span class="dt">main =</span> <span class="st">&quot;homogenous variation&quot;</span>)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="kw">dotchart</span>(x.hetero, <span class="dt">main =</span> <span class="st">&quot;heterogeneous variation&quot;</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:hetero-homo"></span>
-<img src="bookdown-demo_files/figure-html/hetero-homo-1.png" alt="Homogeneity and Heterogeneity" width="80%" />
-<p class="caption">
-Figure 2.1: Homogeneity and Heterogeneity
-</p>
-</div>
+<div id="stable-theory" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Stable theory</h3>
+<p>Let’s revist the stable population theory to understand a change the importance of population structure on epidemic dynamics. The underlying assumptions to a stable population are that i) age-specific mortality and fertility rates are fixed over a long period, ii) age-structure is constant and iii) population closed to migration.</p>
 <ul>
-<li>Can you tell which is which?
-<ul>
-<li><em>Homogeneous</em>: Chance only</li>
-<li><em>Heterogeneous:</em> Chance + group variation in risk</li>
-</ul></li>
-<li><p>Would we expect to see a difference if we increased sample?</p>
-<ul>
-<li>NOTE: ANSWER THIS</li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="analogies" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Analogies</h3>
-<ul>
-<li>Social inequality: equal opportunity vs. equal outcomes</li>
-<li>Analysis of variance: <span class="math inline">\(\mbox{total variance} = \mbox{within group} + \mbox{between group}\)</span></li>
-<li>Statistical models <span class="math inline">\(y = a + b x + \epsilon\)</span></li>
-</ul>
-</div>
-<div id="whats-new" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> What’s new?</h3>
-<ul>
-<li>Dynamics.</li>
-<li>Heterogeneous populations evolve differently.
-<ul>
-<li>Aggregates <span class="math inline">\(\neq\)</span> Individuals</li>
-<li>Rates of growth (or decline)</li>
-<li>Changes over time or age or duration</li>
-<li>The trajectory of even the  individual differs from population average</li>
-<li>Relative positions, change of groups, may be misleading.</li>
-</ul></li>
-<li>Terminology
-<ul>
-<li>Heterogeneity</li>
-<li>Unobserved heterogeneity</li>
-<li>Selection</li>
-<li>Selective survival</li>
-<li>Other terms?</li>
-</ul></li>
-</ul>
-<!-- \begin{frame}{1. Heterogeneity at work? Black-White Crossover} -->
-<!-- \end{frame} -->
-<!-- \begin{frame}{1. Heterogeneity at work? Mortality Plateus} -->
-<!-- \end{frame} -->
-<ul>
-<li><p>Big Caveat: Fundamental Unidentifiability</p>
-<ul>
-<li>Same data of <span class="math inline">\(N\)</span> observations
-<ul>
-<li><span class="math inline">\(N\)</span> draws from 1 distribution</li>
-<li><span class="math inline">\(1\)</span> draw from <span class="math inline">\(N\)</span> distributions</li>
-<li>Something in-between</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>Abel (66) and Beth (76) example.</p>
-<div id="a-2nd-example-exponential-growth-two-countries" class="section level4">
-<h4><span class="header-section-number">2.2.3.1</span> A 2nd example: Exponential growth, two countries</h4>
-<p>Two countries start equal size, but grow at different rates. What
-happens to aggregate growth rate?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">  rA =<span class="st"> </span><span class="fl">.03</span> <span class="co">## growth rate of A</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  rB =<span class="st"> </span><span class="fl">.01</span> <span class="co">## growth rate of A</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  KA =<span class="st"> </span><span class="dv">100</span> <span class="co">## starting pop size</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  KB =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  t =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  KA.t =<span class="st"> </span>KA<span class="op">*</span><span class="kw">exp</span>(rA<span class="op">*</span>t) <span class="co">## exp growth of A</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  KB.t =<span class="st"> </span>KB<span class="op">*</span><span class="kw">exp</span>(rB<span class="op">*</span>t) <span class="co">## exp growth of B</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  K &lt;-<span class="st"> </span>KA.t <span class="op">+</span><span class="st"> </span>KB.t <span class="co">## combined pop</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  r.bar =<span class="st"> </span><span class="kw">diff</span>(<span class="kw">log</span>(K)) <span class="co">## growth rate</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">  <span class="kw">plot</span>(t[<span class="op">-</span><span class="dv">1</span>], r.bar, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>),</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">       <span class="dt">ylab =</span> <span class="st">&quot;r.bar&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;time&quot;</span>)</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">  <span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">c</span>(rA, rB), <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:2-countries"></span>
-<img src="bookdown-demo_files/figure-html/2-countries-1.png" alt="Aggregate growth rate of sub-populations A + B" width="80%" />
-<p class="caption">
-Figure 2.2: Aggregate growth rate of sub-populations A + B
-</p>
-</div>
-<!-- title("Aggregate growth rate of sub-populations A + B") -->
-<ul>
-<li><p>Questions</p>
-<ul>
-<li>What determines growth rate?</li>
-<li>How does it change over time?</li>
-<li>Does the process converge?</li>
-</ul></li>
-</ul>
-</div>
-<div id="more-examples-to-work" class="section level4">
-<h4><span class="header-section-number">2.2.3.2</span> More examples to work</h4>
-<ol style="list-style-type: decimal">
-<li>Differential, constant mortality (<span class="math inline">\(\mu_A = .03\)</span>; <span class="math inline">\(\mu_B =.01\)</span>)</li>
-<li>Differential, <em>time-varying</em> mortality or growth.</li>
-<li>``Movers and Stayers’’ (Migration)</li>
-<li>``Movers and Stayers’’ (Marriage)</li>
-<li>Fecundity: aging or heterogeneity?</li>
-<li>Divorce: duration or heterogeneity?</li>
-<li>Duration of unemployment: duration or heterogeneity?</li>
-<li>Recidivism by time out of prison</li>
-</ol>
-</div>
-</div>
-<div id="application" class="section level3">
-<h3><span class="header-section-number">2.2.4</span> Application</h3>
-<iframe src="https://shiny.demog.berkeley.edu/josh/het_ruse/" width="672" height="600px">
-</iframe>
-<ul>
-<li>Can you create a plateau?</li>
-<li>Can you create a crossover?</li>
-<li>Can you get aggregate rate to decline?</li>
-<li>Anything else?</li>
-</ul>
-</div>
-</div>
-<div id="part-ii.-formal-analysis" class="section level2">
-<h2><span class="header-section-number">2.3</span> Part II. Formal Analysis</h2>
-<div id="outline-1" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Outline</h3>
-<ol style="list-style-type: decimal">
-<li>Keyfitz result</li>
-<li>Keyfitz USA-Mexico example</li>
-<li>Ken’s Poisson-Exponential Model</li>
-</ol>
-</div>
-<div id="keyfitz-result" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> Keyfitz result</h3>
-<p><span class="math display">\[{d \over dt}\bar{r}(t) = \sigma^2_r(t)\]</span></p>
-<blockquote>
-<p>When group-specific growth rates are constant the rate of change of the aggregate growth rate equals the variance of the growth rates.</p>
-</blockquote>
-<ul>
-<li>Derivation</li>
-</ul>
-<p>By definition,
-<span class="math display">\[ \bar{K}(t) = \sum_i K_i(t) = \sum_i K_i e^{r_i t} \]</span>
-and</p>
-<p><span class="math display">\[\bar{r}(t) = {{d \over dt} \bar{K}(t) \over \bar{K}(t)}\]</span></p>
-<p>Let’s take derivatives and simplify, recalling definition of variance.</p>
-<p>SOLVE?</p>
-</div>
-<div id="us-mexico-example" class="section level3">
-<h3><span class="header-section-number">2.3.3</span> US-Mexico Example</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">rm =<span class="st"> </span><span class="fl">3.5</span><span class="op">/</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">ru =<span class="st"> </span><span class="fl">.75</span><span class="op">/</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">Km =<span class="st"> </span><span class="dv">50</span> </a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">Ku =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">t &lt;-<span class="st"> </span><span class="dv">-50</span><span class="op">:</span><span class="dv">150</span> <span class="co">## go back in time to see rise and fall of variance</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">Kt =<span class="st"> </span>Km <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(t<span class="op">*</span>rm) <span class="op">+</span><span class="st"> </span>Ku <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(t<span class="op">*</span>ru)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">bar.rt &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">log</span>(Kt))</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw">plot</span>(t, Kt, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">title</span>(<span class="st">&#39;Total pop size (solid)</span><span class="ch">\n</span><span class="st"> Group m (dashed)&#39;</span>)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">lines</span>(t, Km <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(t<span class="op">*</span>rm), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw">lines</span>(t, Ku <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(t<span class="op">*</span>ru), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">my.v =<span class="st"> </span><span class="dv">26</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="kw">abline</span>(<span class="dt">v =</span> my.v)</a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="kw">plot</span>(t, Kt, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="kw">max</span>(Kt)))</a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="kw">lines</span>(t, Km <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(t<span class="op">*</span>rm), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="kw">lines</span>(t, Ku <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(t<span class="op">*</span>ru), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="kw">abline</span>(<span class="dt">v =</span> my.v)</a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw">title</span>(<span class="st">&quot;Total pop size (solid)</span><span class="ch">\n</span><span class="st"> Group &#39;m&#39; (dashed): Log-scale&quot;</span>)</a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="kw">plot</span>(t[<span class="op">-</span><span class="dv">1</span>], bar.rt, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">main =</span> <span class="st">&#39;Aggregate growth rate&#39;</span>)</a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="kw">plot</span>(t[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)], <span class="kw">diff</span>(bar.rt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,</a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="dt">main =</span> <span class="st">&#39;Change in aggregate growth rate&#39;</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:us-mx"></span>
-<img src="bookdown-demo_files/figure-html/us-mx-1.png" alt="Keyfitz result for US-Mexico" width="80%" />
-<p class="caption">
-Figure 2.3: Keyfitz result for US-Mexico
-</p>
-</div>
-<div id="commentary-on-keyfitz-result" class="section level4">
-<h4><span class="header-section-number">2.3.3.1</span> Commentary on Keyfitz result</h4>
-<ul>
-<li>Growth rates in heterogeneous populations start at pop average
-and then increase.</li>
-<li>Heterogeneity pop growth</li>
-<li>We will extend to cover non-constant growth</li>
-</ul>
-<p>But</p>
-<ul>
-<li>Doesn’t tell us how much bigger <span class="math inline">\(\bar{K}(t)\)</span> is projection
-using constant aggregate rate <span class="math inline">\(\bar{r}(0)\)</span>.</li>
-<li>Doesn’t give us a formula for time path of aggregate <span class="math inline">\(\bar{K}(t)\)</span>
-or <span class="math inline">\(\bar{r}(t)\)</span></li>
-</ul>
-<p>Note: our homework will try to address some of this using Taylor
-approximation.</p>
-</div>
-</div>
-<div id="the-origin-of-professor-wachters-poisson-exponential-model" class="section level3">
-<h3><span class="header-section-number">2.3.4</span> The Origin of Professor Wachter’s Poisson-Exponential Model</h3>
-<p>Given a world with many sub-populations, each growing expontentially
-at their own rate, what can we say about the time-path of world
-population growth?</p>
-<p>From an email:</p>
-<blockquote>
-<p>Josh asks: Suppose we have a discrete mix of subpopulations
-growing at different intrinsic rates r whose maximum is r0. Is
-there a handy approximation for the growth path of the aggregate
-populations?</p>
-</blockquote>
-<blockquote>
-<p>The assumption of a discrete mix is essential here. Otherwise
-Tauberian theorems apply and, with a vanishingly small portion of
-the population close to the maximum growth rate, we do not obtain
-long-run exponential growth.</p>
-</blockquote>
-<blockquote>
-<p>I recommend modeling the discrete distribution of growth rates as
-a mixture of Poisson distributions.</p>
-</blockquote>
-<p>We are considering</p>
-<p><span class="math display">\[\begin{equation}
-  \label{mixture}
-\bar{K}(t) = \sum_i e^{r_i t} K_i(0).
-\end{equation}\]</span></p>
-<p>Ken suggests
-<span class="math display">\[\begin{equation}
-  \label{ri_def}
-r_i = r_0 - s(\lambda) \cdot a,
-\end{equation}\]</span></p>
-<ul>
-<li><span class="math inline">\(r_0\)</span> growth rate of the fastest growing sub-population</li>
-<li><span class="math inline">\(s\)</span> a non-negative Poisson distributed integer</li>
-<li><span class="math inline">\(\lambda\)</span> the parameter of the Poisson distribution (also
-it’s mean and variance)</li>
-<li><span class="math inline">\(a\)</span> gap between adjacent growth rates.</li>
-</ul>
-<p>Example: sub-populations have growth rates 3, 2, 1, 0, -1, <span class="math inline">\(\ldots\)</span> percent,
-then <span class="math inline">\(r_0 = 0.03\)</span> and <span class="math inline">\(a = 0.01\)</span>. Sizes of sub-pops determined by
-Poisson dis’n</p>
+<li>In this context, the population of age <span class="math inline">\(x\)</span> in year <span class="math inline">\(t\)</span> depends on the births (<span class="math inline">\(B(t)\)</span>) and the survivorship: <span class="math display">\[N(x,t)= B(t-x)\ell(x) =B(t)e^{-rx}\ell(x)\]</span>.</li>
+<li>The total population in year <span class="math inline">\(t\)</span> is then <span class="math inline">\(N(t)=\int_{0}^{x} N(a,t)da = B(t)\int_{0}^{x} e^{-ra}\ell(a)da\)</span></li>
+<li>Proportion of stable population at age x:
+<span class="math display">\[ c(x) = \frac{N(x,t)}{N(t)}=\frac{B(t)e^{-rx}\ell(x)}{N(t)} =b e^{-rx}\ell(x) \]</span> where <span class="math inline">\(b\)</span> is the birth rate <span class="math inline">\(\left(b=\frac{B(t)}{N(t)}\right)\)</span>. Note that the age-structure and the birth rate are independent of <span class="math inline">\(t\)</span> in the notation.</li>
+<li><p>Birth rate of a stable population:
+As <span class="math inline">\(\int_0^{x} c(a)da =1\)</span>, <span class="math display">\[\int_{0}^{x} b e^{-ra}\ell(a)da =1  \\ b = \frac{1}{\int_{0}^{x} e^{-ra}\ell(a)da} \]</span>
+Using the Lotka-Euler equation we find that:
+<span class="math display">\[ \]</span></p></li>
+<li>Now we look at the crude death rate (CDR), which is the share of deaths <span class="math inline">\(D(t)\)</span> in a given population
+$$
+<span class="math display">\[\begin{aligned}
+CDR &amp;= \frac{D(t)}{N(t)}\\ 
+&amp; = \frac{\int_{0}^{x} D(a,t)da}{\int_{0}^{x} N(a,t)da} \\ 
 
-<div id="closed-form-result" class="section level4">
-<h4><span class="header-section-number">2.3.4.1</span> Closed-form result</h4>
+&amp; = \frac{\int_{0}^{x} h(a) N(a,t)da}{B(t)\int_{0}^{x} e^{-ra}\ell(a)da}  \\ 
+&amp;= \frac{B(t)\int_{0}^{x} h(a) e^{-ra}\ell(a)da}{B(t)\int_{0}^{x} e^{-ra}\ell(a)da}  
+\end{aligned}\]</span>
+$$ where <span class="math inline">\(h(x)\)</span> is the hazard of dying at age <span class="math inline">\(x\)</span>.</li>
+<li><p>Therefore, in a stable population with growth rate <span class="math inline">\(r\)</span> we have a crude death rate that depends on the intrinsic growth rate:
+<span class="math display">\[CDR(r) = {\int e^{-ra} \ell(a) h(a) \, da \over \int e^{-ra} \ell(a)  \, da} \]</span></p></li>
+<li><p><strong>How does the CDR vary with growth rates?</strong><br />
+We can change <span class="math inline">\(r=b-d\)</span> to make the population younger or older: <span class="math inline">\(r&gt;0 \Rightarrow\)</span> younger population as <span class="math inline">\(b&gt;d\)</span> but if <span class="math inline">\(r&lt;0 \Rightarrow\)</span> then the population is older
+<span class="math display">\[ \begin{aligned}
+\frac{d}{dr} \log CDR(r) &amp;= \frac{d }{dr}\log \int e^{-ra} \ell(a) h(a) da - \frac{d}{dr}\log \int e^{-ra} \ell(a)da\\ 
+&amp; =  -\frac{\int a e^{-ra} \ell(a) h(a) da}{\int e^{-ra} \ell(a) h(a) da} + \frac{\int a e^{-ra} \ell(a)  da}{\int e^{-ra} \ell(a) da} \\
+\end{aligned}\]</span><br />
+If we assume a stationary population, such that <span class="math inline">\(r=0\)</span>,
+<span class="math display">\[ \begin{aligned}
+\frac{d}{dr} \log CDR(r) &amp; = -\frac{\int a \ell(a) h(a) da}{\int \ell(a) h(a) da} + \frac{\int a  \ell(a)  da}{\int  \ell(a) da} \\
+&amp; =-\frac{\int a D(a) da}{\int D(a) da} + \frac{\int a  \ell(a)  da}{\int  \ell(a) da} \\
+&amp; = -\int a D(a) da + \frac{\int a  \ell(a)  da}{\int  \ell(a) da}
+\end{aligned}
+\]</span>
+Here, <span class="math inline">\(l(x)h(x)\)</span> is the density of deaths by age <span class="math inline">\(x\)</span> and <span class="math inline">\(\int_0^x D(a)da =1\)</span>. This is a classic result (from Lotka) where the rate at which <span class="math inline">\(r\)</span> changes affects the CDR through the mean age (<span class="math inline">\(A\)</span>) and the life expectancy at birth (<span class="math inline">\(e_0\)</span>):
+<span class="math display">\[{d \log CDR(r) \over dr}|_{r = 0} = A - e(0)\]</span></p>
+<ul>
+<li><p>An example:
+Let <span class="math inline">\(A=40\)</span> and <span class="math inline">\(e_0=80\)</span> then <span class="math inline">\({d \log CDR(r) \over dr}|_{r = 0}\approx -40\)</span>
+If US and India had same age-specific mortality, but India grew 1 percent faster, what would the ratio of their crude death rates be?
+Both countries experience the same CDR(r) but for India <span class="math inline">\(dr=0.01\)</span>:
+<span class="math inline">\(d \log CDR(r) = (-40)(0.01) = -0.4\)</span>
+The death rate will be 40% lower in the US relative to India conditional on age structure
+<strong>NOTE FOR JOSH: Not sure of interpretation of this example.</strong></p></li>
+<li><p>Now, if Covid-19 increases hazards at all ages by the same amount proportion in both countries, what will the ratio of their crude death rates be?
+4 deaths in India per 10 deaths in the US.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="keyfitzs-entropy" class="section level2">
+<h2><span class="header-section-number">12.4</span> Keyfitz’s entropy</h2>
+<ul>
+<li>Assume that there is a proportional difference in mortality rates across all ages such that:
+<span class="math display">\[\mu^*(x) = (1 + \Delta) \mu_0(x)\]</span> where <span class="math inline">\(\delta \in (0,1]\)</span>.</li>
+<li>The new survivoship is:</li>
+</ul>
+<p><span class="math display">\[ \begin{aligned}
+  \ell^*(x) &amp;= e^{-\int_0^{x}\mu^{*}(a)da}\\
+  &amp; = e^{-(1+\Delta)\int_0^{x}\mu(a)da} \\
+  &amp; =\ell(x)^{1+ \Delta} 
+  \end{aligned}\]</span></p>
+<ul>
+<li>So, <span class="math inline">\(H^*(x) = (1 + \Delta) H(x)\)</span>.</li>
+<li>Life expectancy at birth is:</li>
+</ul>
+<p><span class="math display">\[e_0^{*} (x) = \int_{0}^x \ell(a)^{1+\Delta}da\]</span></p>
+<ul>
+<li>How does the new life expectancy change with the increase in mortality at al ages?</li>
+</ul>
+<p><span class="math display">\[ \frac{de_0^{*} (x)}{d\Delta} = \int_{0}^x (\log\ell(a))\ell(a)^{1+\Delta}da\]</span>
+This quantity will never be positive, as <span class="math inline">\(\ell(a) \leq 1\)</span> such that <span class="math inline">\(\log(\ell(a))&lt;0\)</span>. As the <span class="math inline">\(\Delta\)</span> factor increases, life expectancy at birth falls.</p>
+<ul>
+<li>Entropy is defined as</li>
+</ul>
 <p><span class="math display">\[
-K(t) = K(0) e^{r_0 t} e^{-\lambda (1 - e^{-at})}.
-\]</span></p>
-<p>To derive:</p>
-<ul>
-<li>Write out mixture to get
-<span class="math display">\[  K(t) = K(0) e^{r_0 t} \sum_i e^{-sat} f(s)
-\]</span></li>
-<li>Substitute for <span class="math inline">\(f(s)\)</span>: <span class="math inline">\(Pois ~ {\lambda^s e^{-\lambda} \over s!}\)</span></li>
-<li>Recognize that our mixture contains the series representation of
-<span class="math inline">\(e^{-at}\)</span></li>
-</ul>
-<p>Interpretation
+  {\cal H} = {d \log e_{0}(0) \over d \Delta} = {-\int \ell(x) \log \ell(x) \, dx \over e_{0}(0)}
+  \]</span>
+Reverse order of integration to get <span class="math display">\[
+  {\cal H} = {\int d(x) e(x) \, dx \over e_{0}(0)}
+  \]</span> <strong>NOTE TO JOSH</strong>: don’t really know what the last formula is supposed to convey.</p>
+</div>
+<div id="loss-of-person-years-remaining" class="section level2">
+<h2><span class="header-section-number">12.5</span> Loss of person years remaining</h2>
+<p>Before epidemic the person year remaining (PYR):
 <span class="math display">\[
-K(t) = K(0) e^{r_0 t} e^{-\lambda (1 - e^{-at})}.
-\]</span></p>
-<ul>
-<li>Dominant term contains the maximum population growth rate <span class="math inline">\(r_0\)</span>,</li>
-<li>Second term gives the diminishing effect of the
-sub-populations with smaller population growth rates over time.</li>
-</ul>
-<p>Some further analysis, What is the closed-form expression for <span class="math inline">\(\bar{r}(t)\)</span>?</p>
+  PYR = \int N(x) e(x) \, dx
+  \]</span>
+After (‘’instant’’) epidemic
+<span class="math display">\[
+  PYR = \int \left[ N(x) - D^*(x) \right] e(x) \, dx
+  \]</span>
+Proportion of person years lost
+<span class="math display">\[
+  \int D^*(x) e(x) \,dx \over \int N(x) e(x)\, dx
+  \]</span></p>
 </div>
-</div>
-<div id="some-commentary" class="section level3">
-<h3><span class="header-section-number">2.3.5</span> Some commentary</h3>
+<div id="stationary-theory" class="section level2">
+<h2><span class="header-section-number">12.6</span> Stationary theory</h2>
+<p><strong>If</strong></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\color{red}{\mbox {Stationarity}}\, N(x) \propto \ell(x)\)</span></li>
+<li><span class="math inline">\(\color{red}{\mbox {Proportional hazards}}\, M^*(x) = (1 + \Delta) M(x)\)</span></li>
+</ol>
+<p><strong>Then</strong>
+Proportional loss of person years:
+<span class="math display">\[
+    \color{red}{  {-d \log PYR \over d \Delta} = {H \over  A} = {\mbox{Life
+          table entropy} \over \mbox{Mean age of stationary pop}}} \approx {0.15
+      \over 40} = 0.0038
+    \]</span></p>
+<p>A doubling of mortality in epidemic year (<span class="math inline">\(\Delta = 1)\)</span> causes ``only’’ a 0.38% loss of remaining life expectancy. % Average person who dies loses <span class="math inline">\(e^\dagger \approx 12\)</span> years.</p>
+<p>These numbers seem small, but:</p>
 <ul>
-<li>Poisson and Exponential ``fit’’</li>
-<li>We’ll this complementarity again (e.g., with Gamma)</li>
-<li>Tractable models are super powerful for enhancing our understanding.</li>
-<li>But be careful. Avoid extremes: the model is right/wrong.</li>
-</ul>
-<p>A BIG caveat, are disaggregated models necessarily better?</p>
-<ul>
-<li>Some potential problems:
-<ul>
-<li>Aggregate constraints?</li>
-<li>Interacting sub-populations?</li>
-<li>Illusion of precision?</li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div id="conclusions" class="section level2">
-<h2><span class="header-section-number">2.4</span> Conclusions</h2>
-<ul>
-<li><p>Heterogeneity as variation in risk (not just outcome)</p></li>
-<li><p>Constantly growing parts <span class="math inline">\(\neq\)</span> constantly growth whole</p></li>
-<li><p>Keyfitz result: Change in growth rate <span class="math inline">\(=\)</span> variance of growth
-rates</p></li>
-<li><p>Poisson growth gives us a closed-form solution.</p></li>
+<li>Even an epidemic <em>doubling</em> mortality has small effect on
+remaining life expectancy (<span class="math inline">\(\approx \color{red}{2 \mbox{ months}}\)</span> per person)</li>
+<li>But all-cause mortality also small
+(<span class="math inline">\(\approx \color{red}{2 \mbox{ months}}\)</span> per person)</li>
+<li>Covid-19: 1 million deaths <span class="math inline">\(= 30\)</span>% more mortality, but older \
+(<span class="math inline">\(\approx \color{red}{2 \mbox{ weeks}}\)</span> per person)</li>
 </ul>
 
+<div id="refs" class="references">
+<div>
+<p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396). American Association for the Advancement of Science: 1459–61.</p>
+</div>
+<div>
+<p>Bongaarts, John, and Griffith Feeney. 1998. “On the Quantum and Tempo of Fertility.” <em>Population and Development Review</em>. JSTOR, 271–91.</p>
+</div>
+<div>
+<p>Burkimsher, Marion. 2017. “Evolution of the Shape of the Fertility Curve: Why Might Some Countries Develop a Bimodal Curve?” <em>Demographic Research</em> 37. JSTOR: 295–324.</p>
+</div>
+<div>
+<p>Coale, Ansley J, and Ellen Eliason Kisker. 1986. “Mortality Crossovers: Reality or Bad Data?” <em>Population Studies</em> 40 (3). Taylor &amp; Francis: 389–401.</p>
+</div>
+<div>
+<p>Felsenstein, Joseph. 2005. “Theoretical Evolutionary Genetics Joseph Felsenstein.” <em>University of Washington, Seattle</em>. <a href="https://evolution.gs.washington.edu/gs562/2017/pgbook.pdf">https://evolution.gs.washington.edu/gs562/2017/pgbook.pdf</a>.</p>
+</div>
+<div>
+<p>Hahn, Matthew W, and R Alexander Bentley. 2003. “Drift as a Mechanism for Cultural Change: An Example from Baby Names.” <em>Proceedings of the Royal Society of London. Series B: Biological Sciences</em> 270 (suppl_1). The Royal Society: S120–S123.</p>
+</div>
+<div>
+<p>Harris, Theodore Edward. 1964. “The Theory of Branching Process.” Rand Corporation. <a href="https://www.rand.org/content/dam/rand/pubs/reports/
+2009/R381.pdf">https://www.rand.org/content/dam/rand/pubs/reports/
+2009/R381.pdf</a>.</p>
+</div>
+<div>
+<p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Science &amp; Business Media.</p>
+</div>
+<div>
+<p>Horiuchi, Shiro. 2003. “Interspecies Differences in the Life Span Distribution: Humans Versus Invertebrates.” <em>Population and Development Review</em> 29. JSTOR: 127–51.</p>
+</div>
+<div>
+<p>“Introduction to Probability.” 2006. <a href="https://math.dartmouth.edu/~prob/prob/prob.pdf">https://math.dartmouth.edu/~prob/prob/prob.pdf</a>.</p>
+</div>
+<div>
+<p>Keyfitz, Nathan. 1968. “The Branching Process as a Population Model.” In <em>Introduction to the Mathematics of Populations with Revisions</em>, 399–412.</p>
+</div>
+<div>
+<p>Manton, Kenneth G, and Eric Stallard. 1981. “Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection.” <em>Human Biology</em>. JSTOR, 47–67.</p>
+</div>
+<div>
+<p>Rodriguez, Germán. 2001. “Unobserved Heterogeneity.” <a href="https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf">https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf</a>.</p>
+</div>
+<div>
+<p>Steinsaltz, David R, and Kenneth W Wachter. 2006. “Understanding Mortality Rate Deceleration and Heterogeneity.” <em>Mathematical Population Studies</em> 13 (1). Taylor &amp; Francis: 19–37.</p>
+</div>
+<div>
+<p>Sullivan, Rachel. 2005. “The Age Pattern of First-Birth Rates Among Us Women: The Bimodal 1990s.” <em>Demography</em> 42 (2). Springer: 259–73.</p>
+</div>
+<div>
+<p>Vaupel, James W, Kenneth G Manton, and Eric Stallard. 1979. “The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality.” <em>Demography</em> 16 (3). Springer: 439–54.</p>
+</div>
+<div>
+<p>Vaupel, James W, and Trifon I Missov. 2014. “Unobserved Population Heterogeneity: A Review of Formal Relationships.” <em>Demographic Research</em> 31. JSTOR: 659–86.</p>
+</div>
+<div>
+<p>Wachter, Kenneth W. 2014. <em>Essential Demographic Methods</em>. Harvard University Press.</p>
+</div>
+<div>
+<p>Waldron, Hilary. 2007. “Trends in Mortality Differentials and Life Expectancy for Male Social Security-Covered Workers, by Socioeconomic Status.” <em>Soc. Sec. Bull.</em> 67. HeinOnline: 1.</p>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -675,8 +552,8 @@ rates</p></li>
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="frailty.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="student-presentations.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -707,7 +584,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-heterogeneity.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/covid.Rmd",
 "text": "Edit"
 },
 "history": {
