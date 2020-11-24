@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -344,8 +350,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Additional resources</p>
 <ul>
-<li><span class="citation">Vaupel and Missov (<a href="#ref-vaupel2014unobserved">2014</a>)</span>:</li>
-<li><span class="citation">Rodriguez (<a href="#ref-rodriguez2001">2001</a>)</span>: detailed hand-out for Princeton class. Many of the same results as <span class="citation">Vaupel and Missov (<a href="#ref-vaupel2014unobserved">2014</a>)</span>, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.</li>
+<li><span class="citation">Vaupel and Missov (<a href="#ref-vaupel2014unobserved" role="doc-biblioref">2014</a>)</span>:</li>
+<li><span class="citation">Rodriguez (<a href="#ref-rodriguez2001" role="doc-biblioref">2001</a>)</span>: detailed hand-out for Princeton class. Many of the same results as <span class="citation">Vaupel and Missov (<a href="#ref-vaupel2014unobserved" role="doc-biblioref">2014</a>)</span>, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.</li>
 </ul>
 <div id="review-of-mortality-mathematics" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Review of mortality mathematics</h3>
@@ -406,8 +412,8 @@ schedule of a person with <span class="math inline">\(z = 1\)</span>).</li>
 <li>Let’s think of at least three. (<span class="math inline">\(\beta\)</span>, <span class="math inline">\(i\)</span>, <span class="math inline">\(\Delta\)</span>)</li>
 </ul>
 <p>Which look like multiplicative fixed frailty?</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" alt="Multiplicative fixed frailty" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" alt="Multiplicative fixed frailty" width="672" />
 <p class="caption">
 Figure 3.1: Multiplicative fixed frailty
 </p>
@@ -515,21 +521,21 @@ p(z | k, \lambda) = {\lambda^k  \over \Gamma(k)} z^{k-1} e^{-\lambda z}
 <li>Mean: <span class="math inline">\(k / \lambda\)</span></li>
 <li>Variance: <span class="math inline">\(k / \lambda^2\)</span></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">  <span class="co">## with k and lambda</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  k =<span class="st"> </span><span class="dv">3</span>; lambda =<span class="st"> </span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10000</span>, <span class="dt">shape =</span> k, <span class="dt">rate=</span> lambda)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">mean</span>(x)</a></code></pre></div>
-<pre><code>## [1] 0.498123</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">  <span class="kw">sd</span>(x)</a></code></pre></div>
-<pre><code>## [1] 0.2915809</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="frailty.html#cb11-1"></a>  <span class="co">## with k and lambda</span></span>
+<span id="cb11-2"><a href="frailty.html#cb11-2"></a>  k =<span class="st"> </span><span class="dv">3</span>; lambda =<span class="st"> </span><span class="dv">6</span></span>
+<span id="cb11-3"><a href="frailty.html#cb11-3"></a>  x &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10000</span>, <span class="dt">shape =</span> k, <span class="dt">rate=</span> lambda)</span>
+<span id="cb11-4"><a href="frailty.html#cb11-4"></a>  <span class="kw">mean</span>(x)</span></code></pre></div>
+<pre><code>## [1] 0.5017978</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="frailty.html#cb13-1"></a>  <span class="kw">sd</span>(x)</span></code></pre></div>
+<pre><code>## [1] 0.2889426</code></pre>
 <p>Alternate parameterization</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">  <span class="co">## with mean 1, sigma.sq</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">  sigma.sq &lt;-<span class="st"> </span><span class="fl">.25</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">  z &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10000</span>, <span class="dt">shape =</span> <span class="dv">1</span><span class="op">/</span>sigma.sq, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>sigma.sq)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="kw">mean</span>(z)</a></code></pre></div>
-<pre><code>## [1] 1.003287</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">  <span class="kw">var</span>(z)</a></code></pre></div>
-<pre><code>## [1] 0.2468513</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="frailty.html#cb15-1"></a>  <span class="co">## with mean 1, sigma.sq</span></span>
+<span id="cb15-2"><a href="frailty.html#cb15-2"></a>  sigma.sq &lt;-<span class="st"> </span><span class="fl">.25</span></span>
+<span id="cb15-3"><a href="frailty.html#cb15-3"></a>  z &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10000</span>, <span class="dt">shape =</span> <span class="dv">1</span><span class="op">/</span>sigma.sq, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>sigma.sq)</span>
+<span id="cb15-4"><a href="frailty.html#cb15-4"></a>  <span class="kw">mean</span>(z)</span></code></pre></div>
+<pre><code>## [1] 0.9996</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="frailty.html#cb17-1"></a>  <span class="kw">var</span>(z)</span></code></pre></div>
+<pre><code>## [1] 0.2527649</code></pre>
 </div>
 <div id="population-survival-of-gamma-frailty" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> Population Survival of Gamma Frailty</h3>
@@ -571,30 +577,30 @@ something. What?</p>
 <li>Older ages, smaller survival.</li>
 <li>Variance not so clear, need a picture. (What if <span class="math inline">\(\sigma^2 = 0\)</span>?)</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">a =<span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">b =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">mx<span class="fl">.0</span> &lt;-<span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(b<span class="op">*</span>x)</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">Hx<span class="fl">.0</span> &lt;-<span class="st"> </span><span class="kw">cumsum</span>(mx<span class="fl">.0</span>)</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">Sx<span class="fl">.0</span> &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>Hx<span class="fl">.0</span>)</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">## small sigma</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">sigma.sq =<span class="st"> </span><span class="fl">.5</span><span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">bar.S.small.sigma &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span>Hx<span class="fl">.0</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>sigma.sq)</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">## big sigma</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11">sigma.sq =<span class="st"> </span><span class="dv">1</span><span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12">bar.S.big.sigma &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span>Hx<span class="fl">.0</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>sigma.sq)</a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="kw">plot</span>(x, Sx<span class="fl">.0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb12-14" data-line-number="14">       <span class="dt">ylab =</span> <span class="st">&quot;Survival&quot;</span>)</a>
-<a class="sourceLine" id="cb12-15" data-line-number="15">  <span class="kw">lines</span>(x, bar.S.small.sigma, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb12-16" data-line-number="16">  <span class="kw">lines</span>(x, bar.S.big.sigma, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a>
-<a class="sourceLine" id="cb12-17" data-line-number="17">  <span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Pop big.sigma&quot;</span>,</a>
-<a class="sourceLine" id="cb12-18" data-line-number="18">                       <span class="st">&quot;Pop small.sigma&quot;</span>,</a>
-<a class="sourceLine" id="cb12-19" data-line-number="19">                       <span class="st">&quot;Baseline&quot;</span>),</a>
-<a class="sourceLine" id="cb12-20" data-line-number="20">         <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb12-21" data-line-number="21">         <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,</a>
-<a class="sourceLine" id="cb12-22" data-line-number="22">         <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>))</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" alt="Gamma-frailty population survival" width="672" />
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="frailty.html#cb19-1"></a>x &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></span>
+<span id="cb19-2"><a href="frailty.html#cb19-2"></a>a =<span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></span>
+<span id="cb19-3"><a href="frailty.html#cb19-3"></a>b =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">10</span></span>
+<span id="cb19-4"><a href="frailty.html#cb19-4"></a>mx<span class="fl">.0</span> &lt;-<span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(b<span class="op">*</span>x)</span>
+<span id="cb19-5"><a href="frailty.html#cb19-5"></a>Hx<span class="fl">.0</span> &lt;-<span class="st"> </span><span class="kw">cumsum</span>(mx<span class="fl">.0</span>)</span>
+<span id="cb19-6"><a href="frailty.html#cb19-6"></a>Sx<span class="fl">.0</span> &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>Hx<span class="fl">.0</span>)</span>
+<span id="cb19-7"><a href="frailty.html#cb19-7"></a><span class="co">## small sigma</span></span>
+<span id="cb19-8"><a href="frailty.html#cb19-8"></a>sigma.sq =<span class="st"> </span><span class="fl">.5</span><span class="op">^</span><span class="dv">2</span></span>
+<span id="cb19-9"><a href="frailty.html#cb19-9"></a>bar.S.small.sigma &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span>Hx<span class="fl">.0</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>sigma.sq)</span>
+<span id="cb19-10"><a href="frailty.html#cb19-10"></a><span class="co">## big sigma</span></span>
+<span id="cb19-11"><a href="frailty.html#cb19-11"></a>sigma.sq =<span class="st"> </span><span class="dv">1</span><span class="op">^</span><span class="dv">2</span></span>
+<span id="cb19-12"><a href="frailty.html#cb19-12"></a>bar.S.big.sigma &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span>Hx<span class="fl">.0</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span>sigma.sq)</span>
+<span id="cb19-13"><a href="frailty.html#cb19-13"></a><span class="kw">plot</span>(x, Sx<span class="fl">.0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb19-14"><a href="frailty.html#cb19-14"></a>       <span class="dt">ylab =</span> <span class="st">&quot;Survival&quot;</span>)</span>
+<span id="cb19-15"><a href="frailty.html#cb19-15"></a>  <span class="kw">lines</span>(x, bar.S.small.sigma, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb19-16"><a href="frailty.html#cb19-16"></a>  <span class="kw">lines</span>(x, bar.S.big.sigma, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb19-17"><a href="frailty.html#cb19-17"></a>  <span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Pop big.sigma&quot;</span>,</span>
+<span id="cb19-18"><a href="frailty.html#cb19-18"></a>                       <span class="st">&quot;Pop small.sigma&quot;</span>,</span>
+<span id="cb19-19"><a href="frailty.html#cb19-19"></a>                       <span class="st">&quot;Baseline&quot;</span>),</span>
+<span id="cb19-20"><a href="frailty.html#cb19-20"></a>         <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb19-21"><a href="frailty.html#cb19-21"></a>         <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb19-22"><a href="frailty.html#cb19-22"></a>         <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" alt="Gamma-frailty population survival" width="672" />
 <p class="caption">
 Figure 3.2: Gamma-frailty population survival
 </p>
@@ -619,7 +625,7 @@ hazards including <span class="math inline">\(\bar{\mu}(x) = \mu_0(x) \bar{z}(x)
 <p>Rodriguez, Germán. 2001. “Unobserved Heterogeneity.” <a href="https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf">https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf</a>.</p>
 </div>
 <div id="ref-vaupel2014unobserved">
-<p>Vaupel, James W, and Trifon I Missov. 2014. “Unobserved Population Heterogeneity: A Review of Formal Relationships.” <em>Demographic Research</em> 31. JSTOR: 659–86.</p>
+<p>Vaupel, James W, and Trifon I Missov. 2014. “Unobserved Population Heterogeneity: A Review of Formal Relationships.” <em>Demographic Research</em> 31: 659–86.</p>
 </div>
 </div>
             </section>

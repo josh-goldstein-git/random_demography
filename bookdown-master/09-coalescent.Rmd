@@ -8,30 +8,34 @@
   - Simulation: Inferring population size
   - An application of Coalescent Theory
 
-## Big picture: The Coalescent: Expectations of the Past
+## The Coalescent: Expectations of the Past
   
   - Coalescent theory is not a theory.
-  - It's a model for the probability of different histories. Think about it as a model about how sampling can lead to a history of a common ancestor. 
-  - "the" coalescent is a bit confusing. We're not inferring the actual history of common ancestry, just the probabilities
+  - It's a model for the probability of different histories. 
+    - Think about it as a model about how sampling can lead to a history of a common ancestor. 
+  - "The" coalescent is a bit confusing. 
+    - We're not inferring the actual history of common ancestry, just the probabilities
  
 An actual "picture"
 ![](/hdir/0/fmenares/Book/bookdown-master/images/cutter_diagram.png)
 
 
 - Top panel is a Fisher-Wright instance, ordered so that lines don't cross.
-- Haplotype is a sequence (we are diploids, each contributing 2 haplotypes). But let's just think of each line as an individual, for now. Such that each column is a different generation and the lines are the links across generations between dots. Each dot in the columns represents a "child" (or a parent to the next generation). 
+- Haplotype is a sequence (we are diploids, each contributing 2 haplotypes). 
+  - Let's just think of each line as an individual, for now. 
+  - Such that each column is a different generation and the lines are the links across generations between dots. Each dot in the columns represents a "child" (or a parent to the next generation). 
 - The dark purple dots are 8 sampled individuals. We can find The Most Recent Common Ancestor (TMRCA) of sample. This is the red dot in the middle of the graph. 
 - We can make inferences on the entire population based on the sample of individuals. 
 
   - Our sample $\neq$ even all _extant_ descendants of the MRCA. In other words, the sample is not an exhaustive set of the survivors
-  - Since some of the descendents of the pink lines don't survive, then our sample $\neq$ all of the descendants of the MRCA. 
+  - Since some of the descendants of the pink lines don't survive, then our sample $\neq$ all of the descendants of the MRCA. 
   - If we chose two descendants at random, would we always get same MRCA? 
   
 - When we model coalescence we are thinking backwards in time.
   
 ## Our first question: When was MRCA?
 
-  *If we sample two individuals (today), how long ago was their MRCA?* Note that we are not looking for "who" the MRCA is but rather the number of generations ago that they ocurrred. 
+  *If we sample two individuals (today), how long ago was their MRCA?* Note that we are not looking for "who" the MRCA is but rather the number of generations ago that they occurred. 
   
   - Our answer will in terms of the probability of MRCA being 1 generation ago, 2 generations ago, etc.
   - We'll assume Fisher-Wright: constant N, each gen randomly picks parents.

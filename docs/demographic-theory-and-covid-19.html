@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -352,7 +358,7 @@ times?</li>
 <div id="population-aging" class="section level2">
 <h2><span class="header-section-number">12.3</span> Population aging</h2>
 <div class="figure">
-<img src="figures/covid_1.png" alt="Worldwide distribution of the elderly" />
+<img src="figures/covid_1.png" alt="" />
 <p class="caption">Worldwide distribution of the elderly</p>
 </div>
 <p>Source: Tuljapurkar and Zuo </p>
@@ -363,16 +369,16 @@ times?</li>
 <h3><span class="header-section-number">12.3.1</span> Stable theory</h3>
 <p>Let’s revist the stable population theory to understand a change the importance of population structure on epidemic dynamics. The underlying assumptions to a stable population are that i) age-specific mortality and fertility rates are fixed over a long period, ii) age-structure is constant and iii) population closed to migration.</p>
 <ul>
-<li>In this context, the population of age <span class="math inline">\(x\)</span> in year <span class="math inline">\(t\)</span> depends on the births (<span class="math inline">\(B(t)\)</span>) and the survivorship: <span class="math display">\[N(x,t)= B(t-x)\ell(x) =B(t)e^{-rx}\ell(x)\]</span>.</li>
-<li>The total population in year <span class="math inline">\(t\)</span> is then <span class="math inline">\(N(t)=\int_{0}^{x} N(a,t)da = B(t)\int_{0}^{x} e^{-ra}\ell(a)da\)</span></li>
-<li>Proportion of stable population at age x:
-<span class="math display">\[ c(x) = \frac{N(x,t)}{N(t)}=\frac{B(t)e^{-rx}\ell(x)}{N(t)} =b e^{-rx}\ell(x) \]</span> where <span class="math inline">\(b\)</span> is the birth rate <span class="math inline">\(\left(b=\frac{B(t)}{N(t)}\right)\)</span>. Note that the age-structure and the birth rate are independent of <span class="math inline">\(t\)</span> in the notation.</li>
+<li><p>In this context, the population of age <span class="math inline">\(x\)</span> in year <span class="math inline">\(t\)</span> depends on the births (<span class="math inline">\(B(t)\)</span>) and the survivorship: <span class="math display">\[N(x,t)= B(t-x)\ell(x) =B(t)e^{-rx}\ell(x)\]</span>.</p></li>
+<li><p>The total population in year <span class="math inline">\(t\)</span> is then <span class="math inline">\(N(t)=\int_{0}^{x} N(a,t)da = B(t)\int_{0}^{x} e^{-ra}\ell(a)da\)</span></p></li>
+<li><p>Proportion of stable population at age x:
+<span class="math display">\[ c(x) = \frac{N(x,t)}{N(t)}=\frac{B(t)e^{-rx}\ell(x)}{N(t)} =b e^{-rx}\ell(x) \]</span> where <span class="math inline">\(b\)</span> is the birth rate <span class="math inline">\(\left(b=\frac{B(t)}{N(t)}\right)\)</span>. Note that the age-structure and the birth rate are independent of <span class="math inline">\(t\)</span> in the notation.</p></li>
 <li><p>Birth rate of a stable population:
 As <span class="math inline">\(\int_0^{x} c(a)da =1\)</span>, <span class="math display">\[\int_{0}^{x} b e^{-ra}\ell(a)da =1  \\ b = \frac{1}{\int_{0}^{x} e^{-ra}\ell(a)da} \]</span>
 Using the Lotka-Euler equation we find that:
 <span class="math display">\[ \]</span></p></li>
-<li>Now we look at the crude death rate (CDR), which is the share of deaths <span class="math inline">\(D(t)\)</span> in a given population
-$$
+<li><p>Now we look at the crude death rate (CDR), which is the share of deaths <span class="math inline">\(D(t)\)</span> in a given population
+$$</p>
 <span class="math display">\[\begin{aligned}
 CDR &amp;= \frac{D(t)}{N(t)}\\ 
 &amp; = \frac{\int_{0}^{x} D(a,t)da}{\int_{0}^{x} N(a,t)da} \\ 
@@ -380,7 +386,7 @@ CDR &amp;= \frac{D(t)}{N(t)}\\
 &amp; = \frac{\int_{0}^{x} h(a) N(a,t)da}{B(t)\int_{0}^{x} e^{-ra}\ell(a)da}  \\ 
 &amp;= \frac{B(t)\int_{0}^{x} h(a) e^{-ra}\ell(a)da}{B(t)\int_{0}^{x} e^{-ra}\ell(a)da}  
 \end{aligned}\]</span>
-$$ where <span class="math inline">\(h(x)\)</span> is the hazard of dying at age <span class="math inline">\(x\)</span>.</li>
+<p>$$ where <span class="math inline">\(h(x)\)</span> is the hazard of dying at age <span class="math inline">\(x\)</span>.</p></li>
 <li><p>Therefore, in a stable population with growth rate <span class="math inline">\(r\)</span> we have a crude death rate that depends on the intrinsic growth rate:
 <span class="math display">\[CDR(r) = {\int e^{-ra} \ell(a) h(a) \, da \over \int e^{-ra} \ell(a)  \, da} \]</span></p></li>
 <li><p><strong>How does the CDR vary with growth rates?</strong><br />
@@ -415,15 +421,16 @@ The death rate will be 40% lower in the US relative to India conditional on age 
 <div id="keyfitzs-entropy" class="section level2">
 <h2><span class="header-section-number">12.4</span> Keyfitz’s entropy</h2>
 <ul>
-<li>Assume that there is a proportional difference in mortality rates across all ages such that:
-<span class="math display">\[\mu^*(x) = (1 + \Delta) \mu_0(x)\]</span> where <span class="math inline">\(\delta \in (0,1]\)</span>.</li>
+<li><p>Assume that there is a proportional difference in mortality rates across all ages such that:
+<span class="math display">\[\mu^*(x) = (1 + \Delta) \mu_0(x)\]</span> where <span class="math inline">\(\delta \in (0,1]\)</span>.</p>
+<ul>
 <li>The new survivoship is:</li>
 </ul>
 <p><span class="math display">\[ \begin{aligned}
-  \ell^*(x) &amp;= e^{-\int_0^{x}\mu^{*}(a)da}\\
-  &amp; = e^{-(1+\Delta)\int_0^{x}\mu(a)da} \\
-  &amp; =\ell(x)^{1+ \Delta} 
-  \end{aligned}\]</span></p>
+\ell^*(x) &amp;= e^{-\int_0^{x}\mu^{*}(a)da}\\
+&amp; = e^{-(1+\Delta)\int_0^{x}\mu(a)da} \\
+&amp; =\ell(x)^{1+ \Delta} 
+\end{aligned}\]</span></p>
 <ul>
 <li>So, <span class="math inline">\(H^*(x) = (1 + \Delta) H(x)\)</span>.</li>
 <li>Life expectancy at birth is:</li>
@@ -438,11 +445,12 @@ This quantity will never be positive, as <span class="math inline">\(\ell(a) \le
 <li>Entropy is defined as</li>
 </ul>
 <p><span class="math display">\[
-  {\cal H} = {d \log e_{0}(0) \over d \Delta} = {-\int \ell(x) \log \ell(x) \, dx \over e_{0}(0)}
-  \]</span>
+{\cal H} = {d \log e_{0}(0) \over d \Delta} = {-\int \ell(x) \log \ell(x) \, dx \over e_{0}(0)}
+\]</span>
 Reverse order of integration to get <span class="math display">\[
-  {\cal H} = {\int d(x) e(x) \, dx \over e_{0}(0)}
-  \]</span> <strong>NOTE TO JOSH</strong>: don’t really know what the last formula is supposed to convey.</p>
+{\cal H} = {\int d(x) e(x) \, dx \over e_{0}(0)}
+\]</span> <strong>NOTE TO JOSH</strong>: don’t really know what the last formula is supposed to convey.</p></li>
+</ul>
 </div>
 <div id="loss-of-person-years-remaining" class="section level2">
 <h2><span class="header-section-number">12.5</span> Loss of person years remaining</h2>
@@ -477,42 +485,43 @@ Proportional loss of person years:
 <p>These numbers seem small, but:</p>
 <ul>
 <li>Even an epidemic <em>doubling</em> mortality has small effect on
-remaining life expectancy (<span class="math inline">\(\approx \color{red}{2 \mbox{ months}}\)</span> per person)</li>
+remaining life expectancy (<span class="math inline">\(\approx \color{red}{2 \mbox{ months}}\)</span> per person)
+<ul>
 <li>But all-cause mortality also small
 (<span class="math inline">\(\approx \color{red}{2 \mbox{ months}}\)</span> per person)</li>
 <li>Covid-19: 1 million deaths <span class="math inline">\(= 30\)</span>% more mortality, but older \
 (<span class="math inline">\(\approx \color{red}{2 \mbox{ weeks}}\)</span> per person)</li>
+</ul></li>
 </ul>
 
 <div id="refs" class="references">
 <div>
-<p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396). American Association for the Advancement of Science: 1459–61.</p>
+<p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396): 1459–61.</p>
 </div>
 <div>
-<p>Bongaarts, John, and Griffith Feeney. 1998. “On the Quantum and Tempo of Fertility.” <em>Population and Development Review</em>. JSTOR, 271–91.</p>
+<p>Bongaarts, John, and Griffith Feeney. 1998. “On the Quantum and Tempo of Fertility.” <em>Population and Development Review</em>, 271–91.</p>
 </div>
 <div>
-<p>Burkimsher, Marion. 2017. “Evolution of the Shape of the Fertility Curve: Why Might Some Countries Develop a Bimodal Curve?” <em>Demographic Research</em> 37. JSTOR: 295–324.</p>
+<p>Burkimsher, Marion. 2017. “Evolution of the Shape of the Fertility Curve: Why Might Some Countries Develop a Bimodal Curve?” <em>Demographic Research</em> 37: 295–324.</p>
 </div>
 <div>
-<p>Coale, Ansley J, and Ellen Eliason Kisker. 1986. “Mortality Crossovers: Reality or Bad Data?” <em>Population Studies</em> 40 (3). Taylor &amp; Francis: 389–401.</p>
+<p>Coale, Ansley J, and Ellen Eliason Kisker. 1986. “Mortality Crossovers: Reality or Bad Data?” <em>Population Studies</em> 40 (3): 389–401.</p>
 </div>
 <div>
 <p>Felsenstein, Joseph. 2005. “Theoretical Evolutionary Genetics Joseph Felsenstein.” <em>University of Washington, Seattle</em>. <a href="https://evolution.gs.washington.edu/gs562/2017/pgbook.pdf">https://evolution.gs.washington.edu/gs562/2017/pgbook.pdf</a>.</p>
 </div>
 <div>
-<p>Hahn, Matthew W, and R Alexander Bentley. 2003. “Drift as a Mechanism for Cultural Change: An Example from Baby Names.” <em>Proceedings of the Royal Society of London. Series B: Biological Sciences</em> 270 (suppl_1). The Royal Society: S120–S123.</p>
+<p>Hahn, Matthew W, and R Alexander Bentley. 2003. “Drift as a Mechanism for Cultural Change: An Example from Baby Names.” <em>Proceedings of the Royal Society of London. Series B: Biological Sciences</em> 270 (suppl_1): S120–S123.</p>
 </div>
 <div>
-<p>Harris, Theodore Edward. 1964. “The Theory of Branching Process.” Rand Corporation. <a href="https://www.rand.org/content/dam/rand/pubs/reports/
-2009/R381.pdf">https://www.rand.org/content/dam/rand/pubs/reports/
+<p>Harris, Theodore Edward. 1964. “The Theory of Branching Process.” <a href="https://www.rand.org/content/dam/rand/pubs/reports/%0A2009/R381.pdf">https://www.rand.org/content/dam/rand/pubs/reports/
 2009/R381.pdf</a>.</p>
 </div>
 <div>
 <p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Science &amp; Business Media.</p>
 </div>
 <div>
-<p>Horiuchi, Shiro. 2003. “Interspecies Differences in the Life Span Distribution: Humans Versus Invertebrates.” <em>Population and Development Review</em> 29. JSTOR: 127–51.</p>
+<p>Horiuchi, Shiro. 2003. “Interspecies Differences in the Life Span Distribution: Humans Versus Invertebrates.” <em>Population and Development Review</em> 29: 127–51.</p>
 </div>
 <div>
 <p>“Introduction to Probability.” 2006. <a href="https://math.dartmouth.edu/~prob/prob/prob.pdf">https://math.dartmouth.edu/~prob/prob/prob.pdf</a>.</p>
@@ -521,28 +530,28 @@ remaining life expectancy (<span class="math inline">\(\approx \color{red}{2 \mb
 <p>Keyfitz, Nathan. 1968. “The Branching Process as a Population Model.” In <em>Introduction to the Mathematics of Populations with Revisions</em>, 399–412.</p>
 </div>
 <div>
-<p>Manton, Kenneth G, and Eric Stallard. 1981. “Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection.” <em>Human Biology</em>. JSTOR, 47–67.</p>
+<p>Manton, Kenneth G, and Eric Stallard. 1981. “Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection.” <em>Human Biology</em>, 47–67.</p>
 </div>
 <div>
 <p>Rodriguez, Germán. 2001. “Unobserved Heterogeneity.” <a href="https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf">https://data.princeton.edu/pop509/UnobservedHeterogeneity.pdf</a>.</p>
 </div>
 <div>
-<p>Steinsaltz, David R, and Kenneth W Wachter. 2006. “Understanding Mortality Rate Deceleration and Heterogeneity.” <em>Mathematical Population Studies</em> 13 (1). Taylor &amp; Francis: 19–37.</p>
+<p>Steinsaltz, David R, and Kenneth W Wachter. 2006. “Understanding Mortality Rate Deceleration and Heterogeneity.” <em>Mathematical Population Studies</em> 13 (1): 19–37.</p>
 </div>
 <div>
-<p>Sullivan, Rachel. 2005. “The Age Pattern of First-Birth Rates Among Us Women: The Bimodal 1990s.” <em>Demography</em> 42 (2). Springer: 259–73.</p>
+<p>Sullivan, Rachel. 2005. “The Age Pattern of First-Birth Rates Among Us Women: The Bimodal 1990s.” <em>Demography</em> 42 (2): 259–73.</p>
 </div>
 <div>
-<p>Vaupel, James W, Kenneth G Manton, and Eric Stallard. 1979. “The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality.” <em>Demography</em> 16 (3). Springer: 439–54.</p>
+<p>Vaupel, James W, Kenneth G Manton, and Eric Stallard. 1979. “The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality.” <em>Demography</em> 16 (3): 439–54.</p>
 </div>
 <div>
-<p>Vaupel, James W, and Trifon I Missov. 2014. “Unobserved Population Heterogeneity: A Review of Formal Relationships.” <em>Demographic Research</em> 31. JSTOR: 659–86.</p>
+<p>Vaupel, James W, and Trifon I Missov. 2014. “Unobserved Population Heterogeneity: A Review of Formal Relationships.” <em>Demographic Research</em> 31: 659–86.</p>
 </div>
 <div>
 <p>Wachter, Kenneth W. 2014. <em>Essential Demographic Methods</em>. Harvard University Press.</p>
 </div>
 <div>
-<p>Waldron, Hilary. 2007. “Trends in Mortality Differentials and Life Expectancy for Male Social Security-Covered Workers, by Socioeconomic Status.” <em>Soc. Sec. Bull.</em> 67. HeinOnline: 1.</p>
+<p>Waldron, Hilary. 2007. “Trends in Mortality Differentials and Life Expectancy for Male Social Security-Covered Workers, by Socioeconomic Status.” <em>Soc. Sec. Bull.</em> 67: 1.</p>
 </div>
 </div>
 </div>

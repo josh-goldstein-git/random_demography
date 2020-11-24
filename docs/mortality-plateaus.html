@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -374,18 +380,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="an-example-2" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> An example</h3>
 <p>Assume <span class="math inline">\(\sigma^2 = .2\)</span>.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">  sigma.sq =<span class="st"> </span><span class="fl">.2</span></a>
-<a class="sourceLine" id="cb51-3" data-line-number="3">  dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/ITA.bltcoh_1x1.txt&quot;</span>, <span class="dt">na.string =</span> <span class="st">&quot;.&quot;</span>)</a>
-<a class="sourceLine" id="cb51-4" data-line-number="4">  mx.<span class="fl">80.</span>c1880 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1880</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>mx</a>
-<a class="sourceLine" id="cb51-5" data-line-number="5">  mx.<span class="fl">80.</span>c1900 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>mx</a>
-<a class="sourceLine" id="cb51-6" data-line-number="6">  (rho.bar<span class="fl">.80</span> &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(mx.<span class="fl">80.</span>c1900<span class="op">/</span>mx.<span class="fl">80.</span>c1880)<span class="op">/</span><span class="dv">20</span>) <span class="co">## about 0.8%</span></a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="mortality-plateaus.html#cb58-1"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb58-2"><a href="mortality-plateaus.html#cb58-2"></a>  sigma.sq =<span class="st"> </span><span class="fl">.2</span></span>
+<span id="cb58-3"><a href="mortality-plateaus.html#cb58-3"></a>  dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/ITA.bltcoh_1x1.txt&quot;</span>, <span class="dt">na.string =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb58-4"><a href="mortality-plateaus.html#cb58-4"></a>  mx.<span class="fl">80.</span>c1880 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1880</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>mx</span>
+<span id="cb58-5"><a href="mortality-plateaus.html#cb58-5"></a>  mx.<span class="fl">80.</span>c1900 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>mx</span>
+<span id="cb58-6"><a href="mortality-plateaus.html#cb58-6"></a>  (rho.bar<span class="fl">.80</span> &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(mx.<span class="fl">80.</span>c1900<span class="op">/</span>mx.<span class="fl">80.</span>c1880)<span class="op">/</span><span class="dv">20</span>) <span class="co">## about 0.8%</span></span></code></pre></div>
 <pre><code>## [1] 0.008729961</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">  Sx.<span class="fl">80.</span>c1880 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1880</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>lx</a>
-<a class="sourceLine" id="cb53-2" data-line-number="2">  Sx.<span class="fl">80.</span>c1900 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>lx</a>
-<a class="sourceLine" id="cb53-3" data-line-number="3">  (d.log.Sx &lt;-<span class="st"> </span><span class="kw">log</span>(Sx.<span class="fl">80.</span>c1900<span class="op">/</span>Sx.<span class="fl">80.</span>c1880)<span class="op">/</span><span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="mortality-plateaus.html#cb60-1"></a>  Sx.<span class="fl">80.</span>c1880 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1880</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>lx</span>
+<span id="cb60-2"><a href="mortality-plateaus.html#cb60-2"></a>  Sx.<span class="fl">80.</span>c1900 &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>Age <span class="op">==</span><span class="st"> &quot;80&quot;</span>]<span class="op">$</span>lx</span>
+<span id="cb60-3"><a href="mortality-plateaus.html#cb60-3"></a>  (d.log.Sx &lt;-<span class="st"> </span><span class="kw">log</span>(Sx.<span class="fl">80.</span>c1900<span class="op">/</span>Sx.<span class="fl">80.</span>c1880)<span class="op">/</span><span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## [1] 0.02177952</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">  (<span class="dt">rho.0.80 =</span> rho.bar<span class="fl">.80</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span><span class="st"> </span>d.log.Sx) <span class="co">##  about 1.3%</span></a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="mortality-plateaus.html#cb62-1"></a>  (<span class="dt">rho.0.80 =</span> rho.bar<span class="fl">.80</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span><span class="st"> </span>d.log.Sx) <span class="co">##  about 1.3%</span></span></code></pre></div>
 <pre><code>## [1] 0.01308586</code></pre>
 <p>So individual-level mortality progress is nearly 50% faster (1.3% vs. 0.9%) than it appears!</p>
 </div>
@@ -422,7 +428,7 @@ selection”</li>
 <div class="figure" style="text-align: center"><span id="fig:plateaubarbi"></span>
 <img src="figures/plateau_1.png" alt="Estimated plateau for cohort of Italian women from 1904. Source: @barbi2018" width="80%" />
 <p class="caption">
-Figure 6.1: Estimated plateau for cohort of Italian women from 1904. Source: <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>
+Figure 6.1: Estimated plateau for cohort of Italian women from 1904. Source: <span class="citation">Barbi et al. (<a href="#ref-barbi2018" role="doc-biblioref">2018</a>)</span>
 </p>
 </div>
 <p>What is the importance of plateaus?</p>
@@ -434,50 +440,50 @@ Figure 6.1: Estimated plateau for cohort of Italian women from 1904. Source: <sp
 <div class="figure" style="text-align: center"><span id="fig:plateauhoriuchi"></span>
 <img src="figures/plateau_2.png" alt="Hazards across selected species. Source: @horiuchi2003" width="80%" />
 <p class="caption">
-Figure 6.2: Hazards across selected species. Source: <span class="citation">Horiuchi (<a href="#ref-horiuchi2003">2003</a>)</span>
+Figure 6.2: Hazards across selected species. Source: <span class="citation">Horiuchi (<a href="#ref-horiuchi2003" role="doc-biblioref">2003</a>)</span>
 </p>
 </div>
 </div>
 <div id="gamma-gompertz-fixed-frailty-hazards" class="section level3">
 <h3><span class="header-section-number">6.4.3</span> Gamma-Gompertz Fixed Frailty Hazards</h3>
 <ul>
-<li>The Gamma-Gompertz model of <span class="citation">Vaupel, Manton, and Stallard (<a href="#ref-vaupel1979">1979</a>)</span> is familiar from this course and Chapter 8 of Essential Demographic Methods <span class="citation">(Wachter <a href="#ref-wachter2014essential">2014</a>)</span>.</li>
-<li>Gamma Gompertz models are one way of generating plateaus for population hazards out of increasing individual hazards.</li>
-<li>We fit parameters to the data in <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span> and look for a predicted plateau, starting from age 60 onwards.</li>
-<li>We need formulas for the individual hazard <span class="math inline">\(h_x\)</span> , for the individual
-cumulative hazard <span class="math inline">\(H_x\)</span>, and for the aggregate population hazard <span class="math inline">\(\mu_x\)</span> implied by Gamma-distributed frailty with shape parameter <span class="math inline">\(k\)</span> and rate parameter <span class="math inline">\(\theta = k\)</span>.</li>
-<li>Does the prediction show a plateau?</li>
+<li><p>The Gamma-Gompertz model of <span class="citation">Vaupel, Manton, and Stallard (<a href="#ref-vaupel1979" role="doc-biblioref">1979</a>)</span> is familiar from this course and Chapter 8 of Essential Demographic Methods <span class="citation">(Wachter <a href="#ref-wachter2014essential" role="doc-biblioref">2014</a>)</span>.</p></li>
+<li><p>Gamma Gompertz models are one way of generating plateaus for population hazards out of increasing individual hazards.</p></li>
+<li><p>We fit parameters to the data in <span class="citation">Barbi et al. (<a href="#ref-barbi2018" role="doc-biblioref">2018</a>)</span> and look for a predicted plateau, starting from age 60 onwards.</p></li>
+<li><p>We need formulas for the individual hazard <span class="math inline">\(h_x\)</span> , for the individual
+cumulative hazard <span class="math inline">\(H_x\)</span>, and for the aggregate population hazard <span class="math inline">\(\mu_x\)</span> implied by Gamma-distributed frailty with shape parameter <span class="math inline">\(k\)</span> and rate parameter <span class="math inline">\(\theta = k\)</span>.</p></li>
+<li><p>Does the prediction show a plateau?</p></li>
 <li><p>Does the level of the plateau fit plateau observed in the Italian cohorts over age 105?</p>
-<p>To answer these questions, we create the process below to calculate the aggregate population hazard function predicted from Gompertz hazards for individuals combined with a Gamma distribution for fixed proportional frailty, using parameters matched to the Italian cohort data for <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>.</p></li>
+<p>To answer these questions, we create the process below to calculate the aggregate population hazard function predicted from Gompertz hazards for individuals combined with a Gamma distribution for fixed proportional frailty, using parameters matched to the Italian cohort data for <span class="citation">Barbi et al. (<a href="#ref-barbi2018" role="doc-biblioref">2018</a>)</span>.</p></li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">    <span class="co"># Parameters for Gompertz and Gamma </span></a>
-<a class="sourceLine" id="cb57-2" data-line-number="2">    beta     &lt;-<span class="st">  </span><span class="fl">0.088</span>            <span class="co">#  Gompertz slope parameter,  Barbi et al.</span></a>
-<a class="sourceLine" id="cb57-3" data-line-number="3">    alpha60  &lt;-<span class="st">  </span><span class="fl">0.01340671</span>       <span class="co">#  Gompertz intercept parameter at age 60 </span></a>
-<a class="sourceLine" id="cb57-4" data-line-number="4">    asymp    &lt;-<span class="st">  </span><span class="fl">0.620</span>            <span class="co">#  Observed asymptote, for comparisons in plots</span></a>
-<a class="sourceLine" id="cb57-5" data-line-number="5">    khat     &lt;-<span class="st">  </span><span class="fl">7.045455</span>         <span class="co">#  Gamma shape parameter, to fit plateau </span></a>
-<a class="sourceLine" id="cb57-6" data-line-number="6">    theta    &lt;-<span class="st">  </span><span class="dv">1</span><span class="op">/</span>khat           <span class="co">#  Gamma rate parameter, for unit mean at 60</span></a>
-<a class="sourceLine" id="cb57-7" data-line-number="7">    <span class="co"># Age range, starting to observe cohorts at age 60, reaching up to 130 </span></a>
-<a class="sourceLine" id="cb57-8" data-line-number="8">    xxx      &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">200</span>)          <span class="co">#  set of values of x, years past 60</span></a>
-<a class="sourceLine" id="cb57-9" data-line-number="9">    age      &lt;-<span class="st">  </span><span class="dv">60</span>  <span class="op">+</span><span class="st">  </span>xxx       <span class="co">#  age  </span></a>
-<a class="sourceLine" id="cb57-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb57-11" data-line-number="11">    <span class="co"># Hazards: </span></a>
-<a class="sourceLine" id="cb57-12" data-line-number="12">    <span class="co">###  Gompertz formula to calculate individual hazards hx at x:</span></a>
-<a class="sourceLine" id="cb57-13" data-line-number="13">    hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></a>
-<a class="sourceLine" id="cb57-14" data-line-number="14">    <span class="co">###  Individual cumulative hazard  Hx formula</span></a>
-<a class="sourceLine" id="cb57-15" data-line-number="15">    Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></a>
-<a class="sourceLine" id="cb57-16" data-line-number="16">    <span class="co">###  Aggregate population hazard mu_x with Gamma frailty:</span></a>
-<a class="sourceLine" id="cb57-17" data-line-number="17">    mux       &lt;-<span class="st">  </span>hx <span class="op">*</span>khat<span class="op">/</span><span class="st"> </span>(khat <span class="op">+</span><span class="st"> </span>Hx)</a></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">    <span class="co">#Plot:</span></a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb58-3" data-line-number="3">         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>) <span class="co">#individual hazard</span></a>
-<a class="sourceLine" id="cb58-4" data-line-number="4">    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></a>
-<a class="sourceLine" id="cb58-5" data-line-number="5">    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></a>
-<a class="sourceLine" id="cb58-6" data-line-number="6">    <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="st">&quot;Individual hazard, h&quot;</span>[x]), </a>
-<a class="sourceLine" id="cb58-7" data-line-number="7">                               <span class="st">&quot;Predicted population hazard, &quot;</span><span class="op">~</span><span class="st"> </span>mu [x],</a>
-<a class="sourceLine" id="cb58-8" data-line-number="8">                               <span class="st">&quot;Plateau estimate Barbi et al. (2018)&quot;</span>),</a>
-<a class="sourceLine" id="cb58-9" data-line-number="9">       <span class="dt">col=</span><span class="kw">c</span>( <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" alt="Hazards and plateau with Gamma frailty" width="80%" />
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="mortality-plateaus.html#cb64-1"></a>    <span class="co"># Parameters for Gompertz and Gamma </span></span>
+<span id="cb64-2"><a href="mortality-plateaus.html#cb64-2"></a>    beta     &lt;-<span class="st">  </span><span class="fl">0.088</span>            <span class="co">#  Gompertz slope parameter,  Barbi et al.</span></span>
+<span id="cb64-3"><a href="mortality-plateaus.html#cb64-3"></a>    alpha60  &lt;-<span class="st">  </span><span class="fl">0.01340671</span>       <span class="co">#  Gompertz intercept parameter at age 60 </span></span>
+<span id="cb64-4"><a href="mortality-plateaus.html#cb64-4"></a>    asymp    &lt;-<span class="st">  </span><span class="fl">0.620</span>            <span class="co">#  Observed asymptote, for comparisons in plots</span></span>
+<span id="cb64-5"><a href="mortality-plateaus.html#cb64-5"></a>    khat     &lt;-<span class="st">  </span><span class="fl">7.045455</span>         <span class="co">#  Gamma shape parameter, to fit plateau </span></span>
+<span id="cb64-6"><a href="mortality-plateaus.html#cb64-6"></a>    theta    &lt;-<span class="st">  </span><span class="dv">1</span><span class="op">/</span>khat           <span class="co">#  Gamma rate parameter, for unit mean at 60</span></span>
+<span id="cb64-7"><a href="mortality-plateaus.html#cb64-7"></a>    <span class="co"># Age range, starting to observe cohorts at age 60, reaching up to 130 </span></span>
+<span id="cb64-8"><a href="mortality-plateaus.html#cb64-8"></a>    xxx      &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">200</span>)          <span class="co">#  set of values of x, years past 60</span></span>
+<span id="cb64-9"><a href="mortality-plateaus.html#cb64-9"></a>    age      &lt;-<span class="st">  </span><span class="dv">60</span>  <span class="op">+</span><span class="st">  </span>xxx       <span class="co">#  age  </span></span>
+<span id="cb64-10"><a href="mortality-plateaus.html#cb64-10"></a></span>
+<span id="cb64-11"><a href="mortality-plateaus.html#cb64-11"></a>    <span class="co"># Hazards: </span></span>
+<span id="cb64-12"><a href="mortality-plateaus.html#cb64-12"></a>    <span class="co">###  Gompertz formula to calculate individual hazards hx at x:</span></span>
+<span id="cb64-13"><a href="mortality-plateaus.html#cb64-13"></a>    hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></span>
+<span id="cb64-14"><a href="mortality-plateaus.html#cb64-14"></a>    <span class="co">###  Individual cumulative hazard  Hx formula</span></span>
+<span id="cb64-15"><a href="mortality-plateaus.html#cb64-15"></a>    Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></span>
+<span id="cb64-16"><a href="mortality-plateaus.html#cb64-16"></a>    <span class="co">###  Aggregate population hazard mu_x with Gamma frailty:</span></span>
+<span id="cb64-17"><a href="mortality-plateaus.html#cb64-17"></a>    mux       &lt;-<span class="st">  </span>hx <span class="op">*</span>khat<span class="op">/</span><span class="st"> </span>(khat <span class="op">+</span><span class="st"> </span>Hx)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="mortality-plateaus.html#cb65-1"></a>    <span class="co">#Plot:</span></span>
+<span id="cb65-2"><a href="mortality-plateaus.html#cb65-2"></a>    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</span>
+<span id="cb65-3"><a href="mortality-plateaus.html#cb65-3"></a>         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>) <span class="co">#individual hazard</span></span>
+<span id="cb65-4"><a href="mortality-plateaus.html#cb65-4"></a>    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></span>
+<span id="cb65-5"><a href="mortality-plateaus.html#cb65-5"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></span>
+<span id="cb65-6"><a href="mortality-plateaus.html#cb65-6"></a>    <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="st">&quot;Individual hazard, h&quot;</span>[x]), </span>
+<span id="cb65-7"><a href="mortality-plateaus.html#cb65-7"></a>                               <span class="st">&quot;Predicted population hazard, &quot;</span><span class="op">~</span><span class="st"> </span>mu [x],</span>
+<span id="cb65-8"><a href="mortality-plateaus.html#cb65-8"></a>                               <span class="st">&quot;Plateau estimate Barbi et al. (2018)&quot;</span>),</span>
+<span id="cb65-9"><a href="mortality-plateaus.html#cb65-9"></a>       <span class="dt">col=</span><span class="kw">c</span>( <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-30-1.png" alt="Hazards and plateau with Gamma frailty" width="80%" />
 <p class="caption">
 Figure 6.3: Hazards and plateau with Gamma frailty
 </p>
@@ -485,7 +491,7 @@ Figure 6.3: Hazards and plateau with Gamma frailty
 <ul>
 <li>Note that the x-axis shows the ages for the estimated Gompertz, that is for a population of ages 60 and above.</li>
 <li><span class="math inline">\(\mu_x\)</span> appears to reach its own plateau due to the chosen parameters from the Gamma-Gompertz model.</li>
-<li>In this case, we get a plateau further along than in the italian case of <span class="citation">Barbi et al. (<a href="#ref-barbi2018">2018</a>)</span>.</li>
+<li>In this case, we get a plateau further along than in the italian case of <span class="citation">Barbi et al. (<a href="#ref-barbi2018" role="doc-biblioref">2018</a>)</span>.</li>
 <li>Gamma gompertz models are good at fitting plateaus mathematically but may not be aplicable with the data.</li>
 </ul>
 <div id="how-does-gamma-gompertz-make-a-plateau" class="section level4">
@@ -493,82 +499,82 @@ Figure 6.3: Hazards and plateau with Gamma frailty
 <ul>
 <li>Try alternative values for <span class="math inline">\(k\)</span> and for <span class="math inline">\(\beta\)</span>. Guess a formula for the level of the plateau.</li>
 </ul>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">beta_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.1</span>, beta, <span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">k_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, khat,<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb59-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">plateau_beta_nolegend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></a>
-<a class="sourceLine" id="cb59-6" data-line-number="6">Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></a>
-<a class="sourceLine" id="cb59-7" data-line-number="7">mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</a>
-<a class="sourceLine" id="cb59-8" data-line-number="8">    </a>
-<a class="sourceLine" id="cb59-9" data-line-number="9">    <span class="co">#Plot:</span></a>
-<a class="sourceLine" id="cb59-10" data-line-number="10">    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb59-11" data-line-number="11">         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</a>
-<a class="sourceLine" id="cb59-12" data-line-number="12">         <span class="dt">main=</span><span class="kw">bquote</span>(beta <span class="op">==</span><span class="st"> </span>.(beta_vals))) <span class="co">#individual hazard</span></a>
-<a class="sourceLine" id="cb59-13" data-line-number="13">    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></a>
-<a class="sourceLine" id="cb59-14" data-line-number="14">    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></a>
-<a class="sourceLine" id="cb59-15" data-line-number="15">}</a>
-<a class="sourceLine" id="cb59-16" data-line-number="16">plateau_beta_legend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</a>
-<a class="sourceLine" id="cb59-17" data-line-number="17">hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></a>
-<a class="sourceLine" id="cb59-18" data-line-number="18">Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></a>
-<a class="sourceLine" id="cb59-19" data-line-number="19">mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</a>
-<a class="sourceLine" id="cb59-20" data-line-number="20">    </a>
-<a class="sourceLine" id="cb59-21" data-line-number="21">    <span class="co">#Plot:</span></a>
-<a class="sourceLine" id="cb59-22" data-line-number="22">    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb59-23" data-line-number="23">         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</a>
-<a class="sourceLine" id="cb59-24" data-line-number="24">         <span class="dt">main=</span><span class="kw">bquote</span>(beta <span class="op">==</span><span class="st"> </span>.(beta_vals))) <span class="co">#individual hazard</span></a>
-<a class="sourceLine" id="cb59-25" data-line-number="25">    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></a>
-<a class="sourceLine" id="cb59-26" data-line-number="26">    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></a>
-<a class="sourceLine" id="cb59-27" data-line-number="27">           <span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="st">&quot;Individual hazard, h&quot;</span>[x]), </a>
-<a class="sourceLine" id="cb59-28" data-line-number="28">                               <span class="st">&quot;Predicted population hazard, &quot;</span><span class="op">~</span><span class="st"> </span>mu [x],</a>
-<a class="sourceLine" id="cb59-29" data-line-number="29">                               <span class="st">&quot;Plateau estimate Barbi et al. (2018)&quot;</span>),</a>
-<a class="sourceLine" id="cb59-30" data-line-number="30">                  <span class="dt">col=</span><span class="kw">c</span>( <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">cex=</span><span class="fl">0.7</span>) </a>
-<a class="sourceLine" id="cb59-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb59-32" data-line-number="32">}</a>
-<a class="sourceLine" id="cb59-33" data-line-number="33"></a>
-<a class="sourceLine" id="cb59-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb59-35" data-line-number="35">plateau_k_nolegend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</a>
-<a class="sourceLine" id="cb59-36" data-line-number="36">hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></a>
-<a class="sourceLine" id="cb59-37" data-line-number="37">Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></a>
-<a class="sourceLine" id="cb59-38" data-line-number="38">mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</a>
-<a class="sourceLine" id="cb59-39" data-line-number="39">    </a>
-<a class="sourceLine" id="cb59-40" data-line-number="40">    <span class="co">#Plot:</span></a>
-<a class="sourceLine" id="cb59-41" data-line-number="41">    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb59-42" data-line-number="42">         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</a>
-<a class="sourceLine" id="cb59-43" data-line-number="43">         <span class="dt">main=</span><span class="kw">bquote</span>(k <span class="op">==</span><span class="st"> </span>.(k_vals))) <span class="co">#individual hazard</span></a>
-<a class="sourceLine" id="cb59-44" data-line-number="44">    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></a>
-<a class="sourceLine" id="cb59-45" data-line-number="45">    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></a>
-<a class="sourceLine" id="cb59-46" data-line-number="46">}</a>
-<a class="sourceLine" id="cb59-47" data-line-number="47">plateau_k_legend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</a>
-<a class="sourceLine" id="cb59-48" data-line-number="48">hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></a>
-<a class="sourceLine" id="cb59-49" data-line-number="49">Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></a>
-<a class="sourceLine" id="cb59-50" data-line-number="50">mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</a>
-<a class="sourceLine" id="cb59-51" data-line-number="51">    </a>
-<a class="sourceLine" id="cb59-52" data-line-number="52">    <span class="co">#Plot:</span></a>
-<a class="sourceLine" id="cb59-53" data-line-number="53">    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</a>
-<a class="sourceLine" id="cb59-54" data-line-number="54">         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</a>
-<a class="sourceLine" id="cb59-55" data-line-number="55">         <span class="dt">main=</span><span class="kw">bquote</span>(k <span class="op">==</span><span class="st"> </span>.(k_vals))) <span class="co">#individual hazard</span></a>
-<a class="sourceLine" id="cb59-56" data-line-number="56">    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></a>
-<a class="sourceLine" id="cb59-57" data-line-number="57">    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></a>
-<a class="sourceLine" id="cb59-58" data-line-number="58">           <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="st">&quot;Individual hazard, h&quot;</span>[x]), </a>
-<a class="sourceLine" id="cb59-59" data-line-number="59">                               <span class="st">&quot;Predicted population hazard, &quot;</span><span class="op">~</span><span class="st"> </span>mu [x],</a>
-<a class="sourceLine" id="cb59-60" data-line-number="60">                               <span class="st">&quot;Plateau estimate Barbi et al. (2018)&quot;</span>),</a>
-<a class="sourceLine" id="cb59-61" data-line-number="61">                  <span class="dt">col=</span><span class="kw">c</span>( <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">cex=</span><span class="fl">0.7</span>) </a>
-<a class="sourceLine" id="cb59-62" data-line-number="62"></a>
-<a class="sourceLine" id="cb59-63" data-line-number="63">}</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="mortality-plateaus.html#cb66-1"></a>beta_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.1</span>, beta, <span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb66-2"><a href="mortality-plateaus.html#cb66-2"></a>k_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, khat,<span class="dv">10</span>)</span>
+<span id="cb66-3"><a href="mortality-plateaus.html#cb66-3"></a></span>
+<span id="cb66-4"><a href="mortality-plateaus.html#cb66-4"></a>plateau_beta_nolegend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</span>
+<span id="cb66-5"><a href="mortality-plateaus.html#cb66-5"></a>hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></span>
+<span id="cb66-6"><a href="mortality-plateaus.html#cb66-6"></a>Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></span>
+<span id="cb66-7"><a href="mortality-plateaus.html#cb66-7"></a>mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</span>
+<span id="cb66-8"><a href="mortality-plateaus.html#cb66-8"></a>    </span>
+<span id="cb66-9"><a href="mortality-plateaus.html#cb66-9"></a>    <span class="co">#Plot:</span></span>
+<span id="cb66-10"><a href="mortality-plateaus.html#cb66-10"></a>    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</span>
+<span id="cb66-11"><a href="mortality-plateaus.html#cb66-11"></a>         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</span>
+<span id="cb66-12"><a href="mortality-plateaus.html#cb66-12"></a>         <span class="dt">main=</span><span class="kw">bquote</span>(beta <span class="op">==</span><span class="st"> </span>.(beta_vals))) <span class="co">#individual hazard</span></span>
+<span id="cb66-13"><a href="mortality-plateaus.html#cb66-13"></a>    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></span>
+<span id="cb66-14"><a href="mortality-plateaus.html#cb66-14"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></span>
+<span id="cb66-15"><a href="mortality-plateaus.html#cb66-15"></a>}</span>
+<span id="cb66-16"><a href="mortality-plateaus.html#cb66-16"></a>plateau_beta_legend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</span>
+<span id="cb66-17"><a href="mortality-plateaus.html#cb66-17"></a>hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></span>
+<span id="cb66-18"><a href="mortality-plateaus.html#cb66-18"></a>Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></span>
+<span id="cb66-19"><a href="mortality-plateaus.html#cb66-19"></a>mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</span>
+<span id="cb66-20"><a href="mortality-plateaus.html#cb66-20"></a>    </span>
+<span id="cb66-21"><a href="mortality-plateaus.html#cb66-21"></a>    <span class="co">#Plot:</span></span>
+<span id="cb66-22"><a href="mortality-plateaus.html#cb66-22"></a>    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</span>
+<span id="cb66-23"><a href="mortality-plateaus.html#cb66-23"></a>         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</span>
+<span id="cb66-24"><a href="mortality-plateaus.html#cb66-24"></a>         <span class="dt">main=</span><span class="kw">bquote</span>(beta <span class="op">==</span><span class="st"> </span>.(beta_vals))) <span class="co">#individual hazard</span></span>
+<span id="cb66-25"><a href="mortality-plateaus.html#cb66-25"></a>    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></span>
+<span id="cb66-26"><a href="mortality-plateaus.html#cb66-26"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></span>
+<span id="cb66-27"><a href="mortality-plateaus.html#cb66-27"></a>           <span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="st">&quot;Individual hazard, h&quot;</span>[x]), </span>
+<span id="cb66-28"><a href="mortality-plateaus.html#cb66-28"></a>                               <span class="st">&quot;Predicted population hazard, &quot;</span><span class="op">~</span><span class="st"> </span>mu [x],</span>
+<span id="cb66-29"><a href="mortality-plateaus.html#cb66-29"></a>                               <span class="st">&quot;Plateau estimate Barbi et al. (2018)&quot;</span>),</span>
+<span id="cb66-30"><a href="mortality-plateaus.html#cb66-30"></a>                  <span class="dt">col=</span><span class="kw">c</span>( <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">cex=</span><span class="fl">0.7</span>) </span>
+<span id="cb66-31"><a href="mortality-plateaus.html#cb66-31"></a></span>
+<span id="cb66-32"><a href="mortality-plateaus.html#cb66-32"></a>}</span>
+<span id="cb66-33"><a href="mortality-plateaus.html#cb66-33"></a></span>
+<span id="cb66-34"><a href="mortality-plateaus.html#cb66-34"></a></span>
+<span id="cb66-35"><a href="mortality-plateaus.html#cb66-35"></a>plateau_k_nolegend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</span>
+<span id="cb66-36"><a href="mortality-plateaus.html#cb66-36"></a>hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></span>
+<span id="cb66-37"><a href="mortality-plateaus.html#cb66-37"></a>Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></span>
+<span id="cb66-38"><a href="mortality-plateaus.html#cb66-38"></a>mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</span>
+<span id="cb66-39"><a href="mortality-plateaus.html#cb66-39"></a>    </span>
+<span id="cb66-40"><a href="mortality-plateaus.html#cb66-40"></a>    <span class="co">#Plot:</span></span>
+<span id="cb66-41"><a href="mortality-plateaus.html#cb66-41"></a>    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</span>
+<span id="cb66-42"><a href="mortality-plateaus.html#cb66-42"></a>         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</span>
+<span id="cb66-43"><a href="mortality-plateaus.html#cb66-43"></a>         <span class="dt">main=</span><span class="kw">bquote</span>(k <span class="op">==</span><span class="st"> </span>.(k_vals))) <span class="co">#individual hazard</span></span>
+<span id="cb66-44"><a href="mortality-plateaus.html#cb66-44"></a>    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></span>
+<span id="cb66-45"><a href="mortality-plateaus.html#cb66-45"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></span>
+<span id="cb66-46"><a href="mortality-plateaus.html#cb66-46"></a>}</span>
+<span id="cb66-47"><a href="mortality-plateaus.html#cb66-47"></a>plateau_k_legend &lt;-<span class="st"> </span><span class="cf">function</span>(beta_vals, k_vals){</span>
+<span id="cb66-48"><a href="mortality-plateaus.html#cb66-48"></a>hx       &lt;-<span class="st">  </span>alpha60 <span class="op">*</span><span class="kw">exp</span>(beta_vals<span class="op">*</span>xxx) <span class="co">##also noted as mu_0(x) in course material</span></span>
+<span id="cb66-49"><a href="mortality-plateaus.html#cb66-49"></a>Hx       &lt;-<span class="st">  </span><span class="kw">cumsum</span>(hx) <span class="co">## another way of getting it is  (a/b)(exp(bx)-1)</span></span>
+<span id="cb66-50"><a href="mortality-plateaus.html#cb66-50"></a>mux      &lt;-<span class="st">  </span>hx <span class="op">*</span>k_vals<span class="op">/</span><span class="st"> </span>(k_vals <span class="op">+</span><span class="st"> </span>Hx)</span>
+<span id="cb66-51"><a href="mortality-plateaus.html#cb66-51"></a>    </span>
+<span id="cb66-52"><a href="mortality-plateaus.html#cb66-52"></a>    <span class="co">#Plot:</span></span>
+<span id="cb66-53"><a href="mortality-plateaus.html#cb66-53"></a>    <span class="kw">plot</span>(age, <span class="kw">log</span>(hx), <span class="dt">type=</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>,<span class="dv">130</span>), <span class="dt">ylim =</span><span class="kw">c</span>(<span class="kw">min</span>(<span class="kw">log</span>(hx)),<span class="dv">4</span>),</span>
+<span id="cb66-54"><a href="mortality-plateaus.html#cb66-54"></a>         <span class="dt">xlab=</span> <span class="st">&quot;Ages for estimated Gompertz&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Log hazard&quot;</span>,</span>
+<span id="cb66-55"><a href="mortality-plateaus.html#cb66-55"></a>         <span class="dt">main=</span><span class="kw">bquote</span>(k <span class="op">==</span><span class="st"> </span>.(k_vals))) <span class="co">#individual hazard</span></span>
+<span id="cb66-56"><a href="mortality-plateaus.html#cb66-56"></a>    <span class="kw">lines</span>(age, <span class="kw">log</span>(mux), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)           <span class="co">#predicted population hazard</span></span>
+<span id="cb66-57"><a href="mortality-plateaus.html#cb66-57"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">104</span>, <span class="dt">x1 =</span><span class="dv">117</span>, <span class="dt">y0 =</span> <span class="kw">log</span>(asymp) ) <span class="co">#estimated plateau from Barbi et al.</span></span>
+<span id="cb66-58"><a href="mortality-plateaus.html#cb66-58"></a>           <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">expression</span>(<span class="st">&quot;Individual hazard, h&quot;</span>[x]), </span>
+<span id="cb66-59"><a href="mortality-plateaus.html#cb66-59"></a>                               <span class="st">&quot;Predicted population hazard, &quot;</span><span class="op">~</span><span class="st"> </span>mu [x],</span>
+<span id="cb66-60"><a href="mortality-plateaus.html#cb66-60"></a>                               <span class="st">&quot;Plateau estimate Barbi et al. (2018)&quot;</span>),</span>
+<span id="cb66-61"><a href="mortality-plateaus.html#cb66-61"></a>                  <span class="dt">col=</span><span class="kw">c</span>( <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="dt">lty=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">cex=</span><span class="fl">0.7</span>) </span>
+<span id="cb66-62"><a href="mortality-plateaus.html#cb66-62"></a></span>
+<span id="cb66-63"><a href="mortality-plateaus.html#cb66-63"></a>}</span></code></pre></div>
 <ul>
 <li>Here, we change the values of <span class="math inline">\(\beta\)</span> while fixing the <span class="math inline">\(k\)</span> shape factor of the Gamma frailty distribution.</li>
 <li>As <span class="math inline">\(\beta\)</span> increases, the individual and population hazards rise (or shift upwards).</li>
 <li>For comparison, the third panel contains the <span class="math inline">\(\beta=0.088\)</span> and <span class="math inline">\(k=7.045455\)</span> values used in the previous excercise.</li>
 </ul>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">1</span>],khat)</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">2</span>],khat)</a>
-<a class="sourceLine" id="cb60-4" data-line-number="4"><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">3</span>],khat)</a>
-<a class="sourceLine" id="cb60-5" data-line-number="5"><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">4</span>],khat)</a>
-<a class="sourceLine" id="cb60-6" data-line-number="6"><span class="kw">plateau_beta_legend</span>(beta_vals[<span class="dv">5</span>],khat)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-35"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-35-1.png" alt="Changing values of beta in Gompertz hazards" width="672" />
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="mortality-plateaus.html#cb67-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb67-2"><a href="mortality-plateaus.html#cb67-2"></a><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">1</span>],khat)</span>
+<span id="cb67-3"><a href="mortality-plateaus.html#cb67-3"></a><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">2</span>],khat)</span>
+<span id="cb67-4"><a href="mortality-plateaus.html#cb67-4"></a><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">3</span>],khat)</span>
+<span id="cb67-5"><a href="mortality-plateaus.html#cb67-5"></a><span class="kw">plateau_beta_nolegend</span>(beta_vals[<span class="dv">4</span>],khat)</span>
+<span id="cb67-6"><a href="mortality-plateaus.html#cb67-6"></a><span class="kw">plateau_beta_legend</span>(beta_vals[<span class="dv">5</span>],khat)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-32"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-32-1.png" alt="Changing values of beta in Gompertz hazards" width="672" />
 <p class="caption">
 Figure 6.4: Changing values of beta in Gompertz hazards
 </p>
@@ -578,14 +584,14 @@ Figure 6.4: Changing values of beta in Gompertz hazards
 <li><p>Contrary to what happens when <span class="math inline">\(\beta\)</span> varies, when the shape parameter of the Gamma frailty distribution changes, only the population hazards appear to change.</p></li>
 <li><p>Population hazards expand upwards with increases in <span class="math inline">\(k\)</span>. The fourth panel uses the baseline values for <span class="math inline">\(\beta=0.088\)</span> and <span class="math inline">\(k=7.045455\)</span>.</p></li>
 </ul>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">1</span>] )</a>
-<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">2</span>] )</a>
-<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">3</span>] )</a>
-<a class="sourceLine" id="cb61-5" data-line-number="5"><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">4</span>] )</a>
-<a class="sourceLine" id="cb61-6" data-line-number="6"><span class="kw">plateau_k_legend</span>(beta,k_vals[<span class="dv">5</span>] )</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-36-1.png" alt="Changing values of k (Gamma shape parameter)" width="672" />
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="mortality-plateaus.html#cb68-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb68-2"><a href="mortality-plateaus.html#cb68-2"></a><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">1</span>] )</span>
+<span id="cb68-3"><a href="mortality-plateaus.html#cb68-3"></a><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">2</span>] )</span>
+<span id="cb68-4"><a href="mortality-plateaus.html#cb68-4"></a><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">3</span>] )</span>
+<span id="cb68-5"><a href="mortality-plateaus.html#cb68-5"></a><span class="kw">plateau_k_nolegend</span>(beta,k_vals[<span class="dv">4</span>] )</span>
+<span id="cb68-6"><a href="mortality-plateaus.html#cb68-6"></a><span class="kw">plateau_k_legend</span>(beta,k_vals[<span class="dv">5</span>] )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" alt="Changing values of k (Gamma shape parameter)" width="672" />
 <p class="caption">
 Figure 6.5: Changing values of k (Gamma shape parameter)
 </p>
@@ -600,11 +606,11 @@ Figure 6.5: Changing values of k (Gamma shape parameter)
 <li>The plateau comes from the people that are low frailty but that die. This loss balances out the increase that everyone is experiencing. Selection is balancing senescence.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">plot</span>( age, mux<span class="op">/</span>hx, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">200</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>  , <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Mean Frailty&quot;</span> )</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">abline</span>( <span class="dt">h =</span> <span class="fl">0.5</span>,  <span class="dt">lty =</span> <span class="dv">3</span>     )                     <span class="co"># vertical age 105   </span></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"><span class="kw">abline</span>( <span class="dt">h =</span> <span class="fl">0.1</span>,  <span class="dt">lty =</span> <span class="dv">3</span>     )                     <span class="co"># vertical age 105   </span></a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-37"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-37-1.png" alt="Mean frailty" width="672" />
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="mortality-plateaus.html#cb69-1"></a><span class="kw">plot</span>( age, mux<span class="op">/</span>hx, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">200</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>  , <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Mean Frailty&quot;</span> )</span>
+<span id="cb69-2"><a href="mortality-plateaus.html#cb69-2"></a><span class="kw">abline</span>( <span class="dt">h =</span> <span class="fl">0.5</span>,  <span class="dt">lty =</span> <span class="dv">3</span>     )                     <span class="co"># vertical age 105   </span></span>
+<span id="cb69-3"><a href="mortality-plateaus.html#cb69-3"></a><span class="kw">abline</span>( <span class="dt">h =</span> <span class="fl">0.1</span>,  <span class="dt">lty =</span> <span class="dv">3</span>     )                     <span class="co"># vertical age 105   </span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-34-1.png" alt="Mean frailty" width="672" />
 <p class="caption">
 Figure 6.6: Mean frailty
 </p>
@@ -649,7 +655,7 @@ Figure 6.6: Mean frailty
 </ul>
 </div>
 <div id="vaupel1979" class="section level4">
-<h4><span class="header-section-number">6.4.3.4</span> <span class="citation">Vaupel, Manton, and Stallard (<a href="#ref-vaupel1979">1979</a>)</span></h4>
+<h4><span class="header-section-number">6.4.3.4</span> <span class="citation">Vaupel, Manton, and Stallard (<a href="#ref-vaupel1979" role="doc-biblioref">1979</a>)</span></h4>
 <ul>
 <li>Lifelong Fixed Frailty Z.<br />
 </li>
@@ -727,45 +733,45 @@ equilibrium size <span class="math inline">\(rho(a)\)</span> as a function of <s
 <li>Here, we explore a genetic process which can generate a plateau in individual hazard functions. In particular, this is the case where a harmful mutant allele increases the hazard function of those that carry such allele with onset only in a single age interval.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># Parameters</span></a>
-<a class="sourceLine" id="cb63-2" data-line-number="2">lambda   &lt;-<span class="st">   </span><span class="fl">0.080</span>           <span class="co">#  background extrinsic hazard </span></a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">delta    &lt;-<span class="st">   </span><span class="fl">0.002</span>           <span class="co">#  increment to hazard from mutant allele</span></a>
-<a class="sourceLine" id="cb63-4" data-line-number="4">epsilon  &lt;-<span class="st">   </span><span class="fl">0.0005</span>          <span class="co">#  fixed cost </span></a>
-<a class="sourceLine" id="cb63-5" data-line-number="5">nu       &lt;-<span class="st">   </span><span class="fl">0.200</span><span class="op">/</span><span class="dv">50</span>        <span class="co">#  mutation rate per site per generation</span></a>
-<a class="sourceLine" id="cb63-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="co"># Range of ages  </span></a>
-<a class="sourceLine" id="cb63-8" data-line-number="8">xxx      &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">50</span>)          <span class="co">#  set of values of x, years past 20, up to 70</span></a>
-<a class="sourceLine" id="cb63-9" data-line-number="9">age      &lt;-<span class="st">  </span><span class="dv">20</span>  <span class="op">+</span><span class="st">  </span>xxx       <span class="co">#  age  </span></a>
-<a class="sourceLine" id="cb63-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb63-11" data-line-number="11"><span class="co"># Fertility level that makes baseline NRR equal to 1.</span></a>
-<a class="sourceLine" id="cb63-12" data-line-number="12">lx       &lt;-<span class="st">  </span><span class="kw">exp</span>(<span class="op">-</span>lambda<span class="op">*</span>xxx) <span class="co">#  survivorship under background hazard </span></a>
-<a class="sourceLine" id="cb63-13" data-line-number="13">fert     &lt;-<span class="st">  </span><span class="dv">1</span><span class="op">/</span><span class="kw">sum</span>(lx) <span class="co">#total fertility or constant level of fertility</span></a>
-<a class="sourceLine" id="cb63-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb63-15" data-line-number="15"><span class="co"># Loop over choices of an age interval a at which the mutant allele affects the hazard.</span></a>
-<a class="sourceLine" id="cb63-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb63-17" data-line-number="17">bigrho   &lt;-<span class="st">  </span><span class="ot">NULL</span>             <span class="co">#  vector for holding values of rho  </span></a>
-<a class="sourceLine" id="cb63-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb63-19" data-line-number="19"><span class="cf">for</span>  ( a <span class="cf">in</span> <span class="kw">seq</span>(xxx))      { </a>
-<a class="sourceLine" id="cb63-20" data-line-number="20">  </a>
-<a class="sourceLine" id="cb63-21" data-line-number="21">  hxa    &lt;-<span class="st"> </span>lambda <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">*</span>xxx <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">*</span>epsilon        <span class="co">#  baseline hazard (no fixed cost)  </span></a>
-<a class="sourceLine" id="cb63-22" data-line-number="22">  hxa[a] &lt;-<span class="st"> </span>hxa[a]  <span class="op">+</span><span class="st"> </span>delta                   <span class="co">#  add hazard increment in age interval a </span></a>
-<a class="sourceLine" id="cb63-23" data-line-number="23">  </a>
-<a class="sourceLine" id="cb63-24" data-line-number="24">  Hxa   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(hxa))[<span class="kw">seq</span>(hxa)]</a>
-<a class="sourceLine" id="cb63-25" data-line-number="25">  lxa   &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>Hxa) </a>
-<a class="sourceLine" id="cb63-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb63-27" data-line-number="27">  Sa    &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>( fert<span class="op">*</span>lxa)   <span class="co"># S(a): Selective cost</span></a>
-<a class="sourceLine" id="cb63-28" data-line-number="28">  rho   &lt;-<span class="st"> </span>nu<span class="op">/</span>Sa                <span class="co"># Rho(a)</span></a>
-<a class="sourceLine" id="cb63-29" data-line-number="29">  </a>
-<a class="sourceLine" id="cb63-30" data-line-number="30">  bigrho &lt;-<span class="st"> </span><span class="kw">c</span>(bigrho, rho)    </a>
-<a class="sourceLine" id="cb63-31" data-line-number="31">}   </a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="mortality-plateaus.html#cb70-1"></a><span class="co"># Parameters</span></span>
+<span id="cb70-2"><a href="mortality-plateaus.html#cb70-2"></a>lambda   &lt;-<span class="st">   </span><span class="fl">0.080</span>           <span class="co">#  background extrinsic hazard </span></span>
+<span id="cb70-3"><a href="mortality-plateaus.html#cb70-3"></a>delta    &lt;-<span class="st">   </span><span class="fl">0.002</span>           <span class="co">#  increment to hazard from mutant allele</span></span>
+<span id="cb70-4"><a href="mortality-plateaus.html#cb70-4"></a>epsilon  &lt;-<span class="st">   </span><span class="fl">0.0005</span>          <span class="co">#  fixed cost </span></span>
+<span id="cb70-5"><a href="mortality-plateaus.html#cb70-5"></a>nu       &lt;-<span class="st">   </span><span class="fl">0.200</span><span class="op">/</span><span class="dv">50</span>        <span class="co">#  mutation rate per site per generation</span></span>
+<span id="cb70-6"><a href="mortality-plateaus.html#cb70-6"></a></span>
+<span id="cb70-7"><a href="mortality-plateaus.html#cb70-7"></a><span class="co"># Range of ages  </span></span>
+<span id="cb70-8"><a href="mortality-plateaus.html#cb70-8"></a>xxx      &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">50</span>)          <span class="co">#  set of values of x, years past 20, up to 70</span></span>
+<span id="cb70-9"><a href="mortality-plateaus.html#cb70-9"></a>age      &lt;-<span class="st">  </span><span class="dv">20</span>  <span class="op">+</span><span class="st">  </span>xxx       <span class="co">#  age  </span></span>
+<span id="cb70-10"><a href="mortality-plateaus.html#cb70-10"></a></span>
+<span id="cb70-11"><a href="mortality-plateaus.html#cb70-11"></a><span class="co"># Fertility level that makes baseline NRR equal to 1.</span></span>
+<span id="cb70-12"><a href="mortality-plateaus.html#cb70-12"></a>lx       &lt;-<span class="st">  </span><span class="kw">exp</span>(<span class="op">-</span>lambda<span class="op">*</span>xxx) <span class="co">#  survivorship under background hazard </span></span>
+<span id="cb70-13"><a href="mortality-plateaus.html#cb70-13"></a>fert     &lt;-<span class="st">  </span><span class="dv">1</span><span class="op">/</span><span class="kw">sum</span>(lx) <span class="co">#total fertility or constant level of fertility</span></span>
+<span id="cb70-14"><a href="mortality-plateaus.html#cb70-14"></a></span>
+<span id="cb70-15"><a href="mortality-plateaus.html#cb70-15"></a><span class="co"># Loop over choices of an age interval a at which the mutant allele affects the hazard.</span></span>
+<span id="cb70-16"><a href="mortality-plateaus.html#cb70-16"></a></span>
+<span id="cb70-17"><a href="mortality-plateaus.html#cb70-17"></a>bigrho   &lt;-<span class="st">  </span><span class="ot">NULL</span>             <span class="co">#  vector for holding values of rho  </span></span>
+<span id="cb70-18"><a href="mortality-plateaus.html#cb70-18"></a></span>
+<span id="cb70-19"><a href="mortality-plateaus.html#cb70-19"></a><span class="cf">for</span>  ( a <span class="cf">in</span> <span class="kw">seq</span>(xxx))      { </span>
+<span id="cb70-20"><a href="mortality-plateaus.html#cb70-20"></a>  </span>
+<span id="cb70-21"><a href="mortality-plateaus.html#cb70-21"></a>  hxa    &lt;-<span class="st"> </span>lambda <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">*</span>xxx <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">*</span>epsilon        <span class="co">#  baseline hazard (no fixed cost)  </span></span>
+<span id="cb70-22"><a href="mortality-plateaus.html#cb70-22"></a>  hxa[a] &lt;-<span class="st"> </span>hxa[a]  <span class="op">+</span><span class="st"> </span>delta                   <span class="co">#  add hazard increment in age interval a </span></span>
+<span id="cb70-23"><a href="mortality-plateaus.html#cb70-23"></a>  </span>
+<span id="cb70-24"><a href="mortality-plateaus.html#cb70-24"></a>  Hxa   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(hxa))[<span class="kw">seq</span>(hxa)]</span>
+<span id="cb70-25"><a href="mortality-plateaus.html#cb70-25"></a>  lxa   &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>Hxa) </span>
+<span id="cb70-26"><a href="mortality-plateaus.html#cb70-26"></a></span>
+<span id="cb70-27"><a href="mortality-plateaus.html#cb70-27"></a>  Sa    &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>( fert<span class="op">*</span>lxa)   <span class="co"># S(a): Selective cost</span></span>
+<span id="cb70-28"><a href="mortality-plateaus.html#cb70-28"></a>  rho   &lt;-<span class="st"> </span>nu<span class="op">/</span>Sa                <span class="co"># Rho(a)</span></span>
+<span id="cb70-29"><a href="mortality-plateaus.html#cb70-29"></a>  </span>
+<span id="cb70-30"><a href="mortality-plateaus.html#cb70-30"></a>  bigrho &lt;-<span class="st"> </span><span class="kw">c</span>(bigrho, rho)    </span>
+<span id="cb70-31"><a href="mortality-plateaus.html#cb70-31"></a>}   </span></code></pre></div>
 <ul>
 <li><span class="math inline">\(\rho(a)\)</span> increases exponentially, this comes from the exponential survival. This graph tells us, the number of people that survive when the mutation is triggered at a given age. So at age 70, about 1400 people survive but if the mutation hit at age 20, nobody would survive.</li>
 </ul>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw">plot</span>(  age,  bigrho, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="op">~</span><span class="kw">rho</span>(a)))</a>
-<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="kw">plot</span>(  age,  <span class="kw">log</span>(bigrho), <span class="dt">ylab =</span><span class="kw">expression</span>(<span class="st">&quot;log&quot;</span> <span class="op">~</span><span class="kw">rho</span>(a))  )</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-39"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" alt="$\rho(a)$ as a function of age" width="672" />
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="mortality-plateaus.html#cb71-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb71-2"><a href="mortality-plateaus.html#cb71-2"></a><span class="kw">plot</span>(  age,  bigrho, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="op">~</span><span class="kw">rho</span>(a)))</span>
+<span id="cb71-3"><a href="mortality-plateaus.html#cb71-3"></a><span class="kw">plot</span>(  age,  <span class="kw">log</span>(bigrho), <span class="dt">ylab =</span><span class="kw">expression</span>(<span class="st">&quot;log&quot;</span> <span class="op">~</span><span class="kw">rho</span>(a))  )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-36-1.png" alt="$\rho(a)$ as a function of age" width="672" />
 <p class="caption">
 Figure 6.7: <span class="math inline">\(\rho(a)\)</span> as a function of age
 </p>
@@ -781,10 +787,10 @@ Figure 6.7: <span class="math inline">\(\rho(a)\)</span> as a function of age
 <li>This hazard looks like a Makeham hazard (Gompertz plus a constant).</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">hxx  &lt;-<span class="st">  </span>lambda <span class="op">+</span><span class="st">  </span>bigrho<span class="op">*</span>delta  </a></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">plot</span> ( age, hxx,  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.500</span>) , <span class="dt">ylab=</span> <span class="st">&quot;hazard&quot;</span>)     </a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-41"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" alt="Hazard after exposure to allele" width="672" />
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="mortality-plateaus.html#cb72-1"></a>hxx  &lt;-<span class="st">  </span>lambda <span class="op">+</span><span class="st">  </span>bigrho<span class="op">*</span>delta  </span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="mortality-plateaus.html#cb73-1"></a><span class="kw">plot</span> ( age, hxx,  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.500</span>) , <span class="dt">ylab=</span> <span class="st">&quot;hazard&quot;</span>)     </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-38"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-38-1.png" alt="Hazard after exposure to allele" width="672" />
 <p class="caption">
 Figure 6.8: Hazard after exposure to allele
 </p>
@@ -805,27 +811,27 @@ Figure 6.8: Hazard after exposure to allele
 <li>There appears to be a plateau on the survivors after the onset of the mutation at age <span class="math inline">\(a\)</span> when we add a fixed cost to the mutation, even if it is happening late in the reproductive cycle.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co">#Loop over choices of an age interval a at which the mutant allele affects the hazard with fixed cost</span></a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3">bigrho2   &lt;-<span class="st">  </span><span class="ot">NULL</span>             <span class="co">#  vector for holding values of rho  </span></a>
-<a class="sourceLine" id="cb67-4" data-line-number="4"><span class="cf">for</span>  ( a <span class="cf">in</span> <span class="kw">seq</span>(xxx))      {</a>
-<a class="sourceLine" id="cb67-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb67-6" data-line-number="6">  hxa    &lt;-<span class="st"> </span>lambda <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">*</span>xxx <span class="op">+</span><span class="st"> </span>epsilon        <span class="co">#  baseline hazard plus fixed cost epsilon</span></a>
-<a class="sourceLine" id="cb67-7" data-line-number="7">  hxa[a] &lt;-<span class="st"> </span>hxa[a]  <span class="op">+</span><span class="st"> </span>delta                   <span class="co">#  add hazard increment in age interval a </span></a>
-<a class="sourceLine" id="cb67-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb67-9" data-line-number="9">  Hxa   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(hxa))[<span class="kw">seq</span>(hxa)]</a>
-<a class="sourceLine" id="cb67-10" data-line-number="10">  lxa   &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>Hxa) </a>
-<a class="sourceLine" id="cb67-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb67-12" data-line-number="12">  Sa    &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>( fert<span class="op">*</span>lxa)       <span class="co">#   Selective cost including allele at age a </span></a>
-<a class="sourceLine" id="cb67-13" data-line-number="13">  rho   &lt;-<span class="st"> </span>nu<span class="op">/</span>Sa                    <span class="co">#   Equilibrium count of mutation a </span></a>
-<a class="sourceLine" id="cb67-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb67-15" data-line-number="15">  bigrho2 &lt;-<span class="st"> </span><span class="kw">c</span>(bigrho2, rho)</a>
-<a class="sourceLine" id="cb67-16" data-line-number="16">}      </a></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="kw">plot</span>(  age,  bigrho2, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="op">~</span><span class="kw">rho</span>(a)))</a>
-<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="kw">plot</span>(  age,  <span class="kw">log</span>(bigrho2), <span class="dt">ylab =</span><span class="kw">expression</span>(<span class="st">&quot;log&quot;</span><span class="op">~</span><span class="kw">rho</span>(a))  )</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-43"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" alt="$\rho(a)$ as a function of age" width="672" />
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="mortality-plateaus.html#cb74-1"></a><span class="co">#Loop over choices of an age interval a at which the mutant allele affects the hazard with fixed cost</span></span>
+<span id="cb74-2"><a href="mortality-plateaus.html#cb74-2"></a></span>
+<span id="cb74-3"><a href="mortality-plateaus.html#cb74-3"></a>bigrho2   &lt;-<span class="st">  </span><span class="ot">NULL</span>             <span class="co">#  vector for holding values of rho  </span></span>
+<span id="cb74-4"><a href="mortality-plateaus.html#cb74-4"></a><span class="cf">for</span>  ( a <span class="cf">in</span> <span class="kw">seq</span>(xxx))      {</span>
+<span id="cb74-5"><a href="mortality-plateaus.html#cb74-5"></a>  </span>
+<span id="cb74-6"><a href="mortality-plateaus.html#cb74-6"></a>  hxa    &lt;-<span class="st"> </span>lambda <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">*</span>xxx <span class="op">+</span><span class="st"> </span>epsilon        <span class="co">#  baseline hazard plus fixed cost epsilon</span></span>
+<span id="cb74-7"><a href="mortality-plateaus.html#cb74-7"></a>  hxa[a] &lt;-<span class="st"> </span>hxa[a]  <span class="op">+</span><span class="st"> </span>delta                   <span class="co">#  add hazard increment in age interval a </span></span>
+<span id="cb74-8"><a href="mortality-plateaus.html#cb74-8"></a>  </span>
+<span id="cb74-9"><a href="mortality-plateaus.html#cb74-9"></a>  Hxa   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(hxa))[<span class="kw">seq</span>(hxa)]</span>
+<span id="cb74-10"><a href="mortality-plateaus.html#cb74-10"></a>  lxa   &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>Hxa) </span>
+<span id="cb74-11"><a href="mortality-plateaus.html#cb74-11"></a>  </span>
+<span id="cb74-12"><a href="mortality-plateaus.html#cb74-12"></a>  Sa    &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>( fert<span class="op">*</span>lxa)       <span class="co">#   Selective cost including allele at age a </span></span>
+<span id="cb74-13"><a href="mortality-plateaus.html#cb74-13"></a>  rho   &lt;-<span class="st"> </span>nu<span class="op">/</span>Sa                    <span class="co">#   Equilibrium count of mutation a </span></span>
+<span id="cb74-14"><a href="mortality-plateaus.html#cb74-14"></a>  </span>
+<span id="cb74-15"><a href="mortality-plateaus.html#cb74-15"></a>  bigrho2 &lt;-<span class="st"> </span><span class="kw">c</span>(bigrho2, rho)</span>
+<span id="cb74-16"><a href="mortality-plateaus.html#cb74-16"></a>}      </span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="mortality-plateaus.html#cb75-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb75-2"><a href="mortality-plateaus.html#cb75-2"></a><span class="kw">plot</span>(  age,  bigrho2, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="op">~</span><span class="kw">rho</span>(a)))</span>
+<span id="cb75-3"><a href="mortality-plateaus.html#cb75-3"></a><span class="kw">plot</span>(  age,  <span class="kw">log</span>(bigrho2), <span class="dt">ylab =</span><span class="kw">expression</span>(<span class="st">&quot;log&quot;</span><span class="op">~</span><span class="kw">rho</span>(a))  )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" alt="$\rho(a)$ as a function of age" width="672" />
 <p class="caption">
 Figure 6.9: <span class="math inline">\(\rho(a)\)</span> as a function of age
 </p>
@@ -860,13 +866,13 @@ Figure 6.9: <span class="math inline">\(\rho(a)\)</span> as a function of age
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-barbi2018">
-<p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396). American Association for the Advancement of Science: 1459–61.</p>
+<p>Barbi, Elisabetta, Francesco Lagona, Marco Marsili, James W Vaupel, and Kenneth W Wachter. 2018. “The Plateau of Human Mortality: Demography of Longevity Pioneers.” <em>Science</em> 360 (6396): 1459–61.</p>
 </div>
 <div id="ref-horiuchi2003">
-<p>Horiuchi, Shiro. 2003. “Interspecies Differences in the Life Span Distribution: Humans Versus Invertebrates.” <em>Population and Development Review</em> 29. JSTOR: 127–51.</p>
+<p>Horiuchi, Shiro. 2003. “Interspecies Differences in the Life Span Distribution: Humans Versus Invertebrates.” <em>Population and Development Review</em> 29: 127–51.</p>
 </div>
 <div id="ref-vaupel1979">
-<p>Vaupel, James W, Kenneth G Manton, and Eric Stallard. 1979. “The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality.” <em>Demography</em> 16 (3). Springer: 439–54.</p>
+<p>Vaupel, James W, Kenneth G Manton, and Eric Stallard. 1979. “The Impact of Heterogeneity in Individual Frailty on the Dynamics of Mortality.” <em>Demography</em> 16 (3): 439–54.</p>
 </div>
 <div id="ref-wachter2014essential">
 <p>Wachter, Kenneth W. 2014. <em>Essential Demographic Methods</em>. Harvard University Press.</p>

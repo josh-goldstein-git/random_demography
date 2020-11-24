@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -337,55 +343,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="outline-9" class="section level2">
 <h2><span class="header-section-number">10.1</span> Outline</h2>
 <ul>
-<li>Big picture: What is “coalescent theory”?</li>
+<li>Big picture: What is “coalescent theory”?
+<ul>
 <li>Time to (T)MRCA</li>
 <li>Simulation: Inferring population size</li>
 <li>An application of Coalescent Theory</li>
+</ul></li>
 </ul>
 </div>
 <div id="big-picture-the-coalescent-expectations-of-the-past" class="section level2">
 <h2><span class="header-section-number">10.2</span> Big picture: The Coalescent: Expectations of the Past</h2>
 <ul>
-<li>Coalescent theory is not a theory.</li>
-<li>It’s a model for the probability of different histories</li>
-<li>“the” coalescent is a bit confusing. We’re not inferring the
-actual history of common ancestry, just the probabilities</li>
+<li>Coalescent theory is not a theory.
+<ul>
+<li>It’s a model for the probability of different histories. Think about it as a model about how sampling can lead to a history of a common ancestor.</li>
+<li>“the” coalescent is a bit confusing. We’re not inferring the actual history of common ancestry, just the probabilities</li>
+</ul></li>
 </ul>
 <p>An actual “picture”
 <img src="images/cutter_diagram.png" /></p>
 <ul>
-<li>Top panel is a Fisher-Wright instance, ordered so that lines
-don’t cross.</li>
-<li>Haplotype is a sequence (we are diploids, each
-contributing 2 haplotypes). But let’s just think of each line as
-an individual, for now.</li>
-<li><p>We can find The Most Recent Common Ancestor (TMRCA) of
-sample (dark purple). Who and when would the MRCA of the top two individuals be?</p>
+<li><p>Top panel is a Fisher-Wright instance, ordered so that lines don’t cross.</p></li>
+<li><p>Haplotype is a sequence (we are diploids, each contributing 2 haplotypes). But let’s just think of each line as an individual, for now. Such that each column is a different generation and the lines are the links across generations between dots. Each dot in the columns represents a “child” (or a parent to the next generation).</p></li>
+<li><p>The dark purple dots are 8 sampled individuals. We can find The Most Recent Common Ancestor (TMRCA) of sample. This is the red dot in the middle of the graph.</p></li>
+<li><p>We can make inferences on the entire population based on the sample of individuals.</p>
 <ul>
-<li>Our sample <span class="math inline">\(\neq\)</span> even all <em>extant</em> descendants of the MRCA. What
-does this mean?</li>
-<li>Our sample <span class="math inline">\(\neq\)</span> all of the descendants of the MRCA. What
-does this mean?</li>
-<li>If we chose two descendants at random, would we always get
-same MRCA?</li>
+<li>Our sample <span class="math inline">\(\neq\)</span> even all <em>extant</em> descendants of the MRCA. In other words, the sample is not an exhaustive set of the survivors</li>
+<li>Since some of the descendents of the pink lines don’t survive, then our sample <span class="math inline">\(\neq\)</span> all of the descendants of the MRCA.</li>
+<li>If we chose two descendants at random, would we always get same MRCA?</li>
 </ul></li>
+<li><p>When we model coalescence we are thinking backwards in time.</p></li>
 </ul>
-<p>When we model coalescence we are thinking backwards in time.</p>
 </div>
 <div id="our-first-question-when-was-mrca" class="section level2">
 <h2><span class="header-section-number">10.3</span> Our first question: When was MRCA?</h2>
-<p>If we sample two individuals (today), how long ago was their MRCA?\
-(Note: question is not “who”)</p>
+<p><em>If we sample two individuals (today), how long ago was their MRCA?</em> Note that we are not looking for “who” the MRCA is but rather the number of generations ago that they ocurrred.</p>
 <ul>
-<li>Our answer will in terms of the probability of MRCA being 1
-generation ago, 2 generations ago, etc.</li>
-<li>We’ll assume Fisher-Wright (constant N, each gen randomly
-picks parents)</li>
+<li>Our answer will in terms of the probability of MRCA being 1 generation ago, 2 generations ago, etc.
+<ul>
+<li>We’ll assume Fisher-Wright: constant N, each gen randomly picks parents.</li>
 <li>The answer is surprisingly simple</li>
+</ul></li>
 </ul>
 <p>Let’s assume we have <span class="math inline">\(N\)</span> lines in Fisher-Wright (Note: I’m not using <span class="math inline">\(2N\)</span>.)</p>
 <ul>
-<li>The chance that two sampled people have same parent is <span class="math inline">\(1/N\)</span>, right?</li>
+<li><p>The chance that two sampled people have same parent is <span class="math inline">\(1/N\)</span>, right?</p>
+<ul>
 <li>Thus <span class="math inline">\(P(T_{MRCA} = 1) = 1/N\)</span>.</li>
 <li>What is $P(T_{MRCA} = 2) = $?</li>
 <li>What is $P(T_{MRCA} = n) = $?</li>
@@ -402,12 +405,14 @@ Probability of coalescence at time <span class="math inline">\(t\)</span> = <spa
 <li>Average over 100 FW simulations</li>
 <li>What is variance of outcome? Is it what we would expect from
 exponential?</li>
+</ul></li>
 </ul>
 </div>
 <div id="mutation-and-inference-of-tmrca-and-n" class="section level2">
 <h2><span class="header-section-number">10.4</span> Mutation and inference of TMRCA and <span class="math inline">\(N\)</span></h2>
 <ul>
-<li>Say mutations occur at a constant rate <span class="math inline">\(\mu\)</span> (<span class="math inline">\(10^{-8}\)</span>?)</li>
+<li>Say mutations occur at a constant rate <span class="math inline">\(\mu\)</span> (<span class="math inline">\(10^{-8}\)</span>?)
+<ul>
 <li>Each year we would expect <span class="math inline">\(\mu\)</span> mutations, and over <span class="math inline">\(T\)</span> years we
 would expect <span class="math inline">\(T\mu\)</span> mutations.</li>
 <li>Say we observe that two people differ at <span class="math inline">\(k\)</span> sites of the
@@ -417,34 +422,39 @@ genome.
 <li>How big is the population?</li>
 </ul></li>
 </ul>
-<p>Picture (<span class="math inline">\(\Lambda\)</span>)
+Picture (<span class="math inline">\(\Lambda\)</span>)
 Tree length = <span class="math inline">\(2T\)</span>
 Expected number of mutations:
 <span class="math display">\[
-  E(k) = E(2T\mu) = \bar{T} 2 \mu
-  \]</span>
+E(k) = E(2T\mu) = \bar{T} 2 \mu
+\]</span>
 Since,
 <span class="math display">\[
-  \bar{T} = E(TMRCA) = N
-  \]</span>
+\bar{T} = E(TMRCA) = N
+\]</span>
 If we observe on average <span class="math inline">\(\bar{k}\)</span> mutations, then
 <span class="math display">\[
-  E(k) = N 2 \mu \rightarrow \hat{N} = {\bar{k} \over 2 \mu}
-  \]</span></p>
+E(k) = N 2 \mu \rightarrow \hat{N} = {\bar{k} \over 2 \mu}
+\]</span></li>
+</ul>
 </div>
 <div id="inference-of-population-size-simulation" class="section level2">
 <h2><span class="header-section-number">10.5</span> Inference of population size, simulation</h2>
 <ul>
-<li>We do FW with mutations</li>
+<li>We do FW with mutations
+<ul>
 <li>Average pairwise differences</li>
 <li>Divide by <span class="math inline">\(2\mu\)</span> to get our estimate</li>
 <li>We can repeat a bunch of times and see average estimate
 converges to the truth</li>
+</ul></li>
 </ul>
 <p>Coalescence of a sample of <span class="math inline">\(n\)</span> individuals</p>
 <ul>
-<li>This is covered on pages 42 and 43 of Gillespie</li>
+<li>This is covered on pages 42 and 43 of Gillespie
+<ul>
 <li>We’ll just do one quick example, accepting the result</li>
+</ul></li>
 </ul>
 <p>A sample of 3: Note we’re using <span class="math inline">\(N\)</span> (instead of <span class="math inline">\(2N\)</span>)</p>
 
@@ -455,12 +465,14 @@ is do we have 4 branches, 3 branches, and 2 branches?</p>
 <h2><span class="header-section-number">10.6</span> Conclusions</h2>
 <ul>
 <li>We defined the coalescent as the stochastic process going
-back in time to common ancestors</li>
+back in time to common ancestors
+<ul>
 <li>For constant population size, we proved that time to
 coalescence for a sample pair is exponential.</li>
 <li>We showed (math and simulation) that <span class="math inline">\(E(T) = N\)</span>.</li>
 <li>We showed that we could estimate <span class="math inline">\(N\)</span> from observed mutations
 if we knew the mutation rate</li>
+</ul></li>
 </ul>
 <p>\end{frame}</p>
 </div>
@@ -471,36 +483,39 @@ if we knew the mutation rate</li>
 <div id="coalesence-when-population-is-changing" class="section level3">
 <h3><span class="header-section-number">10.7.1</span> Coalesence when population is changing</h3>
 <ul>
-<li>Ee said hazard of coalescence was <span class="math inline">\(h = c = 1/N\)</span>.</li>
+<li>Ee said hazard of coalescence was <span class="math inline">\(h = c = 1/N\)</span>.
+<ul>
 <li><p>What is hazard of coalesence in one generation for two
 different populations: <span class="math inline">\(N = 1000\)</span>? <span class="math inline">\(N = 2000\)</span>?</p></li>
 <li><p>What if within the same population <span class="math inline">\(N(t) = 1000\)</span> and <span class="math inline">\(N(t+1) = 2000\)</span>? (Hint: we still follow FW in allowing children to
 choose their parents.)</p></li>
 <li><p>If the population size changes over time <span class="math inline">\(N(t)\)</span>, then hazards
 of coalescence in will change too: <span class="math inline">\(h(t) = 1/N(t)\)</span>.</p></li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">  N_recent =<span class="st"> </span><span class="dv">5000</span> <span class="co">## population last T_thresh years</span></a>
-<a class="sourceLine" id="cb126-2" data-line-number="2">  T_thresh =<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb126-3" data-line-number="3">  N_ancient =<span class="st"> </span><span class="dv">500</span> <span class="co">## earlier population</span></a>
-<a class="sourceLine" id="cb126-4" data-line-number="4">  n =<span class="st"> </span><span class="dv">1000</span> <span class="co">## sampled individuals</span></a>
-<a class="sourceLine" id="cb126-5" data-line-number="5">  <span class="kw">set.seed</span>(<span class="fl">0.4886</span>)</a>
-<a class="sourceLine" id="cb126-6" data-line-number="6">  T1 &lt;-<span class="st"> </span><span class="kw">rexp</span>(n, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_recent) <span class="co">## give everyone a chance to coalesce </span></a>
-<a class="sourceLine" id="cb126-7" data-line-number="7">  T1[T1 <span class="op">&gt;</span><span class="st"> </span>T_thresh] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## if they don&#39;t in 1st 1000 years, resample them</span></a>
-<a class="sourceLine" id="cb126-8" data-line-number="8">  n2 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(T1))</a>
-<a class="sourceLine" id="cb126-9" data-line-number="9">  T2 &lt;-<span class="st"> </span>T_thresh <span class="op">+</span><span class="st"> </span><span class="kw">rexp</span>(n2, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_ancient) <span class="co">## at ancient rate</span></a>
-<a class="sourceLine" id="cb126-10" data-line-number="10">  T.vec &lt;-<span class="st"> </span><span class="kw">c</span>(T1, T2)</a>
-<a class="sourceLine" id="cb126-11" data-line-number="11">  <span class="kw">hist</span>(T.vec, <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">5000</span>, <span class="dv">250</span>))</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-102-1.png" width="672" />
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="coalescent.html#cb148-1"></a>  N_recent =<span class="st"> </span><span class="dv">5000</span> <span class="co">## population last T_thresh years</span></span>
+<span id="cb148-2"><a href="coalescent.html#cb148-2"></a>  T_thresh =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb148-3"><a href="coalescent.html#cb148-3"></a>  N_ancient =<span class="st"> </span><span class="dv">500</span> <span class="co">## earlier population</span></span>
+<span id="cb148-4"><a href="coalescent.html#cb148-4"></a>  n =<span class="st"> </span><span class="dv">1000</span> <span class="co">## sampled individuals</span></span>
+<span id="cb148-5"><a href="coalescent.html#cb148-5"></a>  <span class="kw">set.seed</span>(<span class="fl">0.4886</span>)</span>
+<span id="cb148-6"><a href="coalescent.html#cb148-6"></a>  T1 &lt;-<span class="st"> </span><span class="kw">rexp</span>(n, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_recent) <span class="co">## give everyone a chance to coalesce </span></span>
+<span id="cb148-7"><a href="coalescent.html#cb148-7"></a>  T1[T1 <span class="op">&gt;</span><span class="st"> </span>T_thresh] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## if they don&#39;t in 1st 1000 years, resample them</span></span>
+<span id="cb148-8"><a href="coalescent.html#cb148-8"></a>  n2 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(T1))</span>
+<span id="cb148-9"><a href="coalescent.html#cb148-9"></a>  T2 &lt;-<span class="st"> </span>T_thresh <span class="op">+</span><span class="st"> </span><span class="kw">rexp</span>(n2, <span class="dt">rate =</span> <span class="dv">1</span><span class="op">/</span>N_ancient) <span class="co">## at ancient rate</span></span>
+<span id="cb148-10"><a href="coalescent.html#cb148-10"></a>  T.vec &lt;-<span class="st"> </span><span class="kw">c</span>(T1, T2)</span>
+<span id="cb148-11"><a href="coalescent.html#cb148-11"></a>  <span class="kw">hist</span>(T.vec, <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">5000</span>, <span class="dv">250</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-105-1.png" width="672" />
 Q: How could we estimate population sizes from this histogram?</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">  T.vec &lt;-<span class="st"> </span><span class="kw">sort</span>(T.vec)</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">  St =<span class="st"> </span>(n<span class="op">:</span><span class="dv">1</span>)<span class="op">/</span>n</a>
-<a class="sourceLine" id="cb127-3" data-line-number="3">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb127-4" data-line-number="4">  <span class="kw">plot</span>(T.vec, St); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh); <span class="kw">plot</span>(T.vec, <span class="kw">log</span>(St)); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-103-1.png" width="672" />
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="coalescent.html#cb149-1"></a>  T.vec &lt;-<span class="st"> </span><span class="kw">sort</span>(T.vec)</span>
+<span id="cb149-2"><a href="coalescent.html#cb149-2"></a>  St =<span class="st"> </span>(n<span class="op">:</span><span class="dv">1</span>)<span class="op">/</span>n</span>
+<span id="cb149-3"><a href="coalescent.html#cb149-3"></a>  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb149-4"><a href="coalescent.html#cb149-4"></a>  <span class="kw">plot</span>(T.vec, St); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh); <span class="kw">plot</span>(T.vec, <span class="kw">log</span>(St)); <span class="kw">abline</span>(<span class="dt">v =</span> T_thresh)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-106-1.png" width="672" />
 Q: How can we estimate hazards from this histogram?</p>
 <p>Our approach</p>
 <ul>
-<li>Say we have <span class="math inline">\(i\)</span> pairs of haploids</li>
+<li>Say we have <span class="math inline">\(i\)</span> pairs of haploids
+<ul>
 <li>We then compute how many pairwise differences there are,
 but instead of computing <span class="math inline">\(\bar{k}\)</span>, we keep the distributional
 information <span class="math inline">\(k_i\)</span>.</li>
@@ -508,6 +523,7 @@ information <span class="math inline">\(k_i\)</span>.</li>
 <li>We then have a set of ``death times’’ (coalescence times),
 can build a life table, estimate the hazards, and infer
 <span class="math inline">\(N(t)\)</span>.</li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -522,7 +538,7 @@ some pair of them will coalesce.</p>
 do we have 4 branches, 3 branches, and 2 branches?</p>
 </div>
 <div id="reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna" class="section level2">
-<h2><span class="header-section-number">10.9</span> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</h2>
+<h2><span class="header-section-number">10.9</span> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</h2>
 <p>We use real sequences of mitochondrial DNA to estimate
 ancient population sizes. The sequences were made available by Batini
 et al, who analyzed sub-populations in their paper using software for
@@ -545,8 +561,8 @@ resulting population estimates.</p>
 <h4><span class="header-section-number">10.9.1.1</span> The mitochondrial DNA</h4>
 <p>Data preparation begins.</p>
 <p>There are 380 individuals grouped into regional sub-populations. I select out the Greeks, whose labels begin with “gre”.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/mtdna.csv&quot;</span>, <span class="dt">what =</span> <span class="kw">character</span>())</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="kw">nchar</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="coalescent.html#cb150-1"></a>x &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/mtdna.csv&quot;</span>, <span class="dt">what =</span> <span class="kw">character</span>())</span>
+<span id="cb150-2"><a href="coalescent.html#cb150-2"></a><span class="kw">nchar</span>(x)</span></code></pre></div>
 <pre><code>##   [1]     4     3     4     2     5    11     1    15 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577 16577
 ##  [20] 16577 16577 16577 16577 16577 16577 16577 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574
 ##  [39] 16575 16574 16574 16574 16574 16574 16574 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575
@@ -568,50 +584,50 @@ resulting population estimates.</p>
 ## [343] 16575 16575 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574 16574
 ## [362] 16574 16574 16574 16574 16575 16575 16575 16575 16575 16575 16575 16575 16575 16575 16574 16575 16574 16574 16574
 ## [381] 16574 16574 16574 16574 16576 16576 16576 16576</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="co">## note the strings have different length</span></a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="co">## because there is some header information</span></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="co">## and then because the labels are mixed with the sequences</span></a>
-<a class="sourceLine" id="cb130-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="co">## separate out the sequences</span></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6">xx =<span class="st"> </span>x[<span class="kw">nchar</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">10000</span>] <span class="co">## elements that contain both label and sequences</span></a>
-<a class="sourceLine" id="cb130-7" data-line-number="7">xx.list =<span class="st"> </span><span class="kw">strsplit</span>(xx, <span class="dt">split =</span> <span class="st">&quot;,&quot;</span>) <span class="co">## list of elements, split into label and sequences</span></a>
-<a class="sourceLine" id="cb130-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb130-9" data-line-number="9"><span class="co">## now split up this list into a vector of labels and a vector of sequences</span></a>
-<a class="sourceLine" id="cb130-10" data-line-number="10">get.first.element =<span class="st"> </span><span class="cf">function</span>(x) {x[<span class="dv">1</span>]}</a>
-<a class="sourceLine" id="cb130-11" data-line-number="11">get.second.element =<span class="st"> </span><span class="cf">function</span>(x) {x[<span class="dv">2</span>]}</a>
-<a class="sourceLine" id="cb130-12" data-line-number="12">labels =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(xx.list, get.first.element))</a>
-<a class="sourceLine" id="cb130-13" data-line-number="13">seqs =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(xx.list, get.second.element))</a>
-<a class="sourceLine" id="cb130-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb130-15" data-line-number="15"><span class="co">## Now use labels to select out the 20 Greeks</span></a>
-<a class="sourceLine" id="cb130-16" data-line-number="16">s &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;^gre&quot;</span>, labels)</a>
-<a class="sourceLine" id="cb130-17" data-line-number="17">my.labels =<span class="st"> </span>labels[s]</a>
-<a class="sourceLine" id="cb130-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb130-19" data-line-number="19">my.seqs =<span class="st"> </span>seqs[s]</a>
-<a class="sourceLine" id="cb130-20" data-line-number="20"><span class="kw">nchar</span>(my.seqs) <span class="co">## note the sequences all have same number of bases.</span></a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="coalescent.html#cb152-1"></a><span class="co">## note the strings have different length</span></span>
+<span id="cb152-2"><a href="coalescent.html#cb152-2"></a><span class="co">## because there is some header information</span></span>
+<span id="cb152-3"><a href="coalescent.html#cb152-3"></a><span class="co">## and then because the labels are mixed with the sequences</span></span>
+<span id="cb152-4"><a href="coalescent.html#cb152-4"></a></span>
+<span id="cb152-5"><a href="coalescent.html#cb152-5"></a><span class="co">## separate out the sequences</span></span>
+<span id="cb152-6"><a href="coalescent.html#cb152-6"></a>xx =<span class="st"> </span>x[<span class="kw">nchar</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">10000</span>] <span class="co">## elements that contain both label and sequences</span></span>
+<span id="cb152-7"><a href="coalescent.html#cb152-7"></a>xx.list =<span class="st"> </span><span class="kw">strsplit</span>(xx, <span class="dt">split =</span> <span class="st">&quot;,&quot;</span>) <span class="co">## list of elements, split into label and sequences</span></span>
+<span id="cb152-8"><a href="coalescent.html#cb152-8"></a></span>
+<span id="cb152-9"><a href="coalescent.html#cb152-9"></a><span class="co">## now split up this list into a vector of labels and a vector of sequences</span></span>
+<span id="cb152-10"><a href="coalescent.html#cb152-10"></a>get.first.element =<span class="st"> </span><span class="cf">function</span>(x) {x[<span class="dv">1</span>]}</span>
+<span id="cb152-11"><a href="coalescent.html#cb152-11"></a>get.second.element =<span class="st"> </span><span class="cf">function</span>(x) {x[<span class="dv">2</span>]}</span>
+<span id="cb152-12"><a href="coalescent.html#cb152-12"></a>labels =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(xx.list, get.first.element))</span>
+<span id="cb152-13"><a href="coalescent.html#cb152-13"></a>seqs =<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(xx.list, get.second.element))</span>
+<span id="cb152-14"><a href="coalescent.html#cb152-14"></a></span>
+<span id="cb152-15"><a href="coalescent.html#cb152-15"></a><span class="co">## Now use labels to select out the 20 Greeks</span></span>
+<span id="cb152-16"><a href="coalescent.html#cb152-16"></a>s &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;^gre&quot;</span>, labels)</span>
+<span id="cb152-17"><a href="coalescent.html#cb152-17"></a>my.labels =<span class="st"> </span>labels[s]</span>
+<span id="cb152-18"><a href="coalescent.html#cb152-18"></a></span>
+<span id="cb152-19"><a href="coalescent.html#cb152-19"></a>my.seqs =<span class="st"> </span>seqs[s]</span>
+<span id="cb152-20"><a href="coalescent.html#cb152-20"></a><span class="kw">nchar</span>(my.seqs) <span class="co">## note the sequences all have same number of bases.</span></span></code></pre></div>
 <pre><code>##  [1] 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568 16568
 ## [20] 16568</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="co">## now put the bases in a matrix, with each column an indiviual and</span></a>
-<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="co">## each row a base.</span></a>
-<a class="sourceLine" id="cb132-3" data-line-number="3">my.list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(my.seqs, <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb132-4" data-line-number="4">A &lt;-<span class="st"> </span><span class="kw">do.call</span>(cbind, my.list)</a>
-<a class="sourceLine" id="cb132-5" data-line-number="5"><span class="kw">dim</span>(A)</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="coalescent.html#cb154-1"></a><span class="co">## now put the bases in a matrix, with each column an indiviual and</span></span>
+<span id="cb154-2"><a href="coalescent.html#cb154-2"></a><span class="co">## each row a base.</span></span>
+<span id="cb154-3"><a href="coalescent.html#cb154-3"></a>my.list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(my.seqs, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb154-4"><a href="coalescent.html#cb154-4"></a>A &lt;-<span class="st"> </span><span class="kw">do.call</span>(cbind, my.list)</span>
+<span id="cb154-5"><a href="coalescent.html#cb154-5"></a><span class="kw">dim</span>(A)</span></code></pre></div>
 <pre><code>## [1] 16568    20</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="co">## coding region sequences, 576-16023 (according to &quot;Tree construction</span></a>
-<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="co">## and haplogroup prediction&quot; section, but not clear if this was used for</span></a>
-<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="co">## Intrapopulation diversity</span></a>
-<a class="sourceLine" id="cb134-4" data-line-number="4">B &lt;-<span class="st"> </span>A[<span class="dv">576</span><span class="op">:</span><span class="dv">16023</span>,]</a>
-<a class="sourceLine" id="cb134-5" data-line-number="5">haps &lt;-<span class="st"> </span>seqs</a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="coalescent.html#cb156-1"></a><span class="co">## coding region sequences, 576-16023 (according to &quot;Tree construction</span></span>
+<span id="cb156-2"><a href="coalescent.html#cb156-2"></a><span class="co">## and haplogroup prediction&quot; section, but not clear if this was used for</span></span>
+<span id="cb156-3"><a href="coalescent.html#cb156-3"></a><span class="co">## Intrapopulation diversity</span></span>
+<span id="cb156-4"><a href="coalescent.html#cb156-4"></a>B &lt;-<span class="st"> </span>A[<span class="dv">576</span><span class="op">:</span><span class="dv">16023</span>,]</span>
+<span id="cb156-5"><a href="coalescent.html#cb156-5"></a>haps &lt;-<span class="st"> </span>seqs</span></code></pre></div>
 <p>Let’s inspect just a bit of one of these sequences</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">nchar</span>(haps[<span class="dv">213</span>]))</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="coalescent.html#cb157-1"></a><span class="kw">print</span>(<span class="kw">nchar</span>(haps[<span class="dv">213</span>]))</span></code></pre></div>
 <pre><code>## [1] 16568</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">a_segment =<span class="st"> </span><span class="kw">substr</span>(haps[<span class="dv">213</span>], <span class="dv">1</span>, <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="kw">print</span>(a_segment)</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="coalescent.html#cb159-1"></a>a_segment =<span class="st"> </span><span class="kw">substr</span>(haps[<span class="dv">213</span>], <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb159-2"><a href="coalescent.html#cb159-2"></a><span class="kw">print</span>(a_segment)</span></code></pre></div>
 <pre><code>## [1] &quot;GATCACAGGTCTATCACCCTATTAACCACTCACGGGAGCTCTCCATGCATTTGGTATTTTCGTCTGGGGGGTGTGCACGCGATAGCATTGCGAGACGCTG&quot;</code></pre>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="co">## tip: don&#39;t try to print the 16,000 character whole string. it will clog up your computer.</span></a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="coalescent.html#cb161-1"></a><span class="co">## tip: don&#39;t try to print the 16,000 character whole string. it will clog up your computer.</span></span></code></pre></div>
 <p>Let’s put the haps in a matrix</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1">my.list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(haps, <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb140-2" data-line-number="2">H &lt;-<span class="st"> </span><span class="kw">do.call</span>(cbind, my.list)</a>
-<a class="sourceLine" id="cb140-3" data-line-number="3"><span class="kw">print</span>(H[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co">## all the same</span></a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="coalescent.html#cb162-1"></a>my.list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(haps, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb162-2"><a href="coalescent.html#cb162-2"></a>H &lt;-<span class="st"> </span><span class="kw">do.call</span>(cbind, my.list)</span>
+<span id="cb162-3"><a href="coalescent.html#cb162-3"></a><span class="kw">print</span>(H[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co">## all the same</span></span></code></pre></div>
 <pre><code>##       [,1] [,2] [,3] [,4]
 ##  [1,] &quot;G&quot;  &quot;G&quot;  &quot;G&quot;  &quot;G&quot; 
 ##  [2,] &quot;A&quot;  &quot;A&quot;  &quot;A&quot;  &quot;A&quot; 
@@ -624,10 +640,10 @@ resulting population estimates.</p>
 ##  [9,] &quot;G&quot;  &quot;G&quot;  &quot;G&quot;  &quot;G&quot; 
 ## [10,] &quot;T&quot;  &quot;T&quot;  &quot;T&quot;  &quot;T&quot;</code></pre>
 <p>Let’s find a site where there’s polymorphism</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">hap1 =<span class="st"> </span>H[,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb142-2" data-line-number="2">hap2 =<span class="st"> </span>H[,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb142-3" data-line-number="3">s &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(hap1 <span class="op">!=</span><span class="st"> </span>hap2))</a>
-<a class="sourceLine" id="cb142-4" data-line-number="4"><span class="kw">head</span>(H[s <span class="op">+</span><span class="st"> </span><span class="dv">-2</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co">## the polymorphic site in context</span></a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="coalescent.html#cb164-1"></a>hap1 =<span class="st"> </span>H[,<span class="dv">1</span>]</span>
+<span id="cb164-2"><a href="coalescent.html#cb164-2"></a>hap2 =<span class="st"> </span>H[,<span class="dv">2</span>]</span>
+<span id="cb164-3"><a href="coalescent.html#cb164-3"></a>s &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">which</span>(hap1 <span class="op">!=</span><span class="st"> </span>hap2))</span>
+<span id="cb164-4"><a href="coalescent.html#cb164-4"></a><span class="kw">head</span>(H[s <span class="op">+</span><span class="st"> </span><span class="dv">-2</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co">## the polymorphic site in context</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,] &quot;T&quot;  &quot;T&quot;  &quot;T&quot;  &quot;T&quot; 
 ## [2,] &quot;A&quot;  &quot;A&quot;  &quot;A&quot;  &quot;A&quot; 
@@ -635,7 +651,7 @@ resulting population estimates.</p>
 ## [4,] &quot;G&quot;  &quot;G&quot;  &quot;G&quot;  &quot;G&quot; 
 ## [5,] &quot;A&quot;  &quot;A&quot;  &quot;A&quot;  &quot;A&quot;</code></pre>
 <p>Let’s see if that’s hap1 is the only “A”</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="kw">table</span>(H[s,])</a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="coalescent.html#cb166-1"></a><span class="kw">table</span>(H[s,])</span></code></pre></div>
 <pre><code>## 
 ##   A   G 
 ##  19 361</code></pre>
@@ -672,28 +688,28 @@ order of 100,000 the last few thousand years and on the order of
 <ol style="list-style-type: decimal">
 <li>Pick 100 <em>pairs</em> of people at random and count their pairwise differences.</li>
 </ol>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb146-2" data-line-number="2">hap_ids =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(H)</a>
-<a class="sourceLine" id="cb146-3" data-line-number="3">hap_id_sample =<span class="st"> </span><span class="kw">sample</span>(hap_ids,</a>
-<a class="sourceLine" id="cb146-4" data-line-number="4">                       <span class="dt">size =</span> <span class="dv">200</span>,</a>
-<a class="sourceLine" id="cb146-5" data-line-number="5">                       <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb146-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb146-7" data-line-number="7">hap_id.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(hap_id_sample, <span class="dv">100</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb146-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb146-9" data-line-number="9">pairwise_diff_fun &lt;-<span class="st"> </span><span class="cf">function</span>(hap1, hap2)</a>
-<a class="sourceLine" id="cb146-10" data-line-number="10">{</a>
-<a class="sourceLine" id="cb146-11" data-line-number="11">    h1 &lt;-<span class="st"> </span>hap1</a>
-<a class="sourceLine" id="cb146-12" data-line-number="12">    h2 &lt;-<span class="st"> </span>hap2</a>
-<a class="sourceLine" id="cb146-13" data-line-number="13"><span class="co">##    h1 &lt;- unlist(strsplit(hap1, &quot;&quot;))</span></a>
-<a class="sourceLine" id="cb146-14" data-line-number="14"><span class="co">##    h2 &lt;- unlist(strsplit(hap2, &quot;&quot;))</span></a>
-<a class="sourceLine" id="cb146-15" data-line-number="15">    h1[h1 <span class="op">==</span><span class="st"> &quot;N&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## note &quot;N&quot; means missing</span></a>
-<a class="sourceLine" id="cb146-16" data-line-number="16">    h2[h2 <span class="op">==</span><span class="st"> &quot;N&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## making these NA avoids counting as polymorphism</span></a>
-<a class="sourceLine" id="cb146-17" data-line-number="17">    k =<span class="st"> </span><span class="kw">sum</span>(h1 <span class="op">!=</span><span class="st"> </span>h2, <span class="dt">na.rm =</span> T)</a>
-<a class="sourceLine" id="cb146-18" data-line-number="18">    n_valid =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(h1) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(h2))</a>
-<a class="sourceLine" id="cb146-19" data-line-number="19">    <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">k =</span> k, <span class="dt">n_valid =</span> n_valid))</a>
-<a class="sourceLine" id="cb146-20" data-line-number="20">}</a>
-<a class="sourceLine" id="cb146-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb146-22" data-line-number="22"><span class="kw">pairwise_diff_fun</span>(H[,<span class="dv">1</span>], H[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="coalescent.html#cb168-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb168-2"><a href="coalescent.html#cb168-2"></a>hap_ids =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(H)</span>
+<span id="cb168-3"><a href="coalescent.html#cb168-3"></a>hap_id_sample =<span class="st"> </span><span class="kw">sample</span>(hap_ids,</span>
+<span id="cb168-4"><a href="coalescent.html#cb168-4"></a>                       <span class="dt">size =</span> <span class="dv">200</span>,</span>
+<span id="cb168-5"><a href="coalescent.html#cb168-5"></a>                       <span class="dt">replace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb168-6"><a href="coalescent.html#cb168-6"></a></span>
+<span id="cb168-7"><a href="coalescent.html#cb168-7"></a>hap_id.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(hap_id_sample, <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb168-8"><a href="coalescent.html#cb168-8"></a></span>
+<span id="cb168-9"><a href="coalescent.html#cb168-9"></a>pairwise_diff_fun &lt;-<span class="st"> </span><span class="cf">function</span>(hap1, hap2)</span>
+<span id="cb168-10"><a href="coalescent.html#cb168-10"></a>{</span>
+<span id="cb168-11"><a href="coalescent.html#cb168-11"></a>    h1 &lt;-<span class="st"> </span>hap1</span>
+<span id="cb168-12"><a href="coalescent.html#cb168-12"></a>    h2 &lt;-<span class="st"> </span>hap2</span>
+<span id="cb168-13"><a href="coalescent.html#cb168-13"></a><span class="co">##    h1 &lt;- unlist(strsplit(hap1, &quot;&quot;))</span></span>
+<span id="cb168-14"><a href="coalescent.html#cb168-14"></a><span class="co">##    h2 &lt;- unlist(strsplit(hap2, &quot;&quot;))</span></span>
+<span id="cb168-15"><a href="coalescent.html#cb168-15"></a>    h1[h1 <span class="op">==</span><span class="st"> &quot;N&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## note &quot;N&quot; means missing</span></span>
+<span id="cb168-16"><a href="coalescent.html#cb168-16"></a>    h2[h2 <span class="op">==</span><span class="st"> &quot;N&quot;</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> <span class="co">## making these NA avoids counting as polymorphism</span></span>
+<span id="cb168-17"><a href="coalescent.html#cb168-17"></a>    k =<span class="st"> </span><span class="kw">sum</span>(h1 <span class="op">!=</span><span class="st"> </span>h2, <span class="dt">na.rm =</span> T)</span>
+<span id="cb168-18"><a href="coalescent.html#cb168-18"></a>    n_valid =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(h1) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(h2))</span>
+<span id="cb168-19"><a href="coalescent.html#cb168-19"></a>    <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">k =</span> k, <span class="dt">n_valid =</span> n_valid))</span>
+<span id="cb168-20"><a href="coalescent.html#cb168-20"></a>}</span>
+<span id="cb168-21"><a href="coalescent.html#cb168-21"></a></span>
+<span id="cb168-22"><a href="coalescent.html#cb168-22"></a><span class="kw">pairwise_diff_fun</span>(H[,<span class="dv">1</span>], H[,<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## $k
 ## [1] 45
 ## 
@@ -705,25 +721,25 @@ haplotypes.</p>
 <span class="math display">\[
 \bar{Y} = P/C
 \]</span></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">P.vec =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb148-2" data-line-number="2">C.vec =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb148-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hap_id.mat))</a>
-<a class="sourceLine" id="cb148-4" data-line-number="4">{</a>
-<a class="sourceLine" id="cb148-5" data-line-number="5">    hap_id<span class="fl">.1</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb148-6" data-line-number="6">    hap_id<span class="fl">.2</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb148-7" data-line-number="7">    hap1 =<span class="st"> </span>H[,hap_id<span class="fl">.1</span>]</a>
-<a class="sourceLine" id="cb148-8" data-line-number="8">    hap2 =<span class="st"> </span>H[,hap_id<span class="fl">.2</span>]</a>
-<a class="sourceLine" id="cb148-9" data-line-number="9">    out =<span class="st"> </span><span class="kw">pairwise_diff_fun</span>(hap1, hap2)</a>
-<a class="sourceLine" id="cb148-10" data-line-number="10">    P.vec[i] =<span class="st"> </span>out<span class="op">$</span>k</a>
-<a class="sourceLine" id="cb148-11" data-line-number="11">    C.vec[i] =<span class="st"> </span>out<span class="op">$</span>n_valid</a>
-<a class="sourceLine" id="cb148-12" data-line-number="12">}</a>
-<a class="sourceLine" id="cb148-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb148-14" data-line-number="14">Y.bar =<span class="st"> </span>P.vec<span class="op">/</span>C.vec</a>
-<a class="sourceLine" id="cb148-15" data-line-number="15"><span class="kw">head</span>(P.vec)</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="coalescent.html#cb170-1"></a>P.vec =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb170-2"><a href="coalescent.html#cb170-2"></a>C.vec =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb170-3"><a href="coalescent.html#cb170-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hap_id.mat))</span>
+<span id="cb170-4"><a href="coalescent.html#cb170-4"></a>{</span>
+<span id="cb170-5"><a href="coalescent.html#cb170-5"></a>    hap_id<span class="fl">.1</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">1</span>]</span>
+<span id="cb170-6"><a href="coalescent.html#cb170-6"></a>    hap_id<span class="fl">.2</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">2</span>]</span>
+<span id="cb170-7"><a href="coalescent.html#cb170-7"></a>    hap1 =<span class="st"> </span>H[,hap_id<span class="fl">.1</span>]</span>
+<span id="cb170-8"><a href="coalescent.html#cb170-8"></a>    hap2 =<span class="st"> </span>H[,hap_id<span class="fl">.2</span>]</span>
+<span id="cb170-9"><a href="coalescent.html#cb170-9"></a>    out =<span class="st"> </span><span class="kw">pairwise_diff_fun</span>(hap1, hap2)</span>
+<span id="cb170-10"><a href="coalescent.html#cb170-10"></a>    P.vec[i] =<span class="st"> </span>out<span class="op">$</span>k</span>
+<span id="cb170-11"><a href="coalescent.html#cb170-11"></a>    C.vec[i] =<span class="st"> </span>out<span class="op">$</span>n_valid</span>
+<span id="cb170-12"><a href="coalescent.html#cb170-12"></a>}</span>
+<span id="cb170-13"><a href="coalescent.html#cb170-13"></a></span>
+<span id="cb170-14"><a href="coalescent.html#cb170-14"></a>Y.bar =<span class="st"> </span>P.vec<span class="op">/</span>C.vec</span>
+<span id="cb170-15"><a href="coalescent.html#cb170-15"></a><span class="kw">head</span>(P.vec)</span></code></pre></div>
 <pre><code>## [1] 19 36 13 39  5 84</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">head</span>(C.vec)</a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="coalescent.html#cb172-1"></a><span class="kw">head</span>(C.vec)</span></code></pre></div>
 <pre><code>## [1] 16566 16484 16539 16565 16565 16544</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">head</span>(Y.bar)</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="coalescent.html#cb174-1"></a><span class="kw">head</span>(Y.bar)</span></code></pre></div>
 <pre><code>## [1] 0.0011469274 0.0021839359 0.0007860209 0.0023543616 0.0003018412 0.0050773694</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Estimate 100 different times of MRCA (<span class="math inline">\(T\)</span>) using assumed mutation rate.</li>
@@ -750,13 +766,13 @@ where we’ve added a “2” in order to account that either one of the pairwis
 \hat{T} = {-\log (1 - \bar{Y} ) \over \theta}
 \]</span></p>
 <p>Now we’re ready to estimate the MRCAs</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">theta_m =<span class="st"> </span><span class="fl">2.21</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">8</span>) <span class="co">## Batini page 6 (TMRCA estimation)</span></a>
-<a class="sourceLine" id="cb154-2" data-line-number="2">T.vec &lt;-<span class="st"> </span><span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>theta_m) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Y.bar) <span class="co">## TMRCAs in years ago</span></a>
-<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="kw">head</span>(T.vec, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="coalescent.html#cb176-1"></a>theta_m =<span class="st"> </span><span class="fl">2.21</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span>(<span class="op">-</span><span class="dv">8</span>) <span class="co">## Batini page 6 (TMRCA estimation)</span></span>
+<span id="cb176-2"><a href="coalescent.html#cb176-2"></a>T.vec &lt;-<span class="st"> </span><span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>theta_m) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Y.bar) <span class="co">## TMRCAs in years ago</span></span>
+<span id="cb176-3"><a href="coalescent.html#cb176-3"></a><span class="kw">head</span>(T.vec, <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1]  25963.477  49464.349  17790.271  53328.902   6830.018 115165.228  56610.650  12294.775  21863.319  54701.270</code></pre>
 <p>Let’s visualize these</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">hist</span>(T.vec)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="coalescent.html#cb178-1"></a><span class="kw">hist</span>(T.vec)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <p>We see a lot of coalescence about 50 KYA, which is as far back as
 Batini’s estimates go. This means the population was small back
 then.</p>
@@ -768,17 +784,17 @@ logarithm of the survival curve, but we’ll see that it is noisy and
 needs to be smoothed. Second, we’ll construct a “life table” of
 coalescence with discrete periods of time.</p>
 <p>Let’s start with the more continuous version of estimating slopes.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="co">## Plot survival curve by order of T</span></a>
-<a class="sourceLine" id="cb157-2" data-line-number="2">St =<span class="st"> </span>(<span class="dv">100</span><span class="op">:</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">100</span> <span class="co">## or more generally (length(T.vec):1)/length(T.vec)</span></a>
-<a class="sourceLine" id="cb157-3" data-line-number="3">t =<span class="st"> </span>kya =<span class="st"> </span><span class="kw">sort</span>(T.vec)<span class="op">/</span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb157-4" data-line-number="4"><span class="kw">plot</span>(kya, St, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
-<a class="sourceLine" id="cb157-5" data-line-number="5">     <span class="dt">xlab =</span> <span class="st">&quot;Kilo years ago&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fraction of pairs without common ancestor&quot;</span>,</a>
-<a class="sourceLine" id="cb157-6" data-line-number="6">     <span class="dt">main =</span> <span class="st">&quot;Estimated probability of not coalescing&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">plot</span>(kya, <span class="kw">log</span>(St), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
-<a class="sourceLine" id="cb158-2" data-line-number="2">     <span class="dt">xlab =</span> <span class="st">&quot;Kilo years ago&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Log fraction of pairs without common ancestor&quot;</span>,</a>
-<a class="sourceLine" id="cb158-3" data-line-number="3">     <span class="dt">main =</span> <span class="st">&quot;Etimatated probability of not coalescing, log scale&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-113-2.png" width="672" /></p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="coalescent.html#cb179-1"></a><span class="co">## Plot survival curve by order of T</span></span>
+<span id="cb179-2"><a href="coalescent.html#cb179-2"></a>St =<span class="st"> </span>(<span class="dv">100</span><span class="op">:</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">100</span> <span class="co">## or more generally (length(T.vec):1)/length(T.vec)</span></span>
+<span id="cb179-3"><a href="coalescent.html#cb179-3"></a>t =<span class="st"> </span>kya =<span class="st"> </span><span class="kw">sort</span>(T.vec)<span class="op">/</span><span class="dv">1000</span></span>
+<span id="cb179-4"><a href="coalescent.html#cb179-4"></a><span class="kw">plot</span>(kya, St, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb179-5"><a href="coalescent.html#cb179-5"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Kilo years ago&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fraction of pairs without common ancestor&quot;</span>,</span>
+<span id="cb179-6"><a href="coalescent.html#cb179-6"></a>     <span class="dt">main =</span> <span class="st">&quot;Estimated probability of not coalescing&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="coalescent.html#cb180-1"></a><span class="kw">plot</span>(kya, <span class="kw">log</span>(St), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb180-2"><a href="coalescent.html#cb180-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Kilo years ago&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Log fraction of pairs without common ancestor&quot;</span>,</span>
+<span id="cb180-3"><a href="coalescent.html#cb180-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Etimatated probability of not coalescing, log scale&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-116-2.png" width="672" /></p>
 <blockquote>
 <p>Q: What is happening to slope in first from 1,000 to 50,000 years
 ago?</p>
@@ -795,20 +811,20 @@ ago?</p>
 </ol></li>
 </ul>
 <p>First we smooth.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">out =<span class="st"> </span><span class="kw">lowess</span>(<span class="dt">x =</span> kya, <span class="dt">y =</span> St, <span class="dt">f =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb159-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb159-3" data-line-number="3">St_smooth =<span class="st"> </span>out<span class="op">$</span>y</a>
-<a class="sourceLine" id="cb159-4" data-line-number="4">kya_smooth =<span class="st"> </span>out<span class="op">$</span>x</a>
-<a class="sourceLine" id="cb159-5" data-line-number="5"><span class="kw">plot</span>(kya, St, <span class="dt">cex =</span> <span class="fl">.5</span>)</a>
-<a class="sourceLine" id="cb159-6" data-line-number="6"><span class="kw">lines</span>(kya_smooth, St_smooth, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="coalescent.html#cb181-1"></a>out =<span class="st"> </span><span class="kw">lowess</span>(<span class="dt">x =</span> kya, <span class="dt">y =</span> St, <span class="dt">f =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)</span>
+<span id="cb181-2"><a href="coalescent.html#cb181-2"></a></span>
+<span id="cb181-3"><a href="coalescent.html#cb181-3"></a>St_smooth =<span class="st"> </span>out<span class="op">$</span>y</span>
+<span id="cb181-4"><a href="coalescent.html#cb181-4"></a>kya_smooth =<span class="st"> </span>out<span class="op">$</span>x</span>
+<span id="cb181-5"><a href="coalescent.html#cb181-5"></a><span class="kw">plot</span>(kya, St, <span class="dt">cex =</span> <span class="fl">.5</span>)</span>
+<span id="cb181-6"><a href="coalescent.html#cb181-6"></a><span class="kw">lines</span>(kya_smooth, St_smooth, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <blockquote>
 <p>Q. Is f=1/5 a decent fit? Try a different value.</p>
 </blockquote>
 <p>Hazards as minus the slope of log</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">haz_hat =<span class="st"> </span><span class="op">-</span><span class="kw">diff</span>(St_smooth)<span class="op">/</span><span class="kw">diff</span>(kya_smooth)</a>
-<a class="sourceLine" id="cb160-2" data-line-number="2"><span class="kw">plot</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>], haz_hat, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="coalescent.html#cb182-1"></a>haz_hat =<span class="st"> </span><span class="op">-</span><span class="kw">diff</span>(St_smooth)<span class="op">/</span><span class="kw">diff</span>(kya_smooth)</span>
+<span id="cb182-2"><a href="coalescent.html#cb182-2"></a><span class="kw">plot</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>], haz_hat, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <blockquote>
 <p>Q. Does this plot tell us anything about uncertainty?</p>
 </blockquote>
@@ -820,37 +836,37 @@ ago?</p>
 <p>Now let’s estimate the hazards using a “life table”, where again
 “death” is coalescence and “survival” is still not having a common
 ancestor.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="co">## we choose these time boundaries arbitrarily ... not sure if</span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2"><span class="co">## we&#39;ll be able to see the &quot;expansion&quot; after ice age ...</span></a>
-<a class="sourceLine" id="cb161-3" data-line-number="3"><span class="co">## x = c(0, 12,  20, 40, 65,  180 )*1000    # time interval boundaries</span></a>
-<a class="sourceLine" id="cb161-4" data-line-number="4">x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">65</span>, <span class="dv">180</span>) <span class="op">*</span><span class="st"> </span><span class="dv">1000</span> <span class="co">## time interval boundaries</span></a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="coalescent.html#cb183-1"></a><span class="co">## we choose these time boundaries arbitrarily ... not sure if</span></span>
+<span id="cb183-2"><a href="coalescent.html#cb183-2"></a><span class="co">## we&#39;ll be able to see the &quot;expansion&quot; after ice age ...</span></span>
+<span id="cb183-3"><a href="coalescent.html#cb183-3"></a><span class="co">## x = c(0, 12,  20, 40, 65,  180 )*1000    # time interval boundaries</span></span>
+<span id="cb183-4"><a href="coalescent.html#cb183-4"></a>x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">65</span>, <span class="dv">180</span>) <span class="op">*</span><span class="st"> </span><span class="dv">1000</span> <span class="co">## time interval boundaries</span></span></code></pre></div>
 <p>Define a function to count “exposure” by those pairs that
 have MRCA in time intervals</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1">get_nax &lt;-<span class="st"> </span><span class="cf">function</span>(Ti, x)</a>
-<a class="sourceLine" id="cb162-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb162-3" data-line-number="3">    <span class="co">## get person years lived in interval by those who die</span></a>
-<a class="sourceLine" id="cb162-4" data-line-number="4">    nax &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb162-5" data-line-number="5">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(x)<span class="op">-</span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb162-6" data-line-number="6">    {</a>
-<a class="sourceLine" id="cb162-7" data-line-number="7">        s &lt;-<span class="st"> </span>Ti <span class="op">&gt;=</span><span class="st"> </span>x[i] <span class="op">&amp;</span><span class="st"> </span>Ti <span class="op">&lt;</span><span class="st"> </span>x[i<span class="op">+</span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb162-8" data-line-number="8">        <span class="cf">if</span> (<span class="kw">length</span>(Ti[s]) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb162-9" data-line-number="9">          nax[i] =<span class="st"> </span><span class="kw">mean</span>(Ti[s] <span class="op">-</span><span class="st"> </span>x[i])</a>
-<a class="sourceLine" id="cb162-10" data-line-number="10">        }</a>
-<a class="sourceLine" id="cb162-11" data-line-number="11">        nax[<span class="kw">is.na</span>(nax)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb162-12" data-line-number="12">    }</a>
-<a class="sourceLine" id="cb162-13" data-line-number="13">    <span class="kw">return</span>(nax)</a>
-<a class="sourceLine" id="cb162-14" data-line-number="14">}</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="coalescent.html#cb184-1"></a>get_nax &lt;-<span class="st"> </span><span class="cf">function</span>(Ti, x)</span>
+<span id="cb184-2"><a href="coalescent.html#cb184-2"></a>{</span>
+<span id="cb184-3"><a href="coalescent.html#cb184-3"></a>    <span class="co">## get person years lived in interval by those who die</span></span>
+<span id="cb184-4"><a href="coalescent.html#cb184-4"></a>    nax &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb184-5"><a href="coalescent.html#cb184-5"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(x)<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb184-6"><a href="coalescent.html#cb184-6"></a>    {</span>
+<span id="cb184-7"><a href="coalescent.html#cb184-7"></a>        s &lt;-<span class="st"> </span>Ti <span class="op">&gt;=</span><span class="st"> </span>x[i] <span class="op">&amp;</span><span class="st"> </span>Ti <span class="op">&lt;</span><span class="st"> </span>x[i<span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb184-8"><a href="coalescent.html#cb184-8"></a>        <span class="cf">if</span> (<span class="kw">length</span>(Ti[s]) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb184-9"><a href="coalescent.html#cb184-9"></a>          nax[i] =<span class="st"> </span><span class="kw">mean</span>(Ti[s] <span class="op">-</span><span class="st"> </span>x[i])</span>
+<span id="cb184-10"><a href="coalescent.html#cb184-10"></a>        }</span>
+<span id="cb184-11"><a href="coalescent.html#cb184-11"></a>        nax[<span class="kw">is.na</span>(nax)] &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb184-12"><a href="coalescent.html#cb184-12"></a>    }</span>
+<span id="cb184-13"><a href="coalescent.html#cb184-13"></a>    <span class="kw">return</span>(nax)</span>
+<span id="cb184-14"><a href="coalescent.html#cb184-14"></a>}</span></code></pre></div>
 <p>Construct the life table</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="kw">diff</span>(x)</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2">T.vec.by.cat &lt;-<span class="st"> </span><span class="kw">cut</span>(T.vec, x, <span class="dt">include.lowest =</span> T, <span class="dt">right =</span> F)</a>
-<a class="sourceLine" id="cb163-3" data-line-number="3">ndx =<span class="st"> </span><span class="kw">table</span>(T.vec.by.cat)</a>
-<a class="sourceLine" id="cb163-4" data-line-number="4">lx =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(ndx)))</a>
-<a class="sourceLine" id="cb163-5" data-line-number="5">lxpn =<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>], <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb163-6" data-line-number="6">nax =<span class="st"> </span><span class="kw">get_nax</span>(<span class="dt">Ti =</span> T.vec, <span class="dt">x =</span> x)</a>
-<a class="sourceLine" id="cb163-7" data-line-number="7">nLx =<span class="st"> </span>n<span class="op">*</span>lxpn <span class="op">+</span><span class="st"> </span>nax <span class="op">*</span><span class="st"> </span>ndx <span class="co">## exposure</span></a>
-<a class="sourceLine" id="cb163-8" data-line-number="8">nmx =<span class="st"> </span>ndx<span class="op">/</span>nLx <span class="co">## hazard</span></a>
-<a class="sourceLine" id="cb163-9" data-line-number="9">lt &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">x =</span> x[<span class="op">-</span><span class="kw">length</span>(x)], n, ndx, lx, nax, nLx, nmx)</a>
-<a class="sourceLine" id="cb163-10" data-line-number="10"><span class="kw">print</span>(lt)</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="coalescent.html#cb185-1"></a>n &lt;-<span class="st"> </span><span class="kw">diff</span>(x)</span>
+<span id="cb185-2"><a href="coalescent.html#cb185-2"></a>T.vec.by.cat &lt;-<span class="st"> </span><span class="kw">cut</span>(T.vec, x, <span class="dt">include.lowest =</span> T, <span class="dt">right =</span> F)</span>
+<span id="cb185-3"><a href="coalescent.html#cb185-3"></a>ndx =<span class="st"> </span><span class="kw">table</span>(T.vec.by.cat)</span>
+<span id="cb185-4"><a href="coalescent.html#cb185-4"></a>lx =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(ndx)))</span>
+<span id="cb185-5"><a href="coalescent.html#cb185-5"></a>lxpn =<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>], <span class="dv">0</span>)</span>
+<span id="cb185-6"><a href="coalescent.html#cb185-6"></a>nax =<span class="st"> </span><span class="kw">get_nax</span>(<span class="dt">Ti =</span> T.vec, <span class="dt">x =</span> x)</span>
+<span id="cb185-7"><a href="coalescent.html#cb185-7"></a>nLx =<span class="st"> </span>n<span class="op">*</span>lxpn <span class="op">+</span><span class="st"> </span>nax <span class="op">*</span><span class="st"> </span>ndx <span class="co">## exposure</span></span>
+<span id="cb185-8"><a href="coalescent.html#cb185-8"></a>nmx =<span class="st"> </span>ndx<span class="op">/</span>nLx <span class="co">## hazard</span></span>
+<span id="cb185-9"><a href="coalescent.html#cb185-9"></a>lt &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">x =</span> x[<span class="op">-</span><span class="kw">length</span>(x)], n, ndx, lx, nax, nLx, nmx)</span>
+<span id="cb185-10"><a href="coalescent.html#cb185-10"></a><span class="kw">print</span>(lt)</span></code></pre></div>
 <pre><code>##                       x      n ndx  lx       nax      nLx          nmx
 ## [0,2e+03)             0   2000   0 100     0.000 200000.0 0.000000e+00
 ## [2e+03,5e+03)      2000   3000   0 100     0.000 300000.0 0.000000e+00
@@ -861,11 +877,11 @@ have MRCA in time intervals</p>
 ## [4e+04,6.5e+04)   40000  25000  54  64 11619.224 877438.1 6.154280e-05
 ## [6.5e+04,1.8e+05] 65000 115000  10  10 24611.455 246114.6 4.063149e-05</code></pre>
 <p>Let’s compare the two estimates</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">x.mid =<span class="st"> </span>x[<span class="op">-</span><span class="kw">length</span>(x)] <span class="op">+</span><span class="st"> </span>n<span class="op">/</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb165-2" data-line-number="2"><span class="kw">plot</span>(x.mid, nmx, <span class="dt">type =</span> <span class="st">&#39;o&#39;</span>)</a>
-<a class="sourceLine" id="cb165-3" data-line-number="3"><span class="kw">axis</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb165-4" data-line-number="4"><span class="kw">lines</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>, haz_hat<span class="op">/</span><span class="dv">1000</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="coalescent.html#cb187-1"></a>x.mid =<span class="st"> </span>x[<span class="op">-</span><span class="kw">length</span>(x)] <span class="op">+</span><span class="st"> </span>n<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb187-2"><a href="coalescent.html#cb187-2"></a><span class="kw">plot</span>(x.mid, nmx, <span class="dt">type =</span> <span class="st">&#39;o&#39;</span>)</span>
+<span id="cb187-3"><a href="coalescent.html#cb187-3"></a><span class="kw">axis</span>(<span class="dv">2</span>)</span>
+<span id="cb187-4"><a href="coalescent.html#cb187-4"></a><span class="kw">lines</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>, haz_hat<span class="op">/</span><span class="dv">1000</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <p>We’re getting basically the same thing, with a little more hint of
 rising hazards (shrinking pop size) in first 20 kya. Nearly the same
 thing estimate 40 kya ago, and very little signal before that.</p>
@@ -888,18 +904,18 @@ both sexes by doubling the number of females.</p>
 \]</span>
 where the 2 inflates to both sexes, and the 25 inflates the annual
 hazard into geneations of 25 years in length.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">Ne_smooth =<span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(haz_hat<span class="op">/</span><span class="dv">1000</span> <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb166-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb166-3" data-line-number="3">Ne_lifetable =<span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(nmx <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb166-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb166-5" data-line-number="5"><span class="co">## create step function for plotting</span></a>
-<a class="sourceLine" id="cb166-6" data-line-number="6">Ne_lifetable_step =<span class="st"> </span><span class="kw">rep</span>(Ne_lifetable, n<span class="op">/</span><span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb166-7" data-line-number="7">kya_step =<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">max</span>(x)<span class="op">/</span><span class="dv">1000</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="coalescent.html#cb188-1"></a>Ne_smooth =<span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(haz_hat<span class="op">/</span><span class="dv">1000</span> <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</span>
+<span id="cb188-2"><a href="coalescent.html#cb188-2"></a></span>
+<span id="cb188-3"><a href="coalescent.html#cb188-3"></a>Ne_lifetable =<span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(nmx <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</span>
+<span id="cb188-4"><a href="coalescent.html#cb188-4"></a></span>
+<span id="cb188-5"><a href="coalescent.html#cb188-5"></a><span class="co">## create step function for plotting</span></span>
+<span id="cb188-6"><a href="coalescent.html#cb188-6"></a>Ne_lifetable_step =<span class="st"> </span><span class="kw">rep</span>(Ne_lifetable, n<span class="op">/</span><span class="dv">1000</span>)</span>
+<span id="cb188-7"><a href="coalescent.html#cb188-7"></a>kya_step =<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">max</span>(x)<span class="op">/</span><span class="dv">1000</span>)</span></code></pre></div>
 <p>Plotting the results</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">plot</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>], Ne_smooth, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">60000</span>), <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>,</a>
-<a class="sourceLine" id="cb167-2" data-line-number="2">     <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb167-3" data-line-number="3"><span class="kw">lines</span>(kya_step, Ne_lifetable_step, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="coalescent.html#cb189-1"></a><span class="kw">plot</span>(kya_smooth[<span class="op">-</span><span class="dv">1</span>], Ne_smooth, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">60000</span>), <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>,</span>
+<span id="cb189-2"><a href="coalescent.html#cb189-2"></a>     <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb189-3"><a href="coalescent.html#cb189-3"></a><span class="kw">lines</span>(kya_step, Ne_lifetable_step, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
 <p>Uncertainty</p>
 <blockquote>
 <p>Q. How could we evaluate undercertainty? (Hint: resampling)</p>
@@ -910,48 +926,48 @@ hazard into geneations of 25 years in length.</p>
 <p>(We probably won’t do this in class. If we don’t give it a try at
 home.)</p>
 <p>Let’s loop through and do the whole estimation 40 times</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">n_trials =<span class="st"> </span><span class="dv">40</span></a>
-<a class="sourceLine" id="cb168-2" data-line-number="2">Ne.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> n_trials, <span class="dt">ncol =</span> <span class="kw">max</span>(x)<span class="op">/</span><span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb168-4" data-line-number="4"><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</a>
-<a class="sourceLine" id="cb168-5" data-line-number="5">{</a>
-<a class="sourceLine" id="cb168-6" data-line-number="6">  <span class="co">#r = 1</span></a>
-<a class="sourceLine" id="cb168-7" data-line-number="7">    <span class="kw">print</span>(r)</a>
-<a class="sourceLine" id="cb168-8" data-line-number="8">    <span class="co">## sample</span></a>
-<a class="sourceLine" id="cb168-9" data-line-number="9">    hap_id_sample =<span class="st"> </span><span class="kw">sample</span>(hap_ids,</a>
-<a class="sourceLine" id="cb168-10" data-line-number="10">                           <span class="dt">size =</span> <span class="dv">200</span>,</a>
-<a class="sourceLine" id="cb168-11" data-line-number="11">                           <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb168-12" data-line-number="12">    hap_id.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(hap_id_sample, <span class="dv">100</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb168-13" data-line-number="13">    <span class="co">## estimate MRCA distribution</span></a>
-<a class="sourceLine" id="cb168-14" data-line-number="14">    P.vec =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb168-15" data-line-number="15">    C.vec =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb168-16" data-line-number="16">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hap_id.mat))</a>
-<a class="sourceLine" id="cb168-17" data-line-number="17">    {</a>
-<a class="sourceLine" id="cb168-18" data-line-number="18">        hap_id<span class="fl">.1</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb168-19" data-line-number="19">        hap_id<span class="fl">.2</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb168-20" data-line-number="20">        hap1 =<span class="st"> </span>H[,hap_id<span class="fl">.1</span>]</a>
-<a class="sourceLine" id="cb168-21" data-line-number="21">        hap2 =<span class="st"> </span>H[,hap_id<span class="fl">.2</span>]</a>
-<a class="sourceLine" id="cb168-22" data-line-number="22">        out =<span class="st"> </span><span class="kw">pairwise_diff_fun</span>(hap1, hap2)</a>
-<a class="sourceLine" id="cb168-23" data-line-number="23">        P.vec[i] =<span class="st"> </span>out<span class="op">$</span>k</a>
-<a class="sourceLine" id="cb168-24" data-line-number="24">        C.vec[i] =<span class="st"> </span>out<span class="op">$</span>n_valid</a>
-<a class="sourceLine" id="cb168-25" data-line-number="25">    }</a>
-<a class="sourceLine" id="cb168-26" data-line-number="26">    Y.bar =<span class="st"> </span>P.vec<span class="op">/</span>C.vec</a>
-<a class="sourceLine" id="cb168-27" data-line-number="27">    T.vec &lt;-<span class="st"> </span><span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>theta_m) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Y.bar) <span class="co">## TMRCAs in years ago</span></a>
-<a class="sourceLine" id="cb168-28" data-line-number="28">    <span class="co">## estimate Ne</span></a>
-<a class="sourceLine" id="cb168-29" data-line-number="29">    T.vec.by.cat &lt;-<span class="st"> </span><span class="kw">cut</span>(T.vec, x, <span class="dt">include.lowest =</span> T, <span class="dt">right =</span> F)</a>
-<a class="sourceLine" id="cb168-30" data-line-number="30">    ndx =<span class="st"> </span><span class="kw">table</span>(T.vec.by.cat)</a>
-<a class="sourceLine" id="cb168-31" data-line-number="31">    lx =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(ndx)))</a>
-<a class="sourceLine" id="cb168-32" data-line-number="32">    lxpn =<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>], <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb168-33" data-line-number="33">    nax =<span class="st"> </span><span class="kw">get_nax</span>(<span class="dt">Ti =</span> T.vec, <span class="dt">x =</span> x)</a>
-<a class="sourceLine" id="cb168-34" data-line-number="34">    nLx =<span class="st"> </span>n<span class="op">*</span>lxpn <span class="op">+</span><span class="st"> </span>nax <span class="op">*</span><span class="st"> </span>ndx <span class="co">## exposure</span></a>
-<a class="sourceLine" id="cb168-35" data-line-number="35">    nmx =<span class="st"> </span>ndx<span class="op">/</span>nLx <span class="co">## hazard</span></a>
-<a class="sourceLine" id="cb168-36" data-line-number="36">    Ne_lifetable =<span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(nmx <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb168-37" data-line-number="37">    <span class="co">## create step function for plotting</span></a>
-<a class="sourceLine" id="cb168-38" data-line-number="38">    Ne_lifetable_step =<span class="st"> </span><span class="kw">rep</span>(Ne_lifetable, n<span class="op">/</span><span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb168-39" data-line-number="39">    kya_step =<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">max</span>(x)<span class="op">/</span><span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb168-40" data-line-number="40">    <span class="co">## save result</span></a>
-<a class="sourceLine" id="cb168-41" data-line-number="41">    Ne.mat[r,] &lt;-<span class="st"> </span>Ne_lifetable_step</a>
-<a class="sourceLine" id="cb168-42" data-line-number="42">}</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="coalescent.html#cb190-1"></a>n_trials =<span class="st"> </span><span class="dv">40</span></span>
+<span id="cb190-2"><a href="coalescent.html#cb190-2"></a>Ne.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> n_trials, <span class="dt">ncol =</span> <span class="kw">max</span>(x)<span class="op">/</span><span class="dv">1000</span>)</span>
+<span id="cb190-3"><a href="coalescent.html#cb190-3"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb190-4"><a href="coalescent.html#cb190-4"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</span>
+<span id="cb190-5"><a href="coalescent.html#cb190-5"></a>{</span>
+<span id="cb190-6"><a href="coalescent.html#cb190-6"></a>  <span class="co">#r = 1</span></span>
+<span id="cb190-7"><a href="coalescent.html#cb190-7"></a>    <span class="kw">print</span>(r)</span>
+<span id="cb190-8"><a href="coalescent.html#cb190-8"></a>    <span class="co">## sample</span></span>
+<span id="cb190-9"><a href="coalescent.html#cb190-9"></a>    hap_id_sample =<span class="st"> </span><span class="kw">sample</span>(hap_ids,</span>
+<span id="cb190-10"><a href="coalescent.html#cb190-10"></a>                           <span class="dt">size =</span> <span class="dv">200</span>,</span>
+<span id="cb190-11"><a href="coalescent.html#cb190-11"></a>                           <span class="dt">replace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb190-12"><a href="coalescent.html#cb190-12"></a>    hap_id.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(hap_id_sample, <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb190-13"><a href="coalescent.html#cb190-13"></a>    <span class="co">## estimate MRCA distribution</span></span>
+<span id="cb190-14"><a href="coalescent.html#cb190-14"></a>    P.vec =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb190-15"><a href="coalescent.html#cb190-15"></a>    C.vec =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb190-16"><a href="coalescent.html#cb190-16"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hap_id.mat))</span>
+<span id="cb190-17"><a href="coalescent.html#cb190-17"></a>    {</span>
+<span id="cb190-18"><a href="coalescent.html#cb190-18"></a>        hap_id<span class="fl">.1</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">1</span>]</span>
+<span id="cb190-19"><a href="coalescent.html#cb190-19"></a>        hap_id<span class="fl">.2</span> =<span class="st"> </span>hap_id.mat[i,<span class="dv">2</span>]</span>
+<span id="cb190-20"><a href="coalescent.html#cb190-20"></a>        hap1 =<span class="st"> </span>H[,hap_id<span class="fl">.1</span>]</span>
+<span id="cb190-21"><a href="coalescent.html#cb190-21"></a>        hap2 =<span class="st"> </span>H[,hap_id<span class="fl">.2</span>]</span>
+<span id="cb190-22"><a href="coalescent.html#cb190-22"></a>        out =<span class="st"> </span><span class="kw">pairwise_diff_fun</span>(hap1, hap2)</span>
+<span id="cb190-23"><a href="coalescent.html#cb190-23"></a>        P.vec[i] =<span class="st"> </span>out<span class="op">$</span>k</span>
+<span id="cb190-24"><a href="coalescent.html#cb190-24"></a>        C.vec[i] =<span class="st"> </span>out<span class="op">$</span>n_valid</span>
+<span id="cb190-25"><a href="coalescent.html#cb190-25"></a>    }</span>
+<span id="cb190-26"><a href="coalescent.html#cb190-26"></a>    Y.bar =<span class="st"> </span>P.vec<span class="op">/</span>C.vec</span>
+<span id="cb190-27"><a href="coalescent.html#cb190-27"></a>    T.vec &lt;-<span class="st"> </span><span class="op">-</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>theta_m) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Y.bar) <span class="co">## TMRCAs in years ago</span></span>
+<span id="cb190-28"><a href="coalescent.html#cb190-28"></a>    <span class="co">## estimate Ne</span></span>
+<span id="cb190-29"><a href="coalescent.html#cb190-29"></a>    T.vec.by.cat &lt;-<span class="st"> </span><span class="kw">cut</span>(T.vec, x, <span class="dt">include.lowest =</span> T, <span class="dt">right =</span> F)</span>
+<span id="cb190-30"><a href="coalescent.html#cb190-30"></a>    ndx =<span class="st"> </span><span class="kw">table</span>(T.vec.by.cat)</span>
+<span id="cb190-31"><a href="coalescent.html#cb190-31"></a>    lx =<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(ndx)))</span>
+<span id="cb190-32"><a href="coalescent.html#cb190-32"></a>    lxpn =<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>], <span class="dv">0</span>)</span>
+<span id="cb190-33"><a href="coalescent.html#cb190-33"></a>    nax =<span class="st"> </span><span class="kw">get_nax</span>(<span class="dt">Ti =</span> T.vec, <span class="dt">x =</span> x)</span>
+<span id="cb190-34"><a href="coalescent.html#cb190-34"></a>    nLx =<span class="st"> </span>n<span class="op">*</span>lxpn <span class="op">+</span><span class="st"> </span>nax <span class="op">*</span><span class="st"> </span>ndx <span class="co">## exposure</span></span>
+<span id="cb190-35"><a href="coalescent.html#cb190-35"></a>    nmx =<span class="st"> </span>ndx<span class="op">/</span>nLx <span class="co">## hazard</span></span>
+<span id="cb190-36"><a href="coalescent.html#cb190-36"></a>    Ne_lifetable =<span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(nmx <span class="op">*</span><span class="st"> </span><span class="dv">25</span>)</span>
+<span id="cb190-37"><a href="coalescent.html#cb190-37"></a>    <span class="co">## create step function for plotting</span></span>
+<span id="cb190-38"><a href="coalescent.html#cb190-38"></a>    Ne_lifetable_step =<span class="st"> </span><span class="kw">rep</span>(Ne_lifetable, n<span class="op">/</span><span class="dv">1000</span>)</span>
+<span id="cb190-39"><a href="coalescent.html#cb190-39"></a>    kya_step =<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">max</span>(x)<span class="op">/</span><span class="dv">1000</span>)</span>
+<span id="cb190-40"><a href="coalescent.html#cb190-40"></a>    <span class="co">## save result</span></span>
+<span id="cb190-41"><a href="coalescent.html#cb190-41"></a>    Ne.mat[r,] &lt;-<span class="st"> </span>Ne_lifetable_step</span>
+<span id="cb190-42"><a href="coalescent.html#cb190-42"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3
@@ -992,10 +1008,10 @@ home.)</p>
 ## [1] 38
 ## [1] 39
 ## [1] 40</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">Ne.interval &lt;-<span class="st"> </span><span class="kw">apply</span>(Ne.mat, <span class="dv">2</span>, quantile, <span class="kw">c</span>(.<span class="dv">1</span>,.<span class="dv">5</span>, <span class="fl">.9</span>))</a>
-<a class="sourceLine" id="cb170-2" data-line-number="2"><span class="kw">matplot</span>(<span class="kw">t</span>(Ne.interval), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb170-3" data-line-number="3"><span class="kw">lines</span>(Ne.interval[<span class="st">&quot;50%&quot;</span>,], <span class="dt">lwd =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="coalescent.html#cb192-1"></a>Ne.interval &lt;-<span class="st"> </span><span class="kw">apply</span>(Ne.mat, <span class="dv">2</span>, quantile, <span class="kw">c</span>(.<span class="dv">1</span>,.<span class="dv">5</span>, <span class="fl">.9</span>))</span>
+<span id="cb192-2"><a href="coalescent.html#cb192-2"></a><span class="kw">matplot</span>(<span class="kw">t</span>(Ne.interval), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">log =</span> <span class="st">&#39;y&#39;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb192-3"><a href="coalescent.html#cb192-3"></a><span class="kw">lines</span>(Ne.interval[<span class="st">&quot;50%&quot;</span>,], <span class="dt">lwd =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
 <p>So it seems fairly clear that effective population size has been
 growing the last 50 thousand years, from a low of a few thousand to a
 few tens of thousand.</p>

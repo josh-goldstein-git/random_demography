@@ -5,3 +5,5 @@ This repository contains class materials -- including hugo class website, lectur
 
 We will be working to organize and improve these materials during June 2020.
 
+https://josh-goldstein-git.github.io/random_demography/
+

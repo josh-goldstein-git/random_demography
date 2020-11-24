@@ -1,3 +1,12 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r include=FALSE}
+install.packages("kableExtra")
+library(kableExtra)
+```
 # Branching Processes 
 
 ## Outline 
@@ -46,15 +55,16 @@ Additional resources:
   Here are the chances, $p_k$, that the first carrier passes on the virus to $k$
   people
   
-+----+------+
-| $k$| $p_k$|
-+====+======+
-| 0  | .3   |
-+----+------+
-| 1  | .4   | 
-+----+------+
-| 2  | .3   |
-+----+------+
+```{r}
+  knitr::kable(
+  cbind(c(0,1,2),c(.3,.4,.3)),
+  col.names = c('$k$', '$p_k$')
+) %>%
+ kable_paper(bootstrap_options = "striped", full_width = F)
+```
+
+
+
 
   - What is $R_0$, (aka $m$)? This is the expected number of infected cases: 
   $$\begin{aligned}
@@ -64,16 +74,14 @@ Additional resources:
   
   -  Now assume that people will infect $k$ other people based on a random number, for instance the last 4 digits of their phone number. 
   
+  
+```{r}
+  knitr::kable(
+  cbind(c(0,1,2),c(.3,.4,.3),c("0-2", "3-5", "6-9")),
+  col.names = c('$k$', '$p_k$', 'digits')
+) %>% kable_paper(bootstrap_options = "striped", full_width = F)
+```
 
-    +-----+-------+--------+
-    | $k$ | $p_k$ | digits |
-    +=====+=======+========+
-    | 0   | .3    | 0-2    |
-    +-----+-------+--------+
-    | 1   | .4    | 3-5    |
-    +-----+-------+--------+
-    | 2   | .3    | 6-9    |
-    +-----+-------+--------+
 
   -  Let's diagram one chance outcome, using my number "(xxx) xxx-9056". 
     - As each of the four digits is associated with a probability of infecting more people, they can be seen as different the carrier generations. 
@@ -82,18 +90,13 @@ Additional resources:
     
 In the table, we include their rows but the expected number of infected people is still 0 because the spreading stopped in generation 2.  
 
-+--------------+---------+-------+-------------------+
-| carrier      | random  |       | expected          | 
-| generation # | digit   | $p_k$ | # infected        | 
-+==============+=========+=======+===================+
-| 1            | 9       | 0.3   |$2\times 0.3 = 2.7$|
-+--------------+---------+-------+-------------------+
-| 2            | 0       | 0.2   |$0\times 0.3 = 0$  |  
-+--------------+---------+-------+-------------------+ 
-| 3            | 5       | 0.4   | 0                 |
-+--------------+---------+-------+-------------------+
-| 4            | 6       | 0.4   | 0                 |
-+--------------+---------+-------+-------------------+
+```{r}
+  knitr::kable(
+  cbind(c(1,2,3,4),c(9,0,5,6),c(0.3,0.2,0.4,0.4), c("$2 \\times 0.3 = 2.7$", "$0 \\times 0.3 = 0$", "$0$","$0$")),
+  col.names = c('carrier generation #', 'random digit', '$p_k$', 'expected # infected'), align="cccl"
+) %>% kable_paper(bootstrap_options = "striped", full_width = F)
+```
+
 
 **NOTE: does this sound reasonable? **
 
@@ -128,7 +131,7 @@ Some questions
   kids.of.Z3 = sample(x = k, size = Z3, replace = T, prob = p_k)
   Z4 = sum(kids.of.Z3)
 ```
-```{r, message=FALSE,  echo=FALSE}
+```{r echo=TRUE, message=FALSE}
   gen_size <- c(rep(Z1, 1), rep(Z2, Z2), rep(Z3, Z3), rep(Z4, Z4))
   gen <- c(rep(1, 1), rep(2, Z2), rep(3, Z3), rep(4, Z4))
   person <- c(1, seq(2.1,by=0.1, to=2 + Z2*0.1), 
@@ -144,7 +147,7 @@ Some questions
 
   - Here's a more visual representation . 
 
-```{r, echo= FALSE, fig.cap='Parents having childrens', fig.align = 'center'}
+```{r echo=TRUE,  fig.align = 'center', fig.cap='Parents having childrens'}
 # install.packages('DiagrammeR')
 DiagrammeR::grViz("
                   digraph rmarkdown{
@@ -195,26 +198,26 @@ DiagrammeR::grViz("
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
 ```
-```{r, echo=FALSE, fig.cap='Generation size'}  
+```{r, echo=FALSE, fig.cap='Generation size', fig.align = 'center'}  
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
 ```
   - How many survive (out of 20)? log-scale
-```{r, echo=FALSE, fig.cap='Generation sizes (log-scale)'}
+```{r echo=TRUE, fig.align = 'center', fig.cap='Generation sizes (log-scale)'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
   surviving = ifelse(Z.mat[,n_gen] == 0, "extinct", "survive")
   foo <- prop.table(table(surviving))
   print(prop.table(table(surviving)) )
 ```
   - How would you discribe the time path of the surviving lines? Let's extend the number of generations to observe any long-term trends.
-```{r, fig.height = 4}
+```{r, fig.height = 4, fig.align = 'center'}
   n_trials = 20; n_gen = 100
   Z.mat <- matrix(NA, n_trials, n_gen)
   set.seed(131) 
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
 ```
-```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations', fig.align='center'}
+```{r echo=TRUE, fig.align='center', fig.cap='Generation sizes (log-scale) over many generations'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
   - What does this remind you of? (Hint: "Leslie"). (See @harris1964theory, Figure 2, Chapter 1) 
@@ -300,8 +303,7 @@ DiagrammeR::grViz("
   - If we were to find a solution less than 1.0, how would we
     interpret that?
   - Three cases
-```{r, fig.cap='PGF for a variety of z', fig.align = 'center'}
-
+```{r, fig.align = 'center', fig.cap='PGF for a variety of z', fig.height=8}
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
   d <- pk["0"]
@@ -350,7 +352,7 @@ DiagrammeR::grViz("
     - The purple dot is $h(h(p_0))$.
     - The blue dot is $h(h(h(p_0)))$.
     - The points would converge until we reach the intersection between $h(z)$ and the diagonal.
-```{r,  echo= FALSE, fig.cap='Cobwed diagram (staircase)', fig.align = 'center'}
+```{r echo=TRUE,  fig.align = 'center', fig.cap='Cobwed diagram (staircase)'}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
   hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
@@ -392,7 +394,7 @@ DiagrammeR::grViz("
 
 Did we get the right value? Apparently, yes! The green lines take as vertical and horizontal values our $d=0.428568100698915$  
       
-```{r, echo=FALSE, fig.cap='??', fig.align = 'center'}
+```{r echo=TRUE, fig.align = 'center', fig.cap='??'}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
   hz = pk["0"]  + pk["1"]*z + pk["2"]*z^2
@@ -406,7 +408,7 @@ Did we get the right value? Apparently, yes! The green lines take as vertical an
   - This means there's some positive chance of extinction.
   - But also some chance of never-extinction. (What form does never-extinction take?)
 
-```{r, echo=FALSE, fig.cap='Generation sizes (log-scale) over many generations', fig.align = 'center'}
+```{r echo=TRUE, fig.align = 'center', fig.cap='Generation sizes (log-scale) over many generations'}
     suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
 
@@ -506,7 +508,7 @@ SIR model in disease spread)
   for (i in 1:n_trials)
       Z.mat[i,] <- branch(n_max = n_gen)
 ```
-```{r, echo=FALSE, fig.cap='Extinction simulation', fig.align = 'center'}
+```{r echo=TRUE,, fig.align = 'center', fig.cap='Extinction simulation'}
 Zn_bar = apply(Z.mat, 2, mean)
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
@@ -514,7 +516,7 @@ Zn_bar = apply(Z.mat, 2, mean)
     
  
 
-```{r, fig.height = 5}
+```{r, fig.height = 5,  fig.align = 'center'}
 Zn_bar = apply(Z.mat, 2, mean)  #expected value Z_n (E(Z_n))
 n <- 1:ncol(Z.mat)
 proportion.zero <- function(x){prop.table(table(x == 0))["TRUE"]}
@@ -525,7 +527,7 @@ Zn_surv_bar = apply(Z.mat.na, 2, mean, na.rm = T) #expected value of survivors (
 
 Using the means for all 1000 simulations, we calculate $\mathbb{E} Z_n$ (left plot), $d_n$ (center plot) and $\mathbb{E}( Z_n | Z_n > 0)$.
 
-```{r, echo=FALSE, fig.cap='Extinction simulations', fig.align = 'center'}
+```{r echo=TRUE,  fig.align = 'center', fig.cap='Extinction simulations'}
 par(mfrow = c(1,3))
 plot(n, Zn_bar, main = "Mean Zn")
 plot(n, d_n, main = "Fraction extinct")
@@ -572,7 +574,7 @@ Variance in our simulation increases with generation number:
 var_Zn = apply(Z.mat, 2, var)
 ```
 
-```{r, echo=FALSE, fig.cap='Distribution of $Z_n$', fig.align = 'center'}
+```{r echo=TRUE,  fig.align = 'center', fig.cap='Distribution of $Z_n$'}
 n <- 1:ncol(Z.mat)
 plot(n, var_Zn, xlab = 'variance of Zn')
 ```

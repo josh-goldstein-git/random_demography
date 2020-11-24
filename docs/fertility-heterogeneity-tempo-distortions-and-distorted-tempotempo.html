@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -346,11 +352,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Additional resources:</p>
 <ul>
-<li><span class="citation">Sullivan (<a href="#ref-sullivan2005age">2005</a>)</span>: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.</li>
-<li><span class="citation">Burkimsher (<a href="#ref-burkimsher2017evolution">2017</a>)</span>: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.</li>
-<li><span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-hastie2009elements">2009</a>)</span>: A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.</li>
+<li><span class="citation">Sullivan (<a href="#ref-sullivan2005age" role="doc-biblioref">2005</a>)</span>: An early paper (by a Berkeley Demog student!) focusing on ﬁrst birth hazards.</li>
+<li><span class="citation">Burkimsher (<a href="#ref-burkimsher2017evolution" role="doc-biblioref">2017</a>)</span>: A descriptive paper, which you can mostly skip. But see especially section 7, where she argues that her ﬁndings contradict Sullivan for the United States.</li>
+<li><span class="citation">Hastie, Tibshirani, and Friedman (<a href="#ref-hastie2009elements" role="doc-biblioref">2009</a>)</span>: A textbook example of expectation-maximization algorithm applied to mixture of two normals in Section 8.5.</li>
 <li>Victor Lavrenko. Youtube video : “EM algorithm: how it works” <a href="https://www.youtube.com/watch?v=REypj2sy_5U" class="uri">https://www.youtube.com/watch?v=REypj2sy_5U</a>.</li>
-<li><span class="citation">Bongaarts and Feeney (<a href="#ref-bongaarts1998quantum">1998</a>)</span></li>
+<li><span class="citation">Bongaarts and Feeney (<a href="#ref-bongaarts1998quantum" role="doc-biblioref">1998</a>)</span></li>
 </ul>
 </div>
 <div id="introduction-1" class="section level2">
@@ -402,37 +408,77 @@ about tempo adjustment.</p></li>
 <p>We can think of the original version as that which should have ocurred in the absence of postponement. Intuitively, it should be higher than the observed birth stream, but how much larger? The table below shows an example of how to recover the original births where each formula refers to the equations above.</p>
 <table>
 <thead>
-<tr class="header">
-<th align="right">r(t)</th>
-<th align="right">B(obs)</th>
-<th align="right">B(orig) formula 1</th>
-<th align="right">B(orig) formula 2</th>
+<tr>
+<th style="text-align:right;">
+r(t)
+</th>
+<th style="text-align:right;">
+B(obs)
+</th>
+<th style="text-align:right;">
+B(orig) formula 1
+</th>
+<th style="text-align:right;">
+B(orig) formula 2
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">0.1</td>
-<td align="right">91</td>
-<td align="right">100.1</td>
-<td align="right">101.1111</td>
+<tr>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+100.1
+</td>
+<td style="text-align:right;">
+101.1111
+</td>
 </tr>
-<tr class="even">
-<td align="right">0.2</td>
-<td align="right">84</td>
-<td align="right">100.8</td>
-<td align="right">105.0000</td>
+<tr>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+100.8
+</td>
+<td style="text-align:right;">
+105.0000
+</td>
 </tr>
-<tr class="odd">
-<td align="right">0.3</td>
-<td align="right">77</td>
-<td align="right">100.1</td>
-<td align="right">110.0000</td>
+<tr>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+100.1
+</td>
+<td style="text-align:right;">
+110.0000
+</td>
 </tr>
-<tr class="even">
-<td align="right">0.4</td>
-<td align="right">72</td>
-<td align="right">100.8</td>
-<td align="right">120.0000</td>
+<tr>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+100.8
+</td>
+<td style="text-align:right;">
+120.0000
+</td>
 </tr>
 </tbody>
 </table>
@@ -443,9 +489,11 @@ about tempo adjustment.</p></li>
 <h2><span class="header-section-number">7.3</span> Period Shifts: Bongaarts and Feeney’s model</h2>
 <p>In a bigger microsimulation</p>
 <ul>
-<li>Each period will have births across a range of ages</li>
+<li>Each period will have births across a range of ages
+<ul>
 <li>We’ll randomly generate the original planned birthdays</li>
 <li>Then we’ll shift by a continuous function <span class="math inline">\(R(t)\)</span>.</li>
+</ul></li>
 </ul>
 <p>The birth rate of women, <span class="math inline">\(f(a,t)\)</span>, aged <span class="math inline">\(a\)</span> in period <span class="math inline">\(t\)</span> is:
 <span class="math display">\[
@@ -503,7 +551,7 @@ messier). <strong>NOTE: I don’t understand this, could you explain Josh?</stro
 <div id="tempo-adjusted-tfr" class="section level3">
 <h3><span class="header-section-number">7.3.2</span> Tempo-adjusted TFR:</h3>
 <ul>
-<li>counter-factual</li>
+<li><p>counter-factual</p></li>
 <li><p>TFR in absence of timing changes</p>
 <p><span class="math display">\[
 TFR(t) = \int_0^\infty f(a,t) \, da
@@ -557,245 +605,462 @@ The observed <span class="math inline">\(TFR(t)\)</span> deflated by the rate of
 <li>Read in data and format into an array.
 Below we show the period fertility rates for all parities at each age for 1933 and 1934 of US women.</li>
 </ol>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="kw">library</span>(knitr)</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R&quot;</span>)</a>
-<a class="sourceLine" id="cb69-6" data-line-number="6"><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/utility_functions.R&quot;</span>)</a>
-<a class="sourceLine" id="cb69-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb69-8" data-line-number="8"><span class="co">## age specific fertility rates by birth order for all countries and times</span></a>
-<a class="sourceLine" id="cb69-9" data-line-number="9"><span class="co">## RR means &quot;rectangles&quot; on Lexis surface</span></a>
-<a class="sourceLine" id="cb69-10" data-line-number="10">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/data/zip_w/asfrRRbo.txt&quot;</span>, <span class="dt">showProgress =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb69-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb69-12" data-line-number="12">dt &lt;-<span class="st"> </span>dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>] <span class="co">## keep only US</span></a>
-<a class="sourceLine" id="cb69-13" data-line-number="13">dt &lt;-<span class="st"> </span>dt[Age <span class="op">%in%</span><span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">49</span>] <span class="co">## keep only ages 15 to 49</span></a>
-<a class="sourceLine" id="cb69-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb69-15" data-line-number="15"><span class="co">## put all order fertility into a matrix</span></a>
-<a class="sourceLine" id="cb69-16" data-line-number="16">fat &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)] <span class="co"># age (rows) by cohort year (column) matrix of ASFR</span></a>
-<a class="sourceLine" id="cb69-17" data-line-number="17">fat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat)) </a>
-<a class="sourceLine" id="cb69-18" data-line-number="18">fat1 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR1 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)] <span class="co">#age specific fertility rates for parity = 1 </span></a>
-<a class="sourceLine" id="cb69-19" data-line-number="19">fat2 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR2 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb69-20" data-line-number="20">fat3 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR3 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb69-21" data-line-number="21">fat4 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR4 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb69-22" data-line-number="22">fat5p &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR5p <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</a>
-<a class="sourceLine" id="cb69-23" data-line-number="23">year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(fat)</a>
-<a class="sourceLine" id="cb69-24" data-line-number="24">age.vec &lt;-<span class="st"> </span><span class="kw">rownames</span>(fat)</a>
-<a class="sourceLine" id="cb69-25" data-line-number="25">parity.vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;all&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb69-26" data-line-number="26">fat.array &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">nrow</span>(fat), <span class="kw">ncol</span>(fat), <span class="kw">length</span>(parity.vec)))</a>
-<a class="sourceLine" id="cb69-27" data-line-number="27"><span class="kw">dimnames</span>(fat.array) &lt;-<span class="st"> </span><span class="kw">list</span>(age.vec, year.vec, parity.vec)</a>
-<a class="sourceLine" id="cb69-28" data-line-number="28">fat.array[,,<span class="st">&quot;all&quot;</span>] &lt;-<span class="st"> </span>fat</a>
-<a class="sourceLine" id="cb69-29" data-line-number="29">fat.array[,,<span class="st">&quot;1&quot;</span>] &lt;-<span class="st"> </span>fat1</a>
-<a class="sourceLine" id="cb69-30" data-line-number="30">fat.array[,,<span class="st">&quot;2&quot;</span>] &lt;-<span class="st"> </span>fat2</a>
-<a class="sourceLine" id="cb69-31" data-line-number="31">fat.array[,,<span class="st">&quot;3&quot;</span>] &lt;-<span class="st"> </span>fat3</a>
-<a class="sourceLine" id="cb69-32" data-line-number="32">fat.array[,,<span class="st">&quot;4&quot;</span>] &lt;-<span class="st"> </span>fat4</a>
-<a class="sourceLine" id="cb69-33" data-line-number="33">fat.array[,,<span class="st">&quot;5&quot;</span>] &lt;-<span class="st"> </span>fat5p</a>
-<a class="sourceLine" id="cb69-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb69-35" data-line-number="35"><span class="kw">kable</span>(fat.array[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="st">&quot;all&quot;</span>], <span class="dt">caption=</span><span class="st">&quot;An extract of period age-specific fertility rates&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-1"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb76-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb76-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-3"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb76-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-4"></a></span>
+<span id="cb76-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-5"></a><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R&quot;</span>)</span>
+<span id="cb76-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-6"></a><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/utility_functions.R&quot;</span>)</span>
+<span id="cb76-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-7"></a></span>
+<span id="cb76-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-8"></a><span class="co">## age specific fertility rates by birth order for all countries and times</span></span>
+<span id="cb76-9"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-9"></a><span class="co">## RR means &quot;rectangles&quot; on Lexis surface</span></span>
+<span id="cb76-10"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-10"></a>dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/data/zip_w/asfrRRbo.txt&quot;</span>, <span class="dt">showProgress =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb76-11"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-11"></a></span>
+<span id="cb76-12"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-12"></a>dt &lt;-<span class="st"> </span>dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>] <span class="co">## keep only US</span></span>
+<span id="cb76-13"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-13"></a>dt &lt;-<span class="st"> </span>dt[Age <span class="op">%in%</span><span class="st"> </span><span class="dv">15</span><span class="op">:</span><span class="dv">49</span>] <span class="co">## keep only ages 15 to 49</span></span>
+<span id="cb76-14"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-14"></a></span>
+<span id="cb76-15"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-15"></a><span class="co">## put all order fertility into a matrix</span></span>
+<span id="cb76-16"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-16"></a>fat &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)] <span class="co"># age (rows) by cohort year (column) matrix of ASFR</span></span>
+<span id="cb76-17"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-17"></a>fat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">unclass</span>(fat)) </span>
+<span id="cb76-18"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-18"></a>fat1 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR1 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)] <span class="co">#age specific fertility rates for parity = 1 </span></span>
+<span id="cb76-19"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-19"></a>fat2 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR2 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</span>
+<span id="cb76-20"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-20"></a>fat3 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR3 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</span>
+<span id="cb76-21"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-21"></a>fat4 &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR4 <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</span>
+<span id="cb76-22"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-22"></a>fat5p &lt;-<span class="st"> </span>dt[, <span class="kw">xtabs</span>(ASFR5p <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Year)]</span>
+<span id="cb76-23"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-23"></a>year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(fat)</span>
+<span id="cb76-24"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-24"></a>age.vec &lt;-<span class="st"> </span><span class="kw">rownames</span>(fat)</span>
+<span id="cb76-25"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-25"></a>parity.vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;all&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb76-26"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-26"></a>fat.array &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">nrow</span>(fat), <span class="kw">ncol</span>(fat), <span class="kw">length</span>(parity.vec)))</span>
+<span id="cb76-27"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-27"></a><span class="kw">dimnames</span>(fat.array) &lt;-<span class="st"> </span><span class="kw">list</span>(age.vec, year.vec, parity.vec)</span>
+<span id="cb76-28"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-28"></a>fat.array[,,<span class="st">&quot;all&quot;</span>] &lt;-<span class="st"> </span>fat</span>
+<span id="cb76-29"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-29"></a>fat.array[,,<span class="st">&quot;1&quot;</span>] &lt;-<span class="st"> </span>fat1</span>
+<span id="cb76-30"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-30"></a>fat.array[,,<span class="st">&quot;2&quot;</span>] &lt;-<span class="st"> </span>fat2</span>
+<span id="cb76-31"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-31"></a>fat.array[,,<span class="st">&quot;3&quot;</span>] &lt;-<span class="st"> </span>fat3</span>
+<span id="cb76-32"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-32"></a>fat.array[,,<span class="st">&quot;4&quot;</span>] &lt;-<span class="st"> </span>fat4</span>
+<span id="cb76-33"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-33"></a>fat.array[,,<span class="st">&quot;5&quot;</span>] &lt;-<span class="st"> </span>fat5p</span>
+<span id="cb76-34"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-34"></a></span>
+<span id="cb76-35"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb76-35"></a><span class="kw">kable</span>(fat.array[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="st">&quot;all&quot;</span>], <span class="dt">caption=</span><span class="st">&quot;An extract of period age-specific fertility rates&quot;</span>) </span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-46">Table 7.1: </span>An extract of period age-specific fertility rates</caption>
+<caption>
+<span id="tab:unnamed-chunk-43">Table 7.1: </span>An extract of period age-specific fertility rates
+</caption>
 <thead>
-<tr class="header">
-<th></th>
-<th align="right">1933</th>
-<th align="right">1934</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+1933
+</th>
+<th style="text-align:right;">
+1934
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>15</td>
-<td align="right">0.00672</td>
-<td align="right">0.00715</td>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:right;">
+0.00672
+</td>
+<td style="text-align:right;">
+0.00715
+</td>
 </tr>
-<tr class="even">
-<td>16</td>
-<td align="right">0.01875</td>
-<td align="right">0.01991</td>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:right;">
+0.01875
+</td>
+<td style="text-align:right;">
+0.01991
+</td>
 </tr>
-<tr class="odd">
-<td>17</td>
-<td align="right">0.03846</td>
-<td align="right">0.04062</td>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:right;">
+0.03846
+</td>
+<td style="text-align:right;">
+0.04062
+</td>
 </tr>
-<tr class="even">
-<td>18</td>
-<td align="right">0.06586</td>
-<td align="right">0.06957</td>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:right;">
+0.06586
+</td>
+<td style="text-align:right;">
+0.06957
+</td>
 </tr>
-<tr class="odd">
-<td>19</td>
-<td align="right">0.08719</td>
-<td align="right">0.09155</td>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:right;">
+0.08719
+</td>
+<td style="text-align:right;">
+0.09155
+</td>
 </tr>
-<tr class="even">
-<td>20</td>
-<td align="right">0.10136</td>
-<td align="right">0.10749</td>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:right;">
+0.10136
+</td>
+<td style="text-align:right;">
+0.10749
+</td>
 </tr>
-<tr class="odd">
-<td>21</td>
-<td align="right">0.10639</td>
-<td align="right">0.11296</td>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:right;">
+0.10639
+</td>
+<td style="text-align:right;">
+0.11296
+</td>
 </tr>
-<tr class="even">
-<td>22</td>
-<td align="right">0.11349</td>
-<td align="right">0.11807</td>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:right;">
+0.11349
+</td>
+<td style="text-align:right;">
+0.11807
+</td>
 </tr>
-<tr class="odd">
-<td>23</td>
-<td align="right">0.11785</td>
-<td align="right">0.12034</td>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:right;">
+0.11785
+</td>
+<td style="text-align:right;">
+0.12034
+</td>
 </tr>
-<tr class="even">
-<td>24</td>
-<td align="right">0.11476</td>
-<td align="right">0.12208</td>
+<tr>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:right;">
+0.11476
+</td>
+<td style="text-align:right;">
+0.12208
+</td>
 </tr>
-<tr class="odd">
-<td>25</td>
-<td align="right">0.11388</td>
-<td align="right">0.11536</td>
+<tr>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:right;">
+0.11388
+</td>
+<td style="text-align:right;">
+0.11536
+</td>
 </tr>
-<tr class="even">
-<td>26</td>
-<td align="right">0.10873</td>
-<td align="right">0.11399</td>
+<tr>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:right;">
+0.10873
+</td>
+<td style="text-align:right;">
+0.11399
+</td>
 </tr>
-<tr class="odd">
-<td>27</td>
-<td align="right">0.10118</td>
-<td align="right">0.10487</td>
+<tr>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:right;">
+0.10118
+</td>
+<td style="text-align:right;">
+0.10487
+</td>
 </tr>
-<tr class="even">
-<td>28</td>
-<td align="right">0.10283</td>
-<td align="right">0.10554</td>
+<tr>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:right;">
+0.10283
+</td>
+<td style="text-align:right;">
+0.10554
+</td>
 </tr>
-<tr class="odd">
-<td>29</td>
-<td align="right">0.09094</td>
-<td align="right">0.09483</td>
+<tr>
+<td style="text-align:left;">
+29
+</td>
+<td style="text-align:right;">
+0.09094
+</td>
+<td style="text-align:right;">
+0.09483
+</td>
 </tr>
-<tr class="even">
-<td>30</td>
-<td align="right">0.09009</td>
-<td align="right">0.09330</td>
+<tr>
+<td style="text-align:left;">
+30
+</td>
+<td style="text-align:right;">
+0.09009
+</td>
+<td style="text-align:right;">
+0.09330
+</td>
 </tr>
-<tr class="odd">
-<td>31</td>
-<td align="right">0.06941</td>
-<td align="right">0.07239</td>
+<tr>
+<td style="text-align:left;">
+31
+</td>
+<td style="text-align:right;">
+0.06941
+</td>
+<td style="text-align:right;">
+0.07239
+</td>
 </tr>
-<tr class="even">
-<td>32</td>
-<td align="right">0.07813</td>
-<td align="right">0.07541</td>
+<tr>
+<td style="text-align:left;">
+32
+</td>
+<td style="text-align:right;">
+0.07813
+</td>
+<td style="text-align:right;">
+0.07541
+</td>
 </tr>
-<tr class="odd">
-<td>33</td>
-<td align="right">0.07614</td>
-<td align="right">0.06993</td>
+<tr>
+<td style="text-align:left;">
+33
+</td>
+<td style="text-align:right;">
+0.07614
+</td>
+<td style="text-align:right;">
+0.06993
+</td>
 </tr>
-<tr class="even">
-<td>34</td>
-<td align="right">0.06013</td>
-<td align="right">0.07248</td>
+<tr>
+<td style="text-align:left;">
+34
+</td>
+<td style="text-align:right;">
+0.06013
+</td>
+<td style="text-align:right;">
+0.07248
+</td>
 </tr>
-<tr class="odd">
-<td>35</td>
-<td align="right">0.06009</td>
-<td align="right">0.05676</td>
+<tr>
+<td style="text-align:left;">
+35
+</td>
+<td style="text-align:right;">
+0.06009
+</td>
+<td style="text-align:right;">
+0.05676
+</td>
 </tr>
-<tr class="even">
-<td>36</td>
-<td align="right">0.05416</td>
-<td align="right">0.05401</td>
+<tr>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:right;">
+0.05416
+</td>
+<td style="text-align:right;">
+0.05401
+</td>
 </tr>
-<tr class="odd">
-<td>37</td>
-<td align="right">0.04748</td>
-<td align="right">0.04670</td>
+<tr>
+<td style="text-align:left;">
+37
+</td>
+<td style="text-align:right;">
+0.04748
+</td>
+<td style="text-align:right;">
+0.04670
+</td>
 </tr>
-<tr class="even">
-<td>38</td>
-<td align="right">0.04755</td>
-<td align="right">0.04769</td>
+<tr>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:right;">
+0.04755
+</td>
+<td style="text-align:right;">
+0.04769
+</td>
 </tr>
-<tr class="odd">
-<td>39</td>
-<td align="right">0.03724</td>
-<td align="right">0.03752</td>
+<tr>
+<td style="text-align:left;">
+39
+</td>
+<td style="text-align:right;">
+0.03724
+</td>
+<td style="text-align:right;">
+0.03752
+</td>
 </tr>
-<tr class="even">
-<td>40</td>
-<td align="right">0.03078</td>
-<td align="right">0.03024</td>
+<tr>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:right;">
+0.03078
+</td>
+<td style="text-align:right;">
+0.03024
+</td>
 </tr>
-<tr class="odd">
-<td>41</td>
-<td align="right">0.01967</td>
-<td align="right">0.01963</td>
+<tr>
+<td style="text-align:left;">
+41
+</td>
+<td style="text-align:right;">
+0.01967
+</td>
+<td style="text-align:right;">
+0.01963
+</td>
 </tr>
-<tr class="even">
-<td>42</td>
-<td align="right">0.01877</td>
-<td align="right">0.01874</td>
+<tr>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:right;">
+0.01877
+</td>
+<td style="text-align:right;">
+0.01874
+</td>
 </tr>
-<tr class="odd">
-<td>43</td>
-<td align="right">0.01283</td>
-<td align="right">0.01235</td>
+<tr>
+<td style="text-align:left;">
+43
+</td>
+<td style="text-align:right;">
+0.01283
+</td>
+<td style="text-align:right;">
+0.01235
+</td>
 </tr>
-<tr class="even">
-<td>44</td>
-<td align="right">0.00808</td>
-<td align="right">0.00789</td>
+<tr>
+<td style="text-align:left;">
+44
+</td>
+<td style="text-align:right;">
+0.00808
+</td>
+<td style="text-align:right;">
+0.00789
+</td>
 </tr>
-<tr class="odd">
-<td>45</td>
-<td align="right">0.00526</td>
-<td align="right">0.00491</td>
+<tr>
+<td style="text-align:left;">
+45
+</td>
+<td style="text-align:right;">
+0.00526
+</td>
+<td style="text-align:right;">
+0.00491
+</td>
 </tr>
-<tr class="even">
-<td>46</td>
-<td align="right">0.00245</td>
-<td align="right">0.00242</td>
+<tr>
+<td style="text-align:left;">
+46
+</td>
+<td style="text-align:right;">
+0.00245
+</td>
+<td style="text-align:right;">
+0.00242
+</td>
 </tr>
-<tr class="odd">
-<td>47</td>
-<td align="right">0.00127</td>
-<td align="right">0.00122</td>
+<tr>
+<td style="text-align:left;">
+47
+</td>
+<td style="text-align:right;">
+0.00127
+</td>
+<td style="text-align:right;">
+0.00122
+</td>
 </tr>
-<tr class="even">
-<td>48</td>
-<td align="right">0.00081</td>
-<td align="right">0.00087</td>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:right;">
+0.00081
+</td>
+<td style="text-align:right;">
+0.00087
+</td>
 </tr>
-<tr class="odd">
-<td>49</td>
-<td align="right">0.00037</td>
-<td align="right">0.00037</td>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:right;">
+0.00037
+</td>
+<td style="text-align:right;">
+0.00037
+</td>
 </tr>
 </tbody>
 </table>
 <ol start="2" style="list-style-type: decimal">
 <li>Fit bongaarts feeney without birth order</li>
 </ol>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">tfr.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(fat)          <span class="co"># total fertility rate for each cohort</span></a>
-<a class="sourceLine" id="cb70-2" data-line-number="2">mu.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(fat, <span class="dv">2</span>, get.mean) <span class="co"># mean age at childbearing</span></a>
-<a class="sourceLine" id="cb70-3" data-line-number="3">rt.vec &lt;-<span class="st"> </span><span class="kw">center.diff</span>(mu.vec)     <span class="co"># increments of postponement</span></a>
-<a class="sourceLine" id="cb70-4" data-line-number="4">adj.tfr.vec &lt;-<span class="st"> </span>tfr.vec <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.vec) <span class="co"># Assuming no quantum effect, tempo-adjusted TFR</span></a></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), mu.vec, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Mean age of childbearing&quot;</span>)</a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), rt.vec, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">ylab=</span> <span class="st">&quot;Shifts&quot;</span>)</a>
-<a class="sourceLine" id="cb71-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">h =</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb71-5" data-line-number="5"><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">ylab=</span> <span class="st">&quot;TFR&quot;</span>)</a>
-<a class="sourceLine" id="cb71-6" data-line-number="6"><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="dv">1945</span>, <span class="dv">2008</span>))</a>
-<a class="sourceLine" id="cb71-8" data-line-number="8"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Observed TFR&quot;</span>, <span class="st">&quot;Tempo-adjusted TFR&quot;</span>), <span class="dt">lty=</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-48"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-48-1.png" alt="Adjusted TFR" width="672" />
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb77-1"></a>tfr.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(fat)          <span class="co"># total fertility rate for each cohort</span></span>
+<span id="cb77-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb77-2"></a>mu.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(fat, <span class="dv">2</span>, get.mean) <span class="co"># mean age at childbearing</span></span>
+<span id="cb77-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb77-3"></a>rt.vec &lt;-<span class="st"> </span><span class="kw">center.diff</span>(mu.vec)     <span class="co"># increments of postponement</span></span>
+<span id="cb77-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb77-4"></a>adj.tfr.vec &lt;-<span class="st"> </span>tfr.vec <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.vec) <span class="co"># Assuming no quantum effect, tempo-adjusted TFR</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb78-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-2"></a><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), mu.vec, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Mean age of childbearing&quot;</span>)</span>
+<span id="cb78-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-3"></a><span class="kw">plot</span>(<span class="kw">names</span>(mu.vec), rt.vec, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">ylab=</span> <span class="st">&quot;Shifts&quot;</span>)</span>
+<span id="cb78-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-4"></a><span class="kw">abline</span>(<span class="dt">h =</span><span class="dv">0</span>)</span>
+<span id="cb78-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-5"></a><span class="kw">plot</span>(year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">ylab=</span> <span class="st">&quot;TFR&quot;</span>)</span>
+<span id="cb78-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-6"></a><span class="kw">lines</span>(year.vec, adj.tfr.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb78-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-7"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="dv">1945</span>, <span class="dv">2008</span>))</span>
+<span id="cb78-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb78-8"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Observed TFR&quot;</span>, <span class="st">&quot;Tempo-adjusted TFR&quot;</span>), <span class="dt">lty=</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" alt="Adjusted TFR" width="672" />
 <p class="caption">
 Figure 7.1: Adjusted TFR
 </p>
@@ -805,15 +1070,15 @@ Figure 7.1: Adjusted TFR
 <li>We see weird dynamics around end of WW2 and great recession.</li>
 <li>What’s going on? Here is a closeup</li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-49"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-49-1.png" alt="Observed and tempo-adjusted TFRs" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-46-1.png" alt="Observed and tempo-adjusted TFRs" width="672" />
 <p class="caption">
 Figure 7.2: Observed and tempo-adjusted TFRs
 </p>
 </div>
 <p>Now let’s look at turbulence around WWII</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-50"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-50-1.png" alt="Change in fertility rates around WWII" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-47"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-47-1.png" alt="Change in fertility rates around WWII" width="672" />
 <p class="caption">
 Figure 7.3: Change in fertility rates around WWII
 </p>
@@ -823,10 +1088,10 @@ Figure 7.3: Change in fertility rates around WWII
 <ol start="3" style="list-style-type: decimal">
 <li>Fit bongaarts feeney with birth order</li>
 </ol>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">bf.fit</span>(fat.array)  <span class="co">#function to obtain BF tempo-adjusted TFR</span></a>
-<a class="sourceLine" id="cb72-2" data-line-number="2">adj.tfr.bo.vec &lt;-<span class="st">  </span>out<span class="op">$</span>tfr.star.out[, <span class="st">&quot;bf.tfr.star&quot;</span>] <span class="co"># sum of parity specific tempo-adjusted TFRs</span></a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-52"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-52-1.png" alt="TFR by parities" width="672" />
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb79-1"></a>out &lt;-<span class="st"> </span><span class="kw">bf.fit</span>(fat.array)  <span class="co">#function to obtain BF tempo-adjusted TFR</span></span>
+<span id="cb79-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb79-2"></a>adj.tfr.bo.vec &lt;-<span class="st">  </span>out<span class="op">$</span>tfr.star.out[, <span class="st">&quot;bf.tfr.star&quot;</span>] <span class="co"># sum of parity specific tempo-adjusted TFRs</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-49"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-49-1.png" alt="TFR by parities" width="672" />
 <p class="caption">
 Figure 7.4: TFR by parities
 </p>
@@ -835,18 +1100,19 @@ Figure 7.4: TFR by parities
 <li>Use HFD data to verify adjusted TFR
 HFD uses a tempo-adjusted TFR that is the sum of the parity specific adjusted BF TFR.</li>
 </ol>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="co">## let&#39;s check against hfd</span></a>
-<a class="sourceLine" id="cb73-2" data-line-number="2">hfd.adj.dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/data/zip_w/adjtfrRR.txt&quot;</span>, <span class="dt">showProgress =</span> <span class="ot">FALSE</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb73-3" data-line-number="3">hfd.adj.dt &lt;-<span class="st"> </span>hfd.adj.dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb80-1"></a><span class="co">## let&#39;s check against hfd</span></span>
+<span id="cb80-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb80-2"></a>hfd.adj.dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/data/zip_w/adjtfrRR.txt&quot;</span>, <span class="dt">showProgress =</span> <span class="ot">FALSE</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb80-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb80-3"></a>hfd.adj.dt &lt;-<span class="st"> </span>hfd.adj.dt[Code <span class="op">==</span><span class="st"> &quot;USA&quot;</span>]</span></code></pre></div>
 <p>We find that:</p>
 <ul>
-<li>Taking birth order into account smooths out WW2 turbulence (large fluctuations) but increases the variation during the Great Recession.<br />
-</li>
+<li>Taking birth order into account smooths out WW2 turbulence (large fluctuations) but increases the variation during the Great Recession.
+<ul>
 <li>The baby boom appears to initially be even greater than observed when we take into account birth order, but then it fall more than observed.</li>
 <li>Finally, the baby bust was not as bad as it seemed.</li>
+</ul></li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-54"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-54-1.png" alt="TFR by parities using HFD data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-51"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-51-1.png" alt="TFR by parities using HFD data" width="672" />
 <p class="caption">
 Figure 7.5: TFR by parities using HFD data
 </p>
@@ -867,131 +1133,131 @@ changes in mean age</li>
 <div id="two-americas" class="section level2">
 <h2><span class="header-section-number">7.5</span> Two Americas</h2>
 <p>Let’s look at births (all orders). Here we have some animations of the ASFR over time.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">my.year.vec &lt;-<span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2017</span></a>
-<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="co"># library(devtools)</span></a>
-<a class="sourceLine" id="cb74-3" data-line-number="3"><span class="co"># install_github(&quot;dgrtwo/gganimate&quot;)</span></a>
-<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="co"># install.packages(&quot;transformr&quot;)</span></a>
-<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="co"># install.packages(&quot;animation&quot;)</span></a>
-<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="kw">library</span>(gganimate)</a>
-<a class="sourceLine" id="cb74-7" data-line-number="7"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb74-8" data-line-number="8"><span class="kw">library</span>(mixtools)</a>
-<a class="sourceLine" id="cb74-9" data-line-number="9"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb74-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb74-11" data-line-number="11"><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_mixed_functions.R&quot;</span>)</a>
-<a class="sourceLine" id="cb74-12" data-line-number="12"><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R&quot;</span>)</a>
-<a class="sourceLine" id="cb74-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb74-14" data-line-number="14"><span class="co"># plot1 &lt;- ggplot(data=dt[Year %in% my.year.vec,2:4], aes(x=Age, y= ASFR)) + </span></a>
-<a class="sourceLine" id="cb74-15" data-line-number="15"><span class="co">#   geom_line(aes(group=Year))+</span></a>
-<a class="sourceLine" id="cb74-16" data-line-number="16"><span class="co">#   transition_time(Year)+</span></a>
-<a class="sourceLine" id="cb74-17" data-line-number="17"><span class="co">#   labs(title = &quot;Year: {frame_time}&quot;)</span></a>
-<a class="sourceLine" id="cb74-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb74-19" data-line-number="19"><span class="co"># anim_save(&quot;plot1.gif&quot;, plot1)</span></a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-1"></a>my.year.vec &lt;-<span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2017</span></span>
+<span id="cb81-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-2"></a><span class="co"># library(devtools)</span></span>
+<span id="cb81-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-3"></a><span class="co"># install_github(&quot;dgrtwo/gganimate&quot;)</span></span>
+<span id="cb81-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-4"></a><span class="co"># install.packages(&quot;transformr&quot;)</span></span>
+<span id="cb81-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-5"></a><span class="co"># install.packages(&quot;animation&quot;)</span></span>
+<span id="cb81-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-6"></a><span class="kw">library</span>(gganimate)</span>
+<span id="cb81-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-7"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb81-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-8"></a><span class="kw">library</span>(mixtools)</span>
+<span id="cb81-9"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-9"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb81-10"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-10"></a></span>
+<span id="cb81-11"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-11"></a><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_mixed_functions.R&quot;</span>)</span>
+<span id="cb81-12"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-12"></a><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/josh-goldstein-git/random_demography/master/bookdown-master/codes/tempo_functions.R&quot;</span>)</span>
+<span id="cb81-13"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-13"></a></span>
+<span id="cb81-14"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-14"></a><span class="co"># plot1 &lt;- ggplot(data=dt[Year %in% my.year.vec,2:4], aes(x=Age, y= ASFR)) + </span></span>
+<span id="cb81-15"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-15"></a><span class="co">#   geom_line(aes(group=Year))+</span></span>
+<span id="cb81-16"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-16"></a><span class="co">#   transition_time(Year)+</span></span>
+<span id="cb81-17"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-17"></a><span class="co">#   labs(title = &quot;Year: {frame_time}&quot;)</span></span>
+<span id="cb81-18"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-18"></a></span>
+<span id="cb81-19"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb81-19"></a><span class="co"># anim_save(&quot;plot1.gif&quot;, plot1)</span></span></code></pre></div>
 <p><img src="plot1.gif" /></p>
 <p>During the earlier years, the mean childbearing age seems to be in the early 20s. However with time, the AFR seems to become bimodal. So what is happening here? Are there two underlying groups of women that experience different fertility rates. Now fit mixing model and redo the animation.</p>
 <p><strong>NOTE: Not sure of all the lines in this mixture code. Josh, could you add some notes please?</strong></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co">## takes few minutes to run</span></a>
-<a class="sourceLine" id="cb75-2" data-line-number="2">my.fat &lt;-<span class="st"> </span>fat[, <span class="kw">paste</span>(my.year.vec)]</a>
-<a class="sourceLine" id="cb75-3" data-line-number="3">out &lt;-<span class="st"> </span><span class="kw">get.mixed.tfr.star</span>(my.fat)</a>
-<a class="sourceLine" id="cb75-4" data-line-number="4"><span class="co">##</span></a>
-<a class="sourceLine" id="cb75-5" data-line-number="5">out.all &lt;-<span class="st"> </span>out</a>
-<a class="sourceLine" id="cb75-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb75-7" data-line-number="7"><span class="co">#Mixture simulation </span></a>
-<a class="sourceLine" id="cb75-8" data-line-number="8"><span class="cf">if</span> (<span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb75-9" data-line-number="9">mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>mu.mat</a>
-<a class="sourceLine" id="cb75-10" data-line-number="10">lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>lambda.mat</a>
-<a class="sourceLine" id="cb75-11" data-line-number="11">sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>sigma.mat</a>
-<a class="sourceLine" id="cb75-12" data-line-number="12">}</a>
-<a class="sourceLine" id="cb75-13" data-line-number="13">mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>mu.mat</a>
-<a class="sourceLine" id="cb75-14" data-line-number="14">lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>lambda.mat</a>
-<a class="sourceLine" id="cb75-15" data-line-number="15">sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>sigma.ma</a>
-<a class="sourceLine" id="cb75-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb75-17" data-line-number="17"><span class="co">#Temporary comment out until we figure out what these graphs actually are</span></a>
-<a class="sourceLine" id="cb75-18" data-line-number="18"><span class="co"># matplot(my.year.vec, t(mu.mat))</span></a>
-<a class="sourceLine" id="cb75-19" data-line-number="19"><span class="co"># abline(v = 2015)## problem here</span></a>
-<a class="sourceLine" id="cb75-20" data-line-number="20"><span class="co"># points(c(2015, 2015), c(21.5, 30.3))</span></a>
-<a class="sourceLine" id="cb75-21" data-line-number="21"><span class="co"># </span></a>
-<a class="sourceLine" id="cb75-22" data-line-number="22"><span class="co"># matplot(my.year.vec, t(lambda.mat))</span></a>
-<a class="sourceLine" id="cb75-23" data-line-number="23"><span class="co"># abline(v = 2015)## problem here</span></a>
-<a class="sourceLine" id="cb75-24" data-line-number="24"><span class="co"># points(c(2015, 2015), c(21.5, 30.3))</span></a>
-<a class="sourceLine" id="cb75-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb75-26" data-line-number="26"><span class="co">## interpolate 1915</span></a>
-<a class="sourceLine" id="cb75-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb75-28" data-line-number="28"><span class="kw">colnames</span>(lambda.mat) &lt;-<span class="st"> </span>my.year.vec</a>
-<a class="sourceLine" id="cb75-29" data-line-number="29"><span class="kw">colnames</span>(mu.mat) &lt;-<span class="st"> </span>my.year.vec</a>
-<a class="sourceLine" id="cb75-30" data-line-number="30">lambda.mat[,<span class="st">&quot;2015&quot;</span>] &lt;-<span class="st"> </span>(lambda.mat[,<span class="st">&quot;2014&quot;</span>] <span class="op">+</span><span class="st"> </span>lambda.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb75-31" data-line-number="31">mu.mat[,<span class="st">&quot;2015&quot;</span>]     &lt;-<span class="st"> </span>(mu.mat[,<span class="st">&quot;2014&quot;</span>]     <span class="op">+</span><span class="st"> </span>mu.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-1"></a><span class="co">## takes few minutes to run</span></span>
+<span id="cb82-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-2"></a>my.fat &lt;-<span class="st"> </span>fat[, <span class="kw">paste</span>(my.year.vec)]</span>
+<span id="cb82-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-3"></a>out &lt;-<span class="st"> </span><span class="kw">get.mixed.tfr.star</span>(my.fat)</span>
+<span id="cb82-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-4"></a><span class="co">##</span></span>
+<span id="cb82-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-5"></a>out.all &lt;-<span class="st"> </span>out</span>
+<span id="cb82-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-6"></a></span>
+<span id="cb82-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-7"></a><span class="co">#Mixture simulation </span></span>
+<span id="cb82-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-8"></a><span class="cf">if</span> (<span class="dv">0</span>) {</span>
+<span id="cb82-9"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-9"></a>mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>mu.mat</span>
+<span id="cb82-10"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-10"></a>lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>lambda.mat</span>
+<span id="cb82-11"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-11"></a>sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list.variable.sigma)<span class="op">$</span>sigma.mat</span>
+<span id="cb82-12"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-12"></a>}</span>
+<span id="cb82-13"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-13"></a>mu.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>mu.mat</span>
+<span id="cb82-14"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-14"></a>lambda.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>lambda.mat</span>
+<span id="cb82-15"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-15"></a>sigma.mat &lt;-<span class="st"> </span><span class="kw">get.coefs.mixed</span>(out.all<span class="op">$</span>fert.fit.list)<span class="op">$</span>sigma.ma</span>
+<span id="cb82-16"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-16"></a></span>
+<span id="cb82-17"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-17"></a><span class="co">#Temporary comment out until we figure out what these graphs actually are</span></span>
+<span id="cb82-18"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-18"></a><span class="co"># matplot(my.year.vec, t(mu.mat))</span></span>
+<span id="cb82-19"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-19"></a><span class="co"># abline(v = 2015)## problem here</span></span>
+<span id="cb82-20"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-20"></a><span class="co"># points(c(2015, 2015), c(21.5, 30.3))</span></span>
+<span id="cb82-21"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-21"></a><span class="co"># </span></span>
+<span id="cb82-22"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-22"></a><span class="co"># matplot(my.year.vec, t(lambda.mat))</span></span>
+<span id="cb82-23"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-23"></a><span class="co"># abline(v = 2015)## problem here</span></span>
+<span id="cb82-24"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-24"></a><span class="co"># points(c(2015, 2015), c(21.5, 30.3))</span></span>
+<span id="cb82-25"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-25"></a></span>
+<span id="cb82-26"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-26"></a><span class="co">## interpolate 1915</span></span>
+<span id="cb82-27"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-27"></a></span>
+<span id="cb82-28"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-28"></a><span class="kw">colnames</span>(lambda.mat) &lt;-<span class="st"> </span>my.year.vec</span>
+<span id="cb82-29"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-29"></a><span class="kw">colnames</span>(mu.mat) &lt;-<span class="st"> </span>my.year.vec</span>
+<span id="cb82-30"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-30"></a>lambda.mat[,<span class="st">&quot;2015&quot;</span>] &lt;-<span class="st"> </span>(lambda.mat[,<span class="st">&quot;2014&quot;</span>] <span class="op">+</span><span class="st"> </span>lambda.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb82-31"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb82-31"></a>mu.mat[,<span class="st">&quot;2015&quot;</span>]     &lt;-<span class="st"> </span>(mu.mat[,<span class="st">&quot;2014&quot;</span>]     <span class="op">+</span><span class="st"> </span>mu.mat[,<span class="st">&quot;2016&quot;</span>])<span class="op">/</span><span class="dv">2</span></span></code></pre></div>
 <p>Now we create the animation with the normal distributions inside as well as the observed ASFR.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="co"># Obtaining different ASFRs per group (1 and 2)</span></a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">my.dt &lt;-<span class="st"> </span>dt[Year <span class="op">%in%</span><span class="st"> </span>my.year.vec,]</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my.year.vec)){</a>
-<a class="sourceLine" id="cb76-5" data-line-number="5">    my.year &lt;-<span class="st"> </span>my.year.vec[i]</a>
-<a class="sourceLine" id="cb76-6" data-line-number="6">    year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(my.fat)</a>
-<a class="sourceLine" id="cb76-7" data-line-number="7">    fx &lt;-<span class="st"> </span>my.fat[,<span class="kw">paste</span>(my.year)]</a>
-<a class="sourceLine" id="cb76-8" data-line-number="8">    <span class="co"># fx &lt;- fx/sum(fx)</span></a>
-<a class="sourceLine" id="cb76-9" data-line-number="9">    x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(fx))</a>
-<a class="sourceLine" id="cb76-10" data-line-number="10">    <span class="co">## par(mfrow = c(1,1))</span></a>
-<a class="sourceLine" id="cb76-11" data-line-number="11">    <span class="co"># plot(x, fx,</span></a>
-<a class="sourceLine" id="cb76-12" data-line-number="12">    <span class="co">#      ylim = c(0, .3),</span></a>
-<a class="sourceLine" id="cb76-13" data-line-number="13">    <span class="co">#      ylab = &quot;normalized fx&quot;)</span></a>
-<a class="sourceLine" id="cb76-14" data-line-number="14">    s &lt;-<span class="st"> </span>year.vec <span class="op">==</span><span class="st"> </span>my.year</a>
-<a class="sourceLine" id="cb76-15" data-line-number="15">    this.tfr &lt;-<span class="st"> </span><span class="kw">sum</span>(fx)</a>
-<a class="sourceLine" id="cb76-16" data-line-number="16">    fx1.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">1</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">1</span>,s]) <span class="op">*</span></a>
-<a class="sourceLine" id="cb76-17" data-line-number="17"><span class="st">        </span>lambda.mat[<span class="dv">1</span>,s]<span class="op">*</span><span class="st"> </span>this.tfr</a>
-<a class="sourceLine" id="cb76-18" data-line-number="18">    <span class="co"># lines(x, fx1.hat, col = &quot;red&quot;)</span></a>
-<a class="sourceLine" id="cb76-19" data-line-number="19">    fx2.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">2</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">2</span>,s]) <span class="op">*</span></a>
-<a class="sourceLine" id="cb76-20" data-line-number="20"><span class="st">        </span>lambda.mat[<span class="dv">2</span>,s] <span class="op">*</span><span class="st"> </span>this.tfr</a>
-<a class="sourceLine" id="cb76-21" data-line-number="21">    <span class="co"># lines(x, fx2.hat, col = &quot;blue&quot;)</span></a>
-<a class="sourceLine" id="cb76-22" data-line-number="22">    <span class="co"># lines(x, fx1.hat + fx2.hat)</span></a>
-<a class="sourceLine" id="cb76-23" data-line-number="23">    <span class="co"># title(last.year)</span></a>
-<a class="sourceLine" id="cb76-24" data-line-number="24">    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx]</a>
-<a class="sourceLine" id="cb76-25" data-line-number="25">    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx1.hat]</a>
-<a class="sourceLine" id="cb76-26" data-line-number="26">    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx2.hat]</a>
-<a class="sourceLine" id="cb76-27" data-line-number="27">    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx1fx2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx1.hat <span class="op">+</span><span class="st"> </span>fx2.hat]</a>
-<a class="sourceLine" id="cb76-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb76-29" data-line-number="29">}</a>
-<a class="sourceLine" id="cb76-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb76-31" data-line-number="31">labels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Observed&quot;</span> =<span class="st"> &quot;black&quot;</span>, <span class="st">&quot;Mixture 1&quot;</span> =<span class="st"> &quot;blue&quot;</span>, <span class="st">&quot;Mixture 2&quot;</span> =<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;Sum of mixtures&quot;</span>=<span class="st">&quot;orange&quot;</span>)</a>
-<a class="sourceLine" id="cb76-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb76-33" data-line-number="33"><span class="co"># plot2 &lt;-</span></a>
-<a class="sourceLine" id="cb76-34" data-line-number="34"><span class="co">#   ggplot(data=my.dt, aes(x=Age)) + </span></a>
-<a class="sourceLine" id="cb76-35" data-line-number="35"><span class="co">#   geom_line(aes( y= ASFR, group=Year, color = &quot;Observed&quot;))+</span></a>
-<a class="sourceLine" id="cb76-36" data-line-number="36"><span class="co">#   geom_line(aes( y= fx1, group=Year, color = &quot;Mixture 1&quot;))+</span></a>
-<a class="sourceLine" id="cb76-37" data-line-number="37"><span class="co">#   geom_line(aes( y= fx2, group=Year, color = &quot;Mixture 2&quot;))+</span></a>
-<a class="sourceLine" id="cb76-38" data-line-number="38"><span class="co">#   geom_line(aes( y= fx1fx2, group=Year, color = &quot;Sum of mixtures&quot;))+</span></a>
-<a class="sourceLine" id="cb76-39" data-line-number="39"><span class="co">#   labs(color = &quot;Legend&quot;) +</span></a>
-<a class="sourceLine" id="cb76-40" data-line-number="40"><span class="co">#   scale_color_manual(values = labels)+</span></a>
-<a class="sourceLine" id="cb76-41" data-line-number="41"><span class="co">#   theme_bw()#+</span></a>
-<a class="sourceLine" id="cb76-42" data-line-number="42"><span class="co">#   transition_time(Year)+</span></a>
-<a class="sourceLine" id="cb76-43" data-line-number="43"><span class="co">#   labs(title = &quot;Year: {frame_time}&quot;)</span></a>
-<a class="sourceLine" id="cb76-44" data-line-number="44"></a>
-<a class="sourceLine" id="cb76-45" data-line-number="45"><span class="co"># anim_save(&quot;plot2.gif&quot;, plot2)</span></a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-1"></a><span class="co"># Obtaining different ASFRs per group (1 and 2)</span></span>
+<span id="cb83-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-2"></a>my.dt &lt;-<span class="st"> </span>dt[Year <span class="op">%in%</span><span class="st"> </span>my.year.vec,]</span>
+<span id="cb83-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-3"></a></span>
+<span id="cb83-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(my.year.vec)){</span>
+<span id="cb83-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-5"></a>    my.year &lt;-<span class="st"> </span>my.year.vec[i]</span>
+<span id="cb83-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-6"></a>    year.vec &lt;-<span class="st"> </span><span class="kw">colnames</span>(my.fat)</span>
+<span id="cb83-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-7"></a>    fx &lt;-<span class="st"> </span>my.fat[,<span class="kw">paste</span>(my.year)]</span>
+<span id="cb83-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-8"></a>    <span class="co"># fx &lt;- fx/sum(fx)</span></span>
+<span id="cb83-9"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-9"></a>    x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(fx))</span>
+<span id="cb83-10"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-10"></a>    <span class="co">## par(mfrow = c(1,1))</span></span>
+<span id="cb83-11"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-11"></a>    <span class="co"># plot(x, fx,</span></span>
+<span id="cb83-12"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-12"></a>    <span class="co">#      ylim = c(0, .3),</span></span>
+<span id="cb83-13"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-13"></a>    <span class="co">#      ylab = &quot;normalized fx&quot;)</span></span>
+<span id="cb83-14"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-14"></a>    s &lt;-<span class="st"> </span>year.vec <span class="op">==</span><span class="st"> </span>my.year</span>
+<span id="cb83-15"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-15"></a>    this.tfr &lt;-<span class="st"> </span><span class="kw">sum</span>(fx)</span>
+<span id="cb83-16"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-16"></a>    fx1.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">1</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">1</span>,s]) <span class="op">*</span></span>
+<span id="cb83-17"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-17"></a><span class="st">        </span>lambda.mat[<span class="dv">1</span>,s]<span class="op">*</span><span class="st"> </span>this.tfr</span>
+<span id="cb83-18"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-18"></a>    <span class="co"># lines(x, fx1.hat, col = &quot;red&quot;)</span></span>
+<span id="cb83-19"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-19"></a>    fx2.hat &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu.mat[<span class="dv">2</span>,s], <span class="dt">sd =</span> sigma.mat[<span class="dv">2</span>,s]) <span class="op">*</span></span>
+<span id="cb83-20"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-20"></a><span class="st">        </span>lambda.mat[<span class="dv">2</span>,s] <span class="op">*</span><span class="st"> </span>this.tfr</span>
+<span id="cb83-21"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-21"></a>    <span class="co"># lines(x, fx2.hat, col = &quot;blue&quot;)</span></span>
+<span id="cb83-22"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-22"></a>    <span class="co"># lines(x, fx1.hat + fx2.hat)</span></span>
+<span id="cb83-23"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-23"></a>    <span class="co"># title(last.year)</span></span>
+<span id="cb83-24"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-24"></a>    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx]</span>
+<span id="cb83-25"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-25"></a>    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx1.hat]</span>
+<span id="cb83-26"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-26"></a>    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx2.hat]</span>
+<span id="cb83-27"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-27"></a>    my.dt &lt;-<span class="st"> </span>my.dt[Year<span class="op">==</span>my.year, fx1fx2 <span class="op">:</span><span class="er">=</span><span class="st"> </span>fx1.hat <span class="op">+</span><span class="st"> </span>fx2.hat]</span>
+<span id="cb83-28"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-28"></a></span>
+<span id="cb83-29"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-29"></a>}</span>
+<span id="cb83-30"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-30"></a></span>
+<span id="cb83-31"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-31"></a>labels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Observed&quot;</span> =<span class="st"> &quot;black&quot;</span>, <span class="st">&quot;Mixture 1&quot;</span> =<span class="st"> &quot;blue&quot;</span>, <span class="st">&quot;Mixture 2&quot;</span> =<span class="st"> &quot;red&quot;</span>, <span class="st">&quot;Sum of mixtures&quot;</span>=<span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb83-32"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-32"></a></span>
+<span id="cb83-33"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-33"></a><span class="co"># plot2 &lt;-</span></span>
+<span id="cb83-34"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-34"></a><span class="co">#   ggplot(data=my.dt, aes(x=Age)) + </span></span>
+<span id="cb83-35"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-35"></a><span class="co">#   geom_line(aes( y= ASFR, group=Year, color = &quot;Observed&quot;))+</span></span>
+<span id="cb83-36"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-36"></a><span class="co">#   geom_line(aes( y= fx1, group=Year, color = &quot;Mixture 1&quot;))+</span></span>
+<span id="cb83-37"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-37"></a><span class="co">#   geom_line(aes( y= fx2, group=Year, color = &quot;Mixture 2&quot;))+</span></span>
+<span id="cb83-38"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-38"></a><span class="co">#   geom_line(aes( y= fx1fx2, group=Year, color = &quot;Sum of mixtures&quot;))+</span></span>
+<span id="cb83-39"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-39"></a><span class="co">#   labs(color = &quot;Legend&quot;) +</span></span>
+<span id="cb83-40"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-40"></a><span class="co">#   scale_color_manual(values = labels)+</span></span>
+<span id="cb83-41"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-41"></a><span class="co">#   theme_bw()#+</span></span>
+<span id="cb83-42"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-42"></a><span class="co">#   transition_time(Year)+</span></span>
+<span id="cb83-43"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-43"></a><span class="co">#   labs(title = &quot;Year: {frame_time}&quot;)</span></span>
+<span id="cb83-44"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-44"></a></span>
+<span id="cb83-45"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb83-45"></a><span class="co"># anim_save(&quot;plot2.gif&quot;, plot2)</span></span></code></pre></div>
 <p><img src="plot2.gif" /></p>
 <p>The animation shows how the distributions operate under the ASFR curve. There could be two separate normal distributions with distinct mean ages of childbearing.</p>
 <p>Let’s do tempo adjustment:<strong>NOTE: Help! I don’t know how to interpret these graphs</strong></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">rt.mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(mu.mat, <span class="dv">1</span>, center.diff))</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2">tfr.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(my.fat, <span class="dv">2</span>, sum)</a>
-<a class="sourceLine" id="cb77-3" data-line-number="3">tfr.mat &lt;-<span class="st"> </span>lambda.mat <span class="op">*</span><span class="st"> </span>tfr.vec</a>
-<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb77-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb77-6" data-line-number="6"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb77-7" data-line-number="7">tfr.star.mat &lt;-<span class="st"> </span>tfr.mat <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.mat)</a>
-<a class="sourceLine" id="cb77-8" data-line-number="8"><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.star.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>))</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-561"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-56-1.png" alt="Tempo Adjustment" width="672" />
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-1"></a>rt.mat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(mu.mat, <span class="dv">1</span>, center.diff))</span>
+<span id="cb84-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-2"></a>tfr.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(my.fat, <span class="dv">2</span>, sum)</span>
+<span id="cb84-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-3"></a>tfr.mat &lt;-<span class="st"> </span>lambda.mat <span class="op">*</span><span class="st"> </span>tfr.vec</span>
+<span id="cb84-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-4"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb84-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-5"></a></span>
+<span id="cb84-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-6"></a><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</span>
+<span id="cb84-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-7"></a>tfr.star.mat &lt;-<span class="st"> </span>tfr.mat <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rt.mat)</span>
+<span id="cb84-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb84-8"></a><span class="kw">matplot</span>(my.year.vec, <span class="kw">t</span>(tfr.star.mat), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-531"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" alt="Tempo Adjustment" width="672" />
 <p class="caption">
 Figure 7.6: Tempo Adjustment
 </p>
 </div>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">tfr.star.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(tfr.star.mat)</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="kw">plot</span>(my.year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
-<a class="sourceLine" id="cb78-5" data-line-number="5">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb78-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb78-7" data-line-number="7"><span class="kw">lines</span>(my.year.vec, tfr.star.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-562"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-56-2.png" alt="Tempo Adjustment" width="672" />
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-1"></a>tfr.star.vec &lt;-<span class="st"> </span><span class="kw">colSums</span>(tfr.star.mat)</span>
+<span id="cb85-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-2"></a></span>
+<span id="cb85-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-3"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb85-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-4"></a><span class="kw">plot</span>(my.year.vec, tfr.vec, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb85-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-5"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb85-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-6"></a></span>
+<span id="cb85-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb85-7"></a><span class="kw">lines</span>(my.year.vec, tfr.star.vec, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-532"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-53-2.png" alt="Tempo Adjustment" width="672" />
 <p class="caption">
 Figure 7.7: Tempo Adjustment
 </p>
@@ -999,36 +1265,36 @@ Figure 7.7: Tempo Adjustment
 <div id="mixture" class="section level3">
 <h3><span class="header-section-number">7.5.1</span> Mixture</h3>
 <p>Let’s look at 1st births, again as if their are two latent groups: <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. (These could be “early moms” / “late moms”, non-college / college, pre-marital / marital, lower-class / upper class, <span class="math inline">\(\ldots\)</span>)</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">library</span>(mixtools)</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">  <span class="co">## simulate 2 normals </span></a>
-<a class="sourceLine" id="cb79-3" data-line-number="3">  N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">  x1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co">##</span></a>
-<a class="sourceLine" id="cb79-5" data-line-number="5">  x2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2</span><span class="op">*</span>N, <span class="dt">mean =</span> <span class="dv">30</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb79-6" data-line-number="6">  <span class="co">## combine them</span></a>
-<a class="sourceLine" id="cb79-7" data-line-number="7">  x &lt;-<span class="st"> </span><span class="kw">c</span>(x1,x2)</a>
-<a class="sourceLine" id="cb79-8" data-line-number="8">  <span class="co">## use EM to infer mixture</span></a>
-<a class="sourceLine" id="cb79-9" data-line-number="9">  out &lt;-<span class="st"> </span><span class="kw">normalmixEM</span>(x,</a>
-<a class="sourceLine" id="cb79-10" data-line-number="10">                     <span class="dt">lambda =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>),</a>
-<a class="sourceLine" id="cb79-11" data-line-number="11">                     <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">35</span>),</a>
-<a class="sourceLine" id="cb79-12" data-line-number="12">                     <span class="dt">sigma =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))</a></code></pre></div>
-<pre><code>## number of iterations= 371</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>mu)</a></code></pre></div>
-<pre><code>## [1] 22.62401 30.73713</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>sigma)</a></code></pre></div>
-<pre><code>## [1] 3.265651 3.645539</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">  <span class="kw">print</span>(out<span class="op">$</span>lambda)</a></code></pre></div>
-<pre><code>## [1] 0.4259413 0.5740587</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-1"></a><span class="kw">library</span>(mixtools)</span>
+<span id="cb86-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-2"></a>  <span class="co">## simulate 2 normals </span></span>
+<span id="cb86-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-3"></a>  N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb86-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-4"></a>  x1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(N, <span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co">##</span></span>
+<span id="cb86-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-5"></a>  x2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">2</span><span class="op">*</span>N, <span class="dt">mean =</span> <span class="dv">30</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb86-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-6"></a>  <span class="co">## combine them</span></span>
+<span id="cb86-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-7"></a>  x &lt;-<span class="st"> </span><span class="kw">c</span>(x1,x2)</span>
+<span id="cb86-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-8"></a>  <span class="co">## use EM to infer mixture</span></span>
+<span id="cb86-9"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-9"></a>  out &lt;-<span class="st"> </span><span class="kw">normalmixEM</span>(x,</span>
+<span id="cb86-10"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-10"></a>                     <span class="dt">lambda =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>),</span>
+<span id="cb86-11"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-11"></a>                     <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">15</span>, <span class="dv">35</span>),</span>
+<span id="cb86-12"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb86-12"></a>                     <span class="dt">sigma =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span></code></pre></div>
+<pre><code>## number of iterations= 458</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb88-1"></a>  <span class="kw">print</span>(out<span class="op">$</span>mu)</span></code></pre></div>
+<pre><code>## [1] 21.86450 29.68596</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb90-1"></a>  <span class="kw">print</span>(out<span class="op">$</span>sigma)</span></code></pre></div>
+<pre><code>## [1] 2.941271 4.189717</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb92-1"></a>  <span class="kw">print</span>(out<span class="op">$</span>lambda)</span></code></pre></div>
+<pre><code>## [1] 0.2978539 0.7021461</code></pre>
 <p>Seems to work great.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">  ages &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">49</span></a>
-<a class="sourceLine" id="cb87-2" data-line-number="2">  dens1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">1</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb87-3" data-line-number="3">  dens2 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">2</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb87-4" data-line-number="4">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb87-5" data-line-number="5">  <span class="kw">hist</span>(x, <span class="dt">probability =</span> T, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Ages&quot;</span>)</a>
-<a class="sourceLine" id="cb87-6" data-line-number="6">  <span class="kw">lines</span>(ages, dens1, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb87-7" data-line-number="7">  <span class="kw">lines</span>(ages, dens2, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb87-8" data-line-number="8">  <span class="kw">lines</span>(ages, dens1 <span class="op">+</span><span class="st"> </span>dens2, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-58"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-58-1.png" alt="Histogram of ages (x)" width="672" />
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-1"></a>  ages &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">49</span></span>
+<span id="cb94-2"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-2"></a>  dens1 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">1</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">1</span>]</span>
+<span id="cb94-3"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-3"></a>  dens2 &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> ages, <span class="dt">mean =</span> out<span class="op">$</span>mu[<span class="dv">2</span>], <span class="dt">sd =</span> out<span class="op">$</span>sigma[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>out<span class="op">$</span>lambda[<span class="dv">2</span>]</span>
+<span id="cb94-4"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-4"></a>  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb94-5"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-5"></a>  <span class="kw">hist</span>(x, <span class="dt">probability =</span> T, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Ages&quot;</span>)</span>
+<span id="cb94-6"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-6"></a>  <span class="kw">lines</span>(ages, dens1, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb94-7"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-7"></a>  <span class="kw">lines</span>(ages, dens2, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb94-8"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempotempo.html#cb94-8"></a>  <span class="kw">lines</span>(ages, dens1 <span class="op">+</span><span class="st"> </span>dens2, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-55"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-55-1.png" alt="Histogram of ages (x)" width="672" />
 <p class="caption">
 Figure 7.8: Histogram of ages (x)
 </p>
@@ -1037,8 +1303,8 @@ Figure 7.8: Histogram of ages (x)
 <div id="an-algorithm-for-tempo-adjustment-of-mixtures" class="section level3">
 <h3><span class="header-section-number">7.5.2</span> An algorithm for tempo adjustment of mixtures</h3>
 <ul>
-<li>Fit normal mixture to each year.</li>
-<li>Refit using constant variance (average). This assures shape invariance of each component, fulfilling BF assumption.</li>
+<li><p>Fit normal mixture to each year.</p></li>
+<li><p>Refit using constant variance (average). This assures shape invariance of each component, fulfilling BF assumption.</p></li>
 <li><p>Estimate BF separately for <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, and combine.</p></li>
 <li><p>tempo_mixed_results_figure.pdf <strong>NOTE: not sure about this…</strong></p></li>
 </ul>
@@ -1047,21 +1313,25 @@ Figure 7.8: Histogram of ages (x)
 <div id="conclusions-4" class="section level2">
 <h2><span class="header-section-number">7.6</span> Conclusions</h2>
 <ul>
-<li>Postponement dilutes period births, lowers TFR</li>
+<li>Postponement dilutes period births, lowers TFR
+<ul>
 <li>Tempo-adjustment tries to ``put births back in’’</li>
 <li>Changes in mean work fine if ``shape’’ doesn’t change</li>
 <li>Shape can change through heterogeneity</li>
 <li>With strong assumptions, we can identify heterogeneity</li>
 <li>Declining quantum for young and postponement for old appears
 to be the story</li>
+</ul></li>
 </ul>
 <div id="caveats" class="section level3">
 <h3><span class="header-section-number">7.6.1</span> Caveats</h3>
 <ul>
-<li>Who are these latent groups? Do you start out in one and end up in the other? Do you stay in one your whole life?</li>
+<li>Who are these latent groups? Do you start out in one and end up in the other? Do you stay in one your whole life?
+<ul>
 <li>How do we project forward?</li>
 <li>Can we use other indicators (e.g., social class, education,
 marriage) to get same results?</li>
+</ul></li>
 </ul>
 
 </div>
@@ -1070,16 +1340,16 @@ marriage) to get same results?</li>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-bongaarts1998quantum">
-<p>Bongaarts, John, and Griffith Feeney. 1998. “On the Quantum and Tempo of Fertility.” <em>Population and Development Review</em>. JSTOR, 271–91.</p>
+<p>Bongaarts, John, and Griffith Feeney. 1998. “On the Quantum and Tempo of Fertility.” <em>Population and Development Review</em>, 271–91.</p>
 </div>
 <div id="ref-burkimsher2017evolution">
-<p>Burkimsher, Marion. 2017. “Evolution of the Shape of the Fertility Curve: Why Might Some Countries Develop a Bimodal Curve?” <em>Demographic Research</em> 37. JSTOR: 295–324.</p>
+<p>Burkimsher, Marion. 2017. “Evolution of the Shape of the Fertility Curve: Why Might Some Countries Develop a Bimodal Curve?” <em>Demographic Research</em> 37: 295–324.</p>
 </div>
 <div id="ref-hastie2009elements">
 <p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Science &amp; Business Media.</p>
 </div>
 <div id="ref-sullivan2005age">
-<p>Sullivan, Rachel. 2005. “The Age Pattern of First-Birth Rates Among Us Women: The Bimodal 1990s.” <em>Demography</em> 42 (2). Springer: 259–73.</p>
+<p>Sullivan, Rachel. 2005. “The Age Pattern of First-Birth Rates Among Us Women: The Bimodal 1990s.” <em>Demography</em> 42 (2): 259–73.</p>
 </div>
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -342,9 +348,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Additional resources:</p>
 <ul>
-<li><span class="citation">Coale and Kisker (<a href="#ref-coale1986mortality">1986</a>)</span>: Non-technical overview of data issues that could create the appearance of mor-tality cross-overs.<br />
+<li><span class="citation">Coale and Kisker (<a href="#ref-coale1986mortality" role="doc-biblioref">1986</a>)</span>: Non-technical overview of data issues that could create the appearance of mor-tality cross-overs.<br />
 </li>
-<li><span class="citation">Manton and Stallard (<a href="#ref-manton1981methods">1981</a>)</span>: interesting discussion on parameter choice of the Gamma and the empirical results.</li>
+<li><span class="citation">Manton and Stallard (<a href="#ref-manton1981methods" role="doc-biblioref">1981</a>)</span>: interesting discussion on parameter choice of the Gamma and the empirical results.</li>
 </ul>
 </div>
 <div id="what-happens-to-mortality-disparities-at-older-ages" class="section level2">
@@ -368,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-possible-null-model" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> A possible null-model</h3>
 <ul>
-<li>2 groups, each with internal gamma-frailty</li>
+<li><p>2 groups, each with internal gamma-frailty</p></li>
 <li><p>proportional baseline hazards</p>
 <p><span class="math display">\[
 \mu_2(x) =  R \mu_1(x)
@@ -445,62 +451,62 @@ baseline hazard in terms of the observed popualtion hazard
 </div>
 <div id="an-example-1" class="section level3">
 <h3><span class="header-section-number">5.2.4</span> An example</h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/ITA.cMx_1x1.txt&quot;</span>,</a>
-<a class="sourceLine" id="cb48-3" data-line-number="3">            <span class="dt">na.string =</span> <span class="st">&quot;.&quot;</span>)</a>
-<a class="sourceLine" id="cb48-4" data-line-number="4">my.dt &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1915</span>]</a>
-<a class="sourceLine" id="cb48-5" data-line-number="5">my.dt[, H.f <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cumsum</span>(Female)]</a>
-<a class="sourceLine" id="cb48-6" data-line-number="6">my.dt[, H.m <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cumsum</span>(Male)]</a>
-<a class="sourceLine" id="cb48-7" data-line-number="7">my.dt[, h.f <span class="op">:</span><span class="er">=</span><span class="st"> </span>Female]</a>
-<a class="sourceLine" id="cb48-8" data-line-number="8">my.dt[, h.m <span class="op">:</span><span class="er">=</span><span class="st"> </span>Male]</a>
-<a class="sourceLine" id="cb48-9" data-line-number="9">sigma.sq &lt;-<span class="st"> </span><span class="fl">.5</span><span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb48-10" data-line-number="10">my.dt[, h0.f<span class="fl">.5</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</a>
-<a class="sourceLine" id="cb48-11" data-line-number="11">my.dt[, h0.m<span class="fl">.5</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</a>
-<a class="sourceLine" id="cb48-12" data-line-number="12">sigma.sq &lt;-<span class="st"> </span><span class="fl">.2</span><span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb48-13" data-line-number="13">my.dt[, h0.f<span class="fl">.2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</a>
-<a class="sourceLine" id="cb48-14" data-line-number="14">my.dt[, h0.m<span class="fl">.2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</a>
-<a class="sourceLine" id="cb48-15" data-line-number="15">sigma.sq &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb48-16" data-line-number="16">my.dt[, h0.f1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</a>
-<a class="sourceLine" id="cb48-17" data-line-number="17">my.dt[, h0.m1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</a></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, H.f, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
-<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="kw">title</span>(<span class="st">&quot;Cumulative Hazards</span><span class="ch">\n</span><span class="st"> Italian Females born 1915&quot;</span>)</a>
-<a class="sourceLine" id="cb49-4" data-line-number="4">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, <span class="kw">log</span>(h.f), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
-<a class="sourceLine" id="cb49-5" data-line-number="5">                    <span class="dt">main =</span> <span class="st">&quot;Observed vs. implied baseline&quot;</span>)]</a>
-<a class="sourceLine" id="cb49-6" data-line-number="6">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.2</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
-<a class="sourceLine" id="cb49-7" data-line-number="7">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
-<a class="sourceLine" id="cb49-8" data-line-number="8">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f1), <span class="dt">lty =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
-<a class="sourceLine" id="cb49-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;obs if s2 = .2^2&quot;</span>, <span class="st">&quot;obs if s2 = .5^2&quot;</span>, <span class="st">&quot;obs if s2 = 1^2&quot;</span>),</a>
-<a class="sourceLine" id="cb49-10" data-line-number="10">       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" alt="Italian Females vs Males, born 1915 $\sigma^2=.5^2=.2^2=1^2$" width="672" />
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="convergence-and-cross-overs.html#cb55-1"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb55-2"><a href="convergence-and-cross-overs.html#cb55-2"></a>dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/hdir/0/fmenares/Book/bookdown-master/data/ITA.cMx_1x1.txt&quot;</span>,</span>
+<span id="cb55-3"><a href="convergence-and-cross-overs.html#cb55-3"></a>            <span class="dt">na.string =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb55-4"><a href="convergence-and-cross-overs.html#cb55-4"></a>my.dt &lt;-<span class="st"> </span>dt[Year <span class="op">==</span><span class="st"> </span><span class="dv">1915</span>]</span>
+<span id="cb55-5"><a href="convergence-and-cross-overs.html#cb55-5"></a>my.dt[, H.f <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cumsum</span>(Female)]</span>
+<span id="cb55-6"><a href="convergence-and-cross-overs.html#cb55-6"></a>my.dt[, H.m <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cumsum</span>(Male)]</span>
+<span id="cb55-7"><a href="convergence-and-cross-overs.html#cb55-7"></a>my.dt[, h.f <span class="op">:</span><span class="er">=</span><span class="st"> </span>Female]</span>
+<span id="cb55-8"><a href="convergence-and-cross-overs.html#cb55-8"></a>my.dt[, h.m <span class="op">:</span><span class="er">=</span><span class="st"> </span>Male]</span>
+<span id="cb55-9"><a href="convergence-and-cross-overs.html#cb55-9"></a>sigma.sq &lt;-<span class="st"> </span><span class="fl">.5</span><span class="op">^</span><span class="dv">2</span></span>
+<span id="cb55-10"><a href="convergence-and-cross-overs.html#cb55-10"></a>my.dt[, h0.f<span class="fl">.5</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</span>
+<span id="cb55-11"><a href="convergence-and-cross-overs.html#cb55-11"></a>my.dt[, h0.m<span class="fl">.5</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</span>
+<span id="cb55-12"><a href="convergence-and-cross-overs.html#cb55-12"></a>sigma.sq &lt;-<span class="st"> </span><span class="fl">.2</span><span class="op">^</span><span class="dv">2</span></span>
+<span id="cb55-13"><a href="convergence-and-cross-overs.html#cb55-13"></a>my.dt[, h0.f<span class="fl">.2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</span>
+<span id="cb55-14"><a href="convergence-and-cross-overs.html#cb55-14"></a>my.dt[, h0.m<span class="fl">.2</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</span>
+<span id="cb55-15"><a href="convergence-and-cross-overs.html#cb55-15"></a>sigma.sq &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">^</span><span class="dv">2</span></span>
+<span id="cb55-16"><a href="convergence-and-cross-overs.html#cb55-16"></a>my.dt[, h0.f1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.f <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.f)]</span>
+<span id="cb55-17"><a href="convergence-and-cross-overs.html#cb55-17"></a>my.dt[, h0.m1 <span class="op">:</span><span class="er">=</span><span class="st"> </span>h.m <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(sigma.sq <span class="op">*</span>H.m)]</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="convergence-and-cross-overs.html#cb56-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb56-2"><a href="convergence-and-cross-overs.html#cb56-2"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, H.f, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</span>
+<span id="cb56-3"><a href="convergence-and-cross-overs.html#cb56-3"></a><span class="kw">title</span>(<span class="st">&quot;Cumulative Hazards</span><span class="ch">\n</span><span class="st"> Italian Females born 1915&quot;</span>)</span>
+<span id="cb56-4"><a href="convergence-and-cross-overs.html#cb56-4"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, <span class="kw">log</span>(h.f), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb56-5"><a href="convergence-and-cross-overs.html#cb56-5"></a>                    <span class="dt">main =</span> <span class="st">&quot;Observed vs. implied baseline&quot;</span>)]</span>
+<span id="cb56-6"><a href="convergence-and-cross-overs.html#cb56-6"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.2</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</span>
+<span id="cb56-7"><a href="convergence-and-cross-overs.html#cb56-7"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</span>
+<span id="cb56-8"><a href="convergence-and-cross-overs.html#cb56-8"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f1), <span class="dt">lty =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</span>
+<span id="cb56-9"><a href="convergence-and-cross-overs.html#cb56-9"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;obs if s2 = .2^2&quot;</span>, <span class="st">&quot;obs if s2 = .5^2&quot;</span>, <span class="st">&quot;obs if s2 = 1^2&quot;</span>),</span>
+<span id="cb56-10"><a href="convergence-and-cross-overs.html#cb56-10"></a>       <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" alt="Italian Females vs Males, born 1915 $\sigma^2=.5^2=.2^2=1^2$" width="672" />
 <p class="caption">
 Figure 5.1: Italian Females vs Males, born 1915 <span class="math inline">\(\sigma^2=.5^2=.2^2=1^2\)</span>
 </p>
 </div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co">## title(&quot;Cumulative Hazards\n Italian Females born 1915&quot;)</span></a>
-<a class="sourceLine" id="cb50-3" data-line-number="3">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, <span class="kw">log</span>(h.f), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
-<a class="sourceLine" id="cb50-4" data-line-number="4">                    <span class="dt">main =</span> <span class="st">&quot;Observed vs. implied baseline&quot;</span>)]</a>
-<a class="sourceLine" id="cb50-5" data-line-number="5">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</a>
-<a class="sourceLine" id="cb50-6" data-line-number="6">ugh &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h.m), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)]</a>
-<a class="sourceLine" id="cb50-7" data-line-number="7">ugh &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.m<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)]</a>
-<a class="sourceLine" id="cb50-8" data-line-number="8"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;female observed&quot;</span>,</a>
-<a class="sourceLine" id="cb50-9" data-line-number="9">                             <span class="st">&quot;female baseline&quot;</span>,</a>
-<a class="sourceLine" id="cb50-10" data-line-number="10">                             <span class="st">&quot;male observed&quot;</span>,</a>
-<a class="sourceLine" id="cb50-11" data-line-number="11">                             <span class="st">&quot;male baseline&quot;</span>),</a>
-<a class="sourceLine" id="cb50-12" data-line-number="12">       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb50-13" data-line-number="13"><span class="co">## now do difference</span></a>
-<a class="sourceLine" id="cb50-14" data-line-number="14">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, h.m<span class="op">/</span>h.f, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>,</a>
-<a class="sourceLine" id="cb50-15" data-line-number="15">                    <span class="dt">ylab =</span> <span class="kw">c</span>(<span class="st">&quot;h.m/h.f&quot;</span>),</a>
-<a class="sourceLine" id="cb50-16" data-line-number="16">                    <span class="dt">main =</span> <span class="st">&quot;Male-female hazard ratio&quot;</span>)]</a>
-<a class="sourceLine" id="cb50-17" data-line-number="17">foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, h0.m<span class="fl">.5</span><span class="op">/</span>h0.f<span class="fl">.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)]</a>
-<a class="sourceLine" id="cb50-18" data-line-number="18"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>,</a>
-<a class="sourceLine" id="cb50-19" data-line-number="19">                              <span class="st">&quot;implied baseline&quot;</span>),</a>
-<a class="sourceLine" id="cb50-20" data-line-number="20"><span class="co">##       col = c(&quot;red&quot;,&quot;blue&quot;),</span></a>
-<a class="sourceLine" id="cb50-21" data-line-number="21">       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-29-1.png" alt="Italian Females vs Males, born 1915 $\sigma^2=.5^2$" width="672" />
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="convergence-and-cross-overs.html#cb57-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb57-2"><a href="convergence-and-cross-overs.html#cb57-2"></a><span class="co">## title(&quot;Cumulative Hazards\n Italian Females born 1915&quot;)</span></span>
+<span id="cb57-3"><a href="convergence-and-cross-overs.html#cb57-3"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, <span class="kw">log</span>(h.f), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb57-4"><a href="convergence-and-cross-overs.html#cb57-4"></a>                    <span class="dt">main =</span> <span class="st">&quot;Observed vs. implied baseline&quot;</span>)]</span>
+<span id="cb57-5"><a href="convergence-and-cross-overs.html#cb57-5"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.f<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)]</span>
+<span id="cb57-6"><a href="convergence-and-cross-overs.html#cb57-6"></a>ugh &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h.m), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)]</span>
+<span id="cb57-7"><a href="convergence-and-cross-overs.html#cb57-7"></a>ugh &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, <span class="kw">log</span>(h0.m<span class="fl">.5</span>), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)]</span>
+<span id="cb57-8"><a href="convergence-and-cross-overs.html#cb57-8"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;female observed&quot;</span>,</span>
+<span id="cb57-9"><a href="convergence-and-cross-overs.html#cb57-9"></a>                             <span class="st">&quot;female baseline&quot;</span>,</span>
+<span id="cb57-10"><a href="convergence-and-cross-overs.html#cb57-10"></a>                             <span class="st">&quot;male observed&quot;</span>,</span>
+<span id="cb57-11"><a href="convergence-and-cross-overs.html#cb57-11"></a>                             <span class="st">&quot;male baseline&quot;</span>),</span>
+<span id="cb57-12"><a href="convergence-and-cross-overs.html#cb57-12"></a>       <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb57-13"><a href="convergence-and-cross-overs.html#cb57-13"></a><span class="co">## now do difference</span></span>
+<span id="cb57-14"><a href="convergence-and-cross-overs.html#cb57-14"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">plot</span>(Age, h.m<span class="op">/</span>h.f, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb57-15"><a href="convergence-and-cross-overs.html#cb57-15"></a>                    <span class="dt">ylab =</span> <span class="kw">c</span>(<span class="st">&quot;h.m/h.f&quot;</span>),</span>
+<span id="cb57-16"><a href="convergence-and-cross-overs.html#cb57-16"></a>                    <span class="dt">main =</span> <span class="st">&quot;Male-female hazard ratio&quot;</span>)]</span>
+<span id="cb57-17"><a href="convergence-and-cross-overs.html#cb57-17"></a>foo &lt;-<span class="st"> </span>my.dt[, <span class="kw">lines</span>(Age, h0.m<span class="fl">.5</span><span class="op">/</span>h0.f<span class="fl">.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)]</span>
+<span id="cb57-18"><a href="convergence-and-cross-overs.html#cb57-18"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>,</span>
+<span id="cb57-19"><a href="convergence-and-cross-overs.html#cb57-19"></a>                              <span class="st">&quot;implied baseline&quot;</span>),</span>
+<span id="cb57-20"><a href="convergence-and-cross-overs.html#cb57-20"></a><span class="co">##       col = c(&quot;red&quot;,&quot;blue&quot;),</span></span>
+<span id="cb57-21"><a href="convergence-and-cross-overs.html#cb57-21"></a>       <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-26-1.png" alt="Italian Females vs Males, born 1915 $\sigma^2=.5^2$" width="672" />
 <p class="caption">
 Figure 5.2: Italian Females vs Males, born 1915 <span class="math inline">\(\sigma^2=.5^2\)</span>
 </p>
@@ -521,10 +527,10 @@ Figure 5.2: Italian Females vs Males, born 1915 <span class="math inline">\(\sig
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-coale1986mortality">
-<p>Coale, Ansley J, and Ellen Eliason Kisker. 1986. “Mortality Crossovers: Reality or Bad Data?” <em>Population Studies</em> 40 (3). Taylor &amp; Francis: 389–401.</p>
+<p>Coale, Ansley J, and Ellen Eliason Kisker. 1986. “Mortality Crossovers: Reality or Bad Data?” <em>Population Studies</em> 40 (3): 389–401.</p>
 </div>
 <div id="ref-manton1981methods">
-<p>Manton, Kenneth G, and Eric Stallard. 1981. “Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection.” <em>Human Biology</em>. JSTOR, 47–67.</p>
+<p>Manton, Kenneth G, and Eric Stallard. 1981. “Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection.” <em>Human Biology</em>, 47–67.</p>
 </div>
 </div>
             </section>

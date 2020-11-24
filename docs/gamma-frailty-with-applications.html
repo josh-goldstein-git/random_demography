@@ -24,7 +24,7 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -57,9 +61,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -68,14 +72,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +90,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.7.1</b> Coalesence when population is changing</a></li>
 </ul></li>
 <li class="chapter" data-level="10.8" data-path="coalescent.html"><a href="coalescent.html#inference-from-mrca-times-n-2-comparisons-and-relative-branch-lengths"><i class="fa fa-check"></i><b>10.8</b> Inference from MRCA times: <span class="math inline">\(n &gt; 2\)</span> comparisons and relative branch lengths</a></li>
-<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA&quot;</a><ul>
+<li class="chapter" data-level="10.9" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.9</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
 <li class="chapter" data-level="10.9.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.9.1</b> Summary of Batini et al.</a></li>
 <li class="chapter" data-level="10.9.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.9.2</b> Ancient population estimates</a></li>
 </ul></li>
@@ -361,15 +367,15 @@ expression. What is it?</p></li>
 <p><span class="math display">\[{1 \over 1 + v*e^{w x}}\]</span></p></li>
 <li><p>This is a backwards S, going down.</p></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">sigma.sq =<span class="st"> </span><span class="fl">.2</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">x =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">a =<span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">b =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">H0.x =<span class="st"> </span>(a<span class="op">/</span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">bar.z =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span><span class="st"> </span>H0.x)</a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw">plot</span>(x, bar.z)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" alt="Gamma-Gompertz" width="672" />
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="gamma-frailty-with-applications.html#cb20-1"></a>sigma.sq =<span class="st"> </span><span class="fl">.2</span></span>
+<span id="cb20-2"><a href="gamma-frailty-with-applications.html#cb20-2"></a>x =<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">100</span></span>
+<span id="cb20-3"><a href="gamma-frailty-with-applications.html#cb20-3"></a>a =<span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">^-</span><span class="dv">4</span></span>
+<span id="cb20-4"><a href="gamma-frailty-with-applications.html#cb20-4"></a>b =<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">8</span></span>
+<span id="cb20-5"><a href="gamma-frailty-with-applications.html#cb20-5"></a>H0.x =<span class="st"> </span>(a<span class="op">/</span>b) <span class="op">*</span><span class="st"> </span>(<span class="kw">exp</span>(b<span class="op">*</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb20-6"><a href="gamma-frailty-with-applications.html#cb20-6"></a>bar.z =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>sigma.sq <span class="op">*</span><span class="st"> </span>H0.x)</span>
+<span id="cb20-7"><a href="gamma-frailty-with-applications.html#cb20-7"></a><span class="kw">plot</span>(x, bar.z)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" alt="Gamma-Gompertz" width="672" />
 <p class="caption">
 Figure 4.1: Gamma-Gompertz
 </p>
@@ -399,32 +405,32 @@ characteristic.)</p>
 <div id="data" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Data</h3>
 <p>Read in the data and transform the variables to what we want. We produce a variable <span class="math inline">\(y\)</span> (in this case a standardized version of log wage income) to be transformed into a frailty score.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">## read in dat</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">library</span>(data.table)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/data/josh/CenSoc/censoc_bfdw.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">## Clean wage data</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">dt[, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span>INCWAGE]</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">dt[incwage <span class="op">==</span><span class="st"> </span><span class="dv">999998</span>, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NA</span>]</a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">dt[incwage <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NA</span>]</a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">hist_incwage &lt;-<span class="st"> </span>dt[, <span class="kw">hist</span>(incwage, <span class="dt">main =</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Income-Wage&quot;</span>)]</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" alt="Histogram of Income-Wage" width="672" />
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="gamma-frailty-with-applications.html#cb21-1"></a><span class="co">## read in dat</span></span>
+<span id="cb21-2"><a href="gamma-frailty-with-applications.html#cb21-2"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb21-3"><a href="gamma-frailty-with-applications.html#cb21-3"></a>dt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/data/josh/CenSoc/censoc_bfdw.csv&quot;</span>)</span>
+<span id="cb21-4"><a href="gamma-frailty-with-applications.html#cb21-4"></a><span class="co">## Clean wage data</span></span>
+<span id="cb21-5"><a href="gamma-frailty-with-applications.html#cb21-5"></a>dt[, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span>INCWAGE]</span>
+<span id="cb21-6"><a href="gamma-frailty-with-applications.html#cb21-6"></a>dt[incwage <span class="op">==</span><span class="st"> </span><span class="dv">999998</span>, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NA</span>]</span>
+<span id="cb21-7"><a href="gamma-frailty-with-applications.html#cb21-7"></a>dt[incwage <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, incwage <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NA</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="gamma-frailty-with-applications.html#cb22-1"></a>hist_incwage &lt;-<span class="st"> </span>dt[, <span class="kw">hist</span>(incwage, <span class="dt">main =</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Income-Wage&quot;</span>)]</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" alt="Histogram of Income-Wage" width="672" />
 <p class="caption">
 Figure 4.2: Histogram of Income-Wage
 </p>
 </div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">hist_ln_incwage &lt;-<span class="st"> </span>dt[, <span class="kw">hist</span>(<span class="kw">log</span>(incwage),<span class="dt">main =</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Log(Income-Wage)&quot;</span>)]</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-13-1.png" alt="Histogram of LOG(Income-Wage)" width="672" />
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="gamma-frailty-with-applications.html#cb23-1"></a>hist_ln_incwage &lt;-<span class="st"> </span>dt[, <span class="kw">hist</span>(<span class="kw">log</span>(incwage),<span class="dt">main =</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Log(Income-Wage)&quot;</span>)]</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" alt="Histogram of LOG(Income-Wage)" width="672" />
 <p class="caption">
 Figure 4.3: Histogram of LOG(Income-Wage)
 </p>
 </div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">## Do age at death for 1895-1900 cohorts</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">dt[, age.at.death <span class="op">:</span><span class="er">=</span><span class="st"> </span>dyear <span class="op">+</span><span class="st"> </span>dmonth<span class="op">/</span><span class="dv">12</span> <span class="op">-</span><span class="st"> </span>(byear <span class="op">+</span><span class="st"> </span>bmonth<span class="op">/</span><span class="dv">12</span>)]</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">my.dt &lt;-<span class="st"> </span>dt[byear <span class="op">%in%</span><span class="st"> </span><span class="dv">1895</span><span class="op">:</span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>dyear <span class="op">%in%</span><span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2004</span>]</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">## now limits to deaths younger than 105</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">my.dt[, <span class="kw">max</span>(age.at.death), by =<span class="st"> </span>byear]</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="gamma-frailty-with-applications.html#cb24-1"></a><span class="co">## Do age at death for 1895-1900 cohorts</span></span>
+<span id="cb24-2"><a href="gamma-frailty-with-applications.html#cb24-2"></a>dt[, age.at.death <span class="op">:</span><span class="er">=</span><span class="st"> </span>dyear <span class="op">+</span><span class="st"> </span>dmonth<span class="op">/</span><span class="dv">12</span> <span class="op">-</span><span class="st"> </span>(byear <span class="op">+</span><span class="st"> </span>bmonth<span class="op">/</span><span class="dv">12</span>)]</span>
+<span id="cb24-3"><a href="gamma-frailty-with-applications.html#cb24-3"></a>my.dt &lt;-<span class="st"> </span>dt[byear <span class="op">%in%</span><span class="st"> </span><span class="dv">1895</span><span class="op">:</span><span class="dv">1900</span> <span class="op">&amp;</span><span class="st"> </span>dyear <span class="op">%in%</span><span class="st"> </span><span class="dv">1975</span><span class="op">:</span><span class="dv">2004</span>]</span>
+<span id="cb24-4"><a href="gamma-frailty-with-applications.html#cb24-4"></a><span class="co">## now limits to deaths younger than 105</span></span>
+<span id="cb24-5"><a href="gamma-frailty-with-applications.html#cb24-5"></a>my.dt[, <span class="kw">max</span>(age.at.death), by =<span class="st"> </span>byear]</span></code></pre></div>
 <pre><code>##    byear       V1
 ## 1:  1900 104.9167
 ## 2:  1898 106.8333
@@ -432,42 +438,42 @@ Figure 4.3: Histogram of LOG(Income-Wage)
 ## 4:  1895 109.4167
 ## 5:  1899 105.6667
 ## 6:  1896 107.9167</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">nrow</span>(my.dt[age.at.death <span class="op">&gt;=</span><span class="st"> </span><span class="dv">105</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="gamma-frailty-with-applications.html#cb26-1"></a><span class="kw">nrow</span>(my.dt[age.at.death <span class="op">&gt;=</span><span class="st"> </span><span class="dv">105</span>])</span></code></pre></div>
 <pre><code>## [1] 177</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">nrow</span>(my.dt[<span class="kw">floor</span>(age.at.death) <span class="op">==</span><span class="st"> </span><span class="dv">104</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="gamma-frailty-with-applications.html#cb28-1"></a><span class="kw">nrow</span>(my.dt[<span class="kw">floor</span>(age.at.death) <span class="op">==</span><span class="st"> </span><span class="dv">104</span>])</span></code></pre></div>
 <pre><code>## [1] 253</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co">## now we have same age range for every cohort</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">my.dt &lt;-<span class="st"> </span>my.dt[age.at.death <span class="op">&lt;</span><span class="st"> </span><span class="dv">105</span>]</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">my.dt &lt;-<span class="st"> </span>my.dt[<span class="op">!</span><span class="kw">is.na</span>(incwage)] <span class="co">## keep only non-missing </span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="gamma-frailty-with-applications.html#cb30-1"></a><span class="co">## now we have same age range for every cohort</span></span>
+<span id="cb30-2"><a href="gamma-frailty-with-applications.html#cb30-2"></a>my.dt &lt;-<span class="st"> </span>my.dt[age.at.death <span class="op">&lt;</span><span class="st"> </span><span class="dv">105</span>]</span>
+<span id="cb30-3"><a href="gamma-frailty-with-applications.html#cb30-3"></a>my.dt &lt;-<span class="st"> </span>my.dt[<span class="op">!</span><span class="kw">is.na</span>(incwage)] <span class="co">## keep only non-missing </span></span></code></pre></div>
 <p>Log-wages look reasonable, unimodal, kind of symmetric. We now center our variable to 0 before estimating the effect on mortality. Our model exponentiates this 0 to become 1, which is where we want our frailty measure to be centered.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">## standardized log income</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">## log_inc_stan = log(y_orig) - mean(log(y_orig))</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co">## note: control for byear, since different ages in 1940</span></a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">my.dt[, y_orig <span class="op">:</span><span class="er">=</span><span class="st"> </span>incwage]</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">my.dt[, log_inc <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">log</span>(incwage)]</a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">my.dt[, log_inc_mean <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">mean</span>(log_inc), by =<span class="st"> </span>byear]</a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">my.dt[, y <span class="op">:</span><span class="er">=</span><span class="st"> </span>log_inc <span class="op">-</span><span class="st"> </span>log_inc_mean]</a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">hist_y &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(y)]</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-15-1.png" alt="Histogram of standardized Log(Income-Wage)" width="672" />
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="gamma-frailty-with-applications.html#cb31-1"></a><span class="co">## standardized log income</span></span>
+<span id="cb31-2"><a href="gamma-frailty-with-applications.html#cb31-2"></a><span class="co">## log_inc_stan = log(y_orig) - mean(log(y_orig))</span></span>
+<span id="cb31-3"><a href="gamma-frailty-with-applications.html#cb31-3"></a><span class="co">## note: control for byear, since different ages in 1940</span></span>
+<span id="cb31-4"><a href="gamma-frailty-with-applications.html#cb31-4"></a>my.dt[, y_orig <span class="op">:</span><span class="er">=</span><span class="st"> </span>incwage]</span>
+<span id="cb31-5"><a href="gamma-frailty-with-applications.html#cb31-5"></a>my.dt[, log_inc <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">log</span>(incwage)]</span>
+<span id="cb31-6"><a href="gamma-frailty-with-applications.html#cb31-6"></a>my.dt[, log_inc_mean <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">mean</span>(log_inc), by =<span class="st"> </span>byear]</span>
+<span id="cb31-7"><a href="gamma-frailty-with-applications.html#cb31-7"></a>my.dt[, y <span class="op">:</span><span class="er">=</span><span class="st"> </span>log_inc <span class="op">-</span><span class="st"> </span>log_inc_mean]</span>
+<span id="cb31-8"><a href="gamma-frailty-with-applications.html#cb31-8"></a>hist_y &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(y)]</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" alt="Histogram of standardized Log(Income-Wage)" width="672" />
 <p class="caption">
 Figure 4.4: Histogram of standardized Log(Income-Wage)
 </p>
 </div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">my.dt[, <span class="kw">summary</span>(y, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Standardized Log(Income-Wage)&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="gamma-frailty-with-applications.html#cb32-1"></a>my.dt[, <span class="kw">summary</span>(y, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Standardized Log(Income-Wage)&quot;</span>)]</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ## -7.0542 -0.4159  0.1661  0.0000  0.5660  4.2460</code></pre>
 <p>Now we’re centered at 0.</p>
 <p>Show how our (life-long fixed) characteristic of interest changes by age because of mortality selection.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">my.dt[, <span class="kw">plot</span>(x, y_orig.bar)]</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="gamma-frailty-with-applications.html#cb34-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb34-2"><a href="gamma-frailty-with-applications.html#cb34-2"></a>my.dt[, <span class="kw">plot</span>(x, y_orig.bar)]</span></code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">title</span>(<span class="st">&quot;Wage income by surviving age&quot;</span>, <span class="dt">cex.main =</span> <span class="fl">.7</span>)</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">my.dt[, <span class="kw">plot</span>(x, y.bar)]</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="gamma-frailty-with-applications.html#cb36-1"></a><span class="kw">title</span>(<span class="st">&quot;Wage income by surviving age&quot;</span>, <span class="dt">cex.main =</span> <span class="fl">.7</span>)</span>
+<span id="cb36-2"><a href="gamma-frailty-with-applications.html#cb36-2"></a>my.dt[, <span class="kw">plot</span>(x, y.bar)]</span></code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">title</span>(<span class="st">&quot;Standardized log of Wage income by surviving age&quot;</span>, <span class="dt">cex.main =</span> <span class="fl">.7</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" alt="Wage Income by age" width="672" />
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="gamma-frailty-with-applications.html#cb38-1"></a><span class="kw">title</span>(<span class="st">&quot;Standardized log of Wage income by surviving age&quot;</span>, <span class="dt">cex.main =</span> <span class="fl">.7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" alt="Wage Income by age" width="672" />
 <p class="caption">
 Figure 4.5: Wage Income by age
 </p>
@@ -487,11 +493,11 @@ Figure 4.5: Wage Income by age
 <span class="math display">\[
 z_{obs} = e^{\hat\beta  y}
 \]</span></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co">## now get z&#39;s</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">library</span>(survival)</a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">my.dt[, event <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">m &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(age.at.death, event) <span class="op">~</span><span class="st"> </span>y, <span class="dt">data =</span> my.dt)</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">(<span class="kw">summary</span>(m))</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="gamma-frailty-with-applications.html#cb39-1"></a><span class="co">## now get z&#39;s</span></span>
+<span id="cb39-2"><a href="gamma-frailty-with-applications.html#cb39-2"></a><span class="kw">library</span>(survival)</span>
+<span id="cb39-3"><a href="gamma-frailty-with-applications.html#cb39-3"></a>my.dt[, event <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>]</span>
+<span id="cb39-4"><a href="gamma-frailty-with-applications.html#cb39-4"></a>m &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(age.at.death, event) <span class="op">~</span><span class="st"> </span>y, <span class="dt">data =</span> my.dt)</span>
+<span id="cb39-5"><a href="gamma-frailty-with-applications.html#cb39-5"></a>(<span class="kw">summary</span>(m))</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(age.at.death, event) ~ y, data = my.dt)
 ## 
@@ -509,18 +515,18 @@ z_{obs} = e^{\hat\beta  y}
 ## Likelihood ratio test= 298  on 1 df,   p=&lt;2e-16
 ## Wald test            = 301.5  on 1 df,   p=&lt;2e-16
 ## Score (logrank) test = 301.5  on 1 df,   p=&lt;2e-16</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co">##                      coef exp(coef) se(coef)      z Pr(&gt;|z|)</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co">## y -0.03073   0.96974  0.00177 -17.36   &lt;2e-16 ***</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">## so a 10% increase in income reduces mortality by .3% (quite a tiny effect!)</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">beta &lt;-<span class="st"> </span><span class="kw">coef</span>(m)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gamma-frailty-with-applications.html#cb41-1"></a><span class="co">##                      coef exp(coef) se(coef)      z Pr(&gt;|z|)</span></span>
+<span id="cb41-2"><a href="gamma-frailty-with-applications.html#cb41-2"></a><span class="co">## y -0.03073   0.96974  0.00177 -17.36   &lt;2e-16 ***</span></span>
+<span id="cb41-3"><a href="gamma-frailty-with-applications.html#cb41-3"></a><span class="co">## so a 10% increase in income reduces mortality by .3% (quite a tiny effect!)</span></span>
+<span id="cb41-4"><a href="gamma-frailty-with-applications.html#cb41-4"></a>beta &lt;-<span class="st"> </span><span class="kw">coef</span>(m)</span></code></pre></div>
 <ul>
 <li>The effect is very small. Any ideas why?</li>
 </ul>
 <p>Now estimate our z’s.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">my.dt[, z <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">exp</span>(beta <span class="op">*</span><span class="st"> </span>y)]</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">hist_z &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(z, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))]</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" alt="Histogram of Fraility" width="672" />
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="gamma-frailty-with-applications.html#cb42-1"></a>my.dt[, z <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">exp</span>(beta <span class="op">*</span><span class="st"> </span>y)]</span>
+<span id="cb42-2"><a href="gamma-frailty-with-applications.html#cb42-2"></a>hist_z &lt;-<span class="st"> </span>my.dt[, <span class="kw">hist</span>(z, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))]</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-16-1.png" alt="Histogram of Fraility" width="672" />
 <p class="caption">
 Figure 4.6: Histogram of Fraility
 </p>
@@ -529,42 +535,42 @@ Figure 4.6: Histogram of Fraility
 <li>Does this look gamma-like?</li>
 </ul>
 <p>Calculating the variance of <span class="math inline">\(z_{obs}\)</span> to be used for estimating <span class="math inline">\(\bar{z}_{obs}\)</span>. (Also plotting the histogram to see if it looks gamma-like)</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">sigma.sq &lt;-<span class="st"> </span><span class="kw">var</span>(my.dt<span class="op">$</span>z)</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">print</span>(sigma.sq)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="gamma-frailty-with-applications.html#cb43-1"></a>sigma.sq &lt;-<span class="st"> </span><span class="kw">var</span>(my.dt<span class="op">$</span>z)</span>
+<span id="cb43-2"><a href="gamma-frailty-with-applications.html#cb43-2"></a><span class="kw">print</span>(sigma.sq)</span></code></pre></div>
 <pre><code>## [1] 0.000745355</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">sqrt</span>(sigma.sq))</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="gamma-frailty-with-applications.html#cb45-1"></a><span class="kw">print</span>(<span class="kw">sqrt</span>(sigma.sq))</span></code></pre></div>
 <pre><code>## [1] 0.02730119</code></pre>
 <blockquote>
 <p>Check SD against histogram. Does it look right?</p>
 </blockquote>
 <p>Extinct cohort method to estimate survivorship <span class="math inline">\(\bar{S}(x)\)</span></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">Dx &lt;-<span class="st"> </span>my.dt[, <span class="kw">table</span>(<span class="kw">floor</span>(age.at.death))]</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw">plot</span>(Dx)</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">lx &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Dx)))</a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">lxpn &lt;-<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>],<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">Lx &lt;-<span class="st"> </span>(lx <span class="op">+</span><span class="st"> </span>lxpn)<span class="op">/</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb40-7" data-line-number="7">mx &lt;-<span class="st"> </span>Dx<span class="op">/</span>Lx</a>
-<a class="sourceLine" id="cb40-8" data-line-number="8">x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(Dx))</a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="kw">plot</span>(x, <span class="kw">log</span>(mx), <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)</a>
-<a class="sourceLine" id="cb40-10" data-line-number="10"><span class="co">## gomp fit from ages 80 to 95</span></a>
-<a class="sourceLine" id="cb40-11" data-line-number="11">m &lt;-<span class="st"> </span><span class="kw">lm</span> (<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>x, <span class="dt">subset =</span> x <span class="op">%in%</span><span class="st"> </span><span class="dv">80</span><span class="op">:</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb40-12" data-line-number="12"><span class="kw">lines</span>(<span class="dv">80</span><span class="op">:</span><span class="dv">100</span>, <span class="kw">predict</span>(m), <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb40-13" data-line-number="13"><span class="kw">axis</span>(<span class="dv">2</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" alt="Deaths and Mortality" width="672" />
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="gamma-frailty-with-applications.html#cb47-1"></a>Dx &lt;-<span class="st"> </span>my.dt[, <span class="kw">table</span>(<span class="kw">floor</span>(age.at.death))]</span>
+<span id="cb47-2"><a href="gamma-frailty-with-applications.html#cb47-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb47-3"><a href="gamma-frailty-with-applications.html#cb47-3"></a><span class="kw">plot</span>(Dx)</span>
+<span id="cb47-4"><a href="gamma-frailty-with-applications.html#cb47-4"></a>lx &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">cumsum</span>(<span class="kw">rev</span>(Dx)))</span>
+<span id="cb47-5"><a href="gamma-frailty-with-applications.html#cb47-5"></a>lxpn &lt;-<span class="st"> </span><span class="kw">c</span>(lx[<span class="op">-</span><span class="dv">1</span>],<span class="dv">0</span>)</span>
+<span id="cb47-6"><a href="gamma-frailty-with-applications.html#cb47-6"></a>Lx &lt;-<span class="st"> </span>(lx <span class="op">+</span><span class="st"> </span>lxpn)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb47-7"><a href="gamma-frailty-with-applications.html#cb47-7"></a>mx &lt;-<span class="st"> </span>Dx<span class="op">/</span>Lx</span>
+<span id="cb47-8"><a href="gamma-frailty-with-applications.html#cb47-8"></a>x &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">names</span>(Dx))</span>
+<span id="cb47-9"><a href="gamma-frailty-with-applications.html#cb47-9"></a><span class="kw">plot</span>(x, <span class="kw">log</span>(mx), <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)</span>
+<span id="cb47-10"><a href="gamma-frailty-with-applications.html#cb47-10"></a><span class="co">## gomp fit from ages 80 to 95</span></span>
+<span id="cb47-11"><a href="gamma-frailty-with-applications.html#cb47-11"></a>m &lt;-<span class="st"> </span><span class="kw">lm</span> (<span class="kw">log</span>(mx) <span class="op">~</span><span class="st"> </span>x, <span class="dt">subset =</span> x <span class="op">%in%</span><span class="st"> </span><span class="dv">80</span><span class="op">:</span><span class="dv">100</span>)</span>
+<span id="cb47-12"><a href="gamma-frailty-with-applications.html#cb47-12"></a><span class="kw">lines</span>(<span class="dv">80</span><span class="op">:</span><span class="dv">100</span>, <span class="kw">predict</span>(m), <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb47-13"><a href="gamma-frailty-with-applications.html#cb47-13"></a><span class="kw">axis</span>(<span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" alt="Deaths and Mortality" width="672" />
 <p class="caption">
 Figure 4.7: Deaths and Mortality
 </p>
 </div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co">## no slowdown in mortality!!</span></a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="gamma-frailty-with-applications.html#cb48-1"></a><span class="co">## no slowdown in mortality!!</span></span></code></pre></div>
 <ul>
 <li><p>How does Dx look? Plausible?</p></li>
 <li><p>How about hazards? They are Gompertzian for a while, but how do we explain tails?</p></li>
 </ul>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">plot</span>(x, lx)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" alt="Survirship" width="672" />
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="gamma-frailty-with-applications.html#cb49-1"></a><span class="kw">plot</span>(x, lx)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" alt="Survirship" width="672" />
 <p class="caption">
 Figure 4.8: Survirship
 </p>
@@ -573,20 +579,20 @@ Figure 4.8: Survirship
 <p><span class="math display">\[
 \bar{z}(x) = \bar{S}(x)^{\sigma^2}
 \]</span></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">sx.bar &lt;-<span class="st"> </span>lx<span class="op">/</span>lx[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">z.bar.hat &lt;-<span class="st"> </span>sx.bar<span class="op">^</span>sigma.sq</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="gamma-frailty-with-applications.html#cb50-1"></a>sx.bar &lt;-<span class="st"> </span>lx<span class="op">/</span>lx[<span class="dv">1</span>]</span>
+<span id="cb50-2"><a href="gamma-frailty-with-applications.html#cb50-2"></a>z.bar.hat &lt;-<span class="st"> </span>sx.bar<span class="op">^</span>sigma.sq</span></code></pre></div>
 <p>Comparing this to our observed <span class="math inline">\(\bar{z}\)</span></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">74</span><span class="op">:</span><span class="dv">104</span></a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">z.bar &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">{</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">    z.bar[i] &lt;-<span class="st"> </span>my.dt[age.at.death <span class="op">&gt;</span><span class="st"> </span>x[i], <span class="kw">mean</span>(z)]</a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="gamma-frailty-with-applications.html#cb51-1"></a>x &lt;-<span class="st"> </span><span class="dv">74</span><span class="op">:</span><span class="dv">104</span></span>
+<span id="cb51-2"><a href="gamma-frailty-with-applications.html#cb51-2"></a>z.bar &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb51-3"><a href="gamma-frailty-with-applications.html#cb51-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x))</span>
+<span id="cb51-4"><a href="gamma-frailty-with-applications.html#cb51-4"></a>{</span>
+<span id="cb51-5"><a href="gamma-frailty-with-applications.html#cb51-5"></a>    z.bar[i] &lt;-<span class="st"> </span>my.dt[age.at.death <span class="op">&gt;</span><span class="st"> </span>x[i], <span class="kw">mean</span>(z)]</span>
+<span id="cb51-6"><a href="gamma-frailty-with-applications.html#cb51-6"></a>}</span></code></pre></div>
 <p>Plotting comparison</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">plot</span>(x, z.bar.hat, <span class="dt">ylim =</span> <span class="kw">c</span>(.<span class="dv">995</span>, <span class="fl">1.001</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">lines</span>(x, z.bar)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" alt="Frailty comparison" width="672" />
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="gamma-frailty-with-applications.html#cb52-1"></a><span class="kw">plot</span>(x, z.bar.hat, <span class="dt">ylim =</span> <span class="kw">c</span>(.<span class="dv">995</span>, <span class="fl">1.001</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb52-2"><a href="gamma-frailty-with-applications.html#cb52-2"></a><span class="kw">lines</span>(x, z.bar)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" alt="Frailty comparison" width="672" />
 <p class="caption">
 Figure 4.9: Frailty comparison
 </p>
@@ -596,30 +602,30 @@ Figure 4.9: Frailty comparison
 </ul>
 <!-- > I'm not quite sure why intercept of observed is not exactly 1.0. (Feel free to play around, but I don't think this is important -- I hope.) -->
 <p>Showing plots for observed mortality selection and the gamma-frailty based estimate of mortality selection. Do this for several measures including <span class="math inline">\(y\)</span>, and raw (unstandardized) income.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">y.bar.hat &lt;-<span class="st"> </span><span class="kw">log</span>(z.bar.hat)<span class="op">/</span>beta</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">plot</span>(x, y.bar, <span class="dt">ylab =</span> <span class="st">&quot;log(inc) - mean(log(inc))&quot;</span>)</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="kw">lines</span>(x, y.bar.hat)</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="kw">title</span>(<span class="st">&quot;Mean standardized log-income&quot;</span>)</a>
-<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>, <span class="st">&quot;fitted&quot;</span>),</a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-261"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-26-1.png" alt="Frailty comparison" width="672" />
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="gamma-frailty-with-applications.html#cb53-1"></a>y.bar.hat &lt;-<span class="st"> </span><span class="kw">log</span>(z.bar.hat)<span class="op">/</span>beta</span>
+<span id="cb53-2"><a href="gamma-frailty-with-applications.html#cb53-2"></a><span class="kw">plot</span>(x, y.bar, <span class="dt">ylab =</span> <span class="st">&quot;log(inc) - mean(log(inc))&quot;</span>)</span>
+<span id="cb53-3"><a href="gamma-frailty-with-applications.html#cb53-3"></a><span class="kw">lines</span>(x, y.bar.hat)</span>
+<span id="cb53-4"><a href="gamma-frailty-with-applications.html#cb53-4"></a><span class="kw">title</span>(<span class="st">&quot;Mean standardized log-income&quot;</span>)</span>
+<span id="cb53-5"><a href="gamma-frailty-with-applications.html#cb53-5"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>, <span class="st">&quot;fitted&quot;</span>),</span>
+<span id="cb53-6"><a href="gamma-frailty-with-applications.html#cb53-6"></a>       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-231"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" alt="Frailty comparison" width="672" />
 <p class="caption">
 Figure 4.10: Frailty comparison
 </p>
 </div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co">##</span></a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">bar.log.y =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">log</span>(my.dt<span class="op">$</span>y_orig))</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">y_orig.bar.hat.wrong &lt;-<span class="st"> </span><span class="kw">exp</span>(y.bar.hat) <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>( bar.log.y) <span class="co">## this is geometric mean</span></a>
-<a class="sourceLine" id="cb47-4" data-line-number="4">y_orig.bar.hat.right &lt;-<span class="st"> </span><span class="kw">exp</span>(y.bar.hat)<span class="op">*</span>y_orig.bar[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb47-5" data-line-number="5"><span class="kw">plot</span>(x, y_orig.bar, <span class="dt">ylab =</span> <span class="st">&quot;$ per year&quot;</span>)</a>
-<a class="sourceLine" id="cb47-6" data-line-number="6"><span class="kw">title</span>(<span class="st">&quot;Mean income&quot;</span>)</a>
-<a class="sourceLine" id="cb47-7" data-line-number="7"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>, <span class="st">&quot;fitted&quot;</span>),</a>
-<a class="sourceLine" id="cb47-8" data-line-number="8">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb47-9" data-line-number="9"><span class="kw">lines</span>(x, y_orig.bar.hat.wrong, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb47-10" data-line-number="10"><span class="kw">lines</span>(x, y_orig.bar.hat.right, <span class="dt">lty =</span> <span class="dv">1</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-262"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-26-2.png" alt="Frailty comparison" width="672" />
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="gamma-frailty-with-applications.html#cb54-1"></a><span class="co">##</span></span>
+<span id="cb54-2"><a href="gamma-frailty-with-applications.html#cb54-2"></a>bar.log.y =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">log</span>(my.dt<span class="op">$</span>y_orig))</span>
+<span id="cb54-3"><a href="gamma-frailty-with-applications.html#cb54-3"></a>y_orig.bar.hat.wrong &lt;-<span class="st"> </span><span class="kw">exp</span>(y.bar.hat) <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>( bar.log.y) <span class="co">## this is geometric mean</span></span>
+<span id="cb54-4"><a href="gamma-frailty-with-applications.html#cb54-4"></a>y_orig.bar.hat.right &lt;-<span class="st"> </span><span class="kw">exp</span>(y.bar.hat)<span class="op">*</span>y_orig.bar[<span class="dv">1</span>]</span>
+<span id="cb54-5"><a href="gamma-frailty-with-applications.html#cb54-5"></a><span class="kw">plot</span>(x, y_orig.bar, <span class="dt">ylab =</span> <span class="st">&quot;$ per year&quot;</span>)</span>
+<span id="cb54-6"><a href="gamma-frailty-with-applications.html#cb54-6"></a><span class="kw">title</span>(<span class="st">&quot;Mean income&quot;</span>)</span>
+<span id="cb54-7"><a href="gamma-frailty-with-applications.html#cb54-7"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;observed&quot;</span>, <span class="st">&quot;fitted&quot;</span>),</span>
+<span id="cb54-8"><a href="gamma-frailty-with-applications.html#cb54-8"></a>       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb54-9"><a href="gamma-frailty-with-applications.html#cb54-9"></a><span class="kw">lines</span>(x, y_orig.bar.hat.wrong, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb54-10"><a href="gamma-frailty-with-applications.html#cb54-10"></a><span class="kw">lines</span>(x, y_orig.bar.hat.right, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-232"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-23-2.png" alt="Frailty comparison" width="672" />
 <p class="caption">
 Figure 4.11: Frailty comparison
 </p>
