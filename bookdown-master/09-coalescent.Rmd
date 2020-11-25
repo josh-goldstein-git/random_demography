@@ -44,19 +44,19 @@ An actual "picture"
 Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
   
   - The chance that two sampled people have same parent is $1/N$, right?
-  - Thus $P(T_{MRCA} = 1) = 1/N$.
+ 
+ Thus 
+  - $P(T_{MRCA} = 1) = 1/N$.
   - What is $P(T_{MRCA} = 2) = $?
   - What is $P(T_{MRCA} = n) = $?
   
   Let's go to continuous time (reasonable if pop is big and time scale
   is long).
   
-  Hazard of coalescence = $c = 1/N$.
-  Probability of coalescence at time $t$ = $\ell(t) h(t) = e^{-ct} c$
-
-  What is expected time of coalescence? Think life expectancy.
-  
-  $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
+  - Hazard of coalescence = $c = 1/N$.
+    - Probability of coalescence at time $t$ = $\ell(t) h(t) = e^{-ct} c$
+  - What is expected time of coalescence? Think life expectancy.
+  - $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
 
   Let's simulate
 
@@ -109,6 +109,7 @@ Coalescence of a sample of $n$ individuals
   
 A sample of 3: Note we're using $N$ (instead of $2N$)
 
+```latex
 \begin{verbatim}
 
         *            _______
@@ -125,46 +126,42 @@ A sample of 3: Note we're using $N$ (instead of $2N$)
                      _______
                      T(n) : E(T(n)) = N * 2/[n * (n-1)]
 \end{verbatim}
+```
   Question: If we sample 4, how much of time to TMRCA
   is do we have 4 branches, 3 branches, and 2 branches?
 
-## Conclusions
+<!-- ## Conclusions -->
 
 
-  - We defined the coalescent as the stochastic process going
-    back in time to common ancestors
-  - For constant population size, we proved that time to
-    coalescence for a sample pair is exponential.
-  - We showed (math and simulation) that $E(T) = N$.
-  - We showed that we could estimate $N$ from observed mutations
-    if we knew the mutation rate
+<!--   - We defined the coalescent as the stochastic process going -->
+<!--     back in time to common ancestors -->
+<!--   - For constant population size, we proved that time to -->
+<!--     coalescence for a sample pair is exponential. -->
+<!--   - We showed (math and simulation) that $E(T) = N$. -->
+<!--   - We showed that we could estimate $N$ from observed mutations -->
+<!--     if we knew the mutation rate -->
 
 
-\end{frame}
 
-## An application of coalescent theory
+
+<!-- ## An application of coalescent theory -->
+
+<!-- Application to making inferences about the real history of human populations. -->
+
+
+
+## Coalesence when population is changing
+
+*Caveat: We're still using $N$ (not $2N$) as the number of haploids*
   
-Application to making inferences about the real history of human populations.
-    
+- We said hazard of coalescence was $h = c = 1/N$.
+- What is hazard of coalesence in one generation for two different populations: $N =1000$? $N = 2000$?
+- What if within the same population $N(t) = 1000$ and $N(t+1)= 2000$? (Hint: we still follow FW in allowing children to choose their parents.)
+- If the population size changes over time $N(t)$, then hazards of coalescence in will change too: $h(t) = 1/N(t)$.
 
- 
-Caveat: We're still using $N$ (not $2N$) as the number of haploids
+A small simulation
 
-### Coalesence when population is changing
-  
-  - Ee said hazard of coalescence was $h = c = 1/N$.
-  - What is hazard of coalesence in one generation for two
-    different populations: $N =
-    1000$? $N = 2000$?
-    
-  - What if within the same population $N(t) = 1000$ and $N(t+1)
-    = 2000$? (Hint: we still follow FW in allowing children to
-    choose their parents.)
-    
-  - If the population size changes over time $N(t)$, then hazards
-    of coalescence in will change too: $h(t) = 1/N(t)$.
-  
-```{r ,fig.height = 3}
+```{r , fig.height = 4, fig.cap='Histogram', fig.align='center'}
   N_recent = 5000 ## population last T_thresh years
   T_thresh = 1000
   N_ancient = 500 ## earlier population
@@ -175,35 +172,33 @@ Caveat: We're still using $N$ (not $2N$) as the number of haploids
   n2 <- sum(is.na(T1))
   T2 <- T_thresh + rexp(n2, rate = 1/N_ancient) ## at ancient rate
   T.vec <- c(T1, T2)
-  hist(T.vec, breaks = seq(0, 5000, 250))
+  hist(T.vec, breaks = seq(0, 5000, 250), main="")
 ```
-  Q: How could we estimate population sizes from this histogram?
+
+Q: How could we estimate population sizes from this histogram?
   
-```{r, fig.height = 3}
+```{r, fig.height = 4, fig.cap='Population', fig.align='center'}
   T.vec <- sort(T.vec)
   St = (n:1)/n
   par(mfrow = c(1,2))
   plot(T.vec, St); abline(v = T_thresh); plot(T.vec, log(St)); abline(v = T_thresh)
 ```
-  Q: How can we estimate hazards from this histogram?
 
+Q: How can we estimate hazards from this histogram?
 
 
 Our approach
   
-  - Say we have $i$ pairs of haploids
-  - We then compute how many pairwise differences there are,
-    but instead of computing $\bar{k}$, we keep the distributional
-    information $k_i$.
-  - Each $k_i$ implies a $T_i$
-  - We then have a set of ``death times'' (coalescence times),
-    can build a life table, estimate the hazards, and infer
-    $N(t)$.
+- Say we have $i$ pairs of haploids
+- We then compute how many pairwise differences there are, but instead of computing $\bar{k}$, we keep the distributional information $k_i$.
+- Each $k_i$ implies a $T_i$
+- We then have a set of ``death times'' (coalescence times), can build a life table, estimate the hazards, and infer $N(t)$.
 
 ## Inference from MRCA times: $n > 2$ comparisons and relative branch lengths
     
 Detour to length of branches
 A sample of 3: Note we're using $N$ (not $2N$)
+```latex
 \begin{verbatim}
 
         *            _______
@@ -220,12 +215,11 @@ A sample of 3: Note we're using $N$ (not $2N$)
                      _______
                      T(n) : E(T(n)) = N * 2/[n * (n-1)]
 \end{verbatim}
-
-  Intuition: when we have more individuals, there's more chance that
+```
+Intuition: when we have more individuals, there's more chance that
   some pair of them will coalesce.
   
-  Question: If we sample 4, how much of time to TMRCA
-   do we have 4 branches, 3 branches, and 2 branches?
+Question: If we sample 4, how much of time to TMRCA do we have 4 branches, 3 branches, and 2 branches?
 
 
 ## Reconstruction Ancient European Population Sizes using Batini's sample of Mitochondrial DNA"
@@ -235,8 +229,9 @@ ancient population sizes. The sequences were made available by Batini
 et al, who analyzed sub-populations in their paper using software for
 Bayesian inference for comparing groups of individuals. Our approach
 here is to use a simpler, but less powerful approach. We will simply
-look at pairwise differences of random pairs of individuals. For this
-we are not going to do subgroups such as the Greeks or Irish, but are
+look at pairwise differences of random pairs of individuals. 
+
+For this we are not going to do subgroups such as the Greeks or Irish, but are
 going to use the entire European sample. The population sizes we
 estimate are for the entire population represented by the 328
 individuals. 
@@ -417,7 +412,7 @@ compute time back to MRCA.
 First, some background:
 
 Let $a$ index sites and write $Y_a = 1$ if the letters are different,
-and $Y_a = 0 otherwise. For 1 site, the probability that it there has been a mutation, is 1
+and $Y_a = 0$ otherwise. For 1 site, the probability that it there has been a mutation, is 1
 minus the chance that there has been no mutation. 
 
 $$
@@ -433,7 +428,7 @@ $$
 $$
 where we've added a "2" in order to account that either one of the pairwise branched could have had a mutation, so we our "exposure" is twice the time to MRCA.
 
-Rearranging we get an estimate $\hat{T} of $T$ to be
+Rearranging we get an estimate $\hat{T}$ of $T$ to be
 $$
 \hat{T} = {-\log (1 - \bar{Y} ) \over \theta}
 $$
@@ -457,23 +452,24 @@ then.
 
 3. Estimate $h(t)$, the time-varying hazard of coalescence 
 
-We'll do this in two ways. First we'll compute the slope of the
-logarithm of the survival curve, but we'll see that it is noisy and
-needs to be smoothed. Second, we'll construct a "life table" of
-coalescence with discrete periods of time.
+We'll do this in two ways:
+
+1. Compute the slope of the logarithm of the survival curve, but we'll see that it is noisy and
+needs to be smoothed. 
+2. Construct a "life table" of coalescence with discrete periods of time.
 
 Let's start with the more continuous version of estimating slopes.
 
-```{r}
+```{r, fig.height=4, fig.align='center', fig.cap='Etimatated probability of not coalescing'}
 ## Plot survival curve by order of T
 St = (100:1)/100 ## or more generally (length(T.vec):1)/length(T.vec)
 t = kya = sort(T.vec)/1000
 plot(kya, St, type = "l",
      xlab = "Kilo years ago", ylab = "Fraction of pairs without common ancestor",
-     main = "Estimated probability of not coalescing")
+     main = "")
 plot(kya, log(St), type = "l",
      xlab = "Kilo years ago", ylab = "Log fraction of pairs without common ancestor",
-     main = "Etimatated probability of not coalescing, log scale")
+     main = "")
      
 ```
 
@@ -484,12 +480,12 @@ plot(kya, log(St), type = "l",
 
 > Q: What does this imply about effective population size?
 
+Estimating Hazards
 
- - a) Estimating hazards from smoothed survival curve
+1. From smoothed survival curve
 
-First we smooth. 
 
-```{r}
+```{r, fig.cap='Smoothing', fig.align='center'}
 out = lowess(x = kya, y = St, f = 1/5)
 
 St_smooth = out$y
@@ -502,15 +498,15 @@ lines(kya_smooth, St_smooth, type = 'l')
 
 Hazards as minus the slope of log
 
-```{r}
+```{r, fig.cap='Hazards', fig.align='center'}
 haz_hat = -diff(St_smooth)/diff(kya_smooth)
-plot(kya_smooth[-1], haz_hat, type = 'l')
+plot(kya_smooth[-1], haz_hat, type = 'l', ylab = "Estimated Hazard", 
+     xlab = "Kilo Years Ago (Smooth)")
 ```
 
 > Q. Does this plot tell us anything about uncertainty?
 
-
-- b) Life table appraoch
+2. Life table appraoch
 
 Now let's estimate the hazards using a "life table", where again
 "death" is coalescence and "survival" is still not having a common
@@ -560,11 +556,13 @@ print(lt)
 
 Let's compare the two estimates
 
-```{r}
+```{r, fig.align='center', fig.cap='Hazards comparison'}
 x.mid = x[-length(x)] + n/2
-plot(x.mid, nmx, type = 'o')
+plot(x.mid, nmx, type = 'o', ylab = "Mortality Rate", xlab = "Age (Midpoint)")
 axis(2)
 lines(kya_smooth[-1] * 1000, haz_hat/1000, type = "l")
+legend("topleft" , legend=c("Lifetable", "Smooth Survival Curve"),
+       col=c("red", "blue"), lty=1:2, cex=0.8)
 ```
 
 We're getting basically the same thing, with a little more hint of
@@ -610,7 +608,7 @@ Plotting the results
 
 ```{r}
 plot(kya_smooth[-1], Ne_smooth, type = 'l', ylim = c(1000, 60000), log = 'y',
-     lty = 2)
+     lty = 2, ylab="Estimated Population Size", xlab = "Kilo Years Ago (Smooth)")
 lines(kya_step, Ne_lifetable_step, type = 'l', lwd = 2)
 ```
 
