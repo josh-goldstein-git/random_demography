@@ -355,10 +355,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><span class="citation">(“Introduction to Probability” <a href="#ref-grinstead2006" role="doc-biblioref">2006</a>)</span>: An intermediate/advanced undergraduate textbook with good section on Branching Processes, with references to Harris and Keyﬁtz below.</p></li>
 <li><p><span class="citation">Harris (<a href="#ref-harris1964theory" role="doc-biblioref">1964</a>)</span>: Classic reference, but readable if you take your time. We will only read chapter 1 and will only consider the very easiest material.</p></li>
 <li><p>Surname Extinction: When will we all be “Smiths”?_ <a href="https://www.youtube.com/watch?v=5p-Jdjo7sSQ" class="uri">https://www.youtube.com/watch?v=5p-Jdjo7sSQ</a>: Popular science video providing good motivation, but without authority.</p></li>
-<li><p><em>Is Your Surname about to Go Extinct?</em> <a href="https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/" class="uri">https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/</a>:A brief blog entry, mentionng of “endangered names”.</p>
-<ul>
-<li><span class="citation">Keyfitz (<a href="#ref-keyfitz1968" role="doc-biblioref">1968</a>)</span>: Another introduction to branching process with the details of the empirical example cited by Grinstead and Snell.</li>
-</ul></li>
+<li><p><em>Is Your Surname about to Go Extinct?</em> <a href="https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/" class="uri">https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/</a>:A brief blog entry, mentionng of “endangered names”.</p></li>
+<li><p><span class="citation">Keyfitz (<a href="#ref-keyfitz1968" role="doc-biblioref">1968</a>)</span>: Another introduction to branching process with the details of the empirical example cited by Grinstead and Snell.</p></li>
 </ul>
 </div>
 <div id="motivation" class="section level2">
@@ -867,8 +865,8 @@ Generation size
 <span id="cb100-10"><a href="branching-processes.html#cb100-10"></a><span class="st">                  3.4-&gt;{4.6 4.7}</span></span>
 <span id="cb100-11"><a href="branching-processes.html#cb100-11"></a><span class="st">                  }&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-62"></span>
-<div id="htmlwidget-8b2ffa1d2b24112429eb" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8b2ffa1d2b24112429eb">{"x":{"diagram":"\n                  digraph rmarkdown{\n                  1 ->{2.1 2.2}\n                  2.1->{3.1 3.2}\n                  2.2->{3.3 3.4}\n                  3.1->{4.1 4.2}\n                  3.2->{4.3}\n                  3.3->{4.4 4.5}\n                  3.4->{4.6 4.7}\n                  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-22bbdd3855cfe840b425" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-22bbdd3855cfe840b425">{"x":{"diagram":"\n                  digraph rmarkdown{\n                  1 ->{2.1 2.2}\n                  2.1->{3.1 3.2}\n                  2.2->{3.3 3.4}\n                  3.1->{4.1 4.2}\n                  3.2->{4.3}\n                  3.3->{4.4 4.5}\n                  3.4->{4.6 4.7}\n                  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 8.1: Parents having childrens
 </p>
@@ -1247,17 +1245,19 @@ doesn’t matter.</p></li>
 <li>What is mean size of surviving lines? That is, we want to find <span class="math inline">\(\mathbb{E}( Z_n | Z_n &gt; 0)\)</span>
 <ul>
 <li>Hint 1: <span class="math inline">\(P(Z_n = 0) = d_n\)</span>, So <span class="math inline">\(P(Z_n &gt; 0) = 1- d_n\)</span></li>
-<li>Hint 2: <span class="math inline">\(\mathbb{E} Z_n = m^n\)</span>
-Also note that by definition, <span class="math inline">\(\mathbb{E}( Z_n | Z_n = 0)=0\)</span></li>
-</ul>
-<span class="math display">\[
-\begin{aligned}
-\mathbb{E} Z_n = m^n = &amp; \mathbb{E}( Z_n | Z_n &gt; 0) (1- d_n) + (0)d_n\\
-m^n = &amp; \mathbb{E}( Z_n | Z_n &gt; 0) (1- d_n)\\
-\mathbb{E}( Z_n | Z_n &gt; 0) =&amp;\frac{m^n}{(1- d_n)}
-\end{aligned}
-\]</span></li>
+<li>Hint 2: <span class="math inline">\(\mathbb{E} Z_n = m^n\)</span></li>
 </ul></li>
+</ul></li>
+</ul>
+<p>Also note that by definition, <span class="math inline">\(\mathbb{E}( Z_n | Z_n = 0)=0\)</span></p>
+<p><span class="math display">\[
+      \begin{aligned}
+      \mathbb{E} Z_n = m^n = &amp; \mathbb{E}( Z_n | Z_n &gt; 0) (1- d_n) + (0)d_n\\
+      m^n = &amp; \mathbb{E}( Z_n | Z_n &gt; 0) (1- d_n)\\
+      \mathbb{E}( Z_n | Z_n &gt; 0) =&amp;\frac{m^n}{(1- d_n)}
+      \end{aligned}
+      \]</span></p>
+<ul>
 <li>Let’s check our result using simulation for 1000 trials. Note that for this case <span class="math inline">\(m= 0\times p_0 + 1\times p_1 + 2\times p_2= 1\)</span>, so <span class="math inline">\(m^n= 1\)</span></li>
 </ul>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="branching-processes.html#cb118-1"></a>  n_trials =<span class="st"> </span><span class="dv">1000</span>; n_gen =<span class="st"> </span><span class="dv">100</span></span>

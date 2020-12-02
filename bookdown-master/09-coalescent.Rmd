@@ -343,7 +343,7 @@ order of 100,000 the last few thousand years and on the order of
 
 Our procedure will involve a four steps:
 
-*1. Pick 100 _pairs_ of people at random and count their pairwise differences.*
+**1. Pick 100 _pairs_ of people at random and count their pairwise differences.**
 
 ```{r}
 
@@ -400,7 +400,7 @@ head(C.vec)
 head(Y.bar)
 ```
 
-*2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate.*
+**2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate.**
 
 And now we'll use the mutation rate $\theta_m$ given by Batini to
 compute time back to MRCA.
@@ -446,7 +446,7 @@ We see a lot of coalescence about 50 KYA, which is as far back as
 Batini's estimates go. This means the population was small back
 then. 
 
-*3. Estimate $h(t)$, the time-varying hazard of coalescence*
+**3. Estimate $h(t)$, the time-varying hazard of coalescence**
 
 We'll do this in two ways:
 
@@ -477,7 +477,7 @@ plot(kya, log(St), type = "l",
 
 Estimating Hazards
 
-_*1. From smoothed survival curve*_
+**_1. From smoothed survival curve_**
 
 
 ```{r, fig.cap='Smoothing', fig.align='center'}
@@ -501,7 +501,7 @@ plot(kya_smooth[-1], haz_hat, type = 'l', ylab = "Estimated Hazard",
 
 > Q. Does this plot tell us anything about uncertainty?
 
-_*2. Life table appraoch*_
+**_2. Life table appraoch_**
 
 Now let's estimate the hazards using a "life table", where again
 "death" is coalescence and "survival" is still not having a common
@@ -565,7 +565,7 @@ rising hazards (shrinking pop size) in first 20 kya. Nearly the same
 thing estimate 40 kya ago, and very little signal before that. 
 
 
-*4. Estimate the population size  $N_e(t)$*
+**4. Estimate the population size  $N_e(t)$**
 
 In order to estimate the population size, we have to think for a minute
 about units.

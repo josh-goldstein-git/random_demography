@@ -27,7 +27,8 @@ Additional resources:
 - Surname Extinction: When will we all be "Smiths"?_ <https://www.youtube.com/watch?v=5p-Jdjo7sSQ>: Popular science video providing good motivation, but without authority.
 
 - _Is Your Surname about to Go Extinct?_ <https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/>:A brief blog entry, mentionng of "endangered names".
-  - @keyfitz1968: Another introduction to branching process with the details of the empirical example cited by Grinstead and Snell.
+
+- @keyfitz1968: Another introduction to branching process with the details of the empirical example cited by Grinstead and Snell.
 
 ## Motivation
 
@@ -306,7 +307,7 @@ DiagrammeR::grViz("
   - If we were to find a solution less than 1.0, how would we
     interpret that?
   - Three cases
-```{r, fig.align = 'center', fig.cap='PGF for a variety of z', fig.height=6}
+```{r, fig.align = 'center', fig.cap='PGF for a variety of z', fig.height=4}
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
   d <- pk["0"]
@@ -488,6 +489,7 @@ SIR model in disease spread)
     - What is mean size of surviving lines? That is, we want to find $\mathbb{E}( Z_n | Z_n > 0)$
       - Hint 1: $P(Z_n = 0) = d_n$, So $P(Z_n > 0) = 1- d_n$
       - Hint 2: $\mathbb{E} Z_n = m^n$
+      
 Also note that by definition, $\mathbb{E}( Z_n | Z_n = 0)=0$
 
       $$

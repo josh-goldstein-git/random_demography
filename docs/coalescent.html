@@ -704,7 +704,7 @@ order of 100,000 the last few thousand years and on the order of
 <div id="using-the-coalescent-to-estimate-changing-population-size" class="section level4">
 <h4><span class="header-section-number">10.8.2.1</span> Using the Coalescent to estimate changing population size</h4>
 <p>Our procedure will involve a four steps:</p>
-<p><em>1. Pick 100 <em>pairs</em> of people at random and count their pairwise differences.</em></p>
+<p><strong>1. Pick 100 <em>pairs</em> of people at random and count their pairwise differences.</strong></p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="coalescent.html#cb170-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb170-2"><a href="coalescent.html#cb170-2"></a>hap_ids =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(H)</span>
 <span id="cb170-3"><a href="coalescent.html#cb170-3"></a>hap_id_sample =<span class="st"> </span><span class="kw">sample</span>(hap_ids,</span>
@@ -758,7 +758,7 @@ haplotypes.</p>
 <pre><code>## [1] 16566 16484 16539 16565 16565 16544</code></pre>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="coalescent.html#cb176-1"></a><span class="kw">head</span>(Y.bar)</span></code></pre></div>
 <pre><code>## [1] 0.0011469274 0.0021839359 0.0007860209 0.0023543616 0.0003018412 0.0050773694</code></pre>
-<p><em>2. Estimate 100 different times of MRCA (<span class="math inline">\(T\)</span>) using assumed mutation rate.</em></p>
+<p><strong>2. Estimate 100 different times of MRCA (<span class="math inline">\(T\)</span>) using assumed mutation rate.</strong></p>
 <p>And now we’ll use the mutation rate <span class="math inline">\(\theta_m\)</span> given by Batini to
 compute time back to MRCA.</p>
 <p>First, some background:</p>
@@ -791,7 +791,7 @@ where we’ve added a “2” in order to account that either one of the pairwis
 <p>We see a lot of coalescence about 50 KYA, which is as far back as
 Batini’s estimates go. This means the population was small back
 then.</p>
-<p><em>3. Estimate <span class="math inline">\(h(t)\)</span>, the time-varying hazard of coalescence</em></p>
+<p><strong>3. Estimate <span class="math inline">\(h(t)\)</span>, the time-varying hazard of coalescence</strong></p>
 <p>We’ll do this in two ways:</p>
 <ol style="list-style-type: decimal">
 <li>Compute the slope of the logarithm of the survival curve, but we’ll see that it is noisy and needs to be smoothed.</li>
@@ -830,7 +830,7 @@ ago?</p>
 <p>Q: What does this imply about effective population size?</p>
 </blockquote>
 <p>Estimating Hazards</p>
-<p><em><em>1. From smoothed survival curve</em></em></p>
+<p><strong><em>1. From smoothed survival curve</em></strong></p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="coalescent.html#cb183-1"></a>out =<span class="st"> </span><span class="kw">lowess</span>(<span class="dt">x =</span> kya, <span class="dt">y =</span> St, <span class="dt">f =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">5</span>)</span>
 <span id="cb183-2"><a href="coalescent.html#cb183-2"></a></span>
 <span id="cb183-3"><a href="coalescent.html#cb183-3"></a>St_smooth =<span class="st"> </span>out<span class="op">$</span>y</span>
@@ -859,7 +859,7 @@ Figure 10.6: Hazards
 <blockquote>
 <p>Q. Does this plot tell us anything about uncertainty?</p>
 </blockquote>
-<p><em><em>2. Life table appraoch</em></em></p>
+<p><strong><em>2. Life table appraoch</em></strong></p>
 <p>Now let’s estimate the hazards using a “life table”, where again
 “death” is coalescence and “survival” is still not having a common
 ancestor.</p>
@@ -919,7 +919,7 @@ Figure 10.7: Hazards comparison
 <p>We’re getting basically the same thing, with a little more hint of
 rising hazards (shrinking pop size) in first 20 kya. Nearly the same
 thing estimate 40 kya ago, and very little signal before that.</p>
-<p><em>4. Estimate the population size <span class="math inline">\(N_e(t)\)</span></em></p>
+<p><strong>4. Estimate the population size <span class="math inline">\(N_e(t)\)</span></strong></p>
 <p>In order to estimate the population size, we have to think for a minute
 about units.</p>
 <p>Our hazards are per year, but our logic for why hazards are related to
