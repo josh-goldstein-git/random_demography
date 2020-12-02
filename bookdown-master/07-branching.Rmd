@@ -4,26 +4,29 @@ output:
   pdf_document: default
 ---
 ```{r include=FALSE}
-install.packages("kableExtra")
+#install.packages("kableExtra")
 library(kableExtra)
 ```
 # Branching Processes 
 
 ## Outline 
   
-  - The Galton-Watson-Bienaym\'e Process: Motivation
-  - Simulating a branching process
-  - Moment generating functions
-  - Extinction probabilities
-  - The distribution of offspring of all generations
-  - A tractable offspring distribution
+- The Galton-Watson-Bienaym\'e Process: Motivation
+- Simulating a branching process
+- Moment generating functions
+- Extinction probabilities
+- The distribution of offspring of all generations
+- A tractable offspring distribution
   
 Additional resources:
 
-  - @grinstead2006: An intermediate/advanced undergraduate textbook with good section on Branching Processes, with references to Harris and Keyﬁtz below.
-  - @harris1964theory: Classic reference, but readable if you take your time. We will only read chapter 1 and will only consider the very easiest material.
-  - _Surname Extinction: When will we all be "Smiths"?_ <https://www.youtube.com/watch?v=5p-Jdjo7sSQ>: Popular science video providing good motivation, but without authority.
-  - _Is Your Surname about to Go Extinct?_ <https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/>:A brief blog entry, mentionng of "endangered names".
+- @grinstead2006: An intermediate/advanced undergraduate textbook with good section on Branching Processes, with references to Harris and Keyﬁtz below.
+  
+- @harris1964theory: Classic reference, but readable if you take your time. We will only read chapter 1 and will only consider the very easiest material.
+  
+- Surname Extinction: When will we all be "Smiths"?_ <https://www.youtube.com/watch?v=5p-Jdjo7sSQ>: Popular science video providing good motivation, but without authority.
+
+- _Is Your Surname about to Go Extinct?_ <https://blogs.ancestry.com/cm/is-your-rare-surname-about-to-go-extinct/>:A brief blog entry, mentionng of "endangered names".
   - @keyfitz1968: Another introduction to branching process with the details of the empirical example cited by Grinstead and Snell.
 
 ## Motivation
@@ -36,19 +39,19 @@ Additional resources:
 
 ### Very brief history of Branching Processes 
   
-  - Bienaymé's lost notes
-  - Old motivation: Galton and Watson's: to see if elites were dying out because of "degeneration" 
-  - Contemporary motivation: evolution and neutral genetic change. What is the chance that a mutant will survive?
-  - War-time motivation: to see how to build the bomb (chain reactions)
-  - Sociological: Anywhere "incipient dynamics" matter (will all of S. Korea be "Kim"?)
-  - Can we get variance of reproductive success from name disambiguation?
-  - It will give us a headstart on other (less realistic but easier) "drift" models.
+- Bienaymé's lost notes
+- Old motivation: Galton and Watson's: to see if elites were dying out because of "degeneration" 
+- Contemporary motivation: evolution and neutral genetic change. What is the chance that a mutant will survive?
+- War-time motivation: to see how to build the bomb (chain reactions)
+- Sociological: Anywhere "incipient dynamics" matter (will all of S. Korea be "Kim"?)
+- Can we get variance of reproductive success from name disambiguation?
+- It will give us a headstart on other (less realistic but easier) "drift" models.
   
 ### Applicability to the Coronavirus? Yes and no.
 
-  - Perhaps the beginning, with first few cases.
-  - But once scale gets large, we'll see that deterministic dynamics take over.
-  - One lesson: beyond $R_0$.
+- Perhaps the beginning, with first few cases.
+- But once scale gets large, we'll see that deterministic dynamics take over.
+- One lesson: beyond $R_0$.
   
 ### Simulated examples and the questions they raise
 
@@ -66,13 +69,13 @@ Additional resources:
 
 
 
-  - What is $R_0$, (aka $m$)? This is the expected number of infected cases: 
+- What is $R_0$, (aka $m$)? This is the expected number of infected cases: 
   $$\begin{aligned}
   R_{0} & = 0\times 0.3 + 1\times 0.4 + 2\times 0.3 \\
   & = 1 
   \end{aligned}$$ **NOTE: is this correct?**
   
-  -  Now assume that people will infect $k$ other people based on a random number, for instance the last 4 digits of their phone number. 
+- Now assume that people will infect $k$ other people based on a random number, for instance the last 4 digits of their phone number. 
   
   
 ```{r}
@@ -83,10 +86,10 @@ Additional resources:
 ```
 
 
-  -  Let's diagram one chance outcome, using my number "(xxx) xxx-9056". 
-    - As each of the four digits is associated with a probability of infecting more people, they can be seen as different the carrier generations. 
-    - For instance, the first carrier has a probability $p_k=0.3$ of infecting $k=2$ other people. So that first carrier may infect 2.7 people, (3 for simplicity). 
-    - Each of these three people will have a $p_k=0.2$ of each infecting $k=0$ people. Since they don't infect anybody then there are no further carrier generations. 
+- Let's diagram one chance outcome, using my number "(xxx) xxx-9056". 
+  - As each of the four digits is associated with a probability of infecting more people, they can be seen as different the carrier generations. 
+  - For instance, the first carrier has a probability $p_k=0.3$ of infecting $k=2$ other people. So that first carrier may infect 2.7 people, (3 for simplicity). 
+  - Each of these three people will have a $p_k=0.2$ of each infecting $k=0$ people. Since they don't infect anybody then there are no further carrier generations. 
     
 In the table, we include their rows but the expected number of infected people is still 0 because the spreading stopped in generation 2.  
 
@@ -102,19 +105,19 @@ In the table, we include their rows but the expected number of infected people i
 
 ### What is a (Bienayme)-Galton-Watson branching process?
 
-  - $p_k$: Each individual in each generation reproduces independently, following same offspring distribution, with $p_k$ as the probability of having $k$ offspring.
-  - $Z_n$: The si$Z$e of the $n$'th generation $Z_n$. ($Z_1 \equiv 1$)
-  - $p_0 > 0$: Some non-zero probability of no children.
-  - Variance: None of the $p_k$ are 1
+- $p_k$: Each individual in each generation reproduces independently, following same offspring distribution, with $p_k$ as the probability of having $k$ offspring.
+- $Z_n$: The si$Z$e of the $n$'th generation $Z_n$. ($Z_1 \equiv 1$)
+- $p_0 > 0$: Some non-zero probability of no children.
+- Variance: None of the $p_k$ are 1
 
 
 ![Galton's original question](./images/galton.png)
 
 Some questions
   
-  - What is the chance $d$ of eventual extinction (no "outbreak")?
-  - Or, what is the distribution of surviving family sizes?
-  - What are the aggregate properties of many branching processes? (Mean growth, variance, time-paths, eventual size)?
+- What is the chance $d$ of eventual extinction (no "outbreak")?
+- Or, what is the distribution of surviving family sizes?
+- What are the aggregate properties of many branching processes? (Mean growth, variance, time-paths, eventual size)?
   
 ## Simulations of parents having children
   
@@ -145,7 +148,7 @@ Some questions
   knitr::kable(growth)
 ```
 
-  - Here's a more visual representation . 
+- Here's a more visual representation.
 
 ```{r echo=TRUE,  fig.align = 'center', fig.cap='Parents having childrens'}
 # install.packages('DiagrammeR')
@@ -161,7 +164,7 @@ DiagrammeR::grViz("
                   }")
 ```
 
-  - However, we can extend the number of generations in a function:
+- However, we can extend the number of generations in a function:
 
 ```{r}
   #A function   
@@ -179,12 +182,12 @@ DiagrammeR::grViz("
       return(Z.vec) # returns a vector of the number of children at every generation
   }
 ```
-  - Sometimes generations die out:  
+- Sometimes generations die out:  
 ```{r}
   set.seed(19) ; branch()
   set.seed(99) ; branch()
 ```
-  - Let's see what happens with 20 trials (up to 30 generations). Not all generations go extinct here. 
+- Let's see what happens with 20 trials (up to 30 generations). Not all generations go extinct here. 
 ```{r }
   n_trials = 20
   n_gen = 30
@@ -202,14 +205,14 @@ DiagrammeR::grViz("
   matplot(t(Z.mat),
           type = "l", lty = 1, ylab = "Zn", xlab = "n")
 ```
-  - How many survive (out of 20)? log-scale
+- How many survive (out of 20)? log-scale
 ```{r echo=TRUE, fig.align = 'center', fig.cap='Generation sizes (log-scale)'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
   surviving = ifelse(Z.mat[,n_gen] == 0, "extinct", "survive")
   foo <- prop.table(table(surviving))
   print(prop.table(table(surviving)) )
 ```
-  - How would you discribe the time path of the surviving lines? Let's extend the number of generations to observe any long-term trends.
+- How would you describe the time path of the surviving lines? Let's extend the number of generations to observe any long-term trends.
 ```{r, fig.height = 4, fig.align = 'center'}
   n_trials = 20; n_gen = 100
   Z.mat <- matrix(NA, n_trials, n_gen)
@@ -220,21 +223,21 @@ DiagrammeR::grViz("
 ```{r echo=TRUE, fig.align='center', fig.cap='Generation sizes (log-scale) over many generations'}
   suppressWarnings(matplot(t(Z.mat), log = "y", type = "l", lty = 1, ylab = "Zn", xlab = "n"))
 ```
-  - What does this remind you of? (Hint: "Leslie"). (See @harris1964theory, Figure 2, Chapter 1) 
+
+- What does this remind you of? (Hint: "Leslie"). (See @harris1964theory, Figure 2, Chapter 1) 
 
 ## The Probability Generating Function: Our mathematical tool
 
-  - "Extinction" vs "breakout"
-  
-    - We see that in a super-critical ($m > 1$) branching process, if a line can survive a few generations and reach a large enough size, it will grow exponentially.
-    - What happens if $m < 1$, if $m = 1$? Discuss.
+- "Extinction" vs "breakout"
+  - We see that in a super-critical ($m > 1$) branching process, if a line can survive a few generations and reach a large enough size, it will grow exponentially.
+  - What happens if $m < 1$, if $m = 1$? Discuss.
   $$
   h(z) = p_0 + p_1 z + p_2 z^2 + \ldots
   $$
-    - The PGF "keeps book" on the probabilities. The chance of $k$ is the coefficient on $z^k$.  
-      - $h(0)= p_{0}$   
-      - $h(1)= p_{0} + p_{1}$   
-      - $h'(1)= p_{1} + 2p_{2}$
+  - The PGF "keeps book" on the probabilities. The chance of $k$ is the coefficient on $z^k$.  
+    - $h(0)= p_{0}$   
+    - $h(1)= p_{0} + p_{1}$   
+    - $h'(1)= p_{1} + 2p_{2}$
 
   - The story of two brothers. A father has two sons. The probability generating function of their children combined is:
   $$
@@ -250,16 +253,16 @@ DiagrammeR::grViz("
  \end{aligned}
  $$
  
-    - The coefficients on $z^0, z^1, \ldots$ tell us the probability that the sons will have $k=0,1,2,3,4$ sons.
+- The coefficients on $z^0, z^1, \ldots$ tell us the probability that the sons will have $k=0,1,2,3,4$ sons.
 
-  - What is the probability generating function for the distribution of grandsons?
-    - A man has two sons, with probability $p_2$, so PGF in that case is $p_2 [h(z)]^2$.
-    - But let's sum over all possible numbers of sons.
+- What is the probability generating function for the distribution of grandsons?
+  - A man has two sons, with probability $p_2$, so PGF in that case is $p_2 [h(z)]^2$.
+  - But let's sum over all possible numbers of sons.
     $$
     p_0 + p_1 h(z) + p_2 [h(z)]^2 + p_3 [h(z)]^3 + \ldots
     $$
-    - This is the cumulative probability of drawing $k$ children within a generation of size $Z$ 
-    - Which is?
+  - This is the cumulative probability of drawing $k$ children within a generation of size $Z$ 
+  - Which is?
     $$
     h(h(z))
     $$
@@ -270,7 +273,7 @@ DiagrammeR::grViz("
   - For instance, let's get $h_2(z) = h(h(z))$ for $h(z) = p_0 + p_1 z + p_2 z^2$
   $$\begin{aligned}
   h(h(z)) = &  p_0 + p_1 \left[p_0 + p_1 z + p_2 z^2\right] + p_2 \left[p_0 + p_1 z + p_2 z^2\right]^2\\
-   = &  p_0 + p_1 p_0 + p_1^2 z + p_1 p_2 z^2 + p_2p_0^2 + (2p_0 p_1 p_2)z + (2p_0 p_2^2 + p_2p_1^2)z^2 + (2p_1 p_2^2)z^3 + p_2^3 z^4
+   = &  p_0 + p_1 p_0 + p_1^2 z + p_1 p_2 z^2 + p_2p_0^2 + (2p_0 p_1 p_2)z +\\ (2p_0 p_2^2 + p_2p_1^2)z^2 + (2p_1 p_2^2)z^3 + p_2^3 z^4
   \end{aligned}$$
 
 ## Extinction
@@ -303,7 +306,7 @@ DiagrammeR::grViz("
   - If we were to find a solution less than 1.0, how would we
     interpret that?
   - Three cases
-```{r, fig.align = 'center', fig.cap='PGF for a variety of z', fig.height=8}
+```{r, fig.align = 'center', fig.cap='PGF for a variety of z', fig.height=6}
   z = seq(0, 1.6, .01)
   pk = c(.3, .0, .7); names(pk) <- 0:2
   d <- pk["0"]
@@ -345,13 +348,14 @@ DiagrammeR::grViz("
   points(1,1)
 ```
 
-  - We can prove by answering: What is $h'(1)$? What is $h(0)$? Is $h''(z) > 0$? 
+- We can prove by answering: What is $h'(1)$? What is $h(0)$? Is $h''(z) > 0$? 
 
-  - In the following cobwed diagram (like a staircase), we can see the values of $h(p_0)$, $h(h(p_0))$, $h(h(h(p_0)))$, $\ldots$?
-    - The orange dot is $h(p_0)$.
-    - The purple dot is $h(h(p_0))$.
-    - The blue dot is $h(h(h(p_0)))$.
-    - The points would converge until we reach the intersection between $h(z)$ and the diagonal.
+- In the following cobwed diagram (like a staircase), we can see the values of $h(p_0)$, $h(h(p_0))$, $h(h(h(p_0)))$, $\ldots$?
+  - The orange dot is $h(p_0)$.
+  - The purple dot is $h(h(p_0))$.
+  - The blue dot is $h(h(h(p_0)))$.
+  - The points would converge until we reach the intersection between $h(z)$ and the diagonal.
+  
 ```{r echo=TRUE,  fig.align = 'center', fig.cap='Cobwed diagram (staircase)'}
   pk = c(.3, .0, .7); names(pk) <- 0:2
   z = seq(0, 1.6, .01)
@@ -373,8 +377,6 @@ DiagrammeR::grViz("
   points(x= pk["0"], y =hzp0, pch=19, col="orange") #h(p_0)
   points(x= hzp0, y =hhzp0, pch=19, col="purple") #h(h(p_0))
   points(x= hhzp0, y =hhhzp0, pch=19, col="blue") #h(h(h(p_0)))
-
-
 ``` 
 - So how do we actually get $d$?
   - Take the case where $p_0 = .3$, $p_1 = 0$, and $p_3 = .7$ (the one I just plotted).
@@ -484,10 +486,10 @@ SIR model in disease spread)
   $$
     - where $\mathbb{E}( Z_n | Z_n > 0) P(Z_n > 0)$ is the expected size given no extinction and $\mathbb{E}( Z_n | Z_n = 0) P(Z_n = 0)$ is the expected size given extinction.  
     - What is mean size of surviving lines? That is, we want to find $\mathbb{E}( Z_n | Z_n > 0)$
-      - Hint 1: $P(Z_n = 0) = d_n$
-        - So $P(Z_n > 0) = 1- d_n$
+      - Hint 1: $P(Z_n = 0) = d_n$, So $P(Z_n > 0) = 1- d_n$
       - Hint 2: $\mathbb{E} Z_n = m^n$
-      - Also note that by definition, $\mathbb{E}( Z_n | Z_n = 0)=0$
+Also note that by definition, $\mathbb{E}( Z_n | Z_n = 0)=0$
+
       $$
       \begin{aligned}
       \mathbb{E} Z_n = m^n = & \mathbb{E}( Z_n | Z_n > 0) (1- d_n) + (0)d_n\\
@@ -496,7 +498,7 @@ SIR model in disease spread)
       \end{aligned}
       $$
       
-    - Let's check our result using simulation for 1000 trials. Note that for this case $m= 0\times p_0 + 1\times p_1  + 2\times p_2= 1$, so $m^n= 1$  
+- Let's check our result using simulation for 1000 trials. Note that for this case $m= 0\times p_0 + 1\times p_1  + 2\times p_2= 1$, so $m^n= 1$  
     
 ```{r}
   n_trials = 1000; n_gen = 100
@@ -535,7 +537,7 @@ plot(n, Zn_surv_bar, main= "Mean Zn given Zn>0")
 ## insert code here for Zn_surv_bar.hat and add a line
 ```
  
-  - Proving  $\mathbb{E} Z_n = m^n$ 
+### Proving  $\mathbb{E} Z_n = m^n$ 
     - Ingredients  
       - $h(z)=p_{0}+p_{1}z+ p_{2} z^2+ \ldots$
       - $h'(z)=p_{1}+ 2zp_{2} + \ldots$      
@@ -556,9 +558,9 @@ plot(n, Zn_surv_bar, main= "Mean Zn given Zn>0")
       $$ **NOTE: Can't find the complete derivation. Help!**
       
 
-  - Variance result.  
-    - We proved that $\mathbb{E} Z_n = m^n$ using recursion. For the variance, one can also do recursion but this time we start by taking the second derivative of $h(z)$ 
-    - For $m = 1$,
+### Variance result.  
+  - We proved that $\mathbb{E} Z_n = m^n$ using recursion. For the variance, one can also do recursion but this time we start by taking the second derivative of $h(z)$ 
+  - For $m = 1$,
   $$
   \sigma_n^2 = n \sigma^2 
   $$
@@ -632,7 +634,7 @@ k = c(0, kk) ;   p_k = c(p0, p_kk)
 plot(k, p_k)
 ```
 
-Realism? See Table 10.3, p 386, Grinstead and Snell.
+Realism? See Table 10.3, p 386, @grinstead2006
 
 
 
@@ -682,9 +684,9 @@ Realism? See Table 10.3, p 386, Grinstead and Snell.
   $$
   d = {1 - b - c \over c(1-c)}
   $$
-    - How does $d$ depend on $b$ and $c$? $d$ decreases with $b$  at a rate of $\frac{-1}{c(1-c)}$ and changes at rate $\frac{-(1-b)(1-2c)-c^2}{c^2(1-c)^2}$.
+- How does $d$ depend on $b$ and $c$? $d$ decreases with $b$  at a rate of $\frac{-1}{c(1-c)}$ and changes at rate $\frac{-(1-b)(1-2c)-c^2}{c^2(1-c)^2}$.
 
-Big payoff: the full distribution of $Z_n$ (See Grinstead and Snell p. 385)
+Big payoff: the full distribution of $Z_n$ (See @grinstead2006 p. 385)
   
 ### A plot of Keyfitz's numbers for generations 1, 2, and 3. Is it exponential for $k > 0$?
 
@@ -739,10 +741,9 @@ for (i in 1:3)
 
 ## Branching Processes and Covid-19
 
-  - What is the BP that they are studying? Is it contagion, social
-    contacts, or ?
-  - What do they assume about the BP?
-  - Do they use any analytical results or just simulation? Why?
-  - Best feature of paper?
-  - Worst feature of paper?
-  - Inspire any other approaches?
+- What is the BP that they are studying? Is it contagion, social contacts, or ?
+- What do they assume about the BP?
+- Do they use any analytical results or just simulation? Why?
+- Best feature of paper?
+- Worst feature of paper?
+- Inspire any other approaches?

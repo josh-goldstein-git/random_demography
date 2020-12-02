@@ -72,25 +72,24 @@ plot(out.hom$breaks[-1], out.hom$counts, log = 'y')
 ```
   
 ### Analogies
-  - Social inequality: equal opportunity vs. equal outcomes
-  - Analysis of variance: $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
-  - Statistical models $y = a + b x + \epsilon$
+- Social inequality: equal opportunity vs. equal outcomes
+- Analysis of variance: $\mbox{total variance} = \mbox{within group} + \mbox{between group}$
+- Statistical models $y = a + b x + \epsilon$
   
 
 ### What's new? 
-  - Dynamics.
-  - Heterogeneous populations evolve differently. 
-    - Aggregates $\neq$ Individuals
-    - Rates of growth (or decline)
-    - Changes over time or age or duration
-    - The trajectory of even the \alert{average} individual differs from population average
-    - Relative positions, change of groups, may be misleading.
-  - Terminology
-    - Heterogeneity
-    - Unobserved heterogeneity
-    - Selection
-    - Selective survival
-    - Other terms?
+- Dynamics.
+- Heterogeneous populations evolve differently. 
+  - Aggregates $\neq$ Individuals
+  - Rates of growth (or decline)
+  - Changes over time or age or duration
+  - The trajectory of even the \alert{average} individual differs from population average
+  - Relative positions, change of groups, may be misleading.
+- Terminology
+  - Heterogeneity
+  - Unobserved heterogeneity
+  - Selection
+  - Selective survival
   
 <!-- \begin{frame}{1. Heterogeneity at work? Black-White Crossover} -->
 <!-- \end{frame} -->
@@ -99,12 +98,12 @@ plot(out.hom$breaks[-1], out.hom$counts, log = 'y')
 <!-- \end{frame} -->
 
 
-  - Big Caveat: Fundamental Unidentifiability
+- Big Caveat: Fundamental Unidentifiability
 
-    - Same data of $N$ observations
-      - $N$ draws from 1 distribution
-      - $1$ draw from $N$ distributions
-      - Something in-between
+  - Same data of $N$ observations
+    - $N$ draws from 1 distribution
+    - $1$ draw from $N$ distributions
+    - Something in-between
   
 
   Abel (66) and Beth (76) example. 
@@ -212,17 +211,14 @@ main = 'Change in aggregate growth rate')
 
 #### Commentary on Keyfitz result
 
-  - Growth rates in heterogeneous populations start at pop average
-    and then increase.
-  - Heterogeneity pop growth
-  - We will extend to cover non-constant growth
+- Growth rates in heterogeneous populations start at pop average and then increase.
+- Heterogeneity pop growth
+- We will extend to cover non-constant growth
   
   But
   
-  - Doesn't tell us how much bigger $\bar{K}(t)$ is projection
-    using constant aggregate rate $\bar{r}(0)$.
-  - Doesn't give us a formula for time path of aggregate $\bar{K}(t)$
-    or $\bar{r}(t)$
+- Doesn't tell us how much bigger $\bar{K}(t)$ is projection using constant aggregate rate $\bar{r}(0)$.
+- Doesn't give us a formula for time path of aggregate $\bar{K}(t)$ or $\bar{r}(t)$
   
   Note: our homework will try to address some of this using Taylor
   approximation. 
@@ -314,7 +310,7 @@ $$
 ### Some commentary
 
 
-- Poisson and Exponential ``fit''
+- Poisson and Exponential "fit"
 - We'll this complementarity again (e.g., with Gamma)
 - Tractable  models are super powerful for enhancing our understanding.
 - But be careful. Avoid extremes: the model is right/wrong.
@@ -329,11 +325,7 @@ A BIG caveat, are disaggregated models necessarily better?
   
 ## Conclusions
   
-  - Heterogeneity as variation in risk (not just outcome)
-    
-  - Constantly growing parts $\neq$ constantly growth whole
-    
-  - Keyfitz result: Change in growth rate $=$ variance of growth
-    rates
-    
-  - Poisson growth gives us a closed-form solution.
+- Heterogeneity as variation in risk (not just outcome)
+- Constantly growing parts $\neq$ constantly growth whole
+- Keyfitz result: Change in growth rate $=$ variance of growth rates
+- Poisson growth gives us a closed-form solution.

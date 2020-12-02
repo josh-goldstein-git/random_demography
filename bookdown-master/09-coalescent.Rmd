@@ -3,18 +3,18 @@
 
 ## Outline   
   
-  - Big picture: What is "coalescent theory"?
-  - Time to (T)MRCA
-  - Simulation: Inferring population size
-  - An application of Coalescent Theory
+- Big picture: What is "coalescent theory"?
+- Time to (T)MRCA
+- Simulation: Inferring population size
+- An application of Coalescent Theory
 
 ## The Coalescent: Expectations of the Past
   
-  - Coalescent theory is not a theory.
-  - It's a model for the probability of different histories. 
-    - Think about it as a model about how sampling can lead to a history of a common ancestor. 
-  - "The" coalescent is a bit confusing. 
-    - We're not inferring the actual history of common ancestry, just the probabilities
+- Coalescent theory is not a theory.
+- It's a model for the probability of different histories. 
+  - Think about it as a model about how sampling can lead to a history of a common ancestor. 
+- "The" coalescent is a bit confusing. 
+  - We're not inferring the actual history of common ancestry, just the probabilities
  
 An actual "picture"
 ![](/hdir/0/fmenares/Book/bookdown-master/images/cutter_diagram.png)
@@ -35,46 +35,44 @@ An actual "picture"
   
 ## Our first question: When was MRCA?
 
-  *If we sample two individuals (today), how long ago was their MRCA?* Note that we are not looking for "who" the MRCA is but rather the number of generations ago that they occurred. 
-  
+- *If we sample two individuals (today), how long ago was their MRCA?* Note that we are not looking for "who" the MRCA is but rather the number of generations ago that they occurred. 
   - Our answer will in terms of the probability of MRCA being 1 generation ago, 2 generations ago, etc.
   - We'll assume Fisher-Wright: constant N, each gen randomly picks parents.
   - The answer is surprisingly simple
   
-Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
+- Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
   
   - The chance that two sampled people have same parent is $1/N$, right?
  
- Thus 
-  - $P(T_{MRCA} = 1) = 1/N$.
-  - What is $P(T_{MRCA} = 2) = $?
-  - What is $P(T_{MRCA} = n) = $?
+Thus 
+ 
+- $P(T_{MRCA} = 1) = 1/N$.
+- What is $P(T_{MRCA} = 2) = $?
+- What is $P(T_{MRCA} = n) = $?
   
-  Let's go to continuous time (reasonable if pop is big and time scale
-  is long).
+Let's go to continuous time (reasonable if pop is big and time scale is long).
   
-  - Hazard of coalescence = $c = 1/N$.
-    - Probability of coalescence at time $t$ = $\ell(t) h(t) = e^{-ct} c$
-  - What is expected time of coalescence? Think life expectancy.
-  - $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
+- Hazard of coalescence = $c = 1/N$.
+  - Probability of coalescence at time $t$ = $\ell(t) h(t) = e^{-ct} c$
+- What is expected time of coalescence? Think life expectancy.
+- $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
 
   Let's simulate
 
-  - 1 time, without random seed, letting N = 40, ngen = 200, mu = 0
-  - Average over 100 FW simulations
-  - What is variance of outcome? Is it what we would expect from
+- 1 time, without random seed, letting N = 40, ngen = 200, mu = 0
+- Average over 100 FW simulations
+- What is variance of outcome? Is it what we would expect from
     exponential?
 
 
 ## Mutation and inference of TMRCA and $N$
   
-  - Say mutations occur at a constant rate $\mu$ ($10^{-8}$?)
-  - Each year we would expect $\mu$ mutations, and over $T$ years we
+- Say mutations occur at a constant rate $\mu$ ($10^{-8}$?)
+- Each year we would expect $\mu$ mutations, and over $T$ years we
     would expect $T\mu$ mutations.
-  - Say we observe that two people differ at $k$ sites of the
-    genome.
-    - When was TMRCA?
-    - How big is the population?
+- Say we observe that two people differ at $k$ sites of the genome.
+  - When was TMRCA?
+  - How big is the population?
   
 
 
@@ -95,17 +93,16 @@ Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
 
 ## Inference of population size, simulation
   
-  - We do FW with mutations
-  - Average pairwise differences
-  - Divide by $2\mu$ to get our estimate
-  - We can repeat a bunch of times and see average estimate
-    converges to the truth
+- We do FW with mutations
+- Average pairwise differences
+- Divide by $2\mu$ to get our estimate
+- We can repeat a bunch of times and see average estimate converges to the truth
   
 
 Coalescence of a sample of $n$ individuals
   
-  - This is covered on pages 42 and 43 of Gillespie
-  - We'll just do one quick example, accepting the result
+- This is covered on pages 42 and 43 of Gillespie
+- We'll just do one quick example, accepting the result
   
 A sample of 3: Note we're using $N$ (instead of $2N$)
 
@@ -216,8 +213,7 @@ A sample of 3: Note we're using $N$ (not $2N$)
                      T(n) : E(T(n)) = N * 2/[n * (n-1)]
 \end{verbatim}
 ```
-Intuition: when we have more individuals, there's more chance that
-  some pair of them will coalesce.
+Intuition: when we have more individuals, there's more chance that some pair of them will coalesce.
   
 Question: If we sample 4, how much of time to TMRCA do we have 4 branches, 3 branches, and 2 branches?
 
@@ -347,7 +343,7 @@ order of 100,000 the last few thousand years and on the order of
 
 Our procedure will involve a four steps:
 
-1. Pick 100 _pairs_ of people at random and count their pairwise differences.
+*1. Pick 100 _pairs_ of people at random and count their pairwise differences.*
 
 ```{r}
 
@@ -404,7 +400,7 @@ head(C.vec)
 head(Y.bar)
 ```
 
-2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate.
+*2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate.*
 
 And now we'll use the mutation rate $\theta_m$ given by Batini to
 compute time back to MRCA.
@@ -450,13 +446,12 @@ We see a lot of coalescence about 50 KYA, which is as far back as
 Batini's estimates go. This means the population was small back
 then. 
 
-3. Estimate $h(t)$, the time-varying hazard of coalescence 
+*3. Estimate $h(t)$, the time-varying hazard of coalescence*
 
 We'll do this in two ways:
 
-1. Compute the slope of the logarithm of the survival curve, but we'll see that it is noisy and
-needs to be smoothed. 
-2. Construct a "life table" of coalescence with discrete periods of time.
+  1. Compute the slope of the logarithm of the survival curve, but we'll see that it is noisy and needs to be smoothed. 
+  2. Construct a "life table" of coalescence with discrete periods of time.
 
 Let's start with the more continuous version of estimating slopes.
 
@@ -482,7 +477,7 @@ plot(kya, log(St), type = "l",
 
 Estimating Hazards
 
-1. From smoothed survival curve
+_*1. From smoothed survival curve*_
 
 
 ```{r, fig.cap='Smoothing', fig.align='center'}
@@ -506,7 +501,7 @@ plot(kya_smooth[-1], haz_hat, type = 'l', ylab = "Estimated Hazard",
 
 > Q. Does this plot tell us anything about uncertainty?
 
-2. Life table appraoch
+_*2. Life table appraoch*_
 
 Now let's estimate the hazards using a "life table", where again
 "death" is coalescence and "survival" is still not having a common
@@ -570,7 +565,7 @@ rising hazards (shrinking pop size) in first 20 kya. Nearly the same
 thing estimate 40 kya ago, and very little signal before that. 
 
 
-4. Estimate the population size  $N_e(t)$
+*4. Estimate the population size  $N_e(t)$*
 
 In order to estimate the population size, we have to think for a minute
 about units.

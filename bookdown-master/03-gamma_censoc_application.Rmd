@@ -24,18 +24,18 @@
   $$
   \bar\mu(x) = \mu_0(x) { 1  \over 1 + \sigma^2 H_0(x)}
   $$
-  Sketch $\bar{z}(x)$. Hint: what form does $H_0(x)$ have?
+  Sketch $\bar{z}(x)$. Hint: what form does $H_0(x)$ have? (see next Example)
 
 #### Example: Gamma-Gompertz
   
-  - If $H_0(x)$ be Gompertz, we have closed-form
+- If $H_0(x)$ be Gompertz, we have closed-form
     expression. What is it?
     
-  - Does $\bar{z}$ have the form
+- Does $\bar{z}$ have the form
   
     $${1 \over 1 + v*e^{w x}}$$
     
-  - This is a backwards S, going down.
+- This is a backwards S, going down.
   
 ```{r, fig.height = 3,  fig.align='center', fig.cap='Gamma-Gompertz'}
 sigma.sq = .2
@@ -79,7 +79,7 @@ Read in the data and transform the variables to what we want. We produce a varia
 ```{r echo=TRUE}
 ## read in dat
 library(data.table)
-dt <- fread("/data/josh/CenSoc/censoc_bfdw.csv")
+dt <- fread("/data/josh/CenSoc/archive/censoc_bfdw.csv")
 ## Clean wage data
 dt[, incwage := INCWAGE]
 dt[incwage == 999998, incwage := NA]

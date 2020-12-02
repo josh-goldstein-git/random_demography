@@ -10,9 +10,11 @@
 
 Additional resources:
 
-  - Blog "Introduction to the Wright-Fisher Model" <https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html#pre-requisites>
-  - @hahn2003drift:  Evolutionary anthropologists arguing that the neutral explanation of the Fisher-Wright model is consistent with the distribution of 1st names. What other quantitative or qualitative features of 1st name fashion could be used to try to reject the neutral model?
-  - @felsenstein2005theoretical: Very complete "lecture notes" for graduate genetics course. Lots of good commentary, does not assume a lot of math background, but lots of content and can be diffcult to read a piece by itself. 
+- Blog "Introduction to the Wright-Fisher Model" <https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html#pre-requisites>
+  
+- @hahn2003drift:  Evolutionary anthropologists arguing that the neutral explanation of the Fisher-Wright model is consistent with the distribution of 1st names. What other quantitative or qualitative features of 1st name fashion could be used to try to reject the neutral model?
+  
+- @felsenstein2005theoretical: Very complete "lecture notes" for graduate genetics course. Lots of good commentary, does not assume a lot of math background, but lots of content and can be diffcult to read a piece by itself. 
 
 ## Parallel
 
@@ -56,8 +58,11 @@ Additional resources:
     
 </div>
 
+
 ### Another cell phone example
-As in the Branching Processes chapter, let's simulate the creation of generations using the numbers of cell-phone numbers (which are random). For this case, we need as many cell phone numbers as the generations to create, but each next cell phone number is a combination of digits from the first cell phone number. Let these ficticious cell phone numbers be: 731 660 5362 and 530 666 7723. Note how the second number does not contain any 4s, 8s or 9s.  
+As in the Branching Processes chapter, let's simulate the creation of generations using the numbers of cell-phone numbers (which are random). For this case, we need as many cell phone numbers as the generations to create, but each next cell phone number is a combination of digits from the first cell phone number. 
+
+Let these ficticious cell phone numbers be: 731 660 5362 and 530 666 7723. Note how the second number does not contain any 4s, 8s or 9s.  
 
 Generation 1 starts off with a sequence of numbers from 0 to 9. Then for generation 2, we assign each digit of the cell phone to one of cells. We repeat this for generation 3 but with the second cell phone number.   
 
@@ -118,8 +123,8 @@ Let's simulate the process from the example below. We first present some useful 
 ```
 
 Here we try it out. 
- - Each row is a generation and each column is a type of allele. 
- - Notice that already by the third generation, there are several numbers that are not drawn anymore: 3,4,6,8,9.
+- Each row is a generation and each column is a type of allele. 
+- Notice that already by the third generation, there are several numbers that are not drawn anymore: 3,4,6,8,9.
  
 ```{r}
   set.seed(1)
@@ -143,10 +148,10 @@ The graph below shows a simulation of 20 generations each of size 10. The colors
 
 Let's analyze it more. 
 
-  - By generation 5, many of the lines are flat (ocurrence = 0%) which means that they go extinct and the following generations can only select types from a reduced sample. 
-  - For instance line "5" (pink) is selected until generation 10. Around generation 7, it becomes the most prevalent type but then falls as other types are drawn relatively more. As we are looking at the ocurrence in samples were types disappear, the rises and falls in lines are indicate the substitution of numbers as some go extinct. 
-  - By generation 15, all draws are 2s and the other numbers do not ''survive'' 
-  - $E(p_i(t) | p_i(t-1))$ is the likelihood that the same number (type) will be drawn given that it was drawn before.  **NOTE TO JOSH**: is this really what the expectation means? Not on slides
+- By generation 5, many of the lines are flat (ocurrence = 0%) which means that they go extinct and the following generations can only select types from a reduced sample. 
+- For instance line "5" (pink) is selected until generation 10. Around generation 7, it becomes the most prevalent type but then falls as other types are drawn relatively more. As we are looking at the ocurrence in samples were types disappear, the rises and falls in lines are indicate the substitution of numbers as some go extinct. 
+- By generation 15, all draws are 2s and the other numbers do not ''survive'' 
+- $E(p_i(t) | p_i(t-1))$ is the likelihood that the same number (type) will be drawn given that it was drawn before.  **NOTE TO JOSH**: is this really what the expectation means? Not on slides
 
 
 
@@ -169,9 +174,9 @@ This time, let's increase the number of generations (200) and the number of type
 
 Given that we saw before that some of the lines will disappear, we can look about keeping some of the lines fixed (that it will always be selected). For instance, 
 
-  - What is probability that line $i$ will "fix"? 
-  - What is expected time until some line fixes? 
-  - How can we describe the path to fixation? 
+- What is probability that line $i$ will "fix"? 
+- What is expected time until some line fixes? 
+- How can we describe the path to fixation? 
   
 ### Probability that a particular line will "fix"
 **NOTE TO JOSH**: the slide said that finding this was easy but I don't necessarily see how the result from the graph goes with the formula below. 
@@ -187,15 +192,15 @@ Given that we saw before that some of the lines will disappear, we can look abou
 
 ### Expected time until fixation?
 
-  Answer for us is
+Answer for us is
   $$
   \bar{T}_{fixed} = 2 \cdot N
   $$
   
-  - Note: Biologists say $4 N_e$. 
+- Note: Biologists say $4 N_e$. 
   See Wikipedia "Genetic drift"
   
-  - Now we carry out simulations of complete processes. In total, we draw 100 times each generation in order to get the time to fixation. For this example, the mean number of generations taken to get only one remaining line is 202 generations $\approx 2 \times$ the starting generation size.
+- Now we carry out simulations of complete processes. In total, we draw 100 times each generation in order to get the time to fixation. For this example, the mean number of generations taken to get only one remaining line is 202 generations $\approx 2 \times$ the starting generation size.
 
 ```{r}
   T.vec <- NULL 
@@ -212,11 +217,11 @@ Given that we saw before that some of the lines will disappear, we can look abou
 
 ### Path to fixation: a measure of homogeneity/heterogeneity
 
-  - How does the type change over time?
-  - We would like a measure of equality of the types of populations. A low measure would mean that the population is homogeneous while a high measure implies population heterogeneity. 
-  - Let the chance that two randomly drawn individuals are of same type be:
+- How does the type change over time?
+- We would like a measure of equality of the types of populations. A low measure would mean that the population is homogeneous while a high measure implies population heterogeneity. 
+- Let the chance that two randomly drawn individuals are of same type be:
   $$  G = \sum_i p_i^2 $$ 
-  - If we have two types, $p_1 = \pi$ , $p_2 = 1-\pi$. What is G if $\pi = 0, .5, 1$? 
+- If we have two types, $p_1 = \pi$ , $p_2 = 1-\pi$. What is G if $\pi = 0, .5, 1$? 
 ```{r, fig.height=5, fig.cap='Probability of being the same type', fig.align='center'}
 type_fun  <- function(pi_vector){
   oneminus_pi <- 1-pi_vector
@@ -228,8 +233,8 @@ type_fun  <- function(pi_vector){
 pi_vector <- seq(0,1,0.1)
 type_fun(pi_vector)
 ```
-  - Let's derive time path of G. 
-    - Assume just two types, $\pi(t)$
+- Let's derive time path of G. 
+  - Assume just two types, $\pi(t)$
 
 The chance  that two individuals are of same type $$G_{t+1} = P(\mbox{same parent})\cdot 1 + P(\mbox{different parent})\cdot G_{t}$$
 
@@ -269,12 +274,12 @@ by Matthew W. Hahn and R. Alexander Bentley Proc. R. Soc. Lond. B 2003 270, S120
 
 ### Basic idea
 
-  - The process seems to be like Fisher-Wright because:
-    - people choose from existing set
-    - names are "neutral"
-    - draw proportionally 
-  - Authors test to see if they can reject FW by comparin observed histograms to FW simulation
-  - They include mutation to get a stationary distribution. Note: failing to reject FW doesn't mean it's correct
+- The process seems to be like Fisher-Wright because:
+  - people choose from existing set
+  - names are "neutral"
+  - draw proportionally 
+- Authors test to see if they can reject FW by comparin observed histograms to FW simulation
+- They include mutation to get a stationary distribution. Note: failing to reject FW doesn't mean it's correct
 
 
 ![Baby Names by Matthew W. Hahn and R. Alexander Bentley Proc. R.Soc. Lond. B 2003 270, S120-S123](/hdir/0/fmenares/Book/bookdown-master/images/hahn_pic.png)
@@ -421,22 +426,19 @@ lines(my.x, out.hat)
 
 ## Conclusions
   
-  - Fisher-Wright an alternative to branching processes
-  - It reverses logic of reproduction, but gives similar
-    quantitative and qualitative results
-  - A neutral model for other processes?
-  - Starting point for coalescent
+- Fisher-Wright an alternative to branching processes
+- It reverses logic of reproduction, but gives similar quantitative and qualitative results
+- A neutral model for other processes?
+- Starting point for coalescent
 
 ### Some potential criticism
   
-  - While we can't reject that there's some parameterization of
+- While we can't reject that there's some parameterization of
     FW that gives us similar disn, this doesn't mean that we've
     found the right mechanism. (Just that we can't reject it).
-  
-  - What are some other tests of this mechanism?
-  
-  - Markov assumption. We could see if each frequency really
+- What are some other tests of this mechanism?
+- Markov assumption. We could see if each frequency really
     followed random walk.
-  - Perhaps we could see if variances were scaled to
+- Perhaps we could see if variances were scaled to
     frequencies correctly.
   
