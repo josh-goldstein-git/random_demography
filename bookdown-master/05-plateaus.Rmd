@@ -19,15 +19,15 @@
   \bar\mu(x,t) = \mu_0(x,t) \bar{S}_c(x,t)^{\sigma^2}
   $$ 
 
-  We take the log and the time-derivative of hazards  give V&M (39*)
+  We take the log and the time-derivative of hazards  give @vaupel2014unobserved (Eq. 39*)
   $$ 
   \rho(x,t) = \rho_0(x,t) - \sigma^2 {d \over dt} \log
   \bar{S}_c(x,t)^{\sigma^2}
   $$ 
 
-> Note: this formula should be correct. V&M contains a mistake: an extra minus sign in the definition of   $\bar{S}_c(x,t)$. 
+> Note: this formula should be correct. @vaupel2014unobserved contains a mistake: an extra minus sign in the definition of   $\bar{S}_c(x,t)$. 
 
-We take the log and the time-derivative of hazards  give V&M (39*)
+We take the log and the time-derivative of hazards  give @vaupel2014unobserved (Eq. 39*)
 
   $$ 
   \rho(x,t) = \rho_0(x,t) - \sigma^2 {d \over dt} \log
@@ -65,12 +65,12 @@ So individual-level mortality progress is nearly 50% faster (1.3% vs. 0.9%) than
 ## Conclusions 
 - Gamma frailty gives simple expressions for population survival,
 hazard, and average frailty.
-- Gamma frailty gives a plateau
+- Gamma frailty gives a plateau.
 - Gamma frailty gives us a predicted rate of convergence and
-cross-over with age
+cross-over with age.
 - All of this means it is a useful null model.
 - Takes us away from “it could be selection” to “what if it were
-selection”
+selection”.
 
 
 ## Hazards and Plateaus by Professor Ken Wachter
@@ -91,12 +91,12 @@ selection”
 
    What is the importance of plateaus?
    
-   - They encourage optimism that future progress against old-age mortality is feasible. Our bodies are not facing an endlessly mounting set of things going wrong.
-   - They point to commonalities with the life-course demography of other species. The shared genetic heritage of advanced organisms is permissive.
+- They encourage optimism that future progress against old-age mortality is feasible. Our bodies are not facing an endlessly mounting set of things going wrong.
+- They point to commonalities with the life-course demography of other species. The shared genetic heritage of advanced organisms is permissive.
    
    For instance, we can compare human hazard to that of other species:  
    
-```{r plateauhoriuchi, echo=FALSE, fig.align='center', fig.cap='Hazards across selected species. Source: @horiuchi2003', fig.height=5, out.width='80%'}
+```{r plateauhoriuchi, echo=FALSE, fig.align='center', fig.cap='Hazards across selected species. Source: @horiuchi2003', fig.height=6, out.width='80%'}
     knitr::include_graphics('figures/plateau_2.png')
     ```   
     
@@ -132,7 +132,7 @@ cumulative hazard $H_x$, and for the aggregate population hazard $\mu_x$ implied
     mux       <-  hx *khat/ (khat + Hx)
 ```
 
-```{r echo=TRUE, fig.align='center', fig.cap='Hazards and plateau with Gamma frailty', out.width='80%'}
+```{r echo=TRUE, fig.align='center', fig.cap='Hazards and plateau with Gamma frailty', out.width='80%', , fig.height=6}
     #Plot:
     plot(age, log(hx), type= "l", col="blue", xlim = c(60,130), ylim =c(min(log(hx)),4),
          xlab= "Ages for estimated Gompertz", ylab="Log hazard") #individual hazard
@@ -222,7 +222,7 @@ mux      <-  hx *k_vals/ (k_vals + Hx)
 - As $\beta$ increases, the individual and population hazards rise (or shift upwards). 
 - For comparison, the third panel contains the $\beta=0.088$  and $k=7.045455$ values used in the previous excercise.
 
-```{r echo=TRUE, fig.height=6, message=FALSE, fig.cap ='Changing values of beta in Gompertz hazards', fig.align='center'}
+```{r echo=TRUE, fig.height=7, message=FALSE, fig.cap ='Changing values of beta in Gompertz hazards', fig.align='center'}
 par(mfrow=c(2,3))
 plateau_beta_nolegend(beta_vals[1],khat)
 plateau_beta_nolegend(beta_vals[2],khat)
@@ -237,7 +237,7 @@ plateau_beta_legend(beta_vals[5],khat)
 
 - Population hazards expand upwards with increases in $k$. The fourth panel uses the baseline  values for $\beta=0.088$ and $k=7.045455$.
 
-```{r echo=TRUE, fig.height=6, fig.cap = 'Changing values of k (Gamma shape parameter)', fig.align='center'}
+```{r echo=TRUE, fig.height=7, fig.cap = 'Changing values of k (Gamma shape parameter)', fig.align='center'}
 par(mfrow=c(2,3))
 plateau_k_nolegend(beta,k_vals[1] )
 plateau_k_nolegend(beta,k_vals[2] )
@@ -321,7 +321,7 @@ $\mu_x = -\frac{d}{dx}\left(k  log(\theta)- k  log(\theta+H_x)\right)= \left(\fr
 - To keep the story as simple as possible, picture a mutant allele that has a small bad effect on survival only at an “age of onset” $a$. It raises the hazard of the individual who carries it by an amount $\delta$ in the age interval $a$ to $a + 1$.
 - Picture a constant level of fertility from age 20 onward, set to make the NRR equal to 1 for women who carry no mutant alleles.
 - Take, for example, $\lambda = 0.080$, $\delta= 0.002$, and $\nu(a) = 0.020/50$ for any $a \geq 20$. For each separate choice of age of onset $a$, find and plot the
-equilibrium size $rho(a)$ as a function of $a$.
+equilibrium size $\rho(a)$ as a function of $a$.
   - Here, we explore a genetic process which can generate a plateau in individual hazard functions. In particular, this is the case where a harmful mutant allele increases the hazard function of those that carry such allele with onset only in a single age interval.
 ```{r echo=TRUE, warning=FALSE}
 # Parameters
@@ -357,7 +357,8 @@ for  ( a in seq(xxx))      {
 }   
 
 ```
-  - $\rho(a)$ increases exponentially, this comes from the exponential survival. This graph tells us, the number of people that survive when the mutation is triggered at a given age. So at age 70, about 1400 people survive but if the mutation hit at age 20, nobody would survive. 
+
+- $\rho(a)$ increases exponentially, this comes from the exponential survival. This graph tells us, the number of people that survive when the mutation is triggered at a given age. So at age 70, about 1400 people survive but if the mutation hit at age 20, nobody would survive. 
 
 ```{r echo=TRUE, fig.cap="$\\rho(a)$ as a function of age", fig.align='center'}
 par(mfrow=c(1,2))

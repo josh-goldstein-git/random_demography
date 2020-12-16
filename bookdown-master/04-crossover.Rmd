@@ -6,22 +6,22 @@
 
 Additional resources:   
 
-  - @coale1986mortality: Non-technical overview of data issues that could create the appearance of mor-tality cross-overs.  
-  - @manton1981methods: interesting discussion on parameter choice of the Gamma and the empirical results.  
+- @coale1986mortality: Non-technical overview of data issues that could create the appearance of mor-tality cross-overs.  
 
+- @manton1981methods: interesting discussion on parameter choice of the Gamma and the empirical results.  
 
 ## What happens to mortality disparities at older ages?
   
-  - Cumulative disadvantage
-  - Age as a leveler
-    - Individual adaptation/plasticity, gov support, separation from unequal structures like labor market
-  - Bad data / measurement
-    - Unreliable ages, institutionalization changes sample, etc.
+- Cumulative disadvantage
+- Age as a leveler
+  - Individual adaptation/plasticity, gov support, separation from unequal structures like labor market
+- Bad data / measurement
+  - Unreliable ages, institutionalization changes sample, etc.
 
-  - Nothing
-    - It's all selection ("frailty"), pop hazards but individual hazards would have remained "parallel".
+- Nothing
+  - It's all selection ("frailty"), pop hazards but individual hazards would have remained "parallel".
 
-Our goal is to examine this last "null hypothesis". What can frailty explain, and what can't it?
+Our goal is to examine this last "null hypothesis". What can frailty explain, and what can't it
   
 ### A possible null-model
 
@@ -31,7 +31,7 @@ Our goal is to examine this last "null hypothesis". What can frailty explain, an
   $$
   \mu_2(x) =  R \mu_1(x)
   $$
-see V&M (38)
+see @vaupel2014unobserved (Eq 38)
 
   $$
   \mu_1(x |z_1) = \mu_1 z_1 \\ \mu_2(x |z_2) = \mu_2 z_2  
@@ -39,7 +39,7 @@ see V&M (38)
 
   And, frailty terms are each gamma, with mean 1 and own variances.
 
-### A result: \vr (5E - V&M (38))
+### A result: \vr (5E - @vaupel2014unobserved (Eq 38))
 
   $$
   \bar{R}(x) \equiv {\bar\mu_2(x) \over \bar\mu_1(x)} =
@@ -48,12 +48,14 @@ see V&M (38)
   
   Questions:
   
-  - If variances are equal. What happens at age 0? What happens
-    at very old ages.
-  - If the higher mortality group has bigger frailty variance, what
-    happens at older ages?
-  - Same if  higher mortality group has smaller frailty
+- If variances are equal. 
+  - What happens at age 0? 
+  - What happens at very old ages?
+- If the higher mortality group has bigger frailty variance.
+  - What happens at older ages?
+- If higher mortality group has smaller frailty
     variance?
+  - What happens at older ages?
   
 
 > Homework: prove this, simulate this. see if cross of is when

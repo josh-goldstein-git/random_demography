@@ -10,9 +10,11 @@
 
 Additional resources:
 
-  - Blog "Introduction to the Wright-Fisher Model" <https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html#pre-requisites>
-  - @hahn2003drift:  Evolutionary anthropologists arguing that the neutral explanation of the Fisher-Wright model is consistent with the distribution of 1st names. What other quantitative or qualitative features of 1st name fashion could be used to try to reject the neutral model?
-  - @felsenstein2005theoretical: Very complete "lecture notes" for graduate genetics course. Lots of good commentary, does not assume a lot of math background, but lots of content and can be diffcult to read a piece by itself. 
+- Blog "Introduction to the Wright-Fisher Model" <https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html#pre-requisites>
+  
+- @hahn2003drift:  Evolutionary anthropologists arguing that the neutral explanation of the Fisher-Wright model is consistent with the distribution of 1st names. What other quantitative or qualitative features of 1st name fashion could be used to try to reject the neutral model?
+  
+- @felsenstein2005theoretical: Very complete "lecture notes" for graduate genetics course. Lots of good commentary, does not assume a lot of math background, but lots of content and can be diffcult to read a piece by itself. 
 
 ## Parallel
 
@@ -56,39 +58,32 @@ Additional resources:
     
 </div>
 
+
 ### Another cell phone example
-As in the Branching Processes chapter, let's simulate the creation of generations using the numbers of cell-phone numbers (which are random). For this case, we need as many cell phone numbers as the generations to create, but each next cell phone number is a combination of digits from the first cell phone number. Let these ficticious cell phone numbers be: 731 660 5362 and 530 666 7723. Note how the second number does not contain any 4s, 8s or 9s.  
+As in the Branching Processes chapter, let's simulate the creation of generations using the numbers of cell-phone numbers (which are random). For this case, we need as many cell phone numbers as the generations to create, but each next cell phone number is a combination of digits from the first cell phone number. 
+
+Let these ficticious cell phone numbers be: 731 660 5362 and 530 666 7723. Note how the second number does not contain any 4s, 8s or 9s.  
 
 Generation 1 starts off with a sequence of numbers from 0 to 9. Then for generation 2, we assign each digit of the cell phone to one of cells. We repeat this for generation 3 but with the second cell phone number.   
 
+```{r}
+  knitr::kable(
+  cbind(c(1:3), rbind(c(0:9),c(7, 3, 1, 6, 6, 0, 5, 3, 6, 2), 
+        c(5, 3, 0, 6, 6, 6, 7, 7, 2, 3))),
+  col.names = c('generation #', 'allele type', "", "", "", "", "", "", "", "", "")) %>% kable_paper(bootstrap_options = "striped", full_width = F)
+```
 
-+-----------+---------------------------------------+
-| generation| allele type                           | 
-|  #        |                                       |
-+===========+===+===+===+===+===+===+===+===+===+===+
-| 1         | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-+-----------+---+---+---+---+---+---+---+---+---+---+
-| 2         | 7 | 3 | 1 | 6 | 6 | 0 | 5 | 3 | 6 | 2 |  
-+-----------+---+---+---+---+---+---+---+---+---+---+
-| 3         | 5 | 3 | 0 | 6 | 6 | 6 | 7 | 7 | 2 | 3 |
-+-----------+---+---+---+---+---+---+---+---+---+---+
 
 If we translate this graph into a tally of the alleles by generation we see that some alleles are passed/''survive'' more than others. 
 
-+---------+-----------------------+
-|allele   | Count per generation  |
-| type    |   1   |   2   |   3   |
-+=========+=======+=======+=======+
-|    1    |   1   |   1   |   1   | 
-|    2    |   1   |   1   |   1   | 
-|    3    |   1   |   2   |   2   | 
-|    4    |   1   |   0   |   0   | 
-|    5    |   1   |   1   |   1   |
-|    6    |   1   |   3   |   3   |
-|    7    |   1   |   1   |   2   |
-|    8    |   1   |   0   |   0   |
-|    9    |   1   |   0   |   0   |
-+=========+=======+=======+=======+
+
+```{r}
+  knitr::kable(
+  cbind(c(1:9), c(rep(1,9)), c(1, 1, 2, 0, 1, 3, 1, 0, 0), 
+        c(1, 1, 2, 0, 1, 3, 2, 0, 0)),
+  col.names = c('Allele type', "1", "2", "3"))  %>% kable_paper(bootstrap_options = "striped", full_width = F) %>% add_header_above(c(" " = 1, "Count per generation" = 3))
+```
+
 - Here, allele type 6 will most likely dominate. This means that everybody will likely become similar and that individual types disappear. 
 
 **NOTE FOR JOSH**: does this explanation make sense? I had a hard time following the cell-phone number example in class so my notes are incomplete. Also, it's not so straightforward to me how the "Children are choosing their parents here". Could you explain this more?
@@ -127,29 +122,37 @@ Let's simulate the process from the example below. We first present some useful 
   }
 ```
 
-Here we try it out. Each row is a generation and each column is a type of allele. Notice that already by the third generation, there are several numbers that are not drawn anymore: 3,4,6,8,9.
+Here we try it out. 
+- Each row is a generation and each column is a type of allele. 
+- Notice that already by the third generation, there are several numbers that are not drawn anymore: 3,4,6,8,9.
+ 
 ```{r}
   set.seed(1)
   fwm(N = 10, n_gen = 6, mu = 0)
 ```   
 
-The graph below shows a simulation of 20 generations each of size 10. The colors represent different types drawn in each generation. Let's analyze it more. 
+The graph below shows a simulation of 20 generations each of size 10. The colors represent different types drawn in each generation. 
 
-  - By generation 5, many of the lines are flat (ocurrence = 0%) which means that they go extinct and the following generations can only select types from a reduced sample. 
-  - For instance line "5" (pink) is selected until generation 10. Around generation 7, it becomes the most prevalent type but then falls as other types are drawn relatively more. As we are looking at the ocurrence in samples were types disappear, the rises and falls in lines are indicate the substitution of numbers as some go extinct. 
-  - By generation 15, all draws are 2s and the other numbers do not ''survive'' 
-  - $E(p_i(t) | p_i(t-1))$ is the likelihood that the same number (type) will be drawn given that it was drawn before.  **NOTE TO JOSH**: is this really what the expectation means? Not on slides
 ```{r}
   set.seed(1)
   A <- fwm(N = 10, n_gen = 20, mu = 0)
   tt <- table(A, row(A)) ## count types by row
   ptt <- prop.table(tt, 2) ## proportions
 ```
-```{r, fig.height = 3.5, echo=FALSE, fig.cap='Generation composition'}
+
+```{r, fig.height = 3.5, echo=FALSE, fig.cap='Generation composition', fig.align='center'}
   matplot(t(ptt), type = 'l', lty = 1, main = "Fisher-Wright simulation", xlab = "Generation #", ylab="Ocurrence (% of gen. size)"
             )
   text(x = 4, y = jitter(ptt[,4]), rownames(ptt), col = 1:6)
 ``` 
+
+Let's analyze it more. 
+
+- By generation 5, many of the lines are flat (ocurrence = 0%) which means that they go extinct and the following generations can only select types from a reduced sample. 
+- For instance line "5" (pink) is selected until generation 10. Around generation 7, it becomes the most prevalent type but then falls as other types are drawn relatively more. As we are looking at the ocurrence in samples were types disappear, the rises and falls in lines are indicate the substitution of numbers as some go extinct. 
+- By generation 15, all draws are 2s and the other numbers do not ''survive'' 
+- $E(p_i(t) | p_i(t-1))$ is the likelihood that the same number (type) will be drawn given that it was drawn before.  **NOTE TO JOSH**: is this really what the expectation means? Not on slides
+
 
 
 This time, let's increase the number of generations (200) and the number of types drawn at every step. In the long run, many of the colored lines disappear and the generations are composed of a handful of types.
@@ -160,7 +163,7 @@ This time, let's increase the number of generations (200) and the number of type
   tt <- table(A, row(A)) ## count types by row
   ptt <- prop.table(tt, 2) ## proportions
 ```
-```{r, fig.height = 3.5, echo=FALSE, fig.cap='Generation composition long term'}
+```{r, fig.height = 3.5, echo=FALSE, fig.cap='Generation composition long term', fig.align='center'}
   matplot(t(ptt), type = 'l', lty = 1, main = "Fisher-Wright simulation", xlab = "Generation #", ylab="Ocurrence (% of gen. size)"
             )
   text(x = 4, y = jitter(ptt[,4]), rownames(ptt), col = 1:6)
@@ -171,14 +174,14 @@ This time, let's increase the number of generations (200) and the number of type
 
 Given that we saw before that some of the lines will disappear, we can look about keeping some of the lines fixed (that it will always be selected). For instance, 
 
-  - What is probability that line $i$ will ``fix''? 
-  - What is expected time until some line fixes? 
-  - How can we describe the path to fixation? 
+- What is probability that line $i$ will "fix"? 
+- What is expected time until some line fixes? 
+- How can we describe the path to fixation? 
   
 ### Probability that a particular line will "fix"
 **NOTE TO JOSH**: the slide said that finding this was easy but I don't necessarily see how the result from the graph goes with the formula below. 
 
-```{r, fig.height = 5, fig.cap='Time to fix'}
+```{r, fig.height = 5, fig.cap='Time to fix', fig.align='center'}
   set.seed(1)
   A <- fwm(N = 10, n_gen = 20, mu = 0)
   tt <- table(A, row(A)) ## count types by row
@@ -189,13 +192,15 @@ Given that we saw before that some of the lines will disappear, we can look abou
 
 ### Expected time until fixation?
 
-  Answer for us is
+Answer for us is
   $$
   \bar{T}_{fixed} = 2 \cdot N
   $$
-  Note: Biologists say $4 N_e$. See Wikipedia "Genetic drift"
   
-  - Now we carry out simulations of complete processes. In total, we draw 100 times each generation in order to get the time to fixation. For this example, the mean number of generations taken to get only one remaining line is 202 generations $\approx 2 \times$ the starting generation size.
+- Note: Biologists say $4 N_e$. 
+  See Wikipedia "Genetic drift"
+  
+- Now we carry out simulations of complete processes. In total, we draw 100 times each generation in order to get the time to fixation. For this example, the mean number of generations taken to get only one remaining line is 202 generations $\approx 2 \times$ the starting generation size.
 
 ```{r}
   T.vec <- NULL 
@@ -212,12 +217,12 @@ Given that we saw before that some of the lines will disappear, we can look abou
 
 ### Path to fixation: a measure of homogeneity/heterogeneity
 
-  - How does the type change over time?
-  - We would like a measure of equality of the types of populations. A low measure would mean that the population is homogeneous while a high measure implies population heterogeneity. 
-  - Let the chance that two randomly drawn individuals are of same type be:
+- How does the type change over time?
+- We would like a measure of equality of the types of populations. A low measure would mean that the population is homogeneous while a high measure implies population heterogeneity. 
+- Let the chance that two randomly drawn individuals are of same type be:
   $$  G = \sum_i p_i^2 $$ 
-  - If we have two types, $p_1 = \pi$ , $p_2 = 1-\pi$. What is G if $\pi = 0, .5, 1$? 
-```{r, fig.height=4, fig.width= 5, fig.cap='Probability of being the same type'}
+- If we have two types, $p_1 = \pi$ , $p_2 = 1-\pi$. What is G if $\pi = 0, .5, 1$? 
+```{r, fig.height=5, fig.cap='Probability of being the same type', fig.align='center'}
 type_fun  <- function(pi_vector){
   oneminus_pi <- 1-pi_vector
   G <- pi_vector^2 + oneminus_pi^2
@@ -228,22 +233,34 @@ type_fun  <- function(pi_vector){
 pi_vector <- seq(0,1,0.1)
 type_fun(pi_vector)
 ```
-  - Let's derive time path of G. Assume just two types, $\pi(t)$
-    - The chance  that two indivuals are of same type $$ G_{t+1} = P(\mbox{same parent})\cdot 1 + P(\mbox{different parent})\cdot G_{t} $$
-    - The probability of having the same parent is $P(\mbox{same parent})  = \frac{1}{K}$, where $K$ is the population size. This also implies that anybody in the population can be a parent with equal probability.
-    - Additionally, $P(\mbox{different parent})  = 1- P(\mbox{same parent}) = 1-  \frac{1}{K}$
-    - Then, $$ G_{t+1} = \left(1 \over K\right) \cdot 1 + \left(1 - {1\over K})\right \cdot G_{t}$$
-    - For simplicity, let $H = 1 - G$:
+- Let's derive time path of G. 
+  - Assume just two types, $\pi(t)$
+
+The chance  that two individuals are of same type $$G_{t+1} = P(\mbox{same parent})\cdot 1 + P(\mbox{different parent})\cdot G_{t}$$
+
+    - Notation: I’m going use K for pop size. Bio uses 2N.
+
+The probability of having the same parent is $P(\mbox{same parent})  = \frac{1}{K}$, where $K$ is the population size. This also implies that anybody in the population can be a parent with equal probability.
+
+Additionally, $P(\mbox{different parent})  = 1- P(\mbox{same parent}) = 1-  \frac{1}{K}$
+
+Then, $$G_{t+1} = \left(\frac{1}{K}\right) \cdot 1 + \left(1 - \frac{1}{K}\right) \cdot G_{t}$$
+
+For simplicity, let $H = 1 - G$:
     
-    $$\begin{aligned}
-    1 - H_{t+1} & =  {1 \over K} + \left(1 - {1 \over K} \right) \cdot (1-H_{t})   \\
+    $$
+    \begin{aligned}
+    1 - H_{t+1} & =  {1 \over K} + \left(1 - {1 \over K} \right) \cdot (1-H_{t})\\
        & = {1 \over K}  + 1 - H_{t} - {1\over K}+ {1\over K} H_{t} \\
     H_{t+1} & = H_{t} - {1\over K} H_{t} \\
     H_{t+1} & = H_{t} (1 - 1/K)
-    \end{aligned}$$
-    - For many periods, we start at the initial probabilities. 
+    \end{aligned}
+    $$
+    
+For many periods, we start at the initial probabilities. 
+
   $$
-  H_{t} = H_0 (1 - 1/K)^t % \rightarrow H_0 e^{-t/K}
+  H_{t} = H_0 (1 - 1/K)^t \rightarrow H_0 e^{-t/K}
   $$
   So, H goes to 0 exponentially, just as G goes to 1.
 
@@ -257,12 +274,12 @@ by Matthew W. Hahn and R. Alexander Bentley Proc. R. Soc. Lond. B 2003 270, S120
 
 ### Basic idea
 
-  - The process seems to be like Fisher-Wright because:
-    - people choose from existing set
-    - names are "neutral"
-    - draw proportionally 
-  - Authors test to see if they can reject FW by comparin observed histograms to FW simulation
-  - They include mutation to get a stationary distribution. Note: failing to reject FW doesn't mean it's correct
+- The process seems to be like Fisher-Wright because:
+  - people choose from existing set
+  - names are "neutral"
+  - draw proportionally 
+- Authors test to see if they can reject FW by comparin observed histograms to FW simulation
+- They include mutation to get a stationary distribution. Note: failing to reject FW doesn't mean it's correct
 
 
 ![Baby Names by Matthew W. Hahn and R. Alexander Bentley Proc. R.Soc. Lond. B 2003 270, S120-S123](/hdir/0/fmenares/Book/bookdown-master/images/hahn_pic.png)
@@ -311,7 +328,7 @@ my.x <- my.breaks[-length(my.breaks)] + diff(my.breaks)/2
 ``` 
 
 Then we look at observed frequencies and they seem to behave as a power law (in log-log)
-```{r, fig.height=4, fig.width= 5, fig.cap='Power law in baby name appearance'}
+```{r fig.cap='Power', fig.height=5, warning=FALSE, fig.align = 'center'}
 plot(my.x, out, log = "xy", xlab="Frequency of name", ylab= "log(share)")
 ```
 
@@ -327,14 +344,14 @@ get.G <- function(x)
 ```
 
 First we look at the case were there is no mutation
-```{r, fig.height=4, fig.width= 5, fig.cap='G path (without mutation)'}
+```{r, fig.height= 5, fig.cap='G path (without mutation)', fig.align = 'center'}
 A <- fwm(1000, n_gen = 4000, mu = 0)
 G.vec <- apply(A, 1, get.G)
 plot(G.vec, ylab = "G", xlab= "# Generation", type ="l")
 ```
 
 With mutation a single trial shows that the G value oscillates a lot around 0.1. 
-```{r, fig.height=4, fig.width= 5, fig.cap='G path (with mutation, 1 trial)'}
+```{r, fig.height= 5, fig.cap='G path (with mutation, 1 trial)', fig.align = 'center'}
 N = 1000
 A <- fwm(N, n_gen = 3000, mu = 4/N)
 G.vec <- apply(A, 1, get.G)
@@ -342,7 +359,7 @@ plot(G.vec, ylab = "G", xlab= "# Generation", type ="l")
 ```
 We can increase the number of trials (up to 100 here) and look at the average (yellow horizontal line). 
 
-```{r,fig.height=4, fig.width= 5, fig.cap='G path (with mutation, 100 trials)'}
+```{r,fig.height=5, fig.cap='G path (with mutation, 100 trials)', fig.align = 'center'}
 n_gen = 2000
 n_trials = 100
 G.mat <- matrix(NA,  n_trials, n_gen)
@@ -363,14 +380,13 @@ abline(h = 1/9, lty = 3, col = "yellow", lwd = 5)
 Why is the mean about .11?
 ```{r, eval=FALSE}
 1/(1 + 8)
-
 ```
 
-Gillespie tells us that $\bar{G}$ is supposed to be $\frac{1}{(1 + 4*Ne*mu)}$
+Gillespie tells us that $\bar{G}$ is supposed to be $\frac{1}{(1 + 4*Ne*\mu)}$
 
-How does 4*Ne*mu = 8?
+How does $4*Ne*\mu = 8$?
 
-Well, we have $K*mu = 4$ and since $K = 2*Ne$, $Ne = = K/2$ (maybe)
+Well, we have $K*\mu = 4$ and since $K = 2*Ne$, $Ne = K/2$ (maybe)
 
 ### FW babyname simulation of equilibrium frequencies 
 
@@ -382,7 +398,7 @@ theta = N*mu ## [1] 4 ## H&B's "best fit"
 ```
 
 ## Now we can simulate babyynmes
-```{r, eval=FALSE}
+```{r, warning=FALSE, fig.height=5, fig.cap='Baby Names Simulation', fig.align = 'center'}
 n_gen = 1001
 N = 1000
 ## set.seed(1)
@@ -410,22 +426,19 @@ lines(my.x, out.hat)
 
 ## Conclusions
   
-  - Fisher-Wright an alternative to branching processes
-  - It reverses logic of reproduction, but gives similar
-    quantitative and qualitative results
-  - A neutral model for other processes?
-  - Starting point for coalescent
+- Fisher-Wright an alternative to branching processes
+- It reverses logic of reproduction, but gives similar quantitative and qualitative results
+- A neutral model for other processes?
+- Starting point for coalescent
 
 ### Some potential criticism
   
-  - While we can't reject that there's some parameterization of
+- While we can't reject that there's some parameterization of
     FW that gives us similar disn, this doesn't mean that we've
     found the right mechanism. (Just that we can't reject it).
-  
-  - What are some other tests of this mechanism?
-  
-  - Markov assumption. We could see if each frequency really
+- What are some other tests of this mechanism?
+- Markov assumption. We could see if each frequency really
     followed random walk.
-  - Perhaps we could see if variances were scaled to
+- Perhaps we could see if variances were scaled to
     frequencies correctly.
   

@@ -14,7 +14,7 @@ description: "This is a book from the Mathematical Demography lecture notes."
 
 # Introduction
 
-Mathematical demography book
+Mathematical demography book transcribed and coded from class notes by Andrea Miranda-González (andrea.mirgon@berkeley.edu) and Felipe Menares (fmenares@berkeley.edu). 
 
 Special thank you to the Spring 2020 Mathematical Demography students for the problem set answers. 
 

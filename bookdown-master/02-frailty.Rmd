@@ -8,14 +8,13 @@
 
 Additional resources 
 
-  - @vaupel2014unobserved:
-  - @rodriguez2001: detailed hand-out for Princeton class. Many of the same results as @vaupel2014unobserved, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.
+- @vaupel2014unobserved:
+- @rodriguez2001: detailed hand-out for Princeton class. Many of the same results as @vaupel2014unobserved, but with alternative derivations and notation. Also includes inversion formula and extensions beyond Gamma frailty such as “Inverse Gaussian Frailty”.
 
 ### Review of mortality mathematics
 
-  - $\ell(x)$ or $S(x)$ probability of survival to age $x$
-  - $\mu(x)$ or $h(x)$ hazard rate at age $x$ ("minus the exponential rate of change in
-    survival")
+- $\ell(x)$ or $S(x)$ probability of survival to age $x$
+- $\mu(x)$ or $h(x)$ hazard rate at age $x$ ("minus the exponential rate of change in survival")
 
   Let's treat $\mu$ as a definition.
   $$
@@ -29,14 +28,14 @@ Additional resources
 
 ### Application: what is $\ell'(x)$?
 
-  -  in words?
-  -  taking derivative of $\ell(x)$
-  -  interpretation
+- in words?
+- taking derivative of $\ell(x)$
+- interpretation
 
 #### Two special cases
   
-  -  Constant hazards $\mu(x) = \mu$. What's $\ell(x)$?
-  -  Gompertz hazards $\mu(x) = a e^{b x}$. What's $\ell(x)$?
+- Constant hazards $\mu(x) = \mu$. What's $\ell(x)$?
+- Gompertz hazards $\mu(x) = a e^{b x}$. What's $\ell(x)$?
   
 
 ### Extending Keyfitz to mortality
@@ -53,7 +52,7 @@ Additional resources
   $$
 
   To derive Keyfitz extension, differentiate with respect to age
-  $x$. (See \vm eq (13)). A good exercise.
+  $x$. (See \vm @vaupel2014unobserved (Eq. 13). A good exercise.
 
 
 
@@ -63,11 +62,9 @@ Additional resources
   \mu_i(x) = z_i \mu_0(x).
   $$
   
-  - $z_i$ "frailty" of the $i$th individual. (Usually thought
-    of as a random variable with mean $1$.)
-  - $\mu_0(x)$ "Baseline hazard" schedule.  (Also, the
-    schedule of a person with $z = 1$).
-  - Let's think of at least three. ($\beta$, $i$, $\Delta$)
+- $z_i$ "frailty" of the $i$th individual. (Usually thought of as a random variable with mean $1$.)
+- $\mu_0(x)$ "Baseline hazard" schedule.  (Also, the schedule of a person with $z = 1$).
+- Let's think of at least three. ($\beta$, $i$, $\Delta$)
 
 Which look like multiplicative fixed frailty?
 
@@ -102,10 +99,10 @@ Which look like multiplicative fixed frailty?
 ### A simulation
 
 - Our questions
-  -  How do we do a micro-simulation, with individuals?
-  -  How does fixed frailty fit in?
-  -  How do we compute pop survival, hazards, etc.
-  -  How does life table of heterogeneous pop differ from baseline?
+  - How do we do a micro-simulation, with individuals?
+  - How does fixed frailty fit in?
+  - How do we compute pop survival, hazards, etc.
+  - How does life table of heterogeneous pop differ from baseline?
 
 ### Let's derive pop survival (Note: $\bar{s} = \bar{\ell}$) 
 
@@ -176,23 +173,23 @@ Vaupel's result
   \bar{\beta}(x) = \beta_0(x) - \bar{\mu}(x) CV_z^2(x)
   $$
 
--  Hazards rise less slowly in pop than in baseline
--  If pop hazards plateau, then $\bar{\beta}(x) = 0$
--  Two special cases
-  -  Homogeneous pop and plateau in baseline
-  -  Gompertz and constant $CV_z$ (e.g., from Gamma)
+- Hazards rise less slowly in pop than in baseline
+- If pop hazards plateau, then $\bar{\beta}(x) = 0$
+- Two special cases
+  - Homogeneous pop and plateau in baseline
+  - Gompertz and constant $CV_z$ (e.g., from Gamma)
 
 ## Part II. Introduction to Gamma Frailty
 
 ### The Gamma distribution
   
 - What do we want in a frailty distribution?
-  -  positive?
-  -  a single dimension summarizing multiple factors? (Normal?)
-  -  flexible?
-  -  tractable?
+  - positive?
+  - a single dimension summarizing multiple factors? (Normal?)
+  - flexible?
+  - tractable?
 
--  What's the Gamma?
+- What's the Gamma?
 
 
 $$
@@ -274,8 +271,8 @@ Our Result
   $$
 
   
-  -  Older ages, smaller survival.
-  -  Variance not so clear, need a picture. (What if $\sigma^2 = 0$?)
+- Older ages, smaller survival.
+- Variance not so clear, need a picture. (What if $\sigma^2 = 0$?)
   
 ```{r, fig.height = 3, fig.align='center', fig.cap='Gamma-frailty population survival'}
 x <- 0:100
@@ -303,9 +300,8 @@ plot(x, Sx.0, lty = 2, type = "l", ylim = c(0,1),
 ```
 
 ## Conclusions
-  - Multiplicative Fixed Frailty is one option for modeling
-  - Gave us analytical expressions for population survival and
-    hazards including $\bar{\mu}(x) = \mu_0(x) \bar{z}(x)$
-  - Extended Keyfitz result to age-changing hazards
-  - Survival curve for Gamma
+- Multiplicative Fixed Frailty is one option for modeling
+- Gave us analytical expressions for population survival and hazards including $\bar{\mu}(x) = \mu_0(x) \bar{z}(x)$
+- Extended Keyfitz result to age-changing hazards
+- Survival curve for Gamma
   
