@@ -14,6 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Outline
 
   - Formal demography of epidemic mortality
+  
+Additional resources:
+
+  - For more details and insights refer to @goldstein2020demographic
 
 ## Motivating questions 
 
