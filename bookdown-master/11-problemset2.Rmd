@@ -3,7 +3,7 @@
 ## Questions
 1. True/False: The variance of the population distribution of deaths will always be larger than that of the baseline. Explain your answer briefly. 
 
-2. Use the fraily simulator to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.  
+2. Use the frailty simulator to produce plots of the uniform, gamma, and U-shaped beta distribution. Describe in a sentence, each, how the population hazard behaves at older ages.  
 
 3. Does the behavior of the uniform at older ages look like a population with two (proportional) sub-groups? What do you think is driving this? (This is an open-ended question. You should feel free to use mathematics, intuition, or any other approach to answer.)  
 
