@@ -36,11 +36,10 @@ An actual "picture"
 ## Our first question: When was MRCA?
 
 - *If we sample two individuals (today), how long ago was their MRCA?* Note that we are not looking for "who" the MRCA is but rather the number of generations ago that they occurred. 
-  - Our answer will in terms of the probability of MRCA being 1 generation ago, 2 generations ago, etc.
+  - Our answer will be in terms of the probability of MRCA being 1 generation ago, 2 generations ago, etc.
   - We'll assume Fisher-Wright: constant N, each gen randomly picks parents.
-  - The answer is surprisingly simple
+  - The answer is surprisingly simple.
   
-<<<<<<< HEAD
 Let's assume we have $N$ lines in Fisher-Wright (Note: for now we are not using $2N$.) As a reference, think about the population being the dots from the last column of the diagram from the last section. Then this sample is trying to look backwards $n$ generations until they find their MRCA. 
   
   - The chance that two sampled people have same parent is $1/N$.
@@ -49,10 +48,10 @@ Let's assume we have $N$ lines in Fisher-Wright (Note: for now we are not using 
   
   $$P(T_{MRCA} = 2) = \left(1-\frac{1}{N}\right)\frac{1}{N} $$
   
-  Here, $ \left(1-\frac{1}{N}\right)$ is the probability of non coalescence in the first generation and the second term $\frac{1}{N}$ is the probability of coalescence in the $2^{nd}$ generation. Therefore the probability of coalescence in the second generation is subject to non coalescence in the first generation. 
+  - Here, $\left(1- \frac{1}{N}\right)$ is the probability of non coalescence in the first generation and the second term $\frac{1}{N}$ is the probability of coalescence in the $2^{nd}$ generation. Therefore the probability of coalescence in the second generation is subject to non coalescence in the first generation. 
 
 
-  - What is $P(T_{MRCA} = n) = $? Continuing with the logic from the previous answer we have:
+  - What is $P(T_{MRCA} = n)$? Continuing with the logic from the previous answer we have:
   
   $$\begin{aligned}
   P(T_{MRCA} = 3) &= \left(1-\frac{1}{N}\right)^{2}\frac{1}{N}\\
@@ -64,7 +63,7 @@ Let's assume we have $N$ lines in Fisher-Wright (Note: for now we are not using 
   
   *With a reasonably big population and with a long time scale, we can think about the problem in continuous time* 
   
-  - Let the hazard of coalescence = $c = 1/N$.
+  - Let the hazard of coalescence be $c = 1/N$.
   - Probability of coalescence at time $t$: $\ell(t) h(t) = e^{-ct} c$
   - The expected time of coalescence is analogous to the average age of death which is the life expectancy at birth.
   
@@ -77,34 +76,11 @@ Let's assume we have $N$ lines in Fisher-Wright (Note: for now we are not using 
    & = (\frac{-1}{c})(0-1)\\
    & = \frac{1}{c}
    \end{aligned}$$
-   Since $c = 1/N$, then the expected waiting time until coalescence is $\frac{1}{c}= N$  
 
-  What is expected time of coalescence? Think life expectancy.
-=======
-- Let's assume we have $N$ lines in Fisher-Wright (Note: I'm not using $2N$.)
-  
-  - The chance that two sampled people have same parent is $1/N$, right?
- 
-Thus 
- 
-- $P(T_{MRCA} = 1) = 1/N$.
-- What is $P(T_{MRCA} = 2) = $?
-- What is $P(T_{MRCA} = n) = $?
-  
-Let's go to continuous time (reasonable if pop is big and time scale is long).
->>>>>>> 6aafe73ec628f179301b0a0fb97be1812f8569bd
-  
-- Hazard of coalescence = $c = 1/N$.
-  - Probability of coalescence at time $t$ = $\ell(t) h(t) = e^{-ct} c$
-- What is expected time of coalescence? Think life expectancy.
-- $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
-
-  Let's simulate
-
-- 1 time, without random seed, letting N = 40, ngen = 200, mu = 0
-- Average over 100 FW simulations
-- What is variance of outcome? Is it what we would expect from
-    exponential?
+  - Since $c = 1/N$, then the expected waiting time until coalescence is $\frac{1}{c}= N$
+  - What is expected time of coalescence? Think life expectancy.
+  - $E(T_{MRCA})$ if two samples: $1/c = 1/(1/N) = N$
+  - We can look at this through simulations. The functions below create Fisher-Wright processes and get the time to coalescence. 
 
 ```{r}
 ## Our functions
@@ -122,7 +98,7 @@ fwm2 <- function(N, n_gen, mu = 0, start_types = paste(1:N))
     ## Positions
     P <- matrix(NA, nrow = n_gen, ncol = N)
     x <- start_types
-    for (i in 1:3)
+    for (i in 1:n_gen)
     {
         ## this code is a bit different from last time
         ## note: this is a bit confusing, maybe we should assign A[i+1,] <- x at the end of this loop and
@@ -134,7 +110,7 @@ fwm2 <- function(N, n_gen, mu = 0, start_types = paste(1:N))
         x <- mut(x, mu) ## mutation
         ## x
     }
-    return(list(A=A, P=P)) ## matrix of types, each line a generation.
+    return(list(A=A, P=P)) ## A= matrix of types, each line a generation; P= matrix of positions 
 }
 
 mut <- function(x, mu)
@@ -150,6 +126,8 @@ mut <- function(x, mu)
 }
 
 
+##       Time to TMRCA      
+
 get.coalescence.time <- function(P, i,j, verbose = F)
 {
 
@@ -157,14 +135,14 @@ get.coalescence.time <- function(P, i,j, verbose = F)
     parents <- ending_individuals
     k_ago = 0
     PP = P ## for verbose, tracks coalescence
-    for (k in nrow(P):1)
+    for (k in nrow(P):1) # row P = generation until 1 (moving backwards in time)
     {
         k_ago = k_ago + 1
         if (verbose == TRUE)
             print(parents)
         parents <- P[k, parents]
-        PP[k, parents] <- P[k, parents]*10 + P[k, parents]
-        if (parents[1] == parents[2])
+        PP[k, parents] <- P[k, parents]*10 + P[k, parents] # way to tag the parents. PP = P when we are not following (backwards) the individuals i, j
+        if (parents[1] == parents[2]) # Stop looking backwards when both parents are the same
         {
             if(verbose)
                 print(parents)
@@ -182,29 +160,46 @@ get.coalescence.time <- function(P, i,j, verbose = F)
 }
 ```
 
+  - First, consider a FW process with 5 generations and 5 people. The first row of the matrix A is the starting population  of people types 1 through 5. The next generations (in each row) are sampled from the previous generation with replacement. If one type is not sampled into the next generation then it is ''lost'' and cannot appear in future generations. 
+** NOTE FOR JOSH:** I am really confused about the difference between the A and P matrix, so I don't know if I am writing the correct explanation above and below. Could you please explain more how P and A work in the code below and in the context of the get.time.coalesce fn?
 ```{r}
+set.seed(10)
+out <- fwm2(5,5,0) # N = 5, #generations = 5, mutation =0
+P <- out$P
+A <- out$A
+print(A)
+print(P)
 
-get.coalescence.time(P,1,2, verbose = T)
-get.coalescence.time(P,3,4, verbose = T)
-## test when there's no coalescence
-set.sed(10)
+```
+  - Here we look at a function that obtains the time to coalescence given a FW process. The output contains (in order) the parents of the individuals tracked, the position matrix and the time to coalescence. For individuals 1 and 2 $T_{MRCA}=3$ and for individuals 3 and 4, $T_{MRCA}=1$
+```{r}
+get.coalescence.time(P,1,2, verbose = T) # individuals tracked are 1 and 2
+get.coalescence.time(P,3,4, verbose = T) # individuals tracked are 3 and 4
+#output: 1) parents , 2) PP matrix, 3) 
+```
+  - Here is an example where there is no coalescence for individuals 3 and 4. In this case, we are looking at 5 types over 2 generations.
+```{r}
+set.seed(10)
 out <- fwm2(5,2,0)
 P <- out$P
 print(P)
-get.coalescence.time(P,1,2, verbose = T)
-get.coalescence.time(P,3,4, verbose = T)
-get.coalescence.time(P,3,3, verbose = T)
+get.coalescence.time(P,1,2, verbose = T) #Individuals 1 and 2
+get.coalescence.time(P,3,4, verbose = T) #Individuals 3 and 4
+get.coalescence.time(P,3,3, verbose = T) #Individuals 3 and 3
+```
+  - Now let's do average of coalescent time in different FW processes. We'll just draw 1 time for each one. We'll look at 200 generations of 40 types (no mutations). Over 200 simulations, we find that the average time to coalescence is 52.08 which is close to what our formula $E(T_{RMCA})=N$ predicts. Try another size of N, ie 20, and you'll find similar results! 
+
+  - The variance is 2828.174. If the process was an exponential distribution we would get that the mean $=\frac{1}{\lambda}$ and that the variance $=\frac{1}{\lambda^2}$. Here, if $\lambda=\frac{1}{52.08}$, then then variance should be $=\frac{1}{52.08^2}= 2712.326$. So, the variance below is a bit off from what we would expect from an exponential distribution.  
 
 
-## Now let's do average of coalescent time in different fw's
-## we'll just draw 1 pair for each one
+```{r}
 set.seed(2)
 N <- 50 ## pop size
 n_trials = 200 ## the number of "histories" we simulate
 n_samples = 1 ## the number of samples we do, of each history
 T.bar.vec <- rep(NA, n_trials)
 for (r in 1:n_trials) { ## for each trial
-    print(r)
+    #print(r)
     out<- fwm2(N, n_gen = N*20, mu = 0) ## big enough n_gen so we almost always observe MRCA
     P <- out$P
     T.vec <- rep(NA, n_samples) ## vector of Coalescent times from samples
@@ -216,7 +211,8 @@ for (r in 1:n_trials) { ## for each trial
     T.bar.vec[r] <- mean(T.vec) ## average coalescent times for this trial
 }
 
-mean(T.bar.vec) ## [1] 52.08
+mean(T.bar.vec) #Mean time to coalescence
+var(T.bar.vec) #Variance time to coalescence
 
 ```
 
@@ -229,19 +225,10 @@ print(P)
 
 ## Mutation and inference of TMRCA and $N$
   
-<<<<<<< HEAD
   - Using mutations, we can infer the most recent common ancestor. How?
   - Say mutations occur at a constant rate $\mu$ ($10^{-8}$?). Then in each generation we would expect $\mu$ mutations, and over $T$ years we would expect $T\mu$ mutations. Specifically, since the same mutation cannot happen twice, each year we expect new mutations. 
   - Say we observe that two people differ at $k$ sites of the genome. Given this information we can find the TMRCA and even the size of the population. 
-=======
-- Say mutations occur at a constant rate $\mu$ ($10^{-8}$?)
-- Each year we would expect $\mu$ mutations, and over $T$ years we
-    would expect $T\mu$ mutations.
-- Say we observe that two people differ at $k$ sites of the genome.
-  - When was TMRCA?
-  - How big is the population?
->>>>>>> 6aafe73ec628f179301b0a0fb97be1812f8569bd
-  
+
 ```{r, echo=FALSE}
 
 library(DiagrammeR)
@@ -260,88 +247,205 @@ render_graph(graph, width = 200, height = 200)
 ```
   
   In the tree graph above, we have that the difference between the parent point (1) and the branches is the number of generations:
+  
   - The tree length is $2T$
   - The expected number of mutations is # branches $\times$  # generations $\times$ mutations:
   $$ E(k) = E(2T\mu) = 2\mu E(T) = 2 \mu \bar{T}  $$
-  - $\bar{T}$ is the average number of generations until we reach the most common recent ancestor and from the previous section we know that: $$ \bar{T} = E(TMRCA) = N $$0
+  - $\bar{T}$ is the average number of generations until we reach the most common recent ancestor and from the previous section we know that: $$ \bar{T} = E(T_{MRCA}) = N $$
   - If we observe on average $\bar{k}$ mutations, then 
   
   $$ \begin{aligned} 
   \bar{k} & \approx E(k) = N 2 \mu \\
   \hat{N} & = {\bar{k} \over 2 \mu}
   \end{aligned} $$ 
-  -Therefore, an estimate of the population is given by the number of events ($\bar{k}$) as a share of the exposure ($2\mu$). This allows us to make inferences on how big a population is just by knowing an estimate of mutations and their probabilities.
   
-### Inference of population size, simulation
+  - Therefore, an estimate of the population is given by the number of events ($\bar{k}$) as a share of the exposure ($2\mu$). This allows us to make inferences on how big a population is just by knowing an estimate of mutations and their probabilities.
   
-- We do FW with mutations
-- Average pairwise differences
-- Divide by $2\mu$ to get our estimate
-- We can repeat a bunch of times and see average estimate converges to the truth
+### Inference of population size (Simulation)
   
+  - For this simulation, we will do FW with mutations. Then we will average pairwise differences and ivide by $2\mu$ to get our estimate.
+  - We can repeat this process multiple times and see if the average estimate converges to the truth.
 
-Coalescence of a sample of $n$ individuals
+```{r}
+# Function
+count_pairwise_diff <- function(str1, str2, verbose = F)
+{
+    ## stategy: split strings at "." and add
+    ## up number of mutations  after divergence
+
+    if (verbose == TRUE)
+        {
+            print(paste0('Item 1: ',str1))
+            print(paste0('Item 2: ',str2))
+
+        }
+    z1 = unlist(strsplit(str1, "\\."))
+    z2 = unlist(strsplit(str2, "\\."))
+    n1 = length(z1)
+    n2 = length(z2)
+    n = min(c(n1, n2))
+    ## make sure population has fixed
+    if(z1[1] != z2[1])
+        return(NA)
+    ## now get location of prefix (ID of TMRCA) (ie last point before divergence)
+    pre.n = max(which(z1[1:n] == z2[1:n]))
+    ## get suffix
+    ## these are the mutations after prefix
+    ## code is a bit awkward because for 1 of the
+    ## individuals, there may be no additional mutations
+    if (pre.n < length(z1))
+        post.1 <- z1[(pre.n +1): length(z1)]
+    else
+        post.1 = NULL
+    if (pre.n < length(z2))
+        post.2 <- z2[(pre.n +1): length(z2)]
+    else
+        post.2 = NULL
+    if (verbose == TRUE) {
+        print(paste0('Mutations of item 1: ', paste(post.1, collapse = "; ")))
+        print(paste0('Mutations of item 2: ', paste(post.2, collapse = "; ")))
+    }
+    ## count number of periods, note: length(NULL) is 0
+    n_mutations = length(post.1) + length(post.2)
+
+return(n_mutations)
+}
+
+
+```
+
+  - Let's see how this function works by starting off with a FW process of 100 types in 2000 generations with a mutation rate $\mu=0.01$. We save the last generation. Notice that each item in the last generation is a string with '.' which denote a mutation and that the 
+they most of them only differ in the last 4 items between the dots.
+```{r}
+set.seed(1)
+mu = .01
+N = 100
+A <- fwm2(N, 2000, mu = mu)$A
+x <- A[2000,] # Obtain the last generation 
+x[1:10]
+```
+
+  - Below we look at the differences between the different types. Function prints out the items, the mutations that occur after the types start diverging and the total number of mutations between each of the types. For types 1 and 4, there are 4 mutations while for types 1 and 10  there is only 1 mutations. Finally, for between types 10 and 13 there are only 3 differences. 
+```{r}
+count_pairwise_diff(x[1], x[4], verbose = T)#Difference between types 1 and 4
+count_pairwise_diff(x[1], x[10], verbose = T)#Difference between types 1 and 10
+count_pairwise_diff(x[10], x[13], verbose = T)#Difference between types 10 and 13
+```
+```{r}
+## now do get average of all pairwise differences
+x <- A[2000,]
+Pij <- matrix(NA, length(x), length(x))
+for (i in 1:(length(x)-1))
+{
+    for (j in (i+1):length(x))
+        {
+            Pij[i,j] = count_pairwise_diff(x[i], x[j]) # if verbose=F, then only prints out the total number of mutations
+        }
+}
+
+k.bar = mean(Pij, na.rm = T) # 
+
+## we can now infer pop size
+N.hat = k.bar /(2*mu)
+print(N.hat)
+```
+  - Now do repeated trials to see if estimator approximates the formula from the previous section: 
+$\hat{N}  = \frac{\bar{k}}{2 \mu}$. With 100 simulations, we get really close to the actual size of the population, which we established at the beginning. 
+
+
+```{r}
+mu = .01
+n_trials = 100
+N = 100
+n_gen = N*5
+k.bar.vec = NULL
+n_casesfixation = 0 
+for (r in 1:n_trials)
+{
+    #print(r)
+    A <- fwm2(N, n_gen, mu = mu)$A
+    x <- A[n_gen,]
+    ## check on fixation (if we have many of these, increase n_gen)
+    if (length(unique(substr(x,1,2))) > 1)
+        #print(x)
+        n_casesfixation = n_casesfixation + 1
+    Pij <- matrix(NA, length(x), length(x))
+    for (i in 1:(length(x)-1))
+    {
+        for (j in (i+1):length(x))
+        {
+            Pij[i,j] = count_pairwise_diff(x[i], x[j])
+        }
+    }
+   k.bar.vec[r] <- mean(Pij, na.rm = T)
+}
+print(paste0('# cases of fixation: ',n_casesfixation))
+print(paste0('Average # mutations: ',mean(k.bar.vec)))
+N.hat = mean(k.bar.vec) /(2*mu)
+print(paste0('Average population size: ',N.hat))
+
+```
+  - Given this simulation framework, we can modify many of the inputs to see how the size of the population reacts. For instance, we can include a large mutation rate or modify the population size.
+
+## Coalescence of a sample of $n$ individuals
   
 - This is covered on pages 42 and 43 of Gillespie
+**NOTE FOR JOSH: I can't find this reference. What are you refering to?**
 - We'll just do one quick example, accepting the result
-  
-A sample of 3: Note we're using $N$ (instead of $2N$)
+- Here is a sample of 3 (Note we're using $N$ instead of $2N$). 
+- The intuition here is that when we have more individuals, there's more chance that some pair of them will coalesce.
+- This tree might be the beginning or the end, we really don't know. So, it is important to keep in mind what we are talking about.
 
 ```latex
 \begin{verbatim}
 
-        *            _______
-       / \
-      /   \          
-     /     \         T(2) : E(T(2)) = N
-    /       \
-   /         *       _______
-  /         / \
- /         /   \     T(3) : E(T(3)) = N * 2/[3*2]
-*         *     *    _______
-
-                      ...
-                     _______
-                     T(n) : E(T(n)) = N * 2/[n * (n-1)]
+              *            _______
+             / \
+            /   \          
+           /     \         T(2) : E(T(2)) = N
+          /       \
+         /         *       _______
+        /         / \
+       /         /   \     T(3) : E(T(3)) = N * 2/[3*2] = N / 3
+      /         /     *    _______
+     /         /     / \
+    /         /     /   \  T(4) : E(T(4)) = N * 2/[4*3] = N / 6
+   *         *      *    *
+   
+                            ...
+                           _______
+                           T(n) : E(T(n)) = N * 2/[n * (n-1)]
 \end{verbatim}
 ```
-  Question: If we sample 4, how much of time to TMRCA
-  is do we have 4 branches, 3 branches, and 2 branches?
-
-<!-- ## Conclusions -->
-
-
-<!--   - We defined the coalescent as the stochastic process going -->
-<!--     back in time to common ancestors -->
-<!--   - For constant population size, we proved that time to -->
-<!--     coalescence for a sample pair is exponential. -->
-<!--   - We showed (math and simulation) that $E(T) = N$. -->
-<!--   - We showed that we could estimate $N$ from observed mutations -->
-<!--     if we knew the mutation rate -->
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 6aafe73ec628f179301b0a0fb97be1812f8569bd
-
-
-<!-- ## An application of coalescent theory -->
-
-<!-- Application to making inferences about the real history of human populations. -->
+- If we sample 4, how much of time to TMRCA is do we for 4 branches, 3 branches, and 2 branches? 
+  **NOTE FOR JOSH: Could you check this answer here**
+    - The total time waiting until MRCA of all 4 individuals is $N + {N\over 3} + {N \over 6} = {3\over 2} N$
+    - Then, the time spent at each branch relative to the total time (out of 4 branches) is given by the third column.
+    - We count the total branch length as the number of branches time the expected time to coalesce.
+    
+|----------------------|-------------|--------------------------------------------------|------------------------------|
+| Number of branches (n) |  E(T(n))    | Time spent at each branch /total                 | Total branch length          |
+|------------------------|-------------|--------------------------------------------------|------------------------------|
+|         2              |    $N$      | $\frac{N}{N\frac{3}{2}}=\frac{2}{3}$             |       $2N$                   |
+|           3            |$\frac{N}{3}$| $\frac{N\frac{1}{3}}{N\frac{3}{2}}= \frac{2}{9}$ |$3\frac{N}{3}=N$              |
+|           4            |$\frac{N}{6}$| $\frac{N\frac{1}{6}}{N\frac{3}{2}}= \frac{1}{9}$ |$4\frac{N}{6} = \frac{2}{3}N$ |
 
 
 
-## Coalesence when population is changing
+ 
+## An application of coalescent theory
 
-*Caveat: We're still using $N$ (not $2N$) as the number of haploids*
-  
-- We said hazard of coalescence was $h = c = 1/N$.
-- What is hazard of coalesence in one generation for two different populations: $N =1000$? $N = 2000$?
-- What if within the same population $N(t) = 1000$ and $N(t+1)= 2000$? (Hint: we still follow FW in allowing children to choose their parents.)
+In this section, we will look at an application to making inferences about the real history of human populations. *Caveat: We're still using $N$ (not $2N$) as the number of haploids*
+
+
+### Coalesence when population is changing
+
+- We know that the hazard of coalescence is $h = c = 1/N$. For instance if the populations were $N_1 =1000$, $N_2 = 2000$, then the hazard of coalesence in one generation for each of the populations would be $h_1= {1\over1000}$ and $h_2= {1\over2000}$, respectively.
+- What if within the same population in one generation we have $N(t) = 1000$ and in the following generation $N(t+1)= 2000$? We still follow FW in allowing children to choose their parents. 
 - If the population size changes over time $N(t)$, then hazards of coalescence in will change too: $h(t) = 1/N(t)$.
 
-A small simulation
+Let's look at a small simulation. We are thinking about a population that has lived over a certain number of years: 5000 people lived during the last 1000 years. Before that, the population was only 500. 
+**NOTE FOR JOSH: It's not so clear to me why T1 is being sampled with N_recent and not with N_ancient. I thought that for the first 1000 years, the time to coalesce should be drawn from  rexp(n, rate = 1/N_ancient) and then T2 <- T_thresh + rexp(n2, rate = 1/N_recent). I tried changing in the simulation and I don't get the nice histogram (nor the intended message), so I assume that my intuition is wrong. Could you clarify the populations involved and when the threshold happens in relation to the population sizes? **
 
 ```{r , fig.height = 4, fig.cap='Histogram', fig.align='center'}
   N_recent = 5000 ## population last T_thresh years
@@ -349,87 +453,52 @@ A small simulation
   N_ancient = 500 ## earlier population
   n = 1000 ## sampled individuals
   set.seed(0.4886)
-  T1 <- rexp(n, rate = 1/N_recent) ## give everyone a chance to coalesce 
-  T1[T1 > T_thresh] <- NA ## if they don't in 1st 1000 years, resample them
-  n2 <- sum(is.na(T1))
+  T1 <- rexp(n, rate = 1/N_recent) ## random draws from an exponential fn of times to coalesce. 
+  T1[T1 > T_thresh] <- NA ## Remove times that coalesce event happens after first 1000 generations. 
+  n2 <- sum(is.na(T1)) # total years removed. 
   T2 <- T_thresh + rexp(n2, rate = 1/N_ancient) ## at ancient rate
   T.vec <- c(T1, T2)
-  hist(T.vec, breaks = seq(0, 5000, 250), main="")
+  hist(T.vec, breaks = seq(0, 5000, 250), main="History of times to coalesce", xlab="Years")
 ```
 
-Q: How could we estimate population sizes from this histogram?
+- *How could we estimate population sizes from this histogram?* We need to go from hazard to population size. First, let's think about the times to coalesce like the age at death of a specific line of types.  Therefore, we sort the times to coalesce (equivalent to time of death) to get a survivorship graph and then obtain $d_x$.
   
 ```{r, fig.height = 4, fig.cap='Population', fig.align='center'}
   T.vec <- sort(T.vec)
   St = (n:1)/n
   par(mfrow = c(1,2))
-  plot(T.vec, St); abline(v = T_thresh); plot(T.vec, log(St)); abline(v = T_thresh)
+  plot(T.vec, St)
+  abline(v = T_thresh)
+  plot(T.vec, log(St))
+  abline(v = T_thresh)
 ```
 
-Q: How can we estimate hazards from this histogram?
-
-
-Our approach
-  
-- Say we have $i$ pairs of haploids
-- We then compute how many pairwise differences there are, but instead of computing $\bar{k}$, we keep the distributional information $k_i$.
-- Each $k_i$ implies a $T_i$
-- We then have a set of ``death times'' (coalescence times), can build a life table, estimate the hazards, and infer $N(t)$.
-
-## Inference from MRCA times: $n > 2$ comparisons and relative branch lengths
-    
-Detour to length of branches
-A sample of 3: Note we're using $N$ (not $2N$)
-```latex
-\begin{verbatim}
-
-        *            _______
-       / \
-      /   \          
-     /     \         T(2) : E(T(2)) = N
-    /       \
-   /         *       _______
-  /         / \
- /         /   \     T(3) : E(T(3)) = N * 2/[3*2]
-*         *     *    _______
-
-                      ...
-                     _______
-                     T(n) : E(T(n)) = N * 2/[n * (n-1)]
-\end{verbatim}
-```
-Intuition: when we have more individuals, there's more chance that some pair of them will coalesce.
-  
-Question: If we sample 4, how much of time to TMRCA do we have 4 branches, 3 branches, and 2 branches?
+- *How can we estimate hazards from this histogram?* 
+  - Say we have $i$ pairs of haploids
+  - We then compute how many pairwise differences there are, but instead of computing $\bar{k}$, we keep the distributional information $k_i$.
+  - Each $k_i$ implies a $T_i$
+  - We then have a set of ``death times'' (coalescence times), can build a life table, estimate the hazards, and infer $N(t)$.
+  - Below we proceed with an example of how to obtain the hazards and the population sizes. 
 
 
 ## Reconstruction Ancient European Population Sizes using Batini's sample of Mitochondrial DNA"
 
-We use real sequences of mitochondrial DNA to estimate
-ancient population sizes. The sequences were made available by Batini
-et al, who analyzed sub-populations in their paper using software for
-Bayesian inference for comparing groups of individuals. Our approach
-here is to use a simpler, but less powerful approach. We will simply
-look at pairwise differences of random pairs of individuals. 
+  - We use real sequences of mitochondrial DNA to estimate ancient population sizes. The sequences were made available by @batini2017population, who analyzed sub-populations in their paper using software for Bayesian inference for comparing groups of individuals. Our approach here is to use a simpler, but less powerful approach. We will simply look at pairwise differences of random pairs of individuals. 
+**NOTE FOR JOSH: Is the Batini reference this one? https://www.nature.com/articles/s41598-017-11307-9**
+  
+  - For this we are not going to do subgroups such as the Greeks or Irish, but are going to use the entire European sample. The population sizes we estimate are for the entire population represented by the 328 individuals. 
 
-For this we are not going to do subgroups such as the Greeks or Irish, but are
-going to use the entire European sample. The population sizes we
-estimate are for the entire population represented by the 328
-individuals. 
-
->Special thanks to Ken Wachter, who taught me this approach and whose R-code forms the basis of this application
+>Special thanks to Ken Wachter for this approach and whose R-code forms the basis of this application
 
 ### Summary of Batini et al.
 
-Before we begin our own analysis, let's look at the inputs to
-Batini's analysis -- the mtDNA haplotype sequences, and then at the
-resulting population estimates.
+Before we begin our own analysis, let's look at the inputs to @batini2017population analysis -- the mtDNA haplotype sequences, and then at the resulting population estimates.
 
 #### The mitochondrial DNA
 
 Data preparation begins. 
 
-There are 380 individuals grouped into regional sub-populations. I select out the Greeks, whose labels begin with "gre".
+There are 380 individuals grouped into regional sub-populations. We select out the Greeks, whose labels begin with "gre".
 
 ```{r}
 x <- scan("/hdir/0/fmenares/Book/bookdown-master/data/mtdna.csv", what = character())
@@ -506,30 +575,27 @@ These are the kind of comparisons _we_ will be doing.
 
 ### Ancient population estimates
 
-Let's look at Figure 2 on page 5. 
+Let's look at Figure 2 on page 5
+```{r batini1, fig.cap=' Figure 2 page 5 from @batini2017population', out.width='80%', fig.align='center',  echo=FALSE}
+knitr::include_graphics('random_demography/bookdown-master/figures/batini1.png')
+```  
 
-> Q. What was effective population size in Ireland 1 thousand years ago
-> (according to mtDNA)?
+  - If we look at Ireland (IRE), the think lines are effective population estimates over thousands of years (KYA). For instance, according to mtDNA, 1 thousand years ago the effective population size was around $12,500$, while 50 thousand years ago the population was around $\approx 1,250$. The order of magnitude for each these populations appears to be about 10^4 in  last few KYA and 10^3 50 KYA. Together, perhaps the size is 10 fold. So we're looking at European effective population sizes on the order of 100,000 the last few thousand years and on the order of 10,000 tens of thousands of years ago.
 
-> Q. What was effective population size in Ireland 50 thousand years ago
-> (according to mtDNA)?
-
-
-> Q. For the "Irish", what is the annual population growth rate? What's the NRR?
-
-The order of magnitude for each these populations appears to be about 10^4
-in  last few KYA and 10^3 50 KYA. Together, perhaps the size is 10
-fold. So we're looking at European effective population sizes on the
-order of 100,000 the last few thousand years and on the order of
-10,000 tens of thousands of years ago.
 
 
 #### Using the Coalescent to estimate changing population size
 
-Our procedure will involve a four steps:
+Our procedure will involve a four steps:  
 
-**1. Pick 100 _pairs_ of people at random and count their pairwise differences.**
+  1. Pick 100 _pairs_ of people at random and count their pairwise differences
+  2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate
+  3. Estimate $h(t)$, the time-varying hazard of coalescence
+  4. Estimate the population size  $N_e(t)
 
+##### Step 1: random sampling and pairwise differences 
+  
+  - First, we sample 100 people with replacement.
 ```{r}
 
 set.seed(1)
@@ -538,7 +604,7 @@ hap_id_sample = sample(hap_ids,
                        size = 200,
                        replace = FALSE)
 
-hap_id.mat <- matrix(hap_id_sample, 100, 2)
+hap_id.mat <- matrix(hap_id_sample, 100, 2) # 100 by 2 
 
 pairwise_diff_fun <- function(hap1, hap2)
 {
@@ -556,10 +622,9 @@ pairwise_diff_fun <- function(hap1, hap2)
 pairwise_diff_fun(H[,1], H[,2])
 ```
 
-Now we're ready to do pairwise comparisons of all 100 pairs of
-haplotypes.
-
-We'll define the fraction of locii that have mutated (the pairwise differences) as
+  - Now we're ready to do pairwise comparisons of all 100 pairs of haplotypes.
+  - We'll define the fraction of locii that have mutated (the pairwise differences) as
+  **NOTE FOR JOSH: Not sure what P or C are here.**
 $$
 \bar{Y} = P/C
 $$ 
@@ -585,122 +650,98 @@ head(C.vec)
 head(Y.bar)
 ```
 
-**2. Estimate 100 different times of MRCA ($T$)  using assumed mutation rate.**
+##### Step 2: Use mutation rate to obtain 100 distinct TMRCA
 
-And now we'll use the mutation rate $\theta_m$ given by Batini to
-compute time back to MRCA.
-
-First, some background:
-
-Let $a$ index sites and write $Y_a = 1$ if the letters are different,
-and $Y_a = 0$ otherwise. For 1 site, the probability that it there has been a mutation, is 1
-minus the chance that there has been no mutation. 
+  - Now we'll use the mutation rate $\theta_m$ given by @batini2017population to compute time back to MRCA.
+  - First, some background:
+    - Let $a$ index sites and write $Y_a = 1$ if the letters are different, and $Y_a = 0$ otherwise. 
+    - For 1 site, the probability that it there has been a mutation, is 1 minus the chance that there has been no mutation. 
 
 $$
      P( Y_a = 1 ) = 1 - e^{-T\theta}
 $$
-The mean $\bar{Y}$ across the segment is the proportion of $Y_a$ that
-equal 1. So, in expectation for the fraction of sites that mutate is
-the same as the probability that 1 site mutates (assuming 
-independence of mutation probabilities by site). This allows us to write
+
+  - The mean $\bar{Y}$ across the segment is the proportion of $Y_a$ that equal 1. So, in expectation for the fraction of sites that mutate is the same as the probability that 1 site mutates (assuming  independence of mutation probabilities by site). This allows us to write:
 
 $$
      E{\bar{Y}} = 1 - e^{-2T\theta},
 $$
-where we've added a "2" in order to account that either one of the pairwise branched could have had a mutation, so we our "exposure" is twice the time to MRCA.
 
-Rearranging we get an estimate $\hat{T}$ of $T$ to be
+  - where we've added a "2" in order to account that either one of the pairwise branched could have had a mutation, so we our "exposure" is twice the time to MRCA.
+  - Rearranging we get an estimate $\hat{T}$ of $T$ to be
 $$
 \hat{T} = {-\log (1 - \bar{Y} ) \over \theta}
 $$
 
-
-Now we're ready to estimate the MRCAs
+  - Now we're ready to estimate the MRCAs
 ```{r}
 theta_m = 2.21 * 10^(-8) ## Batini page 6 (TMRCA estimation)
 T.vec <- -(1/2) * (1/theta_m) * log(1 - Y.bar) ## TMRCAs in years ago
 head(T.vec, n = 10)
 ```
 
-Let's visualize these
+  - Let's visualize these
 ```{r}
 hist(T.vec)
 ```
 
-We see a lot of coalescence about 50 KYA, which is as far back as
-Batini's estimates go. This means the population was small back
-then. 
+  - We see a lot of coalescence about 50 KYA, which is as far back as @batini2017population estimates go. This means the population was small back then. 
 
-**3. Estimate $h(t)$, the time-varying hazard of coalescence**
+##### Step 3: Obtaining time-varying hazard of coalescence
+  - We'll do this in two ways:
+    1. Compute the slope of the logarithm of the survival curve, but we'll see that it is noisy and needs to be smoothed. 
+    2. Construct a "life table" of coalescence with discrete periods of time.
 
-We'll do this in two ways:
+  - Let's start with the more continuous version of estimating slopes.
 
-  1. Compute the slope of the logarithm of the survival curve, but we'll see that it is noisy and needs to be smoothed. 
-  2. Construct a "life table" of coalescence with discrete periods of time.
-
-Let's start with the more continuous version of estimating slopes.
-
-```{r, fig.height=4, fig.align='center', fig.cap='Etimatated probability of not coalescing'}
+```{r, fig.height=4, fig.align='center', fig.cap='Estimatated probability of not coalescing'}
 ## Plot survival curve by order of T
 St = (100:1)/100 ## or more generally (length(T.vec):1)/length(T.vec)
 t = kya = sort(T.vec)/1000
 plot(kya, St, type = "l",
-     xlab = "Kilo years ago", ylab = "Fraction of pairs without common ancestor",
+     xlab = "Kilo Years Ago", ylab = "Fraction of pairs without common ancestor",
      main = "")
 plot(kya, log(St), type = "l",
-     xlab = "Kilo years ago", ylab = "Log fraction of pairs without common ancestor",
+     xlab = "Kilo Years Ago", ylab = "Log fraction of pairs without common ancestor",
      main = "")
      
 ```
+  
+  - The slope in the first 50,000 years has increased, which implies that the hazard has also increased. This means that the population has increased over time. 
 
-> Q: What is happening to slope in first from 1,000 to 50,000 years
-> ago? 
 
-> Q: What does this imply about hazard of coalescence?
+###### **Estimating Hazards method 1. From smoothed survival curve**
 
-> Q: What does this imply about effective population size?
-
-Estimating Hazards
-
-**_1. From smoothed survival curve_**
-
+  - First, we smooth the survival curve (St)
 
 ```{r, fig.cap='Smoothing', fig.align='center'}
 out = lowess(x = kya, y = St, f = 1/5)
 
 St_smooth = out$y
 kya_smooth = out$x
-plot(kya, St, cex = .5)
+plot(kya, St, cex = .5, ylab="Fraction of pairs without common ancestor",xlab="Kilo Years Ago")
 lines(kya_smooth, St_smooth, type = 'l')
 ```
-
-> Q. Is f=1/5 a decent fit? Try a different value.  
-
-Hazards as minus the slope of log
+  - In this case we tried an f parameter of 1/5 but it can be modified to get a better fit. 
+  - To convert the smoothed survivorship curve into hazards, we use the fact that hazards are equal to minus the slope of log survivorship. 
 
 ```{r, fig.cap='Hazards', fig.align='center'}
 haz_hat = -diff(St_smooth)/diff(kya_smooth)
 plot(kya_smooth[-1], haz_hat, type = 'l', ylab = "Estimated Hazard", 
      xlab = "Kilo Years Ago (Smooth)")
 ```
+  - Unfortunately, this plot does not tell us anything about the uncertainty of our estimates. 
+  
+###### **Estimating Hazards method 2. Life table appraoch**
 
-> Q. Does this plot tell us anything about uncertainty?
-
-**_2. Life table appraoch_**
-
-Now let's estimate the hazards using a "life table", where again
-"death" is coalescence and "survival" is still not having a common
-ancestor.
+  - Now let's estimate the hazards using a "life table", where again "death" is coalescence and "survival" is still not having a common ancestor.
 
 ```{r}
-## we choose these time boundaries arbitrarily ... not sure if
-## we'll be able to see the "expansion" after ice age ...
-## x = c(0, 12,  20, 40, 65,  180 )*1000    # time interval boundaries
+## we choose these time boundaries arbitrarily 
 x = c(0,2, 5, 10,  20, 30, 40, 65, 180) * 1000 ## time interval boundaries
 ```
 
-Define a function to count "exposure" by those pairs that
-have MRCA in time intervals
+  - Define a function to count "exposure" by those pairs that have MRCA in time intervals.
 
 ```{r}
 get_nax <- function(Ti, x)
@@ -719,7 +760,7 @@ get_nax <- function(Ti, x)
 }
 ```
 
-Construct the life table
+  - Construct the life table
 
 ```{r}
 n <- diff(x)
@@ -734,43 +775,30 @@ lt <- cbind(x = x[-length(x)], n, ndx, lx, nax, nLx, nmx)
 print(lt)
 ```
 
-Let's compare the two estimates
+  - Let's compare the two estimates:
 
 ```{r, fig.align='center', fig.cap='Hazards comparison'}
 x.mid = x[-length(x)] + n/2
-plot(x.mid, nmx, type = 'o', ylab = "Mortality Rate", xlab = "Age (Midpoint)")
+plot(x.mid, nmx, type = 'o', ylab = "Mortality Rate", xlab = "Age (Midpoint)", col="red")
 axis(2)
-lines(kya_smooth[-1] * 1000, haz_hat/1000, type = "l")
+lines(kya_smooth[-1] * 1000, haz_hat/1000, type = "l", col="blue")
 legend("topleft" , legend=c("Lifetable", "Smooth Survival Curve"),
        col=c("red", "blue"), lty=1:2, cex=0.8)
 ```
 
-We're getting basically the same thing, with a little more hint of
-rising hazards (shrinking pop size) in first 20 kya. Nearly the same
-thing estimate 40 kya ago, and very little signal before that. 
+  - We're getting basically the same thing, with a little more hint of rising hazards (shrinking pop size) in first 20 kya. Nearly the same thing estimate 40 kya ago, and very little signal before that. 
 
 
-**4. Estimate the population size  $N_e(t)$**
+##### Step 4: Estimate the population size  $N_e(t)$
 
-In order to estimate the population size, we have to think for a minute
-about units.
-
-Our hazards are per year, but our logic for why hazards are related to
-population size is per generation. Remember, the chance of coalescence
-_per generation_ was $1/N$. This means we will want to multiply the annual 
-hazard by generation length in order to get hazards per generation unit of time.
-
-Second, mtDNA is inherited only through mothers. So the coalescent
-that we are thinking of is only for women. And the effective
-population size we're estimating is for females only. We can get a rough estimate of 
-both sexes by doubling the number of females.
-
-Putting these two considerations together, we have
+  - In order to estimate the population size, we have to think for a minute about units.
+  - Our hazards are per year, but our logic for why hazards are related to population size is per generation. Remember, the chance of coalescence _per generation_ was $1/N$. This means we will want to multiply the annual hazard by generation length in order to get hazards per generation unit of time.
+  - Second, mtDNA is inherited only through mothers. So the coalescent that we are thinking of is only for women. And the effective population size we're estimating is for females only. We can get a rough estimate of both sexes by doubling the number of females.
+  - Putting these two considerations together, we have:
 $$
 \hat{N_e(both sexes)} = 2 \times {1 \over 25 \cdot h(t)},
 $$
-where the 2 inflates to both sexes, and the 25 inflates the annual
-hazard into geneations of 25 years in length.
+  - The 2 inflates to both sexes, and the 25 inflates the annual hazard into generations of 25 years in length.
 
 ```{r}
 
@@ -784,7 +812,7 @@ kya_step = 1:(max(x)/1000)
 
 ```
 
-Plotting the results
+  - Plotting the results
 
 ```{r}
 plot(kya_smooth[-1], Ne_smooth, type = 'l', ylim = c(1000, 60000), log = 'y',
@@ -792,18 +820,12 @@ plot(kya_smooth[-1], Ne_smooth, type = 'l', ylim = c(1000, 60000), log = 'y',
 lines(kya_step, Ne_lifetable_step, type = 'l', lwd = 2)
 ```
 
-Uncertainty
+  - We could evaluate uncertainty using resampling techniques such as bootstrap.
+  - The estimate above doesn't include the fact that maybe the mutation rate is not constant or that the sample of people is not representative. 
+    - Also, it's possible that we are not seeing mutations that are not sampled. 
+    - Migration: maybe the people are not all the same population.
 
-> Q. How could we evaluate undercertainty? (Hint: resampling)
-
-> Q. What does this estimate leave out?
-
-(We probably won't do this in class. If we don't give it a try at
-home.)
-
-
-
-Let's loop through and do the whole estimation 40 times
+  - Let's loop through and do the whole estimation 40 times
 
 ```{r}
 n_trials = 40
@@ -812,7 +834,7 @@ set.seed(1)
 for (r in 1:n_trials)
 {
   #r = 1
-    print(r)
+    #print(r)
     ## sample
     hap_id_sample = sample(hap_ids,
                            size = 200,
@@ -850,54 +872,13 @@ for (r in 1:n_trials)
 }
 
 Ne.interval <- apply(Ne.mat, 2, quantile, c(.1,.5, .9))
-matplot(t(Ne.interval), type = 'l', log = 'y', col = "grey", lty = 1, lwd = 2)
+matplot(t(Ne.interval), type = 'l', log = 'y', col = "grey", lty = 1, lwd = 2, ylab="Estimated Population Size", xlab="Kilo Years Ago")
 lines(Ne.interval["50%",], lwd = 4)
 ```
 
-So it seems fairly clear that effective population size has been
-growing the last 50 thousand years, from a low of a few thousand to a
-few tens of thousand. 
-
-The general trend in growth is consistent with Batini but
-
-* Our total population size seems smaller by a factor of about 4 or 5.
-
-* We don't have the resolution to see increase between 10 and 20 kya,
-  the end of the Last Glacial Maximum or the more recent Bronze Age
-  steppe expansion 2 to 5 kya.
-  
-In order to get more resolution and study sub-group differences, we
-would want to turn to methods that do more than pair-wise comparisons,
-giving us more detailed information about the effective population
-sizes of the past.
-
-
-## Some exercises
-
-1. Try doing 150 pairwise comparisons (instead of 100) and see what
-   happens.
-
-2. Try doing 50 pairwise comparisons (instead of 100) and see what
-   happens.
-   
-3. Try changing the interval sizes (or the smoothing parameter) to see
-   if you can see either the post-glaciation population increase or
-   the Bronze Age increase? (I don't know if it's possible with our
-   methods.)
-   
-4. Figure out how to use BEAST or some other software and
-   reproduce their results for one sub-population and tell us what you learned.
-   
-   
-
-   
-
-
-
-
-
-
-
-
-
+  - So it seems fairly clear that effective population size has been growing the last 50 thousand years, from a low of a few thousand to a few tens of thousand. 
+  - The general trend in growth is consistent with Batini but
+    - Our total population size seems smaller by a factor of about 4 or 5.
+    - We don't have the resolution to see increase between 10 and 20 kya, the end of the Last Glacial Maximum or the more recent Bronze Age steppe expansion 2 to 5 kya.
+  - In order to get more resolution and study sub-group differences, we would want to turn to methods that do more than pair-wise comparisons, giving us more detailed information about the effective population sizes of the past.
 
