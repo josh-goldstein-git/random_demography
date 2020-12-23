@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Fisher-Wright | Mathematical Demography</title>
+  <title>Chapter 8 Fisher-Wright | Mathematical Demography</title>
   <meta name="description" content="This is a book from the Mathematical Demography lecture notes." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Fisher-Wright | Mathematical Demography" />
+  <meta property="og:title" content="Chapter 8 Fisher-Wright | Mathematical Demography" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Fisher-Wright | Mathematical Demography" />
+  <meta name="twitter:title" content="Chapter 8 Fisher-Wright | Mathematical Demography" />
   
   <meta name="twitter:description" content="This is a book from the Mathematical Demography lecture notes." />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Josh R. Goldstein" />
 
 
-<meta name="date" content="2020-12-22" />
+<meta name="date" content="2020-12-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="branching-processes.html"/>
+<link rel="prev" href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"/>
 <link rel="next" href="coalescent.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,11 +51,11 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -242,90 +242,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.1" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#caveats"><i class="fa fa-check"></i><b>7.6.1</b> Caveats</a></li>
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#questions-3"><i class="fa fa-check"></i><b>7.7</b> Questions</a></li>
-<li class="chapter" data-level="7.8" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#solutions-3"><i class="fa fa-check"></i><b>7.8</b> Solutions</a></li>
+<li class="chapter" data-level="7.8" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#solutions-3"><i class="fa fa-check"></i><b>7.8</b> Solutions</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#what-is-a-bienayme-galton-watson-branching-process"><i class="fa fa-check"></i><b>7.8.1</b> What is a (Bienayme)-Galton-Watson branching process?</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="branching-processes.html"><a href="branching-processes.html"><i class="fa fa-check"></i><b>8</b> Branching Processes</a><ul>
-<li class="chapter" data-level="8.1" data-path="branching-processes.html"><a href="branching-processes.html#outline-7"><i class="fa fa-check"></i><b>8.1</b> Outline</a></li>
-<li class="chapter" data-level="8.2" data-path="branching-processes.html"><a href="branching-processes.html#motivation"><i class="fa fa-check"></i><b>8.2</b> Motivation</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="branching-processes.html"><a href="branching-processes.html#very-brief-history-of-branching-processes"><i class="fa fa-check"></i><b>8.2.1</b> Very brief history of Branching Processes</a></li>
-<li class="chapter" data-level="8.2.2" data-path="branching-processes.html"><a href="branching-processes.html#applicability-to-the-coronavirus-yes-and-no."><i class="fa fa-check"></i><b>8.2.2</b> Applicability to the Coronavirus? Yes and no.</a></li>
-<li class="chapter" data-level="8.2.3" data-path="branching-processes.html"><a href="branching-processes.html#simulated-examples-and-the-questions-they-raise"><i class="fa fa-check"></i><b>8.2.3</b> Simulated examples and the questions they raise</a></li>
-<li class="chapter" data-level="8.2.4" data-path="branching-processes.html"><a href="branching-processes.html#what-is-a-bienayme-galton-watson-branching-process"><i class="fa fa-check"></i><b>8.2.4</b> What is a (Bienayme)-Galton-Watson branching process?</a></li>
+<li class="chapter" data-level="7.9" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#simulations-of-parents-having-children"><i class="fa fa-check"></i><b>7.9</b> Simulations of parents having children</a></li>
+<li class="chapter" data-level="7.10" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#the-probability-generating-function-our-mathematical-tool"><i class="fa fa-check"></i><b>7.10</b> The Probability Generating Function: Our mathematical tool</a></li>
+<li class="chapter" data-level="7.11" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#extinction"><i class="fa fa-check"></i><b>7.11</b> Extinction</a></li>
+<li class="chapter" data-level="7.12" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#good-and-bad-set-ups-for-branching-process"><i class="fa fa-check"></i><b>7.12</b> Good and bad set-ups for branching process</a></li>
+<li class="chapter" data-level="7.13" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#the-distribution-of-offspring-of-all-generations"><i class="fa fa-check"></i><b>7.13</b> The distribution of offspring of all generations</a><ul>
+<li class="chapter" data-level="7.13.1" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#proving-mathbbe-z_n-mn"><i class="fa fa-check"></i><b>7.13.1</b> Proving <span class="math inline">\(\mathbb{E} Z_n = m^n\)</span></a></li>
+<li class="chapter" data-level="7.13.2" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#variance-result."><i class="fa fa-check"></i><b>7.13.2</b> Variance result.</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="branching-processes.html"><a href="branching-processes.html#simulations-of-parents-having-children"><i class="fa fa-check"></i><b>8.3</b> Simulations of parents having children</a></li>
-<li class="chapter" data-level="8.4" data-path="branching-processes.html"><a href="branching-processes.html#the-probability-generating-function-our-mathematical-tool"><i class="fa fa-check"></i><b>8.4</b> The Probability Generating Function: Our mathematical tool</a></li>
-<li class="chapter" data-level="8.5" data-path="branching-processes.html"><a href="branching-processes.html#extinction"><i class="fa fa-check"></i><b>8.5</b> Extinction</a></li>
-<li class="chapter" data-level="8.6" data-path="branching-processes.html"><a href="branching-processes.html#good-and-bad-set-ups-for-branching-process"><i class="fa fa-check"></i><b>8.6</b> Good and bad set-ups for branching process</a></li>
-<li class="chapter" data-level="8.7" data-path="branching-processes.html"><a href="branching-processes.html#the-distribution-of-offspring-of-all-generations"><i class="fa fa-check"></i><b>8.7</b> The distribution of offspring of all generations</a><ul>
-<li class="chapter" data-level="8.7.1" data-path="branching-processes.html"><a href="branching-processes.html#proving-mathbbe-z_n-mn"><i class="fa fa-check"></i><b>8.7.1</b> Proving <span class="math inline">\(\mathbb{E} Z_n = m^n\)</span></a></li>
-<li class="chapter" data-level="8.7.2" data-path="branching-processes.html"><a href="branching-processes.html#variance-result."><i class="fa fa-check"></i><b>8.7.2</b> Variance result.</a></li>
+<li class="chapter" data-level="7.14" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#geometric-offspring-distribution"><i class="fa fa-check"></i><b>7.14</b> Geometric offspring distribution</a><ul>
+<li class="chapter" data-level="7.14.1" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#the-geometric-distributions-simple-pgf"><i class="fa fa-check"></i><b>7.14.1</b> The Geometric Distribution’s simple PGF</a></li>
+<li class="chapter" data-level="7.14.2" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#a-plot-of-keyfitzs-numbers-for-generations-1-2-and-3.-is-it-exponential-for-k-0"><i class="fa fa-check"></i><b>7.14.2</b> A plot of Keyfitz’s numbers for generations 1, 2, and 3. Is it exponential for <span class="math inline">\(k &gt; 0\)</span>?</a></li>
 </ul></li>
-<li class="chapter" data-level="8.8" data-path="branching-processes.html"><a href="branching-processes.html#geometric-offspring-distribution"><i class="fa fa-check"></i><b>8.8</b> Geometric offspring distribution</a><ul>
-<li class="chapter" data-level="8.8.1" data-path="branching-processes.html"><a href="branching-processes.html#the-geometric-distributions-simple-pgf"><i class="fa fa-check"></i><b>8.8.1</b> The Geometric Distribution’s simple PGF</a></li>
-<li class="chapter" data-level="8.8.2" data-path="branching-processes.html"><a href="branching-processes.html#a-plot-of-keyfitzs-numbers-for-generations-1-2-and-3.-is-it-exponential-for-k-0"><i class="fa fa-check"></i><b>8.8.2</b> A plot of Keyfitz’s numbers for generations 1, 2, and 3. Is it exponential for <span class="math inline">\(k &gt; 0\)</span>?</a></li>
+<li class="chapter" data-level="7.15" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#branching-processes-and-covid-19"><i class="fa fa-check"></i><b>7.15</b> Branching Processes and Covid-19</a></li>
+<li class="chapter" data-level="7.16" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#problems"><i class="fa fa-check"></i><b>7.16</b> Problems</a></li>
+<li class="chapter" data-level="7.17" data-path="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html"><a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html#solutions-4"><i class="fa fa-check"></i><b>7.17</b> Solutions</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="branching-processes.html"><a href="branching-processes.html#branching-processes-and-covid-19"><i class="fa fa-check"></i><b>8.9</b> Branching Processes and Covid-19</a></li>
-<li class="chapter" data-level="8.10" data-path="branching-processes.html"><a href="branching-processes.html#problems"><i class="fa fa-check"></i><b>8.10</b> Problems</a></li>
+<li class="chapter" data-level="8" data-path="fisher-wright.html"><a href="fisher-wright.html"><i class="fa fa-check"></i><b>8</b> Fisher-Wright</a><ul>
+<li class="chapter" data-level="8.1" data-path="fisher-wright.html"><a href="fisher-wright.html#outline-7"><i class="fa fa-check"></i><b>8.1</b> Outline</a></li>
+<li class="chapter" data-level="8.2" data-path="fisher-wright.html"><a href="fisher-wright.html#parallel"><i class="fa fa-check"></i><b>8.2</b> Parallel</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="fisher-wright.html"><a href="fisher-wright.html#another-cell-phone-example"><i class="fa fa-check"></i><b>8.2.1</b> Another cell phone example</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="fisher-wright.html"><a href="fisher-wright.html"><i class="fa fa-check"></i><b>9</b> Fisher-Wright</a><ul>
-<li class="chapter" data-level="9.1" data-path="fisher-wright.html"><a href="fisher-wright.html#outline-8"><i class="fa fa-check"></i><b>9.1</b> Outline</a></li>
-<li class="chapter" data-level="9.2" data-path="fisher-wright.html"><a href="fisher-wright.html#parallel"><i class="fa fa-check"></i><b>9.2</b> Parallel</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="fisher-wright.html"><a href="fisher-wright.html#another-cell-phone-example"><i class="fa fa-check"></i><b>9.2.1</b> Another cell phone example</a></li>
+<li class="chapter" data-level="8.3" data-path="fisher-wright.html"><a href="fisher-wright.html#mutation"><i class="fa fa-check"></i><b>8.3</b> Mutation</a></li>
+<li class="chapter" data-level="8.4" data-path="fisher-wright.html"><a href="fisher-wright.html#fixation"><i class="fa fa-check"></i><b>8.4</b> Fixation</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="fisher-wright.html"><a href="fisher-wright.html#probability-that-a-particular-line-will-fix"><i class="fa fa-check"></i><b>8.4.1</b> Probability that a particular line will “fix”</a></li>
+<li class="chapter" data-level="8.4.2" data-path="fisher-wright.html"><a href="fisher-wright.html#expected-time-until-fixation"><i class="fa fa-check"></i><b>8.4.2</b> Expected time until fixation?</a></li>
+<li class="chapter" data-level="8.4.3" data-path="fisher-wright.html"><a href="fisher-wright.html#path-to-fixation-a-measure-of-homogeneityheterogeneity"><i class="fa fa-check"></i><b>8.4.3</b> Path to fixation: a measure of homogeneity/heterogeneity</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="fisher-wright.html"><a href="fisher-wright.html#mutation"><i class="fa fa-check"></i><b>9.3</b> Mutation</a></li>
-<li class="chapter" data-level="9.4" data-path="fisher-wright.html"><a href="fisher-wright.html#fixation"><i class="fa fa-check"></i><b>9.4</b> Fixation</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="fisher-wright.html"><a href="fisher-wright.html#probability-that-a-particular-line-will-fix"><i class="fa fa-check"></i><b>9.4.1</b> Probability that a particular line will “fix”</a></li>
-<li class="chapter" data-level="9.4.2" data-path="fisher-wright.html"><a href="fisher-wright.html#expected-time-until-fixation"><i class="fa fa-check"></i><b>9.4.2</b> Expected time until fixation?</a></li>
-<li class="chapter" data-level="9.4.3" data-path="fisher-wright.html"><a href="fisher-wright.html#path-to-fixation-a-measure-of-homogeneityheterogeneity"><i class="fa fa-check"></i><b>9.4.3</b> Path to fixation: a measure of homogeneity/heterogeneity</a></li>
+<li class="chapter" data-level="8.5" data-path="fisher-wright.html"><a href="fisher-wright.html#baby-names"><i class="fa fa-check"></i><b>8.5</b> Baby Names</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="fisher-wright.html"><a href="fisher-wright.html#basic-idea"><i class="fa fa-check"></i><b>8.5.1</b> Basic idea</a></li>
+<li class="chapter" data-level="8.5.2" data-path="fisher-wright.html"><a href="fisher-wright.html#fisher-wright-simulation-of-baby-names-hahn-and-bentley"><i class="fa fa-check"></i><b>8.5.2</b> Fisher-Wright simulation of Baby Names (Hahn and Bentley)</a></li>
+<li class="chapter" data-level="8.5.3" data-path="fisher-wright.html"><a href="fisher-wright.html#drawing-their-picture-with-simulation"><i class="fa fa-check"></i><b>8.5.3</b> Drawing their picture with simulation</a></li>
+<li class="chapter" data-level="8.5.4" data-path="fisher-wright.html"><a href="fisher-wright.html#fw-babyname-simulation-of-equilibrium-frequencies"><i class="fa fa-check"></i><b>8.5.4</b> FW babyname simulation of equilibrium frequencies</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="fisher-wright.html"><a href="fisher-wright.html#baby-names"><i class="fa fa-check"></i><b>9.5</b> Baby Names</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="fisher-wright.html"><a href="fisher-wright.html#basic-idea"><i class="fa fa-check"></i><b>9.5.1</b> Basic idea</a></li>
-<li class="chapter" data-level="9.5.2" data-path="fisher-wright.html"><a href="fisher-wright.html#fisher-wright-simulation-of-baby-names-hahn-and-bentley"><i class="fa fa-check"></i><b>9.5.2</b> Fisher-Wright simulation of Baby Names (Hahn and Bentley)</a></li>
-<li class="chapter" data-level="9.5.3" data-path="fisher-wright.html"><a href="fisher-wright.html#drawing-their-picture-with-simulation"><i class="fa fa-check"></i><b>9.5.3</b> Drawing their picture with simulation</a></li>
-<li class="chapter" data-level="9.5.4" data-path="fisher-wright.html"><a href="fisher-wright.html#fw-babyname-simulation-of-equilibrium-frequencies"><i class="fa fa-check"></i><b>9.5.4</b> FW babyname simulation of equilibrium frequencies</a></li>
-</ul></li>
-<li class="chapter" data-level="9.6" data-path="fisher-wright.html"><a href="fisher-wright.html#now-we-can-simulate-babyynmes"><i class="fa fa-check"></i><b>9.6</b> Now we can simulate babyynmes</a></li>
-<li class="chapter" data-level="9.7" data-path="fisher-wright.html"><a href="fisher-wright.html#conclusions-5"><i class="fa fa-check"></i><b>9.7</b> Conclusions</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="fisher-wright.html"><a href="fisher-wright.html#some-potential-criticism"><i class="fa fa-check"></i><b>9.7.1</b> Some potential criticism</a></li>
+<li class="chapter" data-level="8.6" data-path="fisher-wright.html"><a href="fisher-wright.html#now-we-can-simulate-babynames"><i class="fa fa-check"></i><b>8.6</b> Now we can simulate babynames</a></li>
+<li class="chapter" data-level="8.7" data-path="fisher-wright.html"><a href="fisher-wright.html#conclusions-5"><i class="fa fa-check"></i><b>8.7</b> Conclusions</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="fisher-wright.html"><a href="fisher-wright.html#some-potential-criticism"><i class="fa fa-check"></i><b>8.7.1</b> Some potential criticism</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="coalescent.html"><a href="coalescent.html"><i class="fa fa-check"></i><b>10</b> Coalescent</a><ul>
-<li class="chapter" data-level="10.1" data-path="coalescent.html"><a href="coalescent.html#outline-9"><i class="fa fa-check"></i><b>10.1</b> Outline</a></li>
-<li class="chapter" data-level="10.2" data-path="coalescent.html"><a href="coalescent.html#the-coalescent-expectations-of-the-past"><i class="fa fa-check"></i><b>10.2</b> The Coalescent: Expectations of the Past</a></li>
-<li class="chapter" data-level="10.3" data-path="coalescent.html"><a href="coalescent.html#our-first-question-when-was-mrca"><i class="fa fa-check"></i><b>10.3</b> Our first question: When was MRCA?</a></li>
-<li class="chapter" data-level="10.4" data-path="coalescent.html"><a href="coalescent.html#mutation-and-inference-of-tmrca-and-n"><i class="fa fa-check"></i><b>10.4</b> Mutation and inference of TMRCA and <span class="math inline">\(N\)</span></a><ul>
-<li class="chapter" data-level="10.4.1" data-path="coalescent.html"><a href="coalescent.html#inference-of-population-size-simulation"><i class="fa fa-check"></i><b>10.4.1</b> Inference of population size (Simulation)</a></li>
+<li class="chapter" data-level="9" data-path="coalescent.html"><a href="coalescent.html"><i class="fa fa-check"></i><b>9</b> Coalescent</a><ul>
+<li class="chapter" data-level="9.1" data-path="coalescent.html"><a href="coalescent.html#outline-8"><i class="fa fa-check"></i><b>9.1</b> Outline</a></li>
+<li class="chapter" data-level="9.2" data-path="coalescent.html"><a href="coalescent.html#the-coalescent-expectations-of-the-past"><i class="fa fa-check"></i><b>9.2</b> The Coalescent: Expectations of the Past</a></li>
+<li class="chapter" data-level="9.3" data-path="coalescent.html"><a href="coalescent.html#our-first-question-when-was-mrca"><i class="fa fa-check"></i><b>9.3</b> Our first question: When was MRCA?</a></li>
+<li class="chapter" data-level="9.4" data-path="coalescent.html"><a href="coalescent.html#mutation-and-inference-of-tmrca-and-n"><i class="fa fa-check"></i><b>9.4</b> Mutation and inference of TMRCA and <span class="math inline">\(N\)</span></a><ul>
+<li class="chapter" data-level="9.4.1" data-path="coalescent.html"><a href="coalescent.html#inference-of-population-size-simulation"><i class="fa fa-check"></i><b>9.4.1</b> Inference of population size (Simulation)</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="coalescent.html"><a href="coalescent.html#coalescence-of-a-sample-of-n-individuals"><i class="fa fa-check"></i><b>10.5</b> Coalescence of a sample of <span class="math inline">\(n\)</span> individuals</a></li>
-<li class="chapter" data-level="10.6" data-path="coalescent.html"><a href="coalescent.html#an-application-of-coalescent-theory"><i class="fa fa-check"></i><b>10.6</b> An application of coalescent theory</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>10.6.1</b> Coalesence when population is changing</a></li>
+<li class="chapter" data-level="9.5" data-path="coalescent.html"><a href="coalescent.html#coalescence-of-a-sample-of-n-individuals"><i class="fa fa-check"></i><b>9.5</b> Coalescence of a sample of <span class="math inline">\(n\)</span> individuals</a></li>
+<li class="chapter" data-level="9.6" data-path="coalescent.html"><a href="coalescent.html#an-application-of-coalescent-theory"><i class="fa fa-check"></i><b>9.6</b> An application of coalescent theory</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="coalescent.html"><a href="coalescent.html#coalesence-when-population-is-changing"><i class="fa fa-check"></i><b>9.6.1</b> Coalesence when population is changing</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>10.7</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
-<li class="chapter" data-level="10.7.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>10.7.1</b> Summary of Batini et al.</a></li>
-<li class="chapter" data-level="10.7.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>10.7.2</b> Ancient population estimates</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="student-presentations.html"><a href="student-presentations.html"><i class="fa fa-check"></i><b>11</b> Student Presentations</a><ul>
-<li class="chapter" data-level="11.1" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers"><i class="fa fa-check"></i><b>11.1</b> Mortality Crossovers</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="student-presentations.html"><a href="student-presentations.html#outline-10"><i class="fa fa-check"></i><b>11.1.1</b> Outline</a></li>
-<li class="chapter" data-level="11.1.2" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers-reality-or-bad-data-coale1986mortality"><i class="fa fa-check"></i><b>11.1.2</b> <em>Mortality Crossovers: Reality or Bad Data?</em> <span class="citation">(Coale and Kisker <span>1986</span>)</span></a></li>
-<li class="chapter" data-level="11.1.3" data-path="student-presentations.html"><a href="student-presentations.html#methods-for-evaluating-the-heterogeneity-of-aging-processes-in-human-populations-using-vital-statistics-data-explaining-the-blackwhite-mortality-crossover-by-a-model-of-mortality-selection-manton1981methods"><i class="fa fa-check"></i><b>11.1.3</b> <em>Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection</em> <span class="citation">(Manton and Stallard <span>1981</span>)</span></a></li>
-<li class="chapter" data-level="11.1.4" data-path="student-presentations.html"><a href="student-presentations.html#censoc-mortality-crossovers"><i class="fa fa-check"></i><b>11.1.4</b> CenSoc Mortality Crossovers</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="student-presentations.html"><a href="student-presentations.html#plateaus"><i class="fa fa-check"></i><b>11.2</b> Plateaus</a></li>
-<li class="chapter" data-level="11.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>11.3</b> Rising Inequality</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="student-presentations.html"><a href="student-presentations.html#trends-in-mortality-differentials-and-life-expectancy-for-male-social-security-covered-workers-by-socioeconomic-status-waldron2007trends"><i class="fa fa-check"></i><b>11.3.1</b> <em>Trends in mortality differentials and life expectancy for male social security-covered workers, by socioeconomic status</em> <span class="citation">(Waldron <span>2007</span>)</span></a></li>
+<li class="chapter" data-level="9.7" data-path="coalescent.html"><a href="coalescent.html#reconstruction-ancient-european-population-sizes-using-batinis-sample-of-mitochondrial-dna"><i class="fa fa-check"></i><b>9.7</b> Reconstruction Ancient European Population Sizes using Batini’s sample of Mitochondrial DNA"</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="coalescent.html"><a href="coalescent.html#summary-of-batini-et-al."><i class="fa fa-check"></i><b>9.7.1</b> Summary of Batini et al.</a></li>
+<li class="chapter" data-level="9.7.2" data-path="coalescent.html"><a href="coalescent.html#ancient-population-estimates"><i class="fa fa-check"></i><b>9.7.2</b> Ancient population estimates</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html"><i class="fa fa-check"></i><b>12</b> Demographic theory and COVID-19</a><ul>
-<li class="chapter" data-level="12.1" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#outline-11"><i class="fa fa-check"></i><b>12.1</b> Outline</a></li>
-<li class="chapter" data-level="12.2" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#motivating-questions"><i class="fa fa-check"></i><b>12.2</b> Motivating questions</a></li>
-<li class="chapter" data-level="12.3" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#population-aging"><i class="fa fa-check"></i><b>12.3</b> Population aging</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#stable-theory"><i class="fa fa-check"></i><b>12.3.1</b> Stable theory</a></li>
+<li class="chapter" data-level="10" data-path="student-presentations.html"><a href="student-presentations.html"><i class="fa fa-check"></i><b>10</b> Student Presentations</a><ul>
+<li class="chapter" data-level="10.1" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers"><i class="fa fa-check"></i><b>10.1</b> Mortality Crossovers</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="student-presentations.html"><a href="student-presentations.html#outline-9"><i class="fa fa-check"></i><b>10.1.1</b> Outline</a></li>
+<li class="chapter" data-level="10.1.2" data-path="student-presentations.html"><a href="student-presentations.html#mortality-crossovers-reality-or-bad-data-coale1986mortality"><i class="fa fa-check"></i><b>10.1.2</b> <em>Mortality Crossovers: Reality or Bad Data?</em> <span class="citation">(Coale and Kisker <span>1986</span>)</span></a></li>
+<li class="chapter" data-level="10.1.3" data-path="student-presentations.html"><a href="student-presentations.html#methods-for-evaluating-the-heterogeneity-of-aging-processes-in-human-populations-using-vital-statistics-data-explaining-the-blackwhite-mortality-crossover-by-a-model-of-mortality-selection-manton1981methods"><i class="fa fa-check"></i><b>10.1.3</b> <em>Methods for Evaluating the Heterogeneity of Aging Processes in Human Populations Using Vital Statistics Data: Explaining the Black/White Mortality Crossover by a Model of Mortality Selection</em> <span class="citation">(Manton and Stallard <span>1981</span>)</span></a></li>
+<li class="chapter" data-level="10.1.4" data-path="student-presentations.html"><a href="student-presentations.html#censoc-mortality-crossovers"><i class="fa fa-check"></i><b>10.1.4</b> CenSoc Mortality Crossovers</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#keyfitzs-entropy"><i class="fa fa-check"></i><b>12.4</b> Keyfitz’s entropy</a></li>
-<li class="chapter" data-level="12.5" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#loss-of-person-years-remaining"><i class="fa fa-check"></i><b>12.5</b> Loss of person years remaining</a></li>
-<li class="chapter" data-level="12.6" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#stationary-theory"><i class="fa fa-check"></i><b>12.6</b> Stationary theory</a></li>
+<li class="chapter" data-level="10.2" data-path="student-presentations.html"><a href="student-presentations.html#plateaus"><i class="fa fa-check"></i><b>10.2</b> Plateaus</a></li>
+<li class="chapter" data-level="10.3" data-path="student-presentations.html"><a href="student-presentations.html#rising-inequality"><i class="fa fa-check"></i><b>10.3</b> Rising Inequality</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="student-presentations.html"><a href="student-presentations.html#trends-in-mortality-differentials-and-life-expectancy-for-male-social-security-covered-workers-by-socioeconomic-status-waldron2007trends"><i class="fa fa-check"></i><b>10.3.1</b> <em>Trends in mortality differentials and life expectancy for male social security-covered workers, by socioeconomic status</em> <span class="citation">(Waldron <span>2007</span>)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html"><i class="fa fa-check"></i><b>11</b> Demographic theory and COVID-19</a><ul>
+<li class="chapter" data-level="11.1" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#outline-10"><i class="fa fa-check"></i><b>11.1</b> Outline</a></li>
+<li class="chapter" data-level="11.2" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#motivating-questions"><i class="fa fa-check"></i><b>11.2</b> Motivating questions</a></li>
+<li class="chapter" data-level="11.3" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#population-aging"><i class="fa fa-check"></i><b>11.3</b> Population aging</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#stable-theory"><i class="fa fa-check"></i><b>11.3.1</b> Stable theory</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#keyfitzs-entropy"><i class="fa fa-check"></i><b>11.4</b> Keyfitz’s entropy</a></li>
+<li class="chapter" data-level="11.5" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#loss-of-person-years-remaining"><i class="fa fa-check"></i><b>11.5</b> Loss of person years remaining</a></li>
+<li class="chapter" data-level="11.6" data-path="demographic-theory-and-covid-19.html"><a href="demographic-theory-and-covid-19.html#stationary-theory"><i class="fa fa-check"></i><b>11.6</b> Stationary theory</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -348,9 +342,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="fisher-wright" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Fisher-Wright</h1>
-<div id="outline-8" class="section level2">
-<h2><span class="header-section-number">9.1</span> Outline</h2>
+<h1><span class="header-section-number">Chapter 8</span> Fisher-Wright</h1>
+<div id="outline-7" class="section level2">
+<h2><span class="header-section-number">8.1</span> Outline</h2>
 <ul>
 <li>COVID</li>
 <li>Fisher Wright vs Galton Branching Process</li>
@@ -366,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="parallel" class="section level2">
-<h2><span class="header-section-number">9.2</span> Parallel</h2>
+<h2><span class="header-section-number">8.2</span> Parallel</h2>
 <style>
 .column-left{
   float: left;
@@ -404,15 +398,16 @@ universal.</li>
 </ul>
 </div>
 <div id="another-cell-phone-example" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Another cell phone example</h3>
+<h3><span class="header-section-number">8.2.1</span> Another cell phone example</h3>
 <p>As in the Branching Processes chapter, let’s simulate the creation of generations using the numbers of cell-phone numbers (which are random). For this case, we need as many cell phone numbers as the generations to create, but each next cell phone number is a combination of digits from the first cell phone number.</p>
 <p>Let these ficticious cell phone numbers be: 731 660 5362 and 530 666 7723. Note how the second number does not contain any 4s, 8s or 9s.</p>
 <p>Generation 1 starts off with a sequence of numbers from 0 to 9. Then for generation 2, we assign each digit of the cell phone to one of cells. We repeat this for generation 3 but with the second cell phone number.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="fisher-wright.html#cb144-1"></a>  knitr<span class="op">::</span><span class="kw">kable</span>(</span>
-<span id="cb144-2"><a href="fisher-wright.html#cb144-2"></a>  <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>),<span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">2</span>), </span>
-<span id="cb144-3"><a href="fisher-wright.html#cb144-3"></a>        <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>))),</span>
-<span id="cb144-4"><a href="fisher-wright.html#cb144-4"></a>  <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&#39;generation #&#39;</span>, <span class="st">&#39;allele type&#39;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="co">#%&gt;% kable_paper(bootstrap_options = &quot;striped&quot;, full_width = F)</span></span></code></pre></div>
-<table>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="fisher-wright.html#cb170-1"></a>  knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb170-2"><a href="fisher-wright.html#cb170-2"></a>  <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>),<span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">2</span>), </span>
+<span id="cb170-3"><a href="fisher-wright.html#cb170-3"></a>        <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>))),</span>
+<span id="cb170-4"><a href="fisher-wright.html#cb170-4"></a>  <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&#39;generation #&#39;</span>, <span class="st">&#39;allele type&#39;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>))<span class="op">%&gt;%</span></span>
+<span id="cb170-5"><a href="fisher-wright.html#cb170-5"></a><span class="st">  </span>kableExtra<span class="op">::</span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> F) </span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -550,11 +545,12 @@ allele type
 </tbody>
 </table>
 <p>If we translate this graph into a tally of the alleles by generation we see that some alleles are passed/‘’survive’’ more than others.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="fisher-wright.html#cb145-1"></a>  knitr<span class="op">::</span><span class="kw">kable</span>(</span>
-<span id="cb145-2"><a href="fisher-wright.html#cb145-2"></a>  <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">9</span>)), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), </span>
-<span id="cb145-3"><a href="fisher-wright.html#cb145-3"></a>        <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>)),</span>
-<span id="cb145-4"><a href="fisher-wright.html#cb145-4"></a>  <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&#39;Allele type&#39;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))   <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Count per generation&quot;</span> =<span class="st"> </span><span class="dv">3</span>))</span></code></pre></div>
-<table>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="fisher-wright.html#cb171-1"></a>  knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb171-2"><a href="fisher-wright.html#cb171-2"></a>  <span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">9</span>)), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb171-3"><a href="fisher-wright.html#cb171-3"></a>        <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>)),</span>
+<span id="cb171-4"><a href="fisher-wright.html#cb171-4"></a>  <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&#39;Allele type&#39;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>))   <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Count per generation&quot;</span> =<span class="st"> </span><span class="dv">3</span>))<span class="op">%&gt;%</span></span>
+<span id="cb171-5"><a href="fisher-wright.html#cb171-5"></a><span class="st">  </span>kableExtra<span class="op">::</span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> F) </span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="border-bottom:hidden" colspan="1">
@@ -716,40 +712,40 @@ Allele type
 </div>
 </div>
 <div id="mutation" class="section level2">
-<h2><span class="header-section-number">9.3</span> Mutation</h2>
+<h2><span class="header-section-number">8.3</span> Mutation</h2>
 <p>Let’s simulate the process from the example below. We first present some useful functions.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="fisher-wright.html#cb146-1"></a>  fwm &lt;-<span class="st"> </span><span class="cf">function</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">0</span>) <span class="co">## mu != 4/N</span></span>
-<span id="cb146-2"><a href="fisher-wright.html#cb146-2"></a>  {</span>
-<span id="cb146-3"><a href="fisher-wright.html#cb146-3"></a>      <span class="co">## simulate fisher-wright (with mutations)</span></span>
-<span id="cb146-4"><a href="fisher-wright.html#cb146-4"></a>      x &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span>N) <span class="co">## starting types</span></span>
-<span id="cb146-5"><a href="fisher-wright.html#cb146-5"></a>      A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> n_gen, <span class="dt">ncol =</span> N)</span>
-<span id="cb146-6"><a href="fisher-wright.html#cb146-6"></a>      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_gen)</span>
-<span id="cb146-7"><a href="fisher-wright.html#cb146-7"></a>      {</span>
-<span id="cb146-8"><a href="fisher-wright.html#cb146-8"></a>          A[i,] &lt;-<span class="st"> </span>x</span>
-<span id="cb146-9"><a href="fisher-wright.html#cb146-9"></a>          x &lt;-<span class="st"> </span><span class="kw">sample</span>(x, <span class="dt">size =</span> N, <span class="dt">replace =</span> T) <span class="co"># Sample from previous generation and draw with replacement</span></span>
-<span id="cb146-10"><a href="fisher-wright.html#cb146-10"></a>          x &lt;-<span class="st"> </span><span class="kw">mut</span>(x, mu) </span>
-<span id="cb146-11"><a href="fisher-wright.html#cb146-11"></a>          x</span>
-<span id="cb146-12"><a href="fisher-wright.html#cb146-12"></a>      }</span>
-<span id="cb146-13"><a href="fisher-wright.html#cb146-13"></a>      <span class="kw">return</span>(A) <span class="co">## matrix of types, each line a generation.</span></span>
-<span id="cb146-14"><a href="fisher-wright.html#cb146-14"></a>  }</span>
-<span id="cb146-15"><a href="fisher-wright.html#cb146-15"></a></span>
-<span id="cb146-16"><a href="fisher-wright.html#cb146-16"></a><span class="co"># Function to detect number of mutations. This occurs with probability mu. </span></span>
-<span id="cb146-17"><a href="fisher-wright.html#cb146-17"></a>  mut &lt;-<span class="st"> </span><span class="cf">function</span>(x, mu)</span>
-<span id="cb146-18"><a href="fisher-wright.html#cb146-18"></a>  {</span>
-<span id="cb146-19"><a href="fisher-wright.html#cb146-19"></a>      <span class="co">## m, the individuals that mutate</span></span>
-<span id="cb146-20"><a href="fisher-wright.html#cb146-20"></a>      m &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(x), <span class="dt">size=</span> <span class="dv">1</span>, <span class="dt">prob =</span> mu) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb146-21"><a href="fisher-wright.html#cb146-21"></a>      <span class="cf">if</span> (<span class="kw">length</span>(m) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## if no-one mutates</span></span>
-<span id="cb146-22"><a href="fisher-wright.html#cb146-22"></a>          <span class="kw">return</span>(x)</span>
-<span id="cb146-23"><a href="fisher-wright.html#cb146-23"></a>      <span class="co">## add a suffix to their ID, so it will be unique (infinite alleles)</span></span>
-<span id="cb146-24"><a href="fisher-wright.html#cb146-24"></a>      suffix &lt;-<span class="st"> </span><span class="dv">10000</span><span class="op">*</span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="kw">length</span>(m)),<span class="dv">4</span>)</span>
-<span id="cb146-25"><a href="fisher-wright.html#cb146-25"></a>      x[m] &lt;-<span class="st"> </span><span class="kw">paste0</span>(x[m], <span class="st">&quot;.&quot;</span>, suffix)</span>
-<span id="cb146-26"><a href="fisher-wright.html#cb146-26"></a>      x</span>
-<span id="cb146-27"><a href="fisher-wright.html#cb146-27"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="fisher-wright.html#cb172-1"></a>  fwm &lt;-<span class="st"> </span><span class="cf">function</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">0</span>) <span class="co">## mu != 4/N</span></span>
+<span id="cb172-2"><a href="fisher-wright.html#cb172-2"></a>  {</span>
+<span id="cb172-3"><a href="fisher-wright.html#cb172-3"></a>      <span class="co">## simulate fisher-wright (with mutations)</span></span>
+<span id="cb172-4"><a href="fisher-wright.html#cb172-4"></a>      x &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span>N) <span class="co">## starting types</span></span>
+<span id="cb172-5"><a href="fisher-wright.html#cb172-5"></a>      A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> n_gen, <span class="dt">ncol =</span> N)</span>
+<span id="cb172-6"><a href="fisher-wright.html#cb172-6"></a>      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_gen)</span>
+<span id="cb172-7"><a href="fisher-wright.html#cb172-7"></a>      {</span>
+<span id="cb172-8"><a href="fisher-wright.html#cb172-8"></a>          A[i,] &lt;-<span class="st"> </span>x</span>
+<span id="cb172-9"><a href="fisher-wright.html#cb172-9"></a>          x &lt;-<span class="st"> </span><span class="kw">sample</span>(x, <span class="dt">size =</span> N, <span class="dt">replace =</span> T) <span class="co"># Sample from previous generation and draw with replacement</span></span>
+<span id="cb172-10"><a href="fisher-wright.html#cb172-10"></a>          x &lt;-<span class="st"> </span><span class="kw">mut</span>(x, mu) </span>
+<span id="cb172-11"><a href="fisher-wright.html#cb172-11"></a>          x</span>
+<span id="cb172-12"><a href="fisher-wright.html#cb172-12"></a>      }</span>
+<span id="cb172-13"><a href="fisher-wright.html#cb172-13"></a>      <span class="kw">return</span>(A) <span class="co">## matrix of types, each line a generation.</span></span>
+<span id="cb172-14"><a href="fisher-wright.html#cb172-14"></a>  }</span>
+<span id="cb172-15"><a href="fisher-wright.html#cb172-15"></a></span>
+<span id="cb172-16"><a href="fisher-wright.html#cb172-16"></a><span class="co"># Function to detect number of mutations. This occurs with probability mu. </span></span>
+<span id="cb172-17"><a href="fisher-wright.html#cb172-17"></a>  mut &lt;-<span class="st"> </span><span class="cf">function</span>(x, mu)</span>
+<span id="cb172-18"><a href="fisher-wright.html#cb172-18"></a>  {</span>
+<span id="cb172-19"><a href="fisher-wright.html#cb172-19"></a>      <span class="co">## m, the individuals that mutate</span></span>
+<span id="cb172-20"><a href="fisher-wright.html#cb172-20"></a>      m &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(x), <span class="dt">size=</span> <span class="dv">1</span>, <span class="dt">prob =</span> mu) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb172-21"><a href="fisher-wright.html#cb172-21"></a>      <span class="cf">if</span> (<span class="kw">length</span>(m) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="co">## if no-one mutates</span></span>
+<span id="cb172-22"><a href="fisher-wright.html#cb172-22"></a>          <span class="kw">return</span>(x)</span>
+<span id="cb172-23"><a href="fisher-wright.html#cb172-23"></a>      <span class="co">## add a suffix to their ID, so it will be unique (infinite alleles)</span></span>
+<span id="cb172-24"><a href="fisher-wright.html#cb172-24"></a>      suffix &lt;-<span class="st"> </span><span class="dv">10000</span><span class="op">*</span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="kw">length</span>(m)),<span class="dv">4</span>)</span>
+<span id="cb172-25"><a href="fisher-wright.html#cb172-25"></a>      x[m] &lt;-<span class="st"> </span><span class="kw">paste0</span>(x[m], <span class="st">&quot;.&quot;</span>, suffix)</span>
+<span id="cb172-26"><a href="fisher-wright.html#cb172-26"></a>      x</span>
+<span id="cb172-27"><a href="fisher-wright.html#cb172-27"></a>  }</span></code></pre></div>
 <p>Here we try it out.
 - Each row is a generation and each column is a type of allele.
 - Notice that already by the third generation, there are several numbers that are not drawn anymore: 3,4,6,8,9.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="fisher-wright.html#cb147-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb147-2"><a href="fisher-wright.html#cb147-2"></a>  <span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">6</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="fisher-wright.html#cb173-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb173-2"><a href="fisher-wright.html#cb173-2"></a>  <span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">6</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
 ## [1,] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; 
 ## [2,] &quot;9&quot;  &quot;4&quot;  &quot;7&quot;  &quot;1&quot;  &quot;2&quot;  &quot;7&quot;  &quot;2&quot;  &quot;3&quot;  &quot;1&quot;  &quot;5&quot;  
@@ -758,14 +754,14 @@ Allele type
 ## [5,] &quot;1&quot;  &quot;2&quot;  &quot;1&quot;  &quot;1&quot;  &quot;1&quot;  &quot;1&quot;  &quot;5&quot;  &quot;2&quot;  &quot;1&quot;  &quot;7&quot;  
 ## [6,] &quot;1&quot;  &quot;5&quot;  &quot;2&quot;  &quot;1&quot;  &quot;7&quot;  &quot;5&quot;  &quot;1&quot;  &quot;7&quot;  &quot;1&quot;  &quot;2&quot;</code></pre>
 <p>The graph below shows a simulation of 20 generations each of size 10. The colors represent different types drawn in each generation.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="fisher-wright.html#cb149-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb149-2"><a href="fisher-wright.html#cb149-2"></a>  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">20</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
-<span id="cb149-3"><a href="fisher-wright.html#cb149-3"></a>  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></span>
-<span id="cb149-4"><a href="fisher-wright.html#cb149-4"></a>  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-139"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-139-1.png" alt="Generation composition" width="672" />
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="fisher-wright.html#cb175-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb175-2"><a href="fisher-wright.html#cb175-2"></a>  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">20</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb175-3"><a href="fisher-wright.html#cb175-3"></a>  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></span>
+<span id="cb175-4"><a href="fisher-wright.html#cb175-4"></a>  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-141"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-141-1.png" alt="Generation composition" width="672" />
 <p class="caption">
-Figure 9.1: Generation composition
+Figure 8.1: Generation composition
 </p>
 </div>
 <p>Let’s analyze it more.</p>
@@ -776,19 +772,19 @@ Figure 9.1: Generation composition
 <li><span class="math inline">\(E(p_i(t) | p_i(t-1))\)</span> is the likelihood that the same number (type) will be drawn given that it was drawn before. <strong>NOTE TO JOSH</strong>: is this really what the expectation means? Not on slides</li>
 </ul>
 <p>This time, let’s increase the number of generations (200) and the number of types drawn at every step. In the long run, many of the colored lines disappear and the generations are composed of a handful of types.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="fisher-wright.html#cb150-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb150-2"><a href="fisher-wright.html#cb150-2"></a>  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">n_gen =</span> <span class="dv">200</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
-<span id="cb150-3"><a href="fisher-wright.html#cb150-3"></a>  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></span>
-<span id="cb150-4"><a href="fisher-wright.html#cb150-4"></a>  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-141"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-141-1.png" alt="Generation composition long term" width="672" />
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="fisher-wright.html#cb176-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb176-2"><a href="fisher-wright.html#cb176-2"></a>  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">n_gen =</span> <span class="dv">200</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb176-3"><a href="fisher-wright.html#cb176-3"></a>  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></span>
+<span id="cb176-4"><a href="fisher-wright.html#cb176-4"></a>  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-143"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-143-1.png" alt="Generation composition long term" width="672" />
 <p class="caption">
-Figure 9.2: Generation composition long term
+Figure 8.2: Generation composition long term
 </p>
 </div>
 </div>
 <div id="fixation" class="section level2">
-<h2><span class="header-section-number">9.4</span> Fixation</h2>
+<h2><span class="header-section-number">8.4</span> Fixation</h2>
 <p>Given that we saw before that some of the lines will disappear, we can look about keeping some of the lines fixed (that it will always be selected). For instance,</p>
 <ul>
 <li>What is probability that line <span class="math inline">\(i\)</span> will “fix”?</li>
@@ -796,23 +792,23 @@ Figure 9.2: Generation composition long term
 <li>How can we describe the path to fixation?</li>
 </ul>
 <div id="probability-that-a-particular-line-will-fix" class="section level3">
-<h3><span class="header-section-number">9.4.1</span> Probability that a particular line will “fix”</h3>
+<h3><span class="header-section-number">8.4.1</span> Probability that a particular line will “fix”</h3>
 <p><strong>NOTE TO JOSH</strong>: the slide said that finding this was easy but I don’t necessarily see how the result from the graph goes with the formula below.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="fisher-wright.html#cb151-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb151-2"><a href="fisher-wright.html#cb151-2"></a>  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">20</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
-<span id="cb151-3"><a href="fisher-wright.html#cb151-3"></a>  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></span>
-<span id="cb151-4"><a href="fisher-wright.html#cb151-4"></a>  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></span>
-<span id="cb151-5"><a href="fisher-wright.html#cb151-5"></a>  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">main =</span> <span class="st">&quot;FW simu&quot;</span>)</span>
-<span id="cb151-6"><a href="fisher-wright.html#cb151-6"></a>  <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">y =</span> <span class="kw">jitter</span>(ptt[,<span class="dv">4</span>]), <span class="kw">rownames</span>(ptt), <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-142"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-142-1.png" alt="Time to fix" width="672" />
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="fisher-wright.html#cb177-1"></a>  <span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb177-2"><a href="fisher-wright.html#cb177-2"></a>  A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">10</span>, <span class="dt">n_gen =</span> <span class="dv">20</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb177-3"><a href="fisher-wright.html#cb177-3"></a>  tt &lt;-<span class="st"> </span><span class="kw">table</span>(A, <span class="kw">row</span>(A)) <span class="co">## count types by row</span></span>
+<span id="cb177-4"><a href="fisher-wright.html#cb177-4"></a>  ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt, <span class="dv">2</span>) <span class="co">## proportions</span></span>
+<span id="cb177-5"><a href="fisher-wright.html#cb177-5"></a>  <span class="kw">matplot</span>(<span class="kw">t</span>(ptt), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">main =</span> <span class="st">&quot;FW simu&quot;</span>)</span>
+<span id="cb177-6"><a href="fisher-wright.html#cb177-6"></a>  <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">y =</span> <span class="kw">jitter</span>(ptt[,<span class="dv">4</span>]), <span class="kw">rownames</span>(ptt), <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-144"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-144-1.png" alt="Time to fix" width="672" />
 <p class="caption">
-Figure 9.3: Time to fix
+Figure 8.3: Time to fix
 </p>
 </div>
 </div>
 <div id="expected-time-until-fixation" class="section level3">
-<h3><span class="header-section-number">9.4.2</span> Expected time until fixation?</h3>
+<h3><span class="header-section-number">8.4.2</span> Expected time until fixation?</h3>
 <p>Answer for us is
 <span class="math display">\[
   \bar{T}_{fixed} = 2 \cdot N
@@ -822,20 +818,20 @@ Figure 9.3: Time to fix
 See Wikipedia “Genetic drift”</p></li>
 <li><p>Now we carry out simulations of complete processes. In total, we draw 100 times each generation in order to get the time to fixation. For this example, the mean number of generations taken to get only one remaining line is 202 generations <span class="math inline">\(\approx 2 \times\)</span> the starting generation size.</p></li>
 </ul>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="fisher-wright.html#cb152-1"></a>  T.vec &lt;-<span class="st"> </span><span class="ot">NULL</span> </span>
-<span id="cb152-2"><a href="fisher-wright.html#cb152-2"></a>  all.the.same &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">length</span>(<span class="kw">unique</span>(x)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>}</span>
-<span id="cb152-3"><a href="fisher-wright.html#cb152-3"></a>  <span class="kw">set.seed</span>(<span class="dv">10</span>)</span>
-<span id="cb152-4"><a href="fisher-wright.html#cb152-4"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)  <span class="co"># 100 simulations</span></span>
-<span id="cb152-5"><a href="fisher-wright.html#cb152-5"></a>  {</span>
-<span id="cb152-6"><a href="fisher-wright.html#cb152-6"></a>      A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">n_gen =</span> <span class="dv">1000</span>,<span class="dt">mu =</span> <span class="dv">0</span>)   <span class="co"># generation process: rows are generations and columns are types</span></span>
-<span id="cb152-7"><a href="fisher-wright.html#cb152-7"></a>      extinction_time =<span class="st"> </span><span class="kw">min</span>(<span class="kw">row</span>(A)[<span class="kw">apply</span>(A, <span class="dv">1</span>, all.the.same)])  <span class="co"># obtain the first generation when all but one line went extinct</span></span>
-<span id="cb152-8"><a href="fisher-wright.html#cb152-8"></a>      T.vec[i] &lt;-<span class="st"> </span>extinction_time</span>
-<span id="cb152-9"><a href="fisher-wright.html#cb152-9"></a>  }</span>
-<span id="cb152-10"><a href="fisher-wright.html#cb152-10"></a>  <span class="kw">mean</span>(T.vec)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="fisher-wright.html#cb178-1"></a>  T.vec &lt;-<span class="st"> </span><span class="ot">NULL</span> </span>
+<span id="cb178-2"><a href="fisher-wright.html#cb178-2"></a>  all.the.same &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">length</span>(<span class="kw">unique</span>(x)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>}</span>
+<span id="cb178-3"><a href="fisher-wright.html#cb178-3"></a>  <span class="kw">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb178-4"><a href="fisher-wright.html#cb178-4"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)  <span class="co"># 100 simulations</span></span>
+<span id="cb178-5"><a href="fisher-wright.html#cb178-5"></a>  {</span>
+<span id="cb178-6"><a href="fisher-wright.html#cb178-6"></a>      A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dt">N =</span> <span class="dv">100</span>, <span class="dt">n_gen =</span> <span class="dv">1000</span>,<span class="dt">mu =</span> <span class="dv">0</span>)   <span class="co"># generation process: rows are generations and columns are types</span></span>
+<span id="cb178-7"><a href="fisher-wright.html#cb178-7"></a>      extinction_time =<span class="st"> </span><span class="kw">min</span>(<span class="kw">row</span>(A)[<span class="kw">apply</span>(A, <span class="dv">1</span>, all.the.same)])  <span class="co"># obtain the first generation when all but one line went extinct</span></span>
+<span id="cb178-8"><a href="fisher-wright.html#cb178-8"></a>      T.vec[i] &lt;-<span class="st"> </span>extinction_time</span>
+<span id="cb178-9"><a href="fisher-wright.html#cb178-9"></a>  }</span>
+<span id="cb178-10"><a href="fisher-wright.html#cb178-10"></a>  <span class="kw">mean</span>(T.vec)</span></code></pre></div>
 <pre><code>## [1] 202.89</code></pre>
 </div>
 <div id="path-to-fixation-a-measure-of-homogeneityheterogeneity" class="section level3">
-<h3><span class="header-section-number">9.4.3</span> Path to fixation: a measure of homogeneity/heterogeneity</h3>
+<h3><span class="header-section-number">8.4.3</span> Path to fixation: a measure of homogeneity/heterogeneity</h3>
 <ul>
 <li>How does the type change over time?</li>
 <li>We would like a measure of equality of the types of populations. A low measure would mean that the population is homogeneous while a high measure implies population heterogeneity.</li>
@@ -843,19 +839,19 @@ See Wikipedia “Genetic drift”</p></li>
 <span class="math display">\[  G = \sum_i p_i^2 \]</span></li>
 <li>If we have two types, <span class="math inline">\(p_1 = \pi\)</span> , <span class="math inline">\(p_2 = 1-\pi\)</span>. What is G if <span class="math inline">\(\pi = 0, .5, 1\)</span>?</li>
 </ul>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="fisher-wright.html#cb154-1"></a>type_fun  &lt;-<span class="st"> </span><span class="cf">function</span>(pi_vector){</span>
-<span id="cb154-2"><a href="fisher-wright.html#cb154-2"></a>  oneminus_pi &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span>pi_vector</span>
-<span id="cb154-3"><a href="fisher-wright.html#cb154-3"></a>  G &lt;-<span class="st"> </span>pi_vector<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>oneminus_pi<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb154-4"><a href="fisher-wright.html#cb154-4"></a>  </span>
-<span id="cb154-5"><a href="fisher-wright.html#cb154-5"></a>  <span class="kw">return</span>(<span class="kw">plot</span>(pi_vector, G, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Probability type&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>))</span>
-<span id="cb154-6"><a href="fisher-wright.html#cb154-6"></a>}</span>
-<span id="cb154-7"><a href="fisher-wright.html#cb154-7"></a></span>
-<span id="cb154-8"><a href="fisher-wright.html#cb154-8"></a>pi_vector &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>)</span>
-<span id="cb154-9"><a href="fisher-wright.html#cb154-9"></a><span class="kw">type_fun</span>(pi_vector)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-144"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-144-1.png" alt="Probability of being the same type" width="672" />
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="fisher-wright.html#cb180-1"></a>type_fun  &lt;-<span class="st"> </span><span class="cf">function</span>(pi_vector){</span>
+<span id="cb180-2"><a href="fisher-wright.html#cb180-2"></a>  oneminus_pi &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span>pi_vector</span>
+<span id="cb180-3"><a href="fisher-wright.html#cb180-3"></a>  G &lt;-<span class="st"> </span>pi_vector<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>oneminus_pi<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb180-4"><a href="fisher-wright.html#cb180-4"></a>  </span>
+<span id="cb180-5"><a href="fisher-wright.html#cb180-5"></a>  <span class="kw">return</span>(<span class="kw">plot</span>(pi_vector, G, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Probability type&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>))</span>
+<span id="cb180-6"><a href="fisher-wright.html#cb180-6"></a>}</span>
+<span id="cb180-7"><a href="fisher-wright.html#cb180-7"></a></span>
+<span id="cb180-8"><a href="fisher-wright.html#cb180-8"></a>pi_vector &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>)</span>
+<span id="cb180-9"><a href="fisher-wright.html#cb180-9"></a><span class="kw">type_fun</span>(pi_vector)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-146"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-146-1.png" alt="Probability of being the same type" width="672" />
 <p class="caption">
-Figure 9.4: Probability of being the same type
+Figure 8.4: Probability of being the same type
 </p>
 </div>
 <ul>
@@ -888,14 +884,14 @@ So, H goes to 0 exponentially, just as G goes to 1.</p>
 </div>
 </div>
 <div id="baby-names" class="section level2">
-<h2><span class="header-section-number">9.5</span> Baby Names</h2>
+<h2><span class="header-section-number">8.5</span> Baby Names</h2>
 <p>For this section we will look at an application of changes in baby names from this paper:</p>
 <blockquote>
 <p>“Drift as a mechanism for cultural change: an example from baby names”
 by Matthew W. Hahn and R. Alexander Bentley Proc. R. Soc. Lond. B 2003 270, S120-S123</p>
 </blockquote>
 <div id="basic-idea" class="section level3">
-<h3><span class="header-section-number">9.5.1</span> Basic idea</h3>
+<h3><span class="header-section-number">8.5.1</span> Basic idea</h3>
 <ul>
 <li>The process seems to be like Fisher-Wright because:
 <ul>
@@ -910,151 +906,151 @@ by Matthew W. Hahn and R. Alexander Bentley Proc. R. Soc. Lond. B 2003 270, S120
 Source: Hahn and Bentley (2003)</p>
 </div>
 <div id="fisher-wright-simulation-of-baby-names-hahn-and-bentley" class="section level3">
-<h3><span class="header-section-number">9.5.2</span> Fisher-Wright simulation of Baby Names (Hahn and Bentley)</h3>
+<h3><span class="header-section-number">8.5.2</span> Fisher-Wright simulation of Baby Names (Hahn and Bentley)</h3>
 <p>We download and prepare the data:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="fisher-wright.html#cb155-1"></a><span class="kw">download.file</span>(<span class="dt">url=</span> <span class="st">&quot;https://www.ssa.gov/oact/babynames/names.zip&quot;</span>,</span>
-<span id="cb155-2"><a href="fisher-wright.html#cb155-2"></a>              <span class="st">&quot;./names.zip&quot;</span>)</span>
-<span id="cb155-3"><a href="fisher-wright.html#cb155-3"></a><span class="kw">unzip</span>(<span class="st">&quot;names.zip&quot;</span>, <span class="dt">exdir =</span> <span class="st">&quot;./names&quot;</span>)</span>
-<span id="cb155-4"><a href="fisher-wright.html#cb155-4"></a></span>
-<span id="cb155-5"><a href="fisher-wright.html#cb155-5"></a><span class="kw">library</span>(data.table)</span>
-<span id="cb155-6"><a href="fisher-wright.html#cb155-6"></a></span>
-<span id="cb155-7"><a href="fisher-wright.html#cb155-7"></a>filenames &lt;-<span class="st"> </span><span class="kw">system</span>(<span class="st">&quot;ls ./names/*.txt&quot;</span>, <span class="dt">intern =</span> T)</span>
-<span id="cb155-8"><a href="fisher-wright.html#cb155-8"></a>mylist &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(filenames))</span>
-<span id="cb155-9"><a href="fisher-wright.html#cb155-9"></a><span class="kw">names</span>(mylist) &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;[^0-9]&quot;</span>, <span class="dt">replace =</span> <span class="st">&quot;&quot;</span>, filenames)</span>
-<span id="cb155-10"><a href="fisher-wright.html#cb155-10"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(filenames))</span>
-<span id="cb155-11"><a href="fisher-wright.html#cb155-11"></a>{</span>
-<span id="cb155-12"><a href="fisher-wright.html#cb155-12"></a>    myfile &lt;-<span class="st"> </span>filenames[i]</span>
-<span id="cb155-13"><a href="fisher-wright.html#cb155-13"></a>    mylist[[i]] &lt;-<span class="st"> </span><span class="kw">fread</span>(myfile)</span>
-<span id="cb155-14"><a href="fisher-wright.html#cb155-14"></a>}</span>
-<span id="cb155-15"><a href="fisher-wright.html#cb155-15"></a></span>
-<span id="cb155-16"><a href="fisher-wright.html#cb155-16"></a><span class="co"># Final dataframe</span></span>
-<span id="cb155-17"><a href="fisher-wright.html#cb155-17"></a>dt &lt;-<span class="st"> </span><span class="kw">rbindlist</span>(mylist, <span class="dt">idcol =</span> <span class="st">&quot;year&quot;</span>)</span>
-<span id="cb155-18"><a href="fisher-wright.html#cb155-18"></a><span class="kw">names</span>(dt) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;name&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;N&quot;</span>)</span>
-<span id="cb155-19"><a href="fisher-wright.html#cb155-19"></a></span>
-<span id="cb155-20"><a href="fisher-wright.html#cb155-20"></a><span class="co">## Focus on male names from 1900-1909</span></span>
-<span id="cb155-21"><a href="fisher-wright.html#cb155-21"></a>my.dt &lt;-<span class="st"> </span>dt[sex <span class="op">==</span><span class="st"> &quot;M&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">%in%</span><span class="st"> </span><span class="dv">1900</span><span class="op">:</span><span class="dv">1909</span>]</span>
-<span id="cb155-22"><a href="fisher-wright.html#cb155-22"></a>foo &lt;-<span class="st"> </span>my.dt[, .(<span class="dt">N =</span> <span class="kw">sum</span>(N)), by =<span class="st"> </span>name]</span>
-<span id="cb155-23"><a href="fisher-wright.html#cb155-23"></a>foo &lt;-<span class="st"> </span>foo[<span class="kw">order</span>(N, <span class="dt">decreasing =</span> T)]</span>
-<span id="cb155-24"><a href="fisher-wright.html#cb155-24"></a>bar &lt;-<span class="st"> </span>foo[<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,] <span class="co">## 1000 top names</span></span>
-<span id="cb155-25"><a href="fisher-wright.html#cb155-25"></a></span>
-<span id="cb155-26"><a href="fisher-wright.html#cb155-26"></a><span class="co"># Observed histogram of name occurence</span></span>
-<span id="cb155-27"><a href="fisher-wright.html#cb155-27"></a>my.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="op">^</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)<span class="op">/</span><span class="dv">10000</span>)</span>
-<span id="cb155-28"><a href="fisher-wright.html#cb155-28"></a>bar[, p <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">prop.table</span>(N),<span class="dv">5</span>)] <span class="co"># N column contains the share of times that a name is used</span></span>
-<span id="cb155-29"><a href="fisher-wright.html#cb155-29"></a>bar[, pcat <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cut</span>(p, <span class="dt">breaks =</span>  my.breaks, <span class="dt">right =</span> F, <span class="dt">include.lowest =</span> T)]</span>
-<span id="cb155-30"><a href="fisher-wright.html#cb155-30"></a></span>
-<span id="cb155-31"><a href="fisher-wright.html#cb155-31"></a>out &lt;-<span class="st"> </span><span class="kw">unclass</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(bar<span class="op">$</span>pcat)))</span>
-<span id="cb155-32"><a href="fisher-wright.html#cb155-32"></a></span>
-<span id="cb155-33"><a href="fisher-wright.html#cb155-33"></a></span>
-<span id="cb155-34"><a href="fisher-wright.html#cb155-34"></a>my.x &lt;-<span class="st"> </span>my.breaks[<span class="op">-</span><span class="kw">length</span>(my.breaks)] <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(my.breaks)<span class="op">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="fisher-wright.html#cb181-1"></a><span class="kw">download.file</span>(<span class="dt">url=</span> <span class="st">&quot;https://www.ssa.gov/oact/babynames/names.zip&quot;</span>,</span>
+<span id="cb181-2"><a href="fisher-wright.html#cb181-2"></a>              <span class="st">&quot;./names.zip&quot;</span>)</span>
+<span id="cb181-3"><a href="fisher-wright.html#cb181-3"></a><span class="kw">unzip</span>(<span class="st">&quot;names.zip&quot;</span>, <span class="dt">exdir =</span> <span class="st">&quot;./names&quot;</span>)</span>
+<span id="cb181-4"><a href="fisher-wright.html#cb181-4"></a></span>
+<span id="cb181-5"><a href="fisher-wright.html#cb181-5"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb181-6"><a href="fisher-wright.html#cb181-6"></a></span>
+<span id="cb181-7"><a href="fisher-wright.html#cb181-7"></a>filenames &lt;-<span class="st"> </span><span class="kw">system</span>(<span class="st">&quot;ls ./names/*.txt&quot;</span>, <span class="dt">intern =</span> T)</span>
+<span id="cb181-8"><a href="fisher-wright.html#cb181-8"></a>mylist &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(filenames))</span>
+<span id="cb181-9"><a href="fisher-wright.html#cb181-9"></a><span class="kw">names</span>(mylist) &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;[^0-9]&quot;</span>, <span class="dt">replace =</span> <span class="st">&quot;&quot;</span>, filenames)</span>
+<span id="cb181-10"><a href="fisher-wright.html#cb181-10"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(filenames))</span>
+<span id="cb181-11"><a href="fisher-wright.html#cb181-11"></a>{</span>
+<span id="cb181-12"><a href="fisher-wright.html#cb181-12"></a>    myfile &lt;-<span class="st"> </span>filenames[i]</span>
+<span id="cb181-13"><a href="fisher-wright.html#cb181-13"></a>    mylist[[i]] &lt;-<span class="st"> </span><span class="kw">fread</span>(myfile)</span>
+<span id="cb181-14"><a href="fisher-wright.html#cb181-14"></a>}</span>
+<span id="cb181-15"><a href="fisher-wright.html#cb181-15"></a></span>
+<span id="cb181-16"><a href="fisher-wright.html#cb181-16"></a><span class="co"># Final dataframe</span></span>
+<span id="cb181-17"><a href="fisher-wright.html#cb181-17"></a>dt &lt;-<span class="st"> </span><span class="kw">rbindlist</span>(mylist, <span class="dt">idcol =</span> <span class="st">&quot;year&quot;</span>)</span>
+<span id="cb181-18"><a href="fisher-wright.html#cb181-18"></a><span class="kw">names</span>(dt) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;name&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;N&quot;</span>)</span>
+<span id="cb181-19"><a href="fisher-wright.html#cb181-19"></a></span>
+<span id="cb181-20"><a href="fisher-wright.html#cb181-20"></a><span class="co">## Focus on male names from 1900-1909</span></span>
+<span id="cb181-21"><a href="fisher-wright.html#cb181-21"></a>my.dt &lt;-<span class="st"> </span>dt[sex <span class="op">==</span><span class="st"> &quot;M&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">%in%</span><span class="st"> </span><span class="dv">1900</span><span class="op">:</span><span class="dv">1909</span>]</span>
+<span id="cb181-22"><a href="fisher-wright.html#cb181-22"></a>foo &lt;-<span class="st"> </span>my.dt[, .(<span class="dt">N =</span> <span class="kw">sum</span>(N)), by =<span class="st"> </span>name]</span>
+<span id="cb181-23"><a href="fisher-wright.html#cb181-23"></a>foo &lt;-<span class="st"> </span>foo[<span class="kw">order</span>(N, <span class="dt">decreasing =</span> T)]</span>
+<span id="cb181-24"><a href="fisher-wright.html#cb181-24"></a>bar &lt;-<span class="st"> </span>foo[<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>,] <span class="co">## 1000 top names</span></span>
+<span id="cb181-25"><a href="fisher-wright.html#cb181-25"></a></span>
+<span id="cb181-26"><a href="fisher-wright.html#cb181-26"></a><span class="co"># Observed histogram of name occurence</span></span>
+<span id="cb181-27"><a href="fisher-wright.html#cb181-27"></a>my.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="op">^</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)<span class="op">/</span><span class="dv">10000</span>)</span>
+<span id="cb181-28"><a href="fisher-wright.html#cb181-28"></a>bar[, p <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">prop.table</span>(N),<span class="dv">5</span>)] <span class="co"># N column contains the share of times that a name is used</span></span>
+<span id="cb181-29"><a href="fisher-wright.html#cb181-29"></a>bar[, pcat <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">cut</span>(p, <span class="dt">breaks =</span>  my.breaks, <span class="dt">right =</span> F, <span class="dt">include.lowest =</span> T)]</span>
+<span id="cb181-30"><a href="fisher-wright.html#cb181-30"></a></span>
+<span id="cb181-31"><a href="fisher-wright.html#cb181-31"></a>out &lt;-<span class="st"> </span><span class="kw">unclass</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(bar<span class="op">$</span>pcat)))</span>
+<span id="cb181-32"><a href="fisher-wright.html#cb181-32"></a></span>
+<span id="cb181-33"><a href="fisher-wright.html#cb181-33"></a></span>
+<span id="cb181-34"><a href="fisher-wright.html#cb181-34"></a>my.x &lt;-<span class="st"> </span>my.breaks[<span class="op">-</span><span class="kw">length</span>(my.breaks)] <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(my.breaks)<span class="op">/</span><span class="dv">2</span></span></code></pre></div>
 <p>Then we look at observed frequencies and they seem to behave as a power law (in log-log)</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="fisher-wright.html#cb156-1"></a><span class="kw">plot</span>(my.x, out, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Frequency of name&quot;</span>, <span class="dt">ylab=</span> <span class="st">&quot;log(share)&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-146"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-146-1.png" alt="Power" width="672" />
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="fisher-wright.html#cb182-1"></a><span class="kw">plot</span>(my.x, out, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Frequency of name&quot;</span>, <span class="dt">ylab=</span> <span class="st">&quot;log(share)&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-148"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-148-1.png" alt="Power" width="672" />
 <p class="caption">
-Figure 9.5: Power
+Figure 8.5: Power
 </p>
 </div>
 </div>
 <div id="drawing-their-picture-with-simulation" class="section level3">
-<h3><span class="header-section-number">9.5.3</span> Drawing their picture with simulation</h3>
+<h3><span class="header-section-number">8.5.3</span> Drawing their picture with simulation</h3>
 <p>Let’s look at evolution over time of G: chance that two individuals are of same type.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="fisher-wright.html#cb157-1"></a>get.G &lt;-<span class="st"> </span><span class="cf">function</span>(x)</span>
-<span id="cb157-2"><a href="fisher-wright.html#cb157-2"></a>{</span>
-<span id="cb157-3"><a href="fisher-wright.html#cb157-3"></a>    tt &lt;-<span class="st"> </span><span class="kw">table</span>(x)</span>
-<span id="cb157-4"><a href="fisher-wright.html#cb157-4"></a>    p &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt)</span>
-<span id="cb157-5"><a href="fisher-wright.html#cb157-5"></a>    <span class="kw">sum</span>(p<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb157-6"><a href="fisher-wright.html#cb157-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="fisher-wright.html#cb183-1"></a>get.G &lt;-<span class="st"> </span><span class="cf">function</span>(x)</span>
+<span id="cb183-2"><a href="fisher-wright.html#cb183-2"></a>{</span>
+<span id="cb183-3"><a href="fisher-wright.html#cb183-3"></a>    tt &lt;-<span class="st"> </span><span class="kw">table</span>(x)</span>
+<span id="cb183-4"><a href="fisher-wright.html#cb183-4"></a>    p &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt)</span>
+<span id="cb183-5"><a href="fisher-wright.html#cb183-5"></a>    <span class="kw">sum</span>(p<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb183-6"><a href="fisher-wright.html#cb183-6"></a>}</span></code></pre></div>
 <p>First we look at the case were there is no mutation</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="fisher-wright.html#cb158-1"></a>A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dv">1000</span>, <span class="dt">n_gen =</span> <span class="dv">4000</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
-<span id="cb158-2"><a href="fisher-wright.html#cb158-2"></a>G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</span>
-<span id="cb158-3"><a href="fisher-wright.html#cb158-3"></a><span class="kw">plot</span>(G.vec, <span class="dt">ylab =</span> <span class="st">&quot;G&quot;</span>, <span class="dt">xlab=</span> <span class="st">&quot;# Generation&quot;</span>, <span class="dt">type =</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-148"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-148-1.png" alt="G path (without mutation)" width="672" />
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="fisher-wright.html#cb184-1"></a>A &lt;-<span class="st"> </span><span class="kw">fwm</span>(<span class="dv">1000</span>, <span class="dt">n_gen =</span> <span class="dv">4000</span>, <span class="dt">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb184-2"><a href="fisher-wright.html#cb184-2"></a>G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</span>
+<span id="cb184-3"><a href="fisher-wright.html#cb184-3"></a><span class="kw">plot</span>(G.vec, <span class="dt">ylab =</span> <span class="st">&quot;G&quot;</span>, <span class="dt">xlab=</span> <span class="st">&quot;# Generation&quot;</span>, <span class="dt">type =</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-150"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-150-1.png" alt="G path (without mutation)" width="672" />
 <p class="caption">
-Figure 9.6: G path (without mutation)
+Figure 8.6: G path (without mutation)
 </p>
 </div>
 <p>With mutation a single trial shows that the G value oscillates a lot around 0.1.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="fisher-wright.html#cb159-1"></a>N =<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb159-2"><a href="fisher-wright.html#cb159-2"></a>A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, <span class="dt">n_gen =</span> <span class="dv">3000</span>, <span class="dt">mu =</span> <span class="dv">4</span><span class="op">/</span>N)</span>
-<span id="cb159-3"><a href="fisher-wright.html#cb159-3"></a>G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</span>
-<span id="cb159-4"><a href="fisher-wright.html#cb159-4"></a><span class="kw">plot</span>(G.vec, <span class="dt">ylab =</span> <span class="st">&quot;G&quot;</span>, <span class="dt">xlab=</span> <span class="st">&quot;# Generation&quot;</span>, <span class="dt">type =</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-149"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-149-1.png" alt="G path (with mutation, 1 trial)" width="672" />
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="fisher-wright.html#cb185-1"></a>N =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb185-2"><a href="fisher-wright.html#cb185-2"></a>A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, <span class="dt">n_gen =</span> <span class="dv">3000</span>, <span class="dt">mu =</span> <span class="dv">4</span><span class="op">/</span>N)</span>
+<span id="cb185-3"><a href="fisher-wright.html#cb185-3"></a>G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</span>
+<span id="cb185-4"><a href="fisher-wright.html#cb185-4"></a><span class="kw">plot</span>(G.vec, <span class="dt">ylab =</span> <span class="st">&quot;G&quot;</span>, <span class="dt">xlab=</span> <span class="st">&quot;# Generation&quot;</span>, <span class="dt">type =</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-151"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-151-1.png" alt="G path (with mutation, 1 trial)" width="672" />
 <p class="caption">
-Figure 9.7: G path (with mutation, 1 trial)
+Figure 8.7: G path (with mutation, 1 trial)
 </p>
 </div>
 <p>We can increase the number of trials (up to 100 here) and look at the average (yellow horizontal line).</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="fisher-wright.html#cb160-1"></a>n_gen =<span class="st"> </span><span class="dv">2000</span></span>
-<span id="cb160-2"><a href="fisher-wright.html#cb160-2"></a>n_trials =<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb160-3"><a href="fisher-wright.html#cb160-3"></a>G.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>,  n_trials, n_gen)</span>
-<span id="cb160-4"><a href="fisher-wright.html#cb160-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</span>
-<span id="cb160-5"><a href="fisher-wright.html#cb160-5"></a>    {</span>
-<span id="cb160-6"><a href="fisher-wright.html#cb160-6"></a>        N =<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb160-7"><a href="fisher-wright.html#cb160-7"></a>        A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">4</span><span class="op">/</span>N)</span>
-<span id="cb160-8"><a href="fisher-wright.html#cb160-8"></a>        G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</span>
-<span id="cb160-9"><a href="fisher-wright.html#cb160-9"></a>        G.mat[i,] &lt;-<span class="st"> </span>G.vec</span>
-<span id="cb160-10"><a href="fisher-wright.html#cb160-10"></a>        }</span>
-<span id="cb160-11"><a href="fisher-wright.html#cb160-11"></a>G.bar &lt;-<span class="st"> </span><span class="kw">apply</span>(G.mat, <span class="dv">2</span>, mean)</span>
-<span id="cb160-12"><a href="fisher-wright.html#cb160-12"></a></span>
-<span id="cb160-13"><a href="fisher-wright.html#cb160-13"></a><span class="kw">matplot</span>(<span class="kw">t</span>(G.mat), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;G&quot;</span>, <span class="dt">xlab=</span> <span class="st">&quot;# Generation&quot;</span>)</span>
-<span id="cb160-14"><a href="fisher-wright.html#cb160-14"></a><span class="kw">lines</span>(G.bar, <span class="dt">lwd =</span> <span class="dv">4</span>)</span>
-<span id="cb160-15"><a href="fisher-wright.html#cb160-15"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">lwd =</span> <span class="dv">5</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-150"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-150-1.png" alt="G path (with mutation, 100 trials)" width="672" />
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="fisher-wright.html#cb186-1"></a>n_gen =<span class="st"> </span><span class="dv">2000</span></span>
+<span id="cb186-2"><a href="fisher-wright.html#cb186-2"></a>n_trials =<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb186-3"><a href="fisher-wright.html#cb186-3"></a>G.mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>,  n_trials, n_gen)</span>
+<span id="cb186-4"><a href="fisher-wright.html#cb186-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_trials)</span>
+<span id="cb186-5"><a href="fisher-wright.html#cb186-5"></a>    {</span>
+<span id="cb186-6"><a href="fisher-wright.html#cb186-6"></a>        N =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb186-7"><a href="fisher-wright.html#cb186-7"></a>        A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">4</span><span class="op">/</span>N)</span>
+<span id="cb186-8"><a href="fisher-wright.html#cb186-8"></a>        G.vec &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">1</span>, get.G)</span>
+<span id="cb186-9"><a href="fisher-wright.html#cb186-9"></a>        G.mat[i,] &lt;-<span class="st"> </span>G.vec</span>
+<span id="cb186-10"><a href="fisher-wright.html#cb186-10"></a>        }</span>
+<span id="cb186-11"><a href="fisher-wright.html#cb186-11"></a>G.bar &lt;-<span class="st"> </span><span class="kw">apply</span>(G.mat, <span class="dv">2</span>, mean)</span>
+<span id="cb186-12"><a href="fisher-wright.html#cb186-12"></a></span>
+<span id="cb186-13"><a href="fisher-wright.html#cb186-13"></a><span class="kw">matplot</span>(<span class="kw">t</span>(G.mat), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;G&quot;</span>, <span class="dt">xlab=</span> <span class="st">&quot;# Generation&quot;</span>)</span>
+<span id="cb186-14"><a href="fisher-wright.html#cb186-14"></a><span class="kw">lines</span>(G.bar, <span class="dt">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb186-15"><a href="fisher-wright.html#cb186-15"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">lwd =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-152"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-152-1.png" alt="G path (with mutation, 100 trials)" width="672" />
 <p class="caption">
-Figure 9.8: G path (with mutation, 100 trials)
+Figure 8.8: G path (with mutation, 100 trials)
 </p>
 </div>
 <p>Why is the mean about .11?</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="fisher-wright.html#cb161-1"></a><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="fisher-wright.html#cb187-1"></a><span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">8</span>)</span></code></pre></div>
 <p>Gillespie tells us that <span class="math inline">\(\bar{G}\)</span> is supposed to be <span class="math inline">\(\frac{1}{(1 + 4*Ne*\mu)}\)</span></p>
 <p>How does <span class="math inline">\(4*Ne*\mu = 8\)</span>?</p>
 <p>Well, we have <span class="math inline">\(K*\mu = 4\)</span> and since <span class="math inline">\(K = 2*Ne\)</span>, <span class="math inline">\(Ne = K/2\)</span> (maybe)</p>
 </div>
 <div id="fw-babyname-simulation-of-equilibrium-frequencies" class="section level3">
-<h3><span class="header-section-number">9.5.4</span> FW babyname simulation of equilibrium frequencies</h3>
+<h3><span class="header-section-number">8.5.4</span> FW babyname simulation of equilibrium frequencies</h3>
 <p><strong>NOTE TO JOSH</strong>: I don’t really know what is going on here and I noticed that the code mentions that it might not be (w)right.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="fisher-wright.html#cb162-1"></a>N =<span class="st"> </span><span class="dv">1000</span> <span class="co">## Not sure if this is (w)right :)</span></span>
-<span id="cb162-2"><a href="fisher-wright.html#cb162-2"></a>mu =<span class="st"> </span><span class="dv">4</span><span class="op">/</span>N <span class="co">## [1] 0.004</span></span>
-<span id="cb162-3"><a href="fisher-wright.html#cb162-3"></a>theta =<span class="st"> </span>N<span class="op">*</span>mu <span class="co">## [1] 4 ## H&amp;B&#39;s &quot;best fit&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="fisher-wright.html#cb188-1"></a>N =<span class="st"> </span><span class="dv">1000</span> <span class="co">## Not sure if this is (w)right :)</span></span>
+<span id="cb188-2"><a href="fisher-wright.html#cb188-2"></a>mu =<span class="st"> </span><span class="dv">4</span><span class="op">/</span>N <span class="co">## [1] 0.004</span></span>
+<span id="cb188-3"><a href="fisher-wright.html#cb188-3"></a>theta =<span class="st"> </span>N<span class="op">*</span>mu <span class="co">## [1] 4 ## H&amp;B&#39;s &quot;best fit&quot;</span></span></code></pre></div>
 </div>
 </div>
-<div id="now-we-can-simulate-babyynmes" class="section level2">
-<h2><span class="header-section-number">9.6</span> Now we can simulate babyynmes</h2>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="fisher-wright.html#cb163-1"></a>n_gen =<span class="st"> </span><span class="dv">1001</span></span>
-<span id="cb163-2"><a href="fisher-wright.html#cb163-2"></a>N =<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb163-3"><a href="fisher-wright.html#cb163-3"></a><span class="co">## set.seed(1)</span></span>
-<span id="cb163-4"><a href="fisher-wright.html#cb163-4"></a><span class="co">## A &lt;- fwm2(N, n_gen, mu = 4/N)</span></span>
-<span id="cb163-5"><a href="fisher-wright.html#cb163-5"></a><span class="co">#A &lt;- fwm2(N, n_gen, mu = 8/N)</span></span>
-<span id="cb163-6"><a href="fisher-wright.html#cb163-6"></a><span class="co">###############</span></span>
-<span id="cb163-7"><a href="fisher-wright.html#cb163-7"></a><span class="co">#What about the fwm2 function?</span></span>
-<span id="cb163-8"><a href="fisher-wright.html#cb163-8"></a><span class="co">#######################</span></span>
-<span id="cb163-9"><a href="fisher-wright.html#cb163-9"></a>A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">8</span><span class="op">/</span>N)</span>
-<span id="cb163-10"><a href="fisher-wright.html#cb163-10"></a><span class="co">## ok, lets do power law plot of this</span></span>
-<span id="cb163-11"><a href="fisher-wright.html#cb163-11"></a>x &lt;-<span class="st"> </span>A[<span class="dv">1001</span>,]</span>
-<span id="cb163-12"><a href="fisher-wright.html#cb163-12"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(x)</span>
-<span id="cb163-13"><a href="fisher-wright.html#cb163-13"></a>ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt)</span>
-<span id="cb163-14"><a href="fisher-wright.html#cb163-14"></a>my.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="op">^</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)<span class="op">/</span><span class="dv">10000</span>)</span>
-<span id="cb163-15"><a href="fisher-wright.html#cb163-15"></a>p &lt;-<span class="st"> </span>ptt</span>
-<span id="cb163-16"><a href="fisher-wright.html#cb163-16"></a><span class="co">## bar[, p := round(prop.table(N),5)]</span></span>
-<span id="cb163-17"><a href="fisher-wright.html#cb163-17"></a><span class="co">##bar[, pcat := cut(p, breaks =  my.breaks, right = F, include.lowest = T)]</span></span>
-<span id="cb163-18"><a href="fisher-wright.html#cb163-18"></a>pcat =<span class="st"> </span><span class="kw">cut</span>(p, <span class="dt">breaks =</span>  my.breaks, <span class="dt">right =</span> F, <span class="dt">include.lowest =</span> T)</span>
-<span id="cb163-19"><a href="fisher-wright.html#cb163-19"></a>out &lt;-<span class="st"> </span><span class="kw">unclass</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(bar<span class="op">$</span>pcat)))</span>
-<span id="cb163-20"><a href="fisher-wright.html#cb163-20"></a>out.hat &lt;-<span class="st"> </span><span class="kw">unclass</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(pcat)))</span>
-<span id="cb163-21"><a href="fisher-wright.html#cb163-21"></a>my.x &lt;-<span class="st"> </span>my.breaks[<span class="op">-</span><span class="kw">length</span>(my.breaks)] <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(my.breaks)<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb163-22"><a href="fisher-wright.html#cb163-22"></a><span class="kw">plot</span>(my.x, out, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span>
-<span id="cb163-23"><a href="fisher-wright.html#cb163-23"></a><span class="kw">lines</span>(my.x, out.hat)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-153"></span>
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-153-1.png" alt="Baby Names Simulation" width="672" />
+<div id="now-we-can-simulate-babynames" class="section level2">
+<h2><span class="header-section-number">8.6</span> Now we can simulate babynames</h2>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="fisher-wright.html#cb189-1"></a>n_gen =<span class="st"> </span><span class="dv">1001</span></span>
+<span id="cb189-2"><a href="fisher-wright.html#cb189-2"></a>N =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb189-3"><a href="fisher-wright.html#cb189-3"></a><span class="co">## set.seed(1)</span></span>
+<span id="cb189-4"><a href="fisher-wright.html#cb189-4"></a><span class="co">## A &lt;- fwm2(N, n_gen, mu = 4/N)</span></span>
+<span id="cb189-5"><a href="fisher-wright.html#cb189-5"></a><span class="co">#A &lt;- fwm2(N, n_gen, mu = 8/N)</span></span>
+<span id="cb189-6"><a href="fisher-wright.html#cb189-6"></a><span class="co">###############</span></span>
+<span id="cb189-7"><a href="fisher-wright.html#cb189-7"></a><span class="co">#What about the fwm2 function?</span></span>
+<span id="cb189-8"><a href="fisher-wright.html#cb189-8"></a><span class="co">#######################</span></span>
+<span id="cb189-9"><a href="fisher-wright.html#cb189-9"></a>A &lt;-<span class="st"> </span><span class="kw">fwm</span>(N, n_gen, <span class="dt">mu =</span> <span class="dv">8</span><span class="op">/</span>N)</span>
+<span id="cb189-10"><a href="fisher-wright.html#cb189-10"></a><span class="co">## ok, lets do power law plot of this</span></span>
+<span id="cb189-11"><a href="fisher-wright.html#cb189-11"></a>x &lt;-<span class="st"> </span>A[<span class="dv">1001</span>,]</span>
+<span id="cb189-12"><a href="fisher-wright.html#cb189-12"></a>tt &lt;-<span class="st"> </span><span class="kw">table</span>(x)</span>
+<span id="cb189-13"><a href="fisher-wright.html#cb189-13"></a>ptt &lt;-<span class="st"> </span><span class="kw">prop.table</span>(tt)</span>
+<span id="cb189-14"><a href="fisher-wright.html#cb189-14"></a>my.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="op">^</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)<span class="op">/</span><span class="dv">10000</span>)</span>
+<span id="cb189-15"><a href="fisher-wright.html#cb189-15"></a>p &lt;-<span class="st"> </span>ptt</span>
+<span id="cb189-16"><a href="fisher-wright.html#cb189-16"></a><span class="co">## bar[, p := round(prop.table(N),5)]</span></span>
+<span id="cb189-17"><a href="fisher-wright.html#cb189-17"></a><span class="co">##bar[, pcat := cut(p, breaks =  my.breaks, right = F, include.lowest = T)]</span></span>
+<span id="cb189-18"><a href="fisher-wright.html#cb189-18"></a>pcat =<span class="st"> </span><span class="kw">cut</span>(p, <span class="dt">breaks =</span>  my.breaks, <span class="dt">right =</span> F, <span class="dt">include.lowest =</span> T)</span>
+<span id="cb189-19"><a href="fisher-wright.html#cb189-19"></a>out &lt;-<span class="st"> </span><span class="kw">unclass</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(bar<span class="op">$</span>pcat)))</span>
+<span id="cb189-20"><a href="fisher-wright.html#cb189-20"></a>out.hat &lt;-<span class="st"> </span><span class="kw">unclass</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(pcat)))</span>
+<span id="cb189-21"><a href="fisher-wright.html#cb189-21"></a>my.x &lt;-<span class="st"> </span>my.breaks[<span class="op">-</span><span class="kw">length</span>(my.breaks)] <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(my.breaks)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb189-22"><a href="fisher-wright.html#cb189-22"></a><span class="kw">plot</span>(my.x, out, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span>
+<span id="cb189-23"><a href="fisher-wright.html#cb189-23"></a><span class="kw">lines</span>(my.x, out.hat)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-155"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-155-1.png" alt="Baby Names Simulation" width="672" />
 <p class="caption">
-Figure 9.9: Baby Names Simulation
+Figure 8.9: Baby Names Simulation
 </p>
 </div>
 </div>
 <div id="conclusions-5" class="section level2">
-<h2><span class="header-section-number">9.7</span> Conclusions</h2>
+<h2><span class="header-section-number">8.7</span> Conclusions</h2>
 <ul>
 <li>Fisher-Wright an alternative to branching processes</li>
 <li>It reverses logic of reproduction, but gives similar quantitative and qualitative results</li>
@@ -1062,7 +1058,7 @@ Figure 9.9: Baby Names Simulation
 <li>Starting point for coalescent</li>
 </ul>
 <div id="some-potential-criticism" class="section level3">
-<h3><span class="header-section-number">9.7.1</span> Some potential criticism</h3>
+<h3><span class="header-section-number">8.7.1</span> Some potential criticism</h3>
 <ul>
 <li>While we can’t reject that there’s some parameterization of
 FW that gives us similar disn, this doesn’t mean that we’ve
@@ -1091,7 +1087,7 @@ frequencies correctly.</li>
           </div>
         </div>
       </div>
-<a href="branching-processes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fertility-heterogeneity-tempo-distortions-and-distorted-tempo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="coalescent.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
