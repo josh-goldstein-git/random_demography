@@ -629,7 +629,7 @@ avg_hazard_gamma <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %
 ```
 8. *Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?*   
    The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+. 
-```{r, eval = t, echo = F, message=FALSE, warning=FALSE, fig.cap="Uniform Hazards Frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = F, message=FALSE, warning=FALSE, fig.cap="Uniform Hazards Frailty", out.width = '65%', out.height = '65%'}
 avg_hazard_uniform_age <- tibble(age = floor(uniform_frailty$sim),z = uniform_frailty$z) %>%
   filter(age > 0) %>% 
   mutate(age_group = case_when(
@@ -645,7 +645,7 @@ avg_hazard_uniform_age <- tibble(age = floor(uniform_frailty$sim),z = uniform_fr
 
 avg_hazard_uniform_age
 ```
-```{r, eval = t, echo = F, message=FALSE, warning=FALSE, fig.cap="Gamma Hazards Frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = F, message=FALSE, warning=FALSE, fig.cap="Gamma Hazards Frailty", out.width = '65%', out.height = '65%'}
 avg_hazard_gamma_age <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %>%
   filter(age > 0) %>% 
   mutate(age_group = case_when(
@@ -661,7 +661,7 @@ avg_hazard_gamma_age <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$
 
 avg_hazard_gamma_age
 ```
-```{r, eval = t, echo = F, message=FALSE, warning=FALSE, fig.cap="Beta Hazards Frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = F, message=FALSE, warning=FALSE, fig.cap="Beta Hazards Frailty", out.width = '65%', out.height = '65%'}
 avg_hazard_beta_age <- tibble(age = floor(beta_frailty$sim),z = beta_frailty$z) %>%
   filter(age > 0) %>% 
   mutate(age_group = case_when(

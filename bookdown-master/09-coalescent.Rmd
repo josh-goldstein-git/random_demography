@@ -577,7 +577,7 @@ These are the kind of comparisons _we_ will be doing.
 
 Let's look at Figure 2 on page 5
 ```{r batini1, fig.cap=' Figure 2 page 5 from @batini2017population', out.width='80%', fig.align='center',  echo=FALSE}
-knitr::include_graphics('random_demography/bookdown-master/figures/batini1.png')
+knitr::include_graphics('figures/batini1.png')
 ```  
 
   - If we look at Ireland (IRE), the think lines are effective population estimates over thousands of years (KYA). For instance, according to mtDNA, 1 thousand years ago the effective population size was around $12,500$, while 50 thousand years ago the population was around $\approx 1,250$. The order of magnitude for each these populations appears to be about 10^4 in  last few KYA and 10^3 50 KYA. Together, perhaps the size is 10 fold. So we're looking at European effective population sizes on the order of 100,000 the last few thousand years and on the order of 10,000 tens of thousands of years ago.

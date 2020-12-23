@@ -1,8 +1,4 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
+
 ```{r include=FALSE}
 #install.packages("kableExtra")
 library(kableExtra)
@@ -62,11 +58,11 @@ Additional resources:
   people
   
 ```{r}
+library(kableExtra)
+table <- cbind(c(0,1,2),c(.3,.4,.3))
   knitr::kable(
-  cbind(c(0,1,2),c(.3,.4,.3)),
-  col.names = c('$k$', '$p_k$')
-) %>%
- kable_paper(bootstrap_options = "striped", full_width = F)
+  table,
+  col.names = c('$k$', '$p_k$')) 
 ```
 
 
@@ -85,7 +81,7 @@ Additional resources:
   knitr::kable(
   cbind(c(0,1,2),c(.3,.4,.3),c("0-2", "3-5", "6-9")),
   col.names = c('$k$', '$p_k$', 'digits')
-) %>% kable_paper(bootstrap_options = "striped", full_width = F)
+) #%>% kable_paper(bootstrap_options = "striped", full_width = F)
 ```
 
 
@@ -100,7 +96,7 @@ In the table, we include their rows but the expected number of infected people i
   knitr::kable(
   cbind(c(1,2,3,4),c(9,0,5,6),c(0.3,0.2,0.4,0.4), c("$2 \\times 0.3 = 2.7$", "$0 \\times 0.3 = 0$", "$0$","$0$")),
   col.names = c('carrier generation #', 'random digit', '$p_k$', 'expected # infected'), align="cccl"
-) %>% kable_paper(bootstrap_options = "striped", full_width = F)
+) #%>% kable_paper(bootstrap_options = "striped", full_width = F)
 ```
 
 
