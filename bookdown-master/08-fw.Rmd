@@ -70,7 +70,8 @@ Generation 1 starts off with a sequence of numbers from 0 to 9. Then for generat
   knitr::kable(
   cbind(c(1:3), rbind(c(0:9),c(7, 3, 1, 6, 6, 0, 5, 3, 6, 2), 
         c(5, 3, 0, 6, 6, 6, 7, 7, 2, 3))),
-  col.names = c('generation #', 'allele type', "", "", "", "", "", "", "", "", "")) #%>% kable_paper(bootstrap_options = "striped", full_width = F)
+  col.names = c('generation #', 'allele type', "", "", "", "", "", "", "", "", ""))%>%
+  kableExtra::kable_styling(full_width = F) 
 ```
 
 
@@ -81,7 +82,8 @@ If we translate this graph into a tally of the alleles by generation we see that
   knitr::kable(
   cbind(c(1:9), c(rep(1,9)), c(1, 1, 2, 0, 1, 3, 1, 0, 0), 
         c(1, 1, 2, 0, 1, 3, 2, 0, 0)),
-  col.names = c('Allele type', "1", "2", "3"))   %>% add_header_above(c(" " = 1, "Count per generation" = 3))
+  col.names = c('Allele type', "1", "2", "3"))   %>% add_header_above(c(" " = 1, "Count per generation" = 3))%>%
+  kableExtra::kable_styling(full_width = F) 
 ```
 
 - Here, allele type 6 will most likely dominate. This means that everybody will likely become similar and that individual types disappear. 
@@ -397,7 +399,7 @@ mu = 4/N ## [1] 0.004
 theta = N*mu ## [1] 4 ## H&B's "best fit"
 ```
 
-## Now we can simulate babyynmes
+## Now we can simulate babynames
 ```{r, warning=FALSE, fig.height=5, fig.cap='Baby Names Simulation', fig.align = 'center'}
 n_gen = 1001
 N = 1000

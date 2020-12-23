@@ -423,12 +423,11 @@ print(paste0('Average population size: ',N.hat))
     - Then, the time spent at each branch relative to the total time (out of 4 branches) is given by the third column.
     - We count the total branch length as the number of branches time the expected time to coalesce.
     
-|----------------------|-------------|--------------------------------------------------|------------------------------|
-| Number of branches (n) |  E(T(n))    | Time spent at each branch /total                 | Total branch length          |
-|------------------------|-------------|--------------------------------------------------|------------------------------|
-|         2              |    $N$      | $\frac{N}{N\frac{3}{2}}=\frac{2}{3}$             |       $2N$                   |
-|           3            |$\frac{N}{3}$| $\frac{N\frac{1}{3}}{N\frac{3}{2}}= \frac{2}{9}$ |$3\frac{N}{3}=N$              |
-|           4            |$\frac{N}{6}$| $\frac{N\frac{1}{6}}{N\frac{3}{2}}= \frac{1}{9}$ |$4\frac{N}{6} = \frac{2}{3}N$ |
+| Number of branches (n) | E(T(n)) | Time spent at each branch /total | Total branch length |
+|---|---|---|---|
+| 2 | $N$ | $\frac{N}{N\frac{3}{2}}=\frac{2}{3}$ | $2N$  |
+| 3 | $\frac{N}{3}$ | $\frac{N\frac{1}{3}}{N\frac{3}{2}}= \frac{2}{9}$ | $3\frac{N}{3}=N$ |
+| 4 | $\frac{N}{6}$ | $\frac{N\frac{1}{6}}{N\frac{3}{2}}= \frac{1}{9}$ | $4\frac{N}{6} = \frac{2}{3}N$ |
 
 
 
@@ -577,7 +576,7 @@ These are the kind of comparisons _we_ will be doing.
 
 Let's look at Figure 2 on page 5
 ```{r batini1, fig.cap=' Figure 2 page 5 from @batini2017population', out.width='80%', fig.align='center',  echo=FALSE}
-knitr::include_graphics('figures/batini1.png')
+knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/batini1.png')
 ```  
 
   - If we look at Ireland (IRE), the think lines are effective population estimates over thousands of years (KYA). For instance, according to mtDNA, 1 thousand years ago the effective population size was around $12,500$, while 50 thousand years ago the population was around $\approx 1,250$. The order of magnitude for each these populations appears to be about 10^4 in  last few KYA and 10^3 50 KYA. Together, perhaps the size is 10 fold. So we're looking at European effective population sizes on the order of 100,000 the last few thousand years and on the order of 10,000 tens of thousands of years ago.

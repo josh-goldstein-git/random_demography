@@ -10,3 +10,6 @@ render_book("index.Rmd","bookdown::gitbook",
 #in the _bookdown.yml file
 
 #In order to modify the chapters included, you must edit _bookdown.yml list. 
+
+# To preview a chapter just run:
+preview_chapter('09-coalescent.Rmd')

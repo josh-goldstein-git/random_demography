@@ -86,7 +86,7 @@ selection”.
 
 ### Extremes of Longevity in Humans and Other Species 
 ```{r plateaubarbi, fig.cap='Estimated plateau for cohort of Italian women from 1904. Source: @barbi2018', out.width='80%',fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/plateau_1.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/plateau_1.png')
     ```
 
    What is the importance of plateaus?
@@ -97,7 +97,7 @@ selection”.
    For instance, we can compare human hazard to that of other species:  
    
 ```{r plateauhoriuchi, echo=FALSE, fig.align='center', fig.cap='Hazards across selected species. Source: @horiuchi2003', fig.height=6, out.width='80%'}
-    knitr::include_graphics('figures/plateau_2.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/plateau_2.png')
     ```   
     
 ### Gamma-Gompertz Fixed Frailty Hazards

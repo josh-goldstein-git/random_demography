@@ -388,7 +388,7 @@ frailty_sim <- function( N, z, base.a, base.b ){
     ```
     a. Uniform distribution:  
     We find that the uniform-distributed frailty begins to increase more slowly after age 60 compared to baseline.
-    ```{r echo=TRUE}
+    ```{r echo=TRUE, cache=T}
 # Parameters
 million = 10^6
 N <-  million
@@ -401,7 +401,7 @@ w <- .3 ## try smaller if you want
 z <- runif(N, min = 1 - w , max = 1 + w)
 uniform_frailty <- frailty_sim(N, z, base.a, base.b)
     ```
-    ```{r, echo=FALSE, fig.cap="Uniform Distribution", out.width = '100%'}
+    ```{r, echo=FALSE, fig.cap="Uniform Distribution", out.width = '100%',  fig.align='center'}
 frailty <- uniform_frailty$frailty
 base <- uniform_frailty$baseline
 
@@ -442,7 +442,7 @@ legend("topright", legend = c("pop", "baseline"),
     ```
     b. Gamma frailty distribution:  
     Gamma-distributed frailty begins to increase more slowly after age 60 compared to baseline.This is similar to the uniform frailty distribution. 
-    ```{r echo=TRUE}
+    ```{r echo=TRUE, cache=T}
 # Parameters
 million = 10^6
 N <-  million
@@ -456,7 +456,7 @@ my.sd <- .5
   z <- rgamma(N, shape = 1/sigma.sq, scale = sigma.sq)
 gamma_frailty <- frailty_sim(N, z, base.a, base.b)
 ```
-    ```{r echo=FALSE, fig.cap="Gamma Distribution", out.width = '100%'}
+    ```{r echo=FALSE, fig.cap="Gamma Distribution", out.width = '100%',  fig.align='center'}
 frailty <- gamma_frailty$frailty
 base <- gamma_frailty$baseline
 
@@ -496,7 +496,7 @@ legend("topright", legend = c("pop", "baseline"),
     ```    
     c. Beta frailty distribution:  
     Beta-distributed frailty begins to increase more slowly after age 60 compared to baseline and eventually stops increasing at age 100.     
-    ```{r echo=TRUE}
+    ```{r echo=TRUE, cache=T}
 # Parameters
 million = 10^6
 N <-  million
@@ -508,7 +508,7 @@ set.seed(1047) # for reproducibility
 z <- rbeta(N, shape1 = .5, shape2 = .5)
 beta_frailty <- frailty_sim(N, z, base.a, base.b)
     ```
-    ```{r, echo=FALSE, warning=F, fig.cap="Beta Distribution", out.width = '100%'}
+    ```{r, echo=FALSE, warning=F, fig.cap="Beta Distribution",  fig.align='center', out.width = '100%'}
 frailty <- beta_frailty$frailty
 base <- beta_frailty$baseline
 
@@ -558,7 +558,7 @@ legend("topright", legend = c("pop", "baseline"),
     Tx<- rev(cumsum(rev(Lx)))
     ex <- Tx/lx
     ```
-    ```{r, echo=FALSE, fig.cap="Life expectancy comparison", out.width = '65%', out.height = '65%'}
+    ```{r, echo=T, fig.cap="Life expectancy comparison", out.width = '65%', out.height = '65%',  fig.align='center'}
 par(mfrow = c(2,2), oma=c(0.1,0.1,0.1,0.1), mar=c(3,4,3,1))
 ## Uniform
 plot(uniform_frailty$frailty$x, uniform_frailty$frailty$ex, main = "Uniform",
@@ -587,7 +587,7 @@ legend("topright", legend = c("pop", "baseline"),
        lty = c(1, 2), cex = .8, bty = "n")
 ```
 7. *Extend the simulation code to include the average frailty of the surviving at age x, z(x). (Note: this requires some more difficulty programming, and I would recommend keeping your N fairly small.)*  
-```{r, eval = T, echo = F, fig.cap="Average frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = T, fig.cap="Average frailty", out.width = '65%', out.height = '65%', message=F, warning=F,  fig.align='center'}
 
 avg_hazard_uniform <- tibble(age = floor(uniform_frailty$sim),z = uniform_frailty$z) %>% 
   group_by(age) %>% 
@@ -607,20 +607,20 @@ avg_hazard_gamma <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %
   mutate(z_bar_num = cumsum(rev(z_mean*n)), z_bar_denom = cumsum(rev(n))) %>% 
   mutate(z_bar = rev(z_bar_num/z_bar_denom) ) 
 ```
-````{r, eval = T, echo = F, fig.cap="Uniform Hazards Average Frailty", out.width = '65%', out.height = '65%'}
+````{r, eval = T, echo = T, fig.cap="Uniform Hazards Average Frailty", out.width = '65%', out.height = '65%',  fig.align='center'}
   ggplot(data=avg_hazard_uniform , aes(x = age, y = z_bar)) +
   geom_point() + 
   theme_minimal() + 
   ylab("")
 ```
-````{r, eval = T, echo = F, fig.cap="Gamma Hazards Average Frailty", out.width = '65%', out.height = '65%'}
+````{r, eval = T, echo = T, fig.cap="Gamma Hazards Average Frailty", out.width = '65%', out.height = '65%',  fig.align='center'}
   ggplot(data=avg_hazard_gamma , aes(x = age, y = z_bar)) +
   geom_point() + 
   theme_minimal() + 
   ylab("")
 
 ```
-````{r, eval = T, echo = F, fig.cap="Beta Hazards Average Frailty", out.width = '65%', out.height = '65%'}
+````{r, eval = T, echo = T, fig.cap="Beta Hazards Average Frailty", out.width = '65%', out.height = '65%',  fig.align='center'}
   ggplot(data=avg_hazard_beta , aes(x = age, y = z_bar)) +
   geom_point() + 
   theme_minimal() + 
@@ -629,7 +629,7 @@ avg_hazard_gamma <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %
 ```
 8. *Extend the simulation code to histograms of frailty of survivors at different ages. Does the uniform stay uniform? How about the other distributions?*   
    The uniform does not remain uniform. This matches our intuition that people with higher frailty will die off first. This leaves an exponentially decreasing distribution of frailty for survivors age 75+. The gamma remains a gamma but the parameters change. The beta, similar to the uniform, does not remain beta. There is an exponentially decreasing distribution of frailty for survivors age 75+. 
-```{r, eval = T, echo = F, message=FALSE, warning=FALSE, fig.cap="Uniform Hazards Frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = T, message=FALSE, warning=FALSE, fig.cap="Uniform Hazards Frailty", out.width = '65%', out.height = '65%',  fig.align='center'}
 avg_hazard_uniform_age <- tibble(age = floor(uniform_frailty$sim),z = uniform_frailty$z) %>%
   filter(age > 0) %>% 
   mutate(age_group = case_when(
@@ -645,7 +645,7 @@ avg_hazard_uniform_age <- tibble(age = floor(uniform_frailty$sim),z = uniform_fr
 
 avg_hazard_uniform_age
 ```
-```{r, eval = T, echo = F, message=FALSE, warning=FALSE, fig.cap="Gamma Hazards Frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = T, message=FALSE, warning=FALSE, fig.cap="Gamma Hazards Frailty", out.width = '65%', out.height = '65%',  fig.align='center'}
 avg_hazard_gamma_age <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$z) %>%
   filter(age > 0) %>% 
   mutate(age_group = case_when(
@@ -661,7 +661,7 @@ avg_hazard_gamma_age <- tibble(age = floor(gamma_frailty$sim),z = gamma_frailty$
 
 avg_hazard_gamma_age
 ```
-```{r, eval = T, echo = F, message=FALSE, warning=FALSE, fig.cap="Beta Hazards Frailty", out.width = '65%', out.height = '65%'}
+```{r, eval = T, echo = T, message=FALSE, warning=FALSE, fig.cap="Beta Hazards Frailty", out.width = '65%', out.height = '65%',  fig.align='center'}
 avg_hazard_beta_age <- tibble(age = floor(beta_frailty$sim),z = beta_frailty$z) %>%
   filter(age > 0) %>% 
   mutate(age_group = case_when(

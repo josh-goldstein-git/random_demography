@@ -62,7 +62,8 @@ library(kableExtra)
 table <- cbind(c(0,1,2),c(.3,.4,.3))
   knitr::kable(
   table,
-  col.names = c('$k$', '$p_k$')) 
+  col.names = c('$k$', '$p_k$'))%>%
+  kableExtra::kable_styling(full_width = F) 
 ```
 
 
@@ -81,7 +82,8 @@ table <- cbind(c(0,1,2),c(.3,.4,.3))
   knitr::kable(
   cbind(c(0,1,2),c(.3,.4,.3),c("0-2", "3-5", "6-9")),
   col.names = c('$k$', '$p_k$', 'digits')
-) #%>% kable_paper(bootstrap_options = "striped", full_width = F)
+) %>%
+  kableExtra::kable_styling(full_width = F)
 ```
 
 
@@ -96,7 +98,8 @@ In the table, we include their rows but the expected number of infected people i
   knitr::kable(
   cbind(c(1,2,3,4),c(9,0,5,6),c(0.3,0.2,0.4,0.4), c("$2 \\times 0.3 = 2.7$", "$0 \\times 0.3 = 0$", "$0$","$0$")),
   col.names = c('carrier generation #', 'random digit', '$p_k$', 'expected # infected'), align="cccl"
-) #%>% kable_paper(bootstrap_options = "striped", full_width = F)
+) %>%
+  kableExtra::kable_styling(full_width = F)
 ```
 
 
@@ -144,7 +147,8 @@ Some questions
   library(tidyverse)
   growth <- tibble(gen, person, total_children, gen_size)
   names(growth) <- c("Generation #", "Person ID", "Total children", "Generation size")
-  knitr::kable(growth)
+  knitr::kable(growth)%>%
+  kableExtra::kable_styling(full_width = F)
 ```
 
 - Here's a more visual representation.
@@ -267,7 +271,7 @@ DiagrammeR::grViz("
     $$
   - Can show PGF for the n'th generation is
     $$
-    h(h(h ... \mbox{$n$ times}  h(z)))  = h_n(z)
+    h(h(h ... \mbox{$n$ \times}  h(z)))  = h_n(z)
     $$
   - For instance, let's get $h_2(z) = h(h(z))$ for $h(z) = p_0 + p_1 z + p_2 z^2$
   $$\begin{aligned}
@@ -751,6 +755,8 @@ for (i in 1:3)
 ***
 ***
 ## Problems
+For the following problems, let $p_0 = 0.3$, $p_1=0.3$, $p_2=0.4$. Use the function $h(z) = p_0 + p_1 z + p_2 z^2$. This gives $m= 0.3(0) + 0.3(1) + 0.4(2) = 1.1$, which is supercritical.  
+
 1. Multiply out $h(z)^3$ algebraically and explain how the coefficient on $z^4$ consists of all of the possible ways for 3 fathers to produce a total of 4 sons
 2. Multiply out $h_2(z) = h(h(z))$ algebraically and explain how the coefficient on $z^2$ consists of all of the possible ways for a woman to have 2 grand-daughters.
 3. Write an R-program to reproduce 20 entries of the table (This is for our values of $p_0 = 0.3$, $p_1=0.3$, $p_2=0.4$, not the $p_k$ values on wikipedia)
@@ -760,6 +766,7 @@ for (i in 1:3)
     b. What fraction of lines become extinct?  
     c. What is the distribution of surviving lines? (Hint: Choose a time that is is not so distant that few lines survive) 
     d. What is the mean and variance of of $Z_{10}$, $Z_{20}$ and $Z_{30}$? What will happen as $n \to \infty$?    
+
 ## Solutions
 For the following problems, let $p_0 = 0.3$, $p_1=0.3$, $p_2=0.4$. Use the function $h(z) = p_0 + p_1 z + p_2 z^2$. This gives $m= 0.3(0) + 0.3(1) + 0.4(2) = 1.1$, which is supercritical.  
 1. *Multiply out $h(z)^3$ algebraically and explain how the coefficient on $z^4$ consists of all of the possible ways for 3 fathers to produce a total of 4 sons*
@@ -833,17 +840,17 @@ for (i in 1:n_gen) {
     a. *See if you can do a big number of trials, 1000? For many generations, 30, 50, 100?*  
         Sample simulation with 1000 trials for 100 generations (seed set to 91):
         ```{r, echo=FALSE, fig.cap="Branch simulation", out.width = '100%'}
-        knitr::include_graphics('figures/branch_simulation.png')
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/branch_simulation.png')
         ```
     b. *What fraction of lines become extinct?*  
         96.6\% of lines become extinct by generation 100 with the above simulation. The following plot shows extinction at each generation:
         ```{r, echo=FALSE, fig.cap="Rate of extinction", out.width = '100%'}
-        knitr::include_graphics('figures/extinctionplot.png')
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/extinctionplot.png')
         ```
     c. *What is the distribution of surviving lines? (Hint: Choose a time that is is not so distant that few lines survive)*  
         The following histograms show surviving lines' sizes at select generations. At each generation, we can see something resembling a geometric distribution.
         ```{r, echo=FALSE, fig.cap="Surviving generations", out.width = '100%'}
-        knitr::include_graphics('figures/generation_dist.png')
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/generation_dist.png')
         ```
     d. *What is the mean and variance of of $Z_{10}$, $Z_{20}$ and $Z_{30}$? What will happen as $n \to \infty$?*
     
@@ -853,7 +860,7 @@ for (i in 1:n_gen) {
 | 20 | 1.012 | 10.7426  |
 | 30 | 0.991 | 17.53045  |
         ```{r, echo=FALSE, fig.cap="Survival mean and variance", out.width = '100%'}
-        knitr::include_graphics('figures/meanvar.png')
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/meanvar.png')
         ```
         The mean and variance calculated above account for all lines, not just surviving ones. In this simulation, the mean tends to hover around 1 and the variance tends to increase with generation number, at least up to a certain point.
 As $n\to \infty$, the mean and variance theoretically will go to zero (since $m=1$ is critical, all lines must eventually die out).

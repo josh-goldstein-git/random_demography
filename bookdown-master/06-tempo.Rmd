@@ -51,7 +51,7 @@ Postponement
   
 ### Continuous postponement, a shiny simulation
   To answer these questions, we can use the following shiny app. 
-```{r echo=FALSE}
+```{r echo=TRUE}
 knitr::include_url('https://shiny.demog.berkeley.edu/josh/tempo/', height = '600px')
 ```
 
@@ -73,7 +73,7 @@ knitr::include_url('https://shiny.demog.berkeley.edu/josh/tempo/', height = '600
   
 We can think of the original version as that which should have ocurred in the absence of postponement. Intuitively, it should be higher than the observed birth stream, but how much larger? The table below shows an example of how to recover the original births where each formula refers to the equations above.
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=TRUE, message=FALSE}
   library(tidyverse)
   rt <- seq(0.1,0.4,0.1)
   b_obs <- c(91,84, 77, 72 ) 
@@ -81,7 +81,8 @@ We can think of the original version as that which should have ocurred in the ab
   b_orig2 <- b_obs/(1-rt)
   b_orig <- tibble(rt,b_obs, b_orig1, b_orig2)
   names(b_orig) <- c("r(t)","B(obs)", "B(orig) formula 1", "B(orig) formula 2")
-  knitr::kable(b_orig)
+  knitr::kable(b_orig) %>%
+  kableExtra::kable_styling(full_width = F)
 ```
   
   The correct formula is equation 2. **NOTE: is this correct? If so, why?** 
@@ -270,7 +271,8 @@ fat.array[,,"3"] <- fat3
 fat.array[,,"4"] <- fat4
 fat.array[,,"5"] <- fat5p
 
-kable(fat.array[,1:2,"all"], caption="An extract of period age-specific fertility rates") 
+kable(fat.array[,1:2,"all"], caption="An extract of period age-specific fertility rates")%>%
+  kableExtra::kable_styling(full_width = F) 
 ``` 
 
 *2. Fit bongaarts feeney without birth order*
@@ -311,7 +313,7 @@ lines(year.vec, adj.tfr.vec.from.fun, col = "red")
 
 - Now let's look at turbulence around WWII
 
-```{r, echo=FALSE, fig.align='center', fig.cap='Change in fertility rates around WWII', fig.height=6}
+```{r, echo=TRUE, fig.align='center', fig.cap='Change in fertility rates around WWII', fig.height=6}
 par(mfrow = c(2,2))
 plot(age.vec, fat[,"1944"], type = "l", ylim = c(0, .23),
      ylab = "f(a)",
@@ -361,7 +363,7 @@ out <- bf.fit(fat.array)  #function to obtain BF tempo-adjusted TFR
 adj.tfr.bo.vec <-  out$tfr.star.out[, "bf.tfr.star"] # sum of parity specific tempo-adjusted TFRs
 ```
 
-```{r, echo=FALSE, fig.align='center', fig.cap='TFR by parities', fig.height=6}
+```{r, echo=TRUE, fig.align='center', fig.cap='TFR by parities', fig.height=6}
 par(mfrow = c(1,1))
 plot(year.vec, tfr.vec, type = "l", lwd = 2, xlab="Year", ylab= "TFR")
 lines(year.vec, adj.tfr.vec, lty = 2)
@@ -387,7 +389,7 @@ We find that:
 - The baby boom appears to initially be even greater than observed when we take into account birth order, but then it fall more than observed. 
 - Finally, the baby bust was not as bad as it seemed.
 
-```{r, echo=FALSE, fig.align='center', fig.cap='TFR by parities using HFD data', fig.height=6}
+```{r, echo=TRUE, fig.align='center', fig.cap='TFR by parities using HFD data', fig.height=6}
 plot(year.vec, tfr.vec, type = "l", lwd = 2, xlab="Year", ylab= "TFR")
 lines(year.vec, adj.tfr.vec, lty = 2)
 lines(year.vec, adj.tfr.bo.vec, lty = 1, lwd = 2, col = "red")
@@ -628,7 +630,7 @@ library(mixtools)
 1. *Using the tempo_simu.R file,* 
     a. *Try with N of 4 million -- does it still work? What happens?*
     This simulation will first sample from a normal distribution draws of ages that represent the ages of women when giving birth for the first time. It also creates as shift function $R(t)$ which affects all women of a given year. 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, cache=T}
 library(data.table)
 source("functions/utility_functions.R")
 source("functions/tempo_functions.R")
@@ -742,7 +744,7 @@ tempo_simu_plot_fun(dt)
 ```
   Yes, it still works. In fact, we see that the adjusted births are very close to the observed births when using this number of simulations. (I continue to use an N of 4 million for the rest of this problem).  
     b. *Try with a shift function that goes up and down. Are the adjusted counts ever LESS than the observed counts? If so, when?*  
-```{r echo= FALSE, message=FALSE, warning=FALSE}
+```{r echo= FALSE, message=FALSE, warning=FALSE, cache=T}
 
 x <- rnorm(N, mean = 30, sd = 4)
 t <- runif(N, min = min(year.vec), max(year.vec)+1)
@@ -844,7 +846,7 @@ tempo_simu_plot_fun(dt)
     The adjusted counts are not always less than the observed. Naturally, this only happens when we have spikes on the observed counts that become smoother after the adjusting of the birth counts.  
     c. *If the cumulative shift was $R_t = a + 0.1\times t$, what would be a formula for tempo-adjusted counts of births? Sketch the 4 panels without the computer and then check to see if you're right.*  
 Let $a = -199$, so we get a shift of 0 to about 3 years depending on the time period:  
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=TRUE, message=FALSE, warning=FALSE, cache=T}
 x <- rnorm(N, mean = 30, sd = 4)
 t <- runif(N, min = min(year.vec), max(year.vec)+1)
 dt <- data.table(x, t)
@@ -954,7 +956,7 @@ tempo_simu_plot_fun(dt)
     \end{aligned}$$
     The first term represents the proportional change in the fertility of the equivalent pre-postponement cohort. In particular, it is divided into (how far someone shifts 'over' relative to ages on the baseline fertility schedule) and an $R'(t)$ term (how much one shifts 'up'). The second term represents the proportional change in the rate of change in years of postponement; it is a tempo-effect. The third term represents the proportional change in quantum.
 3. *Use simulation based on tempo simu.R to check your answer.*  
-```{r, include = FALSE, echo = FALSE}
+```{r, include = FALSE, echo = FALSE, cache=T}
 #tempo_simu.R
 million = 10^6
 thousand = 10^3
@@ -1058,7 +1060,7 @@ legend("top", c("observed", "adjusted", "original"),
      The  ```tempo_simu.R``` function computes $R(t)$ but we need to obtain the remaining components of the answer from the previous excercise. For simplicity, let's assume that there are no tempo effects ($q(t)=0$) and that $a=25$, that is, our baseline schedule is that of women aged 25.
     a. $R(t)$ components:
     Let's briefly look at $R(t)$, $R'(t)$, and $R''(t)$. In ```tempo_simu.R``` $R(t)$ refers to the cumulative shift object (```shift.t``` ). We can obtain the derivatives by taking the centered difference of this object. 
-    ```{r, fig.height=7, fig.width= 8, message=F}
+    ```{r, fig.height=7, fig.width= 8, message=F, cache=T}
     shift.t.prime <- center.diff(shift.t)
     shift.t.prime.2 <- center.diff(shift.t.prime)
     
@@ -1070,7 +1072,7 @@ legend("top", c("observed", "adjusted", "original"),
     ```
     b. $f_0(a-R(t))$ function:
     In the Bongaarts and Feeney model, the baseline schedule of women of age $a$ at time $t$ is $f_0(a-R(t))$. That is, it is the fertility schedule that is observed because of the shift. From the simulation, we obtain a table of births at each age and the age-specific fertility rates. Then, we can look at the original and the observed ASFRs. The original ASFR is that from the simulation, which we would not observe. Rather we would only the see the ASFR from births that were postponed by year-specific shifts.
-    ```{r, message=F}
+    ```{r, message=F, cache=T}
     # floor everything
 dt_floored <- dt %>% 
     transmute('x' = floor(x), 't' = floor(t), 
@@ -1095,7 +1097,7 @@ matplot(rownames(asfr_original), asfr_original, type = "l", lty = 1, col=grey(se
 abline(v= 25, lty = 2, col = 'black')
 ```
     The component that we are interersted in is the first derivative of the baseline schedule ($f_0(a-R(t))$). 
-    ```{r echo=FALSE}
+    ```{r echo=TRUE}
     asfr_observed_prime <- apply(asfr_observed, 1, center.diff)
     
     par(mfrow = c(1,3))
@@ -1115,7 +1117,7 @@ abline(v= 25, lty = 2, col = 'black')
     ```
     c. Comparison of terms from original and observed data:
     We can merge all the terms of the formula from the previous question and compare it to the derivative of the log version of the observed fertility schedules. 
-    ```{r echo=FALSE}
+    ```{r echo=TRUE}
     #Observed data (right-hand side)
     observed_change <- -shift.t.prime*asfr_observed_prime/t(asfr_observed) - shift.t.prime.2/ (1-shift.t.prime)
     

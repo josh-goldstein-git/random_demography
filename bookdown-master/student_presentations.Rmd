@@ -12,7 +12,7 @@
 They noticed the following patterns in the age-specific death rates for different countries. 
 
 ```{r crossover, fig.cap='Age specific death rates for different countries and cohorts. Source: @coale1986mortality', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_1.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_1.png')
     ```   
     
 
@@ -29,7 +29,7 @@ They noticed the following patterns in the age-specific death rates for differen
 - Begins with a modest upward transfer at age 60 or 70, increases rapidly with age.
 
 ```{r crossover2, fig.cap='Age heaping example Source: IPUMS International', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_2.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_2.png')
     ```  
 
   Implications of age heaping:
@@ -37,7 +37,7 @@ They noticed the following patterns in the age-specific death rates for differen
   $\text{age heaping on age 70} = \frac{Pop_{70}}{(Pop_{69}+Pop_{71})/2}$
   
 ```{r crossover3, fig.cap='Age heaping. Source: @coale1986mortality', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_3.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_3.png')
     ```
 
 #### Takeaways
@@ -128,13 +128,13 @@ nq_x(z) &= 1-exp\left(\frac{kz}{\overline{s}_x^{1/k}}-\frac{kz}{\overline{s}_{x+
 - The values of n used are 1 and 2, suggesting that longevity is unidimensional (k=0.5) and bidimensional (k=1), respectively.
 
 ```{r crossover4, fig.cap='Cohort and Individual Age Specific Mortality Probabilities for the 1875 White Female Birth Cohort. Source: @manton1981methods', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_4.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_4.png')
 ```  
 ```{r crossover5, fig.cap='Age-specific mortality risk ratios (Black males vs White males) for the years 1935,1955 and 1975. Source: @manton1981methods', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_5.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_5.png')
 ```  
 ```{r crossover6, fig.cap='Age-specific mortality risk ratios (Black females vs White females) for the years 1935,1955 and 1975. Source: @manton1981methods', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_6.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_6.png')
 ```  
 
 #### Takeaways
@@ -147,26 +147,26 @@ nq_x(z) &= 1-exp\left(\frac{kz}{\overline{s}_x^{1/k}}-\frac{kz}{\overline{s}_{x+
   
 ### CenSoc Mortality Crossovers
 ```{r crossover7, fig.cap='Pooled cohorts of 1890-1900', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_7.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_7.png')
 ```  
 
 ```{r crossover8, fig.cap='Pooled cohorts of 1890-1900, by education level', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_8.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_8.png')
 ```  
   
 ```{r crossover9, fig.cap='Pooled cohorts of 1890-1900 by location', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_9.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_9.png')
 ```  
 
 ```{r crossover10, fig.cap='Pooled cohorts of 1890-1900 by wages', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_10.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_10.png')
 ```  
 #### Can the crossover be eliminated?
 
 The baseline hazard is given by  $\mu_{0}(x)=\bar{\mu}(x)e^{\sigma^{2}\bar{H}(x)}$ and we try different values of $\sigma^2$ for each group of people, in this case Black and White. 
 
 ```{r crossover11, fig.cap='Pooled cohorts of 1890-1900 by wages', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_11.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_11.png')
 ```  
 
 #### Is death data in CenSoc file less reliable for Blacks?
@@ -179,17 +179,17 @@ days (day of the month)
   - Are missing dates indicative of poor data?
 
 ```{r crossover12, fig.cap='Day of death', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_12.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_12.png')
 ```  
 
 ```{r crossover13, fig.cap='Month of death', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_13.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_13.png')
 ```  
 
 If observations with missing dates are dropped then the mortality rates look slightly different.
 
 ```{r crossover14, fig.cap='Mortality crossover for pooled cohorts of 1890-1900.', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_14.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_14.png')
 ```  
 
 #### Heaping for reported birth year
@@ -201,7 +201,7 @@ If observations with missing dates are dropped then the mortality rates look sli
 $Heaping(1900)=\frac{B_{1900}}{(B_{1899}+B_{1901})/2}$
 
 ```{r crossover15, fig.cap='Heaping: birth year', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/crossover_15.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/crossover_15.png')
 ```  
 
 
@@ -366,13 +366,13 @@ ggplot(new %>% filter(Year != "Gomp.pred")) +
 
   - Widening mortality differentials: 
 ```{r progress1, fig.cap='Selected cohort survival curves for male Social Security-covered workers, by age and earnings group. Source: Chart 1 @waldron2007trends', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/progress_1.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/progress_1.png')
 ```  
 ```{r progress2, fig.cap='Percentage change in the death rate for male Social Security-covered workers, by selected age and earnings group from birth years 1912-1941. Source: Chart 2 @waldron2007trends', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/progress_3.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/progress_3.png')
 ```  
 ```{r progress3, fig.cap='Cohort life expectancy at age 65 (and 95 percent confidence intervals) for male Social Security-covered workers, by selected birth years and earnings group. Source: Chart 3 @waldron2007trends', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/progress_3.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/progress_3.png')
 ```  
   - These results also hold for cohort life expectancies, though for later birth cohorts the confidence intervals tend to overlap--projected estimates.
   - Waldron, using period data, also attempts to compare these numbers to other OECD countries, finding that, at 65, high-earning Social Security-covered men rank close to population averages for multiple other countries like Canada, suggesting they do worse than high-earning men in these countries
@@ -384,7 +384,7 @@ ggplot(new %>% filter(Year != "Gomp.pred")) +
     - Over time, for a given age, the differential has widened.
     - Within the same cohort, across ages, the differential falls.
   ```{r progress4, fig.cap='Odds ratio (confidence intervals) for the bottom half of the earnings distribution relative to the top half of the distribution, by year of birth and age. Source: Table 1 @waldron2007trends', out.width='80%', fig.align='center',  echo=FALSE}
-    knitr::include_graphics('figures/progress_4.png')
+    knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/progress_4.png')
 ```   
   - We can replicate the results of the simulation below. We want to see if heterogeneity alone can explain the pattern in
 Waldron's observations of hazard ratios declining by age and increasing from one cohort to the next. The key idea is that moving from one cohort to the next, holding age constant, is like moving to younger ages within a cohort. Just as moving to younger ages makes the observed hazard ratio larger, moving to a lower baseline mortality rate, holding age constant,

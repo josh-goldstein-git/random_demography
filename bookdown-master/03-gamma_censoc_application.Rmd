@@ -327,7 +327,7 @@ source("functions/utility_functions.R")
 1. *Under gamma frailty, we obtained an explicit expression for average frailty by age for any baseline hazard schedule. $$ \bar{z}=\frac{1}{1+\sigma^2 H_0(x)}$$ Assume baseline mortality is Gompertz (say with a = $10^{-4}$ and b = 1/12). Try a couple of different values of $\sigma^2$ (but make sure one of these values is 1/7 for comparability with the next problem). Describe what happens to average frailty at older ages. Does it decrease exponentially? If so, is there an age at which the rate of decrease equals (or at least comes very close to) the exponential rate of increase in baseline hazards $b$? Does this age depend on $\sigma^2$?*  
     Let $H_0$ be a gompertz curve with parameters a = $10^{-4}$ and b = 1/12. The average frailty over age depends on the level of $\sigma^2$ as seen by the left handside graph. As $\sigma^2$ increases, average fraily decreases at an exponential rate at earlier ages. That is, when $\sigma^2$ is very large (ie, 50) the exponential decrease begins almost instantly. However,  with a very small $\sigma^2$ of 0.01 the average frailty is almost constant except at older ages. Therefore $\sigma^2$ determines when average frailty starts to decrease.   
     The graph on the right shows the derivative over ages of each of the average frailty curves as well as the $b$ parameter of the baseline Gompertz mortality (in blue). Regardless of the the value of $\sigma^2$, none of the derivatives are close enough to equal the $b$ parameter.Analytically, the derivative of average frailty is always going to be negative and very small. $$\frac{d}{dx}\bar{z}= -\sigma^2ae^{bx}\bar{z}(x)^2$$.   
-    ```{r, echo = F, message=FALSE, warning=FALSE, fig.cap="Average frailty by age", out.width = '100%', out.height = '65%'}
+    ```{r, echo = T, message=FALSE, warning=FALSE, fig.cap="Average frailty by age", out.width = '100%', out.height = '65%', cache=T}
 sigma.sq1 <- c(0.01, 1/7, 0.5, 0.75,4,50)
 
 a <- 10^-4
@@ -382,7 +382,7 @@ legend ("topright", legend = c(round(sigma.sq1, 3),"b"),col=graph_colors, lty=re
     In order to get the baseline hazards implied by $\sigma^2$ = 1/7, we can use the inversion formula $$\mu_0 (x) = \bar{\mu}(x)e^{\sigma^2\bar{H}(x)}$$  
     Taking logs, this gives us $$log(\mu_0 (x)) = log(\bar{\mu}(x))+{\sigma^2log(\bar{H}(x))}$$  
     $H(x)$ is equal to the summation of $\mu(x)$ in continuous time, so we can take the cumulative sum of these mortality rates to get the cumulative hazards. We can then use this to calculate the baseline hazards schedule.    
-    ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Observed and implied hazards", out.width = '100%', out.height = '65%' }
+    ```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Observed and implied hazards", out.width = '100%', out.height = '65%' , cache=T}
     italy2 <- read_table2("data/italycMx_1x1.txt", skip=2) %>%
    filter(Year == 1880) %>%
    select(Year, Age, Female)
@@ -401,7 +401,7 @@ legend("topleft",legend = c("Observed", "Implied"), lty = c(1,2))
 
 ```
     Now let's plot average frailty by age. While the shape of the mean frailty graph is the same in both cases, average frailty seems to decline more rapidly here than in the Gompertz case (this is driven by early ages.)  
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Observed and implied hazards", out.width = '100%', out.height = '65%' }
+```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Observed and implied hazards", out.width = '100%', out.height = '65%' }
 italy2$zbar <- (1/(1+sigma.sq.it*italy2$H0))
 plot(italy2$Age, italy2$zbar, type = "l", xlab = "Age", ylab = "Average frailty")
 
@@ -430,7 +430,7 @@ $$\begin{aligned}
     \end{aligned}$$ 
 5. *Simulate this cross over with two proportional Gompertz schedules, with different frailty variances. Can you get a cross-over? If so, does it occur when cumulative hazard satisfy the condition (in small font) at the end of 5E?*  
     We borrow the frailty simulation function from problem set 2 and use it to create two schedules with Gamma frailty distributions (with different variances) and where the scales of the gompertz curves are proportional.
-    ```{r,echo=FALSE}
+    ```{r,echo=T, cache=T}
 source("functions/gomp_funs.R")
 source("functions/frailty_sim_function.R")
 
@@ -453,7 +453,7 @@ schedule2 <- frailty_sim(N, z2, base.a = R*alpha1, base.b =beta1)
 
 ```
     Now we can graph this to observe the crossover. In Problem 4, we calculate an age where this crossover would occur based on 5E, and here, graphing that line in grey, we see that the crossover occurs at exactly that point.  
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Mortality crossover", out.width = '100%', out.height = '65%' }
+```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Mortality crossover", out.width = '100%', out.height = '65%' }
 x.crossover <- (1/beta1)*log( (((beta1/alpha1)*(R-1)) / (R*(sigmasq.2-sigmasq.1))) - 1 )
   
 plot(schedule1$frailty$x, log(schedule1$frailty$mx), main = "Crossover in Log Hazards", type = "l", lty = 1, lwd = 2, col = "black", xlab = "Age", ylab = "log hx")
@@ -464,7 +464,7 @@ legend(x = 5, y = -1, title = "Variance", legend = c("0.25", "0.02"), col = c("b
 ```
 6. *Use simulation to say what the determinants of the age of crossover are in terms of the respective frailty variances, R, and the baseline Gompertz schedule.*  
     If we alter any of the parameters here, it would change the age of crossover in accordance with that observed in Problem 4. We can simulate this by writing the previous code as a function and running it with different parameters.  
-    ```{r}
+    ```{r, cache=T}
 get.crossover.plot <- function( N, sigmasq.1.fun, sigmasq.2.fun, beta.fun, alpha.fun, R.fun) {
 
 #Now let's generate the zs for this using the rgamma function.
@@ -486,33 +486,33 @@ mtext(paste0("R= ", R.fun," Base a = ", alpha.fun, " Base b = ", round(beta.fun,
 }
 ```
     Now let's run this for different values of alpha, beta, R, and the two variances. In the first set of graphs, changing the two variances to compare when they are very different and when they are very similar. Age of crossover does not seem to change very much.    
-    ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Crossover: changing variances", out.width = '100%', out.height = '65%' }
+    ```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Crossover: changing variances", out.width = '100%', out.height = '65%' , cache=T}
 N <- 1000000
 par(mfrow = c(1,2))
 get.crossover.plot(N, sigmasq.1.fun = 0.001, sigmasq.2.fun = 0.7, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 1.6 )
 get.crossover.plot(N, sigmasq.1.fun = 0.3, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 1.6 )
 ```
     Then, when changing alpha so that we can compare a very small alpha with a large one, a crossover occurs earlier with a larger value. 
-    ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Crossover: changing Gompertz $a$ parameter", out.width = '100%', out.height = '65%' }
+    ```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Crossover: changing Gompertz $a$ parameter", out.width = '100%', out.height = '65%' }
 par(mfrow = c(1,2))
 get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-6, beta.fun = 1/9 , R.fun = 1.6 )
 get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-3, beta.fun = 1/9 , R.fun = 1.6 )
 ``` 
     By changing beta to compare a very small beta and a large one, we get a crossover very early with a large beta.  
-    ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Crossover: changing Gompertz $b$ parameter", out.width = '100%', out.height = '65%' }
+    ```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Crossover: changing Gompertz $b$ parameter", out.width = '100%', out.height = '65%' }
 par(mfrow = c(1,2))
 get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/20 , R.fun = 1.6 )
 get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/4 , R.fun = 1.6 )
 ```
     Finally, if we compare a large and small r, there does not seem to be a difference in the crossover ages.   
-    ```{r,echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Crossover: changing $R$", out.width = '100%', out.height = '65%' }
+    ```{r,echo=T, message=FALSE, warning=FALSE, fig.cap="Crossover: changing $R$", out.width = '100%', out.height = '65%' }
 par(mfrow = c(1,2))
 get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 0.7)
 get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10^-4, beta.fun = 1/9 , R.fun = 2.0)
 ```
 7. *Get two Italian cohorts 20 years apart and calculate the rate of mortality improvement by age $\rho(x)$ that you observe and that which you would have observed had there been no frailty. For frailty, assume gamma-distributed with $\sigma^2 = 1/5$.*    
     We obtain the Italian cohort female lifetable (1x1) from the Human Mortality Database (HMD).
-    ```{r, echo=FALSE, warning= FALSE, message =FALSE}
+    ```{r, echo=T, warning= FALSE, message =FALSE, cache=T}
     italy <- read_table2("data/italy_fltcoh_1x1.txt", skip=1) %>% #HMD Italy cohort data, female lifetable (1x1)
     filter(Year == 1880|Year == 1900)
     italy$Age[italy$Age == "110+"] <- 110
@@ -527,7 +527,7 @@ get.crossover.plot(N, sigmasq.1.fun = 0.03, sigmasq.2.fun = 0.25, alpha.fun = 10
     italy1900 <- italy %>% filter(Year == 1900) #1900 cohort
     ```
     The observed rate of mortality improvement can be calculated using $$ \bar{\rho}(x,t) = - {1 \over t} \log {m_{t2}(x) \over m_{t1}(x) }$$ and the version with frailty can be calculated using: $$ \rho(x,t) = \bar{\rho}(x,t) + \sigma^2\ {d \over dt}\bar{S}_c (x,t) $$ Now we can calculate the rates of improvement in mortality and compare them. When we assume frailty, we get a higher rate of improvement at the older ages than in the observed case.   
-    ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Mortality improvement", out.width = '100%', out.height = '65%' }
+    ```{r echo=T, message=FALSE, warning=FALSE, fig.cap="Mortality improvement", out.width = '100%', out.height = '65%' }
 sigma.sq.ct <- 1/5
 ages <- 0:110
 rho_bar <- (-1/20)*log(italy1900$mx/italy1880$mx) #hazard component
@@ -543,7 +543,7 @@ title("Mortality Improvement for the Cohorts of 1880 and 1900")
     a. *Use years of education instead of wage income.*   
     b. *Use both years of education and wage income.*   
     c. *Analyze Blacks and Whites separately using wage income? Is the variance of “observed heterogeneity” ($\hat{z}_{obs}$) larger for one group. Discuss briefly.*    
-    ```{r, echo=FALSE, warning= FALSE, message=FALSE}
+    ```{r, echo=T, warning= FALSE, message=FALSE, cache=T}
     dt <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
     # censoc <- fread("/data/josh/CenSoc/working_files/censoc_dmf_demo.csv")
     # write.csv(censoc, file="data/censoc_dmf_demo")
@@ -579,18 +579,17 @@ title("Mortality Improvement for the Cohorts of 1880 and 1900")
 
 
 ```
-    a. Let's see how this changes for education.  
-```{r, message=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+    a. Let's see how this changes for education.   
+```{r, message=T, echo=FALSE, warning=FALSE, message=FALSE}
 par(mfrow = c(1,2))
-dt[, plot(x, y_orig.bar.educ)]
-title("Years of education by surviving age", cex.main = .7,
+plot(x, dt$y_orig.bar.educ, main ="Years of education by surviving age", cex.main = .7,
      type="l", ylab = "Education (yrs)", xlab = "Age at death")
-dt[, plot(x, y.bar.educ)]
-title("Standardized education by surviving age", cex.main = .7,
+plot(x, dt$y.bar.educ, main ="Standardized education by surviving age", cex.main = .7,
      type="l", ylab = "Standardized Education (yrs)", xlab = "Age at death")
 ```
-    b. The easiest way to compare both income and education is to compare income (on the y-axis) while letting education vary. For simplicity we took 4 education bins: 0-5 years, 5-10 years, 10-15 years and more than 15 years: as well as their standardized analoges. The intensity of colors increases with the number of years of education.
-    ```{r, message=FALSE, echo=FALSE, warning=FALSE}
+    b. The easiest way to compare both income and education is to compare income (on the y-axis) while letting education vary. For simplicity we took 4 education bins: 0-5 years, 5-10 years, 10-15 years and more than 15 years: as well as their standardized analoges. The intensity of colors increases with the number of years of education.  
+    
+    ```{r, message=FALSE, echo=T, warning=FALSE}
 x <- 74:104
 y_std.bar.both1 <- NULL
 y_std.bar.both2 <- NULL
@@ -635,7 +634,7 @@ lines(x, y_std.bar.both4, col=colors[4])
 title("Education and wage by surviving age", cex.main = .7)
 ```
     c. We'll run the wage income comparison for Blacks and Whites separately. 
-```{r, echo = FALSE, results = 'hide'}
+```{r, echo = T, results = 'hide'}
 dt.new <-dt 
 
 x <- 74:104
@@ -659,7 +658,7 @@ for (i in 1:length(x))
 }
 ```
     Now let's graph these two. We can see a decline in log wages with age for Blacks that we do not observe for Whites, for whom this tends to increase by age. This suggests that we may observe greater variance in heterogeneity for blacks than for Whites.   
-```{r, echo=FALSE}
+```{r, echo=T}
 par(mfrow = c(1,2))
 plot(x, y_orig.bar.inc.white,
      type="l", ylab = "log wage", xlab = "Age at death")

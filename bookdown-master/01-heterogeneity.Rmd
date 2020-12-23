@@ -457,9 +457,8 @@ A BIG caveat, are disaggregated models necessarily better?
         vi. *Graphs*  
         There are many methods to project populations.
         ```{r, echo=FALSE, out.width = '100%'}
-        knitr::include_graphics('figures/problemset1_pp1.png')
-        knitr::include_graphics('figures/problemset1_pp2.png')
-        ```
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/problemset1_pp1.png')
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/problemset1_pp2.png')        ```
         
 5. *For Ken’s Poisson-Exponential model,*
     a. *What is the closed-form expression for $\hat{r}(t)$*  

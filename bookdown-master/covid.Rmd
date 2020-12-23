@@ -1,14 +1,3 @@
----
-title: "Demographic theory and COVID-19"
-author: "Andrea Miranda-González"
-date: "10/11/2020"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Demographic theory and COVID-19
 
 ## Outline
@@ -28,7 +17,7 @@ Additional resources:
 
 
 ## Population aging
-![Worldwide distribution of the elderly](figures/covid_1.png)
+![Worldwide distribution of the elderly](/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/covid_1.png)
 
   Source: Tuljapurkar and Zuo \url{https://u.demog.berkeley.edu/~josh/demogblog/}
 
