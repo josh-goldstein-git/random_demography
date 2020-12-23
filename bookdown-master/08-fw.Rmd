@@ -336,7 +336,7 @@ plot(my.x, out, log = "xy", xlab="Frequency of name", ylab= "log(share)")
 
 ### Drawing their picture with simulation
 Let's look at evolution over time of G: chance that two individuals are of same type. 
-```{r, eval=FALSE}
+```{r, eval=T}
 get.G <- function(x)
 {
     tt <- table(x)

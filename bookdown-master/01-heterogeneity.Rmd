@@ -456,10 +456,10 @@ A BIG caveat, are disaggregated models necessarily better?
         \end{aligned}$$  
         vi. *Graphs*  
         There are many methods to project populations.
-        ```{r, echo=FALSE, out.width = '100%'}
+```{r, echo=FALSE, out.width = '100%'}
         knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/problemset1_pp1.png')
-        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/problemset1_pp2.png')        ```
-        
+        knitr::include_graphics('/hdir/0/andreamg/Year2_2019_2020/Random_demography/random_demography/bookdown-master/figures/problemset1_pp2.png')   
+``` 
 5. *For Ken’s Poisson-Exponential model,*
     a. *What is the closed-form expression for $\hat{r}(t)$*  
     $$\begin{aligned}
@@ -468,8 +468,8 @@ A BIG caveat, are disaggregated models necessarily better?
     \end{aligned}$$
     b. *What is the variance of the growth rate?*  
     The variance of the growth rate is $\sigma_r^2(t)$:
-    $$\bar{r}'(t)= \sigma^2_r(t) = \alpha^2\lambda e^{-\alpha t}$$
-    c. *Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn’t depend on? (difference of $\bar{r}(t)$ and $\bar{r}(0)$)*  
+    $$ \bar{r}'(t)= \sigma^2_r(t) = \alpha^2\lambda e^{-\alpha t} $$   
+    c. *Write down an expression for the distortion index. What variables and parameters in the model does it depend on? Are there any variables or parameters that it doesn’t depend on? (difference of $\bar{r}(t)$ and $\bar{r}(0)$)*   
     Distortion index: 
     $$\begin{aligned}
     \bar{r}(t) - \bar{r}(0) & = r_0 - \lambda \alpha e^{-\alpha t} - (r_0 - \lambda \alpha e^{0}) \\
