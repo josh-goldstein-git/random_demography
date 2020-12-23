@@ -383,7 +383,7 @@ legend ("topright", legend = c(round(sigma.sq1, 3),"b"),col=graph_colors, lty=re
     Taking logs, this gives us $$log(\mu_0 (x)) = log(\bar{\mu}(x))+{\sigma^2log(\bar{H}(x))}$$  
     $H(x)$ is equal to the summation of $\mu(x)$ in continuous time, so we can take the cumulative sum of these mortality rates to get the cumulative hazards. We can then use this to calculate the baseline hazards schedule.    
     ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Observed and implied hazards", out.width = '100%', out.height = '65%' }
-    italy2 <- read_table2("data/italycMx_1x1.txt") %>%
+    italy2 <- read_table2("data/italycMx_1x1.txt", skip=2) %>%
    filter(Year == 1880) %>%
    select(Year, Age, Female)
 
